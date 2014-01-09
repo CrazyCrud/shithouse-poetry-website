@@ -1,3 +1,10 @@
+#############
+## Files/Folders
+#############
+
+node_modules/
+sass-cache/
+
 #################
 ## Eclipse
 #################
