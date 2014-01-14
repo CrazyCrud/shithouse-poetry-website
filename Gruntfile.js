@@ -24,7 +24,9 @@ module.exports = function(grunt) {
                     style: 'compressed'
                 },
                 files: {
-                    'css/global.css': 'css/global.scss'
+                    'css/global.css': 'css/global.scss',
+                    'css/plugins/foundation.css': 
+                        'scss/*.scss'
                 }
             } 
         },
@@ -79,13 +81,14 @@ module.exports = function(grunt) {
             },
             scripts: {
                 files: ['js/*.js'],
-                tasks: ['concat', 'uglify'],
+                tasks: ['concat'],
                 options: {
                     spawn: false,
                 },
             },
             css: {
-                files: ['css/*.scss'],
+                files: ['css/*.scss', 'scss/foundation/components/*.scss', 
+                    'scss/foundation/*.scss', 'scss/*.scss'],
                 tasks: ['sass'],
                 options: {
                     spawn: false,
