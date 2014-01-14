@@ -20,9 +20,11 @@ module.exports = function(grunt) {
         },
         sass: {
             dist: {
+                /*
                 options: {
                     style: 'compressed'
                 },
+                */
                 files: {
                     'css/global.css': 'css/global.scss',
                     'css/plugins/foundation.css': 
@@ -99,7 +101,8 @@ module.exports = function(grunt) {
 
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-contrib-sass');
+    grunt.loadNpmTasks('grunt-sass');
+    /*grunt.loadNpmTasks('grunt-contrib-sass');*/
     grunt.loadNpmTasks('grunt-contrib-imagemin');
     grunt.loadNpmTasks('grunt-uncss');
     grunt.loadNpmTasks('grunt-concat-css');
