@@ -1,1 +1,11 @@
-@import "modules/colors";
+/*
+Base styles include setting heading sizes, default link styles, default
+font styles, and body backgrounds; it doesn’t include any class or ID selectors
+*/
+
+@import "modules/all";
+@import "grids";
+@import "typography";
+@import "buttons";
+@import "icons";
+@import "forms";
