@@ -82,14 +82,14 @@ module.exports = function(grunt) {
                 livereload: true,
             },
             scripts: {
-                files: ['js/*.js'],
+                files: ['js/plugins/*.js', 'js/pages/*.js', 'js/*.js'],
                 tasks: ['concat'],
                 options: {
                     spawn: false,
                 },
             },
             css: {
-                files: ['css/*.scss', 'scss/foundation/components/*.scss', 
+                files: ['css/modules/*.scss', 'css/partials/*.scss', 'css/pages/*.scss', 'css/*.scss', 'scss/foundation/components/*.scss', 
                     'scss/foundation/*.scss', 'scss/*.scss'],
                 tasks: ['sass'],
                 options: {
