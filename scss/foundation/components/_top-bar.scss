@@ -60,8 +60,9 @@ $topbar-menu-icon-color-toggled: #888 !default;
 // Transitions and breakpoint styles
 $topbar-transition-speed: 300ms !default;
 // Using rem-calc for the below breakpoint causes issues with top bar
-$topbar-breakpoint: #{lower-bound($medium-range)} !default; // Change to 9999px for always mobile layout
-$topbar-media-query: $medium-up !default;
+//topbar-breakpoint: #{lower-bound($medium-range)} !default; topbar-breakpoint: #{lower-bound($medium-range)} !default; // Change to 9999px for always mobile layout
+$topbar-breakpoint: 0;
+$topbar-media-query: $small-up !default;
 
 // Divider Styles
 $topbar-divider-border-bottom: solid 1px lighten($topbar-bg-color, 10%) !default;

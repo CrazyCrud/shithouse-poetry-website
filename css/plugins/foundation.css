@@ -3863,8 +3863,8 @@ blockquote, blockquote p {
     display: inherit !important; } }
 
 meta.foundation-mq-topbar {
-  font-family: "/only screen and (min-width:40.063em)/";
-  width: 40.063em; }
+  font-family: "/only screen/";
+  width: 0; }
 
 /* Wrapped around .top-bar to contain to grid width */
 .contain-to-grid {
@@ -4086,7 +4086,7 @@ meta.foundation-mq-topbar {
 .js-generated {
   display: block; }
 
-@media only screen and (min-width:40.063em) {
+@media only screen {
   .top-bar {
     background: #333;
     *zoom: 1;

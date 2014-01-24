@@ -26,7 +26,8 @@ module.exports = function(grunt) {
                 },
                 */
                 files: {
-                    'css/global.css': 'css/global.scss',
+                    /* ['css/global.scss', 'css/pages/home.scss'] */
+                    'css/global.css': ['css/*.scss'],
                     'css/plugins/foundation.css': 
                         'scss/*.scss'
                 }
