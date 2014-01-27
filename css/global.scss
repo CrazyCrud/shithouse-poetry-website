@@ -18,8 +18,15 @@ body{
 
 #mainnav{
 	.top-bar-section{
+		a#link-upload{
+			font-size: 0.75rem;
+		}
 		li{
 			padding-right: 20px; 
+		}
+		span{
+			display: inline-block;
+			margin-right: 8px;
 		}
 	}
 }
@@ -63,17 +70,41 @@ body{
 	.upload-button-container{
 		position: absolute;
 		display: block;
-		top: 80%;
+		top: 70%;
 		right: 0;
 		bottom: 0;
 		left: 0;
-		overflow: auto;
 		margin: auto;
+		z-index: 100;
 	}
 }
 
-#upload-button{
 
+
+#upload-button{
+	a#link-upload{
+		font-size: 2rem;
+		transition: font-size 0.5s;
+	}
+
+	a#link-upload:hover{
+		font-size: 2.4rem;
+	}
+}
+
+#link-upload{
+	display: inline-block;
+	color: $white;
+}
+
+@media screen and (max-width: 640px){
+	#mainnav{
+		.top-bar-section{
+			span{
+				display: none;
+			}
+		}
+	}
 }
 
 @import "pages/home";

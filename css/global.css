@@ -94,8 +94,13 @@ body {
   overflow-x: hidden;
   margin: 0; }
 
+#mainnav .top-bar-section a#link-upload {
+  font-size: 0.75rem; }
 #mainnav .top-bar-section li {
   padding-right: 20px; }
+#mainnav .top-bar-section span {
+  display: inline-block;
+  margin-right: 8px; }
 
 #upload {
   position: relative;
@@ -138,11 +143,24 @@ body {
   #upload .upload-button-container {
     position: absolute;
     display: block;
-    top: 80%;
+    top: 70%;
     right: 0;
     bottom: 0;
     left: 0;
-    overflow: auto;
-    margin: auto; }
+    margin: auto;
+    z-index: 100; }
 
+#upload-button a#link-upload {
+  font-size: 2rem;
+  transition: font-size 0.5s; }
+#upload-button a#link-upload:hover {
+  font-size: 2.4rem; }
+
+#link-upload {
+  display: inline-block;
+  color: #ffffff; }
+
+@media screen and (max-width: 640px) {
+  #mainnav .top-bar-section span {
+    display: none; } }
 
