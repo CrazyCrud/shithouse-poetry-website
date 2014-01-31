@@ -7,7 +7,7 @@
 $include-html-top-bar-classes: $include-html-classes !default;
 
 // Background color for the top bar
-$topbar-bg-color: #333 !default;
+$topbar-bg-color: transparent !default;
 $topbar-bg: $topbar-bg-color !default;
 
 // Height and margin
@@ -21,9 +21,9 @@ $topbar-title-weight: normal !default;
 $topbar-title-font-size: rem-calc(17) !default;
 
 // Style the top bar dropdown elements
-$topbar-dropdown-bg: #333 !default;
+$topbar-dropdown-bg: transparent !default;
 $topbar-dropdown-link-color: #fff !default;
-$topbar-dropdown-link-bg: #333 !default;
+$topbar-dropdown-link-bg: transparent !default;
 $topbar-dropdown-toggle-size: 5px !default;
 $topbar-dropdown-toggle-color: #fff !default;
 $topbar-dropdown-toggle-alpha: 0.4 !default;
@@ -46,7 +46,7 @@ $topbar-dropdown-label-color: #777 !default;
 $topbar-dropdown-label-text-transform: uppercase !default;
 $topbar-dropdown-label-font-weight: bold !default;
 $topbar-dropdown-label-font-size: rem-calc(10) !default;
-$topbar-dropdown-label-bg: #333 !default;
+$topbar-dropdown-label-bg: transparent !default;
 
 // Top menu icon styles
 $topbar-menu-link-transform: uppercase !default;
@@ -65,8 +65,8 @@ $topbar-breakpoint: 0;
 $topbar-media-query: $small-up !default;
 
 // Divider Styles
-$topbar-divider-border-bottom: solid 1px lighten($topbar-bg-color, 10%) !default;
-$topbar-divider-border-top: solid 1px darken($topbar-bg-color, 10%) !default;
+$topbar-divider-border-bottom: solid 0px #000000 !default;
+$topbar-divider-border-top: solid 0px #000000 !default;
 
 // Sticky Class
 $topbar-sticky-class: ".sticky" !default;

@@ -3869,7 +3869,7 @@ meta.foundation-mq-topbar {
 /* Wrapped around .top-bar to contain to grid width */
 .contain-to-grid {
   width: 100%;
-  background: #333; }
+  background: transparent; }
   .contain-to-grid .top-bar {
     margin-bottom: 0; }
 
@@ -3897,7 +3897,7 @@ meta.foundation-mq-topbar {
   height: 45px;
   line-height: 45px;
   position: relative;
-  background: #333;
+  background: transparent;
   margin-bottom: 0; }
   .top-bar ul {
     margin-bottom: 0;
@@ -3971,7 +3971,7 @@ meta.foundation-mq-topbar {
     height: auto;
     background: transparent; }
     .top-bar.expanded .title-area {
-      background: #333; }
+      background: transparent; }
     .top-bar.expanded .toggle-topbar a {
       color: #888; }
       .top-bar.expanded .toggle-topbar a span {
@@ -3989,11 +3989,11 @@ meta.foundation-mq-topbar {
     width: 100%;
     height: auto;
     display: block;
-    background: #333;
+    background: transparent;
     font-size: 22px;
     margin: 0; }
   .top-bar-section .divider, .top-bar-section [role="separator"] {
-    border-top: solid 1px #1a1a1a;
+    border-top: solid 0px #000000;
     clear: both;
     height: 1px;
     width: 100%; }
@@ -4006,7 +4006,7 @@ meta.foundation-mq-topbar {
     font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
     font-size: 0.59091rem;
     font-weight: normal;
-    background: #333; }
+    background: transparent; }
     .top-bar-section ul li > a.button {
       background: #008CBA;
       font-size: 0.59091rem;
@@ -4088,7 +4088,7 @@ meta.foundation-mq-topbar {
 
 @media only screen {
   .top-bar {
-    background: #333;
+    background: transparent;
     *zoom: 1;
     overflow: visible; }
     .top-bar:before, .top-bar:after {
@@ -4107,7 +4107,7 @@ meta.foundation-mq-topbar {
       position: relative;
       top: 7px; }
     .top-bar.expanded {
-      background: #333; }
+      background: transparent; }
   .contain-to-grid .top-bar {
     max-width: 45.45455rem;
     margin: 0 auto;
@@ -4131,7 +4131,7 @@ meta.foundation-mq-topbar {
     .top-bar-section li a:not(.button) {
       padding: 0 15px;
       line-height: 45px;
-      background: #333; }
+      background: transparent; }
       .top-bar-section li a:not(.button):hover {
         background: #272727; }
     .top-bar-section .has-dropdown > a {
@@ -4168,22 +4168,22 @@ meta.foundation-mq-topbar {
         line-height: 1;
         white-space: nowrap;
         padding: 12px 15px;
-        background: #333; }
+        background: transparent; }
       .top-bar-section .dropdown li label {
         white-space: nowrap;
-        background: #333; }
+        background: transparent; }
       .top-bar-section .dropdown li .dropdown {
         left: 100%;
         top: 0; }
     .top-bar-section > ul > .divider, .top-bar-section > ul > [role="separator"] {
       border-bottom: none;
       border-top: none;
-      border-right: solid 1px #4d4d4d;
+      border-right: solid 0px #000000;
       clear: none;
       height: 45px;
       width: 0; }
     .top-bar-section .has-form {
-      background: #333;
+      background: transparent;
       padding: 0 15px;
       height: 45px; }
     .top-bar-section ul.right li .dropdown {

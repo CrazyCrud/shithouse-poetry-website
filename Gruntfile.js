@@ -27,7 +27,8 @@ module.exports = function(grunt) {
                 */
                 files: {
                     /* ['css/global.scss', 'css/pages/home.scss'] */
-                    'css/global.css': ['css/*.scss'],
+                    'css/global.css': 'css/*.scss',
+                    'css/pages/home.css': 'css/pages/home.scss',
                     'css/plugins/foundation.css': 
                         'scss/*.scss'
                 }
@@ -41,12 +42,15 @@ module.exports = function(grunt) {
             }
         },
         concat_css: {
+            options:{
+                rebaseUrls: false
+            },
             all: {
                 src: [
                     'css/global.css',
                     'css/pages/*.css'
                 ],
-                dest: 'css/build/global.css'
+                dest: 'css/global.css'
             },
         },
         autoprefixer: {
@@ -92,7 +96,7 @@ module.exports = function(grunt) {
             css: {
                 files: ['css/modules/*.scss', 'css/partials/*.scss', 'css/pages/*.scss', 'css/*.scss', 'scss/foundation/components/*.scss', 
                     'scss/foundation/*.scss', 'scss/*.scss'],
-                tasks: ['sass'],
+                tasks: ['sass', 'concat_css'],
                 options: {
                     spawn: false,
                 }

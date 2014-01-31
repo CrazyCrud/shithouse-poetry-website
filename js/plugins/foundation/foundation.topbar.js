@@ -54,7 +54,7 @@
         self.addCustomRule('.f-topbar-fixed { padding-top: ' + topbar.data('height') + 'px }');
 
         if (topbarContainer.hasClass('fixed')) {
-          $('body').addClass('f-topbar-fixed');
+          // $('body').addClass('f-topbar-fixed');
         }
       });
 

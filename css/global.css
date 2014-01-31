@@ -94,13 +94,32 @@ body {
   overflow-x: hidden;
   margin: 0; }
 
-#mainnav .top-bar-section a#link-upload {
-  font-size: 0.75rem; }
-#mainnav .top-bar-section li {
-  padding-right: 20px; }
-#mainnav .top-bar-section span {
-  display: inline-block;
-  margin-right: 8px; }
+#mainnav {
+  background: -moz-linear-gradient(top, rgba(17, 17, 17, 0.85) 0%, rgba(14, 14, 14, 0.85) 20%, rgba(7, 7, 7, 0.46) 59%, rgba(0, 0, 0, 0) 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(17, 17, 17, 0.85)), color-stop(20%, rgba(14, 14, 14, 0.85)), color-stop(59%, rgba(7, 7, 7, 0.46)), color-stop(100%, rgba(0, 0, 0, 0)));
+  background: -webkit-linear-gradient(top, rgba(17, 17, 17, 0.85) 0%, rgba(14, 14, 14, 0.85) 20%, rgba(7, 7, 7, 0.46) 59%, rgba(0, 0, 0, 0) 100%);
+  background: -o-linear-gradient(top, rgba(17, 17, 17, 0.85) 0%, rgba(14, 14, 14, 0.85) 20%, rgba(7, 7, 7, 0.46) 59%, rgba(0, 0, 0, 0) 100%);
+  background: -ms-linear-gradient(top, rgba(17, 17, 17, 0.85) 0%, rgba(14, 14, 14, 0.85) 20%, rgba(7, 7, 7, 0.46) 59%, rgba(0, 0, 0, 0) 100%);
+  background: linear-gradient(to bottom, rgba(17, 17, 17, 0.85) 0%, rgba(14, 14, 14, 0.85) 20%, rgba(7, 7, 7, 0.46) 59%, rgba(0, 0, 0, 0) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d9111111', endColorstr='#00000000',GradientType=0 ); }
+  #mainnav .top-bar-section a#link-upload {
+    font-size: 0.75rem; }
+  #mainnav .top-bar-section li {
+    padding-right: 20px; }
+    #mainnav .top-bar-section li a:not(.button) {
+      background: transparent; }
+  #mainnav .top-bar-section span {
+    display: inline-block;
+    margin-right: 8px; }
+
+#mainnav.nav-bg:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #111111; }
 
 #upload {
   position: relative;
@@ -160,7 +179,100 @@ body {
   display: inline-block;
   color: #ffffff; }
 
+#maincontent {
+  overflow: hidden; }
+
 @media screen and (max-width: 640px) {
   #mainnav .top-bar-section span {
     display: none; } }
+/*
+Base styles include setting heading sizes, default link styles, default
+font styles, and body backgrounds; it doesn’t include any class or ID selectors
+*/
+/*
+Insert code that doesn't output CSS, things like mixin declarations, functions, and variables.
+*/
+.row {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 0; }
 
+.columns {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 0; }
+
+.full-width {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0; }
+
+.space-plus1 {
+  margin-top: 1.618rem;
+  margin-bottom: 1.618rem; }
+
+.space-plus2 {
+  margin-top: 2.618rem;
+  margin-bottom: 2.618rem; }
+
+.space-plus3 {
+  margin-top: 4.236rem;
+  margin-bottom: 4.236rem; }
+
+.space-plus4 {
+  margin-top: 6.854rem;
+  margin-bottom: 6.854rem; }
+
+.space-plus5 {
+  margin-top: 11.089rem;
+  margin-bottom: 11.089rem; }
+
+.space-plus6 {
+  margin-top: 17.942rem;
+  margin-bottom: 17.942rem; }
+
+.space-plus7 {
+  margin-top: 29.03rem;
+  margin-bottom: 29.03rem; }
+
+.space-plus8 {
+  margin-top: 46.971rem;
+  margin-bottom: 46.971rem; }
+
+.space-minus1 {
+  margin-top: 0.618rem;
+  margin-bottom: 0.618rem; }
+
+.space-minus2 {
+  margin-top: 0.382rem;
+  margin-bottom: 0.382rem; }
+
+.space-minus3 {
+  margin-top: 0.236rem;
+  margin-bottom: 0.236rem; }
+
+.space-minus4 {
+  margin-top: 0.146rem;
+  margin-bottom: 0.146rem; }
+
+.space-minus5 {
+  margin-top: 0.09rem;
+  margin-bottom: 0.09rem; }
+
+.space-minus6 {
+  margin-top: 0.056rem;
+  margin-bottom: 0.056rem; }
+
+body {
+  color: #ffffff; }
+
+#images {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  margin-top: 1.618rem;
+  margin-bottom: 1.618rem;
+  margin-right: 1.618rem;
+  margin-left: 1.618rem; }
