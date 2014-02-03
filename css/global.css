@@ -274,5 +274,7 @@ body {
   overflow: hidden;
   margin-top: 1.618rem;
   margin-bottom: 1.618rem;
-  margin-right: 1.618rem;
-  margin-left: 1.618rem; }
+  margin-right: 0.236rem;
+  margin-left: 0.236rem; }
+  #images .overlay-container {
+    overflow: hidden; }

@@ -6,7 +6,7 @@
 	height: 100%;
 	overflow: hidden;
 	@include vertical-margin($space_plus1, $space_plus1);
-	@include horizontal-margin($space_plus1, $space_plus1); 
+	@include horizontal-margin($space_minus3, $space_minus3); 
 
 	.overlay-container{
 		overflow: hidden;

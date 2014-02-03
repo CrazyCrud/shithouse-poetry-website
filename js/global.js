@@ -1,10 +1,24 @@
+var rootFolder = null;
 var iconOffsetX = 5;
 var iconOffsetY = 0;
 
 $(document).ready(function() {
 	$(document).foundation();
+	setupRoot();
 	setupNavigation();
 });
+
+function setupRoot(){
+	switch (document.location.hostname)
+	{
+        case 'localhost' :
+            rootFolder = '/htdocs/shithouse_poetry'; 
+            break;
+        default :  
+        	rootFolder = '';
+        	break;
+	}
+}
 
 function setupNavigation(){
 	var $uploadLink = $("#link-upload");
