@@ -80,14 +80,15 @@ Insert code that doesn't output CSS, things like mixin declarations, functions, 
 body {
   color: #ffffff; }
 
-#images {
+.infinite-container {
   position: relative;
-  width: 100%;
-  height: 100%;
   overflow: hidden;
-  margin-top: 1.618rem;
-  margin-bottom: 1.618rem;
+  margin-top: 0.236rem;
+  margin-bottom: 0.236rem;
   margin-right: 0.236rem;
   margin-left: 0.236rem; }
-  #images .overlay-container {
-    overflow: hidden; }
+
+#images {
+  padding: 4px; }
+  #images img {
+    vertical-align: bottom; }

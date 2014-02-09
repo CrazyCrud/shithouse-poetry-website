@@ -1,0 +1,7 @@
+Client ID
+9e45d882d3b4055
+
+Client Secret
+ca719e088ff8760bc2da8355d0fe7d512e126efc
+
+https://api.imgur.com/3/album/Latrinalia
