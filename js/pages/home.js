@@ -20,12 +20,7 @@ var $imageContainer = $("#images");
 $(document).ready(function() {
 	$(window).resize(function(event) {
 		vpWidth = $(window).width();
-		// $('#images .img-container').css("opacity", 0);
-	    if (resizeTimer){
-	    	clearTimeout(resizeTimer);
-	    }
-	    resizeTimer = setTimeout(collage, 200);
-		});
+	});
 	requestImages();
 	setupInfiniteScroll();
 });
@@ -56,13 +51,13 @@ function appendImages(){
 		var imgLoaded = 0;
 		var numImages = images.length;
 		for(var i = 0; i < numImages; i++){
-			var image = images[Math.floor(Math.random() * (images.length))];
-			var $imgToAppend = $('<div class="img-container"><a href="#"><img src="' + image + '"/></a></div>');
+			var image = images[Math.floor(Math.random() * (numImages))];
+			var $imgToAppend = $('<a href=""><img src="' + image + '"/></a>');
 			$imageContainer.append($imgToAppend);
 			Foundation.lib_methods.loaded($imgToAppend, function(){
 				imgLoaded++;
 				if(imgLoaded == numImages){
-					collage();
+					displayImages();
 				}
 			});
 		}
@@ -71,11 +66,13 @@ function appendImages(){
 	}
 }
 
-function collage(){
-	$imageContainer.removeWhitespace().collagePlus({
-		'targetHeight' : 200,
-		'fadeSpeed' : 'fast',
-		'effect' : 'effect-1',
-		'allowPartialLastRow' : false
+function displayImages(){
+	$imageContainer.justifiedGallery({
+		'sizeRangeSuffixes': {'lt100':'',
+			'lt240':'', 
+			'lt320':'', 
+			'lt500':'', 
+			'lt640':'', 
+			'lt1024':''}
 	});
 }
