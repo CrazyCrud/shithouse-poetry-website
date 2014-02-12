@@ -11,16 +11,12 @@ var images = ["http://placehold.it/350x150/69d2e7",
 	"http://placehold.it/400x120/542437",
 	"http://placehold.it/300x300/53777a"];
 var resizeTimer = null;
-var vpWidth = null;
 var imgLinks = null;
 var defaultNumOfImages = 9;
 var $infiniteContainer = $(".infiniteContainer");
 var $imageContainer = $("#images");
 
 $(document).ready(function() {
-	$(window).resize(function(event) {
-		vpWidth = $(window).width();
-	});
 	requestImages();
 	setupInfiniteScroll();
 });
@@ -73,6 +69,7 @@ function displayImages(){
 			'lt320':'', 
 			'lt500':'', 
 			'lt640':'', 
-			'lt1024':''}
+			'lt1024':''},
+		'margins': 3
 	});
 }
