@@ -3,6 +3,7 @@
 include("helpers/dbhelper.php");
 
 $db = new DBHelper();
-echo print_r($db->getComplete(DBConfig::$tables["users"]));
+$db->setAuthKey("xxx");
+echo print_r($db->getUser());
 
 ?>

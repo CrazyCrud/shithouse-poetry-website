@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 13. Feb 2014 um 19:07
+-- Erstellungszeit: 13. Feb 2014 um 23:11
 -- Server Version: 5.6.14
 -- PHP-Version: 5.5.6
 
@@ -31,8 +31,16 @@ CREATE TABLE IF NOT EXISTS `comment` (
   `entryid` int(11) NOT NULL,
   `userid` int(11) NOT NULL,
   `comment` text NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Daten für Tabelle `comment`
+--
+
+INSERT INTO `comment` (`id`, `entryid`, `userid`, `comment`, `timestamp`) VALUES
+(1, 1, 1, 'Toller Eintrag', '2014-02-13 21:46:23');
 
 -- --------------------------------------------------------
 
@@ -154,7 +162,14 @@ CREATE TABLE IF NOT EXISTS `user` (
   `sessionkey` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Daten für Tabelle `user`
+--
+
+INSERT INTO `user` (`id`, `email`, `username`, `joindate`, `lastaction`, `status`, `sessionkey`, `password`) VALUES
+(1, 'tiki_blue@web.de', 'tikiblue', '2014-02-13 21:06:03', '2014-02-13 21:06:03', 0, 'xxx', 'password');
 
 -- --------------------------------------------------------
 

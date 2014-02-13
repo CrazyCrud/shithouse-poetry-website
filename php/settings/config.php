@@ -1,21 +1,4 @@
 <?php
-	// DB INFO
-	$sqllocation = "localhost";
-	$sqluser = "root";
-	$sqlpwd = "";
-	$sqldb = "latrinalia";
-	
-	$table_courses = "comment";
-	$table_users = "entry";
-	$table_projects = "images";
-	$table_advisors = "information";
-	$table_tags = "rating";
-	$table_participants = "report";
-	$table_images = "tags";
-	$table_images = "type";
-	$table_images = "user";
-	$table_images = "usertags";
-	
 	// PATHS
 	$USERIMAGEPATH = "uploads/userimages";
 	
