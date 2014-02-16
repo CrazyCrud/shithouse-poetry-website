@@ -71,6 +71,7 @@ class DBConnection{
 		$rows = array();
 		$result = mysql_query($q, $this->link)
 		or $this->error(DBConfig::$dbStatus["offline"]);
+		if(is_bool($result))return $result;
 		while ($row = mysql_fetch_array($result)){
 			$rows[count($rows)]=$row;
 		}
@@ -138,6 +139,13 @@ class Queries{
 		WHERE id=$commentid
 		AND userid=$uid";
 	}
+	public static function update($key){
+		$u = DBConfig::$tables["users"];
+		$date = date( 'Y-m-d H:i:s', time());
+		return "UPDATE $u
+		SET lastaction='$date'
+		WHERE sessionkey='$key'";
+	}
 }
 
 /*
@@ -152,6 +160,10 @@ class DBHelper{
 		$this->connection = DBConnection::getInstance();
 	}
 
+	/**
+	BASIC FUNCTIONS
+	**/
+
 	public function setAuthKey($key){
 		$this->authkey = $key;
 	}
@@ -163,7 +175,8 @@ class DBHelper{
 	private function query($query){
 		if($this->connection->status != DBConfig::$dbStatus["ready"])
 			return false;
-		return $this->connection->query($query);
+		$this->update();
+		return $this->internalQuery($query);
 	}
 
 	// use with caution!!!
@@ -171,10 +184,29 @@ class DBHelper{
 		return $this->query("SELECT * FROM `".$table."`");
 	}
 
+	private function internalQuery($query){
+		return $this->connection->query($query);
+	}
+
+	// this function updates the last action of the user
+	private function update(){
+		$q = Queries::update($this->authkey);
+		$this->internalQuery($q);
+	}
+
+	/**
+	USER FUNCTIONS
+	**/
+
+	// returns the complete user with the previously defined authkey
 	public function getUser(){
 		$query = Queries::getuser($this->authkey);
 		return $this->query($query);
 	}
+
+	/**
+	COMMENT FUNCTIONS
+	**/
 
 	// get the 10 previous comments (older than $commentid)
 	// for $count=-1 delivers the 10 newest comments
@@ -202,12 +234,6 @@ class DBHelper{
 		return $this->query($query);
 	}
 
-	// returns the complete entry of the given id
-	public function getEntry($entryid){
-		$query = Queries::getentry($entryid);
-		return $this->query($query);
-	}
-
 	// returns the complete comment of the given id
 	public function getComment($commentid){
 		$query = Queries::getcomment($commentid);
@@ -223,6 +249,16 @@ class DBHelper{
 			return false;
 		}
 		$query = Queries::deletecomment($commentid, $user["id"]);
+		return $this->query($query);
+	}
+
+	/**
+	ENTRY FUNCTIONS
+	**/
+
+	// returns the complete entry of the given id
+	public function getEntry($entryid){
+		$query = Queries::getentry($entryid);
 		return $this->query($query);
 	}
 
