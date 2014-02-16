@@ -34,6 +34,7 @@ class DBConfig{
 
 	public static $userStatus = array(
 		"deleted" => -1,
+		"newUser" => 0,
 		"default" => 0,
 		"admin" =>1
 	);
@@ -127,7 +128,14 @@ class Queries{
 		return "INSERT INTO $u
 		(email, username, joindate, lastaction, status, sessionkey, password)
 		VALUES
-		('$mail','$name','$date','$date',0,'$key','$pwd')";
+		('$mail','$name','$date','$date',".DBConfig::$userStatus["newUser"].",'$key','$pwd')";
+	}
+	public static function deleteuser($accesskey){
+		$u = DBConfig::$tables["users"];
+		return "UPDATE $u
+		SET sessionkey='".uniqid()."',
+		status = ".DBConfig::$userStatus["deleted"]."
+		WHERE sessionkey='$accesskey'";
 	}
 	/**
 	COMMENT QUERIES
@@ -258,6 +266,11 @@ class DBHelper{
 		}else{
 			return false;
 		}
+	}
+
+	public function deleteUser(){
+		$query = Queries::deleteuser($this->authkey);
+		return $this->query($query);
 	}
 
 	/**
