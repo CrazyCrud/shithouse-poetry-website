@@ -97,7 +97,7 @@ class Queries{
 		"SELECT id, email, username, joindate, lastaction, status
 		FROM `".DBConfig::$tables["users"]."` WHERE `sessionkey` = \"$sessionkey\"";
 	}
-	public static function getcomments($entryid, $count){
+	public static function getcomments($entryid, $commentid){
 		$u = DBConfig::$tables["users"];
 		$c = DBConfig::$tables["comments"];
 		return "SELECT 
@@ -108,9 +108,10 @@ class Queries{
 		`$u`.username AS 'username'
 		FROM `$c`, `$u`
 		WHERE `$u`.id = `$c`.userid
+		AND `commentid`<$commentid
 		AND `$c`.entryid = $entryid
 		ORDER BY `$c`.timestamp DESC
-		LIMIT $count,".($count+10);
+		LIMIT 0,10";
 	}
 	public static function addcomment($entryid, $comment, $userid){
 		$c = DBConfig::$tables["comments"];
@@ -158,13 +159,15 @@ class DBHelper{
 		return $this->query($query);
 	}
 
-	// get 10 comments for an entry starting with the $count(th) comment
-	// for $count=0 delivers the 10 newest comments
-	// for $count=10 delivers the 11th to 20th newest comments
+	// get the 10 previous comments (older than $commentid)
+	// for $count=-1 delivers the 10 newest comments
+	// (assuming the 10th newest comment has the id 123)
+	// for $count=123 delivers the 11th to 20th newest comments
 	// and so on ...
 	// (for endless scrolling/pagination loading purposes)
-	public function getComments($entryid, $count){
-		$query = Queries::getcomments($entryid, $count);
+	public function getComments($entryid, $commentid){
+		if($commentid = -1)$commentid = PHP_INT_MAX;
+		$query = Queries::getcomments($entryid, $commentid);
 		return $this->query($query);
 	}
 
