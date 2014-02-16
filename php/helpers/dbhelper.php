@@ -116,6 +116,13 @@ class Queries{
 		password='$pwd'
 		WHERE id=$userid";
 	}
+	public static function createuser($key, $mail, $name, $pwd){
+		$u = DBConfig::$tables["users"];
+		return "INSERT INTO $u
+		(email, username, joindate, lastaction, status, sessionkey, password)
+		VALUES
+		('$mail','$name','$date','$date',0,'$key','$pwd')";
+	}
 	/**
 	COMMENT QUERIES
 	**/
@@ -189,10 +196,17 @@ class DBHelper{
 		return $this->authkey;
 	}
 
+	private function loggedin(){
+		if($this->authkey==-1)return false;
+		return true;
+	}
+
 	private function query($query){
 		if($this->connection->status != DBConfig::$dbStatus["ready"])
 			return false;
-		$this->update();
+		if($this->loggedin()){
+			$this->update();
+		}
 		return $this->internalQuery($query);
 	}
 
@@ -228,6 +242,16 @@ class DBHelper{
 		}
 		$query = Queries::updateuser($user["id"], $mail, $name, $pwd);
 		return $this->query($query);
+	}
+
+	public function createUser($mail, $name, $pwd){
+		$key = md5($mail).uniqid();
+		$query = Queries::createuser($key, $mail, $name, $pwd);
+		if($this->query($query)){
+			return $key;
+		}else{
+			return false;
+		}
 	}
 
 	/**
