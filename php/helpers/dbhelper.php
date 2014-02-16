@@ -121,6 +121,23 @@ class Queries{
 		VALUES
 		($entryid, $userid, '$comment', '$date')";
 	}
+	public static function getentry($entryid){
+		$e = DBConfig::$tables["entries"];
+		return "SELECT * FROM $e
+		WHERE id = $entryid";
+	}
+	public static function getcomment($commentid){
+		$c = DBConfig::$tables["comments"];
+		return "SELECT * FROM $c
+		WHERE id = $commentid";
+	}
+	public static function deletecomment($commentid, $uid){
+		$c = DBConfig::$tables["comments"];
+		return "UPDATE $c
+		SET comment=''
+		WHERE id=$commentid
+		AND userid=$uid";
+	}
 }
 
 /*
@@ -174,11 +191,38 @@ class DBHelper{
 	// adds a comment to an entry
 	// returns whether successfull
 	public function addComment($entryid, $comment){
+		$comment = trim($comment);
+		if(strlen($comment)==0)return false;
 		$user = $this->getUser();
-		if(!isset($user["id"])){
+		$entry = $this->getEntry($entryid);
+		if(!isset($user["id"])||!isset($entry["id"])){
 			return false;
 		}
 		$query = Queries::addcomment($entryid, $comment, $user["id"]);
+		return $this->query($query);
+	}
+
+	// returns the complete entry of the given id
+	public function getEntry($entryid){
+		$query = Queries::getentry($entryid);
+		return $this->query($query);
+	}
+
+	// returns the complete comment of the given id
+	public function getComment($commentid){
+		$query = Queries::getcomment($commentid);
+		return $this->query($query);
+	}
+
+	// delete a comment
+	// returns whether successfull
+	public function deleteComment($commentid){
+		$user = $this->getUser();
+		$comment = $this->getComment($commentid);
+		if(!isset($user["id"])||!isset($comment["id"])){
+			return false;
+		}
+		$query = Queries::deletecomment($commentid, $user["id"]);
 		return $this->query($query);
 	}
 
