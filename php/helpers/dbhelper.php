@@ -32,6 +32,12 @@ class DBConfig{
 		"offline" => 3
 	);
 
+	public static $userStatus = array(
+		"deleted" => -1,
+		"default" => 0,
+		"admin" =>1
+	);
+
 }
 
 /*
@@ -298,7 +304,12 @@ class DBHelper{
 		if(!isset($user["id"])||!isset($comment["id"])){
 			return false;
 		}
-		$query = Queries::deletecomment($commentid, $user["id"]);
+		if($user["status"] == DBConfig::$userStatus["admin"]){
+			$id = $comment["userid"];
+		}else{
+			$id = $user["id"];
+		}
+		$query = Queries::deletecomment($commentid, $id);
 		return $this->query($query);
 	}
 
