@@ -93,11 +93,32 @@ class DBConnection{
 Latrinalia DataBase Queries
 */
 class Queries{
+	/**
+	USER QUERIES
+	**/
 	public static function getuser($sessionkey){
 		return
 		"SELECT id, email, username, joindate, lastaction, status
 		FROM `".DBConfig::$tables["users"]."` WHERE `sessionkey` = \"$sessionkey\"";
 	}
+	public static function update($key){
+		$u = DBConfig::$tables["users"];
+		$date = date( 'Y-m-d H:i:s', time());
+		return "UPDATE $u
+		SET lastaction='$date'
+		WHERE sessionkey='$key'";
+	}
+	public static function updateuser($userid, $mail, $name, $pwd){
+		$u = DBConfig::$tables["users"];
+		return "UPDATE $u
+		SET email='$mail',
+		username='$name',
+		password='$pwd'
+		WHERE id=$userid";
+	}
+	/**
+	COMMENT QUERIES
+	**/
 	public static function getcomments($entryid, $commentid){
 		$u = DBConfig::$tables["users"];
 		$c = DBConfig::$tables["comments"];
@@ -122,11 +143,6 @@ class Queries{
 		VALUES
 		($entryid, $userid, '$comment', '$date')";
 	}
-	public static function getentry($entryid){
-		$e = DBConfig::$tables["entries"];
-		return "SELECT * FROM $e
-		WHERE id = $entryid";
-	}
 	public static function getcomment($commentid){
 		$c = DBConfig::$tables["comments"];
 		return "SELECT * FROM $c
@@ -139,12 +155,13 @@ class Queries{
 		WHERE id=$commentid
 		AND userid=$uid";
 	}
-	public static function update($key){
-		$u = DBConfig::$tables["users"];
-		$date = date( 'Y-m-d H:i:s', time());
-		return "UPDATE $u
-		SET lastaction='$date'
-		WHERE sessionkey='$key'";
+	/**
+	ENTRY QUERIES
+	**/
+	public static function getentry($entryid){
+		$e = DBConfig::$tables["entries"];
+		return "SELECT * FROM $e
+		WHERE id = $entryid";
 	}
 }
 
@@ -201,6 +218,15 @@ class DBHelper{
 	// returns the complete user with the previously defined authkey
 	public function getUser(){
 		$query = Queries::getuser($this->authkey);
+		return $this->query($query);
+	}
+
+	public function updateUser($mail, $name, $pwd){
+		$user = $this->getUser();
+		if(!isset($user["id"])){
+			return false;
+		}
+		$query = Queries::updateuser($user["id"], $mail, $name, $pwd);
 		return $this->query($query);
 	}
 
