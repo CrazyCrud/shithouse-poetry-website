@@ -100,7 +100,7 @@ class Queries{
 	public static function getcomments($entryid, $count){
 		$u = DBConfig::$tables["users"];
 		$c = DBConfig::$tables["comments"];
-		$query = "SELECT 
+		return "SELECT 
 		`$c`.id AS 'commentid',
 		`$c`.comment AS 'comment',
 		`$c`.timestamp AS 'time',
@@ -111,6 +111,14 @@ class Queries{
 		AND `$c`.entryid = $entryid
 		ORDER BY `$c`.timestamp DESC
 		LIMIT $count,".($count+10);
+	}
+	public static function addcomment($entryid, $comment, $userid){
+		$c = DBConfig::$tables["comments"];
+		$date = date( 'Y-m-d H:i:s', time());
+		return "INSERT INTO $c
+		(entryid, userid, comment, timestamp)
+		VALUES
+		($entryid, $userid, '$comment', '$date')";
 	}
 }
 
@@ -157,6 +165,17 @@ class DBHelper{
 	// (for endless scrolling/pagination loading purposes)
 	public function getComments($entryid, $count){
 		$query = Queries::getcomments($entryid, $count);
+		return $this->query($query);
+	}
+
+	// adds a comment to an entry
+	// returns whether successfull
+	public function addComment($entryid, $comment){
+		$user = $this->getUser();
+		if(!isset($user["id"])){
+			return false;
+		}
+		$query = Queries::addcomment($entryid, $comment, $user["id"]);
 		return $this->query($query);
 	}
 
