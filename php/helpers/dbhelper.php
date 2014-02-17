@@ -254,10 +254,14 @@ class DBHelper{
 	public function getUser($id){
 		if(isset($id)){
 			$query = Queries::getuserbyid($id);
-			return $this->query($query);
+			$users = $this->query($query);
+			if(count($users)==0)return false;
+			return $users[0];
 		}else{
 			$query = Queries::getuser($this->authkey);
-			return $this->query($query);
+			$users = $this->query($query);
+			if(count($users)==0)return false;
+			return $users[0];
 		}
 	}
 
