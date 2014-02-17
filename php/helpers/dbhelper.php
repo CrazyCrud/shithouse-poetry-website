@@ -120,6 +120,12 @@ class Queries{
 		SET lastaction='$date'
 		WHERE sessionkey='$key'";
 	}
+	public static function updateuserwithoutpassword($userid, $mail, $name){
+		return "UPDATE $u
+		SET email='$mail',
+		username='$name'
+		WHERE id=$userid";
+	}
 	public static function updateuser($userid, $mail, $name, $pwd){
 		$u = DBConfig::$tables["users"];
 		return "UPDATE $u
@@ -254,10 +260,14 @@ class DBHelper{
 	public function getUser($id){
 		if(isset($id)){
 			$query = Queries::getuserbyid($id);
-			return $this->query($query);
+			$users = $this->query($query);
+			if(count($users)==0)return false;
+			return $users[0];
 		}else{
 			$query = Queries::getuser($this->authkey);
-			return $this->query($query);
+			$users = $this->query($query);
+			if(count($users)==0)return false;
+			return $users[0];
 		}
 	}
 
@@ -266,7 +276,11 @@ class DBHelper{
 		if(!isset($user["id"])){
 			return false;
 		}
-		$query = Queries::updateuser($user["id"], $mail, $name, $pwd);
+		if(isset($pwd)){
+			$query = Queries::updateuser($user["id"], $mail, $name, $pwd);
+		}else{
+			$query = Queries::updateuserwithoutpassword($user["id"], $mail, $name);
+		}
 		return $this->query($query);
 	}
 
