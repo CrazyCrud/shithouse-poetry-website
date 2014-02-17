@@ -14,29 +14,14 @@
 /* 
 {
 	success : 1 ,
-	data : [
-		{
-			"0":"123",
-			"id":"123",
-			"1":"mustermann@mail.com",
-			"email":"mustermann@mail.com",
-			"2":"mustermann",
-			"username":"mustermann",
-			"3":"2014-02-13 22:06:03",
-			"joindate":"2014-02-13 22:06:03",
-			"4":"2014-02-17 13:47:16",
-			"lastaction":"2014-02-17 13:47:16",
-			"5":"0",
-			"status":"0"
-		}
-	]
+	data : true
 }
 */
 // for success codes see ../php/config.php
 
 // HEADER
 header('Content-Type: application/json; charset=utf-8');
-//error_reporting(0);
+error_reporting(0);
 include("../settings/config.php");
 include("../helpers/dbhelper.php");
 // END HEADER
