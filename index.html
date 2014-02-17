@@ -26,7 +26,7 @@
 							</ul>
 							<ul class="right">
 								<li class="li-search-container">
-									<a id="link-search" href=""><span>Search</span><i class="icon-search"></i></a></li>
+									<a id="link-search" href="#" onClick=""><span>Search</span><i class="icon-search"></i></a></li>
 								<li class="li-login-container">
 									<a id="link-login" href="">
 										<span>Login</span><i class="icon-user"></i>
@@ -60,7 +60,22 @@
 					</div>
 				</div>
 			</section>
+			<section id="searchcontent">
+				<div class="row">
+					<div class="small-12 columns full-width">
+						<form class="searchForm">
+							<input type="text" placeholder="Suche" name="searchInput" id="searchField" autofocus>
+						</form>
+					</div>
+				</div>
+			</section>
 		</div>
+
+
+
+
+		
+		
 		<script src="js/plugins/jquery.min.js"></script>
 		<script src="js/plugins/foundation/foundation.js"></script>
   		<script src="js/plugins/foundation/foundation.topbar.js"></script>
@@ -71,5 +86,6 @@
   		<script src="js/ImgurManager.js"></script>
 		<script src="js/global.js"></script>
 		<script src="js/pages/home.js"></script>
+		<script src="js/pages/searchOverlay.js"></script>
 	</body>
 </html>

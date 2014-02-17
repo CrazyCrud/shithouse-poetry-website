@@ -185,6 +185,24 @@ body {
 @media screen and (max-width: 640px) {
   #mainnav .top-bar-section span {
     display: none; } }
+
+#overlay {
+  position: fixed;
+  z-index: 199;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 100%;
+  background-color: #000000;
+  opacity: 0.9; }
+
+#searchcontent {
+  display: none;
+  position: absolute;
+  width: 100%;
+  top: 10%;
+  left: 0px;
+  z-index: 200; }
 /*
 Base styles include setting heading sizes, default link styles, default
 font styles, and body backgrounds; it doesn’t include any class or ID selectors

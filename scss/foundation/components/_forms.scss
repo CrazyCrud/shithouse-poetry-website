@@ -380,7 +380,7 @@ $select-bg-color: #fafafa;
     }
 
     /* We use this to get basic styling on all basic form elements */
-    input[type="text"],
+    /*input[type="text"],*/
     input[type="password"],
     input[type="date"],
     input[type="datetime"],
@@ -422,8 +422,33 @@ $select-bg-color: #fafafa;
 
     /* Normalize file input width */
     input[type="file"] {
-      width:100%;
+      width:100%;      
     }
+
+    input[type="text"]{
+      color: $lightgrey;
+      background-color: rgba(0,0,0,0);
+      height: 8rem;
+      font-size: 7rem;
+      width: 90%;
+      margin-left: 5%;
+      margin-right: 5%;
+      border: none; 
+      outline: none;     
+    }   
+
+
+    ::-moz-placeholder {color:$lightgrey;}
+    ::-webkit-input-placeholder {color:$lightgrey;}
+    :-ms-input-placeholder {color:$lightgrey;}
+
+
+
+
+
+
+
+    
 
     /* We add basic fieldset styling */
     fieldset {
