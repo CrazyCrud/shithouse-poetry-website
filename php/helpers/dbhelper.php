@@ -108,6 +108,11 @@ class Queries{
 		"SELECT id, email, username, joindate, lastaction, status
 		FROM `".DBConfig::$tables["users"]."` WHERE `sessionkey` = \"$sessionkey\"";
 	}
+	public static function getuserbyid($id){
+		return
+		"SELECT id, email, username, joindate, lastaction, status
+		FROM `".DBConfig::$tables["users"]."` WHERE `id` = \"$id\"";
+	}
 	public static function update($key){
 		$u = DBConfig::$tables["users"];
 		$date = date( 'Y-m-d H:i:s', time());
@@ -151,7 +156,7 @@ class Queries{
 		`$u`.username AS 'username'
 		FROM `$c`, `$u`
 		WHERE `$u`.id = `$c`.userid
-		AND `commentid`<$commentid
+		AND `comment`.id<$commentid
 		AND `$c`.entryid = $entryid
 		ORDER BY `$c`.timestamp DESC
 		LIMIT 0,10";
@@ -216,6 +221,7 @@ class DBHelper{
 	}
 
 	private function query($query){
+		//echo $query;
 		if($this->connection->status != DBConfig::$dbStatus["ready"])
 			return false;
 		if($this->loggedin()){
@@ -244,9 +250,15 @@ class DBHelper{
 	**/
 
 	// returns the complete user with the previously defined authkey
-	public function getUser(){
-		$query = Queries::getuser($this->authkey);
-		return $this->query($query);
+	// or a user by id
+	public function getUser($id){
+		if(isset($id)){
+			$query = Queries::getuserbyid($id);
+			return $this->query($query);
+		}else{
+			$query = Queries::getuser($this->authkey);
+			return $this->query($query);
+		}
 	}
 
 	public function updateUser($mail, $name, $pwd){
@@ -284,7 +296,7 @@ class DBHelper{
 	// and so on ...
 	// (for endless scrolling/pagination loading purposes)
 	public function getComments($entryid, $commentid){
-		if($commentid = -1)$commentid = PHP_INT_MAX;
+		if($commentid == -1)$commentid = PHP_INT_MAX;
 		$query = Queries::getcomments($entryid, $commentid);
 		return $this->query($query);
 	}
