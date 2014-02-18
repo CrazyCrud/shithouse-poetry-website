@@ -425,17 +425,21 @@ $select-bg-color: #fafafa;
       width:100%;      
     }
 
-    input[type="text"]{
+    input[type="text"]#searchField{
       color: $lightgrey;
       background-color: rgba(0,0,0,0);
-      height: 8rem;
-      font-size: 7rem;
+      height: auto;
+      font-size: 600%;
       width: 90%;
       margin-left: 5%;
       margin-right: 5%;
       border: none; 
-      outline: none;     
+      outline: none; 
+      font-family: "Segoe UI light"; 
+      margin-top: 5%;
     }   
+
+    
 
 
     ::-moz-placeholder {color:$lightgrey;}

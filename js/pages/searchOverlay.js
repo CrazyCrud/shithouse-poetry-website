@@ -1,28 +1,26 @@
 var linkSearch = document.getElementById("link-search");
-var searchForms = document.getElementById("searchcontent");
-document.getElementById("link-search").onclick = searchOverlay;
+var searchContent = document.getElementById("searchcontent");
+document.getElementById("link-search").onclick = showSearchOverlay;
+document.getElementById("searchOverlayBackButton").onclick = hideSearchOverlay;
 
-function searchOverlay(){
-	console.log("function");
-	if(document.getElementById("overlay") === null) {
+function showSearchOverlay(){
+	if(!document.getElementById("overlay")) {
 			div = document.createElement("div");
 			div.setAttribute('id', 'overlay');
 			document.getElementsByTagName("body")[0].appendChild(div);
-			document.getElementsByTagName("body")[0].appendChild(searchForms);
-			
-			console.log(searchForms);
-			searchForms.style.display="block";
-
-
-			
-
-
+			document.getElementsByTagName("body")[0].appendChild(searchContent);
+			searchContent.style.display="block";				
 	}
-
-
-	/**else {
-		document.getElementsByTagName("body")[0].removeChild(document.getElementById("overlay"));
-	}**/
 }
+
+function hideSearchOverlay(){
+	if(document.getElementById("overlay")) 
+	{
+		document.getElementsByTagName("body")[0].removeChild(searchContent);
+		document.getElementsByTagName("body")[0].removeChild(document.getElementById("overlay"));
+	}
+}
+
+
 
 
