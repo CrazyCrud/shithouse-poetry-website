@@ -1,3 +1,6 @@
+/*
+Insert code that doesn't output CSS, things like mixin declarations, functions, and variables.
+*/
 meta.foundation-mq-small {
   font-family: "/only screen and (max-width: 40em)/";
   width: 0em; }
@@ -97,6 +100,9 @@ textarea {
 select {
   width: 100%; }
 
+/*
+Insert code that doesn't output CSS, things like mixin declarations, functions, and variables.
+*/
 .row {
   width: 100%;
   margin-left: auto;
@@ -1161,6 +1167,9 @@ select {
       display: block;
       background: #fff; }
 
+/*
+Insert code that doesn't output CSS, things like mixin declarations, functions, and variables.
+*/
 .alert-box {
   border-style: solid;
   border-width: 1px;
@@ -1212,6 +1221,9 @@ select {
     border-color: #8bcae3;
     color: #4e4e4e; }
 
+/*
+Insert code that doesn't output CSS, things like mixin declarations, functions, and variables.
+*/
 [class*="block-grid-"] {
   display: block;
   padding: 0;
@@ -1486,6 +1498,9 @@ select {
     .large-block-grid-12 > li:nth-of-type(12n+1) {
       clear: both; } }
 
+/*
+Insert code that doesn't output CSS, things like mixin declarations, functions, and variables.
+*/
 .breadcrumbs {
   display: block;
   padding: 0.40909rem 0.63636rem 0.40909rem;
@@ -1534,6 +1549,12 @@ select {
       content: " ";
       margin: 0; }
 
+/*
+Insert code that doesn't output CSS, things like mixin declarations, functions, and variables.
+*/
+/*
+Insert code that doesn't output CSS, things like mixin declarations, functions, and variables.
+*/
 button, .button {
   cursor: pointer;
   font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
@@ -1801,6 +1822,12 @@ button, .button {
     .button-bar .button-group div {
       overflow: hidden; }
 
+/*
+Insert code that doesn't output CSS, things like mixin declarations, functions, and variables.
+*/
+/*
+Insert code that doesn't output CSS, things like mixin declarations, functions, and variables.
+*/
 /* Clearing Styles */
 [data-clearing] {
   *zoom: 1;
@@ -1955,6 +1982,9 @@ button, .button {
     padding-left: 0;
     padding-top: 0; } }
 
+/*
+Insert code that doesn't output CSS, things like mixin declarations, functions, and variables.
+*/
 @media only screen and (max-width: 40em) {
   .f-dropdown {
     max-width: 100%;
@@ -2047,6 +2077,9 @@ button, .button {
   .f-dropdown.large {
     max-width: 800px; }
 
+/*
+Insert code that doesn't output CSS, things like mixin declarations, functions, and variables.
+*/
 .dropdown.button {
   position: relative;
   padding-right: 2.59091rem; }
@@ -2092,6 +2125,9 @@ button, .button {
   .dropdown.button.secondary:before {
     border-color: #333 transparent transparent transparent; }
 
+/*
+Insert code that doesn't output CSS, things like mixin declarations, functions, and variables.
+*/
 .flex-video {
   position: relative;
   padding-top: 1.13636rem;
@@ -2110,6 +2146,12 @@ button, .button {
     width: 100%;
     height: 100%; }
 
+/*
+Insert code that doesn't output CSS, things like mixin declarations, functions, and variables.
+*/
+/*
+Insert code that doesn't output CSS, things like mixin declarations, functions, and variables.
+*/
 /* Standard Forms */
 form {
   margin: 0 0 0.72727rem; }
@@ -2313,7 +2355,8 @@ span.postfix, label.postfix {
   border-bottom-right-radius: 1000px; }
 
 /* We use this to get basic styling on all basic form elements */
-input[type="text"], input[type="password"], input[type="date"], input[type="datetime"], input[type="datetime-local"], input[type="month"], input[type="week"], input[type="email"], input[type="number"], input[type="search"], input[type="tel"], input[type="time"], input[type="url"], textarea {
+/*input[type="text"],*/
+input[type="password"], input[type="date"], input[type="datetime"], input[type="datetime-local"], input[type="month"], input[type="week"], input[type="email"], input[type="number"], input[type="search"], input[type="tel"], input[type="time"], input[type="url"], textarea {
   -webkit-appearance: none;
   -webkit-border-radius: 0;
   border-radius: 0;
@@ -2338,16 +2381,16 @@ input[type="text"], input[type="password"], input[type="date"], input[type="date
   -webkit-transition: all 0.15s linear;
   -moz-transition: all 0.15s linear;
   transition: all 0.15s linear; }
-  input[type="text"]:focus, input[type="password"]:focus, input[type="date"]:focus, input[type="datetime"]:focus, input[type="datetime-local"]:focus, input[type="month"]:focus, input[type="week"]:focus, input[type="email"]:focus, input[type="number"]:focus, input[type="search"]:focus, input[type="tel"]:focus, input[type="time"]:focus, input[type="url"]:focus, textarea:focus {
+  input[type="password"]:focus, input[type="date"]:focus, input[type="datetime"]:focus, input[type="datetime-local"]:focus, input[type="month"]:focus, input[type="week"]:focus, input[type="email"]:focus, input[type="number"]:focus, input[type="search"]:focus, input[type="tel"]:focus, input[type="time"]:focus, input[type="url"]:focus, textarea:focus {
     -webkit-box-shadow: 0 0 5px #999999;
     -moz-box-shadow: 0 0 5px #999999;
     box-shadow: 0 0 5px #999999;
     border-color: #999999; }
-  input[type="text"]:focus, input[type="password"]:focus, input[type="date"]:focus, input[type="datetime"]:focus, input[type="datetime-local"]:focus, input[type="month"]:focus, input[type="week"]:focus, input[type="email"]:focus, input[type="number"]:focus, input[type="search"]:focus, input[type="tel"]:focus, input[type="time"]:focus, input[type="url"]:focus, textarea:focus {
+  input[type="password"]:focus, input[type="date"]:focus, input[type="datetime"]:focus, input[type="datetime-local"]:focus, input[type="month"]:focus, input[type="week"]:focus, input[type="email"]:focus, input[type="number"]:focus, input[type="search"]:focus, input[type="tel"]:focus, input[type="time"]:focus, input[type="url"]:focus, textarea:focus {
     background: #fafafa;
     border-color: #999999;
     outline: none; }
-  input[type="text"][disabled], input[type="password"][disabled], input[type="date"][disabled], input[type="datetime"][disabled], input[type="datetime-local"][disabled], input[type="month"][disabled], input[type="week"][disabled], input[type="email"][disabled], input[type="number"][disabled], input[type="search"][disabled], input[type="tel"][disabled], input[type="time"][disabled], input[type="url"][disabled], textarea[disabled] {
+  input[type="password"][disabled], input[type="date"][disabled], input[type="datetime"][disabled], input[type="datetime-local"][disabled], input[type="month"][disabled], input[type="week"][disabled], input[type="email"][disabled], input[type="number"][disabled], input[type="search"][disabled], input[type="tel"][disabled], input[type="time"][disabled], input[type="url"][disabled], textarea[disabled] {
     background-color: #ddd; }
 
 /* Adjust margin for form elements below */
@@ -2364,6 +2407,26 @@ input[type="checkbox"] + label, input[type="radio"] + label {
 /* Normalize file input width */
 input[type="file"] {
   width: 100%; }
+
+input[type="text"] {
+  color: #cbcdc7;
+  background-color: rgba(0, 0, 0, 0);
+  height: 8rem;
+  font-size: 7rem;
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+  border: none;
+  outline: none; }
+
+::-moz-placeholder {
+  color: #cbcdc7; }
+
+::-webkit-input-placeholder {
+  color: #cbcdc7; }
+
+:-ms-input-placeholder {
+  color: #cbcdc7; }
 
 /* We add basic fieldset styling */
 fieldset {
@@ -2425,6 +2488,12 @@ input.error, textarea.error {
 label.error {
   color: #f04124; }
 
+/*
+Insert code that doesn't output CSS, things like mixin declarations, functions, and variables.
+*/
+/*
+Insert code that doesn't output CSS, things like mixin declarations, functions, and variables.
+*/
 .inline-list {
   margin: 0 auto 0.77273rem auto;
   margin-left: -1rem;
@@ -2440,6 +2509,9 @@ label.error {
     .inline-list > li > * {
       display: block; }
 
+/*
+Insert code that doesn't output CSS, things like mixin declarations, functions, and variables.
+*/
 /* Foundation Joyride */
 .joyride-list {
   display: none; }
@@ -2590,6 +2662,9 @@ label.error {
       left: -20px;
       right: auto; } }
 
+/*
+Insert code that doesn't output CSS, things like mixin declarations, functions, and variables.
+*/
 .keystroke, kbd {
   background-color: #ededed;
   border-color: #dbdbdb;
@@ -2603,6 +2678,9 @@ label.error {
   -webkit-border-radius: 3px;
   border-radius: 3px; }
 
+/*
+Insert code that doesn't output CSS, things like mixin declarations, functions, and variables.
+*/
 .label {
   font-weight: normal;
   font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
@@ -2633,6 +2711,9 @@ label.error {
     background-color: #e7e7e7;
     color: #333; }
 
+/*
+Insert code that doesn't output CSS, things like mixin declarations, functions, and variables.
+*/
 [data-magellan-expedition] {
   background: #fff;
   z-index: 50;
@@ -2645,6 +2726,9 @@ label.error {
     [data-magellan-expedition] .sub-nav .active {
       line-height: 1.8em; }
 
+/*
+Insert code that doesn't output CSS, things like mixin declarations, functions, and variables.
+*/
 @-webkit-keyframes rotate {
   from {
     -webkit-transform: rotate(0deg); }
@@ -2880,6 +2964,9 @@ label.error {
   .orbit-stack-on-small .orbit-timer, .orbit-stack-on-small .orbit-next, .orbit-stack-on-small .orbit-prev, .orbit-stack-on-small .orbit-bullets {
     display: none; } }
 
+/*
+Insert code that doesn't output CSS, things like mixin declarations, functions, and variables.
+*/
 ul.pagination {
   display: block;
   height: 1.09091rem;
@@ -2920,6 +3007,9 @@ ul.pagination {
     float: none;
     display: inline-block; }
 
+/*
+Insert code that doesn't output CSS, things like mixin declarations, functions, and variables.
+*/
 /* Panels */
 .panel {
   border-style: solid;
@@ -2963,6 +3053,9 @@ ul.pagination {
     -webkit-border-radius: 3px;
     border-radius: 3px; }
 
+/*
+Insert code that doesn't output CSS, things like mixin declarations, functions, and variables.
+*/
 /* Pricing Tables */
 .pricing-table {
   border: solid 1px #ddd;
@@ -3009,6 +3102,9 @@ ul.pagination {
     text-align: center;
     padding: 0.90909rem 0.90909rem 0; }
 
+/*
+Insert code that doesn't output CSS, things like mixin declarations, functions, and variables.
+*/
 /* Progress Bar */
 .progress {
   background-color: #f6f6f6;
@@ -3045,6 +3141,9 @@ ul.pagination {
       -webkit-border-radius: 999px;
       border-radius: 999px; }
 
+/*
+Insert code that doesn't output CSS, things like mixin declarations, functions, and variables.
+*/
 .reveal-modal-bg {
   position: fixed;
   height: 100%;
@@ -3111,6 +3210,9 @@ ul.pagination {
   .reveal-modal {
     background: #fff !important; } }
 
+/*
+Insert code that doesn't output CSS, things like mixin declarations, functions, and variables.
+*/
 .side-nav {
   display: block;
   margin: 0;
@@ -3135,6 +3237,15 @@ ul.pagination {
       list-style: none;
       border-top-color: #e6e6e6; }
 
+/*
+Insert code that doesn't output CSS, things like mixin declarations, functions, and variables.
+*/
+/*
+Insert code that doesn't output CSS, things like mixin declarations, functions, and variables.
+*/
+/*
+Insert code that doesn't output CSS, things like mixin declarations, functions, and variables.
+*/
 .split.button {
   position: relative;
   padding-right: 3.68182rem; }
@@ -3221,6 +3332,9 @@ ul.pagination {
     border-top-right-radius: 1000px;
     border-bottom-right-radius: 1000px; }
 
+/*
+Insert code that doesn't output CSS, things like mixin declarations, functions, and variables.
+*/
 .sub-nav {
   display: block;
   width: auto;
@@ -3256,6 +3370,9 @@ ul.pagination {
       .sub-nav dt.active a:hover, .sub-nav dd.active a:hover, .sub-nav li.active a:hover {
         background: #007ba1; }
 
+/*
+Insert code that doesn't output CSS, things like mixin declarations, functions, and variables.
+*/
 div.switch {
   position: relative;
   padding: 0;
@@ -3408,6 +3525,9 @@ div.switch {
   to {
     position: relative; } }
 
+/*
+Insert code that doesn't output CSS, things like mixin declarations, functions, and variables.
+*/
 table {
   background: #fff;
   margin-bottom: 0.90909rem;
@@ -3430,6 +3550,9 @@ table {
     display: table-cell;
     line-height: 0.81818rem; }
 
+/*
+Insert code that doesn't output CSS, things like mixin declarations, functions, and variables.
+*/
 .tabs {
   *zoom: 1;
   margin-bottom: 0 !important; }
@@ -3508,6 +3631,9 @@ table {
     float: left;
     margin-left: -1px; } }
 
+/*
+Insert code that doesn't output CSS, things like mixin declarations, functions, and variables.
+*/
 /* Image Thumbnails */
 .th {
   line-height: 0;
@@ -3529,6 +3655,9 @@ a.th {
   display: inline-block;
   max-width: 100%; }
 
+/*
+Insert code that doesn't output CSS, things like mixin declarations, functions, and variables.
+*/
 /* Tooltips */
 .has-tip {
   border-bottom: dotted 1px #ccc;
@@ -3598,6 +3727,12 @@ a.th {
     top: 50%;
     margin-top: -5px; } }
 
+/*
+Insert code that doesn't output CSS, things like mixin declarations, functions, and variables.
+*/
+/*
+Insert code that doesn't output CSS, things like mixin declarations, functions, and variables.
+*/
 p.lead {
   font-size: 1.15909rem;
   line-height: 1.6; }
@@ -3862,6 +3997,12 @@ blockquote, blockquote p {
   .show-for-print {
     display: inherit !important; } }
 
+/*
+Insert code that doesn't output CSS, things like mixin declarations, functions, and variables.
+*/
+/*
+Insert code that doesn't output CSS, things like mixin declarations, functions, and variables.
+*/
 meta.foundation-mq-topbar {
   font-family: "/only screen/";
   width: 0; }
