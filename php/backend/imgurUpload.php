@@ -1,5 +1,23 @@
 <?php
 
+// How to use this page:
+// open it using a FormData or Form by sending via POST:
+// id 		as the entryID to add the image to
+// authkey 	as your authkey
+// images[]	as the image[s] to upload
+//
+// required parameters are:
+// id, authkey, images[]
+//
+// The answer looks as follows:
+// a json with a successcode:
+/* 
+{
+	success : 1
+}
+*/
+// for success codes see ../php/config.php
+
 /**
 IMAGE UPLAOD
 */
