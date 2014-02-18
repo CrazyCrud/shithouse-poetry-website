@@ -271,6 +271,19 @@ class Queries{
 			`$u`.tagid = `$t`.tagid";
 		return $query;
 	}
+	/**
+	IMAGE FUNCTIONS
+	*/
+	public static function saveimage($entryid, $path, $x, $y, $w, $h){
+		$i = DBConfig::$tables["images"];
+		$query = 
+		"INSERT INTO `$i`
+		(entryid, path, xposition, yposition, width, height)
+		VALUES
+		($entryid, '$path', $x, $y, $width, $height)
+		";
+		return $query;
+	}
 }
 
 /*
@@ -453,8 +466,10 @@ class DBHelper{
 		return $this->query($query);
 	}
 
-	public function saveImage($entryid, $url){
-		
+	// saves a new image to the databse
+	public function saveImage($entryid, $url, $x, $y, $w, $h){
+		$query = Queries::saveimage($entryid, $url, $x, $y, $w, $h);
+		return $this->query($query);
 	}
 
 }

@@ -32,7 +32,7 @@ $json["success"]=$CODE_ERROR;
 // GET USER AND ENTRY
 // DB Connection
 $db = new DBHelper();
-$db.setAuthKey($_POST['authkey']);
+$db->setAuthKey($_POST['authkey']);
 $user = $db->getUser();
 $entry = $db->getEntry($_POST['id']);
 
@@ -44,11 +44,13 @@ if(!$user || !$entry){
 }
 
 // USER NOT ALLOWED TO CHANGE TO ENTRY
-if($user["status"]!=DBConfig::userStatus["admin"] && $user["id"]!=$entry["userid"]){
+if($user["status"]!=DBConfig::$userStatus["admin"] && $user["id"]!=$entry["userid"]){
 	$json["success"]=$CODE_PERMISSION_DENIED;
 	echo json_encode($json);
 	exit();
 }
+
+$json["success"]= $CODE_SUCCESS;
 
 for($i = 0; $i < count($_FILES['images']['name']); $i++){
 	if ($_FILES['images']['error'][$i] == UPLOAD_ERR_OK) {
@@ -64,17 +66,28 @@ for($i = 0; $i < count($_FILES['images']['name']); $i++){
 		   continue;
 		}
 
-    	$fileName = $path.$user_id.".jpg";
-		if(file_exists($fileName))unlink($fileName);
-
 		// find data-type
 		$extension = getExtension($_FILES['images']['name'][$i]);
   		$extension = strtolower($extension);
 
         $image = resizeImage($_FILES['images']['tmp_name'][$i], $extension, $MAX_SIZE);
 
-		$url = sendToImgur($image);
-		$db->saveImage($entry["id"], $url);
+		ob_start();
+		imagepng($image);
+		$buffer = ob_get_clean();
+		ob_end_clean();
+
+		$url = sendToImgur($buffer);
+		if(!$url){
+			$json["success"] = $CODE_ERROR;
+			$json["message"] = "uploading error";
+			exit();
+		}
+		if(!$db->saveImage($entry["id"], $url, -1,-1,-1,-1)){
+			$json["success"] = $CODE_ERROR;
+			$json["message"] = "database error";
+			exit();
+		}
 
 		$imagedestroy($image);
 
@@ -156,7 +169,11 @@ function sendToImgur($image){
 
 	$reply = json_decode($reply);
 
-	return $reply->data->link;
+	if($reply->success == false){
+		return false;
+	}else{
+		return $reply->data->link;
+	}
 }
 
 ?>
