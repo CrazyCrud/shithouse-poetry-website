@@ -89,7 +89,7 @@ for($i = 0; $i < count($_FILES['images']['name']); $i++){
 			exit();
 		}
 
-		$imagedestroy($image);
+		imagedestroy($image);
 
         $isDirEmpty = false;
     }

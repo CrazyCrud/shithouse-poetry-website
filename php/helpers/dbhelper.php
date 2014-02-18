@@ -280,7 +280,7 @@ class Queries{
 		"INSERT INTO `$i`
 		(entryid, path, xposition, yposition, width, height)
 		VALUES
-		($entryid, '$path', $x, $y, $width, $height)
+		($entryid, '$path', $x, $y, $w, $h)
 		";
 		return $query;
 	}
