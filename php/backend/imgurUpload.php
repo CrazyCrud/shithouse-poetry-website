@@ -158,6 +158,7 @@ function sendToImgur($image){
 	$client_id = "d86755ff44b7f13";
 
 	$ch = curl_init();
+	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 	curl_setopt($ch, CURLOPT_URL, 'https://api.imgur.com/3/image.json');
 	curl_setopt($ch, CURLOPT_POST, TRUE);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
