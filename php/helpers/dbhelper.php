@@ -443,12 +443,18 @@ class DBHelper{
 		return $entry;
 	}
 
+	// returns the first 20 entries after $start ordered by $orderby
+	// (for $orderby select a name of one of the attributes returned)
 	public function getAllEntries($orderby, $start){
 		if(!isset($start)){
 			$start = 0;
 		}
 		$query = Queries::getallentries($start, Constants::NUMENTRIES, $orderby);
 		return $this->query($query);
+	}
+
+	public function saveImage($entryid, $url){
+		
 	}
 
 }
