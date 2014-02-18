@@ -27,7 +27,7 @@ class DBConfig{
 		"tags" => "tags",
 		"types" => "type",
 		"users" => "user",
-		"tags" => "usertags"
+		"usertags" => "usertags"
 	);
 
 	public static $dbStatus = array(
@@ -201,6 +201,7 @@ class Queries{
 		$t = DBConfig::$tables["types"];
 		$r = DBConfig::$tables["ratings"];
 		$i = DBConfig::$tables["information"];
+		$img = DBConfig::$tables["images"];
 		if(isset($entryid)){
 			$id = "`$e`.id = $entryid AND";
 		}else{
@@ -221,11 +222,17 @@ class Queries{
 			`$i`.location AS location,
 			`$i`.longitude AS longitude,
 			`$i`.latitude AS latitude,
+			`$img`.id AS imageid,
+			`$img`.path AS path,
+			`$img`.xposition AS x,
+			`$img`.yposition AS y,
+			`$img`.width AS width,
+			`$img`.height AS height,
 			AVG(`rating`.rating) AS rating,
 			COUNT(`rating`.rating) AS ratingcount
 
 			FROM
-			`$e`, `$u`, `$t`, `$i`, `$r`
+			`$e`, `$u`, `$t`, `$i`, `$r`, `$img`
 
 			WHERE
 			$id
@@ -236,6 +243,8 @@ class Queries{
 			`$e`.typeid = `$t`.id
 			AND
 			`$e`.id = `$r`.entryid
+			AND
+			`$e`.id = `$img`.entryid
 
 			GROUP BY
 			`$r`.entryid";
@@ -246,6 +255,21 @@ class Queries{
 			$order = "date";
 		}
 		return Queries::getentry()." ORDER BY ".$order." DESC LIMIT $start, $limit";
+	}
+	public static function getusertags($entryid){
+		$u = DBConfig::$tables["usertags"];
+		$t = DBConfig::$tables["tags"];
+		if(isset($entryid)){
+			$id = "`$u`.entryid = $entryid AND";
+		}else{
+			$id = "";
+		}
+		$query = "SELECT 
+			`$t`.tagid, `$t`.tag
+			FROM `$t`, `$u`
+			WHERE $id
+			`$u`.tagid = `$t`.tagid";
+		return $query;
 	}
 }
 
@@ -411,7 +435,12 @@ class DBHelper{
 	// returns the complete entry of the given id
 	public function getEntry($entryid){
 		$query = Queries::getentry($entryid);
-		return $this->query($query);
+		$entry = $this->query($query);
+		if(count($entry)==0)return false;
+		$entry = $entry[0];
+		$query = Queries::getusertags($entryid);
+		$entry["tags"]=$this->query($query);
+		return $entry;
 	}
 
 	public function getAllEntries($orderby, $start){
