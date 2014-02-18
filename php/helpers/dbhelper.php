@@ -84,7 +84,7 @@ class DBConnection{
 		$result = mysql_query($q, $this->link)
 		or $this->error(DBConfig::$dbStatus["offline"]);
 		if(is_bool($result))return $result;
-		while ($row = mysql_fetch_array($result)){
+		while ($row = mysql_fetch_assoc($result)){
 			$rows[count($rows)]=$row;
 		}
 		return $rows;
@@ -201,7 +201,6 @@ class Queries{
 		$t = DBConfig::$tables["types"];
 		$r = DBConfig::$tables["ratings"];
 		$i = DBConfig::$tables["information"];
-		$img = DBConfig::$tables["images"];
 		if(isset($entryid)){
 			$id = "`$e`.id = $entryid AND";
 		}else{
@@ -222,32 +221,32 @@ class Queries{
 			`$i`.location AS location,
 			`$i`.longitude AS longitude,
 			`$i`.latitude AS latitude,
-			`$img`.id AS imageid,
-			`$img`.path AS path,
-			`$img`.xposition AS x,
-			`$img`.yposition AS y,
-			`$img`.width AS width,
-			`$img`.height AS height,
-			AVG(`rating`.rating) AS rating,
-			COUNT(`rating`.rating) AS ratingcount
+			AVG(`$r`.rating) AS rating,
+			COUNT(`$r`.rating) AS ratingcount
 
 			FROM
-			`$e`, `$u`, `$t`, `$i`, `$r`, `$img`
+			`$e`, `$u`, `$t`, `$i`, `$r`
 
 			WHERE
 			$id
 			`$e`.id = `$i`.entryid
 			AND
-			`$u`.id = `$e`.userid
+			`$e`.userid = `$u`.id
 			AND
 			`$e`.typeid = `$t`.id
 			AND
 			`$e`.id = `$r`.entryid
-			AND
-			`$e`.id = `$img`.entryid
 
 			GROUP BY
 			`$r`.entryid";
+		return $query;
+	}
+	public static function getimages($entryid){
+		$img = DBConfig::$tables["images"];
+		$query =
+			"SELECT id, path, xposition, yposition, width, height
+			FROM `$img`
+			WHERE `$img`.entryid=".$entryid;
 		return $query;
 	}
 	public static function getallentries($start, $limit, $order){
@@ -316,7 +315,7 @@ class DBHelper{
 	}
 
 	private function query($query){
-		//echo $query;
+		//echo $query."\n\n\n";
 		if($this->connection->status != DBConfig::$dbStatus["ready"])
 			return false;
 		if($this->loggedin()){
@@ -453,6 +452,8 @@ class DBHelper{
 		$entry = $entry[0];
 		$query = Queries::getusertags($entryid);
 		$entry["tags"]=$this->query($query);
+		$query = Queries::getimages($entryid);
+		$entry["images"]=$this->query($query);
 		return $entry;
 	}
 
@@ -463,7 +464,16 @@ class DBHelper{
 			$start = 0;
 		}
 		$query = Queries::getallentries($start, Constants::NUMENTRIES, $orderby);
-		return $this->query($query);
+		$entries = $this->query($query);
+		if(!$entries)return false;
+		foreach($entries as $key=>$value){
+			$query = Queries::getusertags($value["id"]);
+			$value["tags"]=$this->query($query);
+			$query = Queries::getimages($value["id"]);
+			$value["images"]=$this->query($query);
+			$entries[$key]=$value;
+		}
+		return $entries;
 	}
 
 	// saves a new image to the databse

@@ -53,6 +53,7 @@ Example Data:
 	$image = file_get_contents("test.jpg");
 
 	$ch = curl_init();
+	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 	curl_setopt($ch, CURLOPT_URL, 'https://api.imgur.com/3/image.json');
 	curl_setopt($ch, CURLOPT_POST, TRUE);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);

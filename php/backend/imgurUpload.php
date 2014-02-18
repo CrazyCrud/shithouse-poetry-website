@@ -1,5 +1,23 @@
 <?php
 
+// How to use this page:
+// open it using a FormData or Form by sending via POST:
+// id 		as the entryID to add the image to
+// authkey 	as your authkey
+// images[]	as the image[s] to upload
+//
+// required parameters are:
+// id, authkey, images[]
+//
+// The answer looks as follows:
+// a json with a successcode:
+/* 
+{
+	success : 1
+}
+*/
+// for success codes see ../php/config.php
+
 /**
 IMAGE UPLAOD
 */
@@ -158,6 +176,7 @@ function sendToImgur($image){
 	$client_id = "d86755ff44b7f13";
 
 	$ch = curl_init();
+	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 	curl_setopt($ch, CURLOPT_URL, 'https://api.imgur.com/3/image.json');
 	curl_setopt($ch, CURLOPT_POST, TRUE);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
