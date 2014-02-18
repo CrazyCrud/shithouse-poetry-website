@@ -201,6 +201,7 @@ class Queries{
 		$t = DBConfig::$tables["types"];
 		$r = DBConfig::$tables["ratings"];
 		$i = DBConfig::$tables["information"];
+		$img = DBConfig::$tables["images"];
 		if(isset($entryid)){
 			$id = "`$e`.id = $entryid AND";
 		}else{
@@ -221,11 +222,17 @@ class Queries{
 			`$i`.location AS location,
 			`$i`.longitude AS longitude,
 			`$i`.latitude AS latitude,
+			`$img`.id AS imageid,
+			`$img`.path AS path,
+			`$img`.xposition AS x,
+			`$img`.yposition AS y,
+			`$img`.width AS width,
+			`$img`.height AS height,
 			AVG(`rating`.rating) AS rating,
 			COUNT(`rating`.rating) AS ratingcount
 
 			FROM
-			`$e`, `$u`, `$t`, `$i`, `$r`
+			`$e`, `$u`, `$t`, `$i`, `$r`, `$img`
 
 			WHERE
 			$id
@@ -236,6 +243,8 @@ class Queries{
 			`$e`.typeid = `$t`.id
 			AND
 			`$e`.id = `$r`.entryid
+			AND
+			`$e`.id = `$img`.entryid
 
 			GROUP BY
 			`$r`.entryid";
