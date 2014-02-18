@@ -1,5 +1,10 @@
 <?php
 
+class Constants{
+	const NUMCOMMENTS = 10;
+	const NUMENTRIES = 20;
+}
+
 /*
 Configuration class containing only constants concerning the database
 */
@@ -165,7 +170,7 @@ class Queries{
 		AND `comment`.id<$commentid
 		AND `$c`.entryid = $entryid
 		ORDER BY `$c`.timestamp DESC
-		LIMIT 0,10";
+		LIMIT 0,".Constants::NUMCOMMENTS;
 	}
 	public static function addcomment($entryid, $comment, $userid){
 		$c = DBConfig::$tables["comments"];
@@ -192,8 +197,55 @@ class Queries{
 	**/
 	public static function getentry($entryid){
 		$e = DBConfig::$tables["entries"];
-		return "SELECT * FROM $e
-		WHERE id = $entryid";
+		$u = DBConfig::$tables["users"];
+		$t = DBConfig::$tables["types"];
+		$r = DBConfig::$tables["ratings"];
+		$i = DBConfig::$tables["information"];
+		if(isset($entryid)){
+			$id = "`$e`.id = $entryid AND";
+		}else{
+			$id = "";
+		}
+		$query = 
+			"SELECT
+			`$e`.id AS id,
+			`$e`.title AS title,
+			`$e`.date AS date,
+			`$e`.sex AS sex,
+			`$e`.userid AS userid,
+			`$u`.username AS username,
+			`$t`.name AS typename,
+			`$t`.description AS typedescription,
+			`$i`.artist AS artist,
+			`$i`.transcription AS transcription,
+			`$i`.location AS location,
+			`$i`.longitude AS longitude,
+			`$i`.latitude AS latitude,
+			AVG(`rating`.rating) AS rating,
+			COUNT(`rating`.rating) AS ratingcount
+
+			FROM
+			`$e`, `$u`, `$t`, `$i`, `$r`
+
+			WHERE
+			$id
+			`$e`.id = `$i`.entryid
+			AND
+			`$u`.id = `$e`.userid
+			AND
+			`$e`.typeid = `$t`.id
+			AND
+			`$e`.id = `$r`.entryid
+
+			GROUP BY
+			`$r`.entryid";
+		return $query;
+	}
+	public static function getallentries($start, $limit, $order){
+		if(!isset($order)){
+			$order = "date";
+		}
+		return Queries::getentry()." ORDER BY ".$order." DESC LIMIT $start, $limit";
 	}
 }
 
@@ -359,6 +411,14 @@ class DBHelper{
 	// returns the complete entry of the given id
 	public function getEntry($entryid){
 		$query = Queries::getentry($entryid);
+		return $this->query($query);
+	}
+
+	public function getAllEntries($orderby, $start){
+		if(!isset($start)){
+			$start = 0;
+		}
+		$query = Queries::getallentries($start, Constants::NUMENTRIES, $orderby);
 		return $this->query($query);
 	}
 
