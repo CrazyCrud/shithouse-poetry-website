@@ -146,11 +146,34 @@ body{
 #searchcontent{
 	display: none;
 	position:absolute;
-	width: 100%;
-	top:10%;
+	top:5%;
+	width: 100%;	
 	left:0px;
 	z-index:200;
 }
+
+#searchOverlayBackButton img{
+	width:5%;
+	height:5%;
+}
+
+#searchSubmitButton{
+    color: $lightgrey;
+    height: auto;
+    font-size: 100%;
+    padding: 0.5em;
+    font-family: "Segoe UI Light";
+    border-width: 1px;
+    border-style: solid;
+    border-color: $lightgrey;
+}
+
+.right-aligned{
+	text-align: right;
+}
+
+
+
 
 
 
