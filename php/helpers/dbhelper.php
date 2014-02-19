@@ -195,12 +195,45 @@ class Queries{
 	/**
 	ENTRY QUERIES
 	**/
+	public static function getinformation($entryid){
+		$i = DBConfig::$tables["information"];
+		if(isset($entryid)){
+			$id = "`$i`.entryid = $entryid";
+		}else{
+			$id = "1";
+		}
+		$query = 
+			"SELECT
+			`$i`.entryid AS entryid,
+			`$i`.artist AS artist,
+			`$i`.transcription AS transcription,
+			`$i`.location AS location,
+			`$i`.longitude AS longitude,
+			`$i`.latitude AS latitude
+			FROM $i
+			WHERE $id";
+		return $query;
+	}
+	public static function getratings($entryid){
+		$r = DBConfig::$tables["ratings"];
+		if(isset($entryid)){
+			$id = "`$r`.entryid = $entryid";
+		}else{
+			$id = "1";
+		}
+		$query = 
+			"SELECT
+			`$r`.entryid AS entryid,
+			AVG(`$r`.rating) AS rating,
+			COUNT(`$r`.rating) AS ratingcount
+			FROM $r
+			WHERE $id";
+		return $query;
+	}
 	public static function getentry($entryid){
 		$e = DBConfig::$tables["entries"];
 		$u = DBConfig::$tables["users"];
 		$t = DBConfig::$tables["types"];
-		$r = DBConfig::$tables["ratings"];
-		$i = DBConfig::$tables["information"];
 		if(isset($entryid)){
 			$id = "`$e`.id = $entryid AND";
 		}else{
@@ -215,30 +248,19 @@ class Queries{
 			`$e`.userid AS userid,
 			`$u`.username AS username,
 			`$t`.name AS typename,
-			`$t`.description AS typedescription,
-			`$i`.artist AS artist,
-			`$i`.transcription AS transcription,
-			`$i`.location AS location,
-			`$i`.longitude AS longitude,
-			`$i`.latitude AS latitude,
-			AVG(`$r`.rating) AS rating,
-			COUNT(`$r`.rating) AS ratingcount
+			`$t`.description AS typedescription
 
 			FROM
-			`$e`, `$u`, `$t`, `$i`, `$r`
+			`$e`, `$u`, `$t`
 
 			WHERE
 			$id
-			`$e`.id = `$i`.entryid
-			AND
 			`$e`.userid = `$u`.id
 			AND
 			`$e`.typeid = `$t`.id
-			AND
-			`$e`.id = `$r`.entryid
 
 			GROUP BY
-			`$r`.entryid";
+			`$e`.id";
 		return $query;
 	}
 	public static function getimages($entryid){
@@ -448,12 +470,16 @@ class DBHelper{
 	public function getEntry($entryid){
 		$query = Queries::getentry($entryid);
 		$entry = $this->query($query);
-		if(count($entry)==0)return false;
+		if(count($entry)==0||!$entry)return false;
 		$entry = $entry[0];
 		$query = Queries::getusertags($entryid);
 		$entry["tags"]=$this->query($query);
 		$query = Queries::getimages($entryid);
 		$entry["images"]=$this->query($query);
+		$query = Queries::getratings($entryid);
+		$entry["ratings"]=$this->query($query);
+		$query = Queries::getinformation($entryid);
+		$entry["information"]=$this->query($query);
 		return $entry;
 	}
 
@@ -471,6 +497,10 @@ class DBHelper{
 			$value["tags"]=$this->query($query);
 			$query = Queries::getimages($value["id"]);
 			$value["images"]=$this->query($query);
+			$query = Queries::getratings($entryid);
+			$value["ratings"]=$this->query($query);
+			$query = Queries::getinformation($entryid);
+			$value["information"]=$this->query($query);
 			$entries[$key]=$value;
 		}
 		return $entries;
