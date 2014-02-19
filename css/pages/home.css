@@ -92,3 +92,15 @@ body {
   padding: 4px; }
   #images img {
     vertical-align: bottom; }
+
+.overlay, .overlay-women, .overlay-men {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0.6; }
+
+.overlay-women {
+  background-color: #d22091; }
+
+.overlay-men {
+  background-color: #32a2b8; }

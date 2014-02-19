@@ -15,3 +15,24 @@
 	}
 }
 
+.overlay{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	opacity: 0.6;
+
+	span{
+		
+	}
+}
+
+.overlay-women{
+	@extend .overlay;
+	background-color: $pink;
+}
+
+.overlay-men{
+	@extend .overlay;
+	background-color: $blue;
+}
+

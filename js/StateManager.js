@@ -36,6 +36,9 @@ var StateManager = (function(){
 		getState : function(){
 			return state;
 		},
+		hasTouchSupport : function(){
+			return $("html").hasClass("touch");
+		},
 		States : states
 	}
 }());

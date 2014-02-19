@@ -23,7 +23,7 @@ var ImgurManager = (function(){
 
 	var clientID = "9e45d882d3b4055";
 	return {
-		loadImages : function(searchProps){
+		loadImages : function(callback, searchProps){
 			searchProps = searchProps || {};
 			searchProps.tags = searchProps.tags || [tags.properties[tags.ALL].name];
 			searchProps.ratingActivated = searchProps.ratingActivated || false;
@@ -31,27 +31,27 @@ var ImgurManager = (function(){
 
 			var links = null;
 			var postData = JSON.stringify(searchProps);
-			$.post('/php/requestImages.php', {tags : postData}, function(data) {
-				if(data == null){
-					links = null;
+			$.post('php/backend/getAllEntries.php', {tags : postData}, function(data) {
+				if(data.success == 1){
+					links = data.data;
+					callback(links);
 				}else{
-					links = $.parseJSON(data);
-				}
+					console.log("Error");
+				}		
 			});
-			return links;
 		},
-		loadImage : function(id){
-			var link = null;
+		loadImage : function(callback, id){
+			var data = null;
 			if(id != null || id != undefined){
-				$.post('/php/requestImages.php', {id : id}, function(data) {
+				$.get('php/backend/getEntry.php', {entryid : id}, function(data) {
 					if(data == null){
-						links = null;
+						data = null;
 					}else{
-						links = $.parseJSON(data);
+						data = $.parseJSON(data);
 					}
+					callback(data);
 				});
 			}
-			return link;
 		},
 		uploadImages : function(imgData){
 			if(imgData == null || imgData == undefined){
