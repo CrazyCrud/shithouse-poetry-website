@@ -236,6 +236,46 @@ body {
   z-index: 200;
   position: fixed; }
 
+#entry-info {
+  color: #111111;
+  margin-left: 20px; }
+
+#entry-info-content {
+  margin-top: 20px; }
+
+#entry-img {
+  float: left;
+  margin-right: 20px; }
+
+#entry-location {
+  margin: 10px; }
+
+#entry-title {
+  font-size: 2em;
+  font-family: "Segoe UI"; }
+
+#entry-tags {
+  clear: left; }
+
+.tag {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #cbcdc7;
+  border-radius: 30px;
+  color: #111111;
+  margin: 10px;
+  padding: 7px;
+  padding-left: 10px;
+  padding-right: 10px;
+  float: left; }
+
+#entry-rating {
+  clear: left;
+  margin-top: 30px; }
+
+#thumbs-up {
+  margin-left: 20px; }
+
 .right-aligned {
   text-align: right; }
 

@@ -1,4 +1,4 @@
-var linkSearch = document.getElementById("link-search");
+ar linkSearch = document.getElementById("link-search");
 var searchContent = document.getElementById("searchcontent");
 var linkLogin = document.getElementById("link-login");
 var loginContent = document.getElementById("logincontent");
