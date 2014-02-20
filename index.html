@@ -26,9 +26,12 @@
 							</ul>
 							<ul class="right">
 								<li class="li-search-container">
-									<a id="link-search" href="#" onClick=""><span>Search</span><i class="icon-search"></i></a></li>
+									<a id="link-search" href="#" onClick="">
+										<span>Search</span><i class="icon-search"></i>
+									</a>
+								</li>
 								<li class="li-login-container">
-									<a id="link-login" href="">
+									<a id="link-login" href="#" onClick="">
 										<span>Login</span><i class="icon-user"></i>
 									</a>
 								</li>
@@ -60,20 +63,36 @@
 					</div>
 				</div>
 			</section>
-			<section id="searchcontent">
+			<section id="searchcontent" class="overlaycontent">
 				<div class="row">
-					<a href="#" id="searchOverlayBackButton"> <img src="img/global/back_arrow.png"></a>
+					<a href="#" class="overlayBackButton" id="searchOverlayBackButton"> <img src="img/global/back_arrow.png"></a>
 						<div class="small-12 columns full-width">
 							<form class="searchForm">
 								<input type="text" placeholder="Suche" name="searchInput" id="searchField" autofocus>
 							</form>
-						</div>
-					
+						</div>					
 				</div>
 				<div class="row">
 					<div class="small-12 columns full-width right-aligned">
-						<a href="#" id="searchSubmitButton">Suchen</a>
+						<a href="#" class="overlayButton">suchen</a>
 					</div>
+				</div>
+			</section>
+			<section id="logincontent" class="overlaycontent">
+				<div class="row">
+					<a href="#" class="overlayBackButton" id="loginOverlayBackButton"> <img src="img/global/back_arrow.png"></a>
+					<div class="small-12 columns full-width">
+							<form class="loginForm">
+								<input type="email" placeholder="E-Mail" name="emailInput" class="loginField" id="searchField" autofocus>
+								<input type="password" placeholder="Passwort" name="passwordInput" class="loginField">
+							</form>
+						</div>	
+					<div class="row">
+						<div class="small-12 columns full-width right-aligned">
+							<a href="#" class="overlayButton left-aligned" id="registerButton">registrieren </a>
+							<a href="#" class="overlayButton right-aligned">Login</a>
+						</div>
+					</div>			
 				</div>
 			</section>
 		</div>
@@ -93,6 +112,7 @@
   		<script src="js/ImgurManager.js"></script>
 		<script src="js/global.js"></script>
 		<script src="js/pages/home.js"></script>
-		<script src="js/pages/searchOverlay.js"></script>
+		<script src="js/pages/searchOverlay.js"></script>		
+		<script src="js/pages/loginOverlay.js"></script>
 	</body>
 </html>

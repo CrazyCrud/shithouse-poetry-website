@@ -141,23 +141,15 @@ body{
    width:100%;
    background-color: #000000;
    opacity: 0.9;
+
 }
 
-#searchcontent{
-	display: none;
-	position:absolute;
-	top:5%;
-	width: 100%;	
-	left:0px;
-	z-index:200;
-}
-
-#searchOverlayBackButton img{
+.overlayBackButton img{
 	width:5%;
 	height:5%;
 }
 
-#searchSubmitButton{
+.overlayButton{
     color: $lightgrey;
     height: auto;
     font-size: 100%;
@@ -166,10 +158,41 @@ body{
     border-width: 1px;
     border-style: solid;
     border-color: $lightgrey;
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+}
+.overlayButton:hover{
+	background-color: $lightgrey;
+	color: $black;
+	border-color:$lightgrey;
+}
+
+.overlayButton:focus{
+	background-color: $lightgrey;
+	color: $black;
+	border-color:$lightgrey;
+}
+#registerButton{
+	margin-right:2%;
+}
+
+.overlaycontent{
+	display: none;
+	position:absolute;
+	top:5%;
+	width: 100%;	
+	left:0px;
+	z-index:200;
+	position:fixed;
 }
 
 .right-aligned{
 	text-align: right;
+}
+.left-aligned{
+	text-align: left;
 }
 
 

@@ -381,13 +381,13 @@ $select-bg-color: #fafafa;
 
     /* We use this to get basic styling on all basic form elements */
     /*input[type="text"],*/
-    input[type="password"],
+    /*input[type="password"],
     input[type="date"],
     input[type="datetime"],
     input[type="datetime-local"],
     input[type="month"],
     input[type="week"],
-    input[type="email"],
+    /*input[type="email"],
     input[type="number"],
     input[type="search"],
     input[type="tel"],
@@ -431,15 +431,35 @@ $select-bg-color: #fafafa;
       height: auto;
       font-size: 600%;
       width: 90%;
-      margin-left: 5%;
-      margin-right: 5%;
+      margin: 5%;
       border: none; 
       outline: none; 
       font-family: "Segoe UI light"; 
-      margin-top: 5%;
     }   
 
-    
+    input[type="email"].loginField{
+      color: $lightgrey;
+      background-color: rgba(0,0,0,0);
+      height: auto;
+      font-size: 400%;
+      width: 90%;
+      margin: 5%;
+      border: none; 
+      outline: none; 
+      font-family: "Segoe UI light"; 
+    }
+
+    input[type="password"].loginField{
+      color: $lightgrey;
+      background-color: rgba(0,0,0,0);
+      height: auto;
+      font-size: 400%;
+      width: 90%;
+      margin: 5%;
+      border: none; 
+      outline: none; 
+      font-family: "Segoe UI light"; 
+    }   
 
 
     ::-moz-placeholder {color:$lightgrey;}
