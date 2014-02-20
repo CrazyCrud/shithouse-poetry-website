@@ -99,10 +99,11 @@ function displayImages(){
 }
 
 function addOverlay(){
+	var isTouch = StateManager.isDesktop();
 	$(".jg-image a").each(function(index, value) {
-		id = parseInt($(this).attr('title'));
+		var $parent = $(this).parent(".jg-image");
+		var id = parseInt($(this).attr('title'));
 		elementData = imgData[id];
-		console.log(elementData);
 		if(elementData){
 			var overlayClass = "";
 			switch(elementData.gender.toLowerCase()){
@@ -115,9 +116,42 @@ function addOverlay(){
 				default:
 					overlayClass = "unisex";
 			}
-			var content = '<div class="overlay-' + overlayClass + '"><span>"' + elementData.transcription + '"</span></div>';
+			var content = '<div class="' + overlayClass + '"></div><div class="transcribtion"><span>' + elementData.transcription + '</span></div>';
 			$(this).parent(".jg-image").prepend(content);
-			$(this).removeAttr('data-gender');
 		}
+		addOverlayFunctionality($parent, isTouch);
 	});
+}
+
+function addOverlayFunctionality(container, isTouch){
+	var $container = $(container);
+	var $transcribtion = $container.children('.transcribtion');
+	var $genderOverlay = null;
+	var $image = $container.find('img');
+	if($container.children('div.women').length > 0){
+		$genderOverlay = $container.children('div.women');
+	}else if($container.children('div.men').length > 0){
+		$genderOverlay = $container.children('div.men');
+	}else{
+		$genderOverlay = $container.children('div.unisex');
+	}
+	console.log($image);
+	if(isTouch){
+		var newClass = $transcribtion.attr('class') + "-touch";
+		$transcribtion.removeAttr('class');
+		$transcribtion.addClass(newClass);
+		newClass = $genderOverlay.attr('class') + "-touch";
+		$genderOverlay.removeAttr('class');
+		$genderOverlay.addClass(newClass);
+	}else{
+		$container.hover(function() {
+			$image.transition({scale:[1.1, 1.1]});
+			$genderOverlay.fadeIn(400);
+			$transcribtion.fadeIn(400);
+		}, function() {
+			$image.transition({scale:[1.0, 1.0]});
+			$genderOverlay.fadeOut(400);
+			$transcribtion.fadeOut(400);
+		});
+	}
 }

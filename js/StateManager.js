@@ -26,6 +26,10 @@ var StateManager = (function(){
 		}
 	};
 
+	var hasTouchSupport = function(){
+		return $("html").hasClass("touch");
+	};
+
 	return {
 		init : function(){
 			$(window).resize(function(event) {
@@ -37,7 +41,14 @@ var StateManager = (function(){
 			return state;
 		},
 		hasTouchSupport : function(){
-			return $("html").hasClass("touch");
+			return hasTouchSupport();
+		},
+		isDesktop: function(){
+			if(state == states.properties[states.LARGE].name || hasTouchSupport()){
+				return true;
+			}else{
+				return false;
+			}
 		},
 		States : states
 	}
