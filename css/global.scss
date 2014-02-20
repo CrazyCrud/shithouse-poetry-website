@@ -122,16 +122,6 @@ body{
 	overflow: hidden;
 }
 
-@media screen and (max-width: 640px){
-	#mainnav{
-		.top-bar-section{
-			span{
-				display: none;
-			}
-		}
-	}
-}
-
 #overlay {
    position: fixed;
    z-index:199;
@@ -245,7 +235,15 @@ body{
 	text-align: left;
 }
 
-
+@media screen and (max-width: 640px){
+	#mainnav{
+		.top-bar-section{
+			span{
+				display: none;
+			}
+		}
+	}
+}
 
 
 
