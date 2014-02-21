@@ -263,6 +263,40 @@ class Queries{
 			`$e`.id";
 		return $query;
 	}
+	public static function getentriesbyrating($start, $limit){
+		$e = DBConfig::$tables["entries"];
+		$u = DBConfig::$tables["users"];
+		$t = DBConfig::$tables["types"];
+		$r = DBConfig::$tables["ratings"];
+		$query = 
+			"SELECT
+			`$e`.id AS id,
+			`$e`.title AS title,
+			`$e`.date AS date,
+			`$e`.sex AS sex,
+			`$e`.userid AS userid,
+			`$u`.username AS username,
+			`$t`.name AS typename,
+			`$t`.description AS typedescription,
+			AVG(`$r`.rating) AS ratings
+
+			FROM
+			`$e`, `$u`, `$t`, `$r`
+
+			WHERE
+			`$e`.userid = `$u`.id
+			AND
+			`$e`.typeid = `$t`.id
+			AND
+			`$e`.id = `$r`.entryid
+
+			GROUP BY
+			`$r`.entryid
+			ORDER BY
+			ratings DESC
+			LIMIT $start, $limit";
+		return $query;
+	}
 	public static function getimages($entryid){
 		$img = DBConfig::$tables["images"];
 		$query =
@@ -489,20 +523,30 @@ class DBHelper{
 		if(!isset($start)){
 			$start = 0;
 		}
-		$query = Queries::getallentries($start, Constants::NUMENTRIES, $orderby);
-		$entries = $this->query($query);
+		if($orderby == "rating"){
+			$entries = $this->getAllEntriesByRating($start);
+		}else{
+			$query = Queries::getallentries($start, Constants::NUMENTRIES, $orderby);
+			$entries = $this->query($query);
+		}
 		if(!$entries)return false;
 		foreach($entries as $key=>$value){
 			$query = Queries::getusertags($value["id"]);
 			$value["tags"]=$this->query($query);
 			$query = Queries::getimages($value["id"]);
 			$value["images"]=$this->query($query);
-			$query = Queries::getratings($entryid);
+			$query = Queries::getratings($value["id"]);
 			$value["ratings"]=$this->query($query);
-			$query = Queries::getinformation($entryid);
+			$query = Queries::getinformation($value["id"]);
 			$value["information"]=$this->query($query);
 			$entries[$key]=$value;
 		}
+		return $entries;
+	}
+
+	private function getAllEntriesByRating($start){
+		$query = Queries::getentriesbyrating($start, Constants::NUMENTRIES);
+		$entries = $this->query($query);
 		return $entries;
 	}
 
