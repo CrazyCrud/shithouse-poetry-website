@@ -45,6 +45,10 @@ include("../helpers/dbhelper.php");
 $json = array();
 $json["success"]=$CODE_INSUFFICIENT_PARAMETERS;
 
+if(isset($_POST["entryid"])){
+	$_GET = $_POST;
+}
+
 if(isset($_GET["entryid"])){
 	$entryid = $_GET["entryid"];
 }else{

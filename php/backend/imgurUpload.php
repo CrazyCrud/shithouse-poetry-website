@@ -35,6 +35,10 @@ include("../helpers/dbhelper.php");
 $json = array();
 $json["success"]=$CODE_INSUFFICIENT_PARAMETERS;
 
+if(isset($_POST["authkey"])){
+	$_GET = $_POST;
+}
+
 if(!isset($_POST['authkey'])){
 	$json["message"] = "user authentication (authkey) missing";
 	echo json_encode($json);

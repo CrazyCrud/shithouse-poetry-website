@@ -32,6 +32,10 @@ include("../helpers/dbhelper.php");
 $json = array();
 $json["success"]=$CODE_INSUFFICIENT_PARAMETERS;
 
+if(isset($_POST["authkey"])){
+	$_GET = $_POST;
+}
+
 if(isset($_GET["authkey"])){
 	$key = $_GET["authkey"];
 }else{
