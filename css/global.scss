@@ -123,11 +123,11 @@ body{
 #overlay {
    position: fixed;
    z-index:199;
-   top: 0px;
-   left: 0px;
+   top: 0%;
+   left: 0%;
    height:100%;
    width:100%;
-   background-color: #000000;
+   background-color: $black;
    opacity: 0.9;
 
 }
@@ -164,6 +164,10 @@ body{
 }
 #registerButton{
 	margin-right:2%;
+}
+
+#loginButton{
+	margin-left:2%;
 }
 
 .overlaycontent{

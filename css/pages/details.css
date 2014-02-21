@@ -1,0 +1,129 @@
+/*
+Base styles include setting heading sizes, default link styles, default
+font styles, and body backgrounds; it doesn’t include any class or ID selectors
+*/
+/*
+Insert code that doesn't output CSS, things like mixin declarations, functions, and variables.
+*/
+.row {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 0; }
+
+.columns {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 0; }
+
+.full-width {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0; }
+
+.space-plus1 {
+  margin-top: 1.618rem;
+  margin-bottom: 1.618rem; }
+
+.space-plus2 {
+  margin-top: 2.618rem;
+  margin-bottom: 2.618rem; }
+
+.space-plus3 {
+  margin-top: 4.236rem;
+  margin-bottom: 4.236rem; }
+
+.space-plus4 {
+  margin-top: 6.854rem;
+  margin-bottom: 6.854rem; }
+
+.space-plus5 {
+  margin-top: 11.089rem;
+  margin-bottom: 11.089rem; }
+
+.space-plus6 {
+  margin-top: 17.942rem;
+  margin-bottom: 17.942rem; }
+
+.space-plus7 {
+  margin-top: 29.03rem;
+  margin-bottom: 29.03rem; }
+
+.space-plus8 {
+  margin-top: 46.971rem;
+  margin-bottom: 46.971rem; }
+
+.space-minus1 {
+  margin-top: 0.618rem;
+  margin-bottom: 0.618rem; }
+
+.space-minus2 {
+  margin-top: 0.382rem;
+  margin-bottom: 0.382rem; }
+
+.space-minus3 {
+  margin-top: 0.236rem;
+  margin-bottom: 0.236rem; }
+
+.space-minus4 {
+  margin-top: 0.146rem;
+  margin-bottom: 0.146rem; }
+
+.space-minus5 {
+  margin-top: 0.09rem;
+  margin-bottom: 0.09rem; }
+
+.space-minus6 {
+  margin-top: 0.056rem;
+  margin-bottom: 0.056rem; }
+
+body {
+  color: #ffffff; }
+
+#entry-info {
+  color: #111111;
+  margin-left: 20px;
+  font-family: "Segoe UI"; }
+
+#entry-info-content {
+  margin-top: 5%; }
+
+#entry-img {
+  float: left;
+  margin-right: 5%; }
+
+#entry-location {
+  margin: 2%; }
+
+#entry-title {
+  font-size: 2em;
+  font-family: "Segoe UI Light"; }
+
+#entry-tags {
+  clear: left;
+  overflow: hidden;
+  margin-top: 10%; }
+
+#thumbs-up {
+  position: absolute; }
+
+.tag {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #cbcdc7;
+  border-radius: 30px;
+  color: #111111;
+  margin: 2%;
+  padding: 2%;
+  float: left;
+  font-family: "Segoe UI Light"; }
+
+#entry-rating {
+  clear: left;
+  margin-top: 30px; }
+
+#thumbs-up {
+  margin-left: 20px; }
+
+#details-maincontent {
+  margin-top: 4%; }
