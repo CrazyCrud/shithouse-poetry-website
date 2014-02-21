@@ -1,5 +1,8 @@
 @import "../partials/base";
 
+#details-maincontent{
+	z-index:88;
+}
 #entry-info{
 	color: $black;
 	margin-left: 20px;

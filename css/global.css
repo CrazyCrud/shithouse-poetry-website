@@ -190,7 +190,7 @@ body {
   height: 100%;
   width: 100%;
   background-color: #111111;
-  opacity: 0.9; }
+  opacity: 0.95; }
 
 .overlayBackButton img {
   width: 5%;
@@ -224,7 +224,7 @@ body {
   margin-right: 2%; }
 
 #loginButton {
-  margin-left: 2%; }
+  margin-right: 3%; }
 
 .overlaycontent {
   display: none;
@@ -319,6 +319,9 @@ Insert code that doesn't output CSS, things like mixin declarations, functions, 
 
 body {
   color: #ffffff; }
+
+#details-maincontent {
+  z-index: 88; }
 
 #entry-info {
   color: #111111;

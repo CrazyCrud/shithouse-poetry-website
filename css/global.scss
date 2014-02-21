@@ -128,8 +128,7 @@ body{
    height:100%;
    width:100%;
    background-color: $black;
-   opacity: 0.9;
-
+   opacity: 0.95
 }
 
 .overlayBackButton img{
@@ -163,11 +162,11 @@ body{
 	border-color:$lightgrey;
 }
 #registerButton{
-	margin-right:2%;
+	margin-right: 2%;
 }
 
 #loginButton{
-	margin-left:2%;
+	margin-right: 3%;
 }
 
 .overlaycontent{

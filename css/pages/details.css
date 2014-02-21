@@ -80,6 +80,9 @@ Insert code that doesn't output CSS, things like mixin declarations, functions, 
 body {
   color: #ffffff; }
 
+#details-maincontent {
+  z-index: 88; }
+
 #entry-info {
   color: #111111;
   margin-left: 20px;

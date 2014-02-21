@@ -2397,7 +2397,7 @@ input[type="text"]#searchField {
   color: #cbcdc7;
   background-color: rgba(0, 0, 0, 0);
   height: auto;
-  font-size: 600%;
+  font-size: 300%;
   width: 90%;
   margin: 5%;
   border: none;
@@ -2408,9 +2408,9 @@ input[type="email"].loginField {
   color: #cbcdc7;
   background-color: rgba(0, 0, 0, 0);
   height: auto;
-  font-size: 400%;
+  font-size: 300%;
   width: 90%;
-  margin: 5%;
+  margin: 5% 5% 2% 5%;
   border: none;
   outline: none;
   font-family: "Segoe UI light"; }
@@ -2419,9 +2419,9 @@ input[type="password"].loginField {
   color: #cbcdc7;
   background-color: rgba(0, 0, 0, 0);
   height: auto;
-  font-size: 400%;
+  font-size: 300%;
   width: 90%;
-  margin: 5%;
+  margin: 0% 5% 5% 5%;
   border: none;
   outline: none;
   font-family: "Segoe UI light"; }
