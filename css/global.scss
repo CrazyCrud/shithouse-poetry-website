@@ -100,8 +100,6 @@ body{
 	}
 }
 
-
-
 #upload-button{
 	a#link-upload{
 		font-size: 2rem;
@@ -176,63 +174,6 @@ body{
 	left:0px;
 	z-index:200;
 	position:fixed;
-}
-#entry-info{
-	color: $black;
-	margin-left: 20px;
-}
-#entry-info-content{
-	margin-top: 20px;
-}
-
-#entry-img{
-	float: left;
-	margin-right: 20px;
-}
-
-#entry-location{
-	margin: 10px;
-
-}
-
-#entry-title{
-	font-size: 2em;
-	font-family:"Segoe UI";
-}
-
-#entry-tags{
-	clear: left;
-}
-
-.tag{
-	border-style: solid;
-	border-width: 1px;
-	border-color:$lightgrey;
-	border-radius:30px;
-	color: $black;
-	margin:10px;
-	padding:7px;
-	padding-left:10px;
-	padding-right: 10px;
-	float: left;
-}
-
-#entry-rating{
-	clear: left;
-	margin-top: 30px;
-}
-
-#thumbs-up{
-	margin-left: 20px;
-}
-
-
-
-.right-aligned{
-	text-align: right;
-}
-.left-aligned{
-	text-align: left;
 }
 
 @media screen and (max-width: 640px){
