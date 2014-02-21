@@ -60,6 +60,10 @@ include("../helpers/dbhelper.php");
 $json = array();
 $json["success"]=$CODE_ERROR;
 
+if(isset($_POST["start"]) || isset($_POST["orderby"])){
+	$_GET = $_POST;
+}
+
 if(isset($_GET["start"])){
 	$start = $_GET["start"];
 }else{

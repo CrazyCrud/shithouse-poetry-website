@@ -30,6 +30,11 @@ include("../helpers/dbhelper.php");
 $json = array();
 $json["success"]=$CODE_INSUFFICIENT_PARAMETERS;
 
+if(isset($_POST["mail"])){
+	$_GET = $_POST;
+}
+
+
 if(isset($_GET["mail"])){
 	$mail = $_GET["mail"];
 }else{
