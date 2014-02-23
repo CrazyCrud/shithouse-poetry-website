@@ -437,6 +437,21 @@ $select-bg-color: #fafafa;
       font-family: "Segoe UI light"; 
     }   
 
+    input#register_input{
+      margin-left: 5%;
+      font-family: "Segoe UI";
+      font-size: 100%;
+    }
+
+    label#register-label{
+      color: $black;
+      font: $segoe;
+      margin-left: 5%;
+      margin-bottom: 0%;
+      margin-top: 2%;      
+      //if-bedingung: screen size = small, margin-top:2%;
+    }
+
     input[type="email"].loginField{
       color: $lightgrey;
       background-color: rgba(0,0,0,0);

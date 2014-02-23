@@ -1,0 +1,34 @@
+@import "../partials/base";
+
+
+#searchresults-maincontent{
+	margin-top: 4%;
+}
+
+#myimages-list-template{
+	border: 1px;
+	border-color: $black;
+	border-style: solid;
+	padding: 1%;
+	margin: 2%;
+	color: $black;
+	height: 129px;
+}
+
+#list-entry-image{
+	float: left;
+	width: 100px;
+	height: 100px;
+	background-color: $black;
+}
+
+#list-entry-username{
+	margin-left: 1%;
+}
+
+#list-entry-type{
+	margin-left: 1%;
+}
+
+
+

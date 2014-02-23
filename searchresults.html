@@ -7,6 +7,7 @@
 		<link rel="stylesheet" type="text/css" href="css/plugins/fontello/fontello.css"/>
 		<link rel="stylesheet" type="text/css" href="css/plugins/gallery/jquery.justifiedgallery.min.css"/>
 		<link rel="stylesheet" type="text/css" href="css/global.css"/>
+		<link rel="stylesheet" type="text/css" href="css/register.css"/>
 		<script type="text/javascript" src="js/plugins/modernizr.js"></script>
 		<title>Latrinalia</title>
 	</head>
@@ -31,49 +32,43 @@
 									</a>
 								</li>
 								<li class="li-login-container">
-									<a id="link-login" href="#"  >
+									<a id="link-login" href="#" onClick="">
 										<span>Login</span><i class="icon-user"></i>
-									</a>									
+									</a>
 								</li>
 							</ul>
 						</section>
 					</nav>
-				</div>
-				<div class="row full-width">
-					<div class="small-12 columns">
-						<div id="upload">
-							<div class="upload-image-container">
-									
-							</div>
-							<div class="upload-button-container">
-								<span id="upload-button"><a id="link-upload" href=""><i class="icon-upload-cloud"></i></a></span>
-							</div>
-						</div>
-					</div>
-				</div>
+				</div>				
 			</header>
-			<section id="maincontent">
-				<div class="row">
-					<div class="small-12 columns full-width">
-						<div class="infinite-container">
-							<div id="images">
 
-							</div>
-						</div>
+			<section id="searchresults-maincontent">
+				<div id="myimages-list-template">
+					<div id="list-entry-image">
+					</div>
+					<div id="list-entry-content">
+						<span id="list-entry-username">User Name</span> <br/>
+						<span id="list-entry-type" class="left">Typ (Kommentar/Report): </span>
+						<span id="list-entry-input">Inhalt des Kommentars / des Reports</span>
 					</div>
 				</div>
+					
 			</section>
+
+
+			
+
 			<section id="searchcontent" class="overlaycontent">
 				<div class="row">
 					<a href="#" class="overlayBackButton" id="searchOverlayBackButton"> <img src="img/global/back_arrow.png"></a>
 						<div class="small-12 columns full-width">
-							<form class="searchForm ">
+							<form class="searchForm">
 								<input type="text" placeholder="Suche" name="searchInput" id="searchField" autofocus>
 							</form>
 						</div>					
 				</div>
 				<div class="row">
-					<div class="small-12 columns full-width ">
+					<div class="small-12 columns full-width right">
 						<a href="#" class="overlayButton right">suchen</a>
 					</div>
 				</div>
@@ -83,23 +78,19 @@
 					<a href="#" class="overlayBackButton" id="loginOverlayBackButton"> <img src="img/global/back_arrow.png"></a>
 					<div class="small-12 columns full-width">
 							<form class="loginForm">
-								<input type="email" placeholder="E-Mail" name="emailInput" class="loginField" id="" autofocus>
-								<input type="password" placeholder="Passwort" name="passwordInput" class="loginField" id="">
+								<input type="email" placeholder="E-Mail" name="emailInput" class="loginField" id="searchField" autofocus>
+								<input type="password" placeholder="Passwort" name="passwordInput" class="loginField">
 							</form>
 						</div>	
 					<div class="row">
-						<div class="small-12 columns full-width">
-							<div class="">
-							
+						<div class="small-12 columns full-width right">
 							<a href="#" class="overlayButton right" id="loginButton">Login</a>
 							<a href="#" class="overlayButton right" id="registerButton">registrieren </a>
-						</div>
 						</div>
 					</div>			
 				</div>
 			</section>
 		</div>
-
 
 
 

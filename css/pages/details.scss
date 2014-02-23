@@ -30,12 +30,13 @@
 #entry-tags{
 	clear: left;
 	overflow: hidden;
-	margin-top: 10%;
+	margin-top: 2%;
 
 }
 
 #thumbs-up{
 	position:absolute;
+	left: 60px;
 }
 
 .tag{
@@ -48,6 +49,7 @@
 	padding:2%;
 	float: left;
 	font-family: $segoeli;
+	font-size: medium;
 }
 
 #entry-rating{

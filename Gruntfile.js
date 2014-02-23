@@ -29,7 +29,9 @@ module.exports = function(grunt) {
                     /* ['css/global.scss', 'css/pages/home.scss'] */
                     'css/global.css': 'css/*.scss',
                     'css/pages/home.css': 'css/pages/home.scss',
-                    'css/pages/details.css': 'css/pages/details.scss',
+                    'css/pages/details.css': 'css/pages/details.scss',                    
+                    'css/pages/register.css': 'css/pages/register.scss',
+                    'css/pages/searchresults.css': 'css/pages/searchresults.scss',
                     'css/plugins/foundation.css': 
                         'scss/*.scss'
                 }

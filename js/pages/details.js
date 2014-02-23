@@ -8,7 +8,7 @@ var expanded;
 
 function showRating(){
 if(!expanded){
-	$thumbsup.animate({right: "+=70"}, 600);
+	$thumbsup.animate({left: "+200"}, 1000);
 	expanded=true;
 }
 else{}

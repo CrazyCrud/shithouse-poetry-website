@@ -80,55 +80,5 @@ Insert code that doesn't output CSS, things like mixin declarations, functions, 
 body {
   color: #ffffff; }
 
-#details-maincontent {
-  z-index: 88; }
-
-#entry-info {
-  color: #111111;
-  margin-left: 20px;
-  font-family: "Segoe UI"; }
-
-#entry-info-content {
-  margin-top: 5%; }
-
-#entry-img {
-  float: left;
-  margin-right: 5%; }
-
-#entry-location {
-  margin: 2%; }
-
-#entry-title {
-  font-size: 2em;
-  font-family: "Segoe UI Light"; }
-
-#entry-tags {
-  clear: left;
-  overflow: hidden;
-  margin-top: 2%; }
-
-#thumbs-up {
-  position: absolute;
-  left: 60px; }
-
-.tag {
-  border-style: solid;
-  border-width: 1px;
-  border-color: #cbcdc7;
-  border-radius: 30px;
-  color: #111111;
-  margin: 2%;
-  padding: 2%;
-  float: left;
-  font-family: "Segoe UI Light";
-  font-size: medium; }
-
-#entry-rating {
-  clear: left;
-  margin-top: 30px; }
-
-#thumbs-up {
-  margin-left: 20px; }
-
-#details-maincontent {
+#register-maincontent {
   margin-top: 4%; }

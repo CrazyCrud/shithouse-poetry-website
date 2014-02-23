@@ -226,6 +226,30 @@ body {
 #loginButton {
   margin-right: 3%; }
 
+.normalButton {
+  color: #111111;
+  height: auto;
+  font-size: 100%;
+  padding: 0.5em;
+  font-family: "Segoe UI Light";
+  border-width: 1px;
+  border-style: solid;
+  border-color: #111111;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out; }
+
+.normalButton:focus {
+  background-color: #111111;
+  color: #cbcdc7;
+  border-color: rgba(0, 0, 0, 0); }
+
+.normalButton:hover {
+  background-color: #111111;
+  color: #cbcdc7;
+  border-color: rgba(0, 0, 0, 0); }
+
 .overlaycontent {
   display: none;
   position: absolute;
@@ -345,10 +369,11 @@ body {
 #entry-tags {
   clear: left;
   overflow: hidden;
-  margin-top: 10%; }
+  margin-top: 2%; }
 
 #thumbs-up {
-  position: absolute; }
+  position: absolute;
+  left: 60px; }
 
 .tag {
   border-style: solid;
@@ -359,7 +384,8 @@ body {
   margin: 2%;
   padding: 2%;
   float: left;
-  font-family: "Segoe UI Light"; }
+  font-family: "Segoe UI Light";
+  font-size: medium; }
 
 #entry-rating {
   clear: left;
@@ -497,3 +523,192 @@ body {
 
 .unisex {
   background-color: #888888; }
+/*
+Base styles include setting heading sizes, default link styles, default
+font styles, and body backgrounds; it doesn’t include any class or ID selectors
+*/
+/*
+Insert code that doesn't output CSS, things like mixin declarations, functions, and variables.
+*/
+.row {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 0; }
+
+.columns {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 0; }
+
+.full-width {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0; }
+
+.space-plus1 {
+  margin-top: 1.618rem;
+  margin-bottom: 1.618rem; }
+
+.space-plus2 {
+  margin-top: 2.618rem;
+  margin-bottom: 2.618rem; }
+
+.space-plus3 {
+  margin-top: 4.236rem;
+  margin-bottom: 4.236rem; }
+
+.space-plus4 {
+  margin-top: 6.854rem;
+  margin-bottom: 6.854rem; }
+
+.space-plus5 {
+  margin-top: 11.089rem;
+  margin-bottom: 11.089rem; }
+
+.space-plus6 {
+  margin-top: 17.942rem;
+  margin-bottom: 17.942rem; }
+
+.space-plus7 {
+  margin-top: 29.03rem;
+  margin-bottom: 29.03rem; }
+
+.space-plus8 {
+  margin-top: 46.971rem;
+  margin-bottom: 46.971rem; }
+
+.space-minus1 {
+  margin-top: 0.618rem;
+  margin-bottom: 0.618rem; }
+
+.space-minus2 {
+  margin-top: 0.382rem;
+  margin-bottom: 0.382rem; }
+
+.space-minus3 {
+  margin-top: 0.236rem;
+  margin-bottom: 0.236rem; }
+
+.space-minus4 {
+  margin-top: 0.146rem;
+  margin-bottom: 0.146rem; }
+
+.space-minus5 {
+  margin-top: 0.09rem;
+  margin-bottom: 0.09rem; }
+
+.space-minus6 {
+  margin-top: 0.056rem;
+  margin-bottom: 0.056rem; }
+
+body {
+  color: #ffffff; }
+
+#register-maincontent {
+  margin-top: 4%; }
+/*
+Base styles include setting heading sizes, default link styles, default
+font styles, and body backgrounds; it doesn’t include any class or ID selectors
+*/
+/*
+Insert code that doesn't output CSS, things like mixin declarations, functions, and variables.
+*/
+.row {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 0; }
+
+.columns {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 0; }
+
+.full-width {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0; }
+
+.space-plus1 {
+  margin-top: 1.618rem;
+  margin-bottom: 1.618rem; }
+
+.space-plus2 {
+  margin-top: 2.618rem;
+  margin-bottom: 2.618rem; }
+
+.space-plus3 {
+  margin-top: 4.236rem;
+  margin-bottom: 4.236rem; }
+
+.space-plus4 {
+  margin-top: 6.854rem;
+  margin-bottom: 6.854rem; }
+
+.space-plus5 {
+  margin-top: 11.089rem;
+  margin-bottom: 11.089rem; }
+
+.space-plus6 {
+  margin-top: 17.942rem;
+  margin-bottom: 17.942rem; }
+
+.space-plus7 {
+  margin-top: 29.03rem;
+  margin-bottom: 29.03rem; }
+
+.space-plus8 {
+  margin-top: 46.971rem;
+  margin-bottom: 46.971rem; }
+
+.space-minus1 {
+  margin-top: 0.618rem;
+  margin-bottom: 0.618rem; }
+
+.space-minus2 {
+  margin-top: 0.382rem;
+  margin-bottom: 0.382rem; }
+
+.space-minus3 {
+  margin-top: 0.236rem;
+  margin-bottom: 0.236rem; }
+
+.space-minus4 {
+  margin-top: 0.146rem;
+  margin-bottom: 0.146rem; }
+
+.space-minus5 {
+  margin-top: 0.09rem;
+  margin-bottom: 0.09rem; }
+
+.space-minus6 {
+  margin-top: 0.056rem;
+  margin-bottom: 0.056rem; }
+
+body {
+  color: #ffffff; }
+
+#searchresults-maincontent {
+  margin-top: 4%; }
+
+#myimages-list-template {
+  border: 1px;
+  border-color: #111111;
+  border-style: solid;
+  padding: 1%;
+  margin: 2%;
+  color: #111111;
+  height: 129px; }
+
+#list-entry-image {
+  float: left;
+  width: 100px;
+  height: 100px;
+  background-color: #111111; }
+
+#list-entry-username {
+  margin-left: 1%; }
+
+#list-entry-type {
+  margin-left: 1%; }
