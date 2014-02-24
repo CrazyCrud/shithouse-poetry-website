@@ -5,6 +5,7 @@ var searchOverlayBackButton = document.getElementById("searchOverlayBackButton")
 linkSearch.onclick = showSearchOverlay;
 searchOverlayBackButton.onclick = hideSearchOverlay;
 
+
 function showSearchOverlay(){
 	if(!document.getElementById("overlay")) {
 			div = document.createElement("div");

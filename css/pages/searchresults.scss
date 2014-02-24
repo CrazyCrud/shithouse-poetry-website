@@ -7,27 +7,42 @@
 
 #myimages-list-template{
 	border: 1px;
-	border-color: $black;
+	border-color: $lightgrey;
 	border-style: solid;
-	padding: 1%;
-	margin: 2%;
+	padding: 10px;
 	color: $black;
-	height: 129px;
+	height: 122px;
+	font-family: $segoe;
+	width: 100%;
 }
 
 #list-entry-image{
 	float: left;
 	width: 100px;
 	height: 100px;
-	background-color: $black;
+	background-color: $purple;
+}
+
+#list-entry-date{
+	font-size: 65%;
 }
 
 #list-entry-username{
-	margin-left: 1%;
+	font-size: 120%;
 }
 
-#list-entry-type{
-	margin-left: 1%;
+#list-entry-text{
+	font-size: 80%;
+	margin-top: 1%;
+}
+
+.vertical-line{
+	background-color: $lightgrey;
+	width: 1px;
+	margin-left: 10px;
+	height: 100px;
+	float:left;
+	margin-right: 10px;
 }
 
 
