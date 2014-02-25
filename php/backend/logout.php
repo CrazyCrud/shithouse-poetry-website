@@ -43,6 +43,7 @@ if(isset($_GET["authkey"])){
 }
 
 $db = new DBHelper();
+$db->setAuthKey($authkey);
 $data = $db->logout($authkey);
 
 if($data == false){
