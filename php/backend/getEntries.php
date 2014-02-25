@@ -6,7 +6,7 @@
 // open it with the info about the course to create
 // as described in the database and your sessionkey:
 //
-// getEntries.php?start=10&orderby=rating
+// getAllEntries.php?start=10&orderby=rating
 //
 // required parameters are:
 // orderby [optional], start [optional]
