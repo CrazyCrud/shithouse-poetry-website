@@ -100,20 +100,27 @@ body{
 	}
 }
 
+
+
 #upload-button{
 	a#link-upload{
-		font-size: 2rem;
-		transition: font-size 0.5s;
+		display: inline-block;
+		position: relative;
+		color: $white;
+		font-size: 1.8rem;
 	}
 
-	a#link-upload:hover{
-		font-size: 2.4rem;
+	a#link-upload:hover:after{
+		position: absolute;
+		display: block;
+		top: -17px;
+		left: -9px;
+		width: 75px;
+		height: 75px;
+		content : "";
+		background: url('../img/global/hover.png');
+		background-size: contain;
 	}
-}
-
-#link-upload{
-	display: inline-block;
-	color: $white;
 }
 
 #maincontent{
