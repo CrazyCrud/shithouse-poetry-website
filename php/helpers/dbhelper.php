@@ -254,12 +254,14 @@ class Queries{
 		$e = DBConfig::$tables["entries"];
 		$u = DBConfig::$tables["users"];
 		$t = DBConfig::$tables["types"];
+		$tags = DBConfig::$tables["tags"];
+		$usertags = DBConfig::$tables["usertags"];
 		if(!isset($where)){
 			$where = "";
 		}else{
 			$where = " AND ".$where;
 		}
-		if(isset($entryid)){
+		if(isset($entryid) && $entryid!=false){
 			$id = "`$e`.id = $entryid AND";
 		}else{
 			$id = "";
@@ -276,7 +278,7 @@ class Queries{
 			`$t`.description AS typedescription
 
 			FROM
-			`$e`, `$u`, `$t`
+			`$e`, `$u`, `$t`, `$tags`, `$usertags`
 
 			WHERE
 			$id
@@ -293,6 +295,8 @@ class Queries{
 		$e = DBConfig::$tables["entries"];
 		$u = DBConfig::$tables["users"];
 		$t = DBConfig::$tables["types"];
+		$tags = DBConfig::$tables["tags"];
+		$usertags = DBConfig::$tables["usertags"];
 		$r = DBConfig::$tables["ratings"];
 		if(!isset($where)){
 			$where = "";
@@ -312,7 +316,7 @@ class Queries{
 			AVG(`$r`.rating) AS ratings
 
 			FROM
-			`$e`, `$u`, `$t`, `$r`
+			`$e`, `$u`, `$t`, `$r`, `$tags`, `$usertags`
 
 			WHERE
 			`$e`.userid = `$u`.id
@@ -337,11 +341,11 @@ class Queries{
 			WHERE `$img`.entryid=".$entryid;
 		return $query;
 	}
-	public static function getallentries($start, $limit, $order){
+	public static function getallentries($start, $limit, $order, $where){
 		if(!isset($order)){
 			$order = "date";
 		}
-		return Queries::getentry()." ORDER BY ".$order." DESC LIMIT $start, $limit";
+		return Queries::getentry(false, $where)." ORDER BY ".$order." DESC LIMIT $start, $limit";
 	}
 	public static function getusertags($entryid){
 		$u = DBConfig::$tables["usertags"];
@@ -571,14 +575,14 @@ class DBHelper{
 
 	// returns the first 20 entries after $start ordered by $orderby
 	// (for $orderby select a name of one of the attributes returned)
-	public function getAllEntries($orderby, $start){
+	public function getAllEntries($orderby, $start, $where){
 		if(!isset($start)){
 			$start = 0;
 		}
 		if($orderby == "rating"){
-			$entries = $this->getAllEntriesByRating($start);
+			$entries = $this->getAllEntriesByRating($start, $where);
 		}else{
-			$query = Queries::getallentries($start, Constants::NUMENTRIES, $orderby);
+			$query = Queries::getallentries($start, Constants::NUMENTRIES, $orderby, $where);
 			$entries = $this->query($query);
 		}
 		if(!$entries)return false;
@@ -596,8 +600,8 @@ class DBHelper{
 		return $entries;
 	}
 
-	private function getAllEntriesByRating($start){
-		$query = Queries::getentriesbyrating($start, Constants::NUMENTRIES);
+	private function getAllEntriesByRating($start, $where){
+		$query = Queries::getentriesbyrating($start, Constants::NUMENTRIES, $where);
 		$entries = $this->query($query);
 		return $entries;
 	}
@@ -606,6 +610,47 @@ class DBHelper{
 	public function saveImage($entryid, $url, $x, $y, $w, $h){
 		$query = Queries::saveimage($entryid, $url, $x, $y, $w, $h);
 		return $this->query($query);
+	}
+
+	public function getAllEntriesBySex($sex, $orderby, $start){
+		if($sex == "m" || $sex == "w"){
+			$where = "`sex` = '$sex'";
+		}else{
+			$where = "(`sex`!='m' AND `sex`!='w')";
+		}
+		return $this->getAllEntries($orderby, $start, $where);
+	}
+
+	// here you can give a tag or an array of tags (tagid:int or tagname:string (or mixed))
+	public function getAllEntriesWithTag($tag, $orderby, $start){
+		$e = DBConfig::$tables["entries"];
+		$tags = DBConfig::$tables["tags"];
+		$usertags = DBConfig::$tables["usertags"];
+		if(is_array($tag)){
+			if(count($tag)>0){
+				$singletag = $tag[0];
+				if(is_string($singletag)){
+					$where .= "($tags.tag = '$singletag' AND $tags.tagid=$usertags.tagid AND $e.id=$usertags.entryid)";
+				}else{
+					$where .= "($usertags.tagid=$singletag AND $e.id=$usertags.entryid)";
+				}
+				for($i=1; $i<count($tag);$i++){
+					$singletag = $tag[$i];
+					if(is_string($singletag)){
+						$where .= " OR ($tags.tag = '$singletag' AND $tags.tagid=$usertags.tagid AND $e.id=$usertags.entryid)";
+					}else{
+						$where .= " OR ($usertags.tagid=$singletag AND $e.id=$usertags.entryid)";
+					}
+				}
+			}
+		}else{
+			if(is_string($tag)){
+				$where = "($tags.tag = '$tag' AND $tags.tagid=$usertags.tagid AND $e.id=$usertags.entryid)";
+			}else{
+				$where = "($usertags.tagid=$tag AND $e.id=$usertags.entryid)";
+			}
+		}
+		return $this->getAllEntries($orderby, $start, $where);
 	}
 
 }
