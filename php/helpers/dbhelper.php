@@ -497,8 +497,13 @@ class DBHelper{
 
 	// logs out a user (returns whether successfull)
 	public function logout($authkey){
-		$query = Queries::logout($authkey);
-		return $this->query($query);
+		$this->setAuthKey($authkey);
+		if($this->getUser()){
+			$query = Queries::logout($authkey);
+			return $this->query($query);
+		}else{
+			return false;
+		}
 	}
 
 	/**
