@@ -5,9 +5,11 @@
 // as described in the database and your sessionkey:
 //
 // getUser.php?id=123
+// ODER
+// getUser.php?authkey=xxx
 //
 // required parameters are:
-// id
+// id, authkey
 //
 // The answer looks as follows:
 // a json with a successcode and the course id:
@@ -16,17 +18,11 @@
 	success : 1 ,
 	data : [
 		{
-			"0":"123",
 			"id":"123",
-			"1":"mustermann@mail.com",
 			"email":"mustermann@mail.com",
-			"2":"mustermann",
 			"username":"mustermann",
-			"3":"2014-02-13 22:06:03",
 			"joindate":"2014-02-13 22:06:03",
-			"4":"2014-02-17 13:47:16",
 			"lastaction":"2014-02-17 13:47:16",
-			"5":"0",
 			"status":"0"
 		}
 	]
@@ -45,20 +41,28 @@ include("../helpers/dbhelper.php");
 $json = array();
 $json["success"]=$CODE_INSUFFICIENT_PARAMETERS;
 
-if(isset($_POST["id"])){
+if(isset($_POST["id"]) || isset($_POST["authkey"])){
 	$_GET = $_POST;
 }
 
+$user = "";
+$db = new DBHelper();
+
 if(isset($_GET["id"])){
 	$id = $_GET["id"];
+	$user = $db->getUser($id);
+}else if(isset($_GET["authkey"])){
+	$key = $_GET["authkey"];
+	$db->setAuthKey($key);
+	$user = $db->getUser();
 }else{
-	$json["message"]="id missing";
+	$json["message"]="identifier missing";
 	echo json_encode($json);
 	exit();
 }
 
-$db = new DBHelper();
-$user = $db->getUser($id);
+
+
 
 if($user == false){
 	$json["success"]=$CODE_ERROR;
