@@ -6,8 +6,8 @@
 		<link rel="stylesheet" type="text/css" href="css/plugins/foundation.css"/>
 		<link rel="stylesheet" type="text/css" href="css/plugins/fontello/fontello.css"/>
 		<link rel="stylesheet" type="text/css" href="css/plugins/gallery/jquery.justifiedgallery.min.css"/>
+		<link rel="stylesheet" type="text/css" href="css/searchresults.css"/>
 		<link rel="stylesheet" type="text/css" href="css/global.css"/>
-		<link rel="stylesheet" type="text/css" href="css/register.css"/>
 		<script type="text/javascript" src="js/plugins/modernizr.js"></script>
 		<title>Latrinalia</title>
 	</head>
@@ -45,7 +45,31 @@
 			<section id="searchresults-maincontent">
 				<div class="row">
 					<div class="small-12 columns full-width">
-						<div id="myimages-list-template">
+						<div id="search-list-template" class="list-template">
+							<div id="list-entry-image">
+							</div>
+							<div class="vertical-line">
+							</div>
+							<div id="list-entry-content">
+							<img src="img/details/female.png" class="left" title="Weibliche Toilette" width=30>		
+								<span id="list-entry-title">Titel des Bildes</span> <br/>
+								<span id="list-entry-location" >Ort der Aufnahme</span>
+								<div id="list-entry-tags">
+									<span id="tag1" class="list-entry-tag">Tag1</span>
+									<span id="tag2" class="list-entry-tag">Tag2</span>
+									<span id="tag3" class="list-entry-tag">Tag3</span>
+									<span id="tag4" class="list-entry-tag">Tag4</span>
+								</div>
+							</div>
+						</div>	
+					</div>
+				</div>
+			</section>
+
+			<section id="myimages-maincontent">
+				<div class="row">
+					<div class="small-12 columns full-width">
+						<div id="myimages-list-template" class="list-template">
 							<div id="list-entry-image">
 							</div>
 							<div class="vertical-line">

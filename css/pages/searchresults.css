@@ -83,7 +83,7 @@ body {
 #searchresults-maincontent {
   margin-top: 4%; }
 
-#myimages-list-template {
+.list-template {
   border: 1px;
   border-color: #cbcdc7;
   border-style: solid;
@@ -116,3 +116,13 @@ body {
   height: 100px;
   float: left;
   margin-right: 10px; }
+
+#list-entry-title {
+  font-size: 120%; }
+
+#list-entry-location {
+  font-size: 80%;
+  margin-top: 1%; }
+
+#list-entry-symbol {
+  float: left; }
