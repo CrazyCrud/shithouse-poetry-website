@@ -146,12 +146,32 @@ class Queries{
 		VALUES
 		('$mail','$name','$date','$date',".DBConfig::$userStatus["newUser"].",'$key','$pwd')";
 	}
-	public static function deleteuser($accesskey){
+	public static function deleteuser($authkey){
 		$u = DBConfig::$tables["users"];
 		return "UPDATE $u
 		SET sessionkey='".uniqid()."',
 		status = ".DBConfig::$userStatus["deleted"]."
-		WHERE sessionkey='$accesskey'";
+		WHERE sessionkey='$authkey'";
+	}
+	public static function getuserbyname($uname, $password){
+		return
+		"SELECT id, email, username, joindate, lastaction, status
+		FROM `".DBConfig::$tables["users"]."`
+		WHERE (`username` = '$uname'
+		 OR `email` = '$uname')
+		AND `password` = '$password'";
+	}
+	public static function login($userid, $authkey){
+		$u = DBConfig::$tables["users"];
+		return "UPDATE $u
+		SET sessionkey='$authkey'
+		WHERE id = $userid";
+	}
+	public static function logout($authkey){
+		$u = DBConfig::$tables["users"];
+		return "UPDATE $u
+		SET sessionkey='".uniqid()."'
+		WHERE sessionkey='$authkey'";
 	}
 	/**
 	COMMENT QUERIES
@@ -553,6 +573,26 @@ class DBHelper{
 	// saves a new image to the databse
 	public function saveImage($entryid, $url, $x, $y, $w, $h){
 		$query = Queries::saveimage($entryid, $url, $x, $y, $w, $h);
+		return $this->query($query);
+	}
+
+	// logs in a user and returns an authkey (or false)
+	public function login($username, $password){
+		$query = Queries::getuserbyname($username, $password);
+		$users = $this->query($query);
+		if(count($users)==0)return false;
+		$user = $users[0];
+		$key = md5($mail).uniqid();
+		$query = Queries::login($user["id"], $key);
+		if($this->query($query)){
+			return $key;
+		}
+		return false;
+	}
+
+	// logs out a user (returns whether successfull)
+	public function logout($authkey){
+		$query = Queries::logout($authkey);
 		return $this->query($query);
 	}
 
