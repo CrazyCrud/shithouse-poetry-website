@@ -274,6 +274,7 @@ class Queries{
 			`$e`.sex AS sex,
 			`$e`.userid AS userid,
 			`$u`.username AS username,
+			`$t`.id AS typeid,
 			`$t`.name AS typename,
 			`$t`.description AS typedescription
 
@@ -311,6 +312,7 @@ class Queries{
 			`$e`.sex AS sex,
 			`$e`.userid AS userid,
 			`$u`.username AS username,
+			`$t`.id AS typeid,
 			`$t`.name AS typename,
 			`$t`.description AS typedescription,
 			AVG(`$r`.rating) AS ratings
@@ -621,11 +623,31 @@ class DBHelper{
 		return $this->getAllEntries($orderby, $start, $where);
 	}
 
+	// here you can give a type or an array of types (typeid)
+	public function getAllEntriesByType($type, $orderby, $start){
+		$e = DBConfig::$tables["entries"];
+		$where = "";
+		if(is_array($type)){
+			if(count($type)>0){
+				$singletype = $type[0];
+				$where .= "($e.typeid=$singletype)";
+				for($i=1; $i<count($type);$i++){
+					$singletag = $type[$i];
+					$where .= " OR ($e.typeid=$singletype)";
+				}
+			}
+		}else{
+			$where = "($e.typeid=$type)";
+		}
+		return $this->getAllEntries($orderby, $start, $where);
+	}
+
 	// here you can give a tag or an array of tags (tagid:int or tagname:string (or mixed))
 	public function getAllEntriesWithTag($tag, $orderby, $start){
 		$e = DBConfig::$tables["entries"];
 		$tags = DBConfig::$tables["tags"];
 		$usertags = DBConfig::$tables["usertags"];
+		$where = "";
 		if(is_array($tag)){
 			if(count($tag)>0){
 				$singletag = $tag[0];
