@@ -250,10 +250,15 @@ class Queries{
 			WHERE $id";
 		return $query;
 	}
-	public static function getentry($entryid){
+	public static function getentry($entryid, $where){
 		$e = DBConfig::$tables["entries"];
 		$u = DBConfig::$tables["users"];
 		$t = DBConfig::$tables["types"];
+		if(!isset($where)){
+			$where = "";
+		}else{
+			$where = " AND ".$where;
+		}
 		if(isset($entryid)){
 			$id = "`$e`.id = $entryid AND";
 		}else{
@@ -278,16 +283,22 @@ class Queries{
 			`$e`.userid = `$u`.id
 			AND
 			`$e`.typeid = `$t`.id
+			$where
 
 			GROUP BY
 			`$e`.id";
 		return $query;
 	}
-	public static function getentriesbyrating($start, $limit){
+	public static function getentriesbyrating($start, $limit, $where){
 		$e = DBConfig::$tables["entries"];
 		$u = DBConfig::$tables["users"];
 		$t = DBConfig::$tables["types"];
 		$r = DBConfig::$tables["ratings"];
+		if(!isset($where)){
+			$where = "";
+		}else{
+			$where = " AND ".$where;
+		}
 		$query = 
 			"SELECT
 			`$e`.id AS id,
@@ -309,6 +320,7 @@ class Queries{
 			`$e`.typeid = `$t`.id
 			AND
 			`$e`.id = `$r`.entryid
+			$where
 
 			GROUP BY
 			`$r`.entryid
@@ -463,6 +475,26 @@ class DBHelper{
 		return $this->query($query);
 	}
 
+	// logs in a user and returns an authkey (or false)
+	public function login($username, $password){
+		$query = Queries::getuserbyname($username, $password);
+		$users = $this->query($query);
+		if(count($users)==0)return false;
+		$user = $users[0];
+		$key = md5($mail).uniqid();
+		$query = Queries::login($user["id"], $key);
+		if($this->query($query)){
+			return $key;
+		}
+		return false;
+	}
+
+	// logs out a user (returns whether successfull)
+	public function logout($authkey){
+		$query = Queries::logout($authkey);
+		return $this->query($query);
+	}
+
 	/**
 	COMMENT FUNCTIONS
 	**/
@@ -573,26 +605,6 @@ class DBHelper{
 	// saves a new image to the databse
 	public function saveImage($entryid, $url, $x, $y, $w, $h){
 		$query = Queries::saveimage($entryid, $url, $x, $y, $w, $h);
-		return $this->query($query);
-	}
-
-	// logs in a user and returns an authkey (or false)
-	public function login($username, $password){
-		$query = Queries::getuserbyname($username, $password);
-		$users = $this->query($query);
-		if(count($users)==0)return false;
-		$user = $users[0];
-		$key = md5($mail).uniqid();
-		$query = Queries::login($user["id"], $key);
-		if($this->query($query)){
-			return $key;
-		}
-		return false;
-	}
-
-	// logs out a user (returns whether successfull)
-	public function logout($authkey){
-		$query = Queries::logout($authkey);
 		return $this->query($query);
 	}
 
