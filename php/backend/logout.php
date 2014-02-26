@@ -4,28 +4,17 @@
 // open it with the info about the course to create
 // as described in the database and your sessionkey:
 //
-// getUser.php?id=123
-// ODER
-// getUser.php?authkey=xxx
+// logout.php?authkey=123
 //
 // required parameters are:
-// id, authkey
+// authkey
 //
 // The answer looks as follows:
 // a json with a successcode and the course id:
 /* 
 {
-	success : 1 ,
-	data : [
-		{
-			"id":"123",
-			"email":"mustermann@mail.com",
-			"username":"mustermann",
-			"joindate":"2014-02-13 22:06:03",
-			"lastaction":"2014-02-17 13:47:16",
-			"status":"0"
-		}
-	]
+	"success":1,
+	"data":true
 }
 */
 // for success codes see ../php/config.php
@@ -41,41 +30,34 @@ include("../helpers/dbhelper.php");
 $json = array();
 $json["success"]=$CODE_INSUFFICIENT_PARAMETERS;
 
-if(isset($_POST["id"]) || isset($_POST["authkey"])){
+if(isset($_POST["authkey"])){
 	$_GET = $_POST;
 }
 
-$user = "";
-$db = new DBHelper();
-
-if(isset($_GET["id"])){
-	$id = $_GET["id"];
-	$user = $db->getUser($id);
-}else if(isset($_GET["authkey"])){
-	$key = $_GET["authkey"];
-	$db->setAuthKey($key);
-	$user = $db->getUser();
+if(isset($_GET["authkey"])){
+	$authkey = $_GET["authkey"];
 }else{
-	$json["message"]="identifier missing";
+	$json["message"]="authkey missing";
 	echo json_encode($json);
 	exit();
 }
 
+$db = new DBHelper();
+$db->setAuthKey($authkey);
+$data = $db->logout($authkey);
 
-
-
-if($user == false){
+if($data == false){
 	$json["success"]=$CODE_ERROR;
 	if(DBConnection::getInstance()->status == DBConfig::$dbStatus["offline"]){
 		$json["message"] = "Database error";
 	}else{
-		$json["message"] = "User not found";
+		$json["message"] = "Logout failed";
 	}
 	echo json_encode($json);
 	exit();
 }
 
-$json["data"] = $user;
+$json["data"] = $data;
 
 $json["success"] = $CODE_SUCCESS;
 echo json_encode($json);
