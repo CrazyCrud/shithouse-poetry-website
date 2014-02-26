@@ -408,6 +408,16 @@ class Queries{
 		('$tag', $status)";
 		return $query;
 	}
+	public static function getalltagsbystatus($status){
+		$t = DBConfig::$tables["tags"];
+		$query = "SELECT * FROM `$t` WHERE `$t`.status = $status";
+		return $query;
+	}
+	public static function getalltags(){
+		$t = DBConfig::$tables["tags"];
+		$query = "SELECT * FROM `$t`";
+		return $query;
+	}
 }
 
 /*
@@ -776,6 +786,16 @@ class DBHelper{
 			$query = Queries::createtag($tag);
 			return $this->query($query);
 		}
+	}
+
+	// get all available tags (optional $status, see DBConfig::tagStatus)
+	public function getAllTags($status){
+		if(isset($status)){
+			$query = Queries::getalltagsbystatus($status);
+		}else{
+			$query = Queries::getalltags();
+		}
+		return $this->query($query);
 	}
 
 }
