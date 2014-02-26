@@ -88,7 +88,7 @@ class DBConnection{
 		$rows = array();
 		$result = mysql_query($q, $this->link)
 		or $this->error(DBConfig::$dbStatus["offline"]);
-		if(strpos($q,"INSERT")==0)return mysql_insert_id();
+		if(strpos($q,"INSERT")!==false)return mysql_insert_id();
 		if(is_bool($result))return $result;
 		while ($row = mysql_fetch_assoc($result)){
 			$rows[count($rows)]=$row;
@@ -381,6 +381,31 @@ class Queries{
 		VALUES
 		($entryid, '$path', $x, $y, $w, $h)
 		";
+		return $query;
+	}
+	/**
+	TAG FUNCTIONS
+	*/
+	public static function gettagbyid($tagid){
+		$t = DBConfig::$tables["tags"];
+		$status = DBConfig::$tagStatus["usercreated"];
+		$query = "SELECT * FROM `$t` WHERE `$t`.tagid = $tagid";
+		return $query;
+	}
+	public static function gettagbyname($tag){
+		$t = DBConfig::$tables["tags"];
+		$status = DBConfig::$tagStatus["usercreated"];
+		$query = "SELECT * FROM `$t` WHERE `$t`.tag = '$tag'";
+		return $query;
+	}
+	public static function createtag($tag){
+		$t = DBConfig::$tables["tags"];
+		$status = DBConfig::$tagStatus["usercreated"];
+		$query =
+		"INSERT INTO `$t`
+		(tag, status)
+		VALUES
+		('$tag', $status)";
 		return $query;
 	}
 }
@@ -713,6 +738,44 @@ class DBHelper{
 			}
 		}
 		return $this->getAllEntries($orderby, $start, $where);
+	}
+
+	/**
+	TAG FUNCTIONS
+	*/
+
+	// Get a tag (as described in the database) by its id:int or name:string
+	public function getTag($tag){
+		if(is_string($tag)){
+			$query = Queries::gettagbyname($tag);
+		}else{
+			$query = Queries::gettagbyid($tag);
+		}
+		return $this->query($query);
+	}
+
+	/* 
+	*	Create a new tag (give single strings or an array of strings)
+	*	Returns the id of the newly created tag or the id of an already
+	*	existing tag with the same name
+	*/
+	public function createTag($tag){
+		if(is_array($tag)){
+			$success = true;
+			foreach($tag as $t){
+				if(!$this->createTag($t)){
+					$success = false;
+				}
+			}
+			return $success;
+		}else{
+			$tags = $this->getTag($tag);
+			if(count($tags)>0){
+				return $tags[0]["tagid"];
+			}
+			$query = Queries::createtag($tag);
+			return $this->query($query);
+		}
 	}
 
 }
