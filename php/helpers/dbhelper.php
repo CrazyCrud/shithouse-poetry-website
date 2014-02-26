@@ -712,8 +712,7 @@ class DBHelper{
 				}else{
 					$where .= "($e.typeid=$singletype)";
 				}
-				for($i=1; $i<count($type);$i++){
-					$singletype = $type[$i];
+				foreach($type as $singletype){
 					if(is_string($singletype)){
 						$where .= " OR ($t.name='$singletype')";
 					}else{
@@ -745,8 +744,7 @@ class DBHelper{
 				}else{
 					$where .= "($usertags.tagid=$singletag AND $e.id=$usertags.entryid)";
 				}
-				for($i=1; $i<count($tag);$i++){
-					$singletag = $tag[$i];
+				foreach($tag as $singletag){
 					if(is_string($singletag)){
 						$where .= " OR ($tags.tag = '$singletag' AND $tags.tagid=$usertags.tagid AND $e.id=$usertags.entryid)";
 					}else{
