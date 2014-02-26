@@ -418,6 +418,20 @@ class Queries{
 		$query = "SELECT * FROM `$t`";
 		return $query;
 	}
+	public static function deletetag($id){
+		$t = DBConfig::$tables["tags"];
+		$query = 
+		"DELETE FROM `$t`
+		WHERE `$t`.tagid=$id";
+		return $query;
+	}
+	public static function removetag($id){
+		$u = DBConfig::$tables["usertags"];
+		$query = 
+		"DELETE FROM `$u`
+		WHERE `$u`.tagid=$id;";
+		return $query;
+	}
 }
 
 /*
@@ -761,7 +775,9 @@ class DBHelper{
 		}else{
 			$query = Queries::gettagbyid($tag);
 		}
-		return $this->query($query);
+		$singletag = $this->query($query);
+		if(count($singletag)==0)return false;
+		return $singletag[0];
 	}
 
 	/* 
@@ -796,6 +812,35 @@ class DBHelper{
 			$query = Queries::getalltags();
 		}
 		return $this->query($query);
+	}
+
+	// delete a tag (or array of tags) by id:int or name:string
+	// can only be done by admins
+	// returns whether successfull
+	public function deleteTag($tag){
+		if(is_array($tag)){
+			$success = true;
+			foreach($tag as $t){
+				if(!$this->deleteTag($t)){
+					$success = false;
+				}
+			}
+			return $success;
+		}else{
+			$user = $this->getUser();
+			$singletag = $this->getTag($tag);
+			if(!isset($user["id"])||!isset($singletag["tagid"])){
+				return false;
+			}
+			if($user["status"] == DBConfig::$userStatus["admin"]){
+				$query = Queries::deletetag($singletag["tagid"]);
+				if(!$this->query($query))return false;
+				$query = Queries::removetag($singletag["tagid"]);
+				return $this->query($query);
+			}else{
+				return false;
+			}
+		}
 	}
 
 }
