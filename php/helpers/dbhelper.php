@@ -496,8 +496,15 @@ class DBHelper{
 	}
 
 	// logs out a user (returns whether successfull)
+	// $authkey parameter is optional when you called "setAuthKey" before
 	public function logout($authkey){
-		$this->setAuthKey($authkey);
+		if(!isset($authkey)){
+			if(!$this->loggedin()){
+				return false;
+			}else{
+				$authkey = $this->getAuthkey();
+			}
+		}
 		if($this->getUser()){
 			$query = Queries::logout($authkey);
 			return $this->query($query);
