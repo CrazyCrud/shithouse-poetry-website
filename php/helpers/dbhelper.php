@@ -44,6 +44,11 @@ class DBConfig{
 		"admin" =>1
 	);
 
+	public static $tagStatus = array(
+		"usercreated" => 0,
+		"global" => 1
+	);
+
 }
 
 /*
@@ -83,6 +88,7 @@ class DBConnection{
 		$rows = array();
 		$result = mysql_query($q, $this->link)
 		or $this->error(DBConfig::$dbStatus["offline"]);
+		if(strpos($q,"INSERT")==0)return mysql_insert_id();
 		if(is_bool($result))return $result;
 		while ($row = mysql_fetch_assoc($result)){
 			$rows[count($rows)]=$row;
