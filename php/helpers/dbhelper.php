@@ -589,6 +589,7 @@ class DBHelper{
 
 	// returns the first 20 entries after $start ordered by $orderby
 	// (for $orderby select a name of one of the attributes returned)
+	// $where parameter is optional and mostly used intern
 	public function getAllEntries($orderby, $start, $where){
 		if(!isset($start)){
 			$start = 0;
@@ -614,6 +615,7 @@ class DBHelper{
 		return $entries;
 	}
 
+	// $where parameter is optional and mostly used intern
 	private function getAllEntriesByRating($start, $where){
 		$query = Queries::getentriesbyrating($start, Constants::NUMENTRIES, $where);
 		$entries = $this->query($query);
@@ -626,6 +628,10 @@ class DBHelper{
 		return $this->query($query);
 	}
 
+	// returns the first 20 entries after $start ordered by $orderby
+	// (for $orderby select a name of one of the attributes returned)
+	// where entry.sex = $sex
+	// (if $sex is neither "m" nor "w" neutral entries are returned)
 	public function getAllEntriesBySex($sex, $orderby, $start){
 		if($sex == "m" || $sex == "w"){
 			$where = "`sex` = '$sex'";
@@ -635,27 +641,43 @@ class DBHelper{
 		return $this->getAllEntries($orderby, $start, $where);
 	}
 
+	// returns the first 20 entries after $start ordered by $orderby
+	// (for $orderby select a name of one of the attributes returned)
+	// where entry.type = $type
 	// here you can give a type or an array of types (typeid)
 	public function getAllEntriesByType($type, $orderby, $start){
 		$e = DBConfig::$tables["entries"];
+		$t = DBConfig::$tables["types"];
 		$where = "";
 		if(is_array($type)){
 			if(count($type)>0){
 				$singletype = $type[0];
-				$where .= "($e.typeid=$singletype)";
+				if(is_string($singletype)){
+					$where .= "($t.name='$singletype')";
+				}else{
+					$where .= "($e.typeid=$singletype)";
+				}
 				for($i=1; $i<count($type);$i++){
-					$singletag = $type[$i];
-					$where .= " OR ($e.typeid=$singletype)";
+					$singletype = $type[$i];
+					if(is_string($singletype)){
+						$where .= " OR ($t.name='$singletype')";
+					}else{
+						$where .= " OR ($e.typeid=$singletype)";
+					}
 				}
 			}
 		}else{
-			$where = "($e.typeid=$type)";
+			if(is_string($type)){
+				$where .= "($t.name='$type')";
+			}else{
+				$where .= "($e.typeid=$type)";
+			}
 		}
 		return $this->getAllEntries($orderby, $start, $where);
 	}
 
 	// here you can give a tag or an array of tags (tagid:int or tagname:string (or mixed))
-	public function getAllEntriesWithTag($tag, $orderby, $start){
+	public function getAllEntriesByTag($tag, $orderby, $start){
 		$e = DBConfig::$tables["entries"];
 		$tags = DBConfig::$tables["tags"];
 		$usertags = DBConfig::$tables["usertags"];
