@@ -4,28 +4,17 @@
 // open it with the info about the course to create
 // as described in the database and your sessionkey:
 //
-// getUser.php?id=123
-// ODER
-// getUser.php?authkey=xxx
+// login.php?username=MaxMustermann&password=123
 //
 // required parameters are:
-// id, authkey
+// username, password
 //
 // The answer looks as follows:
-// a json with a successcode and the course id:
+// a json with a successcode and the session key:
 /* 
 {
-	success : 1 ,
-	data : [
-		{
-			"id":"123",
-			"email":"mustermann@mail.com",
-			"username":"mustermann",
-			"joindate":"2014-02-13 22:06:03",
-			"lastaction":"2014-02-17 13:47:16",
-			"status":"0"
-		}
-	]
+	"success":1,
+	"data":"d41d8cd98f00b204e9800998ecf8427e530d0705f3ace"
 }
 */
 // for success codes see ../php/config.php
@@ -41,41 +30,42 @@ include("../helpers/dbhelper.php");
 $json = array();
 $json["success"]=$CODE_INSUFFICIENT_PARAMETERS;
 
-if(isset($_POST["id"]) || isset($_POST["authkey"])){
+if(isset($_POST["username"])){
 	$_GET = $_POST;
 }
 
-$user = "";
-$db = new DBHelper();
-
-if(isset($_GET["id"])){
-	$id = $_GET["id"];
-	$user = $db->getUser($id);
-}else if(isset($_GET["authkey"])){
-	$key = $_GET["authkey"];
-	$db->setAuthKey($key);
-	$user = $db->getUser();
+if(isset($_GET["username"])){
+	$username = $_GET["username"];
 }else{
-	$json["message"]="identifier missing";
+	$json["message"]="username missing";
 	echo json_encode($json);
 	exit();
 }
 
+if(isset($_GET["password"])){
+	$password = $_GET["password"];
+}else{
+	$json["message"]="password missing";
+	echo json_encode($json);
+	exit();
+}
 
+$db = new DBHelper();
+$authkey = $db->login($username, $password);
 
-
-if($user == false){
+if($authkey == false){
 	$json["success"]=$CODE_ERROR;
 	if(DBConnection::getInstance()->status == DBConfig::$dbStatus["offline"]){
 		$json["message"] = "Database error";
 	}else{
+		$json["success"] = $CODE_NOT_FOUND;
 		$json["message"] = "User not found";
 	}
 	echo json_encode($json);
 	exit();
 }
 
-$json["data"] = $user;
+$json["data"] = $authkey;
 
 $json["success"] = $CODE_SUCCESS;
 echo json_encode($json);

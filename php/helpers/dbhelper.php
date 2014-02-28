@@ -44,6 +44,11 @@ class DBConfig{
 		"admin" =>1
 	);
 
+	public static $tagStatus = array(
+		"usercreated" => 0,
+		"global" => 1
+	);
+
 }
 
 /*
@@ -83,6 +88,7 @@ class DBConnection{
 		$rows = array();
 		$result = mysql_query($q, $this->link)
 		or $this->error(DBConfig::$dbStatus["offline"]);
+		if(strpos($q,"INSERT")!==false)return mysql_insert_id();
 		if(is_bool($result))return $result;
 		while ($row = mysql_fetch_assoc($result)){
 			$rows[count($rows)]=$row;
@@ -146,12 +152,32 @@ class Queries{
 		VALUES
 		('$mail','$name','$date','$date',".DBConfig::$userStatus["newUser"].",'$key','$pwd')";
 	}
-	public static function deleteuser($accesskey){
+	public static function deleteuser($authkey){
 		$u = DBConfig::$tables["users"];
 		return "UPDATE $u
 		SET sessionkey='".uniqid()."',
 		status = ".DBConfig::$userStatus["deleted"]."
-		WHERE sessionkey='$accesskey'";
+		WHERE sessionkey='$authkey'";
+	}
+	public static function getuserbyname($uname, $password){
+		return
+		"SELECT id, email, username, joindate, lastaction, status
+		FROM `".DBConfig::$tables["users"]."`
+		WHERE (`username` = '$uname'
+		 OR `email` = '$uname')
+		AND `password` = '$password'";
+	}
+	public static function login($userid, $authkey){
+		$u = DBConfig::$tables["users"];
+		return "UPDATE $u
+		SET sessionkey='$authkey'
+		WHERE id = $userid";
+	}
+	public static function logout($authkey){
+		$u = DBConfig::$tables["users"];
+		return "UPDATE $u
+		SET sessionkey='".uniqid()."'
+		WHERE sessionkey='$authkey'";
 	}
 	/**
 	COMMENT QUERIES
@@ -230,11 +256,18 @@ class Queries{
 			WHERE $id";
 		return $query;
 	}
-	public static function getentry($entryid){
+	public static function getentry($entryid, $where){
 		$e = DBConfig::$tables["entries"];
 		$u = DBConfig::$tables["users"];
 		$t = DBConfig::$tables["types"];
-		if(isset($entryid)){
+		$tags = DBConfig::$tables["tags"];
+		$usertags = DBConfig::$tables["usertags"];
+		if(!isset($where)){
+			$where = "";
+		}else{
+			$where = " AND ".$where;
+		}
+		if(isset($entryid) && $entryid!=false){
 			$id = "`$e`.id = $entryid AND";
 		}else{
 			$id = "";
@@ -247,27 +280,36 @@ class Queries{
 			`$e`.sex AS sex,
 			`$e`.userid AS userid,
 			`$u`.username AS username,
+			`$t`.id AS typeid,
 			`$t`.name AS typename,
 			`$t`.description AS typedescription
 
 			FROM
-			`$e`, `$u`, `$t`
+			`$e`, `$u`, `$t`, `$tags`, `$usertags`
 
 			WHERE
 			$id
 			`$e`.userid = `$u`.id
 			AND
 			`$e`.typeid = `$t`.id
+			$where
 
 			GROUP BY
 			`$e`.id";
 		return $query;
 	}
-	public static function getentriesbyrating($start, $limit){
+	public static function getentriesbyrating($start, $limit, $where){
 		$e = DBConfig::$tables["entries"];
 		$u = DBConfig::$tables["users"];
 		$t = DBConfig::$tables["types"];
+		$tags = DBConfig::$tables["tags"];
+		$usertags = DBConfig::$tables["usertags"];
 		$r = DBConfig::$tables["ratings"];
+		if(!isset($where)){
+			$where = "";
+		}else{
+			$where = " AND ".$where;
+		}
 		$query = 
 			"SELECT
 			`$e`.id AS id,
@@ -276,12 +318,13 @@ class Queries{
 			`$e`.sex AS sex,
 			`$e`.userid AS userid,
 			`$u`.username AS username,
+			`$t`.id AS typeid,
 			`$t`.name AS typename,
 			`$t`.description AS typedescription,
 			AVG(`$r`.rating) AS ratings
 
 			FROM
-			`$e`, `$u`, `$t`, `$r`
+			`$e`, `$u`, `$t`, `$r`, `$tags`, `$usertags`
 
 			WHERE
 			`$e`.userid = `$u`.id
@@ -289,6 +332,7 @@ class Queries{
 			`$e`.typeid = `$t`.id
 			AND
 			`$e`.id = `$r`.entryid
+			$where
 
 			GROUP BY
 			`$r`.entryid
@@ -305,11 +349,11 @@ class Queries{
 			WHERE `$img`.entryid=".$entryid;
 		return $query;
 	}
-	public static function getallentries($start, $limit, $order){
+	public static function getallentries($start, $limit, $order, $where){
 		if(!isset($order)){
 			$order = "date";
 		}
-		return Queries::getentry()." ORDER BY ".$order." DESC LIMIT $start, $limit";
+		return Queries::getentry(false, $where)." ORDER BY ".$order." DESC LIMIT $start, $limit";
 	}
 	public static function getusertags($entryid){
 		$u = DBConfig::$tables["usertags"];
@@ -337,6 +381,55 @@ class Queries{
 		VALUES
 		($entryid, '$path', $x, $y, $w, $h)
 		";
+		return $query;
+	}
+	/**
+	TAG FUNCTIONS
+	*/
+	public static function gettagbyid($tagid){
+		$t = DBConfig::$tables["tags"];
+		$status = DBConfig::$tagStatus["usercreated"];
+		$query = "SELECT * FROM `$t` WHERE `$t`.tagid = $tagid";
+		return $query;
+	}
+	public static function gettagbyname($tag){
+		$t = DBConfig::$tables["tags"];
+		$status = DBConfig::$tagStatus["usercreated"];
+		$query = "SELECT * FROM `$t` WHERE `$t`.tag = '$tag'";
+		return $query;
+	}
+	public static function createtag($tag){
+		$t = DBConfig::$tables["tags"];
+		$status = DBConfig::$tagStatus["usercreated"];
+		$query =
+		"INSERT INTO `$t`
+		(tag, status)
+		VALUES
+		('$tag', $status)";
+		return $query;
+	}
+	public static function getalltagsbystatus($status){
+		$t = DBConfig::$tables["tags"];
+		$query = "SELECT * FROM `$t` WHERE `$t`.status = $status";
+		return $query;
+	}
+	public static function getalltags(){
+		$t = DBConfig::$tables["tags"];
+		$query = "SELECT * FROM `$t`";
+		return $query;
+	}
+	public static function deletetag($id){
+		$t = DBConfig::$tables["tags"];
+		$query = 
+		"DELETE FROM `$t`
+		WHERE `$t`.tagid=$id";
+		return $query;
+	}
+	public static function removetag($id){
+		$u = DBConfig::$tables["usertags"];
+		$query = 
+		"DELETE FROM `$u`
+		WHERE `$u`.tagid=$id;";
 		return $query;
 	}
 }
@@ -443,6 +536,38 @@ class DBHelper{
 		return $this->query($query);
 	}
 
+	// logs in a user and returns an authkey (or false)
+	public function login($username, $password){
+		$query = Queries::getuserbyname($username, $password);
+		$users = $this->query($query);
+		if(count($users)==0)return false;
+		$user = $users[0];
+		$key = md5($mail).uniqid();
+		$query = Queries::login($user["id"], $key);
+		if($this->query($query)){
+			return $key;
+		}
+		return false;
+	}
+
+	// logs out a user (returns whether successfull)
+	// $authkey parameter is optional when you called "setAuthKey" before
+	public function logout($authkey){
+		if(!isset($authkey)){
+			if(!$this->loggedin()){
+				return false;
+			}else{
+				$authkey = $this->getAuthkey();
+			}
+		}
+		if($this->getUser()){
+			$query = Queries::logout($authkey);
+			return $this->query($query);
+		}else{
+			return false;
+		}
+	}
+
 	/**
 	COMMENT FUNCTIONS
 	**/
@@ -519,14 +644,15 @@ class DBHelper{
 
 	// returns the first 20 entries after $start ordered by $orderby
 	// (for $orderby select a name of one of the attributes returned)
-	public function getAllEntries($orderby, $start){
+	// $where parameter is optional and mostly used intern
+	public function getAllEntries($orderby, $start, $where){
 		if(!isset($start)){
 			$start = 0;
 		}
 		if($orderby == "rating"){
-			$entries = $this->getAllEntriesByRating($start);
+			$entries = $this->getAllEntriesByRating($start, $where);
 		}else{
-			$query = Queries::getallentries($start, Constants::NUMENTRIES, $orderby);
+			$query = Queries::getallentries($start, Constants::NUMENTRIES, $orderby, $where);
 			$entries = $this->query($query);
 		}
 		if(!$entries)return false;
@@ -544,8 +670,9 @@ class DBHelper{
 		return $entries;
 	}
 
-	private function getAllEntriesByRating($start){
-		$query = Queries::getentriesbyrating($start, Constants::NUMENTRIES);
+	// $where parameter is optional and mostly used intern
+	private function getAllEntriesByRating($start, $where){
+		$query = Queries::getentriesbyrating($start, Constants::NUMENTRIES, $where);
 		$entries = $this->query($query);
 		return $entries;
 	}
@@ -554,6 +681,164 @@ class DBHelper{
 	public function saveImage($entryid, $url, $x, $y, $w, $h){
 		$query = Queries::saveimage($entryid, $url, $x, $y, $w, $h);
 		return $this->query($query);
+	}
+
+	// returns the first 20 entries after $start ordered by $orderby
+	// (for $orderby select a name of one of the attributes returned)
+	// where entry.sex = $sex
+	// (if $sex is neither "m" nor "w" neutral entries are returned)
+	public function getAllEntriesBySex($sex, $orderby, $start){
+		if($sex == "m" || $sex == "w"){
+			$where = "`sex` = '$sex'";
+		}else{
+			$where = "(`sex`!='m' AND `sex`!='w')";
+		}
+		return $this->getAllEntries($orderby, $start, $where);
+	}
+
+	// returns the first 20 entries after $start ordered by $orderby
+	// (for $orderby select a name of one of the attributes returned)
+	// where entry.type = $type
+	// here you can give a type or an array of types (typeid)
+	public function getAllEntriesByType($type, $orderby, $start){
+		$e = DBConfig::$tables["entries"];
+		$t = DBConfig::$tables["types"];
+		$where = "";
+		if(is_array($type)){
+			if(count($type)>0){
+				$singletype = $type[0];
+				if(is_string($singletype)){
+					$where .= "($t.name='$singletype')";
+				}else{
+					$where .= "($e.typeid=$singletype)";
+				}
+				foreach($type as $singletype){
+					if(is_string($singletype)){
+						$where .= " OR ($t.name='$singletype')";
+					}else{
+						$where .= " OR ($e.typeid=$singletype)";
+					}
+				}
+			}
+		}else{
+			if(is_string($type)){
+				$where .= "($t.name='$type')";
+			}else{
+				$where .= "($e.typeid=$type)";
+			}
+		}
+		return $this->getAllEntries($orderby, $start, $where);
+	}
+
+	// here you can give a tag or an array of tags (tagid:int or tagname:string (or mixed))
+	public function getAllEntriesByTag($tag, $orderby, $start){
+		$e = DBConfig::$tables["entries"];
+		$tags = DBConfig::$tables["tags"];
+		$usertags = DBConfig::$tables["usertags"];
+		$where = "";
+		if(is_array($tag)){
+			if(count($tag)>0){
+				$singletag = $tag[0];
+				if(is_string($singletag)){
+					$where .= "($tags.tag = '$singletag' AND $tags.tagid=$usertags.tagid AND $e.id=$usertags.entryid)";
+				}else{
+					$where .= "($usertags.tagid=$singletag AND $e.id=$usertags.entryid)";
+				}
+				foreach($tag as $singletag){
+					if(is_string($singletag)){
+						$where .= " OR ($tags.tag = '$singletag' AND $tags.tagid=$usertags.tagid AND $e.id=$usertags.entryid)";
+					}else{
+						$where .= " OR ($usertags.tagid=$singletag AND $e.id=$usertags.entryid)";
+					}
+				}
+			}
+		}else{
+			if(is_string($tag)){
+				$where = "($tags.tag = '$tag' AND $tags.tagid=$usertags.tagid AND $e.id=$usertags.entryid)";
+			}else{
+				$where = "($usertags.tagid=$tag AND $e.id=$usertags.entryid)";
+			}
+		}
+		return $this->getAllEntries($orderby, $start, $where);
+	}
+
+	/**
+	TAG FUNCTIONS
+	*/
+
+	// Get a tag (as described in the database) by its id:int or name:string
+	public function getTag($tag){
+		if(is_string($tag)){
+			$query = Queries::gettagbyname($tag);
+		}else{
+			$query = Queries::gettagbyid($tag);
+		}
+		$singletag = $this->query($query);
+		if(count($singletag)==0)return false;
+		return $singletag[0];
+	}
+
+	/* 
+	*	Create a new tag (give single strings or an array of strings)
+	*	Returns the id of the newly created tag or the id of an already
+	*	existing tag with the same name
+	*/
+	public function createTag($tag){
+		if(is_array($tag)){
+			$success = true;
+			foreach($tag as $t){
+				if(!$this->createTag($t)){
+					$success = false;
+				}
+			}
+			return $success;
+		}else{
+			$tags = $this->getTag($tag);
+			if(count($tags)>0){
+				return $tags[0]["tagid"];
+			}
+			$query = Queries::createtag($tag);
+			return $this->query($query);
+		}
+	}
+
+	// get all available tags (optional $status, see DBConfig::tagStatus)
+	public function getAllTags($status){
+		if(isset($status)){
+			$query = Queries::getalltagsbystatus($status);
+		}else{
+			$query = Queries::getalltags();
+		}
+		return $this->query($query);
+	}
+
+	// delete a tag (or array of tags) by id:int or name:string
+	// can only be done by admins
+	// returns whether successfull
+	public function deleteTag($tag){
+		if(is_array($tag)){
+			$success = true;
+			foreach($tag as $t){
+				if(!$this->deleteTag($t)){
+					$success = false;
+				}
+			}
+			return $success;
+		}else{
+			$user = $this->getUser();
+			$singletag = $this->getTag($tag);
+			if(!isset($user["id"])||!isset($singletag["tagid"])){
+				return false;
+			}
+			if($user["status"] == DBConfig::$userStatus["admin"]){
+				$query = Queries::deletetag($singletag["tagid"]);
+				if(!$this->query($query))return false;
+				$query = Queries::removetag($singletag["tagid"]);
+				return $this->query($query);
+			}else{
+				return false;
+			}
+		}
 	}
 
 }

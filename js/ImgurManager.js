@@ -31,7 +31,7 @@ var ImgurManager = (function(){
 
 			var links = null;
 			var postData = JSON.stringify(searchProps);
-			$.post('php/backend/getAllEntries.php', {tags : postData}, function(data) {
+			$.post('php/backend/getEntries.php', {tags : postData}, function(data) {
 				if(data.success == 1){
 					links = data.data;
 					callback(links);
