@@ -81,7 +81,7 @@ body {
   color: #ffffff; }
 
 #searchresults-maincontent {
-  margin-top: 4%; }
+  margin-top: 40px; }
 
 .list-template {
   border: 1px;
@@ -91,7 +91,8 @@ body {
   color: #111111;
   height: 122px;
   font-family: "Segoe UI";
-  width: 100%; }
+  width: 100%;
+  margin-bottom: 2%; }
 
 #list-entry-image {
   float: left;
@@ -118,11 +119,14 @@ body {
   margin-right: 10px; }
 
 #list-entry-title {
-  font-size: 120%; }
+  font-size: 120%;
+  margin-left: 1%; }
 
 #list-entry-location {
   font-size: 80%;
-  margin-top: 1%; }
+  margin-top: 1%;
+  margin-left: 1%; }
 
-#list-entry-symbol {
-  float: left; }
+#list-entry-tags {
+  margin-top: 2%; }
+

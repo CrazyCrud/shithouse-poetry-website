@@ -170,14 +170,20 @@ body {
     z-index: 100; }
 
 #upload-button a#link-upload {
-  font-size: 2rem;
-  transition: font-size 0.5s; }
-#upload-button a#link-upload:hover {
-  font-size: 2.4rem; }
-
-#link-upload {
   display: inline-block;
-  color: #ffffff; }
+  position: relative;
+  color: #ffffff;
+  font-size: 1.8rem; }
+#upload-button a#link-upload:hover:after {
+  position: absolute;
+  display: block;
+  top: -17px;
+  left: -9px;
+  width: 75px;
+  height: 75px;
+  content: "";
+  background: url('../img/global/hover.png');
+  background-size: contain; }
 
 #maincontent {
   overflow: hidden; }
@@ -395,7 +401,7 @@ body {
   margin-left: 20px; }
 
 #details-maincontent {
-  margin-top: 4%; }
+  margin-top: 40x; }
 /*
 Base styles include setting heading sizes, default link styles, default
 font styles, and body backgrounds; it doesn’t include any class or ID selectors
@@ -606,7 +612,7 @@ body {
   color: #ffffff; }
 
 #register-maincontent {
-  margin-top: 4%; }
+  margin-top: 40px; }
 /*
 Base styles include setting heading sizes, default link styles, default
 font styles, and body backgrounds; it doesn’t include any class or ID selectors
@@ -690,7 +696,7 @@ body {
   color: #ffffff; }
 
 #searchresults-maincontent {
-  margin-top: 4%; }
+  margin-top: 40px; }
 
 .list-template {
   border: 1px;
@@ -700,7 +706,8 @@ body {
   color: #111111;
   height: 122px;
   font-family: "Segoe UI";
-  width: 100%; }
+  width: 100%;
+  margin-bottom: 2%; }
 
 #list-entry-image {
   float: left;
@@ -727,11 +734,14 @@ body {
   margin-right: 10px; }
 
 #list-entry-title {
-  font-size: 120%; }
+  font-size: 120%;
+  margin-left: 1%; }
 
 #list-entry-location {
   font-size: 80%;
-  margin-top: 1%; }
+  margin-top: 1%;
+  margin-left: 1%; }
 
-#list-entry-symbol {
-  float: left; }
+#list-entry-tags {
+  margin-top: 2%; }
+
