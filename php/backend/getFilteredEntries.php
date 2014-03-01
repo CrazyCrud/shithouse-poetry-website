@@ -98,7 +98,7 @@
 
 // HEADER
 header('Content-Type: application/json; charset=utf-8');
-error_reporting(0);
+// error_reporting(0);
 include("../settings/config.php");
 include("../helpers/dbhelper.php");
 // END HEADER
@@ -148,7 +148,7 @@ if($filter == "sex"){
 }else if($filter == "type"){
 	$entries = $db->getAllEntriesByType($values, $orderby, $start);
 }else if($filter == "tag"){
-	$entries = $db->getAllEntriesWithTag($values, $orderby, $start);
+	$entries = $db->getAllEntriesByTag($values, $orderby, $start);
 }else{
 	$json["message"]="Wrong filter";
 	echo json_encode($json);
