@@ -1,0 +1,123 @@
+/*
+Base styles include setting heading sizes, default link styles, default
+font styles, and body backgrounds; it doesn’t include any class or ID selectors
+*/
+/*
+Insert code that doesn't output CSS, things like mixin declarations, functions, and variables.
+*/
+.row {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 0; }
+
+.columns {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 0; }
+
+.full-width {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0; }
+
+.space-plus1 {
+  margin-top: 1.618rem;
+  margin-bottom: 1.618rem; }
+
+.space-plus2 {
+  margin-top: 2.618rem;
+  margin-bottom: 2.618rem; }
+
+.space-plus3 {
+  margin-top: 4.236rem;
+  margin-bottom: 4.236rem; }
+
+.space-plus4 {
+  margin-top: 6.854rem;
+  margin-bottom: 6.854rem; }
+
+.space-plus5 {
+  margin-top: 11.089rem;
+  margin-bottom: 11.089rem; }
+
+.space-plus6 {
+  margin-top: 17.942rem;
+  margin-bottom: 17.942rem; }
+
+.space-plus7 {
+  margin-top: 29.03rem;
+  margin-bottom: 29.03rem; }
+
+.space-plus8 {
+  margin-top: 46.971rem;
+  margin-bottom: 46.971rem; }
+
+.space-minus1 {
+  margin-top: 0.618rem;
+  margin-bottom: 0.618rem; }
+
+.space-minus2 {
+  margin-top: 0.382rem;
+  margin-bottom: 0.382rem; }
+
+.space-minus3 {
+  margin-top: 0.236rem;
+  margin-bottom: 0.236rem; }
+
+.space-minus4 {
+  margin-top: 0.146rem;
+  margin-bottom: 0.146rem; }
+
+.space-minus5 {
+  margin-top: 0.09rem;
+  margin-bottom: 0.09rem; }
+
+.space-minus6 {
+  margin-top: 0.056rem;
+  margin-bottom: 0.056rem; }
+
+@font-face {
+  font-family: "Goudy";
+  src: url("../fonts/goudy.otf"); }
+
+body {
+  color: #ffffff; }
+
+.upload-forms-container {
+  margin-top: 0.236rem;
+  margin-bottom: 0.236rem;
+  margin-right: 0.236rem;
+  margin-left: 0.236rem; }
+  .upload-forms-container textarea {
+    display: block;
+    width: 100%; }
+
+#add-image-container {
+  display: block;
+  position: relative;
+  width: 180px;
+  height: 180px;
+  margin: 0 auto;
+  background-color: #111111;
+  margin-top: 1.618rem;
+  margin-bottom: 1.618rem;
+  border-radius: 180px;
+  box-shadow: inset 0 0 0 16px rgba(200, 200, 200, 0.6), 0 1px 2px rgba(20, 20, 20, 0.3); }
+  #add-image-container .add-image-text {
+    display: block;
+    position: absolute;
+    top: 36%;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    text-align: center; }
+
+#add-image-container > div {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  text-align: center; }

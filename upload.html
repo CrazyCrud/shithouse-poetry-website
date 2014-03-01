@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<link rel="stylesheet" type="text/css" href="css/plugins/foundation.css"/>
+		<link rel="stylesheet" type="text/css" href="css/plugins/fontello/fontello.css"/>
+		<link rel="stylesheet" type="text/css" href="css/pages/upload.css"/>
+		<link rel="stylesheet" type="text/css" href="css/global.css"/>
+		<script type="text/javascript" src="js/plugins/modernizr.js"></script>
+		<title>Upload</title>
+	</head>
+	<body>
+		<div id="index">
+			<header id="mainheader">
+				<div class="fixed mainnav-container">
+					<nav id="mainnav" class="top-bar" data-topbar>
+						<ul class="title-area">
+							<li class="name">
+							</li>
+							<li class="toggle-topbar menu-icon"><a href="">Menu</a></li>
+						</ul>
+						<section class="top-bar-section">
+							<ul class="left">
+								<li class="li-upload-container"></li>
+							</ul>
+							<ul class="right">
+								<li class="li-search-container">
+									<a id="link-search" href="#" onClick="">
+										<span>Search</span><i class="icon-search"></i>
+									</a>
+								</li>
+								<li class="li-login-container">
+									<a id="link-login" href="#" onClick="">
+										<span>Login</span><i class="icon-user"></i>
+									</a>
+								</li>
+							</ul>
+						</section>
+					</nav>
+				</div>
+				<div class="row full-width">
+					<div class="small-12 columns">
+						<div id="upload">
+							<div class="upload-image-container">
+									
+							</div>
+							<div class="upload-button-container">
+								<span id="upload-button"><a id="link-upload" href="upload.html"><i class="icon-upload-cloud"></i></a></span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</header>
+			<section id="maincontent">
+				<div class="row">
+					<div class="small-12 columns full-width">
+						<div class="upload-forms-container">
+							<div onclick="$($('.file-input')[0]).click();" id="add-image-container">
+								<div>
+									<div class="add-image-text">
+										Bild</br>
+										wählen
+									</div>
+								</div>
+							</div>
+							<input type="file" class="file-input" multiple
+								style="display:none"></input>
+							<div class="small-12 columns">
+								<label>Textarea Label
+						        	<textarea placeholder="Transcription..."></textarea>
+						    	</label>
+							</div>
+						    <div class="small-12 columns">
+						    	<label>Select Box
+						        	<select>
+						          		<option value="husker">Husker</option>
+						          		<option value="starbuck">Starbuck</option>
+								        <option value="hotdog">Hot Dog</option>
+								        <option value="apollo">Apollo</option>
+						        	</select>
+						    	</label>
+						    </div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+		<script src="js/plugins/jquery.min.js"></script>
+		<script src="js/plugins/underscore.js"></script>
+		<script src="js/plugins/foundation/foundation.js"></script>
+  		<script src="js/plugins/foundation/foundation.topbar.js"></script>
+  		<script src="js/plugins/waypoint/waypoints.min.js"></script>
+  		<script src="js/plugins/transit/transit.min.js"></script>
+  		<script src="js/plugins/gallery/jquery.justifiedgallery.js"></script>
+  		<script src="js/Helper.js"></script>
+  		<script src="js/StateManager.js"></script>
+		<script src="js/global.js"></script>
+		<script src="js/pages/upload.js"></script>
+	</body>
+</html>
