@@ -6,6 +6,7 @@
 		<link rel="stylesheet" type="text/css" href="css/plugins/foundation.css"/>
 		<link rel="stylesheet" type="text/css" href="css/plugins/fontello/fontello.css"/>
 		<link rel="stylesheet" type="text/css" href="css/plugins/gallery/jquery.justifiedgallery.min.css"/>
+		<link rel="stylesheet" type="text/css" href="css/pages/home.css"/>
 		<link rel="stylesheet" type="text/css" href="css/global.css"/>
 		<script type="text/javascript" src="js/plugins/modernizr.js"></script>
 		<title>Latrinalia</title>
@@ -55,6 +56,15 @@
 			<section id="maincontent">
 				<div class="row">
 					<div class="small-12 columns full-width">
+						<dl class="tabs" data-tab>
+							<dd class="active"><a id="tab-new" href="javascript:void(0)">New</a></dd>
+							<dd><a id="tab-hot" href="javascript:void(0)">Hot</a></dd>
+							<dd><a id="tab-vote" href="javascript:void(0)">Vote</a></dd>
+						</dl>
+					</div>
+				</div>
+				<div class="row">
+					<div class="small-12 columns full-width">
 						<div class="infinite-container">
 							<div id="images">
 
@@ -99,18 +109,14 @@
 				</div>
 			</section>
 		</div>
-
-
-
-
-		
-		
 		<script src="js/plugins/jquery.min.js"></script>
+		<script src="js/plugins/underscore.js"></script>
 		<script src="js/plugins/foundation/foundation.js"></script>
   		<script src="js/plugins/foundation/foundation.topbar.js"></script>
   		<script src="js/plugins/waypoint/waypoints.min.js"></script>
   		<script src="js/plugins/transit/transit.min.js"></script>
   		<script src="js/plugins/gallery/jquery.justifiedgallery.min.js"></script>
+  		<script src="js/Helper.js"></script>
   		<script src="js/StateManager.js"></script>
   		<script src="js/ImgurManager.js"></script>
 		<script src="js/global.js"></script>

@@ -1,3 +1,12 @@
+@font-face {
+	font-family: $transcription;
+	src: url("../fonts/goudy.otf");
+}
+
 body{
-	color: #ffffff;
+	color: $white;
+}
+
+@mixin transcription-font(){
+	font-family: $transcription;
 }

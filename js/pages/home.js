@@ -1,36 +1,28 @@
-var images = ["http://placehold.it/350x150/69d2e7",
-	"http://placehold.it/540x360/a7dbd8",
-	"http://placehold.it/320x300/e0e4cc",
-	"http://placehold.it/800x600/c02942",
-	"http://placehold.it/400x120/542437",
-	"http://placehold.it/300x300/53777a",
-	"http://placehold.it/350x150/69d2e7",
-	"http://placehold.it/540x360/a7dbd8",
-	"http://placehold.it/320x300/e0e4cc",
-	"http://placehold.it/800x600/c02942",
-	"http://placehold.it/400x120/542437",
-	"http://placehold.it/300x300/53777a"];
-var genders = ["w","m","?"];
 var currentEntry = 0;
+var currentOrder = null;
 var imgData = {};
 
 var $infiniteContainer = $(".infinite-container");
 var $imageContainer = $("#images");
+var $hotLink = $("#tab-hot");
+var $newLink = $("#tab-new");
+var $voteLink = $("#tab-vote");
 
 $(document).ready(function() {
-	requestImages();
+	setupTabFunctionality();
+	getEntries();
 	setupInfiniteScroll();
 });
 
-$(window).resize(function(event) {
-	// rearrangeImages();
-});
+var lazyRearrange = _.debounce(rearrangeImages, 500);
+
+$(window).resize(lazyRearrange);
 
 function setupInfiniteScroll(){
 	$infiniteContainer.waypoint(function(direction) {
 		if(direction == "down"){
 			if($.waypoints('viewportHeight') < $(this).height()){
-				requestImages();
+				getEntries();
 			}		
 		}
 	}, { offset: function(){
@@ -41,12 +33,6 @@ function setupInfiniteScroll(){
 		}
 		
 	} })
-}
-
-function requestImages(){
-	if(rootFolder != ''){
-		ImgurManager.loadImages(appendImages, null, currentEntry);
-	}
 }
 
 function appendImages(entries){
@@ -83,9 +69,19 @@ function appendImages(entries){
 	currentEntry = numImages + 1;
 }
 
+function appendSingleImage(entry){
+	var gender = entry.sex;
+	var transcription = entry.title;
+	var image = entry.images[0].path;
+	var imgContent = '<a href="" title="' + id + '"><img src="' + image + '"/></a>';
+	Foundation.lib_methods.loaded($(imgContent), function(){
+		$imageContainer.append(imgContent);
+		displayImages();
+	});
+}
+
 function rearrangeImages(){
-	if($imageContainer.children().length > 0){
-		console.log("rearrangeImages()");
+	if(StateManager.getWidth() != StateManager.getInitialWidth()){
 		$imageContainer.empty();
 		for(var index in imgData){
 			$imageContainer.append(imgData[index].htmlData);
@@ -112,7 +108,6 @@ function displayImages(){
 }
 
 function imagesFullyDisplayed(){
-	console.log("imagesFullyDisplayed");
 	$.waypoints('refresh');
 	addOverlay();
 }
@@ -186,5 +181,75 @@ function addOverlayFunctionality(container, isTouch){
 			$genderOverlay.fadeOut(300);
 			$transcription.fadeOut(300);
 		});
+	}
+}
+
+function setupTabFunctionality(){
+	$hotLink.click(function(event) {
+		setActive($(this).parent("dd"));
+		enableInfiniteScroll();
+		setOrder(ImgurManager.OrderBy.properties[ImgurManager.OrderBy.RATING]);
+		clearRequests();
+		getEntries(ImgurManager.OrderBy.properties[ImgurManager.OrderBy.RATING]);
+	});
+	$newLink.click(function(event) {
+		setActive($(this).parent("dd"));
+		enableInfiniteScroll();
+		setOrder(ImgurManager.OrderBy.properties[ImgurManager.OrderBy.DATE]);
+		clearRequests();
+		getEntries(ImgurManager.OrderBy.properties[ImgurManager.OrderBy.DATE]);
+	});
+	$voteLink.click(function(event) {
+		setActive($(this).parent("dd"));
+		disableInfiniteScroll();
+		clearRequests();
+		getSingleEntry();
+	});
+}
+
+function enableInfiniteScroll(){
+	$infiniteContainer.waypoint('enable');
+}
+
+function disableInfiniteScroll(){
+	$infiniteContainer.waypoint('disable');
+}
+
+function setActive(linkContainer){
+	$(linkContainer).siblings('dd.active').removeClass('active');
+	$(linkContainer).addClass('active');
+}
+
+function getEntries(orderby){
+	var order = orderby || currentOrder;
+	if(rootFolder != ''){
+		ImgurManager.getEntries(appendImages, order, currentEntry);
+	}
+}
+
+function getFilteredEntries(){
+	if(rootFolder != ''){
+		ImgurManager.getFilteredEntries(appendImages, null, currentEntry);
+	}
+}
+
+function getSingleEntry(){
+	if(rootFolder != ''){
+		ImgurManager.getSingleEntry(appendSingleImage);
+	}
+}
+
+function setOrder(newOrder){
+	if(newOrder == currentOrder){
+		return;
+	}
+	currentOrder = newOrder;
+}
+
+function clearRequests(){
+	imgData = {};
+	currentEntry = 0;
+	if($imageContainer.children().length > 0){
+		$imageContainer.empty();
 	}
 }
