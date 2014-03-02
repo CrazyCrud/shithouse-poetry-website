@@ -22,7 +22,16 @@
 						</ul>
 						<section class="top-bar-section">
 							<ul class="left">
-								<li class="li-upload-container"></li>
+								<li class="li-home-container">
+									<a id="link-home" href="index.html">
+										<span></span><i class="icon-home"></i>
+									</a>
+								</li>
+								<li class="li-upload-container">
+									<a id="link-upload" href="details.html">
+										<span></span><i class="icon-upload-cloud"></i>
+									</a>
+								</li>
 							</ul>
 							<ul class="right">
 								<li class="li-search-container">
@@ -39,18 +48,6 @@
 						</section>
 					</nav>
 				</div>
-				<div class="row full-width">
-					<div class="small-12 columns">
-						<div id="upload">
-							<div class="upload-image-container">
-									
-							</div>
-							<div class="upload-button-container">
-								<span id="upload-button"><a id="link-upload" href="upload.html"><i class="icon-upload-cloud"></i></a></span>
-							</div>
-						</div>
-					</div>
-				</div>
 			</header>
 			<section id="maincontent">
 				<div class="row">
@@ -58,6 +55,9 @@
 						<div class="upload-forms-container">
 							<div onclick="$($('.file-input')[0]).click();" id="add-image-container">
 								<div>
+									<div class="add-image-bg">
+
+									</div>
 									<div class="add-image-text">
 										Bild</br>
 										wählen
@@ -66,20 +66,27 @@
 							</div>
 							<input type="file" class="file-input" multiple
 								style="display:none"></input>
+							<div class="small-12 columns image-container">
+								
+							</div>
 							<div class="small-12 columns">
-								<label>Textarea Label
-						        	<textarea placeholder="Transcription..."></textarea>
+								<label>Transkribtion
+						        	<textarea placeholder="Transkribtion..."></textarea>
 						    	</label>
 							</div>
 						    <div class="small-12 columns">
-						    	<label>Select Box
-						        	<select>
-						          		<option value="husker">Husker</option>
-						          		<option value="starbuck">Starbuck</option>
-								        <option value="hotdog">Hot Dog</option>
-								        <option value="apollo">Apollo</option>
-						        	</select>
-						    	</label>
+						    	<label>Geschlecht</label>
+      							<input type="radio" name="sex" value="Men" id="men">
+      							<label for="men">Männer</label>
+						      	<input type="radio" name="sex" value="Women" id="women">
+						      	<label for="women">Frauen</label>
+						      	<input type="radio" name="sex" value="Unisex" id="unisex">
+						      	<label for="unisex">Unisex</label>
+						    </div>
+						    <div class="small-12 columns">
+						    	<fieldset>
+							    	<legend>Tags</legend>
+							  	</fieldset>
 						    </div>
 						</div>
 					</div>

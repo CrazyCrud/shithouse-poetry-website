@@ -6,8 +6,8 @@
 		<link rel="stylesheet" type="text/css" href="css/plugins/foundation.css"/>
 		<link rel="stylesheet" type="text/css" href="css/plugins/fontello/fontello.css"/>
 		<link rel="stylesheet" type="text/css" href="css/plugins/gallery/jquery.justifiedgallery.min.css"/>
-		<link rel="stylesheet" type="text/css" href="css/pages/home.css"/>
 		<link rel="stylesheet" type="text/css" href="css/global.css"/>
+		<link rel="stylesheet" type="text/css" href="css/pages/home.css"/>
 		<script type="text/javascript" src="js/plugins/modernizr.js"></script>
 		<title>Latrinalia</title>
 	</head>
@@ -23,6 +23,11 @@
 						</ul>
 						<section class="top-bar-section">
 							<ul class="left">
+								<li class="li-home-container">
+									<a id="link-home" href="index.html">
+										<span></span><i class="icon-home"></i>
+									</a>
+								</li>
 								<li class="li-upload-container"></li>
 							</ul>
 							<ul class="right">
@@ -32,9 +37,9 @@
 									</a>
 								</li>
 								<li class="li-login-container">
-									<a id="link-login" href="#"  >
+									<a id="link-login" href="#" onClick="">
 										<span>Login</span><i class="icon-user"></i>
-									</a>									
+									</a>
 								</li>
 							</ul>
 						</section>
@@ -47,13 +52,13 @@
 									
 							</div>
 							<div class="upload-button-container">
-								<span id="upload-button"><a id="link-upload" href=""><i class="icon-upload-cloud"></i></a></span>
+								<span id="upload-button"><a id="link-upload" href="upload.html"><i class="icon-upload-cloud"></i></a></span>
 							</div>
 						</div>
 					</div>
 				</div>
 			</header>
-			<section id="maincontent">
+			<section class="home" id="maincontent">
 				<div class="row">
 					<div class="small-12 columns full-width">
 						<dl class="tabs" data-tab>
@@ -77,14 +82,14 @@
 				<div class="row">
 					<a href="#" class="overlayBackButton" id="searchOverlayBackButton"> <img src="img/global/back_arrow.png"></a>
 						<div class="small-12 columns full-width">
-							<form class="searchForm ">
+							<form class="searchForm">
 								<input type="text" placeholder="Suche" name="searchInput" id="searchField" autofocus>
 							</form>
 						</div>					
 				</div>
 				<div class="row">
-					<div class="small-12 columns full-width ">
-						<a href="#" class="overlayButton right" id="searchButton">suchen</a>
+					<div class="small-12 columns full-width right-aligned">
+						<a href="#" class="overlayButton">suchen</a>
 					</div>
 				</div>
 			</section>
@@ -93,17 +98,14 @@
 					<a href="#" class="overlayBackButton" id="loginOverlayBackButton"> <img src="img/global/back_arrow.png"></a>
 					<div class="small-12 columns full-width">
 							<form class="loginForm">
-								<input type="email" placeholder="E-Mail" name="emailInput" class="loginField" id="" autofocus>
-								<input type="password" placeholder="Passwort" name="passwordInput" class="loginField" id="">
+								<input type="email" placeholder="E-Mail" name="emailInput" class="loginField" id="searchField" autofocus>
+								<input type="password" placeholder="Passwort" name="passwordInput" class="loginField">
 							</form>
 						</div>	
 					<div class="row">
-						<div class="small-12 columns full-width">
-							<div class="">
-							
-							<a href="#" class="overlayButton right" id="loginButton">Login</a>
-							<a href="#" class="overlayButton right" id="registerButton">registrieren </a>
-						</div>
+						<div class="small-12 columns full-width right-aligned">
+							<a href="#" class="overlayButton left-aligned" id="registerButton">registrieren </a>
+							<a href="#" class="overlayButton right-aligned">Login</a>
 						</div>
 					</div>			
 				</div>
@@ -115,11 +117,12 @@
   		<script src="js/plugins/foundation/foundation.topbar.js"></script>
   		<script src="js/plugins/waypoint/waypoints.min.js"></script>
   		<script src="js/plugins/transit/transit.min.js"></script>
-  		<script src="js/plugins/gallery/jquery.justifiedgallery.min.js"></script>
+  		<script src="js/plugins/gallery/jquery.justifiedgallery.js"></script>
   		<script src="js/Helper.js"></script>
   		<script src="js/StateManager.js"></script>
   		<script src="js/ImgurManager.js"></script>
 		<script src="js/global.js"></script>
+		<script src="js/topbar.js"></script>
 		<script src="js/pages/home.js"></script>
 		<script src="js/pages/searchOverlay.js"></script>		
 		<script src="js/pages/loginOverlay.js"></script>
