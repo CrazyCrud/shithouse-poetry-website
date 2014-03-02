@@ -425,69 +425,6 @@ $select-bg-color: #fafafa;
       width:100%;      
     }
 
-    input[type="text"]#searchField{
-      color: $lightgrey;
-      background-color: rgba(0,0,0,0);
-      height: auto;
-      font-size: 300%;
-      width: 90%;
-      margin: 5%;
-      border: none; 
-      outline: none; 
-      font-family: "Segoe UI light"; 
-    }   
-
-    input#register_input{
-      margin-left: 5%;
-      font-family: "Segoe UI";
-      font-size: 100%;
-    }
-
-    label#register-label{
-      color: $black;
-      font: $segoe;
-      margin-left: 5%;
-      margin-bottom: 0%;
-      margin-top: 2%;      
-      //if-bedingung: screen size = small, margin-top:2%;
-    }
-
-    input[type="email"].loginField{
-      color: $lightgrey;
-      background-color: rgba(0,0,0,0);
-      height: auto;
-      font-size: 300%;
-      width: 90%;
-      margin: 5% 5% 2% 5%;
-      border: none; 
-      outline: none; 
-      font-family: "Segoe UI light"; 
-    }
-
-    input[type="password"].loginField{
-      color: $lightgrey;
-      background-color: rgba(0,0,0,0);
-      height: auto;
-      font-size: 300%;
-      width: 90%;
-      margin: 0% 5% 5% 5%;
-      border: none; 
-      outline: none; 
-      font-family: "Segoe UI light"; 
-    }   
-
-
-    ::-moz-placeholder {color:$lightgrey;}
-    ::-webkit-input-placeholder {color:$lightgrey;}
-    :-ms-input-placeholder {color:$lightgrey;}
-
-
-
-
-
-
-
-    
 
     /* We add basic fieldset styling */
     fieldset {
