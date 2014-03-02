@@ -77,8 +77,66 @@ Insert code that doesn't output CSS, things like mixin declarations, functions, 
   margin-top: 0.056rem;
   margin-bottom: 0.056rem; }
 
+@font-face {
+  font-family: "Goudy";
+  src: url("../fonts/goudy.otf"); }
+
 body {
   color: #ffffff; }
+
+input[type="text"]#searchField {
+  color: #cbcdc7;
+  background-color: rgba(0, 0, 0, 0);
+  height: auto;
+  font-size: 300%;
+  width: 90%;
+  margin: 5%;
+  border: none;
+  outline: none;
+  font-family: "Segoe UI light"; }
+
+input#register_input {
+  margin-left: 5%;
+  font-family: "Segoe UI";
+  font-size: 100%; }
+
+label#register-label {
+  color: #111111;
+  font: "Segoe UI";
+  margin-left: 5%;
+  margin-bottom: 0%;
+  margin-top: 2%; }
+
+input[type="email"].loginField {
+  color: #cbcdc7;
+  background-color: rgba(0, 0, 0, 0);
+  height: auto;
+  font-size: 300%;
+  width: 90%;
+  margin: 5% 5% 2% 5%;
+  border: none;
+  outline: none;
+  font-family: "Segoe UI light"; }
+
+input[type="password"].loginField {
+  color: #cbcdc7;
+  background-color: rgba(0, 0, 0, 0);
+  height: auto;
+  font-size: 300%;
+  width: 90%;
+  margin: 0% 5% 5% 5%;
+  border: none;
+  outline: none;
+  font-family: "Segoe UI light"; }
+
+::-moz-placeholder {
+  color: #cbcdc7; }
+
+::-webkit-input-placeholder {
+  color: #cbcdc7; }
+
+:-ms-input-placeholder {
+  color: #cbcdc7; }
 
 #register-maincontent {
   margin-top: 40px; }
