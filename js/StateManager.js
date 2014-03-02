@@ -2,6 +2,8 @@ var StateManager = (function(){
 	var state = null;
 
 	var viewportWidth = null;
+	
+	var initialViewportWidth = null;
 
 	var states = {
 		SMALL: 1,
@@ -34,11 +36,20 @@ var StateManager = (function(){
 		init : function(){
 			$(window).resize(function(event) {
 				viewportWidth = $(window).width();
+				if(initialViewportWidth == null){
+					initialViewportWidth = viewportWidth;
+				}
 			});
 			setState();
 		},
 		getState : function(){
 			return state;
+		},
+		getWidth : function(){
+			return viewportWidth;
+		},
+		getInitialWidth : function(){
+			return initialViewportWidth;
 		},
 		hasTouchSupport : function(){
 			return hasTouchSupport();

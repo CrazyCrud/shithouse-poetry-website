@@ -84,73 +84,40 @@ Insert code that doesn't output CSS, things like mixin declarations, functions, 
 body {
   color: #ffffff; }
 
-.infinite-container {
-  position: relative;
-  overflow: hidden;
+.upload-forms-container {
   margin-top: 0.236rem;
   margin-bottom: 0.236rem;
   margin-right: 0.236rem;
   margin-left: 0.236rem; }
+  .upload-forms-container textarea {
+    display: block;
+    width: 100%; }
 
-.tabs {
-  /*@include horizontal-margin($space_minus3, $space_minus3);*/ }
-  .tabs dd {
-    width: 33.3%; }
-    .tabs dd a {
-      margin-left: auto;
-      margin-right: auto;
-      text-align: center; }
-
-#images {
-  padding: 4px; }
-  #images img {
-    vertical-align: bottom; }
-
-.jg-image {
-  overflow: hidden; }
-
-.overlay, .women, .men, .unisex {
-  display: none;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  opacity: 0.5;
-  z-index: 2; }
-
-.transcription-container {
-  display: none;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  /*font-size: $space_minus1;*/
-  z-index: 3;
-  cursor: pointer; }
-  .transcription-container div {
-    display: table-cell;
-    position: relative;
-    vertical-align: middle;
-    width: inherit;
-    font-family: "Goudy"; }
-
-span.transcription {
-  display: inline-block;
+#add-image-container {
+  display: block;
   position: relative;
-  width: inherit;
-  max-width: inherit;
-  height: auto;
-  padding: 4px;
-  overflow: hidden;
-  word-wrap: break-word;
-  white-space: normal;
-  /*text-overflow: ellipsis;*/
-  line-height: 1.618rem; }
+  width: 180px;
+  height: 180px;
+  margin: 0 auto;
+  background-color: #111111;
+  margin-top: 1.618rem;
+  margin-bottom: 1.618rem;
+  border-radius: 180px;
+  box-shadow: inset 0 0 0 16px rgba(200, 200, 200, 0.6), 0 1px 2px rgba(20, 20, 20, 0.3); }
+  #add-image-container .add-image-text {
+    display: block;
+    position: absolute;
+    top: 36%;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    text-align: center; }
 
-.women {
-  background-color: #d22091; }
-
-.men {
-  background-color: #32a2b8; }
-
-.unisex {
-  background-color: #888888; }
+#add-image-container > div {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  text-align: center; }

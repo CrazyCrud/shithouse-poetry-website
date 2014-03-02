@@ -7,6 +7,20 @@
 	@include horizontal-margin($space_minus3, $space_minus3); 
 }
 
+.tabs{
+	/*@include horizontal-margin($space_minus3, $space_minus3);*/
+
+	dd{
+		width: 333px/1000px * 100%;
+
+		a{
+			margin-left: auto;
+			margin-right: auto; 
+			text-align: center;
+		}
+	}	
+}
+
 #images{
 	padding: 4px;
 
@@ -28,19 +42,37 @@
 	z-index: 2;
 }
 
-.transcribtion{
+.transcription-container{
 	display: none;
 	position: absolute;
 	width: 100%;
 	height: 100%;
 	text-align: center;
+	/*font-size: $space_minus1;*/
 	z-index: 3;
+	cursor: pointer;
+
+	div{
+		display: table-cell;
+		position: relative;
+		vertical-align: middle;
+		width: inherit;
+		@include transcription-font();
+	}
 }
 
-.transcribtion span{
+span.transcription{
 	display: inline-block;
-	font-size: $space_minus1;
-	margin-top: $space_minus3;
+	position: relative;
+	width: inherit;
+	max-width: inherit;
+	height: auto;
+	padding: 4px;
+	overflow: hidden;
+	word-wrap: break-word;
+	white-space: normal;
+	/*text-overflow: ellipsis;*/
+	line-height: $space_plus1;
 }
 
 .women{

@@ -371,7 +371,7 @@ class Queries{
 		return $query;
 	}
 	/**
-	IMAGE FUNCTIONS
+	IMAGE QUERIES
 	*/
 	public static function saveimage($entryid, $path, $x, $y, $w, $h){
 		$i = DBConfig::$tables["images"];
@@ -384,7 +384,7 @@ class Queries{
 		return $query;
 	}
 	/**
-	TAG FUNCTIONS
+	TAG QUERIES
 	*/
 	public static function gettagbyid($tagid){
 		$t = DBConfig::$tables["tags"];
@@ -794,8 +794,8 @@ class DBHelper{
 			return $success;
 		}else{
 			$tags = $this->getTag($tag);
-			if(count($tags)>0){
-				return $tags[0]["tagid"];
+			if(isset($tags["tagid"])){
+				return $tags["tagid"];
 			}
 			$query = Queries::createtag($tag);
 			return $this->query($query);
