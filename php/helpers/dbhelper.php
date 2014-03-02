@@ -266,7 +266,7 @@ class Queries{
 		if(!isset($where)){
 			$where = "";
 		}else{
-			$where = " AND ".$where;
+			$where = " AND (".$where.")";
 		}
 		if(isset($entryid) && $entryid!=false){
 			$id = "`$e`.id = $entryid AND";
@@ -309,7 +309,7 @@ class Queries{
 		if(!isset($where)){
 			$where = "";
 		}else{
-			$where = " AND ".$where;
+			$where = " AND (".$where.")";
 		}
 		$query = 
 			"SELECT
@@ -355,21 +355,6 @@ class Queries{
 			$order = "date";
 		}
 		return Queries::getentry(false, $where)." ORDER BY ".$order." DESC LIMIT $start, $limit";
-	}
-	public static function getusertags($entryid){
-		$u = DBConfig::$tables["usertags"];
-		$t = DBConfig::$tables["tags"];
-		if(isset($entryid)){
-			$id = "`$u`.entryid = $entryid AND";
-		}else{
-			$id = "";
-		}
-		$query = "SELECT 
-			`$t`.tagid, `$t`.tag
-			FROM `$t`, `$u`
-			WHERE $id
-			`$u`.tagid = `$t`.tagid";
-		return $query;
 	}
 	/**
 	IMAGE QUERIES
@@ -441,6 +426,38 @@ class Queries{
 		VALUES
 		($entryid, $tagid)
 		ON DUPLICATE KEY UPDATE tagid=tagid";
+		return $query;
+	}
+	public static function getusertags($entryid){
+		$u = DBConfig::$tables["usertags"];
+		$t = DBConfig::$tables["tags"];
+		if(isset($entryid)){
+			$id = "`$u`.entryid = $entryid AND";
+		}else{
+			$id = "";
+		}
+		$query = "SELECT 
+			`$t`.tagid, `$t`.tag
+			FROM `$t`, `$u`
+			WHERE $id
+			`$u`.tagid = `$t`.tagid";
+		return $query;
+	}
+	/**
+	RATING QUERIES
+	*/
+	public static function getrandomratings(){
+		$r = DBConfig::$tables["ratings"];
+		$e = DBConfig::$tables["entries"];
+		$query =
+		"SELECT 
+		`$e`.id, COUNT(`$r`.entryid) as 'count' 
+		FROM `$e`
+		LEFT OUTER JOIN `$r`
+		ON `$e`.id = `$r`.entryid
+		GROUP BY `$r`.entryid
+		ORDER BY `count` ASC
+		LIMIT 0,100";
 		return $query;
 	}
 }
@@ -771,6 +788,51 @@ class DBHelper{
 			}
 		}
 		return $this->getAllEntries($orderby, $start, $where);
+	}
+
+	// returns an array of random entries for the user to rate
+	// (mostly new entries with few ratings)
+	// $amount is the number of entries to return
+	// (when not given one entry is returned)
+	public function getRandomEntries($amount){
+		if(!isset($amount))$amount = 1;
+
+		// get lowest ratings
+		$query = Queries::getrandomratings();
+		$ratings = $this->query($query);
+		if(!$ratings||count($ratings)==0)return false;
+
+		if(count($ratings)==1){
+			return $this->getEntry($ratings[0]["id"]);
+		}
+
+		// randomize list
+		shuffle($ratings);
+
+		// get entries with those rating
+		$e = DBConfig::$tables["entries"];
+		$where = "`$e`.id = ".$ratings[0]["id"];
+		for($i=1;$i<count($ratings)&&$i<$amount;$i++){
+			$where .= " OR `$e`.id = ".$ratings[$i]["id"];
+		}
+		$query = Queries::getEntry(false,$where);
+
+		$entries = $this->query($query);
+
+		if(!$entries)return false;
+		foreach($entries as $key=>$value){
+			$query = Queries::getusertags($value["id"]);
+			$value["tags"]=$this->query($query);
+			$query = Queries::getimages($value["id"]);
+			$value["images"]=$this->query($query);
+			$query = Queries::getratings($value["id"]);
+			$value["ratings"]=$this->query($query);
+			$query = Queries::getinformation($value["id"]);
+			$value["information"]=$this->query($query);
+			$entries[$key]=$value;
+		}
+		shuffle($entries);
+		return $entries;
 	}
 
 	/**
