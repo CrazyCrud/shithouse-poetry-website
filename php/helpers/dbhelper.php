@@ -88,7 +88,8 @@ class DBConnection{
 		$rows = array();
 		$result = mysql_query($q, $this->link)
 		or $this->error(DBConfig::$dbStatus["offline"]);
-		if(strpos($q,"INSERT")!==false)return mysql_insert_id();
+		$id = mysql_insert_id();
+		if(strpos($q,"INSERT")!==false&&$id!=0)return $id;
 		if(is_bool($result))return $result;
 		while ($row = mysql_fetch_assoc($result)){
 			$rows[count($rows)]=$row;
@@ -430,6 +431,16 @@ class Queries{
 		$query = 
 		"DELETE FROM `$u`
 		WHERE `$u`.tagid=$id;";
+		return $query;
+	}
+	public static function addtag($tagid, $entryid){
+		$t = DBConfig::$tables["usertags"];
+		$query =
+		"INSERT INTO `$t`
+		(entryid, tagid)
+		VALUES
+		($entryid, $tagid)
+		ON DUPLICATE KEY UPDATE tagid=tagid";
 		return $query;
 	}
 }
@@ -838,6 +849,44 @@ class DBHelper{
 			}else{
 				return false;
 			}
+		}
+	}
+
+	// adds a tag to an entry (tagid or string)
+	// if the tag doesnt exist its added
+	// you can also give an array of tags
+	// you need to be logged in to add tags to entries
+	// admins can add tags to any entry
+	//
+	// $user is only used internally (ignore it)
+	public function addTag($tag, $entryid, $user){
+		if(!isset($user)){
+			$user = $this->getUser();
+		}
+		if(!isset($entryid["id"])){
+			$entry = $this->getEntry($entryid);
+		}else{
+			$entry = $entryid;
+		}
+		if(!$user
+			||!$entry
+			||($entry["userid"]!=$user["id"] && $user["status"]!=DBConfig::$userStatus["admin"])){
+			return false;
+		}
+
+		if(is_array($tag)){
+			$success = true;
+			foreach($tag as $t){
+				if(!$this->addTag($t, $entry, $user)){
+					$success = false;
+				}
+			}
+			return $success;
+		}else{
+			$tagid = $this->createTag($tag);
+			if($tagid == false)return false;
+			$query = Queries::addTag($tagid, $entry["id"]);
+			return $this->query($query);
 		}
 	}
 
