@@ -460,6 +460,33 @@ class Queries{
 		LIMIT 0,100";
 		return $query;
 	}
+	public static function getrandomratingsforuser($userid){
+		if(!isset($userid)){
+			return Queries::getrandomratings();
+		}
+		$r = DBConfig::$tables["ratings"];
+		$e = DBConfig::$tables["entries"];
+		$query =
+		"SELECT `id`, `count`
+		FROM(
+		    SELECT
+		    `$e`.id,
+		    COUNT(`$r`.entryid) as 'count',
+		    sum(case when `$r`.userid=$userid THEN 1 ELSE 0 END) as 'rated'
+		    
+		    FROM (`$e`
+		    LEFT OUTER JOIN `$r`
+		    ON `$e`.id = `$r`.entryid)
+		    GROUP BY `$r`.entryid
+		) a
+		    
+		WHERE `rated` = 0
+
+		ORDER BY `count` ASC
+
+		LIMIT 0,100";
+		return $query;
+	}
 }
 
 /*
@@ -797,8 +824,15 @@ class DBHelper{
 	public function getRandomEntries($amount){
 		if(!isset($amount))$amount = 1;
 
-		// get lowest ratings
-		$query = Queries::getrandomratings();
+		// check whether logged in
+		// and get lowest ratings
+		$user = $this->getUser();
+		if(!$user||!isset($user["id"])){
+			$query = Queries::getrandomratings();
+		}else{
+			$query = Queries::getrandomratingsforuser($user["id"]);
+		}
+
 		$ratings = $this->query($query);
 		if(!$ratings||count($ratings)==0)return false;
 
