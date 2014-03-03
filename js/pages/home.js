@@ -40,8 +40,8 @@ function appendImages(entries){
 	var numImages = entries.length;
 	for(var i = 0; i < numImages; i++){
 		var entry = entries[i];
-		var id = entry.id;
-		if(Helper.hasIndex(imgData, id)){
+		var id = parseInt(entry.id);
+		if((_.chain(imgData).pluck("id").indexOf(id).value()) > -1){
 			numImages--;
 			continue;
 		}else{
@@ -49,10 +49,13 @@ function appendImages(entries){
 			var transcription = entry.title;
 			var image = entry.images[0].path;
 			var imgContent = '<a href="" title="' + id + '"><img src="' + image + '"/></a>';	
-			imgData[id] = {
+			imgData[i] = {
+				id: id,
 				gender: gender,
 				transcription: transcription,
-				htmlData: imgContent
+				htmlData: imgContent,
+				date: entry.date,
+				rating: parseFloat(entry.ratings.rating)
 			};
 			Foundation.lib_methods.loaded($(imgContent), function(){
 				imgLoaded++;
@@ -121,7 +124,12 @@ function addOverlay(){
 	$(".jg-image a").each(function(index, value) {
 		var $parent = $(this).parent(".jg-image");
 		var id = parseInt($(this).attr('title'));
-		elementData = imgData[id];
+
+		var index = _.chain(imgData).pluck("id").indexOf(id).value();
+
+		console.log(index);
+
+		elementData = imgData[index];
 		if(elementData){
 			var overlayClass = "";
 			switch(elementData.gender.toLowerCase()){
@@ -188,16 +196,16 @@ function setupTabFunctionality(){
 	$hotLink.click(function(event) {
 		setActive($(this).parent("dd"));
 		enableInfiniteScroll();
-		setOrder(ImgurManager.OrderBy.properties[ImgurManager.OrderBy.RATING]);
+		setOrder(ImgurManager.OrderBy.properties[ImgurManager.OrderBy.RATING].name);
 		clearRequests();
-		getEntries(ImgurManager.OrderBy.properties[ImgurManager.OrderBy.RATING]);
+		getEntries(ImgurManager.OrderBy.properties[ImgurManager.OrderBy.RATING].name);
 	});
 	$newLink.click(function(event) {
 		setActive($(this).parent("dd"));
 		enableInfiniteScroll();
-		setOrder(ImgurManager.OrderBy.properties[ImgurManager.OrderBy.DATE]);
+		setOrder(ImgurManager.OrderBy.properties[ImgurManager.OrderBy.DATE].name);
 		clearRequests();
-		getEntries(ImgurManager.OrderBy.properties[ImgurManager.OrderBy.DATE]);
+		getEntries(ImgurManager.OrderBy.properties[ImgurManager.OrderBy.DATE].name);
 	});
 	$voteLink.click(function(event) {
 		setActive($(this).parent("dd"));

@@ -40,7 +40,31 @@ var ImgurManager = (function(){
 
 			var links = null;
 
-			$.post('php/backend/getEntries.php', {postData : JSON.stringify(searchProps)}, function(data) {
+			var url = 'getEntries.php?orderby=' + searchProps.orderby + '&start=' + searchProps.start; 
+			console.log(url);
+			$.get('php/backend/' + url, function(data) {
+				if(data.success == 1){
+					links = data.data;
+					console.log(links);
+					callback(links);
+				}else{
+					console.log("Error");
+				}	
+			});
+		},
+		getFilteredEntries : function(callback, searchProps, currentEntry){
+			searchProps = searchProps || {};
+			searchProps.filter = searchProps.filter || "sex";
+			searchProps.values = searchProps.values || "men";
+			searchProps.orderby = searchProps.orderby || orderby.properties[orderby.DATE].name;
+			searchProps.start = currentEntry || 0;
+
+			var links = null;
+
+			var url = 'getFilteredEntries.php?filter=' + searchProps.filter + 
+				'&values=' + values + '&start=' + searchProps.start + 
+				'orderby=' + searchProps.orderby;
+			$.get('php/backend/' + url, function(data) {
 				if(data.success == 1){
 					links = data.data;
 					callback(links);
@@ -48,27 +72,6 @@ var ImgurManager = (function(){
 					console.log("Error");
 				}		
 			});
-		},
-		getFilteredEntries : function(callback, searchProps, currentEntry){
-			searchProps = searchProps || {};
-			if(searchProps.tags == null && searchProps.sex == null){
-				searchProps.sex = sex.properties[sex.MEN].name;
-			}
-			searchProps.orderby = searchProps.orderby || orderby.properties[orderby.DATE].name;
-			searchProps.start = currentEntry || 0;
-
-			var links = null;
-
-			$.post('php/backend/getFilteredEntries.php', {postData : JSON.stringify(searchProps)}, 
-				function(data) {
-					if(data.success == 1){
-						links = data.data;
-						callback(links);
-					}else{
-						console.log("Error");
-					}		
-				}
-			);
 		},
 		getSingleEntry : function(callback){
 			/*
