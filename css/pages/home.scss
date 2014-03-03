@@ -1,5 +1,96 @@
 @import "../partials/base";
 
+#mainnav{
+	background: -moz-linear-gradient(top,  rgba(17,17,17,0.85) 0%, rgba(14,14,14,0.85) 20%, rgba(7,7,7,0.46) 59%, rgba(0,0,0,0) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(17,17,17,0.85)), color-stop(20%,rgba(14,14,14,0.85)), color-stop(59%,rgba(7,7,7,0.46)), color-stop(100%,rgba(0,0,0,0)));
+	background: -webkit-linear-gradient(top,  rgba(17,17,17,0.85) 0%,rgba(14,14,14,0.85) 20%,rgba(7,7,7,0.46) 59%,rgba(0,0,0,0) 100%);
+	background: -o-linear-gradient(top,  rgba(17,17,17,0.85) 0%,rgba(14,14,14,0.85) 20%,rgba(7,7,7,0.46) 59%,rgba(0,0,0,0) 100%);
+	background: -ms-linear-gradient(top,  rgba(17,17,17,0.85) 0%,rgba(14,14,14,0.85) 20%,rgba(7,7,7,0.46) 59%,rgba(0,0,0,0) 100%);
+	background: linear-gradient(to bottom,  rgba(17,17,17,0.85) 0%,rgba(14,14,14,0.85) 20%,rgba(7,7,7,0.46) 59%,rgba(0,0,0,0) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d9111111', endColorstr='#00000000',GradientType=0 );
+}
+
+#mainnav.nav-bg:before{
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: $black;
+}
+
+#upload{
+	position : relative;
+	width: 100%;
+	height: 230px;
+	overflow: hidden;
+	background: $black;
+	text-align: center;
+
+	.upload-image-container{
+		position: absolute;
+		background-image: url('../../img/global/top-img-bw.png');
+		background-position: center;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+	}
+
+	.upload-image-container:before{
+		content: "";
+		display: block;
+		width: 100%;
+		height: 100%;
+		background: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(9,9,9,0.69) 53%, rgba(15,15,15,1) 88%, rgba(17,17,17,1) 100%); /* FF3.6+ */
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(53%,rgba(9,9,9,0.69)), color-stop(88%,rgba(15,15,15,1)), color-stop(100%,rgba(17,17,17,1))); /* Chrome,Safari4+ */
+		background: -webkit-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(9,9,9,0.69) 53%,rgba(15,15,15,1) 88%,rgba(17,17,17,1) 100%); /* Chrome10+,Safari5.1+ */
+		background: -o-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(9,9,9,0.69) 53%,rgba(15,15,15,1) 88%,rgba(17,17,17,1) 100%); /* Opera 11.10+ */
+		background: -ms-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(9,9,9,0.69) 53%,rgba(15,15,15,1) 88%,rgba(17,17,17,1) 100%); /* IE10+ */
+		background: linear-gradient(to bottom,  rgba(0,0,0,0) 0%,rgba(9,9,9,0.69) 53%,rgba(15,15,15,1) 88%,rgba(17,17,17,1) 100%); /* W3C */
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#111111',GradientType=0 ); /* IE6-9 */
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+	}
+
+	.upload-button-container{
+		position: absolute;
+		display: block;
+		top: 70%;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		margin: auto;
+		z-index: 100;
+	}
+}
+
+
+
+#upload-button{
+	a#link-upload{
+		display: inline-block;
+		position: relative;
+		color: $white;
+		font-size: 1.8rem;
+	}
+
+	a#link-upload:hover:after{
+		position: absolute;
+		display: block;
+		top: -17px;
+		left: -9px;
+		width: 75px;
+		height: 75px;
+		content : "";
+		background: url('../../img/global/hover.png');
+		background-size: contain;
+	}
+}
+
 .infinite-container{
 	position: relative;
 	overflow: hidden;
