@@ -495,6 +495,26 @@ class Queries{
 		LIMIT 0,100";
 		return $query;
 	}
+	public static function deleterating($entryid, $userid){
+		$r = DBConfig::$tables["ratings"];
+		$query = 
+		"DELETE FROM `$r`
+		WHERE `$r`.userid = $userid
+		AND `$r`.entryid = $entryid";
+		return $query;
+	}
+	public static function addrating($entryid, $userid, $rating){
+		$r = DBConfig::$tables["ratings"];
+		$query =
+		"INSERT INTO `$r`
+		(entryid, userid, rating, date)
+		VALUES
+		($entryid, $userid, $rating, CURRENT_TIMESTAMP)
+		ON DUPLICATE KEY UPDATE
+		`$r`.rating = $rating,
+		`$r`.date = CURRENT_TIMESTAMP";
+		return $query;
+	}
 	/**
 	TYPE QUERIES
 	*/
@@ -1116,6 +1136,24 @@ class DBHelper{
 	// returns all types
 	public function getAllTypes(){
 		$query = Queries::getalltypes();
+		return $this->query($query);
+	}
+
+	/**
+	RATING FUNCTIONS
+	*/
+
+	// you need to be logged in to do that
+	// $rating can be positive or negative (or 0 to reset it)
+	public function addRating($entryid, $rating){
+		$user = $this->getUser();
+		if(!isset($user["id"]))return false;
+		$rating = $rating>0?1:($rating<0?-1:0);
+		if($rating == 0){
+			$query = Queries::deleterating($entryid, $user["id"]);
+		}else{
+			$query = Queries::addrating($entryid, $user["id"], $rating);
+		}
 		return $this->query($query);
 	}
 
