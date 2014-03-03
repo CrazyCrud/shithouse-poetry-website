@@ -49,6 +49,12 @@ class DBConfig{
 		"global" => 1
 	);
 
+	public static $reportStatus = array(
+		"closed" => -1,
+		"open" => 0,
+		"important" => 1
+	);
+
 }
 
 /*
@@ -570,6 +576,86 @@ class Queries{
 		SET
 		`$e`.typeid = -1
 		WHERE `$e`.typeid = $id";
+		return $query;
+	}
+	/**
+	REPORT QUERIES
+	*/
+	public static function addreport($entryid, $userid, $status, $commentid, $reportdescription){
+		$r = DBConfig::$tables["reports"];
+		$query =
+		"INSERT INTO `$r`
+		(entryid, userid, status, commentid, reportdescription, reportdate)
+		VALUES
+		($entryid, $userid, $status, $commentid, '$reportdescription', CURRENT_TIMESTAMP)
+		ON DUPLICATE KEY UPDATE
+		status = $status,
+		reportdescription = '$reportdescription'";
+		return $query;
+	}
+	public static function getreport($reportid){
+		$r = DBConfig::$tables["reports"];
+		$u = DBConfig::$tables["users"];
+		$e = DBConfig::$tables["entries"];
+		$c = DBConfig::$tables["comments"];
+		$query = 
+		"SELECT
+		`$r`.id AS reportid,
+		`$r`.status as status,
+		`$r`.commentid as commentid,
+		`$c`.comment as comment,
+		`$r`.reportdescription as reportdescription,
+		`$r`.reportdate as reportdate,
+		`$e`.id as entryid,
+		`$e`.title as entrytitle,
+		`$e`.sex as entrysex,
+		`$u`.id as userid,
+		`$u`.username as username,
+		`$u`.lastaction as lastaction
+
+		FROM `$r`,`$u`,`$e`,`$c`
+
+		WHERE (`$r`.userid = `$u`.id OR `$r`.userid = -1)
+		AND (`$r`.commentid = `$c`.id OR `$r`.commentid = -1)
+		AND `$r`.entryid = `$e`.id
+		AND `$r`.id = $reportid";
+		return $query;
+	}
+	public static function getreportofuser($entryid, $userid){
+		$r = DBConfig::$tables["reports"];
+		$u = DBConfig::$tables["users"];
+		$e = DBConfig::$tables["entries"];
+		$c = DBConfig::$tables["comments"];
+		$query = 
+		"SELECT
+		`$r`.id AS reportid,
+		`$r`.status as status,
+		`$r`.commentid as commentid,
+		`$c`.comment as comment,
+		`$r`.reportdescription as reportdescription,
+		`$r`.reportdate as reportdate,
+		`$e`.id as entryid,
+		`$e`.title as entrytitle,
+		`$e`.sex as entrysex,
+		`$u`.id as userid,
+		`$u`.username as username,
+		`$u`.lastaction as lastaction
+
+		FROM `$r`,`$u`,`$e`,`$c`
+
+		WHERE `$r`.userid = `$u`.id
+		AND (`$r`.commentid = `$c`.id OR `$r`.commentid = -1)
+		AND `$u`.id = $userid
+		AND `$r`.entryid = `$e`.id
+		AND `$e`.id = $entryid";
+		return $query;
+	}
+	public static function updatereportstatus($reportid, $status){
+		$r = DBConfig::$tables["reports"];
+		$query =
+		"UPDATE `$r`
+		SET `$r`.status = $status
+		WHERE `$r`.id = $reportid";
 		return $query;
 	}
 }
@@ -1154,6 +1240,79 @@ class DBHelper{
 		}else{
 			$query = Queries::addrating($entryid, $user["id"], $rating);
 		}
+		return $this->query($query);
+	}
+
+	/**
+	REPORT FUNCTIONS
+	*/
+
+	// There are two ways to call this method !!!!!!
+	// First:
+	//		Only give the $id (reportid) and get the full
+	//		report with this id (you need to be logged in)
+	// Second:
+	//		Give the $id (entryid) and a $userid
+	//		(you need to be logged on for that or an admin)
+	//		to get all reports from that user on the given entry
+	// 		(including possible reports on comments)
+	public function getReport($id, $userid){
+		if(isset($userid)){
+			return $this->getReportOfUser($id, $userid);
+		}else{
+			$user = $this->getUser();
+
+			if(!isset($user["id"]))return false;
+
+			$query = Queries::getreport($id);
+			$report = $this->query($query);
+
+			if(count($report)==0)return false;
+
+			if($user["status"]!=DBConfig::$userStatus["admin"]
+				&& $user["id"]!=$report[0]["userid"])return false;
+
+			return $report[0];
+		}
+	}
+
+	// This is basically the second method of calling getReport()
+	// returns all reports of a user about an entry (or its comments)
+	// if youre the user (or an admin)
+	public function getReportOfUser($entryid, $userid){
+		$user = $this->getUser();
+
+		if($user["status"]!=DBConfig::$userStatus["admin"]
+				&& $user["id"]!=$userid)return false;
+
+		$query = Queries::getreportofuser($entryid, $userid);
+		return $this->query($query);
+	}
+
+	// you dont need to be logged in to do that
+	// but you should be
+	// $commentid doenst have to be set ...
+	public function addReport($entryid, $reportdescription, $commentid){
+		$user = $this->getUser();
+		if(isset($user["id"])){
+			$userid = $user["id"];
+		}else{
+			$userid = -1;
+		}
+		if(!isset($commentid))$commentid = -1;
+		$query = Queries::addreport($entryid, $userid, DBConfig::$reportStatus["open"], $commentid, $reportdescription);
+		return $this->query($query);
+	}
+
+	// you can only do this as an admin!
+	public function updateReport($reportid, $status){
+		$user = $this->getUser();
+		if(!isset($user["id"])||$user["status"]!=DBConfig::$userStatus["admin"]){
+			return false;
+		}
+		$report = $this->getReport($reportid);
+		if(!isset($report["reportid"]))return false;
+		$query = Queries::updatereportstatus($reportid, $status);
 		return $this->query($query);
 	}
 
