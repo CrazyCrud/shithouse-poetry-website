@@ -167,12 +167,14 @@ class Queries{
 		WHERE sessionkey='$authkey'";
 	}
 	public static function getuserbyname($uname, $password){
+		if(isset($password)){
+			$and = "AND `password` = '$password'";
+		}
 		return
 		"SELECT id, email, username, joindate, lastaction, status
 		FROM `".DBConfig::$tables["users"]."`
 		WHERE (`username` = '$uname'
-		 OR `email` = '$uname')
-		AND `password` = '$password'";
+		 OR `email` = '$uname') $and";
 	}
 	public static function login($userid, $authkey){
 		$u = DBConfig::$tables["users"];
@@ -719,10 +721,14 @@ class DBHelper{
 	**/
 
 	// returns the complete user with the previously defined authkey
-	// or a user by id
+	// or a user by id or username or email
 	public function getUser($id){
 		if(isset($id)){
-			$query = Queries::getuserbyid($id);
+			if(is_string($id)){
+				$query = Queries::getuserbyname($id);
+			}else{
+				$query = Queries::getuserbyid($id);
+			}
 			$users = $this->query($query);
 			if(count($users)==0)return false;
 			return $users[0];
@@ -748,6 +754,21 @@ class DBHelper{
 	}
 
 	public function createUser($mail, $name, $pwd){
+		// check whether username is long enough
+		if(strlen($name)<3)return false;
+
+		// username must not be a valid email !!!
+		if (filter_var($name, FILTER_VALIDATE_EMAIL))return false;
+
+		// check whether valid email
+		if (!filter_var($mail, FILTER_VALIDATE_EMAIL))return false;
+
+		// check whether user already exists
+		$user = $this->getUser($mail);
+		if(isset($user["id"]))return false;
+		$user = $this->getUser($name);
+		if(isset($user["id"]))return false;
+
 		$key = md5($mail).uniqid();
 		$query = Queries::createuser($key, $mail, $name, $pwd);
 		if($this->query($query)){
@@ -763,8 +784,8 @@ class DBHelper{
 	}
 
 	// logs in a user and returns an authkey (or false)
-	public function login($username, $password){
-		$query = Queries::getuserbyname($username, $password);
+	public function login($email, $password){
+		$query = Queries::getuserbyname($email, $password);
 		$users = $this->query($query);
 		if(count($users)==0)return false;
 		$user = $users[0];
