@@ -241,22 +241,6 @@ class Queries{
 			WHERE $id";
 		return $query;
 	}
-	public static function getratings($entryid){
-		$r = DBConfig::$tables["ratings"];
-		if(isset($entryid)){
-			$id = "`$r`.entryid = $entryid";
-		}else{
-			$id = "1";
-		}
-		$query = 
-			"SELECT
-			`$r`.entryid AS entryid,
-			AVG(`$r`.rating) AS rating,
-			COUNT(`$r`.rating) AS ratingcount
-			FROM $r
-			WHERE $id";
-		return $query;
-	}
 	public static function getentry($entryid, $where){
 		$e = DBConfig::$tables["entries"];
 		$u = DBConfig::$tables["users"];
@@ -292,14 +276,15 @@ class Queries{
 			$id
 			`$e`.userid = `$u`.id
 			AND
-			`$e`.typeid = `$t`.id
+			(`$e`.typeid = `$t`.id
+			OR `$e`.typeid = -1)
 			$where
 
 			GROUP BY
 			`$e`.id";
 		return $query;
 	}
-	public static function getentriesbyrating($start, $limit, $where){
+	public static function getentriesbyrating($start, $limit, $where, $userid){
 		$e = DBConfig::$tables["entries"];
 		$u = DBConfig::$tables["users"];
 		$t = DBConfig::$tables["types"];
@@ -330,7 +315,8 @@ class Queries{
 			WHERE
 			`$e`.userid = `$u`.id
 			AND
-			`$e`.typeid = `$t`.id
+			(`$e`.typeid = `$t`.id
+			OR `$e`.typeid = -1)
 			AND
 			`$e`.id = `$r`.entryid
 			$where
@@ -446,6 +432,28 @@ class Queries{
 	/**
 	RATING QUERIES
 	*/
+	public static function getratings($entryid, $userid){
+		$r = DBConfig::$tables["ratings"];
+		if(isset($entryid)){
+			$id = "`$r`.entryid = $entryid";
+		}else{
+			$id = "1";
+		}
+		if(isset($userid)){
+			$rated = ",SUM(CASE WHEN `$r`.userid=$userid THEN `$r`.rating ELSE 0 END) AS ratedbyme";
+		}else{
+			$rated = "";
+		}
+		$query = 
+			"SELECT
+			`$r`.entryid AS entryid,
+			AVG(`$r`.rating) AS rating,
+			COUNT(`$r`.rating) AS ratingcount
+			$rated
+			FROM $r
+			WHERE $id";
+		return $query;
+	}
 	public static function getrandomratings(){
 		$r = DBConfig::$tables["ratings"];
 		$e = DBConfig::$tables["entries"];
@@ -741,13 +749,14 @@ class DBHelper{
 	public function getEntry($entryid){
 		$query = Queries::getentry($entryid);
 		$entry = $this->query($query);
+		$user = $this->getUser();
 		if(count($entry)==0||!$entry)return false;
 		$entry = $entry[0];
 		$query = Queries::getusertags($entryid);
 		$entry["tags"]=$this->query($query);
 		$query = Queries::getimages($entryid);
 		$entry["images"]=$this->query($query);
-		$query = Queries::getratings($entryid);
+		$query = Queries::getratings($entryid, $user["id"]);
 		$entry["ratings"]=$this->query($query);
 		$query = Queries::getinformation($entryid);
 		$entry["information"]=$this->query($query);
@@ -761,19 +770,19 @@ class DBHelper{
 		if(!isset($start)){
 			$start = 0;
 		}
+		$user = $this->getUser();
 		if($orderby == "rating"){
 			$entries = $this->getAllEntriesByRating($start, $where);
 		}else{
 			$query = Queries::getallentries($start, Constants::NUMENTRIES, $orderby, $where);
 			$entries = $this->query($query);
 		}
-		if(!$entries)return false;
 		foreach($entries as $key=>$value){
 			$query = Queries::getusertags($value["id"]);
 			$value["tags"]=$this->query($query);
 			$query = Queries::getimages($value["id"]);
 			$value["images"]=$this->query($query);
-			$query = Queries::getratings($value["id"]);
+			$query = Queries::getratings($value["id"], $user["id"]);
 			$value["ratings"]=$this->query($query);
 			$query = Queries::getinformation($value["id"]);
 			$value["information"]=$this->query($query);
@@ -783,8 +792,8 @@ class DBHelper{
 	}
 
 	// $where parameter is optional and mostly used intern
-	private function getAllEntriesByRating($start, $where){
-		$query = Queries::getentriesbyrating($start, Constants::NUMENTRIES, $where);
+	private function getAllEntriesByRating($start, $where, $userid){
+		$query = Queries::getentriesbyrating($start, Constants::NUMENTRIES, $where, $userid);
 		$entries = $this->query($query);
 		return $entries;
 	}
