@@ -487,6 +487,63 @@ class Queries{
 		LIMIT 0,100";
 		return $query;
 	}
+	/**
+	TYPE QUERIES
+	*/
+	public static function gettypebyname($name){
+		$t = DBConfig::$tables["types"];
+		$query=
+		"SELECT * FROM `$t` WHERE `$t`.name = '$name'";
+		return $query;
+	}
+	public static function gettypebyid($id){
+		$t = DBConfig::$tables["types"];
+		$query=
+		"SELECT * FROM `$t` WHERE `$t`.id = $id";
+		return $query;
+	}
+	public static function createtype($name, $desc){
+		$t = DBConfig::$tables["types"];
+		$query=
+		"INSERT INTO `$t`
+		(`name`, `description`)
+		VALUES
+		('$name', '$desc')";
+		return $query;
+	}
+	public static function updatetype($id, $name, $desc){
+		$t = DBConfig::$tables["types"];
+		$query=
+		"UPDATE `$t`
+		SET
+		`$t`.name = '$name',
+		`$t`.description = '$desc'
+		WHERE
+		`$t`.id = $id";
+		return $query;
+	}
+	public static function deletetype($id){
+		$t = DBConfig::$tables["types"];
+		$query=
+		"DELETE FROM `$t`
+		WHERE `$t`.id = $id";
+		return $query;
+	}
+	public static function getalltypes(){
+		$t = DBConfig::$tables["types"];
+		$query=
+		"SELECT * FROM `$t` WHERE 1";
+		return $query;
+	}
+	public static function removetypefromentries($id){
+		$e = DBConfig::$tables["entries"];
+		$query =
+		"UPDATE `$e`
+		SET
+		`$e`.typeid = -1
+		WHERE `$e`.typeid = $id";
+		return $query;
+	}
 }
 
 /*
@@ -984,6 +1041,73 @@ class DBHelper{
 			$query = Queries::addTag($tagid, $entry["id"]);
 			return $this->query($query);
 		}
+	}
+	
+	/**
+	TYPE FUNCTIONS
+	*/
+	
+	// returns a specific type
+	// unset $type returns all types
+	public function getType($type){
+		if(!isset($type))return $this->getAllTypes();
+		if(is_string($type)){
+			$query = Queries::gettypebyname($type);
+		}else{
+			$query = Queries::gettypebyid($type);
+		}
+		$types = $this->query($query);
+		if(count($types)==0)return false;
+		return $types[0];
+	}
+	
+	// create a new type or update it if it already exists
+	// (set authkey before)
+	// admin only
+	public function createType($name, $description){
+		$user = $this->getUser();
+		if(!isset($user["id"])||$user["status"]!=DBConfig::$userStatus["admin"]){
+			return false;
+		}
+		$type = $this->getType($name);
+		if(isset($type["id"])){
+			return $this->updateType($type["id"], $name, $description);
+		}
+		$query = Queries::createtype($name, $description);
+		return $this->query($query);
+	}
+
+	// update an existing type (set authkey before)
+	// admin only
+	public function updateType($id, $name, $description){
+		$user = $this->getUser();
+		if(!isset($user["id"])||$user["status"]!=DBConfig::$userStatus["admin"]){
+			return false;
+		}
+		$query = Queries::updatetype($id, $name, $description);
+		return $this->query($query);
+	}
+
+	// remove an existing type (set authkey before)
+	// admin only
+	public function deleteType($type){
+		$user = $this->getUser();
+		if(!isset($user["id"])||$user["status"]!=DBConfig::$userStatus["admin"]){
+			return false;
+		}
+		$type = $this->getType($type);
+		if(!isset($type["id"]))return false;
+		$query = Queries::deletetype($type["id"]);
+		$result = $this->query($query);
+		if(!$result)return false;
+		$query = Queries::removetypefromentries($type["id"]);
+		return $this->query($query);
+	}
+
+	// returns all types
+	public function getAllTypes(){
+		$query = Queries::getalltypes();
+		return $this->query($query);
 	}
 
 }
