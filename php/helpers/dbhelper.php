@@ -781,6 +781,18 @@ class DBHelper{
 	}
 
 	public function updateUser($mail, $name, $pwd){
+		$user = $this->getUser();
+		if(!isset($user["id"])){
+			return false;
+		}
+
+		// check for missing parameters
+		if(!isset($mail)&&!isset($name)&&!isset($pwd))return false;
+		if(!isset($mail))$mail = $user["email"];
+		if(!isset($name))$name = $user["username"];
+		if(!isset($pwd))$pwd = $user["password"];
+
+
 		// check whether username is long enough
 		if(strlen($name)<3)return false;
 
@@ -789,11 +801,6 @@ class DBHelper{
 
 		// check whether valid email
 		if (!filter_var($mail, FILTER_VALIDATE_EMAIL))return false;
-		
-		$user = $this->getUser();
-		if(!isset($user["id"])){
-			return false;
-		}
 		if(isset($pwd)){
 			$query = Queries::updateuser($user["id"], $mail, $name, $pwd);
 		}else{
