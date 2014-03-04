@@ -1,4 +1,3 @@
-$(function(){
 	var registerButton = document.getElementById("registerform_button");
 	$username = $("#username_register");
 	$mail = $("#email_register");
@@ -6,7 +5,7 @@ $(function(){
 	$psw2 = $("#password2_register");
 	$mail.val(email);
 	$psw.val(password);
-});
+
 
 
 function submitRegisterForm(){
@@ -29,7 +28,6 @@ function submitRegisterForm(){
 		{
 			switch(data["success"]){
 				case 1: onLoginSuccess(data["data"]);
-
 					break;
 				//fehlender Parameter
 				case 3: alert("Es fehlt ein Parameter. Bitte wenden Sie sich an den Admin.");
