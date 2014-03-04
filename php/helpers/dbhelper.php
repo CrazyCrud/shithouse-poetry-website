@@ -515,7 +515,8 @@ class DBHelper{
 		// add information
 		$this->addInformation($entryid,$entry["artist"],$entry["transcription"],$entry["location"],$entry["lat"],$entry["long"]);
 
-		// TODO: index
+		// index
+		$this->index($entryid, $entry["title"], $entry["transcription"]);
 
 		return $entryid;
 	}
@@ -867,9 +868,53 @@ class DBHelper{
 	INDEXING FUNCTIONS
 	*/
 
-	public function removeIndex($entryid){
+	// this will only be called if the user is allowed to
+	// so we dont have to check it here
+	private function removeIndex($entryid){
 		$query = Queries::removeindex($entryid);
 		return $this->query($query);
+	}
+
+	private function index($entryid, $title, $transcription){
+		$titleWords = de_stemmer_stem_list($title);
+		$transcWords = de_stemmer_stem_list($transcription);
+		$titleWordCount = 0;
+		$transcWordCount = 0;
+		$words = array();
+		foreach($titleWords as $key=>$stem){
+			if(isset($words[$stem["stem"]])){
+				$words[$stem["stem"]]["titleoccurence"]+= $stem["count"];
+			}else{
+				$word = array(
+					"word" => $stem["stem"],
+					"transcriptionoccurence" => 0,
+					"titleoccurence" => $stem["count"]
+				);
+				$words[$stem["stem"]]=$word;
+			}
+			$titleWordCount += $stem["count"];
+		}
+		foreach($transcWords as $key=>$stem){
+			if(isset($words[$stem["stem"]])){
+				$words[$stem["stem"]]["transcriptionoccurence"]+= $stem["count"];
+			}else{
+				$word = array(
+					"word" => $stem["stem"],
+					"transcriptionoccurence" => $stem["count"],
+					"titleoccurence" => 0
+				);
+				$words[$stem["stem"]]=$word;
+			}
+			$transcWordCount += $stem["count"];
+		}
+
+		$success = true;
+		foreach($words as $word){
+			$query = Queries::index($word["word"], $entryid, $word["titleoccurence"], $word["transcriptionoccurence"]);
+			$result = $this->query($query);
+			if(!$result)$success = false;
+		}
+		return $success;
 	}
 
 }

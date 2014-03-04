@@ -666,6 +666,15 @@ class Queries{
 		WHERE `$i`.entryid = $entryid";
 		return $query;
 	}
+	public static function index($word, $entryid, $titleoccurence, $transcriptionoccurence){
+		$i = DBConfig::$tables["index"];
+		$query =
+		"INSERT INTO `$i`
+		(word, entryid, titleoccurence, transcriptionoccurence)
+		VALUES
+		('$word', $entryid, $titleoccurence, $transcriptionoccurence)";
+		return $query;
+	}
 }
 
 ?>

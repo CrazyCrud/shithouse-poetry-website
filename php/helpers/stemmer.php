@@ -195,14 +195,21 @@ function de_stemmer_help($section = 'admin/help#search') {
 * to identify words which transform to the same stem.
 * For details please compare 'search.module-stem.patch'
 */
-function de_stemmer_stem_list(&$text) {
+function de_stemmer_stem_list($text) {
 // watchdog('de_stemmer','de_stemmer_stem_list: ' .  setlocale(LC_ALL, NULL), WATCHDOG_NOTICE);
   // Split words from noise and remove apostrophes
   $words = _de_stemmer_split_text($text);
 
   $stem_list = array();
   foreach ($words as $word) {
-    $stem_list[$word] = _de_stemmer_wortstamm(strtolower($word));
+    if(isset($stem_list[$word])){
+      $stem_list[$word]["count"]++;
+    }else{
+      $stem_list[$word] = array(
+        "stem"=>_de_stemmer_wortstamm(strtolower($word)),
+        "count"=>1
+      );
+    }
   }
   return $stem_list;
 }
@@ -372,5 +379,3 @@ function _de_stemmer_ausnahme(&$wort) {
   }
   return FALSE;
 }
-
-echo "funktioniert";
