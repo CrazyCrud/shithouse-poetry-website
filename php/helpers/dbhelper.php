@@ -660,6 +660,46 @@ class Queries{
 		WHERE `$r`.id = $reportid";
 		return $query;
 	}
+	/**
+	IMAGE QUERIES
+	*/
+	public static function getimage($id){
+		$i = DBConfig::$tables["images"];
+		$u = DBConfig::$tables["users"];
+		$e = DBConfig::$tables["entries"];
+		$query = 
+		"SELECT
+		`$i`.id AS id,
+		`$i`.path AS path,
+		`$i`.xposition AS xposition,
+		`$i`.yposition AS yposition,
+		`$i`.width AS width,
+		`$i`.height AS height,
+		`$i`.entryid AS entryid,
+		`$e`.title AS title,
+		`$e`.sex AS sex,
+		`$u`.id AS userid,
+		`$u`.username AS username,
+		`$u`.email AS email
+		FROM
+		`$i`, `$e`, `$u`
+		WHERE
+		`$i`.id = $id
+		AND `$i`.entryid = `$e`.id
+		AND `$e`.userid = `$u`.id";
+		return $query;
+	}
+	public static function updateimage($id, $x, $y, $w, $h){
+		$i = DBConfig::$tables["images"];
+		$query =
+		"UPDATE `$i`
+		SET xposition=$x,
+		yposition=$y,
+		width=$w,
+		height=$h
+		WHERE id = $id";
+		return $query;
+	}
 }
 
 /*
@@ -1312,7 +1352,7 @@ class DBHelper{
 
 	// you dont need to be logged in to do that
 	// but you should be
-	// $commentid doenst have to be set ...
+	// $commentid doesnt have to be set ...
 	public function addReport($entryid, $reportdescription, $commentid){
 		$user = $this->getUser();
 		if(isset($user["id"])){
@@ -1334,6 +1374,30 @@ class DBHelper{
 		$report = $this->getReport($reportid);
 		if(!isset($report["reportid"]))return false;
 		$query = Queries::updatereportstatus($reportid, $status);
+		return $this->query($query);
+	}
+
+	/**
+	IMAGE FUNCTIONS
+	*/
+
+	public function getImage($id){
+		$query = Queries::getimage($id);
+		return $this->query($query);
+	}
+
+	// you need to be logged on as owner of the entry (or admin)
+	public function updateImage($id, $x, $y, $w, $h){
+		// get user
+		$user = $this->getUser();
+		if(!isset($user["id"]))return false;
+		// get image
+		$img = $this->getImage($id);
+		if(count($img)==0)return false;
+		// check whether allowed to make changes
+		if($user["status"]!=DBConfig::$userStatus["admin"]
+				&& $user["id"]!=$img[0]["userid"])return false;
+		$query = Queries::updateimage($id, $x, $y, $w, $h);
 		return $this->query($query);
 	}
 
