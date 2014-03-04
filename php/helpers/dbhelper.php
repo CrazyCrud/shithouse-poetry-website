@@ -27,7 +27,8 @@ class DBConfig{
 		"tags" => "tags",
 		"types" => "type",
 		"users" => "user",
-		"usertags" => "usertags"
+		"usertags" => "usertags",
+		"index" => "index"
 	);
 
 	public static $dbStatus = array(
@@ -227,28 +228,16 @@ class Queries{
 		WHERE id=$commentid
 		AND userid=$uid";
 	}
+	public static function removecomments($entryid){
+		$c = DBConfig::$tables["comments"];
+		$query = 
+		"DELETE FROM `$c`
+		WHERE `$c`.entryid = $entryid";
+		return $query;
+	}
 	/**
 	ENTRY QUERIES
 	**/
-	public static function getinformation($entryid){
-		$i = DBConfig::$tables["information"];
-		if(isset($entryid)){
-			$id = "`$i`.entryid = $entryid";
-		}else{
-			$id = "1";
-		}
-		$query = 
-			"SELECT
-			`$i`.entryid AS entryid,
-			`$i`.artist AS artist,
-			`$i`.transcription AS transcription,
-			`$i`.location AS location,
-			`$i`.longitude AS longitude,
-			`$i`.latitude AS latitude
-			FROM $i
-			WHERE $id";
-		return $query;
-	}
 	public static function getentry($entryid, $where){
 		$e = DBConfig::$tables["entries"];
 		$u = DBConfig::$tables["users"];
@@ -336,19 +325,47 @@ class Queries{
 			LIMIT $start, $limit";
 		return $query;
 	}
-	public static function getimages($entryid){
-		$img = DBConfig::$tables["images"];
-		$query =
-			"SELECT id, path, xposition, yposition, width, height
-			FROM `$img`
-			WHERE `$img`.entryid=".$entryid;
-		return $query;
-	}
 	public static function getallentries($start, $limit, $order, $where){
 		if(!isset($order)){
 			$order = "date";
 		}
 		return Queries::getentry(false, $where)." ORDER BY ".$order." DESC LIMIT $start, $limit";
+	}
+	public static function deleteentry($id){
+		$e = DBConfig::$tables["entries"];
+		$query =
+		"DELETE FROM `$e`
+		WHERE `$e`.id = $id";
+		return $query;
+	}
+	/**
+	INFORMATION QUERIES
+	*/
+	public static function getinformation($entryid){
+		$i = DBConfig::$tables["information"];
+		if(isset($entryid)){
+			$id = "`$i`.entryid = $entryid";
+		}else{
+			$id = "1";
+		}
+		$query = 
+			"SELECT
+			`$i`.entryid AS entryid,
+			`$i`.artist AS artist,
+			`$i`.transcription AS transcription,
+			`$i`.location AS location,
+			`$i`.longitude AS longitude,
+			`$i`.latitude AS latitude
+			FROM $i
+			WHERE $id";
+		return $query;
+	}
+	public static function removeinformation($entryid){
+		$i = DBConfig::$tables["information"];
+		$query = 
+		"DELETE FROM `$i`
+		WHERE `$i`.entryid = $entryid";
+		return $query;
 	}
 	/**
 	IMAGE QUERIES
@@ -437,6 +454,13 @@ class Queries{
 			`$u`.tagid = `$t`.tagid";
 		return $query;
 	}
+	public static function removetags($entryid){
+		$u = DBConfig::$tables["usertags"];
+		$query = 
+		"DELETE FROM `$u`
+		WHERE `$u`.entryid = $entryid";
+		return $query;
+	}
 	/**
 	RATING QUERIES
 	*/
@@ -521,6 +545,13 @@ class Queries{
 		ON DUPLICATE KEY UPDATE
 		`$r`.rating = $rating,
 		`$r`.date = CURRENT_TIMESTAMP";
+		return $query;
+	}
+	public static function removeratings($entryid){
+		$r = DBConfig::$tables["ratings"];
+		$query =
+		"DELETE FROM `$r`
+		WHERE `$r`.entryid = $entryid";
 		return $query;
 	}
 	/**
@@ -660,6 +691,13 @@ class Queries{
 		WHERE `$r`.id = $reportid";
 		return $query;
 	}
+	public static function removereports($entryid){
+		$r = DBConfig::$tables["reports"];
+		$query = 
+		"DELETE FROM `$r`
+		WHERE `$r`.entryid = $entryid";
+		return $query;
+	}
 	/**
 	IMAGE QUERIES
 	*/
@@ -698,6 +736,21 @@ class Queries{
 		width=$w,
 		height=$h
 		WHERE id = $id";
+		return $query;
+	}
+	public static function removeimages($entryid){
+		$i = DBConfig::$tables["images"];
+		$query =
+		"DELETE FROM `$i`
+		WHERE `$i`.entryid = $entryid";
+		return $query;
+	}
+	public static function getimages($entryid){
+		$img = DBConfig::$tables["images"];
+		$query =
+			"SELECT id, path, xposition, yposition, width, height
+			FROM `$img`
+			WHERE `$img`.entryid=".$entryid;
 		return $query;
 	}
 }
@@ -924,6 +977,13 @@ class DBHelper{
 		return $this->query($query);
 	}
 
+	// this will only be called if a user is allowed to
+	// so we dont have to check it here
+	private function removeComments($entryid){
+		$query = Queries::removecomments($entryid);
+		return $this->query($query);
+	}
+
 	/**
 	ENTRY FUNCTIONS
 	**/
@@ -1118,6 +1178,44 @@ class DBHelper{
 		return $entries;
 	}
 
+	public function deleteEntry($id){
+		if(!isset($id))return false;
+		$user = $this->getUser();
+		if(!isset($user["id"]))return false;
+
+		// check if the user is allowed to delete the entry
+		// if not admin
+		if(!$user["status"]==DBConfig::$userStatus["admin"]){
+			$entry = $this->getEntry($id);
+			if(!isset($entry["userid"])
+				|| $entry["userid"]!=$user["id"]){
+				return false;
+			}
+		}
+
+		// TODO: if(!$this->removeIndex($id))return false;
+		if(!$this->removeTags($id))return false;
+		if(!$this->removeComments($id))return false;
+		if(!$this->removeRatings($id))return false;
+		if(!$this->removeReports($id))return false;
+		if(!$this->removeImages($id))return false;
+		if(!$this->removeInformation($id))return false;
+
+		$query = Queries::deleteentry($id);
+		return $this->query($query);
+	}
+
+	/**
+	INFORMATION FUNCTIONS
+	*/
+
+	// this will only be called if the user is allowed to
+	// so we dont have to check it here
+	private function removeInformation($entryid){
+		$query = Queries::removeinformation($entryid);
+		return $this->query($query);
+	}
+
 	/**
 	TAG FUNCTIONS
 	*/
@@ -1234,6 +1332,13 @@ class DBHelper{
 			return $this->query($query);
 		}
 	}
+
+	// this will only be called if the user is allowed to
+	// so we dont need to check it here
+	private function removeTags($entryid){
+		$query = Queries::removetags($entryid);
+		return $this->query($query);
+	}
 	
 	/**
 	TYPE FUNCTIONS
@@ -1320,6 +1425,13 @@ class DBHelper{
 		return $this->query($query);
 	}
 
+	// this will only be called if the user is allowed to
+	// so we dont have to check it here
+	private function removeRatings($entryid){
+		$query = Queries::removeratings($entryid);
+		return $this->query($query);
+	}
+
 	/**
 	REPORT FUNCTIONS
 	*/
@@ -1393,6 +1505,13 @@ class DBHelper{
 		return $this->query($query);
 	}
 
+	// this will only be called if the user is allowed to
+	// so we dont have to check it here
+	private function removeReports($entryid){
+		$query = Queries::removereports($entryid);
+		return $this->query($query);
+	}
+
 	/**
 	IMAGE FUNCTIONS
 	*/
@@ -1414,6 +1533,13 @@ class DBHelper{
 		if($user["status"]!=DBConfig::$userStatus["admin"]
 				&& $user["id"]!=$img[0]["userid"])return false;
 		$query = Queries::updateimage($id, $x, $y, $w, $h);
+		return $this->query($query);
+	}
+
+	// this will only be called if the user is allowed to
+	// so we dont have to check it here
+	private function removeImages($entryid){
+		$query = Queries::removeimages($entryid);
 		return $this->query($query);
 	}
 
