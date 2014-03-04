@@ -753,6 +753,16 @@ class Queries{
 			WHERE `$img`.entryid=".$entryid;
 		return $query;
 	}
+	/**
+	INDEX QUERIES
+	*/
+	public static function removeindex($entryid){
+		$i = DBConfig::$tables["index"];
+		$query = 
+		"DELETE FROM `$i`
+		WHERE `$i`.entryid = $entryid";
+		return $query;
+	}
 }
 
 /*
@@ -1193,7 +1203,7 @@ class DBHelper{
 			}
 		}
 
-		// TODO: if(!$this->removeIndex($id))return false;
+		if(!$this->removeIndex($id))return false;
 		if(!$this->removeTags($id))return false;
 		if(!$this->removeComments($id))return false;
 		if(!$this->removeRatings($id))return false;
@@ -1540,6 +1550,15 @@ class DBHelper{
 	// so we dont have to check it here
 	private function removeImages($entryid){
 		$query = Queries::removeimages($entryid);
+		return $this->query($query);
+	}
+
+	/**
+	INDEXING FUNCTIONS
+	*/
+
+	public function removeIndex($entryid){
+		$query = Queries::removeindex($entryid);
 		return $this->query($query);
 	}
 
