@@ -95,7 +95,7 @@ input[type="text"]#searchField {
   outline: none;
   font-family: "Segoe UI light"; }
 
-input#register_input {
+input.register_input {
   margin-left: 5%;
   font-family: "Segoe UI";
   font-size: 100%; }

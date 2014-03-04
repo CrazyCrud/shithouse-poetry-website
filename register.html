@@ -47,33 +47,41 @@
 						<div class="small-12 columns">
 							<h1>Registrieren</h1>
 								<div class="small-12 medium-2 large-2 columns">
+									<label class="inline" id="register-label">Nutzername</label>
+								</div>
+								<div class="small-12 medium-10 large-10 columns">
+									<form name="registerForm">
+										<input class="register_input" type="text" id="username_register" size="30" autofocus>
+									</form>
+								</div>
+								<div class="small-12 medium-2 large-2 columns">
 									<label class="inline" id="register-label">E-Mail Adresse</label>
 								</div>
 								<div class="small-12 medium-10 large-10 columns">
-									<form>
-										<input id="register_input" type="email" name="email_register" size="30" autofocus>
+									<form name="registerForm">
+										<input class="register_input" type="email" id="email_register" size="30" autofocus>
 									</form>
 								</div>
 								<div class="small-12 medium-2 large-2 columns">
 									<label id="register-label" class="inline">Passwort</label>
 								</div>
 								<div class="small-12 medium-10 large-10 columns">
-									<form>
-										<input id="register_input" type="password" name="password_register" size="30" autofocus>
+									<form name="registerForm">
+										<input class="register_input" type="password" id="password_register" size="30" autofocus>
 									</form>
 								</div>
 								<div class="small-12 medium-2 large-2 columns">
 									<label id="register-label" class="inline">Passwort wiederholen</label>
 								</div>
 								<div class="small-12 medium-10 large-10 columns">
-									<form>
-										<input id="register_input" type="password" name="password_register" size="30" autofocus>
+									<form name="registerForm">
+										<input class="register_input" type="password" id="password2_register" size="30" autofocus>
 									</form>
 								</div>										
 							</div>	
 					</div>
 					<div class="row">
-						<a href="#" class="normalButton right">registrieren</a>
+						<a href="javascript:void(0)" id="registerform_button" class="normalButton right">registrieren</a>
 					</div>
 			</section>
 
@@ -119,6 +127,7 @@
 		
 		
 		<script src="js/plugins/jquery.min.js"></script>
+		<script src="js/plugins/md5/jquery.md5.js"></script>
 		<script src="js/plugins/foundation/foundation.js"></script>
   		<script src="js/plugins/foundation/foundation.topbar.js"></script>
   		<script src="js/plugins/waypoint/waypoints.min.js"></script>
@@ -130,6 +139,6 @@
 		<script src="js/pages/home.js"></script>
 		<script src="js/pages/searchOverlay.js"></script>		
 		<script src="js/pages/loginOverlay.js"></script>
-		<script src="js/pages/details.js"></script>
+		<script src="js/pages/register.js"></script>
 	</body>
 </html>
