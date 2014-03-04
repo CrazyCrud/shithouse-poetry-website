@@ -157,7 +157,7 @@ class Queries{
 		return "INSERT INTO $u
 		(email, username, joindate, lastaction, status, sessionkey, password)
 		VALUES
-		('$mail','$name','$date','$date',".DBConfig::$userStatus["newUser"].",'$key','$pwd')";
+		('$mail','$name', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP,".DBConfig::$userStatus["newUser"].",'$key','$pwd')";
 	}
 	public static function deleteuser($authkey){
 		$u = DBConfig::$tables["users"];
