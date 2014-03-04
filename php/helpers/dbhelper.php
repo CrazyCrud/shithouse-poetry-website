@@ -781,6 +781,15 @@ class DBHelper{
 	}
 
 	public function updateUser($mail, $name, $pwd){
+		// check whether username is long enough
+		if(strlen($name)<3)return false;
+
+		// username must not be a valid email !!!
+		if (filter_var($name, FILTER_VALIDATE_EMAIL))return false;
+
+		// check whether valid email
+		if (!filter_var($mail, FILTER_VALIDATE_EMAIL))return false;
+		
 		$user = $this->getUser();
 		if(!isset($user["id"])){
 			return false;
