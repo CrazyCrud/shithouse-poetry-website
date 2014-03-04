@@ -2,8 +2,13 @@ console.log("loginOverlay");
 var linkLogin = document.getElementById("link-login");
 var loginContent = document.getElementById("logincontent");
 var loginOverlayBackButton = document.getElementById("loginOverlayBackButton");
+var registerButton = document.getElementById("registerButton");
+
+registerButton.onclick = openRegisterPage;
 linkLogin.onclick = showLoginOverlay;
 loginOverlayBackButton.onclick = hideLoginOverlay;
+
+
 
 function showLoginOverlay(){
 	if(!document.getElementById("overlay")) {
@@ -21,6 +26,12 @@ function hideLoginOverlay(){
 		document.getElementsByTagName("body")[0].removeChild(loginContent);
 		document.getElementsByTagName("body")[0].removeChild(document.getElementById("overlay"));
 	}
+}
+
+function openRegisterPage(){
+	hideLoginOverlay;
+	document.loginForm.action = "register.php";		
+	document.loginForm.submit();
 }
 
 

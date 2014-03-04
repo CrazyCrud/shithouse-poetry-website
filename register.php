@@ -8,7 +8,11 @@
 		<link rel="stylesheet" type="text/css" href="css/plugins/gallery/jquery.justifiedgallery.min.css"/>
 		<link rel="stylesheet" type="text/css" href="css/global.css"/>
 		<link rel="stylesheet" type="text/css" href="css/pages/register.css"/>
+		<link href="css/plugins/custom-jqui-theme/jquery-ui-1.10.4.custom.css" rel="stylesheet">
 		<script type="text/javascript" src="js/plugins/modernizr.js"></script>
+		
+
+
 		<title>Latrinalia</title>
 	</head>
 	<body>
@@ -45,7 +49,10 @@
 			<section id="register-maincontent">
 					<div class="row">
 						<div class="small-12 columns">
-							<h1>Registrieren</h1>
+							<h1>Registrieren</h1>															
+						</div>	
+						</div>
+						<div class="row">
 								<div class="small-12 medium-2 large-2 columns">
 									<label class="inline" id="register-label">Nutzername</label>
 								</div>
@@ -54,6 +61,8 @@
 										<input class="register_input" type="text" id="username_register" size="30" autofocus>
 									</form>
 								</div>
+							</div>
+							<div class="row">
 								<div class="small-12 medium-2 large-2 columns">
 									<label class="inline" id="register-label">E-Mail Adresse</label>
 								</div>
@@ -62,6 +71,8 @@
 										<input class="register_input" type="email" id="email_register" size="30" autofocus>
 									</form>
 								</div>
+							</div>
+							<div class="row">
 								<div class="small-12 medium-2 large-2 columns">
 									<label id="register-label" class="inline">Passwort</label>
 								</div>
@@ -70,6 +81,8 @@
 										<input class="register_input" type="password" id="password_register" size="30" autofocus>
 									</form>
 								</div>
+							</div>
+							<div class="row">
 								<div class="small-12 medium-2 large-2 columns">
 									<label id="register-label" class="inline">Passwort wiederholen</label>
 								</div>
@@ -77,9 +90,9 @@
 									<form name="registerForm">
 										<input class="register_input" type="password" id="password2_register" size="30" autofocus>
 									</form>
-								</div>										
-							</div>	
-					</div>
+								</div>	
+							</div>
+					
 					<div class="row">
 						<a href="javascript:void(0)" id="registerform_button" class="normalButton right">registrieren</a>
 					</div>
@@ -107,9 +120,9 @@
 				<div class="row">
 					<a href="#" class="overlayBackButton" id="loginOverlayBackButton"> <img src="img/global/back_arrow.png"></a>
 					<div class="small-12 columns full-width">
-							<form class="loginForm">
-								<input type="email" placeholder="E-Mail" name="emailInput" class="loginField" id="searchField" autofocus>
-								<input type="password" placeholder="Passwort" name="passwordInput" class="loginField">
+							<form class="loginForm" name="loginForm" method="post">
+								<input type="email" placeholder="E-Mail" name="emailInput" id="emailInput" class="loginField" autofocus>
+								<input type="password" placeholder="Passwort" name="passwordInput" id="passwordInput" class="loginField">
 							</form>
 						</div>	
 					<div class="row">
@@ -120,9 +133,25 @@
 					</div>			
 				</div>
 			</section>
+			<div id="registerDialogContent" title="Sie haben sich erfolgreich registriert!">
+				<p>Sobald Sie auf "OK" klicken, werden Sie auf die Startseite weitergeleitet.</p>
 		</div>
 
+		<script type="text/javascript">
+			email="";
+			password="";
 
+			<?php
+			if(isset($_POST["emailInput"])){
+				echo "email='".$_POST["emailInput"]."';";
+			}
+			if(isset($_POST["passwordInput"])){
+				echo "password='".$_POST["passwordInput"]."';";
+			}
+
+			?>
+
+		</script>
 
 		
 		
@@ -133,12 +162,10 @@
   		<script src="js/plugins/waypoint/waypoints.min.js"></script>
   		<script src="js/plugins/transit/transit.min.js"></script>
   		<script src="js/plugins/gallery/jquery.justifiedgallery.min.js"></script>
-  		<script src="js/StateManager.js"></script>
-  		<script src="js/ImgurManager.js"></script>
-		<script src="js/global.js"></script>
-		<script src="js/pages/home.js"></script>
 		<script src="js/pages/searchOverlay.js"></script>		
 		<script src="js/pages/loginOverlay.js"></script>
 		<script src="js/pages/register.js"></script>
+		<script src="js/plugins/jquery-ui-custom/jquery-ui-1.10.4.custom.js"></script>
+
 	</body>
 </html>
