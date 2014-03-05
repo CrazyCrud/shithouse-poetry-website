@@ -4,7 +4,7 @@
 // open it with the info about the course to create
 // as described in the database and your sessionkey:
 //
-// getType.php?type=1
+// getTypes.php
 //
 // required parameters are:
 // type
@@ -45,41 +45,26 @@ include("../helpers/dbhelper.php");
 $json = array();
 $json["success"]=$CODE_INSUFFICIENT_PARAMETERS;
 
-if(isset($_POST["type"])){
-	$_GET = $_POST;
-}
-
-if(isset($_GET["type"])){
-	$type = $_GET["type"];
-	if(is_numeric($type)){
-		$type = intval($type);
-	}
-}else{
-	$json["message"]="type missing";
-	echo json_encode($json);
-	exit();
-}
-
 $db = new DBHelper();
 
 if(isset($_GET["authkey"])){
 	$db->setAuthKey($_GET["authkey"]);
 }
-$type = $db->getType($type);
+$types = $db->getAllTypes();
 
-if($type == false){
+if($types == false){
 	$json["success"]=$CODE_ERROR;
 	if(DBConnection::getInstance()->status == DBConfig::$dbStatus["offline"]){
 		$json["message"] = "Database error";
 	}else{
 		$json["success"] = $CODE_NOT_FOUND;
-		$json["message"] = "Type not found";
+		$json["message"] = "Types not found";
 	}
 	echo json_encode($json);
 	exit();
 }
 
-$json["data"] = $type;
+$json["data"] = $types;
 
 $json["success"] = $CODE_SUCCESS;
 echo json_encode($json);
