@@ -57,6 +57,10 @@ if(isset($_GET["tag"])){
 	exit();
 }
 
+if(is_numeric($tag)){
+	$tag = intval($tag);
+}
+
 $db = new DBHelper();
 $tag = $db->getTag($tag);
 
