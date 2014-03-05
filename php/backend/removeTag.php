@@ -63,6 +63,11 @@ $tags = explode("," , $tags);
 $tags = standarize_array($tag);
 
 $db = new DBHelper();
+
+
+if(isset($_GET["authkey"])){
+	$db->setAuthKey($_GET["authkey"]);
+}
 $status = $db->deleteTag($tags);
 
 if($status == false){

@@ -67,6 +67,10 @@ if(isset($_GET["status"])){
 }
 
 $db = new DBHelper();
+
+if(isset($_GET["authkey"])){
+	$db->setAuthKey($_GET["authkey"]);
+}
 $tags = $db->getAllTags($status);
 
 if($tags == false){

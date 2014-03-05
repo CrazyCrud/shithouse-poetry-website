@@ -56,6 +56,10 @@ if(isset($_GET["commentid"])){
 }
 
 $db = new DBHelper();
+
+if(isset($_GET["authkey"])){
+	$db->setAuthKey($_GET["authkey"]);
+}
 $comment = $db->getComment($commentid);
 
 if($comment == false){

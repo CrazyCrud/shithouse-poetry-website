@@ -51,6 +51,10 @@ if(isset($_GET["password"])){
 }
 
 $db = new DBHelper();
+
+if(isset($_GET["authkey"])){
+	$db->setAuthKey($_GET["authkey"]);
+}
 $authkey = $db->login($username, $password);
 
 if($authkey == false){

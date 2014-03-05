@@ -60,6 +60,10 @@ if(isset($_GET["pwd"])){
 }
 
 $db = new DBHelper();
+
+if(isset($_GET["authkey"])){
+	$db->setAuthKey($_GET["authkey"]);
+}
 $data = $db->createUser($mail, $name, $pwd);
 
 if($data == false){

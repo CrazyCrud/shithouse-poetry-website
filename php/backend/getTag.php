@@ -62,6 +62,10 @@ if(is_numeric($tag)){
 }
 
 $db = new DBHelper();
+
+if(isset($_GET["authkey"])){
+	$db->setAuthKey($_GET["authkey"]);
+}
 $tag = $db->getTag($tag);
 
 if($tag == false){

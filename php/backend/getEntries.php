@@ -79,6 +79,9 @@ if(isset($_GET["orderby"])){
 
 
 $db = new DBHelper();
+if(isset($_GET["authkey"])){
+	$db->setAuthKey($_GET["authkey"]);
+}
 $entries = $db->getAllEntries($orderby, $start);
 
 if($entries == false){

@@ -58,6 +58,10 @@ if(isset($_GET["entryid"])){
 }
 
 $db = new DBHelper();
+
+if(isset($_GET["authkey"])){
+	$db->setAuthKey($_GET["authkey"]);
+}
 $entry = $db->getEntry($entryid);
 
 if($entry == false){

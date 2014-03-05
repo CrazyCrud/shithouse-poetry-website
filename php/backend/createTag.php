@@ -60,6 +60,10 @@ if(isset($_GET["tags"])){
 $tags = explode("," , $tags);
 
 $db = new DBHelper();
+
+if(isset($_GET["authkey"])){
+	$db->setAuthKey($_GET["authkey"]);
+}
 $status = $db->createTag($tags);
 
 if($status == false){

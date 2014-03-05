@@ -145,6 +145,10 @@ $values = explode("," , $values);
 $values = standarize_array($values);
 
 $db = new DBHelper();
+
+if(isset($_GET["authkey"])){
+	$db->setAuthKey($_GET["authkey"]);
+}
 $entries = false;
 if($filter == "sex"){
 	$entries = $db->getAllEntriesBySex($values[0], $orderby, $start);
