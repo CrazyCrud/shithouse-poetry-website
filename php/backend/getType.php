@@ -65,9 +65,9 @@ $db = new DBHelper();
 if(isset($_GET["authkey"])){
 	$db->setAuthKey($_GET["authkey"]);
 }
-$entry = $db->getType($type);
+$type = $db->getType($type);
 
-if($entry == false){
+if($type == false){
 	$json["success"]=$CODE_ERROR;
 	if(DBConnection::getInstance()->status == DBConfig::$dbStatus["offline"]){
 		$json["message"] = "Database error";
@@ -79,7 +79,7 @@ if($entry == false){
 	exit();
 }
 
-$json["data"] = $entry;
+$json["data"] = $type;
 
 $json["success"] = $CODE_SUCCESS;
 echo json_encode($json);
