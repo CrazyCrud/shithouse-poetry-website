@@ -194,6 +194,7 @@ function addOverlayFunctionality(container, isTouch){
 
 function setupTabFunctionality(){
 	$hotLink.click(function(event) {
+		event.preventDefault();
 		setActive($(this).parent("dd"));
 		enableInfiniteScroll();
 		setOrder(ImgurManager.OrderBy.properties[ImgurManager.OrderBy.RATING].name);
@@ -201,6 +202,7 @@ function setupTabFunctionality(){
 		getEntries(ImgurManager.OrderBy.properties[ImgurManager.OrderBy.RATING].name);
 	});
 	$newLink.click(function(event) {
+		event.preventDefault();
 		setActive($(this).parent("dd"));
 		enableInfiniteScroll();
 		setOrder(ImgurManager.OrderBy.properties[ImgurManager.OrderBy.DATE].name);
@@ -208,6 +210,7 @@ function setupTabFunctionality(){
 		getEntries(ImgurManager.OrderBy.properties[ImgurManager.OrderBy.DATE].name);
 	});
 	$voteLink.click(function(event) {
+		event.preventDefault();
 		setActive($(this).parent("dd"));
 		disableInfiniteScroll();
 		clearRequests();
