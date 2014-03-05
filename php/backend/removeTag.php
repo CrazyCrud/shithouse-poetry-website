@@ -36,9 +36,10 @@
 
 // HEADER
 header('Content-Type: application/json; charset=utf-8');
-error_reporting(0);
+#error_reporting(0);
 include("../settings/config.php");
 include("../helpers/dbhelper.php");
+include("../helpers/util.php");
 // END HEADER
 
 // PREPARE RESULT
@@ -58,6 +59,8 @@ if(isset($_GET["tags"])){
 }
 
 $tags = explode("," , $tags);
+
+$tags = standarize_array($tag);
 
 $db = new DBHelper();
 $status = $db->deleteTag($tags);
