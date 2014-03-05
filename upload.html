@@ -5,8 +5,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
 		<link rel="stylesheet" type="text/css" href="css/plugins/foundation.css"/>
 		<link rel="stylesheet" type="text/css" href="css/plugins/fontello/fontello.css"/>
-		<link rel="stylesheet" type="text/css" href="css/pages/upload.css"/>
 		<link rel="stylesheet" type="text/css" href="css/global.css"/>
+		<link rel="stylesheet" type="text/css" href="css/pages/upload.css"/>
 		<script type="text/javascript" src="js/plugins/modernizr.js"></script>
 		<title>Upload</title>
 	</head>
@@ -53,41 +53,68 @@
 				<div class="row">
 					<div class="small-12 columns full-width">
 						<div class="upload-forms-container">
-							<div onclick="$($('.file-input')[0]).click();" id="add-image-container">
-								<div>
-									<div class="add-image-bg">
+							<form data-abide="ajax">
+								<div class="add-image-container">
+									<div>
+										<div class="add-image-bg">
 
-									</div>
-									<div class="add-image-text">
-										Bild</br>
-										wählen
+										</div>
+										<div class="add-image-text">
+											Bild</br>
+											wählen
+										</div>
 									</div>
 								</div>
-							</div>
-							<input type="file" class="file-input" multiple
-								style="display:none"></input>
-							<div class="small-12 columns image-container">
-								
-							</div>
-							<div class="small-12 columns">
-								<label>Transkribtion
-						        	<textarea placeholder="Transkribtion..."></textarea>
-						    	</label>
-							</div>
-						    <div class="small-12 columns">
-						    	<label>Geschlecht</label>
-      							<input type="radio" name="sex" value="Men" id="men">
-      							<label for="men">Männer</label>
-						      	<input type="radio" name="sex" value="Women" id="women">
-						      	<label for="women">Frauen</label>
-						      	<input type="radio" name="sex" value="Unisex" id="unisex">
-						      	<label for="unisex">Unisex</label>
-						    </div>
-						    <div class="small-12 columns">
-						    	<fieldset>
-							    	<legend>Tags</legend>
-							  	</fieldset>
-						    </div>
+								<input type="file" accept="image/*" class="file-input" 
+									style="display:none"></input>
+								<small class="error image-error">Bitte wähle noch ein Bild aus</small>
+								<div class="small-12 columns image-container">
+									
+								</div>
+								<div class="small-12 columns">
+									<label>Transkription
+							        	<input id="transcription" type="text" required>
+							        	</input>
+							    	</label>
+								</div>
+								<div class="small-12 columns add-location-container">
+									<label for="location">Ort
+								        <select id="location" class="medium" required>
+								        	<option value>Daten werden abgerufen...</option>
+								        	<option value="regensburg">Regensburg</option>
+								        </select>
+							      	</label>
+								</div>
+							    <div class="small-12 columns">
+							    	<label>Geschlecht</label>
+	      							<input type="radio" name="sex" value="Men" id="men" required>
+	      							<label for="men">Männer</label>
+							      	<input type="radio" name="sex" value="Women" id="women" required>
+							      	<label for="women">Frauen</label>
+							      	<input type="radio" name="sex" value="Unisex" id="unisex" required>
+							      	<label for="unisex">Unisex</label>
+							    </div>
+							    <div class="small-12 columns fieldset-container">
+							    	<fieldset>
+								    	<legend>Tags</legend>
+								    	<div class="tags-container">
+								    		<ul id="tag-list">
+
+								    		</ul>
+								    	</div>
+								  	</fieldset>
+								  	<small class="error tag-error">
+							    		Bitte wähle noch ein oder mehrer Tags
+							    		für das Bild aus
+							   		</small>
+							    </div>
+							    <div class="small-12 columns">
+							    	<button id="upload-submit" type="submit" 
+							    		class="button medium right">
+							    		Hochladen
+							    	</button>
+							    </div>
+							</form>
 						</div>
 					</div>
 				</div>
@@ -97,6 +124,7 @@
 		<script src="js/plugins/underscore.js"></script>
 		<script src="js/plugins/foundation/foundation.js"></script>
   		<script src="js/plugins/foundation/foundation.topbar.js"></script>
+  		<script src="js/plugins/foundation/foundation.abide.js"></script>
   		<script src="js/plugins/waypoint/waypoints.min.js"></script>
   		<script src="js/plugins/transit/transit.min.js"></script>
   		<script src="js/plugins/gallery/jquery.justifiedgallery.js"></script>
