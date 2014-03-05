@@ -4,10 +4,10 @@
 // open it with the info about the course to create
 // as described in the database and your sessionkey:
 //
-// deleteType.php?authkey=xxx&type=1
+// addRating.php?authkey=xxx&entryid=1&rating=1
 //
 // required parameters are:
-// authkey, type
+// authkey, entryid, rating (-1,0,1)
 //
 // The answer looks as follows:
 // a json with a successcode and the course id:
@@ -57,20 +57,25 @@ if(isset($_GET["authkey"])){
 	exit();
 }
 
-if(isset($_GET["type"])){
-	$type = $_GET["type"];
-	if(is_numeric($type)){
-		$type = intval($type);
-	}
+if(isset($_GET["entryid"])){
+	$entryid = $_GET["entryid"];
 }else{
-	$json["message"]="type missing";
+	$json["message"]="entryid missing";
+	echo json_encode($json);
+	exit();
+}
+
+if(isset($_GET["rating"])){
+	$rating = intval($_GET["rating"]);
+}else{
+	$json["message"]="rating missing";
 	echo json_encode($json);
 	exit();
 }
 
 $db = new DBHelper();
 $db->setAuthKey($key);
-$status = $db->deleteType($type);
+$status = $db->addRating($entryid, $rating);
 
 if($status == false){
 	$json["success"]=$CODE_ERROR;
