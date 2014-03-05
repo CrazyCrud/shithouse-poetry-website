@@ -4,10 +4,10 @@
 // open it with the info about the course to create
 // as described in the database and your sessionkey:
 //
-// login.php?username=MaxMustermann&password=123
+// login.php?mail=MaxMustermann@mail.com&password=123
 //
 // required parameters are:
-// username, password
+// mail, password
 //
 // The answer looks as follows:
 // a json with a successcode and the session key:
@@ -30,14 +30,14 @@ include("../helpers/dbhelper.php");
 $json = array();
 $json["success"]=$CODE_INSUFFICIENT_PARAMETERS;
 
-if(isset($_POST["username"])){
+if(isset($_POST["mail"])){
 	$_GET = $_POST;
 }
 
-if(isset($_GET["username"])){
-	$username = $_GET["username"];
+if(isset($_GET["mail"])){
+	$mail = $_GET["mail"];
 }else{
-	$json["message"]="username missing";
+	$json["message"]="mail missing";
 	echo json_encode($json);
 	exit();
 }
@@ -55,7 +55,7 @@ $db = new DBHelper();
 if(isset($_GET["authkey"])){
 	$db->setAuthKey($_GET["authkey"]);
 }
-$authkey = $db->login($username, $password);
+$authkey = $db->login($mail, $password);
 
 if($authkey == false){
 	$json["success"]=$CODE_ERROR;
