@@ -13,8 +13,8 @@
 //
 // filter options:
 // sex (m or w), 
-// type (all types as id), 
-// tag (all tags as text)
+// type (all types as id or text), 
+// tag (all tags as id or text)
 //
 // it is possible to filter for multiple types or tags
 //
@@ -101,6 +101,7 @@ header('Content-Type: application/json; charset=utf-8');
 // error_reporting(0);
 include("../settings/config.php");
 include("../helpers/dbhelper.php");
+include("../helpers/util.php");
 // END HEADER
 
 // PREPARE RESULT
@@ -140,6 +141,8 @@ if(isset($_GET["orderby"])){
 }
 
 $values = explode("," , $values);
+
+$values = standarize_array($values);
 
 $db = new DBHelper();
 $entries = false;
