@@ -287,14 +287,14 @@ class DBHelper{
 			$value["tags"]=$this->query($query);
 			$query = Queries::getimages($value["id"]);
 			$images = $this->query($query);
-			foreach($images as $key=>$val){
+			foreach($images as $k=>$val){
 				$path = $val["path"];
 				$small = $this->getThumbnail($path, "s");
 				$medium = $this->getThumbnail($path, "m");
 				$large = $this->getThumbnail($path, "l");
-				$images[$key]["thumbnail"]=$medium;
-				$images[$key]["smallthumbnail"]=$small;
-				$images[$key]["largethumbnail"]=$large;
+				$images[$k]["thumbnail"]=$medium;
+				$images[$k]["smallthumbnail"]=$small;
+				$images[$k]["largethumbnail"]=$large;
 			}
 			$value["images"]=$images;
 			$query = Queries::getratings($value["id"], $user["id"]);
@@ -434,14 +434,14 @@ class DBHelper{
 			$value["tags"]=$this->query($query);
 			$query = Queries::getimages($value["id"]);
 			$images = $this->query($query);
-			foreach($images as $key=>$val){
+			foreach($images as $k=>$val){
 				$path = $val["path"];
 				$small = $this->getThumbnail($path, "s");
 				$medium = $this->getThumbnail($path, "m");
 				$large = $this->getThumbnail($path, "l");
-				$images[$key]["thumbnail"]=$medium;
-				$images[$key]["smallthumbnail"]=$small;
-				$images[$key]["largethumbnail"]=$large;
+				$images[$k]["thumbnail"]=$medium;
+				$images[$k]["smallthumbnail"]=$small;
+				$images[$k]["largethumbnail"]=$large;
 			}
 			$value["images"]=$images;
 			$query = Queries::getratings($value["id"]);
