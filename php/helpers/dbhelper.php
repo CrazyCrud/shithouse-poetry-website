@@ -1,6 +1,7 @@
 <?php
 
 include("stemmer.php");
+include("util.php");
 include("database/constants.php");
 include("database/queries.php");
 include("database/connection.php");
@@ -249,7 +250,17 @@ class DBHelper{
 		$query = Queries::getusertags($entryid);
 		$entry["tags"]=$this->query($query);
 		$query = Queries::getimages($entryid);
-		$entry["images"]=$this->query($query);
+		$images = $this->query($query);
+		foreach($images as $key=>$val){
+			$path = $val["path"];
+			$small = $this->getThumbnail($path, "s");
+			$medium = $this->getThumbnail($path, "m");
+			$large = $this->getThumbnail($path, "l");
+			$images[$key]["thumbnail"]=$medium;
+			$images[$key]["smallthumbnail"]=$small;
+			$images[$key]["largethumbnail"]=$large;
+		}
+		$entry["images"]=$images;
 		$query = Queries::getratings($entryid, $user["id"]);
 		$entry["ratings"]=$this->query($query);
 		$query = Queries::getinformation($entryid);
@@ -275,7 +286,17 @@ class DBHelper{
 			$query = Queries::getusertags($value["id"]);
 			$value["tags"]=$this->query($query);
 			$query = Queries::getimages($value["id"]);
-			$value["images"]=$this->query($query);
+			$images = $this->query($query);
+			foreach($images as $key=>$val){
+				$path = $val["path"];
+				$small = $this->getThumbnail($path, "s");
+				$medium = $this->getThumbnail($path, "m");
+				$large = $this->getThumbnail($path, "l");
+				$images[$key]["thumbnail"]=$medium;
+				$images[$key]["smallthumbnail"]=$small;
+				$images[$key]["largethumbnail"]=$large;
+			}
+			$value["images"]=$images;
 			$query = Queries::getratings($value["id"], $user["id"]);
 			$value["ratings"]=$this->query($query);
 			$query = Queries::getinformation($value["id"]);
@@ -290,12 +311,6 @@ class DBHelper{
 		$query = Queries::getentriesbyrating($start, Constants::NUMENTRIES, $where, $userid);
 		$entries = $this->query($query);
 		return $entries;
-	}
-
-	// saves a new image to the databse
-	public function saveImage($entryid, $url, $x, $y, $w, $h){
-		$query = Queries::saveimage($entryid, $url, $x, $y, $w, $h);
-		return $this->query($query);
 	}
 
 	// returns the first 20 entries after $start ordered by $orderby
@@ -418,7 +433,17 @@ class DBHelper{
 			$query = Queries::getusertags($value["id"]);
 			$value["tags"]=$this->query($query);
 			$query = Queries::getimages($value["id"]);
-			$value["images"]=$this->query($query);
+			$images = $this->query($query);
+			foreach($images as $key=>$val){
+				$path = $val["path"];
+				$small = $this->getThumbnail($path, "s");
+				$medium = $this->getThumbnail($path, "m");
+				$large = $this->getThumbnail($path, "l");
+				$images[$key]["thumbnail"]=$medium;
+				$images[$key]["smallthumbnail"]=$small;
+				$images[$key]["largethumbnail"]=$large;
+			}
+			$value["images"]=$images;
 			$query = Queries::getratings($value["id"]);
 			$value["ratings"]=$this->query($query);
 			$query = Queries::getinformation($value["id"]);
@@ -1003,6 +1028,16 @@ class DBHelper{
 	private function removeImages($entryid){
 		$query = Queries::removeimages($entryid);
 		return $this->query($query);
+	}
+
+	// saves a new image to the databse
+	public function saveImage($entryid, $url, $x, $y, $w, $h){
+		$query = Queries::saveimage($entryid, $url, $x, $y, $w, $h);
+		return $this->query($query);
+	}
+
+	public function getThumbnail($path, $size){
+		return str_lreplace(".", "$size.", $path);
 	}
 
 	/**
