@@ -686,6 +686,37 @@ class Queries{
 		('$word', $entryid, $titleoccurence, $transcriptionoccurence)";
 		return $query;
 	}
+	public static function search($words, $start, $limit){
+		if(is_array($words)){
+			if(count($words>1)){
+				$word = "`index`.`word` LIKE '%".$words[0]."%'";
+				for($i=1; $i<count($words);$i++){
+					$word .= " OR `index`.`word` LIKE '%".$words[$i]."%'";
+				}
+			}else{
+				$word = "`index`.`word` LIKE '%".$words[0]."%'";
+			}
+		}else{
+			$word = "`index`.`word` LIKE '%$words%'";
+		}
+		$i = DBConfig::$tables["index"];
+		$query =
+		"SELECT
+		`index`.`entryid` AS id,
+		(SUM(`titleoccurence`)+SUM(`transcriptionoccurence`))/a.occurence AS relevancy
+		FROM
+		`index`,
+		(
+		    SELECT `index`.`entryid`, SUM(`titleoccurence`)+SUM(`transcriptionoccurence`) AS occurence
+		    FROM `index` GROUP BY `entryid`
+		) AS a
+		WHERE `index`.`entryid` = a.entryid
+		AND ($word)
+		GROUP BY `index`.`entryid`
+		ORDER BY relevancy DESC
+		LIMIT $start, $limit";
+		return $query;
+	}
 }
 
 ?>

@@ -1058,6 +1058,31 @@ class DBHelper{
 		return $success;
 	}
 
+	public function search($searchstring, $start){
+		if(!isset($start))$start = 0;
+		$stems = de_stemmer_stem_list($searchstring);
+		if(count($stems)==1)$words = $stems[$searchstring]["stem"];
+		else{
+			$words = array();
+			foreach($stems as $stem){
+				$words[count($words)] = $stem["stem"];
+			}
+		}
+		$query = Queries::search($words, $start, Constants::NUMSEARCHRESULTS);
+		$entryids = $this->query($query);
+		if(!$entryids||count($entryids)==0)return false;
+
+		// create the query
+		$entries = array();
+		foreach($entryids as $id){
+			$entry = $this->getEntry($id["id"]);
+			if(!$entry)continue;
+			$entries[count($entries)] = $entry;
+		}
+
+		return $entries;
+	}
+
 }
 
 ?>
