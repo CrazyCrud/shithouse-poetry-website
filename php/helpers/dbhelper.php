@@ -1124,6 +1124,24 @@ class DBHelper{
 		return $entries;
 	}
 
+	/**
+	TIMELINE
+	*/
+
+	// returns a list of timeline-events
+	public function getTimeLine($start){
+		$user = $this->getUser();
+		if(!isset($user["id"]))return false;
+		if(!isset($start))$start = 0;
+		$query = Queries::gettimeline($user["id"], $start, Constants::NUMTIMELINE);
+		$timeline = $this->query($query);
+		if(!$timeline)return false;
+		foreach($timeline as $key=>$val){
+			$timeline[$key]["smallthumbnail"] = $this->getThumbnail($val["path"], "s");
+		}
+		return $timeline;
+	}
+
 }
 
 ?>

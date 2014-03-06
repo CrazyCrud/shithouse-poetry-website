@@ -717,6 +717,40 @@ class Queries{
 		LIMIT $start, $limit";
 		return $query;
 	}
+	/**
+	TIMELINE QUERIES
+	*/
+	public static function gettimeline($userid, $start, $limit){
+		$u = DBConfig::$tables["users"];
+		$e = DBConfig::$tables["entries"];
+		$c = DBConfig::$tables["comments"];
+		$i = DBConfig::$tables["images"];
+		$query =
+		"SELECT
+		`$u`.`id` AS userid,
+		`$u`.`username` AS username,
+		`$e`.`id` AS entryid,
+		`$e`.`title` AS title,
+		`$e`.`sex` AS sex,
+		`$c`.`comment` AS comment,
+		`$c`.`timestamp` AS date,
+		`$i`.`path` AS path
+
+		FROM
+		`$c`, `$u`, `$e`, `$i`
+
+		WHERE
+		`$c`.`entryid` = `$e`.`id`
+		AND `$i`.`entryid` = `$e`.`id`
+		AND `$u`.`id` = `$c`.`userid`
+		AND (`$e`.`userid` = $userid
+		OR `$c`.`userid` = $userid)
+
+		ORDER BY date DESC
+
+		LIMIT $start, $limit";
+		return $query;
+	}
 }
 
 ?>
