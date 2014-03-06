@@ -4,14 +4,19 @@ var imgData = {};
 
 var $infiniteContainer = $(".infinite-container");
 var $imageContainer = $("#images");
+var $tabsContainer = $(".tabs");
 var $hotLink = $("#tab-hot");
 var $newLink = $("#tab-new");
 var $voteLink = $("#tab-vote");
+var $votingContainer = $(".vote-container");
+var $upVote = $("#up-vote");
+var $downVote = $("#down-vote");
 
 $(document).ready(function() {
 	setupTabFunctionality();
 	getEntries();
 	setupInfiniteScroll();
+	setupVoting();
 });
 
 var lazyRearrange = _.debounce(rearrangeImages, 500);
@@ -35,14 +40,51 @@ function setupInfiniteScroll(){
 	} })
 }
 
-function appendImages(entries){
+function appendImages(){
 	var imgLoaded = 0;
+	var numImages = _.keys(imgData).length;
+	for(var i = 0; i < numImages; i++){
+		var htmlData = imgData[i].htmlData;
+		var $imgContent = $(htmlData).find('img');
+		Foundation.lib_methods.loaded($imgContent, function(){
+			imgLoaded++;
+			if(imgLoaded == numImages){
+				$imageContainer.empty();
+				for(var index in imgData){
+					$imageContainer.append(imgData[index].htmlData);
+				}
+				displayImages();
+			}
+		});
+	}
+	currentEntry = numImages + 1;
+}
+
+function appendSingleImage(){
+	if(_.keys(imgData).length == 0){
+		return;
+	}else if(_.keys(imgData).length == currentEntry){
+		resetImgData();
+		getSingleEntry();
+		return;
+	}else{
+		$imageContainer.empty();
+		var htmlData = imgData[currentEntry].htmlData;
+		var $imgContent = $(htmlData).find('img');
+		Foundation.lib_methods.loaded($imgContent, function(){
+			$imageContainer.append(htmlData);
+			displayImages();
+		});
+		currentEntry++;
+	}
+}
+
+function chacheImages(entries){
 	var numImages = entries.length;
 	for(var i = 0; i < numImages; i++){
 		var entry = entries[i];
 		var id = parseInt(entry.id);
 		if((_.chain(imgData).pluck("id").indexOf(id).value()) > -1){
-			numImages--;
 			continue;
 		}else{
 			var gender = entry.sex;
@@ -57,37 +99,23 @@ function appendImages(entries){
 				date: entry.date,
 				rating: parseFloat(entry.ratings.rating)
 			};
-			Foundation.lib_methods.loaded($(imgContent), function(){
-				imgLoaded++;
-				if(imgLoaded == numImages){
-					$imageContainer.empty();
-					for(var index in imgData){
-						$imageContainer.append(imgData[index].htmlData);
-					}
-					displayImages();
-				}
-			});
 		}
 	}
-	currentEntry = numImages + 1;
-}
-
-function appendSingleImage(entry){
-	var gender = entry.sex;
-	var transcription = entry.title;
-	var image = entry.images[0].path;
-	var imgContent = '<a href="" title="' + id + '"><img src="' + image + '"/></a>';
-	Foundation.lib_methods.loaded($(imgContent), function(){
-		$imageContainer.append(imgContent);
-		displayImages();
-	});
 }
 
 function rearrangeImages(){
 	if(StateManager.getWidth() != StateManager.getInitialWidth()){
 		$imageContainer.empty();
-		for(var index in imgData){
-			$imageContainer.append(imgData[index].htmlData);
+		if(getActiveState() == "vote"){
+			if(currentEntry > 0){
+				$imageContainer.append(imgData[currentEntry - 1].htmlData);
+			}else{
+				$imageContainer.append(imgData[currentEntry].htmlData);
+			}
+		}else{
+			for(var index in imgData){
+				$imageContainer.append(imgData[index].htmlData);
+			}
 		}
 		displayImages();
 	}
@@ -117,17 +145,11 @@ function imagesFullyDisplayed(){
 
 function addOverlay(){
 	var isTouch = StateManager.isDesktop();
-	var $hiddenElement = $("<div>").css('display', 'none').addClass('transcription');
-	$("body").append($hiddenElement);
-	var fontSize = parseInt($hiddenElement.css('font-size'));
-	$hiddenElement.remove();
 	$(".jg-image a").each(function(index, value) {
 		var $parent = $(this).parent(".jg-image");
 		var id = parseInt($(this).attr('title'));
 
 		var index = _.chain(imgData).pluck("id").indexOf(id).value();
-
-		console.log(index);
 
 		elementData = imgData[index];
 		if(elementData){
@@ -197,6 +219,7 @@ function setupTabFunctionality(){
 		event.preventDefault();
 		setActive($(this).parent("dd"));
 		enableInfiniteScroll();
+		disableVoting();
 		setOrder(ImgurManager.OrderBy.properties[ImgurManager.OrderBy.RATING].name);
 		clearRequests();
 		getEntries(ImgurManager.OrderBy.properties[ImgurManager.OrderBy.RATING].name);
@@ -205,6 +228,7 @@ function setupTabFunctionality(){
 		event.preventDefault();
 		setActive($(this).parent("dd"));
 		enableInfiniteScroll();
+		disableVoting();
 		setOrder(ImgurManager.OrderBy.properties[ImgurManager.OrderBy.DATE].name);
 		clearRequests();
 		getEntries(ImgurManager.OrderBy.properties[ImgurManager.OrderBy.DATE].name);
@@ -215,7 +239,40 @@ function setupTabFunctionality(){
 		disableInfiniteScroll();
 		clearRequests();
 		getSingleEntry();
+		enableVoting();
 	});
+}
+
+function enableVoting(){
+	$votingContainer.css('display', 'block');
+}
+
+function setupVoting(){
+	$upVote.click(function(event) {
+		console.log("Take my upvote, sir!");
+		lazyClick(false);
+	});
+	$downVote.click(function(event) {
+		console.log("You suck balls!");
+		lazyClick(true);
+	});
+}
+
+var lazyClick = _.throttle(handleVote, 200);
+
+function handleVote(sucks){
+	var rating = 0;
+	var entryid = imgData[currentEntry].id;
+	if(sucks){
+		rating = -1;
+	}else{
+		rating = 1;
+	}
+	ImgurManager.addRating(appendSingleImage, "xxx", entryid, rating);
+}
+
+function disableVoting(){
+	$votingContainer.css('display', 'none');
 }
 
 function enableInfiniteScroll(){
@@ -231,23 +288,37 @@ function setActive(linkContainer){
 	$(linkContainer).addClass('active');
 }
 
+function getActiveState(){
+	return $tabsContainer.children('.active').find('a').html().toLowerCase();
+}
+
 function getEntries(orderby){
 	var order = orderby || currentOrder;
 	if(rootFolder != ''){
-		ImgurManager.getEntries(appendImages, order, currentEntry);
+		ImgurManager.getEntries(appendImagesCallback, order, currentEntry);
 	}
 }
 
 function getFilteredEntries(){
 	if(rootFolder != ''){
-		ImgurManager.getFilteredEntries(appendImages, null, currentEntry);
+		ImgurManager.getFilteredEntries(appendImagesCallback, null, currentEntry);
 	}
 }
 
 function getSingleEntry(){
 	if(rootFolder != ''){
-		ImgurManager.getSingleEntry(appendSingleImage);
+		ImgurManager.getRandomEntries(appendSingleImageCallback);
 	}
+}
+
+function appendImagesCallback(entries){
+	chacheImages(entries);
+	appendImages();
+}
+
+function appendSingleImageCallback(entries){
+	chacheImages(entries);
+	appendSingleImage();
 }
 
 function setOrder(newOrder){
@@ -258,9 +329,13 @@ function setOrder(newOrder){
 }
 
 function clearRequests(){
-	imgData = {};
+	resetImgData();
 	currentEntry = 0;
 	if($imageContainer.children().length > 0){
 		$imageContainer.empty();
 	}
+}
+
+function resetImgData(){
+	imgData = {};
 }

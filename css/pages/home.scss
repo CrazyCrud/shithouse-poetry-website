@@ -181,3 +181,17 @@ span.transcription{
 	background-color: $darkgrey;
 }
 
+.vote-container{
+	display: none;
+	text-align: center;
+
+	.vote-icon-container{
+		display: inline-block;
+		color: $black;
+
+		i{
+			cursor: pointer;
+			margin: $space_minus1;
+		}
+	}
+}

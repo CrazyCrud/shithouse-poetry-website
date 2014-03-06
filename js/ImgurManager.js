@@ -41,11 +41,9 @@ var ImgurManager = (function(){
 			var links = null;
 
 			var url = 'getEntries.php?orderby=' + searchProps.orderby + '&start=' + searchProps.start; 
-			console.log(url);
 			$.get('php/backend/' + url, function(data) {
 				if(data.success == 1){
 					links = data.data;
-					console.log(links);
 					callback(links);
 				}else{
 					console.log("Error");
@@ -73,19 +71,28 @@ var ImgurManager = (function(){
 				}		
 			});
 		},
-		getSingleEntry : function(callback){
-			/*
-			var link = null;
-
-			$.post('php/backend/getRandomEntry.php', function(data) {
+		getRandomEntries : function(callback){
+			var links = null;
+			var url = 'getRandomEntries.php?amount=10';
+			$.post('php/backend/' + url, function(data) {
 				if(data.success == 1){
-					link = data.data;
-					callback(link);
+					links = data.data;
+					callback(links);
 				}else{
 					console.log("Error");
 				}
 			});
-			*/
+		},
+		addRating : function(callback, authkey, entryid, rating){
+			var url = 'addEntry.php?authkey=' + authkey + 
+				'&entryid=' + entryid + '&rating=' + rating;
+			$.post('php/backend/' + url, function(data) {
+				if(data.success == 1){
+					callback();
+				}else{
+					console.log("Error");
+				}
+			});
 		},
 		uploadImages : function(imgData){
 			if(imgData == null || imgData == undefined){

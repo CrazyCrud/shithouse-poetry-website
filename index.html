@@ -74,6 +74,12 @@
 							<div id="images">
 
 							</div>
+							<div class="vote-container small-12 columns">
+								<div class="vote-icon-container">
+									<i id="down-vote" class="icon-thumbs-down-1"></i>
+									<i id="up-vote" class="icon-thumbs-up-1"></i>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -97,23 +103,21 @@
 				<div class="row">
 					<a href="#" class="overlayBackButton" id="loginOverlayBackButton"> <img src="img/global/back_arrow.png"></a>
 					<div class="small-12 columns full-width">
-							<form class="loginForm" name="loginForm" method="post">
-								<input type="email" placeholder="E-Mail" name="emailInput" id="emailInput" class="loginField" autofocus>
-								<input type="password" placeholder="Passwort" name="passwordInput" id="passwordInput" class="loginField">
+							<form class="loginForm">
+								<input type="email" placeholder="E-Mail" name="emailInput" class="loginField" id="searchField" autofocus>
+								<input type="password" placeholder="Passwort" name="passwordInput" class="loginField">
 							</form>
 						</div>	
 					<div class="row">
 						<div class="small-12 columns full-width right-aligned">
-							<a href="#" class="overlayButton right" id="loginButton">Login</a>
-							<a href="#" class="overlayButton right" id="registerButton">registrieren </a>
-							
+							<a href="#" class="overlayButton left-aligned" id="registerButton">registrieren </a>
+							<a href="#" class="overlayButton right-aligned">Login</a>
 						</div>
 					</div>			
 				</div>
 			</section>
 		</div>
 		<script src="js/plugins/jquery.min.js"></script>
-		<script src="js/plugins/md5/jquery.md5.js"></script>
 		<script src="js/plugins/underscore.js"></script>
 		<script src="js/plugins/foundation/foundation.js"></script>
   		<script src="js/plugins/foundation/foundation.topbar.js"></script>

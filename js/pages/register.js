@@ -86,7 +86,7 @@ function onLoginSuccess(authkey){
 	d.setTime(d.getTime()+oneYear);
 	document.cookie = "authkey="+authkey+"; expires="+d.toGMTString();
 
-	$( "#registerDialogContent" ).dialog({
+	$( "#registerDialogTitle" ).dialog({
 	  buttons: [
 	    {
 	      text: "OK",
@@ -99,6 +99,7 @@ function onLoginSuccess(authkey){
 	    }
 	  ]
 	});
+
 
 }
 
