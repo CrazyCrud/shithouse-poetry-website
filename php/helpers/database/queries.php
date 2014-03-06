@@ -409,7 +409,7 @@ class Queries{
 		FROM `$e`
 		LEFT OUTER JOIN `$r`
 		ON `$e`.id = `$r`.entryid
-		GROUP BY `$r`.entryid
+		GROUP BY `$e`.id
 		ORDER BY `count` ASC
 		LIMIT 0,100";
 		return $query;
@@ -431,7 +431,7 @@ class Queries{
 		    FROM (`$e`
 		    LEFT OUTER JOIN `$r`
 		    ON `$e`.id = `$r`.entryid)
-		    GROUP BY `$r`.entryid
+		    GROUP BY `$e`.id
 		) a
 		    
 		WHERE `rated` = 0
