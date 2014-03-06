@@ -1146,6 +1146,38 @@ class DBHelper{
 	LOCATION FUNCTIONS
 	*/
 
+	// deletes a complete location (admin only)
+	public function deleteLocation($id){
+		$user = $this->getUser();
+		if(!isset($user["id"])
+			||$user["status"]!=DBConfig::$userStatus["admin"])
+			return false;
+		$query = Queries::deletelocation($id);
+		return $this->query($query);
+	}
+
+	// creates a location (admin only)
+	public function createLocation($locations, $flat, $flong, $tlat, $tlong){
+		$user = $this->getUser();
+		if(!isset($user["id"])
+			||$user["status"]!=DBConfig::$userStatus["admin"])
+			return false;
+		$query = Queries::createlocation($locations, $flat, $flong, $tlat, $tlong);
+		return $this->query($query);
+	}
+
+	// updates a location (admin only)
+	public function updateLocation($id, $locations, $flat, $flong, $tlat, $tlong){
+		$user = $this->getUser();
+		if(!isset($user["id"])
+			||$user["status"]!=DBConfig::$userStatus["admin"])
+			return false;
+		$query = Queries::updatelocation($id, $locations, $flat, $flong, $tlat, $tlong);
+		return $this->query($query);
+	}
+
+	// returns a list of location-objects (with an array of location-names)
+	// corresponding to the given latitude and longitude
 	public function getLocations($lat, $long){
 		if(!isset($lat)||!isset($long)){
 			$user = $this->getUser();

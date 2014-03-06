@@ -780,6 +780,35 @@ class Queries{
 		"SELECT * FROM `$l` $where";
 		return $query;
 	}
+	public static function deletelocation($id){
+		$l = DBConfig::$tables["locations"];
+		$query =
+		"DELETE FROM `$l`
+		WHERE `$l`.id = $id";
+		return $query;
+	}
+	public static function updatelocation($id, $locations, $flat, $flong, $tlat, $tlong){
+		$l = DBConfig::$tables["locations"];
+		$query =
+		"UPDATE `$l`
+		SET 
+		`$l`.locations = '$locations',
+		`$l`.fromlatitude = $flat,
+		`$l`.fromlongitude = $flong,
+		`$l`.tolatitude = $tlat,
+		`$l`.tolongitude = $tlong
+		WHERE `$l`.id = $id";
+		return $query;
+	}
+	public static function createlocation($locations, $flat, $flong, $tlat, $tlong){
+		$l = DBConfig::$tables["locations"];
+		$query =
+		"INSERT INTO `$l`
+		(`$l`.locations, `$l`.fromlatitude, `$l`.fromlongitude, `$l`.tolatitude, `$l`.tolongitude)
+		VALUES
+		('$locations', $flat, $flong, $tlat, $tlong)";
+		return $query;
+	}
 }
 
 ?>
