@@ -282,27 +282,19 @@ class DBHelper{
 			$query = Queries::getallentries($start, Constants::NUMENTRIES, $orderby, $where);
 			$entries = $this->query($query);
 		}
-		foreach($entries as $key=>$value){
-			$query = Queries::getusertags($value["id"]);
-			$value["tags"]=$this->query($query);
-			$query = Queries::getimages($value["id"]);
-			$images = $this->query($query);
-			foreach($images as $k=>$val){
-				$path = $val["path"];
-				$small = $this->getThumbnail($path, "s");
-				$medium = $this->getThumbnail($path, "m");
-				$large = $this->getThumbnail($path, "l");
-				$images[$k]["thumbnail"]=$medium;
-				$images[$k]["smallthumbnail"]=$small;
-				$images[$k]["largethumbnail"]=$large;
-			}
-			$value["images"]=$images;
-			$query = Queries::getratings($value["id"], $user["id"]);
-			$value["ratings"]=$this->query($query);
-			$query = Queries::getinformation($value["id"]);
-			$value["information"]=$this->query($query);
-			$entries[$key]=$value;
-		}
+		$entries = $this->addExtras($entries, $user["id"]);
+		return $entries;
+	}
+
+	public function getAllEntriesRatedByMe($start){
+		if(!isset($start))$start = 0;
+		$user = $this->getUser();
+		if(!isset($user["id"]))return false;
+		$e = DBConfig::$tables["entries"];
+		$where = "`$e`.userid = ".$user["id"];
+		$query = Queries::getentriesbyrating($start, Constants::NUMENTRIES, $where, $user["id"]);
+		$entries = $this->query($query);
+		$entries = $this->addExtras($entries, $user["id"]);
 		return $entries;
 	}
 
@@ -429,27 +421,7 @@ class DBHelper{
 		$entries = $this->query($query);
 
 		if(!$entries)return false;
-		foreach($entries as $key=>$value){
-			$query = Queries::getusertags($value["id"]);
-			$value["tags"]=$this->query($query);
-			$query = Queries::getimages($value["id"]);
-			$images = $this->query($query);
-			foreach($images as $k=>$val){
-				$path = $val["path"];
-				$small = $this->getThumbnail($path, "s");
-				$medium = $this->getThumbnail($path, "m");
-				$large = $this->getThumbnail($path, "l");
-				$images[$k]["thumbnail"]=$medium;
-				$images[$k]["smallthumbnail"]=$small;
-				$images[$k]["largethumbnail"]=$large;
-			}
-			$value["images"]=$images;
-			$query = Queries::getratings($value["id"]);
-			$value["ratings"]=$this->query($query);
-			$query = Queries::getinformation($value["id"]);
-			$value["information"]=$this->query($query);
-			$entries[$key]=$value;
-		}
+		$entries = $this->addExtras($entries, $user["id"]);
 		shuffle($entries);
 		return $entries;
 	}
@@ -685,6 +657,31 @@ class DBHelper{
 		}
 
 		return $entry["id"];
+	}
+
+	private function addExtras($entries, $userid){
+		foreach($entries as $key=>$value){
+			$query = Queries::getusertags($value["id"]);
+			$value["tags"]=$this->query($query);
+			$query = Queries::getimages($value["id"]);
+			$images = $this->query($query);
+			foreach($images as $k=>$val){
+				$path = $val["path"];
+				$small = $this->getThumbnail($path, "s");
+				$medium = $this->getThumbnail($path, "m");
+				$large = $this->getThumbnail($path, "l");
+				$images[$k]["thumbnail"]=$medium;
+				$images[$k]["smallthumbnail"]=$small;
+				$images[$k]["largethumbnail"]=$large;
+			}
+			$value["images"]=$images;
+			$query = Queries::getratings($value["id"], $userid);
+			$value["ratings"]=$this->query($query);
+			$query = Queries::getinformation($value["id"]);
+			$value["information"]=$this->query($query);
+			$entries[$key]=$value;
+		}
+		return $entries;
 	}
 
 	/**
