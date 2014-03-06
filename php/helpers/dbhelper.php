@@ -1125,7 +1125,7 @@ class DBHelper{
 	}
 
 	/**
-	TIMELINE
+	TIMELINE FUNCTIONS
 	*/
 
 	// returns a list of timeline-events
@@ -1140,6 +1140,41 @@ class DBHelper{
 			$timeline[$key]["smallthumbnail"] = $this->getThumbnail($val["path"], "s");
 		}
 		return $timeline;
+	}
+
+	/**
+	LOCATION FUNCTIONS
+	*/
+
+	public function getLocations($lat, $long){
+		if(!isset($lat)||!isset($long)){
+			$user = $this->getUser();
+			if(!isset($user["id"])
+				||$user["status"]!=DBConfig::$userStatus["admin"])
+				return false;
+			else
+				$locs = $this->getAllLocations();
+		}else{
+			$query = Queries::getalllocations($lat, $long);
+			$locs = $this->query($query);
+		}
+		return $this->explodeLocs($locs);
+	}
+
+	private function getAllLocations(){
+		$query = Queries::getalllocations();
+		return $this->query($query);
+	}
+
+	private function explodeLocs($locs){
+		foreach($locs as $key=>$val){
+			$locations = explode(";", $val["locations"]);
+			foreach($locations as $k=>$v){
+				$locations[$k] = trim($v);
+			}
+			$locs[$key]["locations"] = $locations;
+		}
+		return $locs;
 	}
 
 }

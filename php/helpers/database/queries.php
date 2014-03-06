@@ -751,6 +751,35 @@ class Queries{
 		LIMIT $start, $limit";
 		return $query;
 	}
+	/**
+	LOCATION QUERIES
+	*/
+	public static function getalllocations($lat, $long){
+		$l = DBConfig::$tables["locations"];
+		if(!isset($lat)||!isset($long)){
+			$where = "";
+		}else{
+			$where = 
+			"WHERE
+
+			(`$l`.fromlatitude <= $lat
+			AND `$l`.tolatitude >= $lat)
+			OR
+			(`$l`.fromlatitude >= $lat
+			AND `$l`.tolatitude <= $lat)
+
+			AND 
+
+			(`$l`.fromlongitude <= $long
+			AND `$l`.tolongitude >= $long)
+			OR
+			(`$l`.fromlongitude >= $long
+			AND `$l`.tolongitude <= $long)";
+		}
+		$query =
+		"SELECT * FROM `$l` $where";
+		return $query;
+	}
 }
 
 ?>
