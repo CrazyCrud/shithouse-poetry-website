@@ -133,9 +133,8 @@
 					</div>			
 				</div>
 			</section>
-			<div id="registerDialogContent" title="Sie haben sich erfolgreich registriert!">
-				<p>Sobald Sie auf "OK" klicken, werden Sie auf die Startseite weitergeleitet.</p>
-		</div>
+			<div id="registerDialogTitle" title="Sie haben sich erfolgreich registriert!">
+				<p id="registerDialogContent">Sobald Sie auf "OK" klicken, werden Sie auf die Startseite weitergeleitet.</p>
 
 		<script type="text/javascript">
 			email="";
