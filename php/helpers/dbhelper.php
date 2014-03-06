@@ -552,6 +552,10 @@ class DBHelper{
 		$user = $this->getUser();
 		if(!isset($user["id"]))return false;
 
+		// get the type (to get the id)
+		$type = $this->getType($entry["type"]);
+		if(!isset($type["id"]))return false;
+
 		// get the entry
 		$e = $this->getEntry($entry["id"]);
 
@@ -562,41 +566,80 @@ class DBHelper{
 		}
 
 		// whether to do what
+		$updateEntry = false;
 		$index = false;
 		$tags = false;
 		$information = false;
 
 		// check for optional parameters
-		if(!isset($entry["title"]))$entry["title"]=$e["title"];
-		else $index = true;
-		if(!isset($entry["type"]))$entry["type"]=$e["typeid"];
-		if(!isset($entry["sex"]))$entry["sex"]=$e["sex"];
-		else if(strlen($entry["sex"])!=1)$entry["sex"]="?";
+		if(!isset($entry["title"])
+			||$entry["title"]==$e["title"])
+			$entry["title"]=$e["title"];
+		else{
+			$index = true;
+			$updateEntry = true;
+		}
+		if(!isset($entry["type"])
+			||$entry["type"]==$type["id"]
+			||$entry["type"]==$type["name"])
+			$entry["type"]=$e["typeid"];
+		else $updateEntry = true;
+		if(!isset($entry["sex"])
+			||$entry["sex"]==$e["sex"])
+			$entry["sex"]=$e["sex"];
+		else{
+			$updateEntry = true;
+			if(strlen($entry["sex"])!=1)
+				$entry["sex"]="?";
+		}
 
-		if(!isset($entry["artist"]))$entry["artist"]=$e["information"][0]["artist"];
+		if(!isset($entry["artist"])
+			||$entry["artist"]==$e["information"][0]["artist"])
+			$entry["artist"]=$e["information"][0]["artist"];
 		else $information = true;
-		if(!isset($entry["transcription"]))$entry["transcription"]=$e["information"][0]["transcription"];
+		if(!isset($entry["transcription"])
+			||$entry["transcription"]==$e["information"][0]["transcription"])
+			$entry["transcription"]=$e["information"][0]["transcription"];
 		else{
 			$index = true;
 			$information = true;
 		}
-		if(!isset($entry["location"]))$entry["location"]=$e["information"][0]["location"];
+		if(!isset($entry["location"])
+			||$entry["location"]==$e["information"][0]["location"])
+			$entry["location"]=$e["information"][0]["location"];
 		else $information = true;
-		if(!isset($entry["lat"]))$entry["lat"]=$e["information"][0]["latitude"];
+		if(!isset($entry["lat"])
+			||$entry["lat"]==$e["information"][0]["latitude"])
+			$entry["lat"]=$e["information"][0]["latitude"];
 		else $information = true;
-		if(!isset($entry["long"]))$entry["long"]=$e["information"][0]["longitude"];
+		if(!isset($entry["long"])
+			||$entry["long"]==$e["information"][0]["longitude"])
+			$entry["long"]=$e["information"][0]["longitude"];
 		else $information = true;
 
-		if(isset($entry["tags"])&&is_array($entry["tags"]))$tags = true;
-
-		// get the type (to get the id)
-		$type = $this->getType($entry["type"]);
-		if(!isset($type["id"]))return false;
+		if(isset($entry["tags"])&&is_array($entry["tags"])){
+			if(count($entry["tags"])!=count($e["tags"])){
+				$tags = true;
+			}else{
+				foreach($entry["tags"] as $newTag){
+					if($tags)break;
+					foreach($e["tags"] as $oldTag){
+						if($newTag != $oldTag["tagid"]
+							&& $newTag != $oldTag["tag"]){
+							$tags = true;
+							break;
+						}
+					}
+				}
+			}
+		}
 
 		// update the entry
-		$query = Queries::updateentry($entry["id"], $type["id"], $entry["title"], $entry["sex"]);
-		$result = $this->query($query);
-		if(!$result)return false;
+		if($updateEntry){
+			$query = Queries::updateentry($entry["id"], $type["id"], $entry["title"], $entry["sex"]);
+			$result = $this->query($query);
+			if(!$result)return false;
+		}
 
 		// add tags
 		if($tags){
