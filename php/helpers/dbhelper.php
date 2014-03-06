@@ -502,10 +502,10 @@ class DBHelper{
 
 		// get the type (to get the id)
 		$type = $this->getType($entry["type"]);
-		if(count($type)==0)return false;
+		if(!isset($type["id"]))return false;
 
 		// create the entry
-		$query = Queries::createentry($user["id"], $type[0]["id"], $entry["title"], $entry["sex"]);
+		$query = Queries::createentry($user["id"], $type["id"], $entry["title"], $entry["sex"]);
 		$entryid = $this->query($query);
 		if(!$entryid)return false;
 
