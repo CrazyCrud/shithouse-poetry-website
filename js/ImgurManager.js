@@ -101,6 +101,16 @@ var ImgurManager = (function(){
 				return true;
 			}
 		},
+		getEntry : function(callback, id){
+			var url = "getEntry.php?entryid=" + id;
+			$.post("php/backend/"+url, function(data){
+				if(data.success == 1){
+					callback();
+				}else{
+					console.log("Error");
+				}
+			});
+		},
 		Tags : tags,
 		OrderBy: orderby,
 		Sex : sex
