@@ -286,6 +286,15 @@ class DBHelper{
 		return $entries;
 	}
 
+	// get all entries of a specific user
+	public function getAllEntriesByUser($orderby, $start, $userid){
+		$user = $this->getUser($userid);
+		if(!isset($user["id"]))return false;
+		$e = DBConfig::$tables["entries"];
+		$where = "`$e`.userid = ".$user["id"];
+		return $this->getAllEntries($orderby, $start, $where);
+	}
+
 	public function getAllEntriesRatedByMe($start){
 		if(!isset($start))$start = 0;
 		$user = $this->getUser();
