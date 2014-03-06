@@ -488,7 +488,7 @@ class DBHelper{
 		if(!isset($entry["title"]))return false;
 		if(!isset($entry["type"]))return false;
 		// check for optional parameters
-		if(!isset($entry["sex"])||strlen($entry["sex"])>1)$entry["sex"]="?";
+		if(!isset($entry["sex"])||strlen($entry["sex"])!=1)$entry["sex"]="?";
 		if(!isset($entry["artist"]))$entry["artist"]="";
 		if(!isset($entry["transcription"]))$entry["transcription"]="";
 		if(!isset($entry["location"]))$entry["location"]="";
@@ -519,6 +519,104 @@ class DBHelper{
 		$this->index($entryid, $entry["title"], $entry["transcription"]);
 
 		return $entryid;
+	}
+
+	/* ok here you need to pass me an associative array !!!
+	 (too many parameters are bad -> use a parameter-object instead)
+	 the associative array has to look like this:
+
+	 everyting but the id is optional!!!
+
+	 {
+	 	id : 1,
+		title : "blabla",
+		type : "type or typeid",
+		sex : "m or w (or anything else - 1 character only !!!)",
+		artist : "tiki",
+		transcription : "viel gelaber über nichts",
+		location : "in einem land vor unserer zeit",
+		lat : 48.9987627,
+		long : 12.0969202,
+		tags : [
+			1,4,"comedy","family",7
+		]
+
+	 }
+	*/
+	public function updateEntry($entry){
+		// check for valid $entry
+		// check for necessarry parameters
+		if(!isset($entry["id"]))return false;
+
+		// check whether logged in
+		$user = $this->getUser();
+		if(!isset($user["id"]))return false;
+
+		// get the entry
+		$e = $this->getEntry($entry["id"]);
+
+		// check whether allowed to make changes
+		if(!$user["status"]==DBConfig::$userStatus["admin"]
+			&&$user["id"]!=$e["userid"]){
+			return false;
+		}
+
+		// whether to do what
+		$index = false;
+		$tags = false;
+		$information = false;
+
+		// check for optional parameters
+		if(!isset($entry["title"]))$entry["title"]=$e["title"];
+		else $index = true;
+		if(!isset($entry["type"]))$entry["type"]=$e["typeid"];
+		if(!isset($entry["sex"]))$entry["sex"]=$e["sex"];
+		else if(strlen($entry["sex"])!=1)$entry["sex"]="?";
+
+		if(!isset($entry["artist"]))$entry["artist"]=$e["information"][0]["artist"];
+		else $information = true;
+		if(!isset($entry["transcription"]))$entry["transcription"]=$e["information"][0]["transcription"];
+		else{
+			$index = true;
+			$information = true;
+		}
+		if(!isset($entry["location"]))$entry["location"]=$e["information"][0]["location"];
+		else $information = true;
+		if(!isset($entry["lat"]))$entry["lat"]=$e["information"][0]["latitude"];
+		else $information = true;
+		if(!isset($entry["long"]))$entry["long"]=$e["information"][0]["longitude"];
+		else $information = true;
+
+		if(isset($entry["tags"])&&is_array($entry["tags"]))$tags = true;
+
+		// get the type (to get the id)
+		$type = $this->getType($entry["type"]);
+		if(!isset($type["id"]))return false;
+
+		// update the entry
+		$query = Queries::updateentry($entry["id"], $type["id"], $entry["title"], $entry["sex"]);
+		$result = $this->query($query);
+		if(!$result)return false;
+
+		// add tags
+		if($tags){
+			$this->removeTags($entry["id"]);
+			$this->addTag($entry["tags"], $entry["id"]);
+		}
+
+		// add information
+		if($information){
+			$this->removeInformation($entry["id"]);
+			$this->addInformation($entry["id"],$entry["artist"],$entry["transcription"],$entry["location"],$entry["lat"],$entry["long"]);
+		}
+
+		// index
+		if($index){
+			$this->removeIndex($entry["id"]);
+			$this->index($entry["id"], $entry["title"], $entry["transcription"]);
+		}
+
+		return $entry["id"];
 	}
 
 	/**

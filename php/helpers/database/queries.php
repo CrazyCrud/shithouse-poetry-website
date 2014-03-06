@@ -132,6 +132,17 @@ class Queries{
 		($userid, $typeid, '$title', CURRENT_TIMESTAMP, '$sex')";
 		return $query;
 	}
+	public static function updateentry($entryid, $typeid, $title, $sex){
+		$e = DBConfig::$tables["entries"];
+		$query =
+		"UPDATE `$e`
+		SET
+		typeid = $typeid,
+		title = '$title',
+		sex = '$sex'
+		WHERE `$e`.id = $entryid";
+		return $query;
+	}
 	public static function getentry($entryid, $where){
 		$e = DBConfig::$tables["entries"];
 		$u = DBConfig::$tables["users"];
