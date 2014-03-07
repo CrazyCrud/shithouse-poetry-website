@@ -27,8 +27,8 @@ $MAX_SIZE = 1024;
 
 // HEADER
 header('Content-Type: application/json; charset=utf-8');
-include("../settings/config.php");
-include("../helpers/dbhelper.php");
+include_once("../settings/config.php");
+include_once("../helpers/dbhelper.php");
 // END HEADER
 
 // PREPARE RESULT

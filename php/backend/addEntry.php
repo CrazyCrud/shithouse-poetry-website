@@ -26,10 +26,10 @@
 
 // HEADER
 header('Content-Type: application/json; charset=utf-8');
-#error_reporting(0);
-include("../settings/config.php");
-include("../helpers/dbhelper.php");
-include("../helpers/util.php");
+error_reporting(0);
+include_once("../settings/config.php");
+include_once("../helpers/dbhelper.php");
+include_once("../helpers/util.php");
 // END HEADER
 
 // PREPARE RESULT
