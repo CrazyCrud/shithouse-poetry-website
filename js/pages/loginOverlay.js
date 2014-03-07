@@ -40,7 +40,7 @@ function openRegisterPage(){
 
 function userLogin(){
 	var md5_pwd = $.md5($password.val());
-	var url = "php/backend/login.php?username="+$mail.val()+"&password="+md5_pwd;
+	var url = "php/backend/login.php?mail="+$mail.val()+"&password="+md5_pwd;
 	console.log(url);
 	$.get(url, function(data){
 		if(!data["success"]){

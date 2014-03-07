@@ -2,7 +2,13 @@
 
 #details-maincontent{
 	z-index:88;
+	overflow: hidden;
 }
+
+#image-container{
+	padding: 0 10px;
+}
+
 #entry-info{
 	color: $black;
 	margin-left: 20px;
@@ -63,4 +69,42 @@
 
 #details-maincontent{
 	margin-top: 40x;
+}
+
+#hoverLoginMenu{
+	font-family: $segoe;	
+	list-style-type: none;
+	border-width: 1px;
+	border-color: $darkgrey;
+	border-style: solid;
+	background-color: rgba(0,0,0, 0.5);
+	width: 120px;
+	line-height: 1em;
+	margin-top: 40px;
+	margin-right:20px;
+	text-align: right;
+	display: none;
+}
+
+.hovermenu-link{	
+	color: $white;
+	font-family: $segoe;
+	font-size: 0.59091rem;
+	padding-right: 10px;
+}
+
+.hovermenu-link:hover{
+	color: $lightgrey;
+}
+
+#outer-rating{
+	background-color: $red;
+	height: 5px;
+	width: 0;
+
+}
+
+#inner-rating{
+	background-color: $green;
+	height: 100%;
 }

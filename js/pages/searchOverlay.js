@@ -1,4 +1,3 @@
-console.log("searchOverlay");
 var linkSearch = document.getElementById("link-search");
 var searchContent = document.getElementById("searchcontent");
 var searchOverlayBackButton = document.getElementById("searchOverlayBackButton");

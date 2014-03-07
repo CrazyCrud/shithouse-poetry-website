@@ -105,7 +105,7 @@ var ImgurManager = (function(){
 			var url = "getEntry.php?entryid=" + id;
 			$.post("php/backend/"+url, function(data){
 				if(data.success == 1){
-					callback();
+					callback(data["data"]);
 				}else{
 					console.log("Error");
 				}
