@@ -14,7 +14,8 @@
 // filter options:
 // sex (m or w), 
 // type (all types as id or text), 
-// tag (all tags as id or text)
+// tag (all tags as id or text),
+// user (with userid as value)
 //
 // it is possible to filter for multiple types or tags
 //
@@ -156,6 +157,8 @@ if($filter == "sex"){
 	$entries = $db->getAllEntriesByType($values, $orderby, $start);
 }else if($filter == "tag"){
 	$entries = $db->getAllEntriesByTag($values, $orderby, $start);
+}else if($filter == "user"){
+	$entries = $db->getAllEntriesByUser($orderby, $start, $values[0]);
 }else{
 	$json["message"]="Wrong filter";
 	echo json_encode($json);
