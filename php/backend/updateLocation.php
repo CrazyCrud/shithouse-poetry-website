@@ -4,11 +4,11 @@
 // open it with the info about the course to create
 // as described in the database and your sessionkey:
 //
-// createLocation.php?authkey=xxx&locations=location1,location2&flat=10&
+// updateLocation.php?authkey=xxx&locationid=1&locations=location1,location2&flat=10&
 // flong=30&tlat=60&tlong=50
 //
 // required parameters are:
-// authkey, location (array with locations seperated by comma), flat, 
+// authkey,locationid, location (array with locations seperated by comma), flat, 
 // flong, tlat, tlong
 //
 // The answer looks as follows:
@@ -59,6 +59,14 @@ if(isset($_GET["authkey"])){
 	exit();
 }
 
+if(isset($_GET["locationid"])){
+	$locationid = $_GET["locationid"];
+}else{
+	$json["message"]="locationid missing";
+	echo json_encode($json);
+	exit();
+}
+
 if(isset($_GET["locations"])){
 	$locations = $_GET["locations"];
 }else{
@@ -104,14 +112,14 @@ $locations = str_replace(",", ";" , $locations);
 $db = new DBHelper();
 
 $db->setAuthKey($key);
-$status = $db->createLocation($locations, $flat, $flong, $tlat, $tlong);
+$status = $db->updateLocation($locationid, $locations, $flat, $flong, $tlat, $tlong);
 
 if($status == false){
 	$json["success"]=$CODE_ERROR;
 	if(DBConnection::getInstance()->status == DBConfig::$dbStatus["offline"]){
 		$json["message"] = "Database error";
 	}else{
-		$json["message"] = "Location could not be created";
+		$json["message"] = "Location could not be updated";
 	}
 	echo json_encode($json);
 	exit();
