@@ -84,6 +84,64 @@ Insert code that doesn't output CSS, things like mixin declarations, functions, 
 body {
   color: #ffffff; }
 
+.overlayBackButton img {
+  width: 5%;
+  height: 5%; }
+
+.overlayButton {
+  color: #cbcdc7;
+  height: auto;
+  font-size: 100%;
+  padding: 0.5em;
+  font-family: "Segoe UI Light";
+  border-width: 1px;
+  border-style: solid;
+  border-color: #cbcdc7;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out; }
+
+.overlayButton:hover {
+  background-color: #cbcdc7;
+  color: #111111;
+  border-color: #cbcdc7; }
+
+.overlayButton:focus {
+  background-color: #cbcdc7;
+  color: #111111;
+  border-color: #cbcdc7; }
+
+#registerButton {
+  margin-right: 2%; }
+
+#loginButton {
+  margin-right: 3%; }
+
+.normalButton {
+  color: #111111;
+  height: auto;
+  font-size: 100%;
+  padding: 0.5em;
+  font-family: "Segoe UI Light";
+  border-width: 1px;
+  border-style: solid;
+  border-color: #111111;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out; }
+
+.normalButton:focus {
+  background-color: #111111;
+  color: #cbcdc7;
+  border-color: rgba(0, 0, 0, 0); }
+
+.normalButton:hover {
+  background-color: #111111;
+  color: #cbcdc7;
+  border-color: rgba(0, 0, 0, 0); }
+
 input[type="text"]#searchField {
   color: #cbcdc7;
   background-color: rgba(0, 0, 0, 0);
@@ -139,4 +197,28 @@ input[type="password"].loginField {
   color: #cbcdc7; }
 
 #register-maincontent {
-  margin-top: 40px; }
+  margin-top: 40px;
+  overflow: hidden; }
+
+.ui-dialog .ui-dialog-content {
+  font-size: 0.5em; }
+
+#registerDialogTitle {
+  display: none; }
+
+#registerDialogContent {
+  font-size: 1.4em;
+  margin-bottom: 0%;
+  line-height: 1.4; }
+
+.ui-draggable .ui-dialog-titlebar {
+  font-size: 0.9em; }
+
+.ui-dialog .ui-dialog-titlebar {
+  padding: 0em; }
+
+.ui-dialog .ui-dialog-buttonpane {
+  padding: 0em; }
+
+.normalButton {
+  margin-top: 15px; }

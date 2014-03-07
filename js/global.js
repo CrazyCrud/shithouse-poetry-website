@@ -1,5 +1,6 @@
 var rootFolder = null;
 
+
 $(document).ready(function() {
 	$(document).foundation();
 	setupRoot();
@@ -16,3 +17,6 @@ function setupRoot(){
         	break;
 	}
 }
+
+
+
