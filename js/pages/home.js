@@ -1,7 +1,10 @@
 var currentEntry = 0;
 var currentOrder = null;
+var NO_SINGLE_IMAGE = "Wir können dir leider kein weiteres Bild liefern";
+var NO_IMAGES = "Wir können dir leider keine weiteren Bilder mehr liefern";
 var imgData = {};
 
+var $homeButton = $("#link-home");
 var $infiniteContainer = $(".infinite-container");
 var $imageContainer = $("#images");
 var $tabsContainer = $(".tabs");
@@ -11,11 +14,11 @@ var $voteLink = $("#tab-vote");
 var $votingContainer = $(".vote-container");
 var $upVote = $("#up-vote");
 var $downVote = $("#down-vote");
+var $mainheader = $("#mainheader");
 
 $(document).ready(function() {
 	setupTabFunctionality();
 	getEntries();
-	setupInfiniteScroll();
 	setupVoting();
 });
 
@@ -23,7 +26,14 @@ var lazyRearrange = _.debounce(rearrangeImages, 500);
 
 $(window).resize(lazyRearrange);
 
+var setupOnce = _.once(setupInfiniteScroll);
+
 function setupInfiniteScroll(){
+	var vpTopOffset = $mainheader.height() + $tabsContainer.height();
+	$homeButton.click(function(event) {
+		event.preventDefault();
+		$("html, body").animate({scrollTop: 0}, 400);
+	});
 	$infiniteContainer.waypoint(function(direction) {
 		if(direction == "down"){
 			if($.waypoints('viewportHeight') < $(this).height()){
@@ -31,10 +41,13 @@ function setupInfiniteScroll(){
 			}		
 		}
 	}, { offset: function(){
-		if($.waypoints('viewportHeight') < $(this).height()){
-			return ($(this).height() - ($.waypoints('viewportHeight') + 1)) * -1;	
+		var magicNumber = 284;
+		var vpTopOffset = $mainheader.height() + $tabsContainer.height() - magicNumber;
+		if(($.waypoints('viewportHeight') - vpTopOffset) < $(this).height()){
+			console.log(($(this).height() - ($.waypoints('viewportHeight') - vpTopOffset)) * -1);
+			return ($(this).height() - ($.waypoints('viewportHeight') - vpTopOffset)) * -1;
 		}else{
-			return -($.waypoints('viewportHeight') + 1);
+			return -($.waypoints('viewportHeight') + 1); // never reached
 		}
 		
 	} })
@@ -44,14 +57,14 @@ function appendImages(){
 	var imgLoaded = 0;
 	var numImages = _.keys(imgData).length;
 	for(var i = 0; i < numImages; i++){
-		var htmlData = imgData[i].htmlData;
+		var htmlData = imgData[i].image_m;
 		var $imgContent = $(htmlData).find('img');
 		Foundation.lib_methods.loaded($imgContent, function(){
 			imgLoaded++;
 			if(imgLoaded == numImages){
-				$imageContainer.empty();
+				clearScreen();
 				for(var index in imgData){
-					$imageContainer.append(imgData[index].htmlData);
+					$imageContainer.append(imgData[index].image_m);
 				}
 				displayImages();
 			}
@@ -68,8 +81,8 @@ function appendSingleImage(){
 		getSingleEntry();
 		return;
 	}else{
-		$imageContainer.empty();
-		var htmlData = imgData[currentEntry].htmlData;
+		clearScreen();
+		var htmlData = imgData[currentEntry].image_l;
 		var $imgContent = $(htmlData).find('img');
 		Foundation.lib_methods.loaded($imgContent, function(){
 			$imageContainer.append(htmlData);
@@ -79,42 +92,59 @@ function appendSingleImage(){
 	}
 }
 
+function appendMessage(message){
+	if($(".message").length > 0){
+		return;
+	}else{
+		message = message || "Es gibt leider keine weiteren Bilder mehr";
+		var content = "<div class='small-12 columns message-container'><span class='message'>" + message + "</span></div>";
+		$imageContainer.append(content);
+	}
+}
+
 function chacheImages(entries){
-	var numImages = entries.length;
-	for(var i = 0; i < numImages; i++){
-		var entry = entries[i];
-		var id = parseInt(entry.id);
-		if((_.chain(imgData).pluck("id").indexOf(id).value()) > -1){
-			continue;
-		}else{
-			var gender = entry.sex;
-			var transcription = entry.title;
-			var image = entry.images[0].path;
-			var imgContent = '<a href="" title="' + id + '"><img src="' + image + '"/></a>';	
-			imgData[i] = {
-				id: id,
-				gender: gender,
-				transcription: transcription,
-				htmlData: imgContent,
-				date: entry.date,
-				rating: parseFloat(entry.ratings.rating)
-			};
+	if(entries == null){
+
+	}else{
+		var numImages = entries.length;
+		for(var i = 0; i < numImages; i++){
+			var entry = entries[i];
+			var id = parseInt(entry.id);
+			if((_.chain(imgData).pluck("id").indexOf(id).value()) > -1){
+				continue;
+			}else{
+				var gender = entry.sex;
+				var transcription = entry.title;
+				var imgContent_m = '<a href="" title="' + id + '"><img src="' + 
+					entry.images[0].thumbnail + '"/></a>';	
+				var imgContent_l = '<a href="" title="' + id + '"><img src="' + 
+					entry.images[0].largethumbnail + '"/></a>';
+				imgData[i] = {
+					id: id,
+					gender: gender,
+					transcription: transcription,
+					image_m: imgContent_m,
+					image_l: imgContent_l,
+					date: entry.date,
+					rating: parseFloat(entry.ratings.rating)
+				};
+			}
 		}
 	}
 }
 
 function rearrangeImages(){
 	if(StateManager.getWidth() != StateManager.getInitialWidth()){
-		$imageContainer.empty();
+		clearScreen();
 		if(getActiveState() == "vote"){
 			if(currentEntry > 0){
-				$imageContainer.append(imgData[currentEntry - 1].htmlData);
+				$imageContainer.append(imgData[currentEntry - 1].image_l);
 			}else{
-				$imageContainer.append(imgData[currentEntry].htmlData);
+				$imageContainer.append(imgData[currentEntry].image_l);
 			}
 		}else{
 			for(var index in imgData){
-				$imageContainer.append(imgData[index].htmlData);
+				$imageContainer.append(imgData[index].image_m);
 			}
 		}
 		displayImages();
@@ -122,23 +152,45 @@ function rearrangeImages(){
 }
 
 function displayImages(){
-	$imageContainer.justifiedGallery({
-		'sizeRangeSuffixes': {'lt100':'',
-			'lt240':'', 
-			'lt320':'', 
-			'lt500':'', 
-			'lt640':'', 
-			'lt1024':''},
-		'captions': false,
-		'target': "_blank",
-		'margins': 3,
-		'refreshTime': 500,
-		'justifyLastRow': true,
-		'onComplete': imagesFullyDisplayed
-	});
+	if(StateManager.getState() == StateManager.States.
+		properties[StateManager.States.SMALL].name){
+		$imageContainer.justifiedGallery({
+			'sizeRangeSuffixes': {'lt100':'',
+				'lt240':'', 
+				'lt320':'', 
+				'lt500':'', 
+				'lt640':'', 
+				'lt1024':''},
+			'captions': false,
+			'target': "_blank",
+			'margins': 3,
+			'refreshTime': 500,
+			'justifyLastRow': true,
+			'rowHeight': 250,
+			'fixedHeight' : true,
+			'onComplete': imagesFullyDisplayed
+		});
+	}else{
+		$imageContainer.justifiedGallery({
+			'sizeRangeSuffixes': {'lt100':'',
+				'lt240':'', 
+				'lt320':'', 
+				'lt500':'', 
+				'lt640':'', 
+				'lt1024':''},
+			'captions': false,
+			'target': "_blank",
+			'margins': 3,
+			'refreshTime': 500,
+			'justifyLastRow': true,
+			'onComplete': imagesFullyDisplayed
+		});
+	}
+	
 }
 
 function imagesFullyDisplayed(){
+	setupOnce();
 	$.waypoints('refresh');
 	addOverlay();
 }
@@ -193,8 +245,14 @@ function addOverlayFunctionality(container, isTouch){
 		$genderOverlay.addClass(newClass);
 	}else{
 		$container.hover(function() {
+			$genderOverlay.stop(true, true);
+			$transcription.stop(true, true);
+			$image.stop(true, true);
 			$image.transition({scale:[1.1, 1.1]});
-			$genderOverlay.fadeIn(300);
+			$genderOverlay.fadeIn({
+				duration : 300,
+				queue: false
+			});
 			$transcription.fadeIn({
 				duration: 300,
 				start: function(){
@@ -204,12 +262,22 @@ function addOverlayFunctionality(container, isTouch){
 						'width': $container.width() + 'px'
 					});
 					$(this).find('.transcription').css('width', $container.width() + 'px');
-				}
+				},
+				queue: false
 			});
 		}, function() {
+			$genderOverlay.stop(true, true);
+			$transcription.stop(true, true);
+			$image.stop(true, true);
 			$image.transition({scale:[1.0, 1.0]});
-			$genderOverlay.fadeOut(300);
-			$transcription.fadeOut(300);
+			$genderOverlay.fadeOut({
+				duration: 300,
+				queue: false
+			});
+			$transcription.fadeOut({
+				duration: 300,
+				queue: false
+			});
 		});
 	}
 }
@@ -268,7 +336,7 @@ function handleVote(sucks){
 	}else{
 		rating = 1;
 	}
-	ImgurManager.addRating(appendSingleImage, "xxx", entryid, rating);
+	addRating(entryid, rating);
 }
 
 function disableVoting(){
@@ -311,14 +379,29 @@ function getSingleEntry(){
 	}
 }
 
+function addRating(entryid, rating){
+	if(rootFolder != ''){
+		ImgurManager.addRating(appendSingleImage, entryid, rating);
+	}
+}
+
 function appendImagesCallback(entries){
-	chacheImages(entries);
-	appendImages();
+	if(entries == null){
+		appendMessage(NO_IMAGES);
+	}else{
+		chacheImages(entries);
+		appendImages();
+	}
 }
 
 function appendSingleImageCallback(entries){
-	chacheImages(entries);
-	appendSingleImage();
+	if(entries == null){
+		clearScreen();
+		appendMessage(NO_SINGLE_IMAGE);
+	}else{
+		chacheImages(entries);
+		appendSingleImage();
+	}
 }
 
 function setOrder(newOrder){
@@ -332,8 +415,12 @@ function clearRequests(){
 	resetImgData();
 	currentEntry = 0;
 	if($imageContainer.children().length > 0){
-		$imageContainer.empty();
+		clearScreen();
 	}
+}
+
+function clearScreen(){
+	$imageContainer.empty();
 }
 
 function resetImgData(){

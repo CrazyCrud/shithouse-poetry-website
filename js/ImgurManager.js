@@ -30,8 +30,6 @@ var ImgurManager = (function(){
 		}
 	};
 
-	var clientID = "9e45d882d3b4055";
-
 	return {
 		getEntries : function(callback, order, currentEntry){
 			var searchProps = {};
@@ -44,10 +42,8 @@ var ImgurManager = (function(){
 			$.get('php/backend/' + url, function(data) {
 				if(data.success == 1){
 					links = data.data;
-					callback(links);
-				}else{
-					console.log("Error");
 				}	
+				callback(links);
 			});
 		},
 		getFilteredEntries : function(callback, searchProps, currentEntry){
@@ -65,25 +61,26 @@ var ImgurManager = (function(){
 			$.get('php/backend/' + url, function(data) {
 				if(data.success == 1){
 					links = data.data;
-					callback(links);
-				}else{
-					console.log("Error");
-				}		
+				}	
+				callback(links);	
 			});
 		},
 		getRandomEntries : function(callback){
+			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 			var links = null;
 			var url = 'getRandomEntries.php?amount=10';
+			if(authkey.length > 0){
+				url += ('&authkey=' + authkey);
+			}
 			$.post('php/backend/' + url, function(data) {
 				if(data.success == 1){
 					links = data.data;
-					callback(links);
-				}else{
-					console.log("Error");
 				}
+				callback(links);
 			});
 		},
-		addRating : function(callback, authkey, entryid, rating){
+		addRating : function(callback, entryid, rating){
+			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 			var url = 'addEntry.php?authkey=' + authkey + 
 				'&entryid=' + entryid + '&rating=' + rating;
 			$.post('php/backend/' + url, function(data) {
@@ -94,16 +91,29 @@ var ImgurManager = (function(){
 				}
 			});
 		},
-		uploadImages : function(imgData){
-			if(imgData == null || imgData == undefined){
-				return false;
+		addEntry : function(callback, formData){
+			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+
+			//authkey=xxx&title=moep&type=Text&sex=m&
+			// artist=McWolff&transcription=Cool stuff&location=PT Toilette&
+			// lat=123&long=1245&tags=1,2,3
+			formData.append('authkey', authkey);
+			if(formData == null || formData == undefined){
+				return;
 			}else{
-				return true;
+				var url = "addEntry.php";
+				$.post("php/backend/" + url, {data : formData}, function(data){
+					if(data.success == 1){
+						callback();
+					}else{
+						console.log("Error");
+					}
+				});
 			}
 		},
 		getEntry : function(callback, id){
 			var url = "getEntry.php?entryid=" + id;
-			$.post("php/backend/"+url, function(data){
+			$.post("php/backend/" + url, function(data){
 				if(data.success == 1){
 					callback(data["data"]);
 				}else{

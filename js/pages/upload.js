@@ -3,6 +3,7 @@ var $addImageContainer = $(".add-image-container");
 var $addImageText = $(".add-image-text");
 var $addLocationContainer = $(".add-location-container");
 var $addImageInput = $("input.file-input");
+var $customTagInput = $("#custom-tag");
 var $locationInput = $("select#location");
 var $tagsContainer = $(".tags-container");
 var $tagList = $("#tag-list");
@@ -45,21 +46,24 @@ function initImageUpload(){
 	}).on('valid', function(event) {
 		if(checkForImage() && checkForTags()){
 			var data = new FormData();
-			var file = $addImageInput[0].files[0];
+			// var file = $addImageInput[0].files[0];
+			var title = $.trim($("input#title").val());
+			var artist = $.trim($("input#artist").val());
 			var transcription = $.trim($("input#transcription").val());
 			var location = $locationInput.val();
 			var sex = $("input:radio[name=sex]").val();
 			var tags = _.pluck($tagList.children('.tag-active'), 'innerHTML');
-			data.append('image', file)
+			
+			data.append('stuff&location', location);
+			data.append('title', title);
+			data.append('artist', artist);
 			data.append('sex', sex);
 			data.append('transcription', transcription);
 			data.append('tags', tags);
-			data.append('location', location);
-			/*
-			$.post('', data : data, function(data) {
-				
-			});
-			*/
+			data.append('lat', -1);
+			data.append('long', -1)
+
+			ImgurManager.addEntry(null, data);
 		}
 	});;
 }
@@ -144,7 +148,8 @@ function checkForImage(){
 }
 
 function checkForTags(){
-	if($tagList.children('.tag-active').length > 0){
+	if($tagList.children('.tag-active').length > 0 ||
+			$customTagInput.val().length > 2){
 		showError("tag", false);
 		return true;
 	}else{
@@ -154,12 +159,56 @@ function checkForTags(){
 }
 
 function getTags(){
-	var url = 'getTags.php';
+	var url = 'getTags.php?status=system';
 	var tagData = null;
+
 	$.get('php/backend/' + url, function(data) {
 		if(data.success == 1){
 			tagData = data.data;
 			appendTags(tagData);
+		}else{
+			console.log("Error");
+		}
+	});
+
+	url = 'getTags.php?status=usercreated';
+	$.get('php/backend/' + url, function(data) {
+		if(data.success == 1){
+			tagData = data.data;
+			var tags = _.pluck(tagData, 'tag');
+
+			function split(val) {
+		    	return val.split( /,\s*/ );
+		    }
+		    function extractLast(term) {
+		    	return split(term).pop();
+		    }
+
+			$customTagInput
+		    	.bind("keydown", function(event) {
+			        if(event.keyCode === $.ui.keyCode.TAB &&
+			            $(this).data("ui-autocomplete").menu.active) {
+			        	event.preventDefault();
+			        }
+		      	})
+		      	.autocomplete({
+		        	minLength: 0,
+		        	source: function( request, response ) {
+		          		response($.ui.autocomplete.filter(
+		            		tags, extractLast(request.term)));
+			        },
+			        focus: function() {
+			        	return false;
+			        },
+			        select: function(event, ui) {
+			        	var terms = split(this.value);
+			          	terms.pop();
+			          	terms.push(ui.item.value);
+			          	terms.push("");
+			          	this.value = terms.join(", ");
+			          	return false;
+			        }
+		      	});
 		}else{
 			console.log("Error");
 		}

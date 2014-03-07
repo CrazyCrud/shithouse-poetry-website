@@ -195,3 +195,12 @@ span.transcription{
 		}
 	}
 }
+
+.message-container{
+	text-align: center;
+
+	.message{
+		font-size: $space_minus1;
+		color: $black;
+	}
+}

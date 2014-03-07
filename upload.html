@@ -72,13 +72,13 @@
 									
 								</div>
 								<div class="small-12 columns">
-									<label>Transkription
+									<label>Transkription<small>erforderlich</small>
 							        	<input id="transcription" type="text" required>
 							        	</input>
 							    	</label>
 								</div>
 								<div class="small-12 columns add-location-container">
-									<label for="location">Ort
+									<label for="location">Ort<small>erforderlich</small>
 								        <select id="location" class="medium" required>
 								        	<option value>Daten werden abgerufen...</option>
 								        	<option value="regensburg">Regensburg</option>
@@ -86,7 +86,7 @@
 							      	</label>
 								</div>
 							    <div class="small-12 columns">
-							    	<label>Geschlecht</label>
+							    	<label>Geschlecht<small>erforderlich</small></label>
 	      							<input type="radio" name="sex" value="Men" id="men" required>
 	      							<label for="men">Männer</label>
 							      	<input type="radio" name="sex" value="Women" id="women" required>
@@ -96,11 +96,16 @@
 							    </div>
 							    <div class="small-12 columns fieldset-container">
 							    	<fieldset>
-								    	<legend>Tags</legend>
+								    	<legend>Tags<small>erforderlich</small></legend>
 								    	<div class="tags-container">
 								    		<ul id="tag-list">
 
 								    		</ul>
+								    	</div>
+								    	<div class="custom-tags-container">
+								    		<label>Eigene Tags wählen<small>komma-separiert</small>
+      											<input id="custom-tag" type="text" placeholder="">
+    										</label>
 								    	</div>
 								  	</fieldset>
 								  	<small class="error tag-error">
@@ -108,6 +113,18 @@
 							    		für das Bild aus
 							   		</small>
 							    </div>
+							    <div class="small-12 columns">
+									<label>Titel<small>optional</small>
+							        	<input id="title" type="text">
+							        	</input>
+							    	</label>
+								</div>
+							    <div class="small-12 columns">
+									<label>Künstler<small>optional</small>
+							        	<input id="artist" type="text">
+							        	</input>
+							    	</label>
+								</div>
 							    <div class="small-12 columns">
 							    	<button id="upload-submit" type="submit" 
 							    		class="button medium right">
@@ -124,11 +141,8 @@
 		<script src="js/plugins/underscore.js"></script>
 		<script src="js/plugins/foundation/foundation.js"></script>
   		<script src="js/plugins/foundation/foundation.topbar.js"></script>
+		<script src="js/plugins/jquery-ui-custom/jquery-ui-1.10.4.custom.min.js"></script>
   		<script src="js/plugins/foundation/foundation.abide.js"></script>
-  		<script src="js/plugins/waypoint/waypoints.min.js"></script>
-  		<script src="js/plugins/transit/transit.min.js"></script>
-  		<script src="js/plugins/gallery/jquery.justifiedgallery.js"></script>
-  		<script src="js/Helper.js"></script>
   		<script src="js/StateManager.js"></script>
 		<script src="js/global.js"></script>
 		<script src="js/pages/upload.js"></script>
