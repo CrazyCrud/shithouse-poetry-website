@@ -6,7 +6,7 @@
 // open it with the info about the course to create
 // as described in the database and your sessionkey:
 //
-// getRatedEntries.php?authkey=xxx&start=10
+// getTimeLine.php?authkey=xxx&start=10
 //
 // required parameters are:
 // authkey
@@ -78,7 +78,7 @@ if(isset($_GET["start"])){
 $db = new DBHelper();
 $db->setAuthKey($key);
 
-$entries = $db->getAllEntriesRatedByMe($start);
+$entries = $db->getTimeLine($start);
 
 if($entries == false){
 	$json["success"]=$CODE_ERROR;
