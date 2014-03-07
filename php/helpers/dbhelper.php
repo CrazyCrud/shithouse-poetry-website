@@ -558,12 +558,9 @@ class DBHelper{
 		$user = $this->getUser();
 		if(!isset($user["id"]))return false;
 
-		// get the type (to get the id)
-		$type = $this->getType($entry["type"]);
-		if(!isset($type["id"]))return false;
-
 		// get the entry
 		$e = $this->getEntry($entry["id"]);
+		$type = $this->getType($e["typeid"]);
 
 		// check whether allowed to make changes
 		if(!$user["status"]==DBConfig::$userStatus["admin"]
