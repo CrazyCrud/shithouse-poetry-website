@@ -66,26 +66,22 @@
 									</div>
 								</div>
 								<input type="file" accept="image/*" class="file-input" 
-									style="display:none"></input>
-								<small class="error image-error">Bitte wähle noch ein Bild aus</small>
+										style="display:none">
+								</input>
+								<div class="small-12 columns image-error-container">
+									<small class="error image-error">Bitte wähle noch ein Bild aus</small>
+								</div>
+								
 								<div class="small-12 columns image-container">
 									
 								</div>
-								<div class="small-12 columns">
-									<label>Transkription<small>erforderlich</small>
-							        	<input id="transcription" type="text" required>
+								<div class="small-12 columns add-title-container">
+									<label>Titel<small>erforderlich</small>
+							        	<input id="title" type="text" required>
 							        	</input>
 							    	</label>
 								</div>
-								<div class="small-12 columns add-location-container">
-									<label for="location">Ort<small>erforderlich</small>
-								        <select id="location" class="medium" required>
-								        	<option value>Daten werden abgerufen...</option>
-								        	<option value="regensburg">Regensburg</option>
-								        </select>
-							      	</label>
-								</div>
-							    <div class="small-12 columns">
+							    <div class="small-12 columns add-sex-container">
 							    	<label>Geschlecht<small>erforderlich</small></label>
 	      							<input type="radio" name="sex" value="Men" id="men" required>
 	      							<label for="men">Männer</label>
@@ -94,9 +90,28 @@
 							      	<input type="radio" name="sex" value="Unisex" id="unisex" required>
 							      	<label for="unisex">Unisex</label>
 							    </div>
-							    <div class="small-12 columns fieldset-container">
+							    <div class="small-12 columns add-transcription-container">
+									<label>Transkription<small>optional</small>
+							        	<input id="transcription" type="text">
+							        	</input>
+							    	</label>
+								</div>
+							    <div class="small-12 columns add-location-container">
+									<label for="location">Ort<small>optional</small>
+								        <select id="location" class="medium">
+								        	<option value>Daten werden abgerufen...</option>
+								        </select>
+							      	</label>
+								</div>
+							    <div class="small-12 columns add-artist-container">
+									<label>Künstler<small>optional</small>
+							        	<input id="artist" type="text">
+							        	</input>
+							    	</label>
+								</div>
+								<div class="small-12 columns fieldset-container">
 							    	<fieldset>
-								    	<legend>Tags<small>erforderlich</small></legend>
+								    	<legend>Tags<small>optional</small></legend>
 								    	<div class="tags-container">
 								    		<ul id="tag-list">
 
@@ -113,18 +128,6 @@
 							    		für das Bild aus
 							   		</small>
 							    </div>
-							    <div class="small-12 columns">
-									<label>Titel<small>optional</small>
-							        	<input id="title" type="text">
-							        	</input>
-							    	</label>
-								</div>
-							    <div class="small-12 columns">
-									<label>Künstler<small>optional</small>
-							        	<input id="artist" type="text">
-							        	</input>
-							    	</label>
-								</div>
 							    <div class="small-12 columns">
 							    	<button id="upload-submit" type="submit" 
 							    		class="button medium right">
@@ -143,6 +146,13 @@
   		<script src="js/plugins/foundation/foundation.topbar.js"></script>
 		<script src="js/plugins/jquery-ui-custom/jquery-ui-1.10.4.custom.min.js"></script>
   		<script src="js/plugins/foundation/foundation.abide.js"></script>
+  		<script src="js/plugins/exif/load-image.min.js"></script>
+		<script src="js/plugins/exif/load-image-ios.js"></script>
+		<script src="js/plugins/exif/load-image-orientation.js"></script>
+		<script src="js/plugins/exif/load-image-meta.js"></script>
+		<script src="js/plugins/exif/load-image-exif.js"></script>
+		<script src="js/plugins/exif/load-image-exif-map.js"></script>
+		<script src="js/ImgurManager.js"></script>
   		<script src="js/StateManager.js"></script>
 		<script src="js/global.js"></script>
 		<script src="js/pages/upload.js"></script>

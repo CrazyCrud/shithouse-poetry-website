@@ -93,11 +93,8 @@ var ImgurManager = (function(){
 		},
 		addEntry : function(callback, formData){
 			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-
-			//authkey=xxx&title=moep&type=Text&sex=m&
-			// artist=McWolff&transcription=Cool stuff&location=PT Toilette&
-			// lat=123&long=1245&tags=1,2,3
 			formData.append('authkey', authkey);
+			
 			if(formData == null || formData == undefined){
 				return;
 			}else{
@@ -111,6 +108,18 @@ var ImgurManager = (function(){
 				});
 			}
 		},
+		deleteEntry : function(entryid){
+			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+			var url = "deleteEntry.php?entryid=" + id + 
+				"authkey=" + authkey;
+			$.post("php/backend/" + url, function(data){
+				if(data.success == 1){
+					console.log("Entry deleted...");
+				}else{
+					console.log("Error");
+				}
+			});
+		},
 		getEntry : function(callback, id){
 			var url = "getEntry.php?entryid=" + id;
 			$.post("php/backend/" + url, function(data){
@@ -118,6 +127,33 @@ var ImgurManager = (function(){
 					callback(data["data"]);
 				}else{
 					console.log("Error");
+				}
+			});
+		},
+		getLocations : function(callback, lat, long){
+			var locations = null;
+			var url = "getLocations.php?lat=" + lat + 
+				"&long=" + long;
+			$.post("php/backend/" + url, function(data){
+				if(data.success == 1){
+					locations = data.data;
+				}
+				callback(locations);
+			});
+		},
+		uploadImage : function(callback, entryid, file){
+			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+			var formData = new FormData();
+			formData.append('authkey', authkey);
+			formData.append('id', entryid);
+			formData.append('file', file);
+
+			var url = "imgurUpload.php?";
+			$.post("php/backend/" + url, {data : formData} , function(data){
+				if(data.success == 1){
+					callback(true, entryid);
+				}else{
+					callback(false, entryid);
 				}
 			});
 		},

@@ -1,3 +1,9 @@
+var latitude_g = -1;
+var longitude_g = -1;
+var DEFAULT_LOCATIONS = [
+	"Bar", "Kino", "Restaurant", "Tankstelle", "Schule", "Hochschule"
+];
+
 var $imageContainer = $(".image-container");
 var $addImageContainer = $(".add-image-container");
 var $addImageText = $(".add-image-text");
@@ -9,13 +15,14 @@ var $tagsContainer = $(".tags-container");
 var $tagList = $("#tag-list");
 var $uploadSubmit = $("#upload-submit");
 var $form = $(".upload-forms-container > form");
-var $imageError = $(".image-error");
+var $imageError = $(".image-error-container");
 var $tagError = $(".tag-error");
 var $locError = $(".location-error");
 
 $(document).ready(function() {
+	$locationInput.prop('disabled', true);
 	initImageUpload();
-	getLocations();
+	// getLocations();
 	getTags();
 });
 
@@ -27,47 +34,104 @@ function initImageUpload(){
 	$addImageInput.change(function(event) {
 		var files = event.target.files;
 		if(files.length){
-			var $img = $("<img id='img-upload'/>");
-			var src = window.URL.createObjectURL(files[0]);
-			$img.attr('src', src);
+			var file = files[0];
+
+			var $img = $("<img id='img-upload' exif='true'/>");
+			// var src = window.URL.createObjectURL(file);
 			$imageContainer.empty();
 			$imageContainer.append($img);
 			showError("image", false);
 			$imageContainer.fadeIn('slow', function() {
 				$addImageText.html("Bild</br>ändern");
 			});
+			
+			var reader = new FileReader();
+    		reader.onload = (function(aImg){ 
+    			return function(e){ 
+    				$(aImg).attr('src', e.target.result); 
+    			}; 
+    		})($img);
+    		reader.readAsDataURL(file);
+
+    		loadImage.parseMetaData(
+			    file,
+			    function (data) {
+			    	extractImageData(data);		    	
+			    },
+			    {
+			        disableExifGps: false
+			    }
+			);
+
 		}
 	});
 
 	$form.on('invalid', function(event) {
 		// var invalid_fields = $(this).find('[data-invalid]');
     	checkForImage();
-    	checkForTags();
+    	// checkForTags();
 	}).on('valid', function(event) {
-		if(checkForImage() && checkForTags()){
+		if(checkForImage()){
 			var data = new FormData();
-			// var file = $addImageInput[0].files[0];
 			var title = $.trim($("input#title").val());
 			var artist = $.trim($("input#artist").val());
 			var transcription = $.trim($("input#transcription").val());
-			var location = $locationInput.val();
-			var sex = $("input:radio[name=sex]").val();
+			var location = $.trim($locationInput.find('option:selected').text());
+			var sex = $.trim($("input:radio[name=sex]").val());
 			var tags = _.pluck($tagList.children('.tag-active'), 'innerHTML');
-			
-			data.append('stuff&location', location);
-			data.append('title', title);
-			data.append('artist', artist);
-			data.append('sex', sex);
-			data.append('transcription', transcription);
-			data.append('tags', tags);
-			data.append('lat', -1);
-			data.append('long', -1)
 
-			ImgurManager.addEntry(null, data);
+			if(location.length > 2){
+				data.append('stuff&location', location);
+			}
+			if(transcription.length > 2){
+				data.append('transcription', transcription);
+			}
+			if(artist.length > 2){
+				data.append('artist', artist);
+			}
+			if(latitude_g != -1 && longitude_g != -1){
+				data.append('lat', latitude_g);
+				data.append('long', longitude_g);
+			}
+			if(tags.length > 0){
+				data.append('tags', tags);
+			}
+
+			data.append('sex', sex);
+			data.append('title', title);
+
+			ImgurManager.addEntry(uploadImage, data);
 		}
 	});;
 }
 
+function extractImageData(data){
+	var latitude = data.exif.getText('GPSLatitude');
+	var longitude = data.exif.getText('GPSLongitude');
+	if(latitude != undefined && longitude != undefined){
+		latitude_g = latitude;
+		longitude_g = longitude;
+		console.log(latitude + ", " + longitude);
+		ImgurManager.getLocations(retrieveLocations);
+	}else{
+		ImgurManager.getLocations(null);
+	}
+}
+
+function uploadImage(entryid){
+	var file = $addImageInput[0].files[0];
+	ImgurManager.uploadImage(uploadImageResult, entryid, file);
+}
+
+function uploadImageResult(uploadSuccesfull, entryid){
+	if(uploadSuccesfull){
+
+	}else{
+		ImgurManager.deleteEntry(entryid);
+	}
+}
+
+/*
 function getLocations(){
 	if(Modernizr.geolocation){
 		$locationInput.prop('disabled', true);
@@ -108,12 +172,19 @@ function handleGeolocationErrors(error){
     }
     retrieveLocations(null);
 }
+*/
 
-function retrieveLocations(loc){
+function retrieveLocations(locations){
 	$locationInput.children().first().html("Wähle einen Ort aus...");
 	$locationInput.prop('disabled', false);
-	if(loc == null){
-
+	var content = "";
+	if(locations == null){
+		for(var i = 0; i < DEFAULT_LOCATIONS.length; i++){
+			var location = DEFAULT_LOCATIONS[i];
+			content += "<option value='" + location + "'>" + location + "</option>";
+		}
+		$locationInput.append(content);
+		return;
 	}else{
 
 	}

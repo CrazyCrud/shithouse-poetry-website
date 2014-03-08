@@ -4,12 +4,12 @@
 	@include vertical-margin($space_minus3, $space_minus3);
 	@include horizontal-margin($space_minus1, $space_minus1); 
 	overflow: hidden;
-	.image-error, .tag-error{
+	.image-error-container, .tag-error{
 		display: none;
 	}
 
 	small{
-		@include horizontal-margin($space_minus3, $space_minus3); 
+		@include horizontal-margin($space_minus3, $space_minus3) !important; 
 	}
 }
 
