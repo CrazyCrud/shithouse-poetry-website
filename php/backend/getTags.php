@@ -1,46 +1,54 @@
 <?php
 
 // How to use this page:
-// open it with the info about the course to create
-// as described in the database and your sessionkey:
+// open it with the info about the tags to get
+// as described in the database:
 //
-// getTags.php?status="system"
+// getTags.php
 //
-// required parameters are:
-// status [optional]
+// optional parameters are:
+// status
 //
 //	Status options:
-//	all/system/ usercreated?
+//	0 : usercreated
+//  1 : global
 // 	default: all
 //
 // The answer looks as follows:
-// a json with a successcode and the course id:
+// a json with a successcode and the tags:
 /* 
 {
 	"success":1,
 	"data":[
 		{
-			"id":"1",
-			"title":"lustiges bild",
-			"date":"2014-02-18 13:29:28",
-			"sex":"m",
-			"userid":"1",
-			"username":"tikiblue",
-			"typename":"Text",
-			"typedescription":"Ein an eine Wand, T\u00fcr oder auf einen anderen Gegenstand geschriebener Text.",
-			"artist":"slivr33",
-			"transcription":"dont hate me because im beautiful, hate me because i did your dad.\r\n\r\ngo home mom, youre drunk",
-			"location":"in einer toilette irgendwo im nirgendwo",
-			"longitude":"-1",
-			"latitude":"-1",
-			"imageid":"1",
-			"path":"http:\/\/i.imgur.com\/YZmJoCz.jpg",
-			"x":"50",
-			"y":"50",
-			"width":"350",
-			"height":"250",
-			"rating":"0.0000",
-			"ratingcount":"6"
+			"tagid":"1",
+			"tag":"comedy",
+			"status":"0"
+		},
+		{
+			"tagid":"2",
+			"tag":"family",
+			"status":"0"
+		},
+		{
+			"tagid":"4",
+			"tag":"politics",
+			"status":"0"
+		},
+		{
+			"tagid":"5",
+			"tag":"relations",
+			"status":"0"
+		},
+		{
+			"tagid":"6",
+			"tag":"nichtlustig",
+			"status":"0"
+		},
+		{
+			"tagid":"7",
+			"tag":"schonlustig",
+			"status":"0"
 		}
 	]
 }
