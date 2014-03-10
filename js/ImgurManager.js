@@ -178,6 +178,27 @@ var ImgurManager = (function(){
 				callback(comments);
 			});
 		},
+		addComment : function(callback, entryid, comment){
+			var url = "addComment.php?entryid=" + entryid + "&comment=" + comment;
+			$.post("php/backend/" + url, function(data){
+				if(data.success == 1){
+					callback(true);
+				}else{
+					callback(false);
+				}	
+			});
+		},
+		addReport : function(callback, entryid, reportdesc, commentid){
+			var url = "addReport.php?entryid=" + entryid + "&reportdesc=" + reportdesc +
+				"&commentid" + commentid;
+			$.post("php/backend/" + url, function(data){
+				if(data.success == 1){
+					callback(true);
+				}else{
+					callback(false);
+				}	
+			});
+		},
 		uploadImage : function(callback, entryid, file){
 			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 			
