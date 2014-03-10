@@ -114,3 +114,23 @@ body{
   font-size: .5em;
   font-style: italic;
 }
+
+.comment{
+  background: #eee;
+  padding: .75em;
+  margin-bottom: .5em;
+}
+
+.comment .author{
+  font-size: .5em;
+}
+
+.comment .date{
+  font-size: .5em;
+  float: right;
+}
+
+.comment .text{
+  margin-top: .25em;
+  font-size: .75em;
+}
