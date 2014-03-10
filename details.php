@@ -49,55 +49,48 @@
 				<li><a href="#" class="hovermenu-link" id="logout-link">Logout</a></li>
 			</ul>
 
-			<section id="details-maincontent">
-						<div class="details-entry">
-							<div class="row">
-									<div class="small-12 medium-7 large-7 columns left" id="image-container">
-										<img id="image" src="img/dummy/d05.png">
-									</div>
-								<div class="small-12 medium 5 large-5 columns right">
-									<div id="entry-info-content">
-										<div id="entry-img">
-											<img src="img/details/female.png" title="Weibliche Toilette" width=50>
-										</div>
-										<div id="entry-info">
-											<span id="entry-title">Bild Nummer 1</span><br/>
-											<div id="entry-location">
-												<span>Aufnahmeort: </span><span id="details-location">Bar</span>
-											</div>
-										</div>
-										<div id="entry-tags">
-											<span id="tag1" class="tag">Tag1</span>
-											<span id="tag2" class="tag">Tag2</span>
-											<span id="tag3" class="tag">Tag3</span>
-											<span id="tag4" class="tag">Tag4</span>
-										</div>
-										<div id="entry-rating">
-											<div id="rating">
-												<a href="#" > <img src="img/details/thumbsup.png" id="thumbs-up" width=20> </a>
-												<div id="outer-rating">
-													<div id="inner-rating"></div> 
-												</div>
-
-												<a href="#" id="thumbs-down"> <img src="img/details/thumbsdown.png" width=20> </a>
-											</div>
-										</div>
-										
-										<div id="more-entry-information">
-											<!-- hochgeladen von: 
-											und hochgeladen am: -->
-											<span>hochgeladen von: </span><span id="author">Autor</span><br/>
-											<span>hochgeladen am: </span><span id="author">Datum</span>
-
-										</div>
-										<div id="entry-comments">
-											<!-- comment-elemente, jeweils bestehend aus bild des kommentators, datum (zwei versionen: "vor 10 minuten" und "am 20.01.2014", kommentar) -->
-
-										</div>																
-										
-									</div>
+			<section id="maincontent">
+				<div class="details-entry">
+					<div class="row">
+						<div class="details small-12 medium-7 large-7 columns left" id="image-container">
+							<img id="image" src="img/dummy/d05.png">
+						</div>
+						<div class="details small-12 medium-5 large-5 columns right" id="image-description">
+							<div id="title">Bild nicht gefunden</div>
+							<div id="artist"></div>
+							<i id="sex"></i>
+							<div id="location">
+								Ort: <span id="locationdescription"></span>
+							</div>
+							<div id="upload-info">Hochgeladen <span id="date"></span> von <a id="author"></a></div>
+							<div id="tags"></div>
+							<div id="transcription">
+								<p>Transkription:</p>
+								<p id="content"></p>
+							</div>
+							<div id="rating">
+								<div id="thumbsup" class="inline thumbs">
+									<img src="img/details/thumbsup.png" id="thumbs-up" width=20>
 								</div>
-							</div>	
+								<div id="outer-rating" class="inline">
+									<div id="inner-rating"></div>
+								</div>
+								<div id="ratingcountwrapper" class="inline">
+									(<span id="ratingcount"></span>)
+								</div>
+								<div id="thumbsdown" class="inline thumbs">
+									<img src="img/details/thumbsdown.png" id="thumbs-down" width=20>
+								</div>
+							</div>
+						</div>
+					</div>	
+					<div class="row details">
+						<div id="comments-header">Kommentare:</div>
+						<div id="comments-add">
+							<input type="text" placeholder="Kommentar schreiben"></input>
+						</div>
+						<div id="comments-content"></div>
+					</div>
 				</div>
 			</section>
 
