@@ -4,6 +4,7 @@ var rootFolder = null;
 $(document).ready(function() {
 	$(document).foundation();
 	setupRoot();
+    cookieUser();
 });
 
 function setupRoot(){
