@@ -1,8 +1,4 @@
 var Helper = (function(){
-	var regex = /\s/;
-	var defaultFontSize = 14;
-	var defaultLetterWidth = 7;
-
 	return {
 		// use: index = indexOf.call(myArray, needle);
 		indexOf: function(value){
@@ -25,6 +21,24 @@ var Helper = (function(){
 		},
 		hasIndex: function(obj, index){
 			return index in obj;
+		},
+		debounce: function (func, threshold, execAsap) {
+		    var timeout;
+		    return function debounced () {
+		        var obj = this, args = arguments;
+		        function delayed () {
+		            if (!execAsap)
+		                func.apply(obj, args);
+		            timeout = null; 
+		        };
+		 
+		        if (timeout)
+		            clearTimeout(timeout);
+		        else if (execAsap)
+		            func.apply(obj, args);
+		 
+		        timeout = setTimeout(delayed, threshold || 100); 
+		    };
 		}
 	};
 }());

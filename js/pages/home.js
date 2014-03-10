@@ -196,7 +196,7 @@ function imagesFullyDisplayed(){
 }
 
 function addOverlay(){
-	var isTouch = StateManager.isDesktop();
+	var isDesktop = StateManager.isDesktop();
 	$(".jg-image a").each(function(index, value) {
 		var $parent = $(this).parent(".jg-image");
 		var id = parseInt($(this).attr('title'));
@@ -219,12 +219,11 @@ function addOverlay(){
 			var content = '<div class="' + overlayClass + '"></div><div class="transcription-container"><div><span class="transcription"><i>' + elementData.transcription + '</i></span></div></div>';
 			$parent.prepend(content);
 		}
-		addOverlayFunctionality($parent, isTouch);
+		addOverlayFunctionality($parent, isDesktop);
 	});
 }
 
-function addOverlayFunctionality(container, isTouch){
-	isTouch = false;
+function addOverlayFunctionality(container, isDesktop){
 	var $container = $(container);
 	var $transcription = $container.children('.transcription-container');
 	var $genderOverlay = null;
@@ -236,7 +235,7 @@ function addOverlayFunctionality(container, isTouch){
 	}else{
 		$genderOverlay = $container.children('div.unisex');
 	}
-	if(isTouch){
+	if(!isDesktop){
 		var newClass = $transcription.attr('class') + "-touch";
 		$transcription.removeAttr('class');
 		$transcription.addClass(newClass);

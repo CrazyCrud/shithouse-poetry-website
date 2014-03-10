@@ -39,8 +39,8 @@ var StateManager = (function(){
 				if(initialViewportWidth == null){
 					initialViewportWidth = viewportWidth;
 				}
+				setState();
 			});
-			setState();
 		},
 		getState : function(){
 			return state;
