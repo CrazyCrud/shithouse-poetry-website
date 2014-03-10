@@ -217,7 +217,7 @@ class DBHelper{
 	public function deleteComment($commentid){
 		$user = $this->getUser();
 		$comment = $this->getComment($commentid);
-		if(!isset($user["id"])||!isset($comment["id"])){
+		if(!isset($user["id"])||!isset($comment[0]["id"])){
 			return false;
 		}
 		if($user["status"] == DBConfig::$userStatus["admin"]){

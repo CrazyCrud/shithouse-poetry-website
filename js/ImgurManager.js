@@ -190,6 +190,19 @@ var ImgurManager = (function(){
 				}	
 			});
 		},
+		deleteComment : function(callback, commentid){
+			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+			if(authkey.length != 45)callback(false);
+			var url = "deleteComment.php?commentid=" + commentid + "&authkey=" + authkey;
+			console.log(url);
+			$.post("php/backend/" + url, function(data){
+				if(data.success == 1){
+					callback(true, commentid);
+				}else{
+					callback(false);
+				}	
+			});
+		},
 		addReport : function(callback, entryid, reportdesc, commentid){
 			var url = "addReport.php?entryid=" + entryid + "&reportdesc=" + reportdesc +
 				"&commentid" + commentid;

@@ -119,6 +119,10 @@ body{
   margin-bottom: .5em;
 }
 
+.comment i{
+  cursor: pointer;
+}
+
 .comment .author{
   font-size: .5em;
 }
@@ -131,4 +135,9 @@ body{
 .comment .text{
   margin-top: .25em;
   font-size: .75em;
+}
+
+.comment .missing{
+  font-size: .66em;
+  font-style: italic;
 }

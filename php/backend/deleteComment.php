@@ -68,7 +68,7 @@ if(isset($_GET["commentid"])){
 
 $db = new DBHelper();
 $db->setAuthKey($key);
-$status = $db->getComment($commentid);
+$status = $db->deleteComment($commentid);
 
 if($status == false){
 	$json["success"]=$CODE_ERROR;
