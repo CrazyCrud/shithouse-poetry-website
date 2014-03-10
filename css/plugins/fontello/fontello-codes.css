@@ -7,7 +7,9 @@
 .icon-upload:before { content: '\e806'; } /* '' */
 .icon-upload-cloud:before { content: '\e805'; } /* '' */
 .icon-user-1:before { content: '\e807'; } /* '' */
+.icon-help:before { content: '\e812'; } /* '' */
 .icon-user:before { content: '\e800'; } /* '' */
+.icon-home:before { content: '\e80a'; } /* '' */
 .icon-up-circled:before { content: '\e808'; } /* '' */
 .icon-thumbs-up:before { content: '\e80b'; } /* '' */
 .icon-thumbs-down:before { content: '\e80c'; } /* '' */
@@ -15,4 +17,4 @@
 .icon-thumbs-up-1:before { content: '\e80d'; } /* '' */
 .icon-thumbs-down-1:before { content: '\e80e'; } /* '' */
 .icon-male:before { content: '\e80f'; } /* '' */
-.icon-home:before { content: '\e80a'; } /* '' */
+.icon-help-circled:before { content: '\e811'; } /* '' */

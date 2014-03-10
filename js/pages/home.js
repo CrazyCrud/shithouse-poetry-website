@@ -45,6 +45,7 @@ function setupInfiniteScroll(){
 	$infiniteContainer.waypoint(function(direction) {
 		if(direction == "down"){
 			if($.waypoints('viewportHeight') < $(this).height()){
+				console.log("Load more images...");
 				getEntries();
 			}		
 		}
@@ -52,7 +53,6 @@ function setupInfiniteScroll(){
 		var magicNumber = 284;
 		var vpTopOffset = $mainheader.height() + $tabsContainer.height() - magicNumber;
 		if(($.waypoints('viewportHeight') - vpTopOffset) < $(this).height()){
-			console.log(($(this).height() - ($.waypoints('viewportHeight') - vpTopOffset)) * -1);
 			return ($(this).height() - ($.waypoints('viewportHeight') - vpTopOffset)) * -1;
 		}else{
 			return -($.waypoints('viewportHeight') + 1); // never reached
@@ -63,28 +63,35 @@ function setupInfiniteScroll(){
 
 function appendImages(){
 	var imgLoaded = 0;
-	var numImages = _.keys(imgData).length;
-	for(var i = 0; i < numImages; i++){
-		var htmlData = imgData[i].image_m;
-		var $imgContent = $(htmlData).find('img');
-		Foundation.lib_methods.loaded($imgContent, function(){
-			imgLoaded++;
-			if(imgLoaded == numImages){
-				clearScreen();
-				for(var index in imgData){
-					$imageContainer.append(imgData[index].image_m);
+	if(_.isEmpty(imgData)){
+		appendMessage(NO_IMAGES);
+		return;
+	}else{
+		var numImages = _.keys(imgData).length;
+		for(var i = 0; i < numImages; i++){
+			var htmlData = imgData[i].image_m;
+			var $imgContent = $(htmlData).find('img');
+			Foundation.lib_methods.loaded($imgContent, function(){
+				imgLoaded++;
+				if(imgLoaded == numImages){
+					clearScreen();
+					for(var index in imgData){
+						$imageContainer.append(imgData[index].image_m);
+					}
+					displayImages();
 				}
-				displayImages();
-			}
-		});
+			});
+		}
+		currentEntry = numImages + 1;
 	}
-	currentEntry = numImages + 1;
 }
 
 function appendSingleImage(){
-	if(_.keys(imgData).length == 0){
+	if(_.isEmpty(imgData)){
+		disableVoting();
+		appendMessage(NO_SINGLE_IMAGE);
 		return;
-	}else if(_.keys(imgData).length == currentEntry){
+	}else if(_.keys(imgData).length >= currentEntry){
 		resetImgData();
 		getSingleEntry();
 		return;
@@ -101,13 +108,14 @@ function appendSingleImage(){
 }
 
 function appendMessage(message){
-	if($(".message").length > 0){
-		return;
-	}else{
-		message = message || "Es gibt leider keine weiteren Bilder mehr";
-		var content = "<div class='small-12 columns message-container'><span class='message'>" + message + "</span></div>";
-		$imageContainer.append(content);
-	}
+	message = message || "Es gibt leider keine weiteren Bilder mehr";
+	$(".message").html(message);
+	$(".message").addClass('label secondary');
+}
+
+function deleteMessage(){
+	$(".message").html("");
+	$(".message").removeClass('label secondary round');
 }
 
 function chacheImages(entries){
@@ -292,6 +300,7 @@ function addOverlayFunctionality(container, isDesktop){
 function setupTabFunctionality(){
 	$hotLink.click(function(event) {
 		event.preventDefault();
+		deleteMessage();
 		setActive($(this).parent("dd"));
 		enableInfiniteScroll();
 		disableVoting();
@@ -301,6 +310,7 @@ function setupTabFunctionality(){
 	});
 	$newLink.click(function(event) {
 		event.preventDefault();
+		deleteMessage();
 		setActive($(this).parent("dd"));
 		enableInfiniteScroll();
 		disableVoting();
@@ -310,6 +320,7 @@ function setupTabFunctionality(){
 	});
 	$voteLink.click(function(event) {
 		event.preventDefault();
+		deleteMessage();
 		setActive($(this).parent("dd"));
 		disableInfiniteScroll();
 		clearRequests();
@@ -324,16 +335,14 @@ function enableVoting(){
 
 function setupVoting(){
 	$upVote.click(function(event) {
-		console.log("Take my upvote, sir!");
 		lazyClick(false);
 	});
 	$downVote.click(function(event) {
-		console.log("You suck balls!");
 		lazyClick(true);
 	});
 }
 
-var lazyClick = _.throttle(handleVote, 200);
+var lazyClick = _.throttle(handleVote, 2000);
 
 function handleVote(sucks){
 	var rating = 0;

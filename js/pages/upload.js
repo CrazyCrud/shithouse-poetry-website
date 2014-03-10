@@ -164,9 +164,17 @@ function extractImageData(data){
 		var latitude = data.exif.getText('GPSLatitude');
 		var longitude = data.exif.getText('GPSLongitude');
 		if((latitude != 'undefined') && (longitude != 'undefined')){
+			latitude_array = latitude.split(',');
+			longitude_array = longitude.split(',');
+			latitude = parseFloat(parseInt(latitude_array[0]) + 
+				parseFloat(latitude_array[1] / 60) + parseFloat(latitude_array[2] / 3600));
+			longitude = parseFloat(parseInt(longitude_array[0]) + 
+				parseFloat(longitude_array[1] / 60) + parseFloat(longitude_array[2] / 3600));
+			
 			latitude_g = latitude;
 			longitude_g = longitude;
-			ImgurManager.getLocations(retrieveLocations, latitude_g, longitude_g);
+
+			ImgurManager.getLocations(retrieveLocations, latitude, longitude);
 			return;
 		}
 	}
@@ -234,6 +242,9 @@ function retrieveLocations(locData){
 	$locationInput.children().first().html("Wähle einen Ort aus...");
 	$locationInput.prop('disabled', false);
 	var locations = locData[0]['locations'];
+	if(locData[1]){
+		$.merge(locations, locData[1]['locations']);
+	}
 	var content = "";
 	if(locations == null || locations.length < 1){
 		return;
@@ -337,12 +348,10 @@ function appendUserTags(tagData){
 	        	minLength: 0,
 	        	source: tags,
 		        select: function(event, ui) {
-		        	var terms = split(this.value);
-		          	terms.pop();
-		          	terms.push( ui.item.value );
+		          	$customTagInput.val(ui.item.value);
 		          	return false;
 		        }
-	      	});
+	    	});
 	}
 }
 
