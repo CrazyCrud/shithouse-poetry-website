@@ -1,22 +1,27 @@
+var overlayTemplate = null;
 var rootFolder = null;
-
 
 $(document).ready(function() {
 	$(document).foundation();
-	setupRoot();
+    setupOverlayBackground();
     cookieUser();
 });
 
-function setupRoot(){
-	switch (document.location.hostname)
-	{
-        case 'localhost' :
-            rootFolder = '/htdocs/shithouse_poetry'; 
-            break;
-        default :  
-        	rootFolder = '';
-        	break;
-	}
+function setupOverlayBackground(){
+    overlayTemplate = _.template($("script.overlay-template").html()); 
+}
+
+function createOverlayBackground(){
+    if($("#overlay-background").length > 0){
+        return;
+    }else{
+        $("body").append(overlayTemplate());
+    }
+    
+}
+
+function removeOverlayBackground(){
+    $("#overlay-background").remove();
 }
 
 function cookieUser(){
