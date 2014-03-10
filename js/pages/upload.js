@@ -11,6 +11,7 @@ var $addLocationContainer = $(".add-location-container");
 var $addImageInput = $("input.file-input");
 var $customTagInput = $("#custom-tag");
 var $locationInput = $("select#location");
+var $typeInput = $("select#type");
 var $tagsContainer = $(".tags-container");
 var $tagList = $("#tag-list");
 var $uploadSubmit = $("#upload-submit");
@@ -22,7 +23,7 @@ var $locError = $(".location-error");
 $(document).ready(function() {
 	initUpload();
 	initImageUpload();
-	// getLocations();
+	getType();
 	getTags();
 	initDialog();
 });
@@ -41,7 +42,77 @@ function initDialog(){
 }
 
 function initUpload(){
+	$form.on('invalid', function(event) {
+		// var invalid_fields = $(this).find('[data-invalid]');
+    	checkForImage();
+    	// checkForTags();
+	}).on('valid', function(event) {
+		if(checkForImage()){
+			message("Speichern", "Bild wird gespeichert, bitte warten ...");
+			event.preventDefault();
+			var data = {};
+			var title = $.trim($("input#title").val());
+			var artist = $.trim($("input#artist").val());
+			var transcription = $.trim($("input#transcription").val());
+			var location = $.trim($locationInput.find('option:selected').val());
+			var sex = $.trim($("input:radio[name=sex]:checked").val());
+			var tags = _.pluck($tagList.children('.tag-active'), 'innerHTML');
+			tags = tags.join(',');
+			
+			console.log(tags);
+
+			var type = $.trim($("#type").find('option:selected').val());
+
+			if(location.length > 2){
+				data['location'] = location;
+			}
+			if(transcription.length > 2){
+				data['transcription'] = transcription;
+			}
+			if(artist.length > 2){
+				data['artist'] = artist;
+			}
+			if((latitude_g != -1000 && longitude_g != -1000)){
+				data['latitude'] = latitude_g;
+				data['longitude'] = longitude_g;
+			}
+			if(tags.length > 0){
+				data['tags'] = tags;
+			}
+
+			data['sex'] = sex;
+			data['title'] = title;
+			data['type'] = type;
+
+			ImgurManager.addEntry(uploadImage, data);
+		}
+	});
+
+	$form.bind("keyup keypress", function(e) {
+		var code = e.keyCode || e.which; 
+		if (code  == 13) {               
+			e.preventDefault();
+			return false;
+	  	}
+	});
+
+	$form.on('submit', function(event) {
+		event.preventDefault();
+	});
+
+	$customTagInput.bind("keydown", function(event) {
+        var code = event.which;
+        if(code == 13 || code == 9 || code == 188 || code == 186 || code == 190){
+        	var text = $.trim($(this).val());
+        	if(text.length > 2){
+        		appendSingleTag(text, true);
+        	}
+        	$(this).val('');
+        }
+  	});
+
 	$locationInput.prop('disabled', true);
+
 	$uploadSubmit.click(function(event) {
 		// nothing to do here...
 	});
@@ -85,53 +156,6 @@ function initImageUpload(){
 			);
 
 		}
-	});
-
-	$form.on('invalid', function(event) {
-		// var invalid_fields = $(this).find('[data-invalid]');
-    	checkForImage();
-    	// checkForTags();
-	}).on('valid', function(event) {
-		if(checkForImage()){
-			message("Speichern", "Bild wird gespeichert, bitte warten ...");
-			event.preventDefault();
-			var data = {};
-			var title = $.trim($("input#title").val());
-			var artist = $.trim($("input#artist").val());
-			var transcription = $.trim($("input#transcription").val());
-			var location = $.trim($locationInput.find('option:selected').val());
-			var sex = $.trim($("input:radio[name=sex]:checked").val());
-			//var tags = _.pluck($tagList.children('.tag-active'), 'innerHTML');
-			var tags = $.trim($("input#custom-tag").val());
-			var type = $.trim($("#type").find('option:selected').val());
-
-			if(location.length > 2){
-				data['location'] = location;
-			}
-			if(transcription.length > 2){
-				data['transcription'] = transcription;
-			}
-			if(artist.length > 2){
-				data['artist'] = artist;
-			}
-			if((latitude_g != -1000 && longitude_g != -1000)){
-				data['latitude'] = latitude_g;
-				data['longitude'] = longitude_g;
-			}
-			if(tags.length > 0){
-				data['tags'] = tags;
-			}
-
-			data['sex'] = sex;
-			data['title'] = title;
-			data['type'] = type;
-
-			ImgurManager.addEntry(uploadImage, data);
-		}
-	});
-
-	$form.on('submit', function(event) {
-		event.preventDefault();
 	});
 }
 
@@ -261,6 +285,25 @@ function checkForTags(){
 	}
 }
 
+function getType(){
+	ImgurManager.getTypes(appendTypes);
+}
+
+function appendTypes(typeData){
+	if(typeData == null){
+
+	}else{
+		var types = _.pluck(typeData, 'name');
+		var content = "";
+
+		for(var i = 0; i < types.length; i++){
+			var type = types[i];
+			content += "<option value='" + type + "'>" + type + "</option>";
+		}
+		$typeInput.append(content);
+	}
+}
+
 function getTags(){
 	ImgurManager.getSystemTags(appendSystemTags);
 	ImgurManager.getUserTags(appendUserTags);
@@ -272,11 +315,7 @@ function appendSystemTags(tagData){
 	}else{
 		var tags = _.pluck(tagData, 'tag');
 		for(var i = 0; i < tags.length; i++){
-			$tagItem = $("<li>" + tags[i] + "</li>");
-			$tagItem.click(function(event) {
-				tagFunctionality($(this));
-			});
-			$tagList.append($tagItem);
+			appendSingleTag(tags[i], false);
 		}
 	}
 }
@@ -293,32 +332,29 @@ function appendUserTags(tagData){
 	    	return split(term).pop();
 	    }
 
-		$customTagInput
-	    	.bind("keydown", function(event) {
-		        if(event.keyCode === $.ui.keyCode.TAB &&
-		            $(this).data("ui-autocomplete").menu.active) {
-		        	event.preventDefault();
-		        }
-	      	})
-	      	.autocomplete({
+		$customTagInput.autocomplete(
+			{
 	        	minLength: 0,
-	        	source: function( request, response ) {
-	          		response($.ui.autocomplete.filter(
-	            		tags, extractLast(request.term)));
-		        },
-		        focus: function() {
-		        	return false;
-		        },
+	        	source: tags,
 		        select: function(event, ui) {
 		        	var terms = split(this.value);
 		          	terms.pop();
-		          	terms.push(ui.item.value);
-		          	terms.push("");
-		          	this.value = terms.join(", ");
+		          	terms.push( ui.item.value );
 		          	return false;
 		        }
 	      	});
 	}
+}
+
+function appendSingleTag(tag, state){
+	$tagItem = $("<li>" + tag + "</li>");
+	if(state){
+		$tagItem.addClass('tag-active');
+	}
+	$tagItem.click(function(event) {
+		tagFunctionality($(this));
+	});
+	$tagList.append($tagItem);
 }
 
 function tagFunctionality(tag){

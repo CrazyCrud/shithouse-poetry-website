@@ -151,6 +151,16 @@ var ImgurManager = (function(){
 				callback(locations);
 			});
 		},
+		getTypes : function(callback){
+			var types = null;
+			var url = "getTypes.php";
+			$.post("php/backend/" + url, function(data){
+				if(data.success == 1){
+					types = data.data;
+				}
+				callback(types);
+			});
+		},
 		uploadImage : function(callback, entryid, file){
 			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 			

@@ -5,6 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
 		<link rel="stylesheet" type="text/css" href="css/plugins/foundation.css"/>
 		<link rel="stylesheet" type="text/css" href="css/plugins/fontello/fontello.css"/>
+		<link rel="stylesheet" type="text/css" href="css/plugins/custom-jqui-theme/jquery-ui-1.10.4.custom.css"/>
 		<link rel="stylesheet" type="text/css" href="css/global.css"/>
 		<link rel="stylesheet" type="text/css" href="css/pages/upload.css"/>
 		<script type="text/javascript" src="js/plugins/modernizr.js"></script>
@@ -81,12 +82,16 @@
 							        	</input>
 							    	</label>
 								</div>
+								<div class="small-12 columns add-transcription-container">
+									<label>Transkription<small>optional</small>
+							        	<input id="transcription" type="text">
+							        	</input>
+							    	</label>
+								</div>
 								<div class="small-12 columns add-type-container">
 									<label for="type">Type<small>erforderlich</small>
 								        <select id="type" class="medium" required>
 								        	<option value>Bitte den Type des Bildes wählen...</option>
-								        	<option value="Text">Text</option>
-									        <option value="Bild">Bild</option>
 								        </select>
 							      	</label>
 								</div>
@@ -99,12 +104,6 @@
 							      	<input type="radio" name="sex" value="U" id="unisex" required>
 							      	<label for="unisex">Unisex</label>
 							    </div>
-							    <div class="small-12 columns add-transcription-container">
-									<label>Transkription<small>optional</small>
-							        	<input id="transcription" type="text">
-							        	</input>
-							    	</label>
-								</div>
 							    <div class="small-12 columns add-location-container">
 									<label for="location">Ort<small>optional</small>
 								        <select id="location" class="medium">
@@ -127,7 +126,7 @@
 								    		</ul>
 								    	</div>
 								    	<div class="custom-tags-container">
-								    		<label>Eigene Tags wählen<small>komma-separiert</small>
+								    		<label>Eigene Tags wählen<small></small>
       											<input id="custom-tag" type="text" placeholder="">
     										</label>
 								    	</div>
@@ -153,6 +152,7 @@
 		<script src="js/plugins/underscore.js"></script>
 		<script src="js/plugins/foundation/foundation.js"></script>
   		<script src="js/plugins/foundation/foundation.topbar.js"></script>
+		<script src="js/plugins/jquery-ui-custom/jquery-ui-1.10.4.custom.min.js"></script>
   		<script src="js/plugins/foundation/foundation.abide.js"></script>
   		<script src="js/plugins/exif/load-image.min.js"></script>
 		<script src="js/plugins/exif/load-image-ios.js"></script>
