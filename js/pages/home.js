@@ -378,9 +378,7 @@ function getActiveState(){
 
 function getEntries(orderby){
 	var order = orderby || currentOrder;
-	if(rootFolder != ''){
-		ImgurManager.getEntries(appendImagesCallback, order, currentEntry);
-	}
+	ImgurManager.getEntries(appendImagesCallback, order, currentEntry);
 }
 
 function getFilteredEntries(){
