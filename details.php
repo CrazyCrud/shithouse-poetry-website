@@ -60,6 +60,10 @@
 
 			<section id="maincontent">
 				<div class="details-entry">
+					<div class="row" id="controlpanel">
+						<a id="editentry">Eintrag bearbeiten</a>
+						<a id="deleteentry">Eintrag l&ouml;schen</a>
+					</div>
 					<div class="row">
 						<div class="details small-12 medium-7 large-7 columns left" id="image-container">
 							<img id="image" src="img/dummy/d05.png">
@@ -67,7 +71,7 @@
 						<div class="details small-12 medium-5 large-5 columns right" id="image-description">
 							<div id="title">Bild nicht gefunden</div>
 							<div id="artist"></div>
-							<i id="sex"></i>
+							<i title="Geschlecht" id="sex"></i>
 							<div id="location">
 								Ort: <span id="locationdescription"></span>
 							</div>

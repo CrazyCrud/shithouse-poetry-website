@@ -20,6 +20,16 @@ body{
   padding: 32px;
 }
 
+#controlpanel{
+  display: none;
+  padding-top: 32px;
+  padding-left: 32px;
+  font-size: .75em;
+}
+#controlpanel #deleteentry{
+  margin-left: 32px;
+}
+
 #image-container #image{
   width: 100%;
 }
@@ -29,6 +39,7 @@ body{
 }
 
 #artist{
+  margin-top: 1em;
   font-size: .5em;
   font-style: italic;
   margin-bottom: 1em;

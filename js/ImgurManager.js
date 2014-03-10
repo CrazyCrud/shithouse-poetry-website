@@ -108,16 +108,18 @@ var ImgurManager = (function(){
 				});
 			}
 		},
-		deleteEntry : function(entryid){
+		deleteEntry : function(entryid, callback){
 			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-			var url = "deleteEntry.php?entryid=" + id + 
-				"authkey=" + authkey;
+			var url = "deleteEntry.php?entryid=" + entryid + 
+				"&authkey=" + authkey;
+			console.log(url);
 			$.post("php/backend/" + url, function(data){
 				if(data.success == 1){
 					console.log("Entry deleted...");
 				}else{
 					console.log("Error");
 				}
+				callback(data.success==1);
 			});
 		},
 		getEntry : function(callback, id){
