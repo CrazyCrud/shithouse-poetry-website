@@ -52,7 +52,7 @@
 }
 
 .ui-front {
-	z-index: 100;
+	z-index: 1000;
 }
 
 
@@ -470,6 +470,7 @@ button.ui-button::-moz-focus-inner {
 	padding: .2em;
 	outline: 0;
 	max-width: 640px;
+	margin: 0 auto;
 }
 .ui-dialog .ui-dialog-titlebar {
 	padding: .4em 1em;

@@ -24,7 +24,21 @@ $(document).ready(function() {
 	initImageUpload();
 	// getLocations();
 	getTags();
+	initDialog();
 });
+
+function initDialog(){
+	if(!$("<div></div>").dialog){
+		$("body").append('<script src="js/plugins/jquery-ui-custom/jquery-ui-1.10.4.custom.min.js"></script>'
+		+'<link rel="stylesheet" type="text/css" href="css/plugins/custom-jqui-theme/jquery-ui-1.10.4.custom.css"/>');
+	}
+	setTimeout(function(){
+		var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+		if(!authkey || authkey.length != 45){
+			error("Sie m&uuml;ssen eingeloggt sein, um ein Bild hochladen zu können");
+		}
+	},500);
+}
 
 function initUpload(){
 	$locationInput.prop('disabled', true);
@@ -140,8 +154,9 @@ function uploadImage(entryid){
 
 function uploadImageResult(uploadSuccesfull, entryid){
 	if(uploadSuccesfull){
-
+		window.location = "details.php?id="+entryid;
 	}else{
+		error("Bild konnte nicht hochgeladen werden.");
 		ImgurManager.deleteEntry(entryid);
 	}
 }
@@ -311,4 +326,16 @@ function tagFunctionality(tag){
 	}else{
 		$tag.addClass('tag-active');
 	}
+}
+
+function error(message){
+	var $dialog = $('<div class="error-dialog">'+message+"</div>");
+	$dialog.dialog({
+		modal: true,
+		width: "80%",
+		title: "Oops!",
+		close : function(){
+			window.location = "index.html";
+		}
+	});
 }
