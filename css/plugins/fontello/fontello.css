@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'fontello';
-  src: url('font/fontello.eot?5808302');
-  src: url('font/fontello.eot?5808302#iefix') format('embedded-opentype'),
-       url('font/fontello.woff?5808302') format('woff'),
-       url('font/fontello.ttf?5808302') format('truetype'),
-       url('font/fontello.svg?5808302#fontello') format('svg');
+  src: url('../font/fontello.eot?51658882');
+  src: url('../font/fontello.eot?51658882#iefix') format('embedded-opentype'),
+       url('../font/fontello.woff?51658882') format('woff'),
+       url('../font/fontello.ttf?51658882') format('truetype'),
+       url('../font/fontello.svg?51658882#fontello') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -14,7 +14,7 @@
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: 'fontello';
-    src: url('../font/fontello.svg?5808302#fontello') format('svg');
+    src: url('../font/fontello.svg?51658882#fontello') format('svg');
   }
 }
 */
@@ -51,17 +51,19 @@
 }
  
 .icon-search:before { content: '\e801'; } /* '' */
-.icon-thumbs-down-1:before { content: '\e80e'; } /* '' */
+.icon-female:before { content: '\e810'; } /* '' */
 .icon-camera:before { content: '\e802'; } /* '' */
 .icon-ok:before { content: '\e803'; } /* '' */
 .icon-cancel:before { content: '\e804'; } /* '' */
 .icon-upload:before { content: '\e806'; } /* '' */
 .icon-upload-cloud:before { content: '\e805'; } /* '' */
+.icon-user-1:before { content: '\e807'; } /* '' */
 .icon-user:before { content: '\e800'; } /* '' */
-.icon-home:before { content: '\e80a'; } /* '' */
 .icon-up-circled:before { content: '\e808'; } /* '' */
 .icon-thumbs-up:before { content: '\e80b'; } /* '' */
 .icon-thumbs-down:before { content: '\e80c'; } /* '' */
 .icon-cog:before { content: '\e809'; } /* '' */
 .icon-thumbs-up-1:before { content: '\e80d'; } /* '' */
-.icon-user-1:before { content: '\e807'; } /* '' */
+.icon-thumbs-down-1:before { content: '\e80e'; } /* '' */
+.icon-male:before { content: '\e80f'; } /* '' */
+.icon-home:before { content: '\e80a'; } /* '' */
