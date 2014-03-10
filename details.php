@@ -96,9 +96,12 @@
 					<div class="row details">
 						<div id="comments-header">Kommentare:</div>
 						<div id="comments-add">
-							<input type="text" placeholder="Kommentar schreiben"></input>
+							<input type="text" id="comment-input" placeholder="Kommentar schreiben"></input>
 						</div>
 						<div id="comments-content"></div>
+						<button id="morecomments">
+							Weitere Kommentare laden
+						</button>
 					</div>
 				</div>
 			</section>

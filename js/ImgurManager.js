@@ -170,7 +170,7 @@ var ImgurManager = (function(){
 		getComments: function(callback, entryid, start){
 			var comments = null;
 			start = start || -1;
-			var url = "getComments.php?entryid=" + entryid + "&start=" + start;
+			var url = "getComments.php?entryid=" + entryid + "&commentid=" + start;
 			$.post("php/backend/" + url, function(data){
 				if(data.success == 1){
 					comments = data.data;
@@ -179,7 +179,9 @@ var ImgurManager = (function(){
 			});
 		},
 		addComment : function(callback, entryid, comment){
-			var url = "addComment.php?entryid=" + entryid + "&comment=" + comment;
+			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+			if(authkey.length != 45)callback(false);
+			var url = "addComment.php?entryid=" + entryid + "&comment=" + comment + "&authkey=" + authkey;
 			$.post("php/backend/" + url, function(data){
 				if(data.success == 1){
 					callback(true);
