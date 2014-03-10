@@ -1,5 +1,5 @@
-var latitude_g = -1;
-var longitude_g = -1;
+var latitude_g = -1000;
+var longitude_g = -1000;
 var DEFAULT_LOCATIONS = [
 	"Bar", "Kino", "Restaurant", "Tankstelle", "Schule", "Hochschule"
 ];
@@ -20,11 +20,18 @@ var $tagError = $(".tag-error");
 var $locError = $(".location-error");
 
 $(document).ready(function() {
-	$locationInput.prop('disabled', true);
+	initUpload();
 	initImageUpload();
 	// getLocations();
 	getTags();
 });
+
+function initUpload(){
+	$locationInput.prop('disabled', true);
+	$uploadSubmit.click(function(event) {
+		// nothing to do here...
+	});
+}
 
 function initImageUpload(){
 	$addImageContainer.click(function(event) {
@@ -72,49 +79,55 @@ function initImageUpload(){
     	// checkForTags();
 	}).on('valid', function(event) {
 		if(checkForImage()){
-			var data = new FormData();
+			event.preventDefault();
+			var data = {};
 			var title = $.trim($("input#title").val());
 			var artist = $.trim($("input#artist").val());
 			var transcription = $.trim($("input#transcription").val());
-			var location = $.trim($locationInput.find('option:selected').text());
+			var location = $.trim($locationInput.find('option:selected').val());
 			var sex = $.trim($("input:radio[name=sex]").val());
 			var tags = _.pluck($tagList.children('.tag-active'), 'innerHTML');
+			var type = $.trim($("#type").find('option:selected').val());
 
 			if(location.length > 2){
-				data.append('stuff&location', location);
+				data['stuff&location'] = location;
 			}
 			if(transcription.length > 2){
-				data.append('transcription', transcription);
+				data['transcription'] = transcription;
 			}
 			if(artist.length > 2){
-				data.append('artist', artist);
+				data['artist'] = artist;
 			}
-			if(latitude_g != -1 && longitude_g != -1){
-				data.append('lat', latitude_g);
-				data.append('long', longitude_g);
+			if((latitude_g != -1000 && longitude_g != -1000)){
+				data['latitude'] = latitude_g;
+				data['longitude'] = longitude_g;
 			}
 			if(tags.length > 0){
-				data.append('tags', tags);
+				data['tags'] = tags;
 			}
 
-			data.append('sex', sex);
-			data.append('title', title);
+			data['sex'] = sex;
+			data['title'] = title;
+			data['type'] = type;
 
 			ImgurManager.addEntry(uploadImage, data);
 		}
-	});;
+	});
+
+	$form.on('submit', function(event) {
+		event.preventDefault();
+	});
 }
 
 function extractImageData(data){
 	var latitude = data.exif.getText('GPSLatitude');
 	var longitude = data.exif.getText('GPSLongitude');
-	if(latitude != undefined && longitude != undefined){
+	if((latitude != 'undefined') && (longitude != 'undefined')){
 		latitude_g = latitude;
 		longitude_g = longitude;
-		console.log(latitude + ", " + longitude);
-		ImgurManager.getLocations(retrieveLocations);
+		ImgurManager.getLocations(retrieveLocations, latitude_g, longitude_g);
 	}else{
-		ImgurManager.getLocations(null);
+		ImgurManager.getDefaultLocations(retrieveLocations);
 	}
 }
 
@@ -174,19 +187,19 @@ function handleGeolocationErrors(error){
 }
 */
 
-function retrieveLocations(locations){
+function retrieveLocations(locData){
 	$locationInput.children().first().html("Wähle einen Ort aus...");
 	$locationInput.prop('disabled', false);
+	var locations = locData[0]['locations'];
 	var content = "";
-	if(locations == null){
-		for(var i = 0; i < DEFAULT_LOCATIONS.length; i++){
-			var location = DEFAULT_LOCATIONS[i];
+	if(locations == null || locations.length < 1){
+		return;
+	}else{
+		for(var i = 0; i < locations.length; i++){
+			var location = locations[i];
 			content += "<option value='" + location + "'>" + location + "</option>";
 		}
 		$locationInput.append(content);
-		return;
-	}else{
-
 	}
 }
 
@@ -230,70 +243,62 @@ function checkForTags(){
 }
 
 function getTags(){
-	var url = 'getTags.php?status=system';
-	var tagData = null;
-
-	$.get('php/backend/' + url, function(data) {
-		if(data.success == 1){
-			tagData = data.data;
-			appendTags(tagData);
-		}else{
-			console.log("Error");
-		}
-	});
-
-	url = 'getTags.php?status=usercreated';
-	$.get('php/backend/' + url, function(data) {
-		if(data.success == 1){
-			tagData = data.data;
-			var tags = _.pluck(tagData, 'tag');
-
-			function split(val) {
-		    	return val.split( /,\s*/ );
-		    }
-		    function extractLast(term) {
-		    	return split(term).pop();
-		    }
-
-			$customTagInput
-		    	.bind("keydown", function(event) {
-			        if(event.keyCode === $.ui.keyCode.TAB &&
-			            $(this).data("ui-autocomplete").menu.active) {
-			        	event.preventDefault();
-			        }
-		      	})
-		      	.autocomplete({
-		        	minLength: 0,
-		        	source: function( request, response ) {
-		          		response($.ui.autocomplete.filter(
-		            		tags, extractLast(request.term)));
-			        },
-			        focus: function() {
-			        	return false;
-			        },
-			        select: function(event, ui) {
-			        	var terms = split(this.value);
-			          	terms.pop();
-			          	terms.push(ui.item.value);
-			          	terms.push("");
-			          	this.value = terms.join(", ");
-			          	return false;
-			        }
-		      	});
-		}else{
-			console.log("Error");
-		}
-	});
+	ImgurManager.getSystemTags(appendSystemTags);
+	ImgurManager.getUserTags(appendUserTags);
 }
 
-function appendTags(tagData){
-	var tags = _.pluck(tagData, 'tag');
-	for(var i = 0; i < tags.length; i++){
-		$tagItem = $("<li>" + tags[i] + "</li>");
-		$tagItem.click(function(event) {
-			tagFunctionality($(this));
-		});
-		$tagList.append($tagItem);
+function appendSystemTags(tagData){
+	if(tagData == null){
+
+	}else{
+		var tags = _.pluck(tagData, 'tag');
+		for(var i = 0; i < tags.length; i++){
+			$tagItem = $("<li>" + tags[i] + "</li>");
+			$tagItem.click(function(event) {
+				tagFunctionality($(this));
+			});
+			$tagList.append($tagItem);
+		}
+	}
+}
+
+function appendUserTags(tagData){
+	if(tagData == null){
+
+	}else{
+		var tags = _.pluck(tagData, 'tag');
+		function split(val) {
+	    	return val.split( /,\s*/ );
+	    }
+	    function extractLast(term) {
+	    	return split(term).pop();
+	    }
+
+		$customTagInput
+	    	.bind("keydown", function(event) {
+		        if(event.keyCode === $.ui.keyCode.TAB &&
+		            $(this).data("ui-autocomplete").menu.active) {
+		        	event.preventDefault();
+		        }
+	      	})
+	      	.autocomplete({
+	        	minLength: 0,
+	        	source: function( request, response ) {
+	          		response($.ui.autocomplete.filter(
+	            		tags, extractLast(request.term)));
+		        },
+		        focus: function() {
+		        	return false;
+		        },
+		        select: function(event, ui) {
+		        	var terms = split(this.value);
+		          	terms.pop();
+		          	terms.push(ui.item.value);
+		          	terms.push("");
+		          	this.value = terms.join(", ");
+		          	return false;
+		        }
+	      	});
 	}
 }
 

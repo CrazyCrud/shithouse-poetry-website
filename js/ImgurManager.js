@@ -93,14 +93,14 @@ var ImgurManager = (function(){
 		},
 		addEntry : function(callback, formData){
 			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-			formData.append('authkey', authkey);
-			
 			if(formData == null || formData == undefined){
 				return;
 			}else{
-				var url = "addEntry.php";
-				$.post("php/backend/" + url, {data : formData}, function(data){
+				var url = "addEntry.php?authkey=" + authkey + "&" + $.param(formData, false);
+				console.log(url);
+				$.post("php/backend/" + url, function(data){
 					if(data.success == 1){
+						console.log("Entry added");
 						callback();
 					}else{
 						console.log("Error");
@@ -141,6 +141,16 @@ var ImgurManager = (function(){
 				callback(locations);
 			});
 		},
+		getDefaultLocations : function(callback){
+			var locations = null;
+			var url = "getLocations.php?lat=-1&long=-1";
+			$.post("php/backend/" + url, function(data){
+				if(data.success == 1){
+					locations = data.data;
+				}
+				callback(locations);
+			});
+		},
 		uploadImage : function(callback, entryid, file){
 			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 			var formData = new FormData();
@@ -155,6 +165,28 @@ var ImgurManager = (function(){
 				}else{
 					callback(false, entryid);
 				}
+			});
+		},
+		getSystemTags: function(callback){
+			var url = 'getTags.php?status=1';
+			var tagData = null;
+
+			$.get('php/backend/' + url, function(data) {
+				if(data.success == 1){
+					tagData = data.data;
+				}
+				callback(tagData);
+			});
+		},
+		getUserTags: function(callback){
+			var url = 'getTags.php?status=0';
+			var tagData = null;
+
+			$.get('php/backend/' + url, function(data) {
+				if(data.success == 1){
+					tagData = data.data;
+				}
+				callback(tagData);
 			});
 		},
 		Tags : tags,
