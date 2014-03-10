@@ -26,7 +26,7 @@ $(document).ready(function() {
 	getType();
 	getTags();
 	initDialog();
-	if(id)initEdit();
+	if(id>0)initEdit();
 });
 
 function initEdit(){

@@ -144,6 +144,7 @@ function refresh(){
 
 function fillUI(e){
 	entry = e;
+	document.title = e.title;
 	if(e.userid == user.id || user.admin){
 		$("#controlpanel").css("display","block");
 	}
@@ -221,21 +222,23 @@ function fillUI(e){
 
 
 var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-var getUserURL= "php/backend/getUser.php?authkey="+authkey;
-$.get(getUserURL, function(data){
-	if(!data["success"]){
-		alert("Es gibt Probleme bei der Kommunikation mit dem Server");
-	}
-	else
-	{
-		switch(data["success"]){
-			case 1: menuHoverEffect();
-				break;
-			default: console.log(data);					
+if(authkey.length == 45){
+	var getUserURL= "php/backend/getUser.php?authkey="+authkey;
+	$.get(getUserURL, function(data){
+		if(!data["success"]){
+			alert("Es gibt Probleme bei der Kommunikation mit dem Server");
 		}
-	}
+		else
+		{
+			switch(data["success"]){
+				case 1: menuHoverEffect();
+					break;
+				default: console.log(data);					
+			}
+		}
 
-});
+	});
+}
 
 function menuHoverEffect(){
 
