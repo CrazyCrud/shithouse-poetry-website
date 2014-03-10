@@ -550,6 +550,7 @@ class DBHelper{
 	 }
 	*/
 	public function updateEntry($entry){
+
 		// check for valid $entry
 		// check for necessarry parameters
 		if(!isset($entry["id"]))return false;
@@ -584,9 +585,12 @@ class DBHelper{
 		}
 		if(!isset($entry["type"])
 			||$entry["type"]==$type["id"]
-			||$entry["type"]==$type["name"])
-			$entry["type"]=$e["typeid"];
-		else $updateEntry = true;
+			||$entry["type"]==$type["name"]){
+			$entry["type"]=$type["id"];
+		}else{
+			$entry["type"]=$this->getType($entry["type"])["id"];
+			$updateEntry = true;
+		}
 		if(!isset($entry["sex"])
 			||$entry["sex"]==$e["sex"])
 			$entry["sex"]=$e["sex"];
@@ -639,7 +643,7 @@ class DBHelper{
 
 		// update the entry
 		if($updateEntry){
-			$query = Queries::updateentry($entry["id"], $type["id"], $entry["title"], $entry["sex"]);
+			$query = Queries::updateentry($entry["id"], $entry["type"], $entry["title"], $entry["sex"]);
 			$result = $this->query($query);
 			if(!$result)return false;
 		}

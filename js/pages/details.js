@@ -120,6 +120,9 @@ function initGUI(){
 			}
 		});
 	});
+	$("#editentry").click(function(){
+		window.location = "upload.php?id="+id;
+	});
 }
 
 function onCommentDeleted(success, commentid){

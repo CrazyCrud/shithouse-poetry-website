@@ -30,7 +30,7 @@
 									</a>
 								</li>
 								<li class="li-upload-container">
-									<a id="link-upload" href="upload.html">
+									<a id="link-upload" href="upload.php">
 										<span></span><i class="icon-upload-cloud"></i>
 									</a>
 								</li>

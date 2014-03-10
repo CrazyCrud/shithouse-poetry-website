@@ -3,7 +3,7 @@ var longitude_g = -1000;
 var DEFAULT_LOCATIONS = [
 	"Bar", "Kino", "Restaurant", "Tankstelle", "Schule", "Hochschule"
 ];
-
+var entry = {};
 var $imageContainer = $(".image-container");
 var $addImageContainer = $(".add-image-container");
 var $addImageText = $(".add-image-text");
@@ -26,7 +26,33 @@ $(document).ready(function() {
 	getType();
 	getTags();
 	initDialog();
+	if(id)initEdit();
 });
+
+function initEdit(){
+	document.title = "Bearbeiten";
+	$uploadSubmit.html("Speichern");
+	ImgurManager.getEntry(fillUI, id);
+	$(".add-image-container").css("display","none");
+}
+
+function fillUI(e){
+	entry = e;
+	var $img = $('<img id="img-upload" exif="true" src="'+entry.images[0].thumbnail+'"/>');
+	$imageContainer.append($img);
+	$imageContainer.css("display","block");
+	$("#title").val(entry.title);
+	$("#transcription").val(entry.information[0].transcription);
+	$("#type option[value="+entry.typename.replace(/ /g,"_")+"]").attr("selected", "selected");
+	$(".add-sex-container input[value=U]").attr("checked", true);
+	$(".add-sex-container input[value="+entry.sex.toUpperCase()+"]").attr("checked", true);
+	ImgurManager.getLocations(retrieveLocations, entry.information[0].latitude, entry.information[0].longitude);
+	$("#location option[value="+entry.information[0].location.replace(/ /g,"_")+"]").attr("selected", "selected");	
+	$("#artist").val(entry.information[0].artist);
+	for(var i=0; i<entry.tags.length; i++){
+		appendSingleTag(entry.tags[i].tag, true);
+	}
+}
 
 function initDialog(){
 	if(!$("<div></div>").dialog){
@@ -84,7 +110,14 @@ function initUpload(){
 			data['title'] = title;
 			data['type'] = type;
 
-			ImgurManager.addEntry(uploadImage, data);
+			if(entry.id){
+				data["entryid"] = entry.id;
+				ImgurManager.updateEntry(function(){
+					window.location = "details.php?id="+entry.id;
+				}, data);
+			}else{
+				ImgurManager.addEntry(uploadImage, data);
+			}
 		}
 	});
 
@@ -245,15 +278,20 @@ function retrieveLocations(locData){
 	if(locData[1]){
 		$.merge(locations, locData[1]['locations']);
 	}
-	var content = "";
 	if(locations == null || locations.length < 1){
 		return;
 	}else{
 		for(var i = 0; i < locations.length; i++){
 			var location = locations[i];
-			content += "<option value='" + location + "'>" + location + "</option>";
+			var content = "<option value='" + location.replace(/ /g,"_") + "'>" + location + "</option>";
+			var $content = $(content);
+			if(entry.information && entry.information[0]){
+				if(entry.information[0].location == location){
+					$content.attr("selected","selected");
+				}
+			}
+			$locationInput.append($content);
 		}
-		$locationInput.append(content);
 	}
 }
 
@@ -305,13 +343,18 @@ function appendTypes(typeData){
 
 	}else{
 		var types = _.pluck(typeData, 'name');
-		var content = "";
 
 		for(var i = 0; i < types.length; i++){
 			var type = types[i];
-			content += "<option value='" + type + "'>" + type + "</option>";
+			var content = "<option value='" + type.replace(/ /g,"_") + "'>" + type + "</option>";
+			var $content = $(content);
+			if(entry.typename){
+				if(entry.typename == type){
+					$content.attr("selected","selected");
+				}
+			}
+			$typeInput.append($content);
 		}
-		$typeInput.append(content);
 	}
 }
 

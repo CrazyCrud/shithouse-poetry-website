@@ -99,6 +99,23 @@ var ImgurManager = (function(){
 				var url = "addEntry.php?authkey=" + authkey + "&" + data;
 				console.log(url);
 				$.post("php/backend/" + url, function(data){
+					if(data.success == 1){
+						callback(data.data);
+					}else{
+						console.log("Error");
+					}
+				});
+			}
+		},
+		updateEntry : function(callback, formData){
+			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+			if(formData == null || formData == undefined){
+				return;
+			}else{
+				var data = $.param(formData, false);
+				var url = "updateEntry.php?authkey=" + authkey + "&" + data;
+				console.log(url);
+				$.post("php/backend/" + url, function(data){
 					console.log(data);
 					if(data.success == 1){
 						callback(data.data);

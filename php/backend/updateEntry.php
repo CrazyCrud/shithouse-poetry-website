@@ -27,7 +27,7 @@
 
 // HEADER
 header('Content-Type: application/json; charset=utf-8');
-#error_reporting(0);
+error_reporting(0);
 include_once("../settings/config.php");
 include_once("../helpers/dbhelper.php");
 include_once("../helpers/util.php");
@@ -97,7 +97,7 @@ if(isset($_GET["long"])){
 
 if(isset($_GET["tags"])){
 	$tags = $_GET["tags"];
-	$entry["tags"] = standarize_array($tags);
+	$entry["tags"] = standarize_array(explode(",",$tags));
 }
 
 $db = new DBHelper();

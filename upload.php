@@ -148,6 +148,17 @@
 				</div>
 			</section>
 		</div>
+		<script type="text/javascript">
+			id=-1;
+
+			<?php
+			if(isset($_GET["id"])){
+				echo "id=".$_GET["id"].";";
+			}
+
+			?>
+
+		</script>
 		<script src="js/plugins/jquery.min.js"></script>
 		<script src="js/plugins/underscore.js"></script>
 		<script src="js/plugins/foundation/foundation.js"></script>
