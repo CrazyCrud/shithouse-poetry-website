@@ -170,7 +170,8 @@ var ImgurManager = (function(){
 		getComments: function(callback, entryid, start){
 			var comments = null;
 			start = start || -1;
-			var url = "getComments.php?entryid=" + entryid + "&start=" + start;
+			var url = "getComments.php?entryid=" + entryid + "&commentid=" + start;
+			console.log(url);
 			$.post("php/backend/" + url, function(data){
 				if(data.success == 1){
 					comments = data.data;
