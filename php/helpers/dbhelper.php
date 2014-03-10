@@ -741,6 +741,7 @@ class DBHelper{
 			if(isset($tags["tagid"])){
 				return $tags["tagid"];
 			}
+			if(strlen(trim($tag))<3)return false;
 			$query = Queries::createtag($tag);
 			return $this->query($query);
 		}

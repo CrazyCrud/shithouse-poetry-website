@@ -93,6 +93,7 @@ function initImageUpload(){
     	// checkForTags();
 	}).on('valid', function(event) {
 		if(checkForImage()){
+			message("Speichern", "Bild wird gespeichert, bitte warten ...");
 			event.preventDefault();
 			var data = {};
 			var title = $.trim($("input#title").val());
@@ -100,11 +101,12 @@ function initImageUpload(){
 			var transcription = $.trim($("input#transcription").val());
 			var location = $.trim($locationInput.find('option:selected').val());
 			var sex = $.trim($("input:radio[name=sex]:checked").val());
-			var tags = _.pluck($tagList.children('.tag-active'), 'innerHTML');
+			//var tags = _.pluck($tagList.children('.tag-active'), 'innerHTML');
+			var tags = $.trim($("input#custom-tag").val());
 			var type = $.trim($("#type").find('option:selected').val());
 
 			if(location.length > 2){
-				data['stuff&location'] = location;
+				data['location'] = location;
 			}
 			if(transcription.length > 2){
 				data['transcription'] = transcription;
@@ -134,7 +136,7 @@ function initImageUpload(){
 }
 
 function extractImageData(data){
-	if(data){
+	if(data && data.exif){
 		var latitude = data.exif.getText('GPSLatitude');
 		var longitude = data.exif.getText('GPSLongitude');
 		if((latitude != 'undefined') && (longitude != 'undefined')){
@@ -157,7 +159,7 @@ function uploadImageResult(uploadSuccesfull, entryid){
 		window.location = "details.php?id="+entryid;
 	}else{
 		error("Bild konnte nicht hochgeladen werden.");
-		ImgurManager.deleteEntry(entryid);
+		ImgurManager.deleteEntry(data);
 	}
 }
 
@@ -334,6 +336,18 @@ function error(message){
 		modal: true,
 		width: "80%",
 		title: "Oops!",
+		close : function(){
+			window.location = "index.html";
+		}
+	});
+}
+
+function message(title, message){
+	var $dialog = $('<div class="error-dialog">'+message+"</div>");
+	$dialog.dialog({
+		modal: true,
+		width: "80%",
+		title: title,
 		close : function(){
 			window.location = "index.html";
 		}

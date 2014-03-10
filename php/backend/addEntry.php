@@ -96,7 +96,7 @@ if(isset($_GET["long"])){
 
 if(isset($_GET["tags"])){
 	$tags = $_GET["tags"];
-	$entry["tags"] = standarize_array($tags);
+	$entry["tags"] = standarize_array(explode(",",$tags));
 }
 
 $db = new DBHelper();

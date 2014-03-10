@@ -50,6 +50,8 @@ if(!isset($_POST['id'])){
 	exit();
 }
 $json["success"]=$CODE_ERROR;
+$data = array();
+$data["id"]=$_POST['id'];
 
 // GET USER AND ENTRY
 // DB Connection
@@ -110,12 +112,15 @@ for($i = 0; $i < count($_FILES['images']['name']); $i++){
 			$json["message"] = "database error";
 			exit();
 		}
+		$data["url"]=$url;
 
 		imagedestroy($image);
 
         $isDirEmpty = false;
     }
 }
+
+$json["data"]=$data;
 
 echo json_encode($json);
 

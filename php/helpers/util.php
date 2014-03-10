@@ -4,10 +4,10 @@ function standarize_array($arr){
 	$new_array = [];
 
 	foreach($arr as $element){
-		if(is_numeric($element)){
-			array_push($new_array, intval($element));
+		if(is_numeric(trim($element))){
+			array_push($new_array, intval(trim($element)));
 		}else{
-			array_push($new_array, $element);
+			array_push($new_array, trim($element));
 		}
 	}
 

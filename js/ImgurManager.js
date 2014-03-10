@@ -95,8 +95,11 @@ var ImgurManager = (function(){
 			if(formData == null || formData == undefined){
 				return;
 			}else{
-				var url = "addEntry.php?authkey=" + authkey + "&" + $.param(formData, false);
+				var data = $.param(formData, false);
+				var url = "addEntry.php?authkey=" + authkey + "&" + data;
+				console.log(url);
 				$.post("php/backend/" + url, function(data){
+					console.log(data);
 					if(data.success == 1){
 						callback(data.data);
 					}else{
@@ -168,9 +171,10 @@ var ImgurManager = (function(){
 			})
 			.done(function(data) {
 				console.log(data);
+				callback(true, entryid);
 			})
 			.fail(function(data) {
-				console.log("error", data);
+				callback(false, entryid);
 			})
 			.always(function() {
 				console.log("complete");
