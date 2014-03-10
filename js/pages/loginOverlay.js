@@ -6,6 +6,12 @@ var loginButton = document.getElementById("loginButton");
 $mail = $("#emailInput");
 $password = $("#passwordInput");
 
+$(function(){
+	if(!$("<div></div>").dialog){
+		$("body").append('<script src="js/plugins/jquery-ui-custom/jquery-ui-1.10.4.custom.min.js"></script>'
+		+'<link rel="stylesheet" type="text/css" href="css/plugins/custom-jqui-theme/jquery-ui-1.10.4.custom.css"/>');
+	}
+});
 
 registerButton.onclick = openRegisterPage;
 loginButton.onclick = userLogin;
@@ -52,14 +58,27 @@ function userLogin(){
 				case 1: onLoginSuccess(data["data"]);
 					break;
 				//missing parameter
-				case 3: alert("Es fehlt ein Parameter. Bitte wenden Sie sich an den Admin.");
+				case 3: 
+					error("Es fehlt ein Parameter. Bitte wenden Sie sich an den Admin.");
 					break;
 				case 0: console.log(data["message"]);
 					break;
 				case -1: console.log("code not logged in");
+					break;
+				case 7:
+					error("Nutzername oder Passwort nicht gefunden.");
 				default: console.log(data);					
 			}
 		}
+	});
+}
+
+function error(message){
+	var $dialog = $('<div class="error-dialog">'+message+"</div>");
+	$dialog.dialog({
+		modal: true,
+		width: "80%",
+		title: "Oops!"
 	});
 }
 
@@ -70,4 +89,3 @@ function onLoginSuccess(authkey){
 	document.cookie = "authkey="+authkey+"; expires="+d.toGMTString();
 	window.location = "index.html";
 }
-
