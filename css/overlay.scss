@@ -1,0 +1,75 @@
+@import "partials/base";
+
+#overlay-background {
+   	position: fixed;
+   	z-index: 100;
+   	top: 0%;
+   	left: 0%;
+   	height: 100%;
+   	width: 100%;
+   	background-color: $black;
+   	opacity: 0.95
+}
+
+.overlaycontent{
+	position: fixed;
+	top: 5%;
+	width: 100%;	
+	left: 0;
+	z-index: 110;
+}
+
+.form-container{
+	div{
+		margin-top: $space_minus1;
+		margin-bottom: $space_minus1;
+	}
+
+	.input-container{
+		margin-top: $space_plus3;
+	}
+}
+
+#search-button{
+	float: right;
+}
+
+#search-input{
+	height: auto;
+	font-size: $space_plus1;
+	color: $white;
+	border: 0;
+	background: rgba(10, 10, 10, 0.0);
+	padding: 0;
+}
+
+#search-input:focus{
+	border: 0;
+	background: rgba(10, 10, 10, 0.0);
+	box-shadow: none;
+}
+
+.close-button-container{
+	position: absolute;
+	display: block;
+	width: auto;
+	height: auto;
+	top: 0%;
+	right: 3%;
+}
+
+#back-button{
+	margin-bottom: $space_plus1;
+	font-size: $space_plus1;
+	color: $white;
+}
+
+@media screen and (max-width: 459px){
+	#search-input{
+		font-size: 1rem;
+	}
+
+	#search-button{
+		float: left;
+	}
+}

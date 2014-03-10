@@ -186,6 +186,60 @@ input[type="password"].loginField {
 :-ms-input-placeholder {
   color: #cbcdc7; }
 
-.form-register .columns {
-  padding-right: 0.618rem;
-  padding-left: 0.618rem; }
+#overlay-background {
+  position: fixed;
+  z-index: 100;
+  top: 0%;
+  left: 0%;
+  height: 100%;
+  width: 100%;
+  background-color: #111111;
+  opacity: 0.95; }
+
+.overlaycontent {
+  position: fixed;
+  top: 5%;
+  width: 100%;
+  left: 0;
+  z-index: 110; }
+
+.form-container div {
+  margin-top: 0.618rem;
+  margin-bottom: 0.618rem; }
+.form-container .input-container {
+  margin-top: 4.236rem; }
+
+#search-button {
+  float: right; }
+
+#search-input {
+  height: auto;
+  font-size: 1.618rem;
+  color: #ffffff;
+  border: 0;
+  background: rgba(10, 10, 10, 0);
+  padding: 0; }
+
+#search-input:focus {
+  border: 0;
+  background: rgba(10, 10, 10, 0);
+  box-shadow: none; }
+
+.close-button-container {
+  position: absolute;
+  display: block;
+  width: auto;
+  height: auto;
+  top: 0%;
+  right: 3%; }
+
+#back-button {
+  margin-bottom: 1.618rem;
+  font-size: 1.618rem;
+  color: #ffffff; }
+
+@media screen and (max-width: 459px) {
+  #search-input {
+    font-size: 1rem; }
+  #search-button {
+    float: left; } }

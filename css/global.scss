@@ -47,27 +47,6 @@ body{
 	padding-top: $space_plus1;
 }
 
-#overlay {
-   position: fixed;
-   z-index:199;
-   top: 0%;
-   left: 0%;
-   height:100%;
-   width:100%;
-   background-color: $black;
-   opacity: 0.95
-}
-
-.overlaycontent{
-	display: none;
-	position:absolute;
-	top:5%;
-	width: 100%;	
-	left:0px;
-	z-index:200;
-	position:fixed;
-}
-
 @media screen and (max-width: 640px){
 	#mainnav{
 		.top-bar-section{

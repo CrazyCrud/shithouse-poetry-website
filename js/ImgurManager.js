@@ -30,6 +30,8 @@ var ImgurManager = (function(){
 		}
 	};
 
+	var AUTH_KEY_LENGTH = 45;
+
 	return {
 		getEntries : function(callback, order, currentEntry){
 			var searchProps = {};
@@ -69,7 +71,9 @@ var ImgurManager = (function(){
 			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 			var links = null;
 			var url = 'getRandomEntries.php?amount=10';
-			url += ('&authkey=' + authkey);
+			if(authkey.length == AUTH_KEY_LENGTH){
+				url += ('&authkey=' + authkey);
+			}
 			$.post('php/backend/' + url, function(data) {
 				if(data.success == 1){
 					links = data.data;
@@ -142,7 +146,7 @@ var ImgurManager = (function(){
 		getEntry : function(callback, id){
 			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 			var url;
-			if(authkey.length == 45){
+			if(authkey.length == AUTH_KEY_LENGTH){
 				url = "getEntry.php?entryid=" + id + "&authkey=" + authkey;
 			}else{
 				url = "getEntry.php?entryid=" + id;
@@ -199,7 +203,7 @@ var ImgurManager = (function(){
 		},
 		addComment : function(callback, entryid, comment){
 			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-			if(authkey.length != 45)callback(false);
+			if(authkey.length != AUTH_KEY_LENGTH)callback(false);
 			var url = "addComment.php?entryid=" + entryid + "&comment=" + comment + "&authkey=" + authkey;
 			$.post("php/backend/" + url, function(data){
 				if(data.success == 1){
@@ -211,7 +215,7 @@ var ImgurManager = (function(){
 		},
 		deleteComment : function(callback, commentid){
 			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-			if(authkey.length != 45)callback(false);
+			if(authkey.length != AUTH_KEY_LENGTH)callback(false);
 			var url = "deleteComment.php?commentid=" + commentid + "&authkey=" + authkey;
 			console.log(url);
 			$.post("php/backend/" + url, function(data){
@@ -282,6 +286,18 @@ var ImgurManager = (function(){
 					tagData = data.data;
 				}
 				callback(tagData);
+			});
+		},
+		search: function(callback, searchcontent, start){
+			start = start || 0;
+			var url = 'search.php?search=' + searchcontent + '&start=' + start;
+			var searchData = null;
+
+			$.get('php/backend/' + url, function(data) {
+				if(data.success == 1){
+					searchData = data.data;
+				}
+				callback(searchData);
 			});
 		},
 		Tags : tags,

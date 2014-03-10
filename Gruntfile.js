@@ -28,10 +28,11 @@ module.exports = function(grunt) {
                 files: {
                     /* ['css/global.scss', 'css/pages/home.scss'] */
                     'css/global.css': 'css/*.scss',
+                    'css/overlay.css': 'css/overlay.scss',
                     'css/pages/home.css': 'css/pages/home.scss',
-                    'css/pages/details.css': 'css/pages/details.scss',                    
+                    'css/pages/details.css': 'css/pages/details.scss',
+                    'css/pages/upload.css': 'css/pages/upload.scss',
                     'css/pages/register.css': 'css/pages/register.scss',
-                    'css/pages/searchresults.css': 'css/pages/searchresults.scss',
                     'css/plugins/foundation.css': 
                         'scss/*.scss'
                 }
@@ -99,7 +100,7 @@ module.exports = function(grunt) {
             css: {
                 files: ['css/modules/*.scss', 'css/partials/*.scss', 'css/pages/*.scss', 'css/*.scss', 'scss/foundation/components/*.scss', 
                     'scss/foundation/*.scss', 'scss/*.scss'],
-                tasks: ['sass', 'concat_css'],
+                tasks: ['sass'],
                 options: {
                     spawn: false,
                 }
@@ -119,5 +120,5 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-imagemin');
     grunt.loadNpmTasks('grunt-contrib-watch');
 
-    grunt.registerTask('default', ['concat', 'uglify', 'sass', 'uncss', 'concat_css', 'autoprefixer', 'cssmin', 'imagemin']);
+    grunt.registerTask('default', ['concat', 'uglify', 'sass', 'concat_css', 'autoprefixer', 'cssmin', 'imagemin']);
 };

@@ -1,46 +1,10 @@
 @import "../partials/base";
 
-
-
-#register-maincontent{
-	margin-top: 40px;
-	overflow:hidden;
+.form-register{
+	.columns{
+		padding-right: $space_minus1;
+		padding-left: $space_minus1;
+	}
 }
-
-
-
-.ui-dialog .ui-dialog-content{
-	font-size:0.5em;
-
-}
-
-
-#registerDialogTitle{
-	display:none;
-}
-
-#registerDialogContent{
-	font-size: 1.4em;
-	margin-bottom: 0%;
-	line-height: 1.4;
-}
-
-.ui-draggable .ui-dialog-titlebar{
-	font-size: 0.9em;
-}
-
-.ui-dialog .ui-dialog-titlebar{
-	padding: 0em;
-}
-
-.ui-dialog .ui-dialog-buttonpane{
-	padding: 0em;
-}
-
-.normalButton{
-	margin-top: 15px;
-}
-
-
 
 

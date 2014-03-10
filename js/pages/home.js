@@ -87,6 +87,9 @@ function appendImages(){
 }
 
 function appendSingleImage(){
+	console.log(currentEntry);
+	console.log(_.keys(imgData).length);
+	enableVoting();
 	if(_.isEmpty(imgData)){
 		disableVoting();
 		appendMessage(NO_SINGLE_IMAGE);
@@ -325,12 +328,13 @@ function setupTabFunctionality(){
 		disableInfiniteScroll();
 		clearRequests();
 		getSingleEntry();
-		enableVoting();
 	});
 }
 
 function enableVoting(){
-	$votingContainer.css('display', 'block');
+	if($votingContainer.is("hidden")){
+		$votingContainer.css('display', 'block');
+	}
 }
 
 function setupVoting(){

@@ -1,8 +1,6 @@
 var latitude_g = -1000;
 var longitude_g = -1000;
-var DEFAULT_LOCATIONS = [
-	"Bar", "Kino", "Restaurant", "Tankstelle", "Schule", "Hochschule"
-];
+
 var entry = {};
 var $imageContainer = $(".image-container");
 var $addImageContainer = $(".add-image-container");
@@ -26,7 +24,9 @@ $(document).ready(function() {
 	getType();
 	getTags();
 	initDialog();
-	if(id>0)initEdit();
+	if(id > 0){
+		initEdit();
+	}
 });
 
 function initEdit(){

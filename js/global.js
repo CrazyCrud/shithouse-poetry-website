@@ -8,7 +8,9 @@ $(document).ready(function() {
 });
 
 function setupOverlayBackground(){
-    overlayTemplate = _.template($("script.overlay-template").html()); 
+    if($("script.overlay-template").length > 0){
+        overlayTemplate = _.template($("script.overlay-template").html()); 
+    }
 }
 
 function createOverlayBackground(){
