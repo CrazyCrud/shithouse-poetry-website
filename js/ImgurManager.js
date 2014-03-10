@@ -121,7 +121,14 @@ var ImgurManager = (function(){
 			});
 		},
 		getEntry : function(callback, id){
-			var url = "getEntry.php?entryid=" + id;
+			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+			var url;
+			if(authkey.length == 45){
+				url = "getEntry.php?entryid=" + id + "&authkey=" + authkey;
+			}else{
+				url = "getEntry.php?entryid=" + id;
+			}
+			
 			$.post("php/backend/" + url, function(data){
 				if(data.success == 1){
 					callback(data["data"]);
