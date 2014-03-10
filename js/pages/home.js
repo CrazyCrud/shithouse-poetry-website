@@ -20,6 +20,7 @@ $(document).ready(function() {
 	setupTabFunctionality();
 	getEntries();
 	setupVoting();
+	setupImageClick();
 });
 
 var lazyRearrange = _.debounce(rearrangeImages, 500);
@@ -27,6 +28,13 @@ var lazyRearrange = _.debounce(rearrangeImages, 500);
 $(window).resize(lazyRearrange);
 
 var setupOnce = _.once(setupInfiniteScroll);
+
+function setupImageClick(){
+	$(document).on("click", ".jg-image",function(){
+		var id = $($(this).find("a")[0]).attr("title");
+		window.location = "details.php?id="+id;
+	});
+}
 
 function setupInfiniteScroll(){
 	var vpTopOffset = $mainheader.height() + $tabsContainer.height();
