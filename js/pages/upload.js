@@ -85,7 +85,7 @@ function initImageUpload(){
 			var artist = $.trim($("input#artist").val());
 			var transcription = $.trim($("input#transcription").val());
 			var location = $.trim($locationInput.find('option:selected').val());
-			var sex = $.trim($("input:radio[name=sex]").val());
+			var sex = $.trim($("input:radio[name=sex]:checked").val());
 			var tags = _.pluck($tagList.children('.tag-active'), 'innerHTML');
 			var type = $.trim($("#type").find('option:selected').val());
 

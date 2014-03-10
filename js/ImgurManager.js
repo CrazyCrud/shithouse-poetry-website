@@ -97,11 +97,9 @@ var ImgurManager = (function(){
 				return;
 			}else{
 				var url = "addEntry.php?authkey=" + authkey + "&" + $.param(formData, false);
-				console.log(url);
 				$.post("php/backend/" + url, function(data){
 					if(data.success == 1){
-						console.log("Entry added");
-						callback();
+						callback(data.data);
 					}else{
 						console.log("Error");
 					}
@@ -153,18 +151,30 @@ var ImgurManager = (function(){
 		},
 		uploadImage : function(callback, entryid, file){
 			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+			
 			var formData = new FormData();
 			formData.append('authkey', authkey);
 			formData.append('id', entryid);
-			formData.append('file', file);
+			formData.append('images[0]', file);
 
-			var url = "imgurUpload.php?";
-			$.post("php/backend/" + url, {data : formData} , function(data){
-				if(data.success == 1){
-					callback(true, entryid);
-				}else{
-					callback(false, entryid);
-				}
+			var url = "imgurUpload.php";
+
+			$.ajax({
+				url: 'php/backend/' + url,
+				type: 'POST',
+				contentType: false,
+				processData: false,
+				cache: false,
+				data: formData,
+			})
+			.done(function(data) {
+				console.log(data);
+			})
+			.fail(function(data) {
+				console.log("error", data);
+			})
+			.always(function() {
+				console.log("complete");
 			});
 		},
 		getSystemTags: function(callback){
