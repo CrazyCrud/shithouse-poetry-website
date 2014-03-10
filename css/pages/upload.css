@@ -202,8 +202,11 @@ input[type="password"].loginField {
   margin-right: 0.618rem;
   margin-left: 0.618rem;
   overflow: hidden; }
-  .upload-forms-container .image-error, .upload-forms-container .tag-error {
+  .upload-forms-container .image-error-container, .upload-forms-container .tag-error {
     display: none; }
+  .upload-forms-container small {
+    margin-right: 0.236rem;
+    margin-left: 0.236rem; }
 
 .upload-forms-container form > div:not(.add-image-container) {
   margin-top: 0.618rem;
@@ -274,6 +277,9 @@ input[type="password"].loginField {
 
 .fieldset-container {
   color: #111111; }
+  .fieldset-container legend small {
+    font-weight: normal;
+    font-size: 35%; }
 
 .tags-container {
   display: block;
@@ -282,7 +288,9 @@ input[type="password"].loginField {
   overflow: hidden; }
 
 #tag-list {
-  list-style-type: none; }
+  list-style-type: none;
+  margin-left: 0;
+  margin-right: 0; }
   #tag-list li {
     display: inline-block;
     font-size: 0.618rem;
