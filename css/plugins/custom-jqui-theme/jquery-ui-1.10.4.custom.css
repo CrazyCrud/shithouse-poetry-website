@@ -469,6 +469,7 @@ button.ui-button::-moz-focus-inner {
 	left: 0;
 	padding: .2em;
 	outline: 0;
+	max-width: 640px;
 }
 .ui-dialog .ui-dialog-titlebar {
 	padding: .4em 1em;
@@ -479,8 +480,9 @@ button.ui-button::-moz-focus-inner {
 	margin: .1em 0;
 	white-space: nowrap;
 	width: 90%;
-	overflow: hidden;
+	//overflow: hidden;
 	text-overflow: ellipsis;
+	font-size: .8em;
 }
 .ui-dialog .ui-dialog-titlebar-close {
 	position: absolute;
@@ -497,6 +499,7 @@ button.ui-button::-moz-focus-inner {
 	padding: .5em 1em;
 	background: none;
 	overflow: auto;
+	font-size: .7em;
 }
 .ui-dialog .ui-dialog-buttonpane {
 	text-align: left;
@@ -805,10 +808,11 @@ body .ui-tooltip {
 	color: #222222;
 }
 .ui-widget-header {
-	border: 1px solid #aaaaaa;
-	background: #e4e4e4 url(images/ui-bg_flat_50_e4e4e4_40x100.png) 50% 50% repeat-x;
-	color: #535353;
-	font-weight: bold;
+	border: none;
+	border-bottom: 1px solid black;
+	//background: #e4e4e4 url(images/ui-bg_flat_50_e4e4e4_40x100.png) 50% 50% repeat-x;
+	//color: #535353;
+	//font-weight: bold;
 }
 .ui-widget-header a {
 	color: #535353;
@@ -819,7 +823,7 @@ body .ui-tooltip {
 .ui-state-default,
 .ui-widget-content .ui-state-default,
 .ui-widget-header .ui-state-default {
-	border: 1px solid #d3d3d3;
+	//border: 1px solid #d3d3d3;
 	background: #e6e6e6 url(images/ui-bg_flat_75_e6e6e6_40x100.png) 50% 50% repeat-x;
 	font-weight: normal;
 	color: #555555;
@@ -836,7 +840,7 @@ body .ui-tooltip {
 .ui-state-focus,
 .ui-widget-content .ui-state-focus,
 .ui-widget-header .ui-state-focus {
-	border: 1px solid #999999;
+	//border: 1px solid #999999;
 	background: #dadada url(images/ui-bg_flat_75_dadada_40x100.png) 50% 50% repeat-x;
 	font-weight: normal;
 	color: #212121;
@@ -1164,8 +1168,9 @@ body .ui-tooltip {
 
 /* Overlays */
 .ui-widget-overlay {
-	background: #aaaaaa url(images/ui-bg_flat_0_aaaaaa_40x100.png) 50% 50% repeat-x;
-	opacity: .3;
+	// background: #aaaaaa url(images/ui-bg_flat_0_aaaaaa_40x100.png) 50% 50% repeat-x;
+	background: #000;
+	opacity: .75;
 	filter: Alpha(Opacity=30);
 }
 .ui-widget-shadow {
