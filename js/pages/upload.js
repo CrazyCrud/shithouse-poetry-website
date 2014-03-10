@@ -120,15 +120,17 @@ function initImageUpload(){
 }
 
 function extractImageData(data){
-	var latitude = data.exif.getText('GPSLatitude');
-	var longitude = data.exif.getText('GPSLongitude');
-	if((latitude != 'undefined') && (longitude != 'undefined')){
-		latitude_g = latitude;
-		longitude_g = longitude;
-		ImgurManager.getLocations(retrieveLocations, latitude_g, longitude_g);
-	}else{
-		ImgurManager.getDefaultLocations(retrieveLocations);
+	if(data){
+		var latitude = data.exif.getText('GPSLatitude');
+		var longitude = data.exif.getText('GPSLongitude');
+		if((latitude != 'undefined') && (longitude != 'undefined')){
+			latitude_g = latitude;
+			longitude_g = longitude;
+			ImgurManager.getLocations(retrieveLocations, latitude_g, longitude_g);
+			return;
+		}
 	}
+	ImgurManager.getDefaultLocations(retrieveLocations);
 }
 
 function uploadImage(entryid){
