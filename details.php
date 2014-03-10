@@ -24,7 +24,16 @@
 						</ul>
 						<section class="top-bar-section">
 							<ul class="left">
-								<li class="li-upload-container"></li>
+								<li class="li-home-container">
+									<a id="link-home" href="index.html">
+										<span></span><i class="icon-home"></i>
+									</a>
+								</li>
+								<li class="li-upload-container">
+									<a id="link-upload" href="upload.html">
+										<span></span><i class="icon-upload-cloud"></i>
+									</a>
+								</li>
 							</ul>
 							<ul class="right">
 								<li class="li-search-container">
