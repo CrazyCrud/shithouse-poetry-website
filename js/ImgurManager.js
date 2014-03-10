@@ -128,7 +128,6 @@ var ImgurManager = (function(){
 			}else{
 				url = "getEntry.php?entryid=" + id;
 			}
-			
 			$.post("php/backend/" + url, function(data){
 				if(data.success == 1){
 					callback(data["data"]);
@@ -137,10 +136,10 @@ var ImgurManager = (function(){
 				}
 			});
 		},
-		getLocations : function(callback, lat, long){
+		getLocations : function(callback, latitude, longitude){
 			var locations = null;
-			var url = "getLocations.php?lat=" + lat + 
-				"&long=" + long;
+			var url = "getLocations.php?lat=" + latitude + 
+				"&long=" + longitude;
 			$.post("php/backend/" + url, function(data){
 				if(data.success == 1){
 					locations = data.data;
@@ -166,6 +165,17 @@ var ImgurManager = (function(){
 					types = data.data;
 				}
 				callback(types);
+			});
+		},
+		getComments: function(callback, entryid, start){
+			var comments = null;
+			start = start || -1;
+			var url = "getComments.php?entryid=" + entryid + "&start=" + start;
+			$.post("php/backend/" + url, function(data){
+				if(data.success == 1){
+					comments = data.data;
+				}
+				callback(comments);
 			});
 		},
 		uploadImage : function(callback, entryid, file){
