@@ -69,9 +69,7 @@ var ImgurManager = (function(){
 			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 			var links = null;
 			var url = 'getRandomEntries.php?amount=10';
-			if(authkey.length > 0){
-				url += ('&authkey=' + authkey);
-			}
+			url += ('&authkey=' + authkey);
 			$.post('php/backend/' + url, function(data) {
 				if(data.success == 1){
 					links = data.data;
@@ -81,8 +79,9 @@ var ImgurManager = (function(){
 		},
 		addRating : function(callback, entryid, rating){
 			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-			var url = 'addEntry.php?authkey=' + authkey + 
+			var url = 'addRating.php?authkey=' + authkey + 
 				'&entryid=' + entryid + '&rating=' + rating;
+			console.log(url);
 			$.post('php/backend/' + url, function(data) {
 				if(data.success == 1){
 					callback();
