@@ -220,7 +220,8 @@ body {
   width: 120px;
   overflow: hidden;
   top: 90%;
-  right: 2%; }
+  right: 2%;
+  box-shadow: 1px 1px 1px #111111; }
   #user-overlay .user-overlay-container {
     background-color: rgba(140, 140, 140, 0.5); }
     #user-overlay .user-overlay-container ul {
