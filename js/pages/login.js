@@ -24,14 +24,12 @@ $(document).ready(function() {
 });
 
 function isLoggedIn(){
-	console.log(user.username.length);
 	return user.username.length > 0 ? true: false;
 }
 
 function manageLoginOverlay(){
-	if($("#user-overlay").length > 0){
-		$("#mainnav").append(loginTemplate());
-		
+	if($("#user-overlay").length < 1){
+		$("#mainnav").append(userTemplate());
 	}else{
 		$("#user-overlay").remove();
 	}
