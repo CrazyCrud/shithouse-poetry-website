@@ -100,9 +100,9 @@ var ImgurManager = (function(){
 			$.post('php/backend/' + url, function(data) {
 				if(data.success == 1){
 					callback();
-				}else{
-					console.log("Error");
+					return;
 				}
+				callback();
 			});
 		},
 		addEntry : function(callback, formData){

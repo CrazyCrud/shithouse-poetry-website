@@ -290,6 +290,12 @@ input[type="password"].loginField {
   #images img {
     vertical-align: bottom; }
 
+.images-vote {
+  display: block;
+  width: 60% !important;
+  margin-left: auto;
+  margin-right: auto; }
+
 .jg-image {
   overflow: hidden; }
 
@@ -388,13 +394,28 @@ span.transcription {
 
 .vote-container {
   display: none;
-  text-align: center; }
+  text-align: center;
+  margin: 0.618rem 0;
+  height: auto; }
   .vote-container .vote-icon-container {
     display: inline-block;
-    color: #111111; }
+    height: 50px;
+    width: 100%;
+    color: #111111;
+    font-size: 1.618rem; }
     .vote-container .vote-icon-container i {
+      background-color: #ffffff;
+      color: #111111;
       cursor: pointer;
-      margin: 0.618rem; }
+      margin-top: 1.618rem;
+      margin-bottom: 1.618rem;
+      padding: 0.618rem;
+      border: solid 1px #cbcdc7;
+      border-radius: 4px;
+      transition: all 0.3s ease; }
+    .vote-container .vote-icon-container i:hover {
+      color: #ffffff;
+      background-color: #111111; }
 
 .message-container {
   text-align: center; }
