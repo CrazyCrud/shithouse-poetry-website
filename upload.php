@@ -159,6 +159,67 @@
 			?>
 
 		</script>
+		<script type="text/template" class="overlay-template">
+			<div id="overlay-background"></div>
+		</script>
+		<script type="text/template" class="overlay-user">
+			<section id="user-overlay">
+				<div class="user-overlay-container">
+					<ul>
+						<li><a id="link-timeline" href="">Timeline</a></li>
+						<li><a id="link-logout" href="">Logout</a></li>
+					</ul>
+				</div>
+			</section>
+		</script>
+		<script type="text/template" class="search-template">
+ 			<section id="searchcontent" class="overlaycontent">
+				<div class="row">
+					<div class="close-button-container">
+						<a href="#" class="left" id="back-button"> 
+							<i class="icon-cancel"></i>
+						</a>
+					</div>
+					<div class="small-11 small-centered medium-10 medium-centered large-8 large-centered columns form-container">
+						<div class="small-12 columns full-width input-container">
+							<input type="text" placeholder="Suche nach..." id="search-input" autofocus>
+						</div>	
+						<div class="small-12 columns full-width submit-container">
+							<a href="#" class="button-overlay" id="search-button">Suchen</a>
+						</div>
+					</div>				
+				</div>
+			</section>
+    	</script>
+    	<script type="text/template" class="login-template">
+ 			<section id="logincontent" class="overlaycontent">
+				<div class="row">
+					<div class="close-button-container">
+						<a href="#" class="left" id="back-button"> 
+							<i class="icon-cancel"></i>
+						</a>
+					</div>
+					<div class="small-11 small-centered medium-10 medium-centered large-8 large-centered columns form-container">
+						<div class="small-12 columns full-width input-container">
+							<form id="login-form">
+								<input type="email" placeholder="E-Mail" name="mail-input" class="login-field" id="mail-input" autofocus />
+								<input type="password" placeholder="Passwort" name="password-input" class="login-field" id="password-input" />
+							</form>
+						</div>	
+						<div class="small-12 columns full-width submit-container">
+							<a href="register.php" class="button-overlay left" 
+									id="register-button">
+								Registrieren 
+							</a>
+							<a href="#" class="button-overlay right" 
+									id="login-button">
+								Login
+							</a>
+						</div>
+					</div>		
+				</div>
+			</section>
+    	</script>
 		<script src="js/plugins/jquery.min.js"></script>
 		<script src="js/plugins/underscore.js"></script>
 		<script src="js/plugins/foundation/foundation.js"></script>
