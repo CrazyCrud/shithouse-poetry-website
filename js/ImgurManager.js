@@ -300,6 +300,16 @@ var ImgurManager = (function(){
 				callback(userData);
 			});
 		},
+		getUser : function(callback, id){
+			var url = 'getUser.php?id='+id;
+			$.get("php/backend/"+url,function(data){
+				if(data.success == 1){
+					callback(data.data);
+				}else{
+					callback(false);
+				}
+			});
+		},
 		search: function(callback, searchcontent, start){
 			start = start || 0;
 			var url = 'search.php?search=' + searchcontent + '&start=' + start;
