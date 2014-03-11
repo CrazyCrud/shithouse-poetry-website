@@ -312,7 +312,7 @@ var ImgurManager = (function(){
 			});
 		},
 		createUser : function(callback, username, pw, mail){
-			var url = 'createUser.php?username=' + username + 'pw=&' + pw + 
+			var url = 'createUser.php?name=' + username + '&pwd=' + pw + 
 				'&mail=' + mail;
 			var userData = null;
 
