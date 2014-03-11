@@ -5,6 +5,7 @@ $(document).ready(function() {
 	$(document).foundation();
     setupOverlayBackground();
     cookieUser();
+    greetUser();
 });
 
 function setupOverlayBackground(){
@@ -31,6 +32,14 @@ function cookieUser(){
     user.id = document.cookie.replace(/(?:(?:^|.*;\s*)userid\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     user.username = document.cookie.replace(/(?:(?:^|.*;\s*)username\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     user.admin = document.cookie.replace(/(?:(?:^|.*;\s*)username\s*\=\s*([^;]*).*$)|^.*$/, "$1")==1;
+}
+
+function greetUser(){
+    if(!_.isEmpty(user)){
+      if(user.username.length > 0){
+        $("#link-login").children('span').html(user.username);
+      }
+    }
 }
 
 function formatTime(time){

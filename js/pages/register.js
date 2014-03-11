@@ -55,7 +55,21 @@ function onLoginSuccess(authkey){
 		var d = new Date();
 		var oneYear = 31536000000;
 		d.setTime(d.getTime() + oneYear);
+
 		document.cookie = "authkey=" + authkey + "; expires=" + d.toGMTString();
+
+		ImgurManager.getUserAuth(logUserIn, authkey);
+	}
+}
+
+function logUserIn(success){
+	if(success){
+		var d = new Date();
+		var oneYear = 31536000000;
+		d.setTime(d.getTime() + oneYear);
+		document.cookie = "username=" + user.username + "; expires=" + d.toGMTString();
+		document.cookie = "userid=" + user.id+ "; expires=" + d.toGMTString();
+		document.cookie = "admin=" + user.status + "; expires=" + d.toGMTString();
 
 		$("<div>Sie haben sich erfolgreich angemeldet!</div>").dialog({
 			dialogClass: "no-close",
