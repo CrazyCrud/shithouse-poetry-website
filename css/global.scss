@@ -46,7 +46,8 @@ body{
 	overflow: hidden;
 	top: 90%;
 	right: 2%;
-
+	box-shadow: 1px 1px 1px $black;
+	
 	.user-overlay-container{
 		background-color: rgba(140, 140, 140, 0.5);
 		ul{
