@@ -6,6 +6,7 @@
 		<link rel="stylesheet" type="text/css" href="css/plugins/foundation.css"/>
 		<link rel="stylesheet" type="text/css" href="css/plugins/fontello/fontello.css"/>
 		<link rel="stylesheet" type="text/css" href="css/global.css"/>
+		<link rel="stylesheet" type="text/css" href="css/overlay.css"/>
 		<link rel="stylesheet" type="text/css" href="css/pages/register.css"/>
 		<link href="css/plugins/custom-jqui-theme/jquery-ui-1.10.4.custom.css" rel="stylesheet">
 		<script type="text/javascript" src="js/plugins/modernizr.js"></script>
@@ -48,45 +49,45 @@
 			</header>
 			<section id="maincontent">
 				<div class="row">
-					<div class="small-12 columns full-width">
-						<h1>Registrieren</h1>															
-					</div>	
-					<div class="small-12 columns form-container">
+					<div class="small-12 columns register-forms-container">
+						<div class="small-12 medium-9 medium-offset-3
+								large-9 large-offset-3 columns headline-container">
+							<h3>Registrieren</h3>															
+						</div>	
 						<form data-abide="ajax" class="form-register" novalidate="novalidate">
 							<div class="row">
-					        	<div class="small-3 columns">
-					        		<label for="username" class="right">Benutzername</label>
+					        	<div class="small-12 medium-3 large-3 columns">
+					        		<label for="username">Benutzername</label>
 					        	</div>
-					        	<div class="small-9 columns">
-					        		<input type="text" pattern="text" id="username" 
+					        	<div class="small-12 medium-9 large-9 columns">
+					        		<input type="text" id="username" 
 					        			placeholder="Hier Benutzername eingeben..." required>
 					        	</div>
 					      	</div>
 					      	<div class="row">
-					        	<div class="small-3 columns">
-					        		<label for="mail" class="right">E-Mail</label>
+					        	<div class="small-12 medium-3 large-3 columns">
+					        		<label for="mail">E-Mail</label>
 					        	</div>
-					        	<div class="small-9 columns">
+					        	<div class="small-12 medium-9 large-9 columns">
 					          		<input pattern="email" type="email" id="mail" 
 					          			placeholder="Hier E-Mail eingeben..." required>
 					       		</div>
 					      	</div>
 					      	<div class="row">
-					        	<div class="small-3 columns">
-					        		<label for="password" class="right">Passwort</label>
+					        	<div class="small-12 medium-3 large-3 columns">
+					        		<label for="password">Passwort</label>
 					        	</div>
-					        	<div class="small-9 columns">
-					        		<input type="password" pattern="password" id="password" 
-					        			placeholder="Hier Passwort eingeben..." required>
+					        	<div class="small-12 medium-9 large-9 columns">
+					        		<input type="password" id="password" placeholder="Hier Passwort eingeben..." required>
 					        	</div>
 					        </div>
 					        <div class="row">
-					        	<div class="small-3 columns">
-					        		<label for="confirm-password" class="right">Passwort bestätigen</label>
+					        	<div class="small-12 medium-3 large-3 columns">
+					        		<label for="confirm-password">Passwort bestätigen</label>
 					        	</div>
-					        	<div class="small-9 columns">
-					        		<input type="password" pattern="password" id="confirm-password" 
-					        			placeholder="Hier Passwort eingeben..." required data-equalto="password">
+					        	<div class="small-12 medium-9 large-9 columns">
+					        		<input type="password" id="confirm-password" 
+					        			placeholder="Hier Passwort bestätigen..." data-equalto="password">
 					        	</div>
 					      	</div>
 					      	<div class="row">
@@ -157,11 +158,11 @@
 		<script src="js/plugins/underscore.js"></script>
 		<script src="js/plugins/md5/jquery.md5.js"></script>
 		<script src="js/plugins/foundation/foundation.js"></script>
-		<script src="js/plugins/foundation/foundation.abide.js"></script>
   		<script src="js/plugins/foundation/foundation.topbar.js"></script>
-  		
   		<script src="js/plugins/jquery-ui-custom/jquery-ui-1.10.4.custom.js"></script>
-  		<script src="js/pages/global.js"></script>	
+  		<script src="js/plugins/foundation/foundation.abide.js"></script>
+  		<script src="js/global.js"></script>	
+  		<script src="js/ImgurManager.js"></script>
 		<script src="js/pages/search.js"></script>		
 		<script src="js/pages/login.js"></script>
 		<script src="js/pages/register.js"></script>
