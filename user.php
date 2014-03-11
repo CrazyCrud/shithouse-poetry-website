@@ -56,6 +56,17 @@
 							<div id="username">Nutzer nicht gefunden</div>
 							<div id="joined">Beigetreten <span id="membersince"></span></div>
 							<div id="online">Zuletzt online <span id="lastseen"></span></div>
+							<div id="stats">
+								<div id="entries">Bilder hochgeladen: <span class="amount"></span></div>
+								<div id="comments">Kommentare gepostet: <span class="amount"></span></div>
+								<div id="ratings">Bilder bewertet: <span class="amount"></span></div>
+							</div>
+							<div id="achievements">
+								Erfolge:
+								<div id="entries"></div>
+								<div id="comments"></div>
+								<div id="ratings"></div>
+							</div>
 						</div>
 						<div class="details small-12 medium-5 large-5 columns right" id="image-container">
 							<div id="lastaction">Neuestes Bild:</div>

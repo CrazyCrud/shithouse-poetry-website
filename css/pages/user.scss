@@ -31,3 +31,64 @@ body{
 #online{
   font-size: .5em;
 }
+
+#stats{
+	margin-top: 1em;
+	font-size: .5em;
+}
+
+#stats .amount{
+	font-style: italic;
+}
+
+#achievements{
+	margin-top: 1em;
+	font-size: .75em;
+}
+
+#achievements .achievement{
+	display: inline-block;
+	margin-right: 1em;
+	margin-top: .5em;
+	margin-bottom: .5em;
+  	background: #eee;
+  	padding: .5em;
+  	font-size: .5rem;
+}
+
+#achievements .achievement .lvl2{
+	color: #050;
+}
+#achievements .achievement .lvl3{
+	color: #0a0;
+}
+#achievements .achievement .lvl4{
+	color: #0f0;
+}
+#achievements .achievement .lvl5{
+	color: #005;
+}
+#achievements .achievement .lvl6{
+	color: #00a;
+}
+#achievements .achievement .lvl7{
+	color: #00f;
+}
+#achievements .achievement .lvl8{
+	color: #500;
+}
+#achievements .achievement .lvl9{
+	color: #a00;
+}
+#achievements .achievement .lvl10{
+	color: #f00;
+}
+#achievements .achievement .lvl11{
+	color: #550;
+}
+#achievements .achievement .lvl12{
+	color: #aa0;
+}
+#achievements .achievement .lvl13{
+	color: #ff0;
+}
