@@ -1,8 +1,11 @@
 
+/*
 var hoverLoginMenu = document.getElementById("hoverLoginMenu");
 var logoutlink = document.getElementById("logout-link");
-var expanded;
+
 logoutlink.onclick = userLogout;
+*/
+var expanded;
 var comments = [];
 
 var entry={};
@@ -291,7 +294,7 @@ function userLogout(){
 function showRating(){
 	if(!expanded){
 		$("#outer-rating").animate({width: "100"}, 500);
-		expanded=true;
+		expanded = true;
 	}
 }
 
