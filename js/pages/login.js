@@ -65,6 +65,21 @@ function appendLoginOverlay(){
 	$passwordInput = $("#password-input");
 	$loginForm = $("#login-form");
 
+	$mailInput.on('keypress', function(event) {
+		var code = event.which;
+		if(code == 13){
+			$loginButton.trigger('click');
+		}
+	});
+
+	$passwordInput.on('keypress', function(event) {
+		var code = event.which;
+		console.log(code);
+		if(code == 13){
+			$loginButton.trigger('click');
+		}
+	});
+
 	$backButton.click(function(event) {
 		removeOverlayBackground();
 		$overlay.remove();

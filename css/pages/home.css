@@ -341,7 +341,7 @@ span.transcription {
   position: absolute;
   width: 100%;
   height: 30%;
-  top: 70%;
+  top: 0;
   opacity: 0.5;
   z-index: 2; }
 
@@ -367,15 +367,13 @@ span.transcription {
   display: block;
   position: absolute;
   width: 100%;
-  height: 30%;
-  top: 30%;
+  top: 2%;
   text-align: center;
   font-size: 0.618rem;
   z-index: 3; }
   .transcription-container-touch div {
-    display: table-cell;
+    display: block;
     position: relative;
-    vertical-align: middle;
     width: inherit;
     font-family: "Goudy"; }
 
@@ -388,7 +386,7 @@ span.transcription {
   padding: 4px;
   overflow: hidden;
   word-wrap: break-word;
-  white-space: normal;
+  white-space: nowrap;
   text-overflow: ellipsis;
   line-height: 1.618rem; }
 
