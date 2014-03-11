@@ -1,12 +1,7 @@
-.overlayBackButton img{
-	width:5%;
-	height:5%;
-}
-
-.overlayButton{
+.button-overlay{
     color: $lightgrey;
     height: auto;
-    font-size: 100%;
+    font-size: 1rem;
     padding: 0.5em;
     font-family: "Segoe UI Light";
     border-width: 1px;
@@ -17,30 +12,23 @@
     -o-transition: all 0.3s ease-out;
     transition: all 0.3s ease-out;
 }
-.overlayButton:hover{
+
+.button-overlay:hover{
 	background-color: $lightgrey;
 	color: $black;
 	border-color:$lightgrey;
 }
 
-.overlayButton:focus{
+.button-overlay:focus{
 	background-color: $lightgrey;
 	color: $black;
 	border-color:$lightgrey;
 }
 
-#registerButton{
-	margin-right: 2%;
-}
-
-#loginButton{
-	margin-right: 3%;
-}
-
-.normalButton{
+.button-normal{
 	color: $black;
     height: auto;
-    font-size: 100%;
+    font-size: 1rem;
     padding: 0.5em;
     font-family: "Segoe UI Light";
     border-width: 1px;
@@ -52,13 +40,13 @@
     transition: all 0.3s ease-out;
 }
 
-.normalButton:focus{
+.button-normal:focus{
 	background-color: $black;
 	color: $lightgrey;
 	border-color: rgba(0,0,0,0);
 }
 
-.normalButton:hover{
+.button-normal:hover{
 	background-color: $black;
 	color: $lightgrey;
 	border-color: rgba(0,0,0,0);

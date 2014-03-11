@@ -186,6 +186,27 @@ input[type="password"].loginField {
 :-ms-input-placeholder {
   color: #cbcdc7; }
 
-.form-register .columns {
-  padding-right: 0.618rem;
-  padding-left: 0.618rem; }
+.register-forms-container {
+  overflow: hidden;
+  margin: 0.618rem 1.618rem; }
+  .register-forms-container .row {
+    margin-right: auto;
+    margin-left: auto; }
+    .register-forms-container .row .columns {
+      padding-right: 0.618rem;
+      padding-left: 0.618rem; }
+  .register-forms-container .headline-container {
+    margin-top: 0.618rem;
+    margin-bottom: 0.618rem; }
+
+.form-register label {
+  float: right; }
+.form-register .row {
+  margin-top: 0.618rem;
+  margin-bottom: 0.618rem; }
+
+@media screen and (max-width: 640px) {
+  .register-forms-container {
+    margin: 0.618rem 0.618rem; }
+  .form-register label {
+    float: left; } }

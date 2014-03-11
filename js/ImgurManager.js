@@ -288,6 +288,18 @@ var ImgurManager = (function(){
 				callback(tagData);
 			});
 		},
+		createUser : function(callback, username, pw, mail){
+			var url = 'createUser.php?username=' + username + 'pw=&' + pw + 
+				'&mail=' + mail;
+			var userData = null;
+
+			$.get('php/backend/' + url, function(data) {
+				if(data.success == 1){
+					userData = data.data;
+				}
+				callback(userData);
+			});
+		},
 		search: function(callback, searchcontent, start){
 			start = start || 0;
 			var url = 'search.php?search=' + searchcontent + '&start=' + start;

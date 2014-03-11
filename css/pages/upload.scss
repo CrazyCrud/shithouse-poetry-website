@@ -9,7 +9,7 @@
 	}
 
 	small{
-		@include horizontal-margin($space_minus3, $space_minus3) !important; 
+		@include horizontal-margin($space_minus3, $space_minus3); 
 	}
 }
 

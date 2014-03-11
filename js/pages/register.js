@@ -1,3 +1,31 @@
+var $form = $(".form-register");
+var $submitButton = $("#register-submit");
+var $mailInput = $("input#mail");
+var $userNameInput = $("input#username");
+var $passwordInput = $("input#password");
+
+$(document).ready(function() {
+	$form
+  		.on('invalid', function () {
+    		
+  		})
+  		.on('valid', function () {
+    		registerUser();
+  		});
+});
+
+function registerUser(){
+	var mail = $mailInput.val();
+	var username = $userNameInput.val();
+	var pwd = $passwordInput.val();
+	ImgurManager.createUser(onLoginSuccess);
+}
+
+function onLoginSuccess(){
+
+}
+
+/*
 	var registerButton = document.getElementById("registerform_button");
 	$username = $("#username_register");
 	$mail = $("#email_register");
@@ -103,3 +131,4 @@ function onLoginSuccess(authkey){
 
 }
 
+*/
