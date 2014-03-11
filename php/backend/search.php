@@ -1,10 +1,8 @@
 <?php
 
-// ############# NOT TESTED ####################
-
 // How to use this page:
-// open it with the info about the course to create
-// as described in the database and your sessionkey:
+// open it with the info you wish to search for, additionally
+// you can give a start:
 //
 // search.php?search=bla&start=10
 //
@@ -14,12 +12,8 @@
 // optional parameters are:
 // start
 //
-//	Orderby options:
-//	date, rating
-// 	default: date
-//
 // The answer looks as follows:
-// a json with a successcode and the course id:
+// a json with a successcode and the entries found by the search:
 /* 
 {
 	"success":1,

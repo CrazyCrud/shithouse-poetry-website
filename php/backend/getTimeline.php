@@ -1,10 +1,8 @@
 <?php
 
-// ############# NOT TESTED ####################
-
 // How to use this page:
-// open it with the info about the course to create
-// as described in the database and your sessionkey:
+// open it with the authkey of the user additionally you can
+// give a start for the given information:
 //
 // getTimeLine.php?authkey=xxx&start=10
 //
@@ -15,35 +13,46 @@
 // start
 //
 // The answer looks as follows:
-// a json with a successcode and the course id:
+// a json with a successcode and the timeline informations:
 /* 
 {
 	"success":1,
-	"data":[
-		{
-			"id":"1",
-			"title":"lustiges bild",
-			"date":"2014-02-18 13:29:28",
-			"sex":"m",
-			"userid":"1",
-			"username":"tikiblue",
-			"typename":"Text",
-			"typedescription":"Ein an eine Wand, T\u00fcr oder auf einen anderen Gegenstand geschriebener Text.",
-			"artist":"slivr33",
-			"transcription":"dont hate me because im beautiful, hate me because i did your dad.\r\n\r\ngo home mom, youre drunk",
-			"location":"in einer toilette irgendwo im nirgendwo",
-			"longitude":"-1",
-			"latitude":"-1",
-			"imageid":"1",
-			"path":"http:\/\/i.imgur.com\/YZmJoCz.jpg",
-			"x":"50",
-			"y":"50",
-			"width":"350",
-			"height":"250",
-			"rating":"0.0000",
-			"ratingcount":"6"
-		}
-	]
+	"data":
+		[
+			{
+				"userid":"1",
+				"username":"tikiblue",
+				"entryid":"1",
+				"title":"lustiges bild",
+				"sex":"m",
+				"comment":"Toller Eintrag",
+				"date":"2014-02-13 22:46:23",
+				"path":"http:\/\/i.imgur.com\/YZmJoCz.jpg",
+				"smallthumbnail":"http:\/\/i.imgur.com\/YZmJoCzs.jpg"
+			},
+			{
+				"userid":"1",
+				"username":"tikiblue",
+				"entryid":"1",
+				"title":"lustiges bild",
+				"sex":"m",
+				"comment":"Toller Eintrag",
+				"date":"2014-02-13 22:46:23",
+				"path":"http:\/\/i.imgur.com\/9WrZiJV.png",
+				"smallthumbnail":"http:\/\/i.imgur.com\/9WrZiJVs.png"
+			},
+			{
+				"userid":"1",
+				"username":"tikiblue",
+				"entryid":"1",
+				"title":"lustiges bild",
+				"sex":"m",
+				"comment":"Toller Eintrag",
+				"date":"2014-02-13 22:46:23",
+				"path":"http:\/\/i.imgur.com\/j1WdvLo.png",
+				"smallthumbnail":"http:\/\/i.imgur.com\/j1WdvLos.png"
+			}
+		]
 }
 */
 // for success codes see ../php/config.php

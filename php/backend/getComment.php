@@ -1,16 +1,15 @@
 <?php
 
 // How to use this page:
-// open it with the info about the course to create
-// as described in the database and your sessionkey:
+// open it with the info about the comment you wish to get:
 //
-// getUser.php?commentid=123
+// getComment.php?commentid=123
 //
 // required parameters are:
 // commentid
 //
 // The answer looks as follows:
-// a json with a successcode and the course id:
+// a json with a successcode and the comment data:
 /* 
 {
 	"success":1,

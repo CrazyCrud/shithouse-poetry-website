@@ -1,22 +1,20 @@
 <?php
 
-// ############# NOT TESTED ####################
-
 // How to use this page:
-// open it with the info about the course to create
-// as described in the database and your sessionkey:
+// open it with the info about the entryid, your authkey
+// and the tags you wish to add:
 //
-// addTag.php?authkey=xxx&entryid=123&tags=[1,2,3]
+// addTag.php?authkey=xxx&entryid=123&tags=1,2,3
 //
 // required parameters are:
 // authkey, entryid, tags (array with text or id)
 //
 // The answer looks as follows:
-// a json with a successcode and the course id:
+// a json with a successcode and true if it was successful:
 /* 
 {
-	success : 1 ,
-	data : true
+	"success":1,
+	"data":true
 }
 */
 // for success codes see ../php/config.php

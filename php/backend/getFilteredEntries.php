@@ -1,15 +1,14 @@
 <?php
 
-// ############# NOT TESTED ####################
-
 // How to use this page:
-// open it with the info about the course to create
-// as described in the database and your sessionkey:
+// open it with the info about entries you wish to get, filtered by
+// one of the filter options with the given values,
+// you can additionally change the order and the start:
 //
 // getFilteredEntries.php?filter=sex&values=value1,value2,value3&start=10&orderby=rating
 //
 // required parameters are:
-// filter,values (array), orderby [optional], start [optional]
+// filter,values (array)
 //
 // filter options:
 // sex (m or w), 
@@ -19,12 +18,15 @@
 //
 // it is possible to filter for multiple types or tags
 //
+// optional parameters are:
+// orderby, start
+//
 //	Orderby options:
 //	date, rating
 // 	default: date
 //
 // The answer looks as follows:
-// a json with a successcode and the course id:
+// a json with a successcode and data about the entries:
 /* 
 {
 	"success":1,

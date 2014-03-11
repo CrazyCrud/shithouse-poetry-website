@@ -1,8 +1,7 @@
 <?php
 
 // How to use this page:
-// open it with the info about the course to create
-// as described in the database and your sessionkey:
+// open it with the info about the entry you wish to update:
 //
 // updateEntry.php?authkey=xxx&entryid=1&title=moep&type=Text&sex=m&
 // artist=McWolff&transcription=Cool stuff&location=PT Toilette&
@@ -16,11 +15,11 @@
 //transcription, location, lat, long, tags (array with texts or ids)
 //
 // The answer looks as follows:
-// a json with a successcode and the course id:
+// a json with a successcode and the entry id:
 /* 
 {
-	success : 1 ,
-	data : "97dfebf4098c0f5c16bca61e2b76c37353021f00128a6"
+	"success":1,
+	"data":2
 }
 */
 // for success codes see ../php/config.php

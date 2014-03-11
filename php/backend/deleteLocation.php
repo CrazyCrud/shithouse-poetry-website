@@ -1,8 +1,10 @@
 <?php
 
+################### ADMIN ONLY ########################
+
 // How to use this page:
-// open it with the info about the course to create
-// as described in the database and your sessionkey:
+// open it with the info about the location you wish to delete
+// and your authkey:
 //
 // deleteLocation.php?authkey=xxx&locationid=1
 //
@@ -10,7 +12,7 @@
 // authkey, locationid
 //
 // The answer looks as follows:
-// a json with a successcode and the course id:
+// a json with a successcode and true if the operation was successful:
 /* 
 {
 	success : 1 ,

@@ -1,16 +1,15 @@
 <?php
 
 // How to use this page:
-// open it with the info about the course to create
-// as described in the database and your sessionkey:
+// open it with the authkey of the user you wish to delete:
 //
-// getUser.php?authkey=123
+// deleteUser.php?authkey=123
 //
 // required parameters are:
 // authkey
 //
 // The answer looks as follows:
-// a json with a successcode and the course id:
+// a json with a successcode and true if the operation was successfull:
 /* 
 {
 	success : 1 ,

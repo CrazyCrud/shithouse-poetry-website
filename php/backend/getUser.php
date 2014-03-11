@@ -1,18 +1,18 @@
 <?php
 
 // How to use this page:
-// open it with the info about the course to create
-// as described in the database and your sessionkey:
+// open it with the info about the user you wish to get, you 
+// can either give the id or the authkey:
 //
 // getUser.php?id=123
-// ODER
+// OR
 // getUser.php?authkey=xxx
 //
 // required parameters are:
 // id, authkey
 //
 // The answer looks as follows:
-// a json with a successcode and the course id:
+// a json with a successcode and the data about the user:
 /* 
 {
 	success : 1 ,

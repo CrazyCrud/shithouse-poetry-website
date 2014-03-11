@@ -1,8 +1,8 @@
 <?php
 
 // How to use this page:
-// open it with the info about the course to create
-// as described in the database and your sessionkey:
+// open it with the info about the user you wish to create, needed are
+// mail, name and the password (pwd):
 //
 // createUser.php?mail=mustermann@mail.com&name=mustermann&pwd=123
 //
@@ -10,11 +10,11 @@
 // mail, name, pwd
 //
 // The answer looks as follows:
-// a json with a successcode and the course id:
+// a json with a successcode and the current session key:
 /* 
 {
-	success : 1 ,
-	data : "97dfebf4098c0f5c16bca61e2b76c37353021f00128a6"
+	"success":1,
+	"data":"97dfebf4098c0f5c16bca61e2b76c373531ef49ed345d"
 }
 */
 // for success codes see ../php/config.php

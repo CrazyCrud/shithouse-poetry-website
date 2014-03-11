@@ -1,10 +1,8 @@
 <?php
 
-// ############# NOT TESTED ####################
-
 // How to use this page:
-// open it with the info about the course to create
-// as described in the database and your sessionkey:
+// open it with the your authkey and additionally you can give
+// a start for the entries you get:
 //
 // getRatedEntries.php?authkey=xxx&start=10
 //
@@ -15,7 +13,7 @@
 // start
 //
 // The answer looks as follows:
-// a json with a successcode and the course id:
+// a json with a successcode and the data about the entries:
 /* 
 {
 	"success":1,

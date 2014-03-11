@@ -1,8 +1,7 @@
 <?php
 
 // How to use this page:
-// open it with the info about the course to create
-// as described in the database and your sessionkey:
+// open it with the info about the type you wish to get:
 //
 // getType.php?type=1
 //
@@ -10,26 +9,16 @@
 // type
 //
 // The answer looks as follows:
-// a json with a successcode and the course id:
+// a json with a successcode and the data about the type:
 /* 
 {
-	success : 1 ,
-	data : [
-		{
-			"0":"123",
-			"id":"123",
-			"1":"mustermann@mail.com",
-			"email":"mustermann@mail.com",
-			"2":"mustermann",
-			"username":"mustermann",
-			"3":"2014-02-13 22:06:03",
-			"joindate":"2014-02-13 22:06:03",
-			"4":"2014-02-17 13:47:16",
-			"lastaction":"2014-02-17 13:47:16",
-			"5":"0",
-			"status":"0"
-		}
-	]
+	"success":1,
+	"data":
+	{
+		"id":"1",
+		"name":"Text",
+		"description":"Ein an eine Wand, T\u00fcr oder auf einen anderen Gegenstand geschriebener Text."
+	}
 }
 */
 // for success codes see ../php/config.php

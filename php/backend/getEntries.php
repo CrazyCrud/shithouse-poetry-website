@@ -1,22 +1,23 @@
 <?php
 
-// ############# NOT TESTED ####################
-
 // How to use this page:
-// open it with the info about the course to create
-// as described in the database and your sessionkey:
+// open it without info the get the first entries ordered by date
+// you can change the start and the order with optional parameters:
 //
-// getAllEntries.php?start=10&orderby=rating
+// getEntries.php?start=10&orderby=rating
 //
-// required parameters are:
-// orderby [optional], start [optional]
+// required paramters are:
+// none
+// 
+// optional parameters are:
+// orderby , start
 //
 //	Orderby options:
 //	date, rating
 // 	default: date
 //
 // The answer looks as follows:
-// a json with a successcode and the course id:
+// a json with a successcode and entries data:
 /* 
 {
 	"success":1,

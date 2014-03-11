@@ -1,35 +1,100 @@
 <?php
 
 // How to use this page:
-// open it with the info about the course to create
-// as described in the database and your sessionkey:
+// open it with the info about the entry you wish to get:
 //
-// getUser.php?entryid=123
+// getEntry.php?entryid=123
 //
 // required parameters are:
 // entryid
 //
 // The answer looks as follows:
-// a json with a successcode and the course id:
+// a json with a successcode and data about the entry:
 /* 
 {
-	success : 1 ,
-	data : [
+	"success":1,
+	"data":
 		{
-			"0":"123",
-			"id":"123",
-			"1":"mustermann@mail.com",
-			"email":"mustermann@mail.com",
-			"2":"mustermann",
-			"username":"mustermann",
-			"3":"2014-02-13 22:06:03",
-			"joindate":"2014-02-13 22:06:03",
-			"4":"2014-02-17 13:47:16",
-			"lastaction":"2014-02-17 13:47:16",
-			"5":"0",
-			"status":"0"
-		}
-	]
+			"id":"1",
+			"title":"lustiges bild",
+			"date":"2014-02-18 13:29:28",
+			"sex":"m",
+			"userid":"1",
+			"username":"tikiblue",
+			"typeid":"1",
+			"typename":"Text",
+			"typedescription":"Ein an eine Wand, T\u00fcr oder auf einen anderen Gegenstand geschriebener Text.",
+			"tags":
+			[
+				{
+					"tagid":"1",
+					"tag":"comedy"
+				},
+				{
+					"tagid":"2",
+					"tag":"family"
+				},
+				{
+					"tagid":"3",
+					"tag":"test"
+				}
+			],
+		"images":
+			[
+				{
+					"id":"1",
+					"path":"http:\/\/i.imgur.com\/YZmJoCz.jpg",
+					"xposition":"50",
+					"yposition":"50",
+					"width":"350",
+					"height":"250",
+					"thumbnail":"http:\/\/i.imgur.com\/YZmJoCzm.jpg",
+					"smallthumbnail":"http:\/\/i.imgur.com\/YZmJoCzs.jpg",
+					"largethumbnail":"http:\/\/i.imgur.com\/YZmJoCzl.jpg"
+				},
+				{
+					"id":"2",
+					"path":"http:\/\/i.imgur.com\/9WrZiJV.png",
+					"xposition":"12",
+					"yposition":"24",
+					"width":"200",
+					"height":"400",
+					"thumbnail":"http:\/\/i.imgur.com\/9WrZiJVm.png",
+					"smallthumbnail":"http:\/\/i.imgur.com\/9WrZiJVs.png",
+					"largethumbnail":"http:\/\/i.imgur.com\/9WrZiJVl.png"
+				},
+				{
+					"id":"3",
+					"path":"http:\/\/i.imgur.com\/j1WdvLo.png",
+					"xposition":"-1",
+					"yposition":"-1",
+					"width":"-1",
+					"height":"-1",
+					"thumbnail":"http:\/\/i.imgur.com\/j1WdvLom.png",
+					"smallthumbnail":"http:\/\/i.imgur.com\/j1WdvLos.png",
+					"largethumbnail":"http:\/\/i.imgur.com\/j1WdvLol.png"
+				}
+			],
+		"ratings":
+			[
+				{
+					"entryid":"1",
+					"rating":"-1.0000",
+					"ratingcount":"1"
+				}
+			],
+		"information":
+			[
+				{
+					"entryid":"1",
+					"artist":"slivr33",
+					"transcription":"dont hate me because im beautiful, hate me because i did your dad.\r\n\r\ngo home mom, youre drunk",
+					"location":"in einer toilette irgendwo im nirgendwo",
+					"longitude":"-1",
+					"latitude":"-1"
+				}
+			]
+	}
 }
 */
 // for success codes see ../php/config.php

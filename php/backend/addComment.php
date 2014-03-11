@@ -1,22 +1,20 @@
 <?php
 
-// ############# NOT TESTED ####################
-
 // How to use this page:
-// open it with the info about the course to create
-// as described in the database and your sessionkey:
+// open it with the authkey, the entryid and 
+// the comment you wish to add
 //
-// getUser.php?authkey=123&entryid=123&comment="can I have comment?"
+// addComment.php?authkey=530d03c697d60&entryid=2&comment=this%20is%20a%20test
 //
 // required parameters are:
 // authkey, entryid, comment
 //
 // The answer looks as follows:
-// a json with a successcode and the course id:
+// a json with a successcode and the comment id:
 /* 
 {
-	success : 1 ,
-	data : true
+	"success":1,
+	"data":2
 }
 */
 // for success codes see ../php/config.php

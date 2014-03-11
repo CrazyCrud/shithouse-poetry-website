@@ -1,8 +1,9 @@
 <?php
 
+#################### ADMIN ONLY #######################
+
 // How to use this page:
-// open it with the info about the course to create
-// as described in the database and your sessionkey:
+// open it with the info about the type you wish to update:
 //
 // updateType.php?authkey=123&id=1&name=bla&desc=much bla
 //
@@ -10,7 +11,7 @@
 // authkey, id, name, desc
 //
 // The answer looks as follows:
-// a json with a successcode and the course id:
+// a json with a successcode and true if the operation was successfull:
 /* 
 {
 	success : 1 ,

@@ -1,8 +1,7 @@
 <?php
 
 // How to use this page:
-// open it with the info about the course to create
-// as described in the database and your sessionkey:
+// open it with the info about the user you wish to update:
 //
 // updateUser.php?authkey=123&mail=mustermann@mail.com&name=mustermann&pwd=123
 //
@@ -10,7 +9,7 @@
 // authkey, mail, name, pwd
 //
 // The answer looks as follows:
-// a json with a successcode and the course id:
+// a json with a successcode and true if the operation was successfull:
 /* 
 {
 	success : 1 ,

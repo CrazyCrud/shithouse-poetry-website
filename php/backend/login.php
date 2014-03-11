@@ -1,8 +1,7 @@
 <?php
 
 // How to use this page:
-// open it with the info about the course to create
-// as described in the database and your sessionkey:
+// open it with the mail and the password of the user:
 //
 // login.php?mail=MaxMustermann@mail.com&password=123
 //

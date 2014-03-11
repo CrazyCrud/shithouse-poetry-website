@@ -1,18 +1,19 @@
 <?php
 
-// ############# NOT TESTED ####################
-
 // How to use this page:
-// open it with the info about the course to create
-// as described in the database and your sessionkey:
+// open it with nothing and you get entries, additionally you can 
+// give the authkey or the amount of entries you wish to get:
 //
 // getRandomEntries.php?authkey=xxx&amount=20
 //
 // required parameters are:
-// authkey [optional], amount [optional]
+// none
+//
+// optional parameters are:
+// authkey, amount
 //
 // The answer looks as follows:
-// a json with a successcode and the course id:
+// a json with a successcode and the data about the entries:
 /* 
 {
 	"success":1,
@@ -56,7 +57,7 @@ include_once("../helpers/dbhelper.php");
 $json = array();
 $json["success"]=$CODE_ERROR;
 
-if(isset($_POST["start"]) || isset($_POST["amount"])){
+if(isset($_POST["authkey"]) || isset($_POST["amount"])){
 	$_GET = $_POST;
 }
 

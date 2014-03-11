@@ -1,22 +1,32 @@
 <?php
 
-// ############# NOT TESTED ####################
-
 // How to use this page:
-// open it with the info about the course to create
-// as described in the database and your sessionkey:
+// open it with the info about the entryid and the starting comment:
 //
-// getUser.php?entryid=123&commentid=123
+// getComments.php?entryid=123&commentid=123
 //
 // required parameters are:
 // entryid, commentid
 //
 // The answer looks as follows:
-// a json with a successcode and the course id:
+// a json with a successcode and the comments data:
 /* 
 {
-	success : 1 ,
-	data : true
+	"success":1,
+	"data":[
+		{
+			"0":"1",
+			"id":"1",
+			"1":"1",
+			"entryid":"1",
+			"2":"1",
+			"userid":"1",
+			"3":"Toller Eintrag",
+			"comment":"Toller Eintrag",
+			"4":"2014-02-13 22:46:23",
+			"timestamp":"2014-02-13 22:46:23"
+		}
+	]
 }
 */
 // for success codes see ../php/config.php

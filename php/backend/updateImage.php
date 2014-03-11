@@ -1,8 +1,8 @@
 <?php
 
 // How to use this page:
-// open it with the info about the course to create
-// as described in the database and your sessionkey:
+// open it with the info about the image you wish to update
+// and the values you wish to give:
 //
 // updateImage.php?authkey=123&id=1&x=20&y=10&w=120&h=130
 //
@@ -10,7 +10,7 @@
 // authkey, id, x, y, w, h
 //
 // The answer looks as follows:
-// a json with a successcode and the course id:
+// a json with a successcode and true if the operation was successfull:
 /* 
 {
 	success : 1 ,

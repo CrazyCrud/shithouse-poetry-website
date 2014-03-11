@@ -1,8 +1,9 @@
 <?php
 
 // How to use this page:
-// open it with the info about the course to create
-// as described in the database and your sessionkey:
+// open it with authkey, the title, the type of 
+// the entry you wish to add, additionally you can 
+// add optional paramters like sex or transcription:
 //
 // addEntry.php?authkey=xxx&title=moep&type=Text&sex=m&
 // artist=McWolff&transcription=Cool stuff&location=PT Toilette&
@@ -15,11 +16,11 @@
 //	sex (only one character), artist, transcription, location, lat, long, tags (array with texts or ids)
 //
 // The answer looks as follows:
-// a json with a successcode and the course id:
+// a json with a successcode and the entryid:
 /* 
 {
-	success : 1 ,
-	data : "97dfebf4098c0f5c16bca61e2b76c37353021f00128a6"
+	"success":1,
+	"data":5
 }
 */
 // for success codes see ../php/config.php

@@ -1,35 +1,19 @@
 <?php
 
 // How to use this page:
-// open it with the info about the course to create
-// as described in the database and your sessionkey:
+// open it with the info about the tag(s) you wish to create:
 //
 // createTag.php?tags=tag1,tag2,tag3
 //
 // required parameters are:
-// tag (array with strings)
+// tags (array with strings)
 //
 // The answer looks as follows:
-// a json with a successcode and the course id:
+// a json with a successcode and true if the operation was successful:
 /* 
 {
-	success : 1 ,
-	data : [
-		{
-			"0":"123",
-			"id":"123",
-			"1":"mustermann@mail.com",
-			"email":"mustermann@mail.com",
-			"2":"mustermann",
-			"username":"mustermann",
-			"3":"2014-02-13 22:06:03",
-			"joindate":"2014-02-13 22:06:03",
-			"4":"2014-02-17 13:47:16",
-			"lastaction":"2014-02-17 13:47:16",
-			"5":"0",
-			"status":"0"
-		}
-	]
+	"success":1,
+	"data":true
 }
 */
 // for success codes see ../php/config.php
