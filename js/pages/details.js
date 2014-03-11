@@ -127,10 +127,11 @@ function initGUI(){
 		window.location = "upload.php?id="+id;
 	});
 	$("#report-icon").click(function(){
-		$('<form name="report"><input type="text" maxlength="500" size="500" id="description" value="Enter your report here"></form>').dialog({
+		$('<form name="report"><textarea cols="50" rows=10 id="description" style="height:auto;width:auto" placeholder="Enter your report here"></textarea></form>').dialog({
 			modal: true,
 			width: "auto",
-			title: "Melden?",
+			autoResize: true,
+			title: "Aus welchen Gründen möchten Sie diesen Eintrag melden?",
 			buttons:{
 				"OK":function(){
 					var desc =  $('#description').val();
