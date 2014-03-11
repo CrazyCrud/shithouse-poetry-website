@@ -209,7 +209,8 @@ function fillUI(e){
 	}
 
 	//set upload info
-	$("#upload-info #date").html(entry.date);
+	$("#upload-info #date").html(formatTime(entry.date));
+	$("#upload-info #date").attr("title", entry.date);
 	$("#upload-info #author").html(entry.username);
 	$("#upload-info #author").attr("href", "user.php?id="+entry.userid);
 
@@ -220,51 +221,6 @@ function fillUI(e){
 	}
 	$("#transcription #content").html(trans);
 }
-
-
-
-
-var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-if(authkey.length == 45){
-	var getUserURL= "php/backend/getUser.php?authkey="+authkey;
-	$.get(getUserURL, function(data){
-		if(!data["success"]){
-			alert("Es gibt Probleme bei der Kommunikation mit dem Server");
-		}
-		else
-		{
-			switch(data["success"]){
-				case 1: menuHoverEffect();
-					break;
-				default: console.log(data);					
-			}
-		}
-
-	});
-}
-
-function menuHoverEffect(){
-
-$("#link-login").hover(
-	function() 
-	{	
-		hoverLoginMenu.style.display = "block";
-		$("#hoverLoginMenu").hover(function() 
-			{	
-				hoverLoginMenu.style.display = "block";
-			},
-			function()
-			{
-				hoverLoginMenu.style.display = "none";
-			});
-	}, 
-	function()
-	{	
-		hoverLoginMenu.style.display = "none";
-	}
-);
-}
-
 
 function userLogout(){
 	console.log("userLogout");
