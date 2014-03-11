@@ -29,19 +29,19 @@
 									</a>
 								</li>
 								<li class="li-upload-container">
-									<a id="link-upload" href="details.html">
+									<a id="link-upload" href="">
 										<span></span><i class="icon-upload-cloud"></i>
 									</a>
 								</li>
 							</ul>
 							<ul class="right">
 								<li class="li-search-container">
-									<a id="link-search" href="#" onClick="">
+									<a id="link-search" href="javascript:void()" onClick="">
 										<span>Search</span><i class="icon-search"></i>
 									</a>
 								</li>
 								<li class="li-login-container">
-									<a id="link-login" href="#" onClick="">
+									<a id="link-login" href="javascript:void()" onClick="">
 										<span>Login</span><i class="icon-user"></i>
 									</a>
 								</li>
