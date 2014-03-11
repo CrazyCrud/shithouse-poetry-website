@@ -76,6 +76,10 @@ class DBHelper{
 			}
 			$users = $this->query($query);
 			if(count($users)==0)return false;
+			$stats = $this->getUserStats($users[0]["id"]);
+			if($stats){
+				$users[0]["stats"] = $stats[0];
+			}
 			return $users[0];
 		}else{
 			$query = Queries::getuser($this->authkey);
@@ -83,6 +87,11 @@ class DBHelper{
 			if(count($users)==0)return false;
 			return $users[0];
 		}
+	}
+
+	private function getUserStats($id){
+		$query = Queries::getuserstats($id);
+		return $this->query($query);
 	}
 
 	public function updateUser($mail, $name, $pwd){

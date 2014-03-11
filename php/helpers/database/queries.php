@@ -62,6 +62,47 @@ class Queries{
 		WHERE (`username` = '$uname'
 		 OR `email` = '$uname') $and";
 	}
+	public static function getuserstats($id){
+		$e = DBConfig::$tables["entries"];
+		$c = DBConfig::$tables["comments"];
+		$r = DBConfig::$tables["ratings"];
+		$query = "SELECT
+		SUM(entries) AS entries,
+		SUM(comments) AS comments,
+		SUM(ratings) AS ratings
+
+		FROM(
+
+		SELECT
+		$id AS userid,
+		COUNT(*) AS entries,
+		NULL AS comments,
+		NULL AS ratings
+		FROM $e
+		WHERE $e.userid = $id
+
+		UNION
+		SELECT
+		$id AS userid,
+		NULL AS entries,
+		COUNT(*) AS comments,
+		NULL AS ratings
+		FROM $c
+		WHERE $c.userid = $id
+
+		UNION
+		SELECT
+		$id AS userid,
+		NULL AS entries,
+		NULL AS comments,
+		COUNT(*) AS ratings
+		FROM $r
+		WHERE $r.userid = $id
+		 ) a
+
+		GROUP BY userid";
+		return $query;
+	}
 	public static function login($userid, $authkey){
 		$u = DBConfig::$tables["users"];
 		return "UPDATE $u
