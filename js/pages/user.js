@@ -20,5 +20,14 @@ function fillUI(u){
 	$("#username").html(user.username);
 	$("#membersince").html(formatTime(user.joindate));
 	$("#lastseen").html(formatTime(user.lastaction));
-	$("#lastseen").attr("title",user.lastaction);
+	$("#lastseen").attr("title",user.lastaction);	
+	ImgurManager.getEntriesForUser(fillImages,id);
+}
+
+function fillImages(data){
+	if(!data||data.length==0)return;
+	var entry = data[0];
+	$("#image").attr("src",entry.images[0].thumbnail);
+	$("#lastlink").attr("href","details.php?id="+entry.id);
+
 }

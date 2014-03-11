@@ -6,7 +6,7 @@
 		<link rel="stylesheet" type="text/css" href="css/plugins/foundation.css"/>
 		<link rel="stylesheet" type="text/css" href="css/plugins/fontello/fontello.css"/>
 		<link rel="stylesheet" type="text/css" href="css/global.css"/>
-		<link rel="stylesheet" type="text/css" href="css/pages/details.css"/>
+		<link rel="stylesheet" type="text/css" href="css/pages/user.css"/>
 		<script type="text/javascript" src="js/plugins/modernizr.js"></script>
 		<title>Latrinalia</title>
 	</head>
@@ -52,13 +52,16 @@
 			<section id="maincontent">
 				<div class="details-user">
 					<div class="row">
-						<div class="details small-12 medium-7 large-7 columns left" id="image-container">
-							<img id="image" src="img/dummy/d05.png">
-						</div>
-						<div class="details small-12 medium-5 large-5 columns right" id="image-description">
+						<div class="details small-12 medium-7 large-7 columns left" id="image-description">
 							<div id="username">Nutzer nicht gefunden</div>
-							<div>Mitglied seit <span id="membersince"></span></div>
-							<div>Zuletzt online <span id="lastseen"></span></div>
+							<div id="joined">Beigetreten <span id="membersince"></span></div>
+							<div id="online">Zuletzt online <span id="lastseen"></span></div>
+						</div>
+						<div class="details small-12 medium-5 large-5 columns right" id="image-container">
+							<div id="lastaction">Neuestes Bild:</div>
+							<a id="lastlink" href="">
+								<img id="image" src="img/dummy/d05.png">
+							</a>
 						</div>
 					</div>	
 					<div class="row pictures">

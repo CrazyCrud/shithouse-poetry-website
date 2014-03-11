@@ -48,6 +48,17 @@ var ImgurManager = (function(){
 				callback(links);
 			});
 		},
+		getEntriesForUser : function(callback, userid, start){
+			start = start || 0;
+			var url = 'getFilteredEntries.php?filter=user&values='+userid+"&start="+start;
+			$.get('php/backend/' + url, function(data) {
+				var links = false;
+				if(data.success == 1){
+					links = data.data;
+				}	
+				callback(links);
+			});
+		},
 		getFilteredEntries : function(callback, searchProps, currentEntry){
 			searchProps = searchProps || {};
 			searchProps.filter = searchProps.filter || "sex";

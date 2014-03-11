@@ -112,3 +112,7 @@ function convertDateTime(dt){
     
     return result;
 }
+
+getAvatar = function(name){
+  return "http://social.microsoft.com/profile/u/avatar.jpg?displayname=%1".replace("%1",name);
+}
