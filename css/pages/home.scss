@@ -178,7 +178,7 @@ span.transcription{
 	position: absolute;
 	width: 100%;
 	height: 30%;
-	top: 70%;
+	top: 0;
 	opacity: 0.5;
 	z-index: 2;
 }
@@ -217,16 +217,14 @@ span.transcription{
 	display: block;
 	position: absolute;
 	width: 100%;
-	height: 30%;
-	top: 30%;
+	top: 2%;
 	text-align: center;
 	font-size: $space_minus1;
 	z-index: 3;
 
 	div{
-		display: table-cell;
+		display: block;
 		position: relative;
-		vertical-align: middle;
 		width: inherit;
 		@include transcription-font();
 	}
@@ -241,7 +239,7 @@ span.transcription{
 	padding: 4px;
 	overflow: hidden;
 	word-wrap: break-word;
-	white-space: normal;
+	white-space: nowrap;
 	text-overflow: ellipsis;
 	line-height: $space_plus1;
 }
