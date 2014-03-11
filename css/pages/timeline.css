@@ -204,6 +204,13 @@ body {
   padding: 0.75em;
   margin-bottom: 0.5em; }
 
+.action.gender-w {
+  background: #d22091; }
+
+.action.gender-m {
+  background: #32a2b8; }
+
+
 .action .content {
   display: flex; }
 

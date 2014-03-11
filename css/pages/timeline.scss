@@ -22,6 +22,18 @@ body{
   margin-bottom: .5em;
 }
 
+.action.entry{
+	background: $gray;
+}
+
+.action.gender-w{
+	background: $pink;
+}
+
+.action.gender-m{
+	background: $blue;
+}
+
 .action .content{
 	display: flex;
 }

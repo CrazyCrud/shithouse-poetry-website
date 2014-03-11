@@ -726,26 +726,44 @@ class Queries{
 		$c = DBConfig::$tables["comments"];
 		$i = DBConfig::$tables["images"];
 		$query =
-		"SELECT
+		"SELECT 
 		`$u`.`id` AS userid,
 		`$u`.`username` AS username,
 		`$e`.`id` AS entryid,
 		`$e`.`title` AS title,
 		`$e`.`sex` AS sex,
-		`$c`.`comment` AS comment,
-		`$c`.`timestamp` AS date,
-		`$i`.`path` AS path
+		`$e`.`date` AS date,
+		`$i`.`path` AS path,
+		NULL AS comment
 
 		FROM
-		`$c`, `$u`, `$e`, `$i`
+		`$u`, `$i`, `$e`
+
+		WHERE `$i`.`entryid` = `$e`.`id`
+		AND `$u`.id = $userid
+		AND `$e`.`userid` = $userid
+		UNION
+		SELECT
+		`$u`.`id` AS userid,
+		`$u`.`username` AS username,
+		`$e`.`id` AS entryid,
+		`$e`.`title` AS title,
+		`$e`.`sex` AS sex,
+		`$c`.`timestamp` AS date,
+		`$i`.`path` AS path,
+		`$c`.`comment` AS comment
+
+		FROM
+		`$c`, `user`, `$e`, `images`
 
 		WHERE
-		`$c`.`entryid` = `$e`.`id`
-		AND `$i`.`entryid` = `$e`.`id`
+		`$c`.`entryid` = `entry`.`id`
+		AND `$i`.`entryid` = `entry`.`id`
+		AND LENGTH(`$c`.`comment`)>0
 		AND `$u`.`id` = `$c`.`userid`
 		AND (`$e`.`userid` = $userid
-		OR `$c`.`userid` = $userid)
-
+		     OR `$c`.`userid` = $userid)
+		    
 		ORDER BY date DESC
 
 		LIMIT $start, $limit";
