@@ -21,6 +21,15 @@ $(document).ready(function() {
 			appendLoginOverlay();
 		}
 	});
+
+	$(this).mouseup(function (e)
+	{
+	    var container = $("#user-overlay");
+	    if (!container.is(e.target) 
+	        	&& container.has(e.target).length === 0) {
+	        $(container).remove();
+	    }
+	});
 });
 
 function isLoggedIn(){
@@ -37,6 +46,7 @@ function manageLoginOverlay(){
 			document.cookie = "admin=''; expires=" + d.toGMTString();
 			window.location = "index.html";
 		});
+		$("#link-myimages").attr('href', 'user.php?id=' + user.id);
 	}else{
 		$("#user-overlay").remove();
 	}
