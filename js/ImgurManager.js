@@ -59,9 +59,10 @@ var ImgurManager = (function(){
 				callback(links);
 			});
 		},
-		getTimeline : function(callback){
+		getTimeline : function(callback, start){
+			start = start || 0;
 			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-			var url = 'getTimeline.php?authkey='+authkey;
+			var url = 'getTimeline.php?authkey='+authkey+'&start='+start;
 			$.get("php/backend/"+url, function(data){
 				var d = false;
 				if(data.success == 1){

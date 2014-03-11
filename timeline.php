@@ -55,7 +55,12 @@
 					<div class="row details">
 						Neueste Aktivit&auml;ten zu deinen Bildern:
 					</div>
-					<div class="row details" id="actions">
+					<div class="row details">
+						<div id="actions">
+						</div>
+						<button id="moreactions">
+							Weitere Aktivit&auml;ten laden
+						</button>
 					</div>
 				</div>
 			</section>
