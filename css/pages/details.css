@@ -204,6 +204,15 @@ body {
 .details {
   padding: 32px; }
 
+#controlpanel {
+  display: none;
+  padding-top: 32px;
+  padding-left: 32px;
+  font-size: 0.75em; }
+
+#controlpanel #deleteentry {
+  margin-left: 32px; }
+
 #image-container #image {
   width: 100%; }
 
