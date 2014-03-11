@@ -50,6 +50,9 @@ $db = new DBHelper();
 
 if(isset($_GET["id"])){
 	$id = $_GET["id"];
+	if(is_numeric($id)){
+		$id = intval($id);
+	}
 	$user = $db->getUser($id);
 }else if(isset($_GET["authkey"])){
 	$key = $_GET["authkey"];
