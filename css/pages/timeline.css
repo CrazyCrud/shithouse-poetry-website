@@ -207,6 +207,12 @@ body {
 .action.entry {
   border: 1px solid #B8B8B8; }
 
+.action.rating .icon-thumbs-down-1 {
+  color: #ff4444; }
+
+.action.rating .icon-thumbs-up-1 {
+  color: #99cc00; }
+
 .action.gender-w {
   border: 1px solid #d22091; }
 

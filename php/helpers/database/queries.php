@@ -725,6 +725,7 @@ class Queries{
 		$e = DBConfig::$tables["entries"];
 		$c = DBConfig::$tables["comments"];
 		$i = DBConfig::$tables["images"];
+		$r = DBConfig::$tables["ratings"];
 		$query =
 		"SELECT 
 		`$u`.`id` AS userid,
@@ -734,7 +735,8 @@ class Queries{
 		`$e`.`sex` AS sex,
 		`$e`.`date` AS date,
 		`$i`.`path` AS path,
-		NULL AS comment
+		NULL AS comment,
+		NULL AS rating
 
 		FROM
 		`$u`, `$i`, `$e`
@@ -742,6 +744,7 @@ class Queries{
 		WHERE `$i`.`entryid` = `$e`.`id`
 		AND `$u`.id = $userid
 		AND `$e`.`userid` = $userid
+
 		UNION
 		SELECT
 		`$u`.`id` AS userid,
@@ -751,18 +754,40 @@ class Queries{
 		`$e`.`sex` AS sex,
 		`$c`.`timestamp` AS date,
 		`$i`.`path` AS path,
-		`$c`.`comment` AS comment
+		`$c`.`comment` AS comment,
+		NULL AS rating
 
 		FROM
-		`$c`, `user`, `$e`, `images`
+		`$c`, `$u`, `$e`, `$i`
 
 		WHERE
-		`$c`.`entryid` = `entry`.`id`
-		AND `$i`.`entryid` = `entry`.`id`
+		`$c`.`entryid` = `$e`.`id`
+		AND `$i`.`entryid` = `$e`.`id`
 		AND LENGTH(`$c`.`comment`)>0
 		AND `$u`.`id` = `$c`.`userid`
 		AND (`$e`.`userid` = $userid
 		     OR `$c`.`userid` = $userid)
+
+		UNION
+		SELECT
+		`$u`.`id` AS userid,
+		`$u`.`username` AS username,
+		`$e`.`id` AS entryid,
+		`$e`.`title` AS title,
+		`$e`.`sex` AS sex,
+		`$r`.`date` AS date,
+		`$i`.`path` AS path,
+		NULL AS comment,
+		`$r`.rating AS rating
+
+		FROM
+		`$u`, `$e`, `$i`, `$r`
+
+		WHERE
+		`$i`.`entryid` = `$e`.`id`
+		AND `$r`.`entryid` = `$e`.`id`
+		AND `$r`.`userid` = $userid
+		AND `$r`.`userid` = `$u`.id
 		    
 		ORDER BY date DESC
 
