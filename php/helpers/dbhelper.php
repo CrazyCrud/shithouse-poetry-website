@@ -221,7 +221,7 @@ class DBHelper{
 			return false;
 		}
 		if($user["status"] == DBConfig::$userStatus["admin"]){
-			$id = $comment["userid"];
+			$id = $comment[0]["userid"];
 		}else{
 			$id = $user["id"];
 		}
