@@ -153,3 +153,18 @@ body{
   font-size: .66em;
   font-style: italic;
 }
+
+#report{
+  text-align: right;
+  margin-top: -22px;
+}
+
+#report i{
+  padding-right: 6px;
+  padding-top: 6px;
+  cursor: pointer;
+}
+
+#report-icon:hover{
+  color: #ff4444;
+}

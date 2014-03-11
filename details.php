@@ -5,6 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
 		<link rel="stylesheet" type="text/css" href="css/plugins/foundation.css"/>
 		<link rel="stylesheet" type="text/css" href="css/plugins/fontello/fontello.css"/>
+		<link rel="stylesheet" type="text/css" href="css/plugins/custom-jqui-theme/jquery-ui-1.10.4.custom.css">
 		<link rel="stylesheet" type="text/css" href="css/global.css"/>
 		<link rel="stylesheet" type="text/css" href="css/pages/details.css"/>
 		<script type="text/javascript" src="js/plugins/modernizr.js"></script>
@@ -86,6 +87,9 @@
 									<img src="img/details/thumbsdown.png" id="thumbs-down" width=20>
 								</div>
 							</div>
+							<div id="report">
+								<i title="Melden" id="report-icon" class="icon-block"></i>
+							</div>
 						</div>
 					</div>	
 					<div class="row details">
@@ -164,6 +168,7 @@
 			</section>
     	</script>
 		<script src="js/plugins/jquery.min.js"></script>
+		<script src="js/plugins/jquery-ui-custom/jquery-ui-1.10.4.custom.min.js"></script>
 		<script src="js/plugins/underscore.js"></script>		
 		<script src="js/plugins/foundation/foundation.js"></script>
   		<script src="js/plugins/foundation/foundation.topbar.js"></script>

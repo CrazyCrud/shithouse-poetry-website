@@ -126,6 +126,35 @@ function initGUI(){
 	$("#editentry").click(function(){
 		window.location = "upload.php?id="+id;
 	});
+	$("#report-icon").click(function(){
+		$('<form name="report"><input type="text" maxlength="500" size="500" id="description" value="Enter your report here"></form>').dialog({
+			modal: true,
+			width: "auto",
+			title: "Melden?",
+			buttons:{
+				"OK":function(){
+					var desc =  $('#description').val();
+					ImgurManager.addReport(function(success){
+						console.log("Report done!");
+						$dialog = $('<div>Der Report wurde erfolgreich gesendet</div>');
+						$dialog.dialog({
+							modal: false,
+							width: "auto",
+							title: "Vielen Dank für ihren Report.",
+							show: true
+						});
+						setTimeout(function() {	
+								$dialog.dialog('close'); 
+						}, 2000);
+					}, id, desc, -1);
+					$(this).dialog("close");
+				},
+				"Abbrechen":function(){
+					$(this).dialog("close");
+				}
+			}
+		});
+	});
 }
 
 function onCommentDeleted(success, commentid){
@@ -253,6 +282,5 @@ function showRating(){
 		expanded = true;
 	}
 }
-
 
 
