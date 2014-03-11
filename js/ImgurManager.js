@@ -48,6 +48,28 @@ var ImgurManager = (function(){
 				callback(links);
 			});
 		},
+		getEntriesForUser : function(callback, userid, start){
+			start = start || 0;
+			var url = 'getFilteredEntries.php?filter=user&values='+userid+"&start="+start;
+			$.get('php/backend/' + url, function(data) {
+				var links = false;
+				if(data.success == 1){
+					links = data.data;
+				}	
+				callback(links);
+			});
+		},
+		getTimeline : function(callback){
+			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+			var url = 'getTimeline.php?authkey='+authkey;
+			$.get("php/backend/"+url, function(data){
+				var d = false;
+				if(data.success == 1){
+					d = data.data;
+				}
+				callback(d);
+			});
+		},
 		getFilteredEntries : function(callback, searchProps, currentEntry){
 			searchProps = searchProps || {};
 			searchProps.filter = searchProps.filter || "sex";
@@ -89,9 +111,9 @@ var ImgurManager = (function(){
 			$.post('php/backend/' + url, function(data) {
 				if(data.success == 1){
 					callback();
-				}else{
-					console.log("Error");
+					return;
 				}
+				callback();
 			});
 		},
 		addEntry : function(callback, formData){

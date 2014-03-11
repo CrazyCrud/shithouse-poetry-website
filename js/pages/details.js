@@ -42,7 +42,8 @@ function showComments(c){
 function buildComment(comment){
 	var $comment = $('<div comment-id="'+comment.commentid+'" class="comment"></div>');
 	var $author = $('<div class="author"><a href="user.php?id='+comment.userid+'">'+comment.username+'</a></div>');
-	var $date = $('<div class="date">'+comment.time+'</div>');
+	var $date = $('<div class="date">'+formatTime(comment.time)+'</div>');
+	$date.attr("title",comment.time);
 	if(user.admin || user.id == comment.userid){
 		var $del = $('<i title="Kommentar l&ouml;schen" class="deletecomment icon-cancel"></i>');
 		$date.append($del);
@@ -102,7 +103,6 @@ function initGUI(){
 	});
 	$(document).on("click",".deletecomment",function(){
 		var commentid = $($(this).closest(".comment")).attr("comment-id");
-		Img
 		ImgurManager.deleteComment(onCommentDeleted,commentid);
 	});
 	$("#deleteentry").click(function(){

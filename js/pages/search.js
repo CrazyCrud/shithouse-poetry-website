@@ -11,12 +11,13 @@ $(document).ready(function() {
 	searchTemplate = _.template($("script.search-template").html());
 
 	$searchLink.click(function(event) {
-		appendOverlay();
+		appendSearchOverlay();
 	});
 });
 
-function appendOverlay(){
+function appendSearchOverlay(){
 	createOverlayBackground();
+
 	$("body").append(searchTemplate());
 
 	$overlay = $(".overlaycontent");

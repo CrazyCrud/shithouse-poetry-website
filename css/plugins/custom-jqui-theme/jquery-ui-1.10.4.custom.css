@@ -52,7 +52,7 @@
 }
 
 .ui-front {
-	z-index: 100;
+	z-index: 1000;
 }
 
 
@@ -470,6 +470,7 @@ button.ui-button::-moz-focus-inner {
 	padding: .2em;
 	outline: 0;
 	max-width: 640px;
+	margin: 0 auto;
 }
 .ui-dialog .ui-dialog-titlebar {
 	padding: .4em 1em;
@@ -503,7 +504,7 @@ button.ui-button::-moz-focus-inner {
 }
 .ui-dialog .ui-dialog-buttonpane {
 	text-align: left;
-	border-width: 1px 0 0 0;
+	border: none;
 	background-image: none;
 	margin-top: .5em;
 	padding: .3em 1em .5em .4em;
@@ -790,7 +791,7 @@ body .ui-tooltip {
 	font-size: 1.2em;
 }
 .ui-widget .ui-widget {
-	font-size: 1em;
+	font-size: .5em;
 }
 .ui-widget input,
 .ui-widget select,

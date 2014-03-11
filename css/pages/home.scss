@@ -120,6 +120,13 @@
 	}
 }
 
+.images-vote{
+	display: block;
+	width: 60% !important;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 .jg-image{
 	overflow: hidden;
 }
@@ -242,14 +249,29 @@ span.transcription{
 .vote-container{
 	display: none;
 	text-align: center;
+	margin: $space_minus1 0;
+	height: auto;
 
 	.vote-icon-container{
 		display: inline-block;
+		height: 50px;
+		width: 100%;
 		color: $black;
-
+		font-size: $space_plus1;
 		i{
+			background-color: $white;
+			color: $black;
 			cursor: pointer;
-			margin: $space_minus1;
+			margin-top: $space_plus1;
+			margin-bottom: $space_plus1;
+			padding: $space_minus1;
+			border: solid 1px $lightgrey;
+			border-radius: 4px;
+			transition: all 0.3s ease;
+		}
+		i:hover{
+			color: $white;
+			background-color: $black;
 		}
 	}
 }

@@ -13,11 +13,11 @@ $(document).ready(function() {
 	loginTemplate = _.template($("script.login-template").html());
 
 	$loginLink.click(function(event) {
-		appendOverlay();
+		appendLoginOverlay();
 	});
 });
 
-function appendOverlay(){
+function appendLoginOverlay(){
 	createOverlayBackground();
 	$("body").append(loginTemplate());
 
@@ -128,6 +128,7 @@ function onLoginSuccess(authkey){
 	d.setTime(d.getTime() + oneYear);
 	document.cookie = "authkey=" + authkey + "; expires=" + d.toGMTString();
 	getUser(authkey);
+	window.location = "index.html";
 }
 
 

@@ -1,0 +1,55 @@
+@import "../partials/base";
+
+/*
+Base styles include setting heading sizes, default link styles, default
+font styles, and body backgrounds; it doesn’t include any class or ID selectors
+*/
+/*
+Insert code that doesn't output CSS, things like mixin declarations, functions, and variables.
+*/
+
+body{
+  color: black;
+}
+
+.details{
+  padding: 32px;
+}
+
+.action{
+  background: #eee;
+  padding: .75em;
+  margin-bottom: .5em;
+}
+
+.action .content{
+	display: flex;
+}
+
+.action .container{
+	display: inline-block;
+}
+
+.action .leftcontainer{
+	margin-right: .75em;
+}
+
+.action .rightcontainer{
+
+}
+
+.action .comment{
+	overflow: hidden;
+	max-height: 64px;
+	margin-top: .5em;
+	font-size: .75em;
+}
+
+.action .time{
+	font-size: .5em;
+	float: right;
+}
+
+.action .info{
+	font-size: .5em;
+}
