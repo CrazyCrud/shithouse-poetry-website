@@ -16,14 +16,15 @@ $(document).ready(function() {
 
 	$loginLink.click(function(event) {
 		if(isLoggedIn()){
-			appendUserPanel();
-		}else{
 			manageLoginOverlay();
+		}else{
+			appendLoginOverlay();
 		}
 	});
 });
 
 function isLoggedIn(){
+	console.log(user.username.length);
 	return user.username.length > 0 ? true: false;
 }
 
