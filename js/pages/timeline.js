@@ -48,9 +48,10 @@ function fillActions(ac){
 	}
 }
 
-function addAction(comment){
-	if(comment.comment != null)addComment(comment);
-	else addUpload(comment);
+function addAction(action){
+	if(action.comment != null)addComment(action);
+	else if(action.rating != null)addRating(action);
+	else addUpload(action);
 }
 
 function addComment(comment){
@@ -98,6 +99,41 @@ function addUpload(entry){
 	$info.append($user);
 	if(entry.userid == user.id) $info.append(" hast ein Bild hochgeladen:");
 	else $info.append(" hat ein Bild hochgeladen:");
+	$left.append($img);
+	$right.append($info);
+	$right.append($title);
+
+	var $content = $('<div class="content"></div>');
+	$content.append($left);
+	$content.append($right);
+	
+	$container.append($time);
+	$container.append($content);
+
+	$("#actions").append($container);
+}
+
+function addRating(entry){
+	if(entry.userid == user.id)entry.username = "Du";
+	var $container = $('<div class="action rating"></div>');
+	var $img = $('<a href="details.php?id='+entry.entryid+'"><img src="'+entry.smallthumbnail+'" title="'+entry.title+'"></img></a>');
+	var $user = $('<a href="user.php?id='+entry.userid+'">'+entry.username+"</a>");
+	if(entry.title.trim().length == 0)entry.title = '<span class="missing">Bild gel&ouml;scht</span>';
+	var icon = '<i class="icon-thumbs-up-1"/>';
+	var sentiment = "positiv";
+	if(entry.rating != 1){
+		icon = '<i class="icon-thumbs-down-1"/>';
+		sentiment = "negativ";
+	}
+	var $title = $('<div class="comment">'+icon+entry.title+'</div>');
+	var $left = $('<div class="leftcontainer container"></div>');
+	var $right = $('<div class="rightcontainer container"></div>');
+	var $info = $('<div class="info"></div>');
+	var $time = $('<div class="time">'+formatTime(entry.date)+'</div>');
+
+	$info.append($user);
+	if(entry.userid == user.id) $info.append(" hast ein Bild "+sentiment+" bewertet:");
+	else $info.append(" hat ein Bild "+sentiment+" bewertet:");
 	$left.append($img);
 	$right.append($info);
 	$right.append($title);

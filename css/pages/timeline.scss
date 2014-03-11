@@ -26,6 +26,14 @@ body{
 	border: 1px solid $grey;
 }
 
+.action.rating .icon-thumbs-down-1{
+	color: $red;
+}
+
+.action.rating .icon-thumbs-up-1{
+	color: $green;
+}
+
 .action.gender-w{
 	border: 1px solid $pink;
 }
