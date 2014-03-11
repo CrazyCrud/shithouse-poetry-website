@@ -26,6 +26,12 @@ function fillUI(u){
 		$("#stats #comments .amount").html(u.stats.comments);
 		$("#stats #ratings .amount").html(u.stats.ratings);
 		drawAchievements(u.stats);
+		var today = new Date();
+		var timeObj = convertDateTime(user.joindate);
+		var timestamp = timeObj.getTime();
+		var difference = today-timestamp;
+		var lvl = computeLevel(u.stats.entries, u.stats.comments, u.stats.ratings, difference);
+		$("#level").html("(Level "+lvl+")");
 	}
 	ImgurManager.getEntriesForUser(fillImages,id);
 }
@@ -41,6 +47,24 @@ function drawAchievements(stats){
 	drawEntryAchievements(stats.entries);
 	drawCommentAchievements(stats.comments);
 	drawRatingAchievements(stats.ratings);
+}
+
+function computeLevel(entries, comments, ratings, ageInMillis){
+	var ageInDays = ageInMillis/1000 /60 /60 /24;
+	var level = 1;
+
+	var entryMulti = .1;
+	var commentMulti = .01;
+	var ratingMulti = .02;
+	var ageMulti = .01;
+
+	var extralevel = entries*entryMulti;
+	extralevel += comments*commentMulti;
+	extralevel += ratings*ratingMulti;
+	extralevel += ageInDays*ageMulti;
+
+	level = Math.floor(level+extralevel);
+	return level;
 }
 
 function drawEntryAchievements(amount){

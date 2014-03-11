@@ -205,6 +205,10 @@ body {
 #username {
   font-size: 2em; }
 
+#level {
+  font-size: 0.5em;
+  font-style: italic; }
+
 #joined {
   font-size: 0.5em; }
 

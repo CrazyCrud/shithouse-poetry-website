@@ -53,7 +53,10 @@
 				<div class="details-user">
 					<div class="row">
 						<div class="details small-12 medium-7 large-7 columns left" id="image-description">
-							<div id="username">Nutzer nicht gefunden</div>
+							<div id="title">
+								<span id="username">Nutzer nicht gefunden</span>
+								<span id="level"></span>
+							</div>
 							<div id="joined">Beigetreten <span id="membersince"></span></div>
 							<div id="online">Zuletzt online <span id="lastseen"></span></div>
 							<div id="stats">
