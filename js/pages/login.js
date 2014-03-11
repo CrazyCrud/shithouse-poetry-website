@@ -30,6 +30,9 @@ function isLoggedIn(){
 function manageLoginOverlay(){
 	if($("#user-overlay").length < 1){
 		$("#mainnav").append(userTemplate());
+		$("#link-logout").click(function(event) {
+			
+		});
 	}else{
 		$("#user-overlay").remove();
 	}
