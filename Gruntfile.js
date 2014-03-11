@@ -35,6 +35,7 @@ module.exports = function(grunt) {
                     'css/pages/register.css': 'css/pages/register.scss',
                     'css/pages/user.css': 'css/pages/user.scss',
                     'css/pages/timeline.css': 'css/pages/timeline.scss',
+                    'css/pages/search.css': 'css/pages/search.scss'
                 }
             } 
         },

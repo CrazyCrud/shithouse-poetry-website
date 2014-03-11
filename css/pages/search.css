@@ -186,58 +186,15 @@ input[type="password"].loginField {
 :-ms-input-placeholder {
   color: #cbcdc7; }
 
-body {
-  width: 100%;
-  height: 100%;
-  overflow-y: auto;
-  overflow-x: hidden;
-  background: #ffffff; }
-
-#index {
-  width: 100%;
-  height: 100%;
-  overflow-y: auto;
-  overflow-x: hidden;
-  margin: 0; }
-
-#mainnav {
-  background: #111111; }
-  #mainnav .top-bar-section a#link-upload {
-    font-size: 0.75rem; }
-  #mainnav .top-bar-section a#link-home {
-    font-size: 0.725rem; }
-  #mainnav .top-bar-section li {
-    padding-right: 20px; }
-    #mainnav .top-bar-section li a:not(.button) {
-      background: transparent; }
-  #mainnav .top-bar-section span {
-    display: inline-block;
-    margin-right: 8px; }
-
-#user-overlay {
-  display: block;
-  position: absolute;
-  width: 120px;
+.infinite-container {
+  position: relative;
   overflow: hidden;
-  top: 90%;
-  right: 2%;
-  box-shadow: 1px 1px 1px #111111; }
-  #user-overlay .user-overlay-container {
-    background-color: rgba(140, 140, 140, 0.5); }
-    #user-overlay .user-overlay-container ul {
-      margin: 0; }
-    #user-overlay .user-overlay-container li {
-      text-align: center; }
-      #user-overlay .user-overlay-container li a {
-        font-size: 0.618rem;
-        color: #ffffff; }
+  margin-top: 0.236rem;
+  margin-bottom: 0.236rem;
+  margin-right: 0.236rem;
+  margin-left: 0.236rem; }
 
-#maincontent {
-  overflow: hidden; }
-
-#maincontent:not(.home) {
-  padding-top: 1.618rem; }
-
-@media screen and (max-width: 640px) {
-  #mainnav .top-bar-section span {
-    display: none; } }
+#images {
+  padding: 4px; }
+  #images img {
+    vertical-align: bottom; }

@@ -29,7 +29,7 @@
 									</a>
 								</li>
 								<li class="li-upload-container">
-									<a id="link-upload" href="">
+									<a id="link-upload" href="javascript:void">
 										<span></span><i class="icon-upload-cloud"></i>
 									</a>
 								</li>
