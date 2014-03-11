@@ -34,7 +34,7 @@
 	float: right;
 }
 
-#search-input{
+#search-input, #mail-input, #password-input{
 	height: auto;
 	font-size: $space_plus1;
 	color: $white;
@@ -43,7 +43,7 @@
 	padding: 0;
 }
 
-#search-input:focus{
+#search-input:focus, #mail-input:focus, #password-input:focus{
 	border: 0;
 	background: rgba(10, 10, 10, 0.0);
 	box-shadow: none;

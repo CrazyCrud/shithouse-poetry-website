@@ -212,7 +212,7 @@ input[type="password"].loginField {
 #search-button {
   float: right; }
 
-#search-input {
+#search-input, #mail-input, #password-input {
   height: auto;
   font-size: 1.618rem;
   color: #ffffff;
@@ -220,7 +220,7 @@ input[type="password"].loginField {
   background: rgba(10, 10, 10, 0);
   padding: 0; }
 
-#search-input:focus {
+#search-input:focus, #mail-input:focus, #password-input:focus {
   border: 0;
   background: rgba(10, 10, 10, 0);
   box-shadow: none; }

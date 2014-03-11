@@ -197,7 +197,9 @@ input[type="password"].loginField {
       padding-left: 0.618rem; }
   .register-forms-container .headline-container {
     margin-top: 0.618rem;
-    margin-bottom: 0.618rem; }
+    margin-bottom: 0.618rem;
+    padding-right: 0.618rem;
+    padding-left: 0.618rem; }
 
 .form-register label {
   float: right; }
