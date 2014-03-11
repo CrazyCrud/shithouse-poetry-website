@@ -39,6 +39,30 @@ body{
 	}
 }
 
+#user-overlay{
+	display: block;
+	position: absolute;
+	width: 120px;
+	overflow: hidden;
+	top: 90%;
+	right: 1%;
+
+	.user-overlay-container{
+		background-color: rgba(140, 140, 140, 0.5);
+		ul{
+			margin: 0;
+		}
+		li{
+			text-align: center;
+
+			a{
+				font-size: $space_minus1;
+				color: $white;
+			}
+		}
+	}
+}
+
 #maincontent{
 	overflow: hidden;
 }

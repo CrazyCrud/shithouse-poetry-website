@@ -8,14 +8,34 @@ var $passwordInput;
 var $loginForm;
 
 var loginTemplate = null; 
+var userTemplate = null;
 
 $(document).ready(function() {
 	loginTemplate = _.template($("script.login-template").html());
+	userTemplate = _.template($("script.overlay-user").html());
 
 	$loginLink.click(function(event) {
-		appendLoginOverlay();
+		if(isLoggedIn()){
+			appendUserPanel();
+		}else{
+			manageLoginOverlay();
+		}
 	});
 });
+
+function isLoggedIn(){
+	return user.username.length > 0 ? true: false;
+}
+
+function manageLoginOverlay(){
+	if($("#user-overlay").length > 0){
+		$("#mainnav").append(loginTemplate());
+		
+	}else{
+		$("#user-overlay").remove();
+	}
+}
+
 
 function appendLoginOverlay(){
 	createOverlayBackground();
