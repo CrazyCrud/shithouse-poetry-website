@@ -33,8 +33,8 @@ module.exports = function(grunt) {
                     'css/pages/details.css': 'css/pages/details.scss',
                     'css/pages/upload.css': 'css/pages/upload.scss',
                     'css/pages/register.css': 'css/pages/register.scss',
-                    'css/plugins/foundation.css': 
-                        'scss/*.scss'
+                    'css/pages/user.css': 'css/pages/user.scss',
+                    'css/pages/timeline.css': 'css/pages/timeline.scss',
                 }
             } 
         },
@@ -98,8 +98,7 @@ module.exports = function(grunt) {
                 },
             },
             css: {
-                files: ['css/modules/*.scss', 'css/partials/*.scss', 'css/pages/*.scss', 'css/*.scss', 'scss/foundation/components/*.scss', 
-                    'scss/foundation/*.scss', 'scss/*.scss'],
+                files: ['css/modules/*.scss', 'css/partials/*.scss', 'css/pages/*.scss', 'css/*.scss'],
                 tasks: ['sass'],
                 options: {
                     spawn: false,

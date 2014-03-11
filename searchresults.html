@@ -41,91 +41,74 @@
 					</nav>
 				</div>				
 			</header>
-
 			<section id="searchresults-maincontent">
 				<div class="row">
-					<div class="small-12 columns full-width">
-						<div id="search-list-template" class="list-template">
-							<div id="list-entry-image">
-							</div>
-							<div class="vertical-line">
-							</div>
-							<div id="list-entry-content">
-							<img src="img/details/female.png" class="left" title="Weibliche Toilette" width=30>		
-								<span id="list-entry-title">Titel des Bildes</span> <br/>
-								<span id="list-entry-location" >Ort der Aufnahme</span>
-							
-								<div id="list-entry-tags">
-									<span id="tag1" class="list-entry-tag">Tag1</span>
-									<span id="tag2" class="list-entry-tag">Tag2</span>
-									<span id="tag3" class="list-entry-tag">Tag3</span>
-									<span id="tag4" class="list-entry-tag">Tag4</span>
-								</div>
-							</div>
-						</div>	
-					</div>
-				</div>
-			</section>
 
-			<section id="myimages-maincontent">
-				<div class="row">
-					<div class="small-12 columns full-width">
-						<div id="myimages-list-template" class="list-template">
-							<div id="list-entry-image">
-							</div>
-							<div class="vertical-line">
-							</div>
-							<div id="list-entry-date" class="right">12.02.2014</div>
-							<div id="list-entry-content">
-								<span id="list-entry-username">User Name</span> <br/>
-								<div id="list-entry-text" >Typ (Kommentar/Report): + Inhalt des Kommentars / des Reports</div>
-							</div>
-						</div>	
-					</div>
 				</div>
-			</section>
-
-
-			
-
-			<section id="searchcontent" class="overlaycontent">
-				<div class="row">
-					<a href="#" class="overlayBackButton" id="searchOverlayBackButton"> <img src="img/global/back_arrow.png"></a>
-						<div class="small-12 columns full-width">
-							<form class="searchForm">
-								<input type="text" placeholder="Suche" name="searchInput" id="searchField" autofocus>
-							</form>
-						</div>					
-				</div>
-				<div class="row">
-					<div class="small-12 columns full-width right">
-						<a href="#" class="overlayButton right" id="searchButton">suchen</a>
-					</div>
-				</div>
-			</section>
-			<section id="logincontent" class="overlaycontent">
-				<div class="row">
-					<a href="#" class="overlayBackButton" id="loginOverlayBackButton"> <img src="img/global/back_arrow.png"></a>
-					<div class="small-12 columns full-width">
-							<form class="loginForm" name="loginForm" method="post">
-								<input type="email" placeholder="E-Mail" name="emailInput" id="emailInput" class="loginField" autofocus>
-								<input type="password" placeholder="Passwort" name="passwordInput" id="passwordInput" class="loginField">
-							</form>
-						</div>	
-					<div class="row">
-						<div class="small-12 columns full-width right">
-							<a href="#" class="overlayButton right" id="loginButton">Login</a>
-							<a href="#" class="overlayButton right" id="registerButton">registrieren </a>
-						</div>
-					</div>			
-				</div>
-			</section>
+			</section>		
 		</div>
-
-
-
-		
-		
+		<script type="text/template" class="overlay-template">
+			<div id="overlay-background"></div>
+		</script>
+		<script type="text/template" class="overlay-user">
+			<section id="user-overlay">
+				<div class="user-overlay-container">
+					<ul>
+						<li><a id="link-timeline" href="timeline.php">Timeline</a></li>
+						<li><a id="link-myimages" href="javascript:void()">Meine Bilder</a></li>
+						<li><a id="link-logout" href="javascript:void()">Logout</a></li>
+					</ul>
+				</div>
+			</section>
+		</script>
+		<script type="text/template" class="search-template">
+ 			<section id="searchcontent" class="overlaycontent">
+				<div class="row">
+					<div class="close-button-container">
+						<a href="#" class="left" id="back-button"> 
+							<i class="icon-cancel"></i>
+						</a>
+					</div>
+					<div class="small-11 small-centered medium-10 medium-centered large-8 large-centered columns form-container">
+						<div class="small-12 columns full-width input-container">
+							<input type="text" placeholder="Suche nach..." id="search-input" autofocus>
+						</div>	
+						<div class="small-12 columns full-width submit-container">
+							<a href="#" class="button-overlay" id="search-button">Suchen</a>
+						</div>
+					</div>				
+				</div>
+			</section>
+    	</script>
+    	<script type="text/template" class="login-template">
+ 			<section id="logincontent" class="overlaycontent">
+				<div class="row">
+					<div class="close-button-container">
+						<a href="#" class="left" id="back-button"> 
+							<i class="icon-cancel"></i>
+						</a>
+					</div>
+					<div class="small-11 small-centered medium-10 medium-centered large-8 large-centered columns form-container">
+						<div class="small-12 columns full-width input-container">
+							<form id="login-form">
+								<input type="email" placeholder="E-Mail" name="mail-input" class="login-field" id="mail-input" autofocus />
+								<input type="password" placeholder="Passwort" name="password-input" class="login-field" id="password-input" />
+							</form>
+						</div>	
+						<div class="small-12 columns full-width submit-container">
+							<a href="register.php" class="button-overlay left" 
+									id="register-button">
+								Registrieren 
+							</a>
+							<a href="#" class="button-overlay right" 
+									id="login-button">
+								Login
+							</a>
+						</div>
+					</div>		
+				</div>
+			</section>
+    	</script>
 		<script src="js/plugins/jquery.min.js"></script>		
 		<script src="js/plugins/md5/jquery.md5.js"></script>
 		<script src="js/plugins/foundation/foundation.js"></script>

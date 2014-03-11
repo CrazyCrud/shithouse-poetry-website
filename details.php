@@ -119,6 +119,16 @@
 		<script type="text/template" class="overlay-template">
 			<div id="overlay-background"></div>
 		</script>
+		<script type="text/template" class="overlay-user">
+			<section id="user-overlay">
+				<div class="user-overlay-container">
+					<ul>
+						<li><a id="link-timeline" href="">Timeline</a></li>
+						<li><a id="link-logout" href="">Logout</a></li>
+					</ul>
+				</div>
+			</section>
+		</script>
 		<script type="text/template" class="search-template">
  			<section id="searchcontent" class="overlaycontent">
 				<div class="row">

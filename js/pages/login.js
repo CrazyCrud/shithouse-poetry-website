@@ -8,14 +8,50 @@ var $passwordInput;
 var $loginForm;
 
 var loginTemplate = null; 
+var userTemplate = null;
 
 $(document).ready(function() {
 	loginTemplate = _.template($("script.login-template").html());
+	userTemplate = _.template($("script.overlay-user").html());
 
 	$loginLink.click(function(event) {
-		appendLoginOverlay();
+		if(isLoggedIn()){
+			manageLoginOverlay();
+		}else{
+			appendLoginOverlay();
+		}
+	});
+
+	$(this).mouseup(function (e)
+	{
+	    var container = $("#user-overlay");
+	    if (!container.is(e.target) 
+	        	&& container.has(e.target).length === 0) {
+	        $(container).remove();
+	    }
 	});
 });
+
+function isLoggedIn(){
+	return user.username.length > 0 ? true: false;
+}
+
+function manageLoginOverlay(){
+	if($("#user-overlay").length < 1){
+		$("#mainnav").append(userTemplate());
+		$("#link-logout").click(function(event) {
+			var d = new Date(1970, 1);
+			document.cookie = "username=''	; expires=" + d.toGMTString();
+			document.cookie = "userid=''; expires=" + d.toGMTString();
+			document.cookie = "admin=''; expires=" + d.toGMTString();
+			window.location = "index.html";
+		});
+		$("#link-myimages").attr('href', 'user.php?id=' + user.id);
+	}else{
+		$("#user-overlay").remove();
+	}
+}
+
 
 function appendLoginOverlay(){
 	createOverlayBackground();

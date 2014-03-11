@@ -339,7 +339,7 @@ var ImgurManager = (function(){
 				if(data.success == 1){
 					callback(data.data);
 				}else{
-					callback(false);
+					callback(null);
 				}
 			});
 		},

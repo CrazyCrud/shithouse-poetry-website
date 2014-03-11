@@ -204,6 +204,21 @@ body {
   padding: 0.75em;
   margin-bottom: 0.5em; }
 
+.action.entry {
+  border: 1px solid #B8B8B8; }
+
+.action.rating .icon-thumbs-down-1 {
+  color: #ff4444; }
+
+.action.rating .icon-thumbs-up-1 {
+  color: #99cc00; }
+
+.action.gender-w {
+  border: 1px solid #d22091; }
+
+.action.gender-m {
+  border: 1px solid #32a2b8; }
+
 .action .content {
   display: flex; }
 

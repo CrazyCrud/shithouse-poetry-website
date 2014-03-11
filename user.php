@@ -35,12 +35,12 @@
 							</ul>
 							<ul class="right">
 								<li class="li-search-container">
-									<a id="link-search" href="#" onClick="">
+									<a id="link-search" href="javascript:void()" onClick="">
 										<span>Search</span><i class="icon-search"></i>
 									</a>
 								</li>
 								<li class="li-login-container">
-									<a id="link-login" href="#" onClick="">
+									<a id="link-login" href="javascript:void()" onClick="">
 										<span>Login</span><i class="icon-user"></i>
 									</a>									
 								</li>
@@ -83,6 +83,17 @@
 		</script>
 		<script type="text/template" class="overlay-template">
 			<div id="overlay-background"></div>
+		</script>
+		<script type="text/template" class="overlay-user">
+			<section id="user-overlay">
+				<div class="user-overlay-container">
+					<ul>
+						<li><a id="link-timeline" href="timeline.php">Timeline</a></li>
+						<li><a id="link-myimages" href="javascript:void()">Meine Bilder</a></li>
+						<li><a id="link-logout" href="javascript:void()">Logout</a></li>
+					</ul>
+				</div>
+			</section>
 		</script>
 		<script type="text/template" class="search-template">
  			<section id="searchcontent" class="overlaycontent">
