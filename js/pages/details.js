@@ -102,7 +102,6 @@ function initGUI(){
 	});
 	$(document).on("click",".deletecomment",function(){
 		var commentid = $($(this).closest(".comment")).attr("comment-id");
-		Img
 		ImgurManager.deleteComment(onCommentDeleted,commentid);
 	});
 	$("#deleteentry").click(function(){

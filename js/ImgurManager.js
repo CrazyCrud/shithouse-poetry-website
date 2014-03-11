@@ -59,6 +59,17 @@ var ImgurManager = (function(){
 				callback(links);
 			});
 		},
+		getTimeline : function(callback){
+			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+			var url = 'getTimeline.php?authkey='+authkey;
+			$.get("php/backend/"+url, function(data){
+				var d = false;
+				if(data.success == 1){
+					d = data.data;
+				}
+				callback(d);
+			});
+		},
 		getFilteredEntries : function(callback, searchProps, currentEntry){
 			searchProps = searchProps || {};
 			searchProps.filter = searchProps.filter || "sex";
