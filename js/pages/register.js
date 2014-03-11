@@ -56,6 +56,8 @@ function onLoginSuccess(authkey){
 		var oneYear = 31536000000;
 		d.setTime(d.getTime() + oneYear);
 		document.cookie = "authkey=" + authkey + "; expires=" + d.toGMTString();
+		
+		
 
 		$("<div>Sie haben sich erfolgreich angemeldet!</div>").dialog({
 			dialogClass: "no-close",

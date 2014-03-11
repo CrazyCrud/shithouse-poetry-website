@@ -128,7 +128,6 @@ function onLoginSuccess(authkey){
 	d.setTime(d.getTime() + oneYear);
 	document.cookie = "authkey=" + authkey + "; expires=" + d.toGMTString();
 	getUser(authkey);
-	window.location = "index.html";
 }
 
 
