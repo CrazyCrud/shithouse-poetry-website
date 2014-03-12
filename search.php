@@ -70,11 +70,11 @@
 			</section>
 		</div>
 		<script type="text/javascript">
-			var term = null;
+			var query = null;
 
 			<?php
-			if(isset($_GET["term"])){
-				echo "term='".$_GET["term"]."';";
+			if(isset($_GET["query"])){
+				echo "query='".mysql_real_escape_string($_GET["query"])."';";
 			}
 
 			?>

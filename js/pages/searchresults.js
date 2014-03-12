@@ -4,8 +4,8 @@ var NO_RESULTS = "Für diesen Suchbegriff gab es leider keine Treffer!";
 var NO_MORE_IMAGES = "Wir können dir leider keine weiteren Bilder mehr liefern";
 
 $(document).ready(function() {
-	if(term != null){
-		ImgurManager.search(computeSearch, term, 0);
+	if(query != null){
+		ImgurManager.search(computeSearch, query, 0);
 		// ImgurManager.getEntries(computeSearch);
 		setupImageClick();
 		setupOnce();
@@ -28,7 +28,7 @@ function setupInfiniteScroll(){
 	$("html").waypoint(function(direction) {
 		if(direction == "down"){
 			if($.waypoints('viewportHeight') < $(this).height()){
-				ImgurManager.search(computeSearch, term, GalleryView.getCurrentEntry());
+				ImgurManager.search(computeSearch, query, GalleryView.getCurrentEntry());
 			}		
 		}
 	}, { offset: 'bottom-in-view'
@@ -38,7 +38,7 @@ function setupInfiniteScroll(){
 var setupOnce = _.once(setupInfiniteScroll);
 
 function computeSearch(searchData){
-	$searchTermLabel.html(term);
+	$searchTermLabel.html(query);
 	if(_.isNull(searchData) || _.isUndefined(searchData)){
 		resultsError(NO_RESULTS);
 	}else if(_.isEmpty(searchData)){

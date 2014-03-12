@@ -34,7 +34,7 @@ function appendSearchOverlay(){
 	$submitButton.click(function(event) {
 		console.log("search");
 		if($searchInput.val().length > 2){
-			window.location = 'search.php?term=' + $.trim($searchInput.val());
+			window.location = 'search.php?query=' + $.trim($searchInput.val());
 		}
 	});
 }
