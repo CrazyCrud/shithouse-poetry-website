@@ -1,14 +1,41 @@
 var user = {};
+var NO_RESULTS = "Hier gibt es leider keine Bilder mehr!";
 
 $(function(){
 	if(id>0){
 		loadUser(id);
+		setupImageClick();
+		setupOnce();
 	}
 });
 
 function loadUser(id){
 	ImgurManager.getUser(fillUI, id);
 }
+
+$(document).on("complete", function(){
+	$.waypoints('refresh');
+});
+
+function setupImageClick(){
+	$(document).on("click", ".jg-image",function(){
+		var id = $($(this).find("a")[0]).attr("title");
+		window.location = "details.php?id=" + id;
+	});
+}
+
+function setupInfiniteScroll(){
+	$("html").waypoint(function(direction) {
+		if(direction == "down"){
+			if($.waypoints('viewportHeight') < $(this).height()){
+				ImgurManager.getEntriesForUser(fillImages, id, GalleryView.getCurrentEntry());
+			}		
+		}
+	}, { offset: 'bottom-in-view'
+	});
+}
+
+var setupOnce = _.once(setupInfiniteScroll);
 
 function fillUI(u){
 	if(!u){
@@ -33,20 +60,43 @@ function fillUI(u){
 		var lvl = computeLevel(u.stats.entries, u.stats.comments, u.stats.ratings, difference);
 		$("#level").html("(Level "+lvl+")");
 	}
-	ImgurManager.getEntriesForUser(fillImages,id);
+	ImgurManager.getEntriesForUser(fillImages, id);
 }
 
-function fillImages(data){
-	if(!data||data.length==0)return;
+function fillImages(searchData){
+	if(!searchData||searchData.length==0){
+		resultsError(NO_RESULTS);
+	}else{
+		GalleryView.init($("#images"));
+		showResults(searchData);
+	}
+	/*
 	var entry = data[0];
 	$("#image").attr("src",entry.images[0].thumbnail);
 	$("#lastlink").attr("href","details.php?id="+entry.id);
+	*/
+}
+
+function resultsError(msg){
+	var content = "<div class='error-message secondary label'>" + msg + "</div>";
+	if($(".error-message").length < 1){
+		$("#images").append(content);
+	}
+}
+
+function showResults(searchData){
+	GalleryView.appendEntries(searchData);
+	GalleryView.reload();
 }
 
 function drawAchievements(stats){
 	drawEntryAchievements(stats.entries);
 	drawCommentAchievements(stats.comments);
 	drawRatingAchievements(stats.ratings);
+	if($(".achievement").length == 0){
+		var $none = $('<div class="missing">Dieser Nutzer hat noch keine Erfolge.</div>');
+		$("#achievements").append($none);
+	}
 }
 
 function computeLevel(entries, comments, ratings, ageInMillis){

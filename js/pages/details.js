@@ -240,6 +240,11 @@ function fillUI(e){
 	//set location
 	$("#locationdescription").html(entry.information[0].location);
 
+	//set type
+	var $t = $("#typedescription");
+	$t.html(entry.typename);
+	$t.attr("title",entry.typedescription);
+
 	//set tags
 	var $tags = $("#tags");
 	$tags.html("");

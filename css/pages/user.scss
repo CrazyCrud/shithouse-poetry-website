@@ -12,8 +12,12 @@ body{
   color: black;
 }
 
-.details{
-  padding: 32px;
+.details, .images-container{
+  padding: $space_plus1;
+}
+
+#pictures-header{
+	@include vertical-margin($space_minus2, $space_minus2);
 }
 
 #image-container #image{
@@ -49,6 +53,14 @@ body{
 #achievements{
 	margin-top: 1rem;
 	font-size: .75rem;
+}
+
+#achievements .missing{
+	font-size: .5rem;
+	font-style: italic;
+	background: #eee;
+	padding: .5rem;
+	margin-top: .5rem;
 }
 
 #achievements .achievement{

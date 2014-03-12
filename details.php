@@ -62,9 +62,12 @@
 							<img id="image" src="img/dummy/d05.png">
 						</div>
 						<div class="details small-12 medium-5 large-5 columns right" id="image-description">
-							<div id="title">Bild nicht gefunden</div>
+							<div id="title">Bild wird geladen ...</div>
 							<div id="artist"></div>
 							<i title="Geschlecht" id="sex"></i>
+							<div id="type">
+								Typ: <span id="typedescription"></span>
+							</div>
 							<div id="location">
 								Ort: <span id="locationdescription"></span>
 							</div>
