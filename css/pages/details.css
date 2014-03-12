@@ -239,6 +239,10 @@ body {
   font-size: 0.5rem;
   text-align: right; }
 
+#type {
+  font-size: 0.5rem;
+  text-align: right; }
+
 #tags .tag {
   font-size: 0.5rem;
   padding: 0.25rem;
@@ -259,6 +263,7 @@ body {
 #transcription #content .missing {
   background: #eee;
   font-style: italic;
+  font-size: 0.75rem;
   color: #555;
   padding: 0.25rem; }
 
