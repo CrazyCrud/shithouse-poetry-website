@@ -127,31 +127,55 @@ function initGUI(){
 		window.location = "upload.php?id="+id;
 	});
 	$("#report-icon").click(function(){
-		$('<form name="report"><textarea cols="50" rows=10 id="description" style="height:auto;width:auto" placeholder="Bitte beschreiben Sie hier, warum Sie diesen Eintrag melden m&ouml;chten."></textarea></form>').dialog({
+		$('<form name="report"><textarea cols="50" rows=10 id="description" style="height:auto;width:auto" placeholder="Bitte beschreibe hier, warum du diesen Eintrag melden m&ouml;chtest."></textarea></form>').dialog({
 			modal: true,
 			width: "auto",
 			autoResize: true,
-			title: "Aus welchen Gründen möchten Sie diesen Eintrag melden?",
+			title: "Aus welchen Gründen möchtest du diesen Eintrag melden?",
 			buttons:{
 				"OK":function(){
 					var desc =  $('#description').val();
 					ImgurManager.addReport(function(success){
-						console.log("Report done!");
-						$dialog = $('<div>Der Report wurde erfolgreich gesendet.</div>');
-						$dialog.dialog({
-							modal: false,
-							width: "auto",
-							title: "Vielen Dank für ihren Report",
-							show: true
-						});
-						setTimeout(function() {	
-								$dialog.dialog('close'); 
+							$dialog = "";
+						if(success){
+							$dialog = $('<div>Die Meldung wurde erfolgreich gesendet.</div>');
+							$dialog.dialog({
+								modal: false,
+								width: "auto",
+								title: "Vielen Dank für deine Meldung",
+								show: true
+							});
+							setTimeout(function() {	
+								$dialog.dialog('close');
+								$dialog.dialog("destroy");
 						}, 2000);
+						}else{
+							$dialog = $('<div>Deine Meldung wurde nicht erfolgreich eingetragen.<br><br>&Uuml;berpr&uuml;fe bitte, dass diese mindestens 10 Zeichen lang ist.</div>');
+							$dialog.dialog({
+								modal: false,
+								width: "auto",
+								title: "Leider gab es Probleme mit deiner Meldung",
+								show: true
+							});
+						}
+
+						$(this).mouseup(function (e)
+						{
+							if($dialog.hasClass('ui-dialog-content')){
+							    if (!$dialog.is(e.target) && $dialog.has(e.target).length === 0) {
+							        $dialog.dialog('close');
+									$dialog.dialog("destroy");
+							    }
+							}   
+						});
+	
 					}, id, desc, -1);
 					$(this).dialog("close");
+					$(this).dialog("destroy");
 				},
 				"Abbrechen":function(){
 					$(this).dialog("close");
+					$(this).dialog("destroy");
 				}
 			}
 		});
