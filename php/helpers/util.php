@@ -1,10 +1,10 @@
 <?php
 
 foreach($_GET as $key=>$val){
-	$_GET[$key] = mysql_real_escape_string(htmlspecialchars($val));
+	$_GET[$key] = mysql_escape_string(htmlspecialchars($val));
 }
 foreach($_POST as $key=>$val){
-	$_POST[$key] = mysql_real_escape_string(htmlspecialchars($val));
+	$_POST[$key] = mysql_escape_string(htmlspecialchars($val));
 }
 
 function standarize_array($arr){
