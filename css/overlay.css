@@ -221,6 +221,8 @@ input[type="password"].loginField {
       #user-overlay .user-overlay-container li a {
         font-size: 0.618rem;
         color: #ffffff; }
+      #user-overlay .user-overlay-container li a:hover {
+        text-decoration: underline; }
 
 #user-overlay:before {
   content: "";

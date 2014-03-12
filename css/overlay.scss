@@ -41,6 +41,9 @@
 				font-size: $space_minus1;
 				color: $white;
 			}
+			a:hover{
+				text-decoration: underline;
+			}
 		}
 	}
 }
