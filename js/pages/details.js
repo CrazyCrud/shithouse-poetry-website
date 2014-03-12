@@ -201,86 +201,102 @@ function refresh(){
 
 
 function fillUI(e){
-	entry = e;
-	document.title = e.title;
-	if(e.userid == user.id || user.admin){
-		$("#controlpanel").css("display","block");
-	}
-	//set rating
-	$innerRating = $("#inner-rating");
-	//calculation of "green"-percentage of the rating
-	var r = entry.ratings[0].rating;
-	if(!r)r=0;
-	var i = parseFloat(r);
-	var j = (1+i)*50;
-	var width = j + "%";
-	$innerRating.css("width", width);
-	$("#ratingcount").html(entry.ratings[0].ratingcount);
-
-	$(".thumbs").removeClass("mine");
-	if(entry.ratings[0].ratedbyme){
-		if(entry.ratings[0].ratedbyme==-1){
-			$("#thumbsdown").addClass("mine");
-		}else if(entry.ratings[0].ratedbyme==1){
-			$("#thumbsup").addClass("mine");
+	if(e == "Error"){
+		$dialog = $('<div>Der Eintrag wurde leider gel&ouml;scht.</div>');
+		$dialog.dialog({
+			modal: true,
+			width: "auto",
+			title: "Eintrag nicht vorhanden",
+			open: function(){
+				setTimeout(function() {	
+								$dialog.dialog('close');
+								$dialog.dialog("destroy");
+								window.location = "index.html";
+						}, 1000);
+			}
+		});
+	}else{
+		entry = e;
+		document.title = e.title;
+		if(e.userid == user.id || user.admin){
+			$("#controlpanel").css("display","block");
 		}
+		//set rating
+		$innerRating = $("#inner-rating");
+		//calculation of "green"-percentage of the rating
+		var r = entry.ratings[0].rating;
+		if(!r)r=0;
+		var i = parseFloat(r);
+		var j = (1+i)*50;
+		var width = j + "%";
+		$innerRating.css("width", width);
+		$("#ratingcount").html(entry.ratings[0].ratingcount);
+
+		$(".thumbs").removeClass("mine");
+		if(entry.ratings[0].ratedbyme){
+			if(entry.ratings[0].ratedbyme==-1){
+				$("#thumbsdown").addClass("mine");
+			}else if(entry.ratings[0].ratedbyme==1){
+				$("#thumbsup").addClass("mine");
+			}
+		}
+
+		//set image
+		var $image = $("#image");
+		$("#image").css('width', '100%');
+		var $entryTitle = $("#entry-title");
+		$image.attr("src", entry.images[0].largethumbnail);
+		$image.attr("title", entry.title);
+
+		//set title
+		document.getElementById("title").innerHTML=entry.title;
+
+		//set artist
+		$("#artist").html(entry.information[0].artist);
+
+		//set location
+		$("#locationdescription").html(entry.information[0].location);
+
+		//set type
+		var $t = $("#typedescription");
+		$t.html(entry.typename);
+		$t.attr("title",entry.typedescription);
+
+		//set tags
+		var $tags = $("#tags");
+		$tags.html("");
+		for(var i=0; i<entry.tags.length; i++){
+			var tag = entry.tags[i];
+			var $tag = $('<span id="tag-'+tag.tagid+'" class="tag">'+tag.tag+'</span>');
+			$tags.append($tag);
+		}
+
+		//set sex
+		var sex = entry.sex.toLowerCase();
+		switch(sex){
+			case "m":
+				$("#sex").addClass("icon-male");
+				break;
+			case "w":
+				$("#sex").addClass("icon-female");
+				break;
+			default:
+				$("#sex").addClass("icon-help");
+		}
+
+		//set upload info
+		$("#upload-info #date").html(formatTime(entry.date));
+		$("#upload-info #date").attr("title", entry.date);
+		$("#upload-info #author").html(entry.username);
+		$("#upload-info #author").attr("href", "user.php?id="+entry.userid);
+
+		//set transcription
+		var trans = entry.information[0].transcription.trim();
+		if(trans.length==0){
+			trans = '<p class="missing">keine Transkription angegeben</p>';
+		}
+		$("#transcription #content").html(trans);
 	}
-
-	//set image
-	var $image = $("#image");
-	$("#image").css('width', '100%');
-	var $entryTitle = $("#entry-title");
-	$image.attr("src", entry.images[0].largethumbnail);
-	$image.attr("title", entry.title);
-
-	//set title
-	document.getElementById("title").innerHTML=entry.title;
-
-	//set artist
-	$("#artist").html(entry.information[0].artist);
-
-	//set location
-	$("#locationdescription").html(entry.information[0].location);
-
-	//set type
-	var $t = $("#typedescription");
-	$t.html(entry.typename);
-	$t.attr("title",entry.typedescription);
-
-	//set tags
-	var $tags = $("#tags");
-	$tags.html("");
-	for(var i=0; i<entry.tags.length; i++){
-		var tag = entry.tags[i];
-		var $tag = $('<span id="tag-'+tag.tagid+'" class="tag">'+tag.tag+'</span>');
-		$tags.append($tag);
-	}
-
-	//set sex
-	var sex = entry.sex.toLowerCase();
-	switch(sex){
-		case "m":
-			$("#sex").addClass("icon-male");
-			break;
-		case "w":
-			$("#sex").addClass("icon-female");
-			break;
-		default:
-			$("#sex").addClass("icon-help");
-	}
-
-	//set upload info
-	$("#upload-info #date").html(formatTime(entry.date));
-	$("#upload-info #date").attr("title", entry.date);
-	$("#upload-info #author").html(entry.username);
-	$("#upload-info #author").attr("href", "user.php?id="+entry.userid);
-
-	//set transcription
-	var trans = entry.information[0].transcription.trim();
-	if(trans.length==0){
-		trans = '<p class="missing">keine Transkription angegeben</p>';
-	}
-	$("#transcription #content").html(trans);
 }
 
 function userLogout(){
