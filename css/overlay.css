@@ -203,6 +203,36 @@ input[type="password"].loginField {
   left: 0;
   z-index: 110; }
 
+#user-overlay {
+  display: block;
+  position: absolute;
+  width: 120px;
+  overflow: visible;
+  top: 90%;
+  right: 2%;
+  box-shadow: 1px 1px 1px #111111; }
+  #user-overlay .user-overlay-container {
+    background-color: rgba(140, 140, 140, 0.9);
+    border-radius: 1px; }
+    #user-overlay .user-overlay-container ul {
+      margin: 0; }
+    #user-overlay .user-overlay-container li {
+      text-align: center; }
+      #user-overlay .user-overlay-container li a {
+        font-size: 0.618rem;
+        color: #ffffff; }
+
+#user-overlay:before {
+  content: "";
+  position: absolute;
+  top: -4%;
+  left: 48%;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid rgba(140, 140, 140, 0.9); }
+
 .form-container div {
   margin-top: 0.618rem;
   margin-bottom: 0.618rem; }
