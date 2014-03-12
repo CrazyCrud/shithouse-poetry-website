@@ -7,6 +7,7 @@
 		<link rel="stylesheet" type="text/css" href="css/plugins/fontello/fontello.css"/>
 		<link rel="stylesheet" type="text/css" href="css/plugins/gallery/jquery.justifiedgallery.min.css"/>
 		<link rel="stylesheet" type="text/css" href="css/global.css"/>
+		<link rel="stylesheet" type="text/css" href="css/overlay.css"/>
 		<link rel="stylesheet" type="text/css" href="css/pages/galleryview.css"/>
 		<link rel="stylesheet" type="text/css" href="css/pages/user.css"/>
 		<link rel="icon" type="image/x-icon" href="img/global/favicon.jpg"/>
