@@ -5,7 +5,9 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
 		<link rel="stylesheet" type="text/css" href="css/plugins/foundation.css"/>
 		<link rel="stylesheet" type="text/css" href="css/plugins/fontello/fontello.css"/>
+		<link rel="stylesheet" type="text/css" href="css/plugins/gallery/jquery.justifiedgallery.min.css"/>
 		<link rel="stylesheet" type="text/css" href="css/global.css"/>
+		<link rel="stylesheet" type="text/css" href="css/pages/galleryview.css"/>
 		<link rel="stylesheet" type="text/css" href="css/pages/user.css"/>
 		<link rel="icon" type="image/x-icon" href="img/global/favicon.jpg"/>
 		<script type="text/javascript" src="js/plugins/modernizr.js"></script>
@@ -80,7 +82,14 @@
 						</div>
 					</div>	
 					<div class="row pictures">
-						<div id="pictures-header">Bilder:</div>
+						<div class="images-container small-12 columns">
+							<div id="pictures-header">Bilder:</div>
+							<div class="infinite-container">
+								<div class="justifiedGallery" id="images">
+
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</section>
@@ -162,7 +171,12 @@
 		<script src="js/plugins/underscore.js"></script>		
 		<script src="js/plugins/foundation/foundation.js"></script>
   		<script src="js/plugins/foundation/foundation.topbar.js"></script>
+  		<script src="js/plugins/transit/transit.min.js"></script>
+  		<script src="js/plugins/gallery/jquery.justifiedgallery.js"></script>
+  		<script src="js/plugins/waypoint/waypoints.min.js"></script>
   		<script src="js/ImgurManager.js"></script>
+  		<script src="js/StateManager.js"></script>
+  		<script src="js/GalleryView.js"></script>
 		<script src="js/global.js"></script>
 		<script src="js/pages/search.js"></script>		
 		<script src="js/pages/login.js"></script>

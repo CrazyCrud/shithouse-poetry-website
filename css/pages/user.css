@@ -196,8 +196,12 @@ Insert code that doesn't output CSS, things like mixin declarations, functions, 
 body {
   color: black; }
 
-.details {
-  padding: 32px; }
+.details, .images-container {
+  padding: 1.618rem; }
+
+#pictures-header {
+  margin-top: 0.382rem;
+  margin-bottom: 0.382rem; }
 
 #image-container #image {
   width: 100%; }

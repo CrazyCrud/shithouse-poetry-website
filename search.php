@@ -8,6 +8,7 @@
 		<link rel="stylesheet" type="text/css" href="css/plugins/gallery/jquery.justifiedgallery.min.css"/>
 		<link rel="stylesheet" type="text/css" href="css/global.css"/>
 		<link rel="stylesheet" type="text/css" href="css/overlay.css"/>
+		<link rel="stylesheet" type="text/css" href="css/pages/galleryview.css"/>
 		<link rel="stylesheet" type="text/css" href="css/pages/search.css"/>
 		<link rel="icon" type="image/x-icon" href="img/global/favicon.jpg"/>
 		<script type="text/javascript" src="js/plugins/modernizr.js"></script>
@@ -145,7 +146,6 @@
 		<script src="js/plugins/underscore.js"></script>
 		<script src="js/plugins/foundation/foundation.js"></script>
   		<script src="js/plugins/foundation/foundation.topbar.js"></script>
-  		<script src="js/plugins/waypoint/waypoints.min.js"></script>
   		<script src="js/plugins/transit/transit.min.js"></script>
   		<script src="js/plugins/gallery/jquery.justifiedgallery.js"></script>
   		<script src="js/plugins/waypoint/waypoints.min.js"></script>

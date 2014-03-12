@@ -12,8 +12,12 @@ body{
   color: black;
 }
 
-.details{
-  padding: 32px;
+.details, .images-container{
+  padding: $space_plus1;
+}
+
+#pictures-header{
+	@include vertical-margin($space_minus2, $space_minus2);
 }
 
 #image-container #image{
