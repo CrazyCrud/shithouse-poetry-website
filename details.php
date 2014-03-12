@@ -55,8 +55,8 @@
 			<section id="maincontent">
 				<div class="details-entry">
 					<div class="row" id="controlpanel">
-						<a id="editentry" class="small button">Eintrag bearbeiten</a>
-						<a id="deleteentry" class="button small">Eintrag l&ouml;schen</a>
+						<a id="editentry" class="tiny button">Eintrag bearbeiten</a>
+						<a id="deleteentry" class="button tiny">Eintrag l&ouml;schen</a>
 					</div>
 					<div class="row">
 						<div class="details small-12 medium-7 large-7 columns left" id="image-container">
