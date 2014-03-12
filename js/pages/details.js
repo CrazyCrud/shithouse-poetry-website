@@ -150,7 +150,7 @@ function initGUI(){
 								$dialog.dialog("destroy");
 						}, 2000);
 						}else{
-							$dialog = $('<div>Deine Meldung wurde nicht erfolgreich eingetragen.<br><br>&Uuml;berpr&uuml;fe bitte, dass diese mindestens 10 Zeichen lang ist.</div>');
+							$dialog = $('<div><br>Deine Meldung wurde nicht erfolgreich eingetragen.<br>&Uuml;berpr&uuml;fe bitte, dass diese mindestens 10 Zeichen lang ist.</div>');
 							$dialog.dialog({
 								modal: false,
 								width: "auto",
