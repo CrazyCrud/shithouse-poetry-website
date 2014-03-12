@@ -50,7 +50,7 @@ function fillUI(e){
 	$("#location option[value="+entry.information[0].location.replace(/ /g,"_")+"]").attr("selected", "selected");	
 	$("#artist").val(entry.information[0].artist);
 	for(var i=0; i<entry.tags.length; i++){
-		appendSingleTag(entry.tags[i].tag, true);
+		appendSingleTag(entry.tags[i].tag, true, true);
 	}
 }
 
@@ -138,7 +138,7 @@ function initUpload(){
         if(code == 13 || code == 9 || code == 188 || code == 186 || code == 190){
         	var text = $.trim($(this).val());
         	if(text.length > 2){
-        		appendSingleTag(text, true);
+        		appendSingleTag(text, true, true);
         	}
         	$(this).val('');
         }
@@ -369,7 +369,7 @@ function appendSystemTags(tagData){
 	}else{
 		var tags = _.pluck(tagData, 'tag');
 		for(var i = 0; i < tags.length; i++){
-			appendSingleTag(tags[i], false);
+			appendSingleTag(tags[i], false, false);
 		}
 	}
 }
@@ -398,14 +398,30 @@ function appendUserTags(tagData){
 	}
 }
 
-function appendSingleTag(tag, state){
-	$tagItem = $("<li>" + tag + "</li>");
-	if(state){
+function appendSingleTag(tag, state, isUserTag){
+	var $tagItem;
+	if(isUserTag){
+		$tagItem = $("<li>" + tag + "<i class='icon-cancel'></i></li>");
+		$tagItem.addClass('tag-user');
+		$tagItem.addClass('tag-active');
+	}else{
+		$tagItem = $("<li>" + tag + "</li>");
+	}
+
+	if(state && !isUserTag){
 		$tagItem.addClass('tag-active');
 	}
-	$tagItem.click(function(event) {
-		tagFunctionality($(this));
-	});
+
+	if(isUserTag){
+		$tagItem.children('i').click(function(event) {
+			$(this).parent('li').remove();
+		});
+	}else{
+		$tagItem.click(function(event) {
+			tagFunctionality($(this));
+		});
+	}
+
 	$tagList.append($tagItem);
 }
 

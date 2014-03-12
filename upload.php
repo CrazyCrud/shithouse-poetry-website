@@ -7,6 +7,7 @@
 		<link rel="stylesheet" type="text/css" href="css/plugins/fontello/fontello.css"/>
 		<link rel="stylesheet" type="text/css" href="css/plugins/custom-jqui-theme/jquery-ui-1.10.4.custom.css"/>
 		<link rel="stylesheet" type="text/css" href="css/global.css"/>
+		<link rel="stylesheet" type="text/css" href="css/overlay.css"/>
 		<link rel="stylesheet" type="text/css" href="css/pages/upload.css"/>
 		<link rel="icon" type="image/x-icon" href="img/global/favicon.jpg"/>
 		<script type="text/javascript" src="js/plugins/modernizr.js"></script>
@@ -237,6 +238,8 @@
 		<script src="js/ImgurManager.js"></script>
   		<script src="js/StateManager.js"></script>
 		<script src="js/global.js"></script>
+		<script src="js/pages/search.js"></script>		
+		<script src="js/pages/login.js"></script>
 		<script src="js/pages/upload.js"></script>
 	</body>
 </html>
