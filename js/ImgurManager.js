@@ -178,6 +178,7 @@ var ImgurManager = (function(){
 				if(data.success == 1){
 					callback(data["data"]);
 				}else{
+					callback("Error");
 					console.log("Error");
 				}
 			});
