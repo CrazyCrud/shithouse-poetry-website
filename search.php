@@ -57,7 +57,7 @@
 				<div class="row">
 					<div class="small-12 medium-11 medium-centered large-10 large-centered columns results-container">
 						<div class="small-12 columns headline-container">
-							<h3>Ihre Ergebnisse für <i class="search-term"></i></h3>
+							<h3>Ergebnisse für <i class="search-term"></i></h3>
 						</div>
 						<div class="small-12 columns">
 							<div class="infinite-container">
