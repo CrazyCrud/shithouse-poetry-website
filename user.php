@@ -68,18 +68,14 @@
 								<div id="comments">Kommentare gepostet: <span class="amount"></span></div>
 								<div id="ratings">Bilder bewertet: <span class="amount"></span></div>
 							</div>
+						</div>
+						<div class="details small-12 medium-5 large-5 columns right" id="image-container">
 							<div id="achievements">
 								Erfolge:
 								<div id="entries"></div>
 								<div id="comments"></div>
 								<div id="ratings"></div>
 							</div>
-						</div>
-						<div class="details small-12 medium-5 large-5 columns right" id="image-container">
-							<div id="lastaction">Neuestes Bild:</div>
-							<a id="lastlink" href="">
-								<img id="image" src="img/dummy/d05.png">
-							</a>
 						</div>
 					</div>	
 					<div class="row pictures">

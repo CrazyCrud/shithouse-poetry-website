@@ -230,6 +230,13 @@ body {
   margin-top: 1rem;
   font-size: 0.75rem; }
 
+#achievements .missing {
+  font-size: 0.5rem;
+  font-style: italic;
+  background: #eee;
+  padding: 0.5rem;
+  margin-top: 0.5rem; }
+
 #achievements .achievement {
   display: inline-block;
   margin-right: 0.5rem;
