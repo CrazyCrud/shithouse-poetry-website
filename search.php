@@ -75,7 +75,7 @@
 
 			<?php
 			if(isset($_GET["query"])){
-				echo "query='".mysql_real_escape_string($_GET["query"])."';";
+				echo "query='".mysql_escape_string($_GET["query"])."';";
 			}
 
 			?>

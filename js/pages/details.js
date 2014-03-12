@@ -10,6 +10,7 @@ var comments = [];
 
 var entry={};
 $(function(){
+	$("#image").css('width', '5%');
 	cookieUser();
 	refresh();
 	showRating();
@@ -242,6 +243,7 @@ function fillUI(e){
 
 		//set image
 		var $image = $("#image");
+		$("#image").css('width', '100%');
 		var $entryTitle = $("#entry-title");
 		$image.attr("src", entry.images[0].largethumbnail);
 		$image.attr("title", entry.title);
