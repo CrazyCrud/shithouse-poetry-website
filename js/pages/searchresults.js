@@ -5,8 +5,8 @@ var NO_MORE_IMAGES = "Wir können dir leider keine weiteren Bilder mehr liefern"
 
 $(document).ready(function() {
 	if(query != null){
-		// ImgurManager.search(computeSearch, query, 0);
-		ImgurManager.getEntries(computeSearch);
+		ImgurManager.search(computeSearch, query, 0);
+		// ImgurManager.getEntries(computeSearch);
 		setupImageClick();
 		setupOnce();
 	}

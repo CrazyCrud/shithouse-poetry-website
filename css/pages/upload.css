@@ -284,8 +284,8 @@ input[type="password"].loginField {
   #tag-list li {
     display: inline-block;
     font-size: 0.618rem;
-    padding-right: 0.236rem;
-    padding-left: 0.236rem;
+    padding-right: 0.382rem;
+    padding-left: 0.382rem;
     padding-top: 0.236rem;
     padding-bottom: 0.236rem;
     margin-right: 0.236rem;
@@ -297,6 +297,21 @@ input[type="password"].loginField {
   #tag-list .tag-active {
     background: #888888;
     color: #ffffff; }
+  #tag-list .tag-user {
+    position: relative;
+    padding-right: 0.9rem;
+    cursor: auto; }
+    #tag-list .tag-user i {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      color: #111111;
+      top: 0;
+      right: 15%;
+      cursor: pointer; }
+    #tag-list .tag-user i:before {
+      border-radius: 3px;
+      background-color: rgba(100, 100, 100, 0.5); }
 
 @media screen and (max-width: 1023px) {
   .image-container img {

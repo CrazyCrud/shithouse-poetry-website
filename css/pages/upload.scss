@@ -109,19 +109,37 @@
 	li{
 		display: inline-block;
 		font-size: $space_minus1;
-		@include horizontal-padding($space_minus3, $space_minus3);
+		@include horizontal-padding($space_minus2, $space_minus2);
 		@include vertical-padding($space_minus3, $space_minus3);
 		@include horizontal-margin($space_minus3, $space_minus3);
 		background: $lightgrey;
 		color: $darkgrey;
 		cursor: pointer;
-
 		transition: all 0.5s ease;
 	}
 
 	.tag-active{
 		background: $darkgrey;
 		color: $white;
+	}
+
+	.tag-user{
+		position: relative;
+		padding-right: 0.9rem;
+		cursor: auto;
+		i{
+			position: absolute;
+			width: 10px;
+			height: 10px;
+			color: $black;
+			top: 0;
+			right: 15%;
+			cursor: pointer;
+		}
+		i:before{
+			border-radius: 3px;
+			background-color: rgba(100, 100, 100, 0.5);
+		}
 	}
 }
 
