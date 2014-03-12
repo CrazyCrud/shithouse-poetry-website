@@ -216,6 +216,9 @@ body {
 #image-container #image {
   width: 100%; }
 
+#image-container {
+  text-align: center; }
+
 #title {
   font-size: 2rem; }
 
