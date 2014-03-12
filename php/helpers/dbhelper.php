@@ -280,15 +280,16 @@ class DBHelper{
 	// returns the first 20 entries after $start ordered by $orderby
 	// (for $orderby select a name of one of the attributes returned)
 	// $where parameter is optional and mostly used intern
-	public function getAllEntries($orderby, $start, $where){
+	public function getAllEntries($orderby, $start, $where, $num){
 		if(!isset($start)){
 			$start = 0;
 		}
+		if(!isset($num))$num = Constants::NUMENTRIES;
 		$user = $this->getUser();
 		if($orderby == "rating"){
 			$entries = $this->getAllEntriesByRating($start, $where);
 		}else{
-			$query = Queries::getallentries($start, Constants::NUMENTRIES, $orderby, $where);
+			$query = Queries::getallentries($start, $num, $orderby, $where);
 			$entries = $this->query($query);
 		}
 		$entries = $this->addExtras($entries, $user["id"]);
@@ -531,7 +532,16 @@ class DBHelper{
 		$this->addInformation($entryid,$entry["artist"],$entry["transcription"],$entry["location"],$entry["lat"],$entry["long"]);
 
 		// index
-		$this->index($entryid, $entry["title"], $entry["transcription"]);
+		$taggedTitle = $entry["title"];
+		foreach($entry["tags"] as $tag){
+			if(is_numeric($tag)){
+				$tagText = $this->getTag($tag)["tag"];
+			}else{
+				$tagText = $tag;
+			}
+			if($tagText)$taggedTitle .= " ".$tagText;
+		}
+		$this->index($entryid, $taggedTitle, $entry["transcription"]);
 
 		return $entryid;
 	}
@@ -670,12 +680,39 @@ class DBHelper{
 		}
 
 		// index
-		if($index){
+		if($index || $tags){
 			$this->removeIndex($entry["id"]);
-			$this->index($entry["id"], $entry["title"], $entry["transcription"]);
+			$taggedTitle = $entry["title"];
+			foreach($entry["tags"] as $tag){
+				if(is_numeric($tag)){
+					$tagText = $this->getTag($tag)["tag"];
+				}else{
+					$tagText = $tag;
+				}
+				if($tagText)$taggedTitle .= " ".$tagText;
+			}
+			$this->index($entry["id"], $taggedTitle, $entry["transcription"]);
 		}
 
 		return $entry["id"];
+	}
+
+	public function reIndexEverything(){
+		$entries = $this->getAllEntries("date", 0, null, -1);
+		foreach($entries as $e){
+			$this->removeIndex($e["id"]);
+			$taggedTitle = $e["title"];
+			foreach($e["tags"] as $t){;
+				$tag = $t["tag"];
+				if(is_numeric($tag)){
+					$tagText = $this->getTag($tag)["tag"];
+				}else{
+					$tagText = $tag;
+				}
+				if($tagText)$taggedTitle .= " ".$tagText;
+			}
+			$this->index($e["id"], $taggedTitle, $e["information"][0]["transcription"]);
+		}
 	}
 
 	private function addExtras($entries, $userid){
