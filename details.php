@@ -8,6 +8,7 @@
 		<link rel="stylesheet" type="text/css" href="css/plugins/custom-jqui-theme/jquery-ui-1.10.4.custom.css">
 		<link rel="stylesheet" type="text/css" href="css/global.css"/>
 		<link rel="stylesheet" type="text/css" href="css/pages/details.css"/>
+		<link rel="stylesheet" type="text/css" href="css/pages/overlay.css"/>
 		<link rel="icon" type="image/x-icon" href="img/global/favicon.jpg"/>
 		<script type="text/javascript" src="js/plugins/modernizr.js"></script>
 		<title>Latrinalia</title>
@@ -182,6 +183,7 @@
 			</section>
     	</script>
 		<script src="js/plugins/jquery.min.js"></script>
+		<script src="js/plugins/md5/jquery.md5.js"></script>
 		<script src="js/plugins/jquery-ui-custom/jquery-ui-1.10.4.custom.min.js"></script>
 		<script src="js/plugins/underscore.js"></script>		
 		<script src="js/plugins/foundation/foundation.js"></script>
