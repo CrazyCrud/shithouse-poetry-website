@@ -24,16 +24,17 @@ $(document).ready(function() {
 	getType();
 	getTags();
 	initDialog();
-	if(id > 0){
-		initEdit();
-	}
 });
 
 function initEdit(){
-	document.title = "Bearbeiten";
-	$uploadSubmit.html("Speichern");
-	ImgurManager.getEntry(fillUI, id);
-	$(".add-image-container").css("display","none");
+	if(id < 1){
+		return;
+	}else{
+		document.title = "Bearbeiten";
+		$uploadSubmit.html("Speichern");
+		ImgurManager.getEntry(fillUI, id);
+		$(".add-image-container").css("display","none");
+	}
 }
 
 function fillUI(e){
@@ -49,8 +50,18 @@ function fillUI(e){
 	ImgurManager.getLocations(retrieveLocations, entry.information[0].latitude, entry.information[0].longitude);
 	$("#location option[value="+entry.information[0].location.replace(/ /g,"_")+"]").attr("selected", "selected");	
 	$("#artist").val(entry.information[0].artist);
+	var $tagElements = $tagList.find('li span');
+	var availableTags = _.pluck($tagElements, 'innerHTML');
+
 	for(var i=0; i<entry.tags.length; i++){
-		appendSingleTag(entry.tags[i].tag, true, true);
+		var tagText = entry.tags[i].tag.toLowerCase();
+		var index = _.indexOf(availableTags, tagText);
+		if(index == -1){
+			appendSingleTag(entry.tags[i].tag, true, entry.tags[i].status!=1);
+		}else{
+			$($tagElements[index]).parent('li').addClass('tag-active');
+			$($tagElements[index]).addClass('tag-active-text');
+		}
 	}
 }
 
@@ -69,9 +80,7 @@ function initDialog(){
 
 function initUpload(){
 	$form.on('invalid', function(event) {
-		// var invalid_fields = $(this).find('[data-invalid]');
     	checkForImage();
-    	// checkForTags();
 	}).on('valid', function(event) {
 		if(checkForImage()){
 			message("Speichern", "Bild wird gespeichert, bitte warten ...");
@@ -82,10 +91,10 @@ function initUpload(){
 			var transcription = $.trim($("input#transcription").val());
 			var location = $.trim($locationInput.find('option:selected').val());
 			var sex = $.trim($("input:radio[name=sex]:checked").val());
-			var tags = _.pluck($tagList.children('.tag-active'), 'innerHTML');
+
+			var tags = _.pluck($tagList.find('.tag-active-text'), 'innerHTML');
+
 			tags = tags.join(',');
-			
-			console.log(tags);
 
 			var type = $.trim($("#type").find('option:selected').val());
 
@@ -138,7 +147,11 @@ function initUpload(){
         if(code == 13 || code == 9 || code == 188 || code == 186 || code == 190){
         	var text = $.trim($(this).val());
         	if(text.length > 2){
-        		appendSingleTag(text, true, true);
+        		var $tagElements = $tagList.find('li span');
+				var availableTags = _.pluck($tagElements, 'innerHTML');
+        		if(_.indexOf(availableTags, text.toLowerCase()) == -1){
+        			appendSingleTag(text, true, true);
+        		}
         	}
         	$(this).val('');
         }
@@ -363,6 +376,8 @@ function getTags(){
 	ImgurManager.getUserTags(appendUserTags);
 }
 
+var editOnce = _.after(2, initEdit);
+
 function appendSystemTags(tagData){
 	if(tagData == null){
 
@@ -372,6 +387,7 @@ function appendSystemTags(tagData){
 			appendSingleTag(tags[i], false, false);
 		}
 	}
+	editOnce();
 }
 
 function appendUserTags(tagData){
@@ -396,20 +412,22 @@ function appendUserTags(tagData){
 		        }
 	    	});
 	}
+	editOnce();
 }
 
 function appendSingleTag(tag, state, isUserTag){
 	var $tagItem;
 	if(isUserTag){
-		$tagItem = $("<li>" + tag + "<i class='icon-cancel'></i></li>");
+		$tagItem = $("<li><span class='tag-active-text'>" + tag + "</span><i class='icon-cancel'></i></li>");
 		$tagItem.addClass('tag-user');
 		$tagItem.addClass('tag-active');
 	}else{
-		$tagItem = $("<li>" + tag + "</li>");
+		$tagItem = $("<li><span>" + tag + "</span></li>");
 	}
 
 	if(state && !isUserTag){
 		$tagItem.addClass('tag-active');
+		$tag.children('span').addClass('tag-active-text');
 	}
 
 	if(isUserTag){
@@ -429,8 +447,10 @@ function tagFunctionality(tag){
 	var $tag = $(tag);
 	if($tag.hasClass('tag-active')){
 		$tag.removeClass('tag-active');
+		$tag.children('span').removeClass('tag-active-text');
 	}else{
 		$tag.addClass('tag-active');
+		$tag.children('span').addClass('tag-active-text');
 	}
 }
 

@@ -42,23 +42,25 @@ function setupInfiniteScroll(){
 		event.preventDefault();
 		$("html, body").animate({scrollTop: 0}, 400);
 	});
-	$infiniteContainer.waypoint(function(direction) {
+	$("html").waypoint(function(direction) {
 		if(direction == "down"){
 			if($.waypoints('viewportHeight') < $(this).height()){
 				console.log("Load more images...");
 				getEntries();
 			}		
 		}
-	}, { offset: function(){
-		var magicNumber = 284;
-		var vpTopOffset = $mainheader.height() + $tabsContainer.height() - magicNumber;
-		if(($.waypoints('viewportHeight') - vpTopOffset) < $(this).height()){
-			return ($(this).height() - ($.waypoints('viewportHeight') - vpTopOffset)) * -1;
-		}else{
-			return -($.waypoints('viewportHeight') + 1); // never reached
-		}
-		
-	} })
+	}, { offset: 'bottom-in-view'
+			/*
+			function(){
+				var magicNumber = 284;
+				var vpTopOffset = $mainheader.height() + $tabsContainer.height() - magicNumber;
+				if(($.waypoints('viewportHeight') - vpTopOffset) < $(this).height()){
+					return ($(this).height() - ($.waypoints('viewportHeight') - vpTopOffset)) * -1;
+				}else{
+					return -($.waypoints('viewportHeight') + 1); // never reached
+				}
+			*/
+	});
 }
 
 function appendImages(){

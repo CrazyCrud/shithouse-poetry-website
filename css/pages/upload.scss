@@ -109,10 +109,10 @@
 	li{
 		display: inline-block;
 		font-size: $space_minus1;
-		@include horizontal-padding($space_minus2, $space_minus2);
+		@include horizontal-padding($space_minus3, $space_minus3);
 		@include vertical-padding($space_minus3, $space_minus3);
 		@include horizontal-margin($space_minus3, $space_minus3);
-		background: $lightgrey;
+		background-color: #eee;
 		color: $darkgrey;
 		cursor: pointer;
 		transition: all 0.5s ease;
@@ -125,20 +125,17 @@
 
 	.tag-user{
 		position: relative;
-		padding-right: 0.9rem;
 		cursor: auto;
 		i{
-			position: absolute;
+			position: relative;
+			font-size: $space_minus1;
 			width: 10px;
 			height: 10px;
-			color: $black;
-			top: 0;
-			right: 15%;
+			color: #555;
 			cursor: pointer;
+			@include horizontal-padding($space_minus4, $space_minus2);
 		}
 		i:before{
-			border-radius: 3px;
-			background-color: rgba(100, 100, 100, 0.5);
 		}
 	}
 }
