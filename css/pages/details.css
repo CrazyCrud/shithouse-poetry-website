@@ -258,6 +258,7 @@ body {
 
 #transcription #content .missing {
   background: #eee;
+  font-style: italic;
   color: #555;
   padding: 0.25em; }
 
@@ -267,9 +268,10 @@ body {
 #rating .thumbs {
   opacity: 0.25; }
 
-#rating .thumbs img {
+#rating .thumbs {
   padding-top: 6px;
-  cursor: pointer; }
+  cursor: pointer;
+  font-size: 0.75rem; }
 
 #rating .thumbs.mine {
   opacity: 1; }
@@ -286,6 +288,9 @@ body {
 #ratingcountwrapper {
   font-size: 0.5em;
   font-style: italic; }
+
+#thumbsdown #thumbs-down {
+  vertical-align: sub; }
 
 .comment {
   background: #eee;
