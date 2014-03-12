@@ -74,8 +74,9 @@
 			<section id="user-overlay">
 				<div class="user-overlay-container">
 					<ul>
-						<li><a id="link-timeline" href="timeline.php">Timeline</a></li>
-						<li><a id="link-myimages" href="javascript:void()">Meine Bilder</a></li>
+						<li><a id="link-timeline" href="timeline.php">Meine Timeline</a></li>
+						<li><a id="link-myimages" href="javascript:void()">Meine Profil</a></li>
+						<li><a id="link-user" href="javascript:void()">Benutzer</a></li>
 						<li><a id="link-logout" href="javascript:void()">Logout</a></li>
 					</ul>
 				</div>
