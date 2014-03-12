@@ -213,7 +213,7 @@ input[type="password"].loginField {
   text-align: center; }
   #upload .upload-image-container {
     position: absolute;
-    background-image: url('../../img/global/top-img-bw.png');
+    background-image: url('../../img/global/top-img-bw.jpg');
     background-position: center;
     top: 0;
     right: 0;
