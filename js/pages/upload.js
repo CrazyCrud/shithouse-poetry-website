@@ -356,10 +356,12 @@ function appendTypes(typeData){
 
 	}else{
 		var types = _.pluck(typeData, 'name');
+		var typesDesc = _.pluck(typeData, 'description');
 
 		for(var i = 0; i < types.length; i++){
 			var type = types[i];
-			var content = "<option value='" + type.replace(/ /g,"_") + "'>" + type + "</option>";
+			var typeDesc = typesDesc[i];
+			var content = "<option value='" + type.replace(/ /g,"_") + "' title='" + typeDesc + "'>" + type + "</option>";
 			var $content = $(content);
 			if(entry.typename){
 				if(entry.typename == type){
