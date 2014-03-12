@@ -5,10 +5,37 @@ var NO_MORE_IMAGES = "Wir können dir leider keine weiteren Bilder mehr liefern"
 
 $(document).ready(function() {
 	if(term != null){
-		// ImgurManager.search(computeSearch, term, 0);
-		ImgurManager.getEntries(computeSearch);
+		ImgurManager.search(computeSearch, term, 0);
+		// ImgurManager.getEntries(computeSearch);
+		setupImageClick();
+		setupOnce();
 	}
 });
+
+$(document).on("complete", function(){
+	$.waypoints('refresh');
+});
+
+function setupImageClick(){
+	$(document).on("click", ".jg-image",function(){
+		var id = $($(this).find("a")[0]).attr("title");
+		window.location = "details.php?id=" + id;
+	});
+}
+
+function setupInfiniteScroll(){
+	var vpTopOffset = $("#mainheader").height();
+	$("html").waypoint(function(direction) {
+		if(direction == "down"){
+			if($.waypoints('viewportHeight') < $(this).height()){
+				ImgurManager.search(computeSearch, term, GalleryView.getCurrentEntry());
+			}		
+		}
+	}, { offset: 'bottom-in-view'
+	});
+}
+
+var setupOnce = _.once(setupInfiniteScroll);
 
 function computeSearch(searchData){
 	$searchTermLabel.html(term);
@@ -24,7 +51,9 @@ function computeSearch(searchData){
 
 function resultsError(msg){
 	var content = "<div class='error-message secondary label'>" + msg + "</div>";
-	$imageContainer.append(content);
+	if($(".error-message").length < 1){
+		$imageContainer.append(content);
+	}
 }
 
 function showResults(searchData){

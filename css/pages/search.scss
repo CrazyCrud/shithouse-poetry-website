@@ -3,6 +3,7 @@
 .results-container{
 	overflow: hidden;
 	padding: $space_minus1 $space_plus1;
+	padding-bottom: 0;
 
 	.headline-container{
 		margin-top: $space_minus1;
@@ -20,10 +21,11 @@
 
 .infinite-container{
 	position: relative;
-	overflow: hidden;
+	overflow: auto;
 	width: 100%;
-	@include vertical-margin($space_minus3, $space_minus3);
-	@include horizontal-margin($space_minus3, $space_minus3); 
+	height: auto;
+	@include vertical-margin($space_minus3, 0);
+	@include horizontal-margin($space_minus3, $space_minus3);
 }
 
 #images{
