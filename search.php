@@ -77,7 +77,6 @@
 			}
 
 			?>
-			console.log(term);
 		</script>
 		<script type="text/template" class="overlay-template">
 			<div id="overlay-background"></div>
@@ -148,6 +147,7 @@
   		<script src="js/plugins/waypoint/waypoints.min.js"></script>
   		<script src="js/plugins/transit/transit.min.js"></script>
   		<script src="js/plugins/gallery/jquery.justifiedgallery.js"></script>
+  		<script src="js/plugins/waypoint/waypoints.min.js"></script>
   		<script src="js/StateManager.js"></script>
   		<script src="js/ImgurManager.js"></script>
 		<script src="js/global.js"></script>

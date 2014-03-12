@@ -3,8 +3,8 @@ var GalleryView = (function(document){
 		imgData : {},
 		currentEntry : 0,
 		imageContainer : null,
-		rowHeight : 120,
-		fixedHeight : true
+		rowHeight : 200,
+		fixedHeight : false
 	};
 
 	var displayImages = function(){
@@ -24,7 +24,7 @@ var GalleryView = (function(document){
 				'justifyLastRow': true,
 				'rowHeight': 250,
 				'fixedHeight' : true,
-				'onComplete': addOverlay
+				'onComplete': complete
 			});
 		}else{
 			settings.imageContainer.justifiedGallery({
@@ -41,9 +41,18 @@ var GalleryView = (function(document){
 				'rowHeight': settings.rowHeight,
 				'refreshTime': 500,
 				'justifyLastRow': true,
-				'onComplete': addOverlay
+				'onComplete': complete
 			});
 		}
+	};
+
+	var complete = function(){
+		$.event.trigger({
+			type : "complete",
+			message: "Images are completely loaded",
+			time: new Date()
+		});
+		addOverlay();
 	};
 
 	var addOverlay = function(){
@@ -130,6 +139,7 @@ var GalleryView = (function(document){
 
 	var reload = function(){
 		var imgLoaded = 0;
+		clearScreen();
 		if(_.isEmpty(settings.imgData) || settings.imageContainer.length < 1){
 			return;
 		}else{
@@ -147,16 +157,19 @@ var GalleryView = (function(document){
 					}
 				});
 			}
-			setCurrentEntry(numImages + 1);
 		}
 	};
 
 	var setCurrentEntry = function(newValue){
-		currentEntry = newValue;
+		settings.currentEntry = newValue;
+	}
+
+	var incrementCurrentEntry = function(){
+		settings.currentEntry++;
 	}
 
 	var getCurrentEntry = function(){
-		return currentEntry;
+		return settings.currentEntry;
 	}
 
 	var appendEntries = function(entries){
@@ -185,18 +198,23 @@ var GalleryView = (function(document){
 						date: entry.date,
 						rating: parseFloat(entry.ratings.rating)
 					};
+					incrementCurrentEntry();
 				}
 			}
 		}
 	};
 
 	var resizeImages = function(){
-		settings.imageContainer.empty();
+		clearScreen();
 		for(var index in settings.imgData){
 			settings.imageContainer.append(settings.imgData[index].image_m);
 		}
 		displayImages();
-	}
+	};
+
+	var clearScreen = function(){
+		settings.imageContainer.empty();
+	};
 
 	var lazyRearrange = _.debounce(resizeImages, 500);
 
