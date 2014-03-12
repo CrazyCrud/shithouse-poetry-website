@@ -324,6 +324,33 @@ var ImgurManager = (function(){
 				callback(userData);
 			});
 		},
+		loginUser : function(callback, mail, password){
+			var url = 'login.php?mail=' + mail + '&password=' + password;
+			var userData = null;
+			console.log(url);
+			$.get('php/backend/' + url, function(data) {
+				if(data.success == 1){
+					userData = data.data;
+					var d = new Date();
+					var oneYear = 31536000000;
+					d.setTime(d.getTime() + oneYear);
+					document.cookie = "authkey=" + userData + "; expires=" + d.toGMTString();
+				}
+				callback(userData);
+			});
+		},
+		updateUser : function(callback, mail, username, password){
+			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+			var url = 'updateUser.php?mail=' + mail + '&pwd=' + password + '&name=' + username + '&authkey='+authkey;
+			var userData = null;
+			console.log(url);
+			$.get('php/backend/' + url, function(data) {
+				if(data.success == 1){
+					userData = data.data;
+				}
+				callback(userData);
+			});
+		},
 		getUser : function(callback, id){
 			var url = 'getUser.php?id='+id;
 			$.get("php/backend/"+url,function(data){

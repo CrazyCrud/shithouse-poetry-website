@@ -53,7 +53,7 @@
 					<div class="small-12 columns register-forms-container">
 						<div class="small-12 medium-9 medium-offset-3
 								large-9 large-offset-3 columns headline-container">
-							<h3>Registrieren</h3>															
+							<h3 id="header">Registrieren</h3>															
 						</div>	
 						<form data-abide="ajax" class="form-register" novalidate="novalidate">
 							<div class="row">
@@ -74,9 +74,17 @@
 					          			placeholder="Hier E-Mail eingeben..." required>
 					       		</div>
 					      	</div>
+					      	<div class="row" id="old-pwd">
+					        	<div class="small-12 medium-3 large-3 columns">
+					        		<label for="old-password">Aktuelles Passwort</label>
+					        	</div>
+					        	<div class="small-12 medium-9 large-9 columns">
+					        		<input type="password" id="old-password" placeholder="Hier aktuelles Passwort eingeben..." required>
+					        	</div>
+					        </div>
 					      	<div class="row">
 					        	<div class="small-12 medium-3 large-3 columns">
-					        		<label for="password">Passwort</label>
+					        		<label for="password" id="new-pwd">Passwort</label>
 					        	</div>
 					        	<div class="small-12 medium-9 large-9 columns">
 					        		<input type="password" id="password" placeholder="Hier Passwort eingeben..." required>
@@ -165,6 +173,14 @@
 					</div>		
 				</div>
 			</section>
+    	</script>
+    	<script>
+    		var edit = false;
+    		<?php
+    			if(isset($_GET["edit"])){
+    				echo "edit = true;";
+    			}
+    		?>
     	</script>
 		<script src="js/plugins/jquery.min.js"></script>
 		<script src="js/plugins/underscore.js"></script>
