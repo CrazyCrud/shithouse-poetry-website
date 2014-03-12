@@ -203,36 +203,36 @@ body {
   width: 100%; }
 
 #username {
-  font-size: 2em; }
+  font-size: 2rem; }
 
 #level {
-  font-size: 0.5em;
+  font-size: 0.5rem;
   font-style: italic; }
 
 #joined {
-  font-size: 0.5em; }
+  font-size: 0.5rem; }
 
 #online {
-  font-size: 0.5em; }
+  font-size: 0.5rem; }
 
 #stats {
-  margin-top: 1em;
-  font-size: 0.5em; }
+  margin-top: 1rem;
+  font-size: 0.5rem; }
 
 #stats .amount {
   font-style: italic; }
 
 #achievements {
-  margin-top: 1em;
-  font-size: 0.75em; }
+  margin-top: 1rem;
+  font-size: 0.75rem; }
 
 #achievements .achievement {
   display: inline-block;
-  margin-right: 1em;
-  margin-top: 0.5em;
-  margin-bottom: 0.5em;
+  margin-right: 1rem;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
   background: #eee;
-  padding: 0.5em;
+  padding: 0.25rem;
   font-size: 0.5rem; }
 
 #achievements .achievement .lvl2 {
