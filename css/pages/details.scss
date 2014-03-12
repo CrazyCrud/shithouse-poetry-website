@@ -26,7 +26,7 @@ body{
   display: none;
   padding-top: 32px;
   padding-left: 32px;
-  font-size: .75em;
+  font-size: .75rem;
 }
 #controlpanel #deleteentry{
   margin-left: 32px;
@@ -37,18 +37,18 @@ body{
 }
 
 #title{
-  font-size: 2em;
+  font-size: 2rem;
 }
 
 #artist{
-  font-size: .5em;
+  font-size: .5rem;
   font-style: italic;
-  margin-bottom: 1em;
+  margin-bottom: 1rem;
 }
 
 #sex{
-  width: 1em;
-  height: 1em;
+  width: 1rem;
+  height: 1rem;
   float: left;
 }
 
@@ -61,36 +61,36 @@ body{
 }
 
 #location{
-  font-size: .5em;
+  font-size: .5rem;
   text-align: right;
 }
 
 #tags .tag{
-  font-size: .5em;
-  padding: .25em;
-  margin-right: .5em;
+  font-size: .5rem;
+  padding: .25rem;
+  margin-right: .5rem;
   background: #eee;
   color: #555;
 }
 
 #upload-info{
-  font-size: .5em;
+  font-size: .5rem;
   text-align: right;
 }
 
 #transcription{
-  margin-top: 1em;
+  margin-top: 1rem;
 }
 
 #transcription #content{
-  font-size: .5em;
+  font-size: .5rem;
 }
 
 #transcription #content .missing{
   background: #eee;
   font-style: italic;
   color: #555;
-  padding: .25em;
+  padding: .25rem;
 }
 
 #rating .inline{
@@ -123,7 +123,7 @@ body{
 }
 
 #ratingcountwrapper{
-  font-size: .5em;
+  font-size: .5rem;
   font-style: italic;
 }
 
@@ -133,8 +133,8 @@ body{
 
 .comment{
   background: #eee;
-  padding: .75em;
-  margin-bottom: .5em;
+  padding: .75rem;
+  margin-bottom: .5rem;
 }
 
 .comment i{
@@ -142,21 +142,21 @@ body{
 }
 
 .comment .author{
-  font-size: .5em;
+  font-size: .5rem;
 }
 
 .comment .date{
-  font-size: .5em;
+  font-size: .5rem;
   float: right;
 }
 
 .comment .text{
-  margin-top: .25em;
-  font-size: .75em;
+  margin-top: .25rem;
+  font-size: .75rem;
 }
 
 .comment .missing{
-  font-size: .66em;
+  font-size: .66rem;
   font-style: italic;
 }
 
