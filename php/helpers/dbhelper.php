@@ -986,6 +986,7 @@ class DBHelper{
 	// but you should be
 	// $commentid doesnt have to be set ...
 	public function addReport($entryid, $reportdescription, $commentid){
+		if(strlen(trim($reportdescription))<10)return false;
 		$user = $this->getUser();
 		if(isset($user["id"])){
 			$userid = $user["id"];
