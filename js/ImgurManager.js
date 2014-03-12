@@ -250,8 +250,9 @@ var ImgurManager = (function(){
 			});
 		},
 		addReport : function(callback, entryid, reportdesc, commentid){
+			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 			var url = "addReport.php?entryid=" + entryid + "&reportdesc=" + reportdesc +
-				"&commentid" + commentid;
+				"&commentid" + commentid + "&authkey=" + authkey;
 			$.post("php/backend/" + url, function(data){
 				if(data.success == 1){
 					callback(true);
