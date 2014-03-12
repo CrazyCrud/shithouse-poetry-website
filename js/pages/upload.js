@@ -53,6 +53,10 @@ function fillUI(e){
 	var $tagElements = $tagList.find('li span');
 	var availableTags = _.pluck($tagElements, 'innerHTML');
 
+	for(var i = 0; i < availableTags.length; i++){
+		availableTags[i] = availableTags[i].toLowerCase();
+	}
+
 	for(var i=0; i<entry.tags.length; i++){
 		var tagText = entry.tags[i].tag.toLowerCase();
 		var index = _.indexOf(availableTags, tagText);

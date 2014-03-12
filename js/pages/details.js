@@ -10,7 +10,7 @@ var comments = [];
 
 var entry={};
 $(function(){
-	$("#image").css('width', '5%');
+	$("#image").css('width', '34px');
 	cookieUser();
 	refresh();
 	showRating();
