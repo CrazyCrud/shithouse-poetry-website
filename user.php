@@ -90,7 +90,7 @@
 
 			<?php
 			if(isset($_GET["id"])){
-				echo "id=".$_GET["id"].";";
+				echo "id=".mysql_real_escape_string(htmlspecialchars($_GET["id"])).";";
 			}
 
 			?>
