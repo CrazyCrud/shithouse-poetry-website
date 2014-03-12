@@ -47,6 +47,7 @@ function manageLoginOverlay(){
 			window.location = "index.html";
 		});
 		$("#link-myimages").attr('href', 'user.php?id=' + user.id);
+		$("#link-user").attr('href', 'register.php?edit=true');
 	}else{
 		$("#user-overlay").remove();
 	}
