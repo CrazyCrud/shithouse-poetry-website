@@ -74,7 +74,6 @@ function appendLoginOverlay(){
 
 	$passwordInput.on('keypress', function(event) {
 		var code = event.which;
-		console.log(code);
 		if(code == 13){
 			$loginButton.trigger('click');
 		}
