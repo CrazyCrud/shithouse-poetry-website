@@ -32,9 +32,15 @@ function appendSearchOverlay(){
 	});
 
 	$submitButton.click(function(event) {
-		console.log("search");
 		if($searchInput.val().length > 2){
 			window.location = 'search.php?query=' + $.trim($searchInput.val());
+		}
+	});
+
+	$searchInput.on('keypress', function(event) {
+		var code = event.which;
+		if(code == 13){
+			$submitButton.trigger('click');
 		}
 	});
 }
