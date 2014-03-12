@@ -275,7 +275,12 @@ class Queries{
 		if(!isset($order)){
 			$order = "date";
 		}
-		return Queries::getentry(false, $where)." ORDER BY ".$order." DESC LIMIT $start, $limit";
+		if($limit == -1){
+			$lim = "";
+		}else{
+			$lim = "LIMIT $start, $limit";
+		}
+		return Queries::getentry(false, $where)." ORDER BY ".$order." DESC ".$lim;
 	}
 	public static function deleteentry($id){
 		$e = DBConfig::$tables["entries"];
