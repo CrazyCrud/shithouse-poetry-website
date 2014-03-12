@@ -75,7 +75,7 @@
 							</div>
 							<div id="rating">
 								<div id="thumbsup" class="inline thumbs">
-									<img src="img/details/thumbsup.png" id="thumbs-up" width=20>
+									<i class="icon-thumbs-up-1" id="thumbs-up"></i>
 								</div>
 								<div id="outer-rating" class="inline">
 									<div id="inner-rating"></div>
@@ -84,7 +84,7 @@
 									(<span id="ratingcount"></span>)
 								</div>
 								<div id="thumbsdown" class="inline thumbs">
-									<img src="img/details/thumbsdown.png" id="thumbs-down" width=20>
+									<i class="icon-thumbs-down-1" id="thumbs-down"></i>
 								</div>
 							</div>
 							<div id="report">
@@ -111,7 +111,7 @@
 
 			<?php
 			if(isset($_GET["id"])){
-				echo "id=".$_GET["id"].";";
+				echo "id=".mysql_real_escape_string(htmlspecialchars($_GET["id"])).";";
 			}
 
 			?>

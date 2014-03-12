@@ -241,6 +241,7 @@ body {
 @media screen and (max-width: 640px) {
   #mainnav .top-bar-section span {
     display: none; } }
+<<<<<<< HEAD
 /*
 Base styles include setting heading sizes, default link styles, default
 font styles, and body backgrounds; it doesn’t include any class or ID selectors
@@ -2467,3 +2468,10 @@ body {
 
 #achievements .achievement .lvl13 {
   color: #ff0; }
+
+i.icon-thumbs-up-1:before {
+  -webkit-transform: scale(-1, 1);
+  -moz-transform: scale(-1, 1);
+  -ms-transform: scale(-1, 1);
+  -o-transform: scale(-1, 1);
+  transform: scale(-1, 1); }

@@ -192,8 +192,8 @@ function fillUI(e){
 	$innerRating.css("width", width);
 	$("#ratingcount").html(entry.ratings[0].ratingcount);
 
+	$(".thumbs").removeClass("mine");
 	if(entry.ratings[0].ratedbyme){
-		$(".thumbs").removeClass("mine");
 		if(entry.ratings[0].ratedbyme==-1){
 			$("#thumbsdown").addClass("mine");
 		}else if(entry.ratings[0].ratedbyme==1){
