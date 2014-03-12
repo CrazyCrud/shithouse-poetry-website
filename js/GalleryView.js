@@ -1,16 +1,16 @@
-var GalleryView = (function(){
+var GalleryView = (function(document){
 	var settings = {
-		imgData = {},
-		currentEntry = 0,
-		$imageContainer = null,
-		rowHeight = 120,
-		fixedHeight = false
+		imgData : {},
+		currentEntry : 0,
+		imageContainer : null,
+		rowHeight : 120,
+		fixedHeight : true
 	};
 
 	var displayImages = function(){
 		if(StateManager.getState() == StateManager.States.
 			properties[StateManager.States.SMALL].name){
-			$imageContainer.justifiedGallery({
+			settings.imageContainer.justifiedGallery({
 				'sizeRangeSuffixes': {'lt100':'',
 					'lt240':'', 
 					'lt320':'', 
@@ -27,7 +27,7 @@ var GalleryView = (function(){
 				'onComplete': addOverlay
 			});
 		}else{
-			$imageContainer.justifiedGallery({
+			settings.imageContainer.justifiedGallery({
 				'sizeRangeSuffixes': {'lt100':'',
 					'lt240':'', 
 					'lt320':'', 
@@ -37,8 +37,8 @@ var GalleryView = (function(){
 				'captions': false,
 				'target': "_blank",
 				'margins': 3,
-				'fixedHeight': fixedHeight,
-				'rowHeight': rowHeight,
+				'fixedHeight': settings.fixedHeight,
+				'rowHeight': settings.rowHeight,
 				'refreshTime': 500,
 				'justifyLastRow': true,
 				'onComplete': addOverlay
@@ -52,9 +52,9 @@ var GalleryView = (function(){
 			var $parent = $(this).parent(".jg-image");
 			var id = parseInt($(this).attr('title'));
 
-			var index = _.chain(imgData).pluck("id").indexOf(id).value();
+			var index = _.chain(settings.imgData).pluck("id").indexOf(id).value();
 
-			elementData = imgData[index];
+			elementData = settings.imgData[index];
 			if(elementData){
 				var overlayClass = "";
 				switch(elementData.gender.toLowerCase()){
@@ -67,11 +67,11 @@ var GalleryView = (function(){
 					default:
 						overlayClass = "unisex";
 				}
-				var content = '<div class="' + overlayClass + '"></div><div class="transcription-parent"><div><span class="transcription"><i>' + elementData.transcription + '</i></span></div></div>';
+				var content = '<div class="' + overlayClass + '"></div><div class="transcription-container"><div><span class="transcription"><i>' + elementData.transcription + '</i></span></div></div>';
 				$parent.prepend(content);
 			}
 
-			var $transcription = $parent.children('.transcription-parent');
+			var $transcription = $parent.children('.transcription-container');
 			var $genderOverlay = null;
 			var $image = $parent.find('img');
 			if($parent.children('div.women').length > 0){
@@ -130,20 +130,18 @@ var GalleryView = (function(){
 
 	var reload = function(){
 		var imgLoaded = 0;
-		if(_.isEmpty(imgData)){
-			// append error message
+		if(_.isEmpty(settings.imgData) || settings.imageContainer.length < 1){
 			return;
 		}else{
-			var numImages = _.keys(imgData).length;
+			var numImages = _.keys(settings.imgData).length;
 			for(var i = 0; i < numImages; i++){
-				var htmlData = imgData[i].image_m;
+				var htmlData = settings.imgData[i].image_m;
 				var $imgContent = $(htmlData).find('img');
 				Foundation.lib_methods.loaded($imgContent, function(){
 					imgLoaded++;
 					if(imgLoaded == numImages){
-						clearScreen();
-						for(var index in imgData){
-							$imageContainer.append(imgData[index].image_m);
+						for(var index in settings.imgData){
+							settings.imageContainer.append(settings.imgData[index].image_m);
 						}
 						displayImages();
 					}
@@ -157,15 +155,19 @@ var GalleryView = (function(){
 		currentEntry = newValue;
 	}
 
+	var getCurrentEntry = function(){
+		return currentEntry;
+	}
+
 	var appendEntries = function(entries){
-		if(_.isEmpty(entires)){
+		if(_.isEmpty(entries)){
 			return;
 		}else{
 			var numImages = entries.length;
 			for(var i = 0; i < numImages; i++){
 				var entry = entries[i];
 				var id = parseInt(entry.id);
-				if((_.chain(imgData).pluck("id").indexOf(id).value()) > -1){
+				if((_.chain(settings.imgData).pluck("id").indexOf(id).value()) > -1){
 					continue;
 				}else{
 					var gender = entry.sex;
@@ -174,7 +176,7 @@ var GalleryView = (function(){
 						entry.images[0].thumbnail + '"/></a>';	
 					var imgContent_l = '<a href="" title="' + id + '"><img src="' + 
 						entry.images[0].largethumbnail + '"/></a>';
-					imgData[i] = {
+					settings.imgData[i] = {
 						id: id,
 						gender: gender,
 						transcription: transcription,
@@ -188,14 +190,33 @@ var GalleryView = (function(){
 		}
 	};
 
-	var init = function(elementID){
-		$imageContainer = $("#" + elementID);
+	var resizeImages = function(){
+		settings.imageContainer.empty();
+		for(var index in settings.imgData){
+			settings.imageContainer.append(settings.imgData[index].image_m);
+		}
+		displayImages();
+	}
+
+	var lazyRearrange = _.debounce(resizeImages, 500);
+
+	var setupContainer = function(element){
+		settings.imageContainer = $(element);
+		$(window).resize(lazyRearrange);
+	};
+
+	var init = _.once(setupContainer);
+
+	var reset = function(element){
+		setupContainer(element);
 	};
 
 	return {
-		displayImages: displayIamges,
+		init: init,
+		reset: reset,
 		appendEntries: appendEntries,
 		reload: reload,
+		getCurrentEntry: getCurrentEntry,
 		settings: settings
 	}
-}());
+}(document));

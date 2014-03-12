@@ -7,6 +7,7 @@
 		<link rel="stylesheet" type="text/css" href="css/plugins/fontello/fontello.css"/>
 		<link rel="stylesheet" type="text/css" href="css/plugins/gallery/jquery.justifiedgallery.min.css"/>
 		<link rel="stylesheet" type="text/css" href="css/global.css"/>
+		<link rel="stylesheet" type="text/css" href="css/overlay.css"/>
 		<link rel="stylesheet" type="text/css" href="css/pages/search.css"/>
 		<script type="text/javascript" src="js/plugins/modernizr.js"></script>
 		<title>Suchergebnisse</title>
@@ -52,13 +53,15 @@
 			</header>
 			<section id="maincontent">
 				<div class="row">
-					<div class="small-12 columns full-width">
-						<div class="small-12 columns">
+					<div class="small-12 medium-11 medium-centered large-10 large-centered columns results-container">
+						<div class="small-12 columns headline-container">
 							<h3>Ihre Ergebnisse für <i class="search-term"></i></h3>
 						</div>
-						<div class="infinite-container">
-							<div id="images">
+						<div class="small-12 columns">
+							<div class="infinite-container">
+								<div class="justifiedGallery" id="images">
 
+								</div>
 							</div>
 						</div>
 					</div>
@@ -148,9 +151,9 @@
   		<script src="js/StateManager.js"></script>
   		<script src="js/ImgurManager.js"></script>
 		<script src="js/global.js"></script>
-		<script src="js/topbar.js"></script>
 		<script src="js/pages/search.js"></script>		
 		<script src="js/pages/login.js"></script>
+		<script src="js/GalleryView.js"></script>
 		<script src="js/pages/searchresults.js"></script>
 	</body>
 </html>
