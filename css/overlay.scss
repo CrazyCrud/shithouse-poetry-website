@@ -8,7 +8,7 @@
    	height: 100%;
    	width: 100%;
    	background-color: $black;
-   	opacity: 0.95
+   	opacity: 0.95;
 }
 
 .overlaycontent{
@@ -17,6 +17,44 @@
 	width: 100%;	
 	left: 0;
 	z-index: 110;
+}
+
+#user-overlay{
+	display: block;
+	position: absolute;
+	width: 120px;
+	overflow: visible;
+	top: 90%;
+	right: 2%;
+	box-shadow: 1px 1px 1px $black;
+	
+	.user-overlay-container{
+		background-color: rgba(140, 140, 140, 0.9);
+		border-radius: 1px;
+		ul{
+			margin: 0;
+		}
+		li{
+			text-align: center;
+
+			a{
+				font-size: $space_minus1;
+				color: $white;
+			}
+		}
+	}
+}
+
+#user-overlay:before{
+	content: "";
+	position: absolute;
+	top: -4%;
+	left: 48%;
+	width: 0; 
+	height: 0; 
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	border-bottom: 5px solid rgba(140, 140, 140, 0.9);
 }
 
 .form-container{

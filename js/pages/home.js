@@ -377,11 +377,11 @@ function disableVoting(){
 }
 
 function enableInfiniteScroll(){
-	$infiniteContainer.waypoint('enable');
+	$("html").waypoint('enable');
 }
 
 function disableInfiniteScroll(){
-	$infiniteContainer.waypoint('disable');
+	$("html").waypoint('disable');
 }
 
 function setActive(linkContainer){

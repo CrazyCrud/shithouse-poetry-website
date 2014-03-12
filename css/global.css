@@ -214,24 +214,6 @@ body {
     display: inline-block;
     margin-right: 8px; }
 
-#user-overlay {
-  display: block;
-  position: absolute;
-  width: 120px;
-  overflow: hidden;
-  top: 90%;
-  right: 2%;
-  box-shadow: 1px 1px 1px #111111; }
-  #user-overlay .user-overlay-container {
-    background-color: rgba(140, 140, 140, 0.5); }
-    #user-overlay .user-overlay-container ul {
-      margin: 0; }
-    #user-overlay .user-overlay-container li {
-      text-align: center; }
-      #user-overlay .user-overlay-container li a {
-        font-size: 0.618rem;
-        color: #ffffff; }
-
 #maincontent {
   overflow: hidden; }
 
