@@ -55,6 +55,14 @@ body{
 	font-size: .75rem;
 }
 
+#achievements .missing{
+	font-size: .5rem;
+	font-style: italic;
+	background: #eee;
+	padding: .5rem;
+	margin-top: .5rem;
+}
+
 #achievements .achievement{
 	display: inline-block;
 	margin-right: .5rem;

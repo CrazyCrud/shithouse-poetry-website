@@ -93,6 +93,10 @@ function drawAchievements(stats){
 	drawEntryAchievements(stats.entries);
 	drawCommentAchievements(stats.comments);
 	drawRatingAchievements(stats.ratings);
+	if($(".achievement").length == 0){
+		var $none = $('<div class="missing">Dieser Nutzer hat noch keine Erfolge.</div>');
+		$("#achievements").append($none);
+	}
 }
 
 function computeLevel(entries, comments, ratings, ageInMillis){
