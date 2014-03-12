@@ -208,7 +208,7 @@ body {
   display: none;
   padding-top: 32px;
   padding-left: 32px;
-  font-size: 0.75em; }
+  font-size: 0.75rem; }
 
 #controlpanel #deleteentry {
   margin-left: 32px; }
@@ -217,16 +217,16 @@ body {
   width: 100%; }
 
 #title {
-  font-size: 2em; }
+  font-size: 2rem; }
 
 #artist {
-  font-size: 0.5em;
+  font-size: 0.5rem;
   font-style: italic;
-  margin-bottom: 1em; }
+  margin-bottom: 1rem; }
 
 #sex {
-  width: 1em;
-  height: 1em;
+  width: 1rem;
+  height: 1rem;
   float: left; }
 
 #sex.icon-male {
@@ -236,31 +236,31 @@ body {
   color: #d22091; }
 
 #location {
-  font-size: 0.5em;
+  font-size: 0.5rem;
   text-align: right; }
 
 #tags .tag {
-  font-size: 0.5em;
-  padding: 0.25em;
-  margin-right: 0.5em;
+  font-size: 0.5rem;
+  padding: 0.25rem;
+  margin-right: 0.5rem;
   background: #eee;
   color: #555; }
 
 #upload-info {
-  font-size: 0.5em;
+  font-size: 0.5rem;
   text-align: right; }
 
 #transcription {
-  margin-top: 1em; }
+  margin-top: 1rem; }
 
 #transcription #content {
-  font-size: 0.5em; }
+  font-size: 0.5rem; }
 
 #transcription #content .missing {
   background: #eee;
   font-style: italic;
   color: #555;
-  padding: 0.25em; }
+  padding: 0.25rem; }
 
 #rating .inline {
   display: inline; }
@@ -286,7 +286,7 @@ body {
   height: 100%; }
 
 #ratingcountwrapper {
-  font-size: 0.5em;
+  font-size: 0.5rem;
   font-style: italic; }
 
 #thumbsdown #thumbs-down {
@@ -294,25 +294,25 @@ body {
 
 .comment {
   background: #eee;
-  padding: 0.75em;
-  margin-bottom: 0.5em; }
+  padding: 0.75rem;
+  margin-bottom: 0.5rem; }
 
 .comment i {
   cursor: pointer; }
 
 .comment .author {
-  font-size: 0.5em; }
+  font-size: 0.5rem; }
 
 .comment .date {
-  font-size: 0.5em;
+  font-size: 0.5rem;
   float: right; }
 
 .comment .text {
-  margin-top: 0.25em;
-  font-size: 0.75em; }
+  margin-top: 0.25rem;
+  font-size: 0.75rem; }
 
 .comment .missing {
-  font-size: 0.66em;
+  font-size: 0.66rem;
   font-style: italic; }
 
 #report {

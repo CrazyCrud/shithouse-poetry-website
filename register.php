@@ -9,6 +9,7 @@
 		<link rel="stylesheet" type="text/css" href="css/overlay.css"/>
 		<link rel="stylesheet" type="text/css" href="css/pages/register.css"/>
 		<link href="css/plugins/custom-jqui-theme/jquery-ui-1.10.4.custom.css" rel="stylesheet">
+		<link rel="icon" type="image/x-icon" href="img/global/favicon.jpg"/>
 		<script type="text/javascript" src="js/plugins/modernizr.js"></script>
 		<title>Registrierung</title>
 	</head>
@@ -20,7 +21,7 @@
 						<ul class="title-area">
 							<li class="name">
 							</li>
-							<li class="toggle-topbar menu-icon"><a href="">Menu</a></li>
+							<li class="toggle-topbar menu-icon"><a href="">Men&uml;</a></li>
 						</ul>
 						<section class="top-bar-section">
 							<ul class="left">
@@ -34,7 +35,7 @@
 							<ul class="right">
 								<li class="li-search-container">
 									<a id="link-search" href="javascript:void()" onClick="">
-										<span>Search</span><i class="icon-search"></i>
+										<span>Suche</span><i class="icon-search"></i>
 									</a>
 								</li>
 								<li class="li-login-container">

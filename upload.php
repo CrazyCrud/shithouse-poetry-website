@@ -8,6 +8,7 @@
 		<link rel="stylesheet" type="text/css" href="css/plugins/custom-jqui-theme/jquery-ui-1.10.4.custom.css"/>
 		<link rel="stylesheet" type="text/css" href="css/global.css"/>
 		<link rel="stylesheet" type="text/css" href="css/pages/upload.css"/>
+		<link rel="icon" type="image/x-icon" href="img/global/favicon.jpg"/>
 		<script type="text/javascript" src="js/plugins/modernizr.js"></script>
 		<title>Upload</title>
 	</head>
@@ -19,7 +20,7 @@
 						<ul class="title-area">
 							<li class="name">
 							</li>
-							<li class="toggle-topbar menu-icon"><a href="">Menu</a></li>
+							<li class="toggle-topbar menu-icon"><a href="">Men&uuml;</a></li>
 						</ul>
 						<section class="top-bar-section">
 							<ul class="left">
@@ -37,7 +38,7 @@
 							<ul class="right">
 								<li class="li-search-container">
 									<a id="link-search" href="javascript:void()" onClick="">
-										<span>Search</span><i class="icon-search"></i>
+										<span>Suche</span><i class="icon-search"></i>
 									</a>
 								</li>
 								<li class="li-login-container">
