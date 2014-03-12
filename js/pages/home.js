@@ -85,7 +85,7 @@ function appendImages(){
 				}
 			});
 		}
-		setCurrentEntry(numImages + 1);
+		setCurrentEntry(getCurrentEntry() + numImages + 1);
 	}
 }
 
@@ -457,8 +457,14 @@ function resetImgData(){
 
 function incrementCurrentEntry(){
 	currentEntry++;
+	console.log("CurrentEntry is set to " + currentEntry);
 }
 
 function setCurrentEntry(newValue){
 	currentEntry = newValue;
+	console.log("CurrentEntry is set to " + currentEntry);
+}
+
+function getCurrentEntry(){
+	return currentEntry;
 }
