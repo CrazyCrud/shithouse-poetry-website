@@ -3,6 +3,7 @@ var currentOrder = null;
 var NO_SINGLE_IMAGE = "Wir können dir leider kein weiteres Bild liefern";
 var NO_IMAGES = "Wir können dir leider keine weiteren Bilder mehr liefern";
 var imgData = {};
+var loadingSpinner = "<div class='loading-spinner'><div class='dot1'></div><div class='dot2'></div></div>";
 
 var $homeButton = $("#link-home");
 var $infiniteContainer = $(".infinite-container");
