@@ -312,12 +312,15 @@ body {
 
 #report {
   text-align: right;
-  margin-top: -22px; }
+  margin-top: -20px;
+  font-size: 0.75rem; }
 
 #report i {
   padding-right: 6px;
   padding-top: 6px;
+  opacity: 0.25;
   cursor: pointer; }
 
 #report-icon:hover {
-  color: #ff4444; }
+  color: #ff4444;
+  opacity: 1; }

@@ -127,7 +127,7 @@ function initGUI(){
 		window.location = "upload.php?id="+id;
 	});
 	$("#report-icon").click(function(){
-		$('<form name="report"><textarea cols="50" rows=10 id="description" style="height:auto;width:auto" placeholder="Enter your report here"></textarea></form>').dialog({
+		$('<form name="report"><textarea cols="50" rows=10 id="description" style="height:auto;width:auto" placeholder="Bitte beschreiben Sie hier, warum Sie diesen Eintrag melden m&ouml;chten?"></textarea></form>').dialog({
 			modal: true,
 			width: "auto",
 			autoResize: true,
@@ -137,11 +137,11 @@ function initGUI(){
 					var desc =  $('#description').val();
 					ImgurManager.addReport(function(success){
 						console.log("Report done!");
-						$dialog = $('<div>Der Report wurde erfolgreich gesendet</div>');
+						$dialog = $('<div>Der Report wurde erfolgreich gesendet.</div>');
 						$dialog.dialog({
 							modal: false,
 							width: "auto",
-							title: "Vielen Dank für ihren Report.",
+							title: "Vielen Dank für ihren Report",
 							show: true
 						});
 						setTimeout(function() {	

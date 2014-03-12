@@ -241,3 +241,2229 @@ body {
 @media screen and (max-width: 640px) {
   #mainnav .top-bar-section span {
     display: none; } }
+/*
+Base styles include setting heading sizes, default link styles, default
+font styles, and body backgrounds; it doesn’t include any class or ID selectors
+*/
+/*
+Insert code that doesn't output CSS, things like mixin declarations, functions, and variables.
+*/
+.row {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 0; }
+
+.columns {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 0; }
+
+.full-width {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0; }
+
+.space-plus1 {
+  margin-top: 1.618rem;
+  margin-bottom: 1.618rem; }
+
+.space-plus2 {
+  margin-top: 2.618rem;
+  margin-bottom: 2.618rem; }
+
+.space-plus3 {
+  margin-top: 4.236rem;
+  margin-bottom: 4.236rem; }
+
+.space-plus4 {
+  margin-top: 6.854rem;
+  margin-bottom: 6.854rem; }
+
+.space-plus5 {
+  margin-top: 11.089rem;
+  margin-bottom: 11.089rem; }
+
+.space-plus6 {
+  margin-top: 17.942rem;
+  margin-bottom: 17.942rem; }
+
+.space-plus7 {
+  margin-top: 29.03rem;
+  margin-bottom: 29.03rem; }
+
+.space-plus8 {
+  margin-top: 46.971rem;
+  margin-bottom: 46.971rem; }
+
+.space-minus1 {
+  margin-top: 0.618rem;
+  margin-bottom: 0.618rem; }
+
+.space-minus2 {
+  margin-top: 0.382rem;
+  margin-bottom: 0.382rem; }
+
+.space-minus3 {
+  margin-top: 0.236rem;
+  margin-bottom: 0.236rem; }
+
+.space-minus4 {
+  margin-top: 0.146rem;
+  margin-bottom: 0.146rem; }
+
+.space-minus5 {
+  margin-top: 0.09rem;
+  margin-bottom: 0.09rem; }
+
+.space-minus6 {
+  margin-top: 0.056rem;
+  margin-bottom: 0.056rem; }
+
+@font-face {
+  font-family: "Goudy";
+  src: url("../fonts/goudy.otf"); }
+
+body {
+  color: #ffffff; }
+
+.button-overlay {
+  color: #cbcdc7;
+  height: auto;
+  font-size: 1rem;
+  padding: 0.5em;
+  font-family: "Segoe UI Light";
+  border-width: 1px;
+  border-style: solid;
+  border-color: #cbcdc7;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out; }
+
+.button-overlay:hover {
+  background-color: #cbcdc7;
+  color: #111111;
+  border-color: #cbcdc7; }
+
+.button-overlay:focus {
+  background-color: #cbcdc7;
+  color: #111111;
+  border-color: #cbcdc7; }
+
+.button-normal {
+  color: #111111;
+  height: auto;
+  font-size: 1rem;
+  padding: 0.5em;
+  font-family: "Segoe UI Light";
+  border-width: 1px;
+  border-style: solid;
+  border-color: #111111;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out; }
+
+.button-normal:focus {
+  background-color: #111111;
+  color: #cbcdc7;
+  border-color: rgba(0, 0, 0, 0); }
+
+.button-normal:hover {
+  background-color: #111111;
+  color: #cbcdc7;
+  border-color: rgba(0, 0, 0, 0); }
+
+input[type="text"]#searchField {
+  color: #cbcdc7;
+  background-color: rgba(0, 0, 0, 0);
+  height: auto;
+  font-size: 300%;
+  width: 90%;
+  margin: 5%;
+  border: none;
+  outline: none;
+  font-family: "Segoe UI light"; }
+
+input#register_input {
+  margin-left: 5%;
+  font-family: "Segoe UI";
+  font-size: 100%; }
+
+label#register-label {
+  color: #111111;
+  font: "Segoe UI";
+  margin-left: 5%;
+  margin-bottom: 0%;
+  margin-top: 2%; }
+
+input[type="email"].loginField {
+  color: #cbcdc7;
+  background-color: rgba(0, 0, 0, 0);
+  height: auto;
+  font-size: 300%;
+  width: 90%;
+  margin: 5% 5% 2% 5%;
+  border: none;
+  outline: none;
+  font-family: "Segoe UI light"; }
+
+input[type="password"].loginField {
+  color: #cbcdc7;
+  background-color: rgba(0, 0, 0, 0);
+  height: auto;
+  font-size: 300%;
+  width: 90%;
+  margin: 0% 5% 5% 5%;
+  border: none;
+  outline: none;
+  font-family: "Segoe UI light"; }
+
+::-moz-placeholder {
+  color: #cbcdc7; }
+
+::-webkit-input-placeholder {
+  color: #cbcdc7; }
+
+:-ms-input-placeholder {
+  color: #cbcdc7; }
+
+/*
+Base styles include setting heading sizes, default link styles, default
+font styles, and body backgrounds; it doesn’t include any class or ID selectors
+*/
+/*
+Insert code that doesn't output CSS, things like mixin declarations, functions, and variables.
+*/
+body {
+  color: black; }
+
+#hoverLoginMenu {
+  display: none;
+  position: fixed;
+  right: 0; }
+
+.details {
+  padding: 32px; }
+
+#controlpanel {
+  display: none;
+  padding-top: 32px;
+  padding-left: 32px;
+  font-size: 0.75em; }
+
+#controlpanel #deleteentry {
+  margin-left: 32px; }
+
+#image-container #image {
+  width: 100%; }
+
+#title {
+  font-size: 2em; }
+
+#artist {
+  font-size: 0.5em;
+  font-style: italic;
+  margin-bottom: 1em; }
+
+#sex {
+  width: 1em;
+  height: 1em;
+  float: left; }
+
+#sex.icon-male {
+  color: #32a2b8; }
+
+#sex.icon-female {
+  color: #d22091; }
+
+#location {
+  font-size: 0.5em;
+  text-align: right; }
+
+#tags .tag {
+  font-size: 0.5em;
+  padding: 0.25em;
+  margin-right: 0.5em;
+  background: #eee;
+  color: #555; }
+
+#upload-info {
+  font-size: 0.5em;
+  text-align: right; }
+
+#transcription {
+  margin-top: 1em; }
+
+#transcription #content {
+  font-size: 0.5em; }
+
+#transcription #content .missing {
+  background: #eee;
+  color: #555;
+  padding: 0.25em; }
+
+#rating .inline {
+  display: inline; }
+
+#rating .thumbs {
+  opacity: 0.25; }
+
+#rating .thumbs img {
+  padding-top: 6px;
+  cursor: pointer; }
+
+#rating .thumbs.mine {
+  opacity: 1; }
+
+#outer-rating {
+  background-color: #ff4444;
+  height: 5px;
+  width: 0px; }
+
+#inner-rating {
+  background-color: #99cc00;
+  height: 100%; }
+
+#ratingcountwrapper {
+  font-size: 0.5em;
+  font-style: italic; }
+
+.comment {
+  background: #eee;
+  padding: 0.75em;
+  margin-bottom: 0.5em; }
+
+.comment i {
+  cursor: pointer; }
+
+.comment .author {
+  font-size: 0.5em; }
+
+.comment .date {
+  font-size: 0.5em;
+  float: right; }
+
+.comment .text {
+  margin-top: 0.25em;
+  font-size: 0.75em; }
+
+.comment .missing {
+  font-size: 0.66em;
+  font-style: italic; }
+
+#report {
+  text-align: right;
+  margin-top: -20px;
+  font-size: 0.75rem; }
+
+#report i {
+  padding-right: 6px;
+  padding-top: 6px;
+  opacity: 0.25;
+  cursor: pointer; }
+
+#report-icon:hover {
+  color: #ff4444;
+  opacity: 1; }
+/*
+Base styles include setting heading sizes, default link styles, default
+font styles, and body backgrounds; it doesn’t include any class or ID selectors
+*/
+/*
+Insert code that doesn't output CSS, things like mixin declarations, functions, and variables.
+*/
+.row {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 0; }
+
+.columns {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 0; }
+
+.full-width {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0; }
+
+.space-plus1 {
+  margin-top: 1.618rem;
+  margin-bottom: 1.618rem; }
+
+.space-plus2 {
+  margin-top: 2.618rem;
+  margin-bottom: 2.618rem; }
+
+.space-plus3 {
+  margin-top: 4.236rem;
+  margin-bottom: 4.236rem; }
+
+.space-plus4 {
+  margin-top: 6.854rem;
+  margin-bottom: 6.854rem; }
+
+.space-plus5 {
+  margin-top: 11.089rem;
+  margin-bottom: 11.089rem; }
+
+.space-plus6 {
+  margin-top: 17.942rem;
+  margin-bottom: 17.942rem; }
+
+.space-plus7 {
+  margin-top: 29.03rem;
+  margin-bottom: 29.03rem; }
+
+.space-plus8 {
+  margin-top: 46.971rem;
+  margin-bottom: 46.971rem; }
+
+.space-minus1 {
+  margin-top: 0.618rem;
+  margin-bottom: 0.618rem; }
+
+.space-minus2 {
+  margin-top: 0.382rem;
+  margin-bottom: 0.382rem; }
+
+.space-minus3 {
+  margin-top: 0.236rem;
+  margin-bottom: 0.236rem; }
+
+.space-minus4 {
+  margin-top: 0.146rem;
+  margin-bottom: 0.146rem; }
+
+.space-minus5 {
+  margin-top: 0.09rem;
+  margin-bottom: 0.09rem; }
+
+.space-minus6 {
+  margin-top: 0.056rem;
+  margin-bottom: 0.056rem; }
+
+@font-face {
+  font-family: "Goudy";
+  src: url("../fonts/goudy.otf"); }
+
+body {
+  color: #ffffff; }
+
+.button-overlay {
+  color: #cbcdc7;
+  height: auto;
+  font-size: 1rem;
+  padding: 0.5em;
+  font-family: "Segoe UI Light";
+  border-width: 1px;
+  border-style: solid;
+  border-color: #cbcdc7;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out; }
+
+.button-overlay:hover {
+  background-color: #cbcdc7;
+  color: #111111;
+  border-color: #cbcdc7; }
+
+.button-overlay:focus {
+  background-color: #cbcdc7;
+  color: #111111;
+  border-color: #cbcdc7; }
+
+.button-normal {
+  color: #111111;
+  height: auto;
+  font-size: 1rem;
+  padding: 0.5em;
+  font-family: "Segoe UI Light";
+  border-width: 1px;
+  border-style: solid;
+  border-color: #111111;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out; }
+
+.button-normal:focus {
+  background-color: #111111;
+  color: #cbcdc7;
+  border-color: rgba(0, 0, 0, 0); }
+
+.button-normal:hover {
+  background-color: #111111;
+  color: #cbcdc7;
+  border-color: rgba(0, 0, 0, 0); }
+
+input[type="text"]#searchField {
+  color: #cbcdc7;
+  background-color: rgba(0, 0, 0, 0);
+  height: auto;
+  font-size: 300%;
+  width: 90%;
+  margin: 5%;
+  border: none;
+  outline: none;
+  font-family: "Segoe UI light"; }
+
+input#register_input {
+  margin-left: 5%;
+  font-family: "Segoe UI";
+  font-size: 100%; }
+
+label#register-label {
+  color: #111111;
+  font: "Segoe UI";
+  margin-left: 5%;
+  margin-bottom: 0%;
+  margin-top: 2%; }
+
+input[type="email"].loginField {
+  color: #cbcdc7;
+  background-color: rgba(0, 0, 0, 0);
+  height: auto;
+  font-size: 300%;
+  width: 90%;
+  margin: 5% 5% 2% 5%;
+  border: none;
+  outline: none;
+  font-family: "Segoe UI light"; }
+
+input[type="password"].loginField {
+  color: #cbcdc7;
+  background-color: rgba(0, 0, 0, 0);
+  height: auto;
+  font-size: 300%;
+  width: 90%;
+  margin: 0% 5% 5% 5%;
+  border: none;
+  outline: none;
+  font-family: "Segoe UI light"; }
+
+::-moz-placeholder {
+  color: #cbcdc7; }
+
+::-webkit-input-placeholder {
+  color: #cbcdc7; }
+
+:-ms-input-placeholder {
+  color: #cbcdc7; }
+
+#mainnav {
+  background: -moz-linear-gradient(top, rgba(17, 17, 17, 0.85) 0%, rgba(14, 14, 14, 0.85) 20%, rgba(7, 7, 7, 0.46) 59%, rgba(0, 0, 0, 0) 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(17, 17, 17, 0.85)), color-stop(20%, rgba(14, 14, 14, 0.85)), color-stop(59%, rgba(7, 7, 7, 0.46)), color-stop(100%, rgba(0, 0, 0, 0)));
+  background: -webkit-linear-gradient(top, rgba(17, 17, 17, 0.85) 0%, rgba(14, 14, 14, 0.85) 20%, rgba(7, 7, 7, 0.46) 59%, rgba(0, 0, 0, 0) 100%);
+  background: -o-linear-gradient(top, rgba(17, 17, 17, 0.85) 0%, rgba(14, 14, 14, 0.85) 20%, rgba(7, 7, 7, 0.46) 59%, rgba(0, 0, 0, 0) 100%);
+  background: -ms-linear-gradient(top, rgba(17, 17, 17, 0.85) 0%, rgba(14, 14, 14, 0.85) 20%, rgba(7, 7, 7, 0.46) 59%, rgba(0, 0, 0, 0) 100%);
+  background: linear-gradient(to bottom, rgba(17, 17, 17, 0.85) 0%, rgba(14, 14, 14, 0.85) 20%, rgba(7, 7, 7, 0.46) 59%, rgba(0, 0, 0, 0) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d9111111', endColorstr='#00000000',GradientType=0 ); }
+
+#mainnav.nav-bg:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #111111; }
+
+#upload {
+  position: relative;
+  width: 100%;
+  height: 230px;
+  overflow: hidden;
+  background: #111111;
+  text-align: center; }
+  #upload .upload-image-container {
+    position: absolute;
+    background-image: url('../../img/global/top-img-bw.png');
+    background-position: center;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0; }
+  #upload .upload-image-container:before {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: -moz-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(9, 9, 9, 0.69) 53%, #0f0f0f 88%, #111111 100%);
+    /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(0, 0, 0, 0)), color-stop(53%, rgba(9, 9, 9, 0.69)), color-stop(88%, #0f0f0f), color-stop(100%, #111111));
+    /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(9, 9, 9, 0.69) 53%, #0f0f0f 88%, #111111 100%);
+    /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(9, 9, 9, 0.69) 53%, #0f0f0f 88%, #111111 100%);
+    /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(9, 9, 9, 0.69) 53%, #0f0f0f 88%, #111111 100%);
+    /* IE10+ */
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(9, 9, 9, 0.69) 53%, #0f0f0f 88%, #111111 100%);
+    /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#111111',GradientType=0 );
+    /* IE6-9 */
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0; }
+  #upload .upload-button-container {
+    position: absolute;
+    display: block;
+    top: 70%;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    z-index: 100; }
+
+#upload-button a#link-upload {
+  display: inline-block;
+  position: relative;
+  color: #ffffff;
+  font-size: 1.8rem; }
+#upload-button a#link-upload:hover:after {
+  position: absolute;
+  display: block;
+  top: -17px;
+  left: -9px;
+  width: 75px;
+  height: 75px;
+  content: "";
+  background: url('../../img/global/hover.png');
+  background-size: contain; }
+
+.infinite-container {
+  position: relative;
+  overflow: hidden;
+  margin-top: 0.236rem;
+  margin-bottom: 0.236rem;
+  margin-right: 0.236rem;
+  margin-left: 0.236rem; }
+
+.tabs {
+  /*@include horizontal-margin($space_minus3, $space_minus3);*/ }
+  .tabs dd {
+    width: 33.3%; }
+    .tabs dd a {
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center; }
+
+#images {
+  padding: 4px; }
+  #images img {
+    vertical-align: bottom; }
+
+.images-vote {
+  display: block;
+  width: 60% !important;
+  margin-left: auto;
+  margin-right: auto; }
+
+.jg-image {
+  overflow: hidden; }
+
+.transcription-container {
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  /*font-size: $space_minus1;*/
+  z-index: 3;
+  cursor: pointer; }
+  .transcription-container div {
+    display: table-cell;
+    position: relative;
+    vertical-align: middle;
+    width: inherit;
+    font-family: "Goudy"; }
+
+span.transcription {
+  display: inline-block;
+  position: relative;
+  width: inherit;
+  max-width: inherit;
+  height: auto;
+  padding: 4px;
+  overflow: hidden;
+  word-wrap: break-word;
+  white-space: normal;
+  /*text-overflow: ellipsis;*/
+  line-height: 1.618rem; }
+
+.overlay, .women, .men, .unisex {
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
+  z-index: 2; }
+
+.overlaytouch, .women-touch, .men-touch, .unisex-touch {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 30%;
+  top: 0;
+  opacity: 0.5;
+  z-index: 2;
+  max-height: 80px; }
+
+.women {
+  background-color: #d22091; }
+
+.men {
+  background-color: #32a2b8; }
+
+.unisex {
+  background-color: #888888; }
+
+.women-touch {
+  background-color: #d22091; }
+
+.men-touch {
+  background-color: #32a2b8; }
+
+.unisex-touch {
+  background-color: #888888; }
+
+.transcription-container-touch {
+  display: block;
+  position: absolute;
+  width: 100%;
+  top: 2%;
+  text-align: center;
+  font-size: 0.618rem;
+  z-index: 3; }
+  .transcription-container-touch div {
+    display: block;
+    position: relative;
+    width: inherit;
+    font-family: "Goudy"; }
+
+.transcription-container-touch span.transcription {
+  display: inline-block;
+  position: relative;
+  width: inherit;
+  max-width: inherit;
+  height: auto;
+  padding: 4px;
+  overflow: hidden;
+  word-wrap: break-word;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  line-height: 1.618rem; }
+
+.vote-container {
+  display: none;
+  text-align: center;
+  margin: 0.618rem 0;
+  height: auto; }
+  .vote-container .vote-icon-container {
+    display: inline-block;
+    height: 50px;
+    width: 100%;
+    color: #111111;
+    font-size: 1.618rem; }
+    .vote-container .vote-icon-container i {
+      background-color: #ffffff;
+      color: #111111;
+      cursor: pointer;
+      margin-top: 1.618rem;
+      margin-bottom: 1.618rem;
+      padding: 0.618rem;
+      border: solid 1px #cbcdc7;
+      border-radius: 4px;
+      transition: all 0.3s ease; }
+    .vote-container .vote-icon-container i:hover {
+      color: #ffffff;
+      background-color: #111111; }
+
+.message-container {
+  text-align: center; }
+  .message-container .message {
+    font-size: 0.618rem;
+    color: #111111; }
+/*
+Base styles include setting heading sizes, default link styles, default
+font styles, and body backgrounds; it doesn’t include any class or ID selectors
+*/
+/*
+Insert code that doesn't output CSS, things like mixin declarations, functions, and variables.
+*/
+.row {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 0; }
+
+.columns {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 0; }
+
+.full-width {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0; }
+
+.space-plus1 {
+  margin-top: 1.618rem;
+  margin-bottom: 1.618rem; }
+
+.space-plus2 {
+  margin-top: 2.618rem;
+  margin-bottom: 2.618rem; }
+
+.space-plus3 {
+  margin-top: 4.236rem;
+  margin-bottom: 4.236rem; }
+
+.space-plus4 {
+  margin-top: 6.854rem;
+  margin-bottom: 6.854rem; }
+
+.space-plus5 {
+  margin-top: 11.089rem;
+  margin-bottom: 11.089rem; }
+
+.space-plus6 {
+  margin-top: 17.942rem;
+  margin-bottom: 17.942rem; }
+
+.space-plus7 {
+  margin-top: 29.03rem;
+  margin-bottom: 29.03rem; }
+
+.space-plus8 {
+  margin-top: 46.971rem;
+  margin-bottom: 46.971rem; }
+
+.space-minus1 {
+  margin-top: 0.618rem;
+  margin-bottom: 0.618rem; }
+
+.space-minus2 {
+  margin-top: 0.382rem;
+  margin-bottom: 0.382rem; }
+
+.space-minus3 {
+  margin-top: 0.236rem;
+  margin-bottom: 0.236rem; }
+
+.space-minus4 {
+  margin-top: 0.146rem;
+  margin-bottom: 0.146rem; }
+
+.space-minus5 {
+  margin-top: 0.09rem;
+  margin-bottom: 0.09rem; }
+
+.space-minus6 {
+  margin-top: 0.056rem;
+  margin-bottom: 0.056rem; }
+
+@font-face {
+  font-family: "Goudy";
+  src: url("../fonts/goudy.otf"); }
+
+body {
+  color: #ffffff; }
+
+.button-overlay {
+  color: #cbcdc7;
+  height: auto;
+  font-size: 1rem;
+  padding: 0.5em;
+  font-family: "Segoe UI Light";
+  border-width: 1px;
+  border-style: solid;
+  border-color: #cbcdc7;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out; }
+
+.button-overlay:hover {
+  background-color: #cbcdc7;
+  color: #111111;
+  border-color: #cbcdc7; }
+
+.button-overlay:focus {
+  background-color: #cbcdc7;
+  color: #111111;
+  border-color: #cbcdc7; }
+
+.button-normal {
+  color: #111111;
+  height: auto;
+  font-size: 1rem;
+  padding: 0.5em;
+  font-family: "Segoe UI Light";
+  border-width: 1px;
+  border-style: solid;
+  border-color: #111111;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out; }
+
+.button-normal:focus {
+  background-color: #111111;
+  color: #cbcdc7;
+  border-color: rgba(0, 0, 0, 0); }
+
+.button-normal:hover {
+  background-color: #111111;
+  color: #cbcdc7;
+  border-color: rgba(0, 0, 0, 0); }
+
+input[type="text"]#searchField {
+  color: #cbcdc7;
+  background-color: rgba(0, 0, 0, 0);
+  height: auto;
+  font-size: 300%;
+  width: 90%;
+  margin: 5%;
+  border: none;
+  outline: none;
+  font-family: "Segoe UI light"; }
+
+input#register_input {
+  margin-left: 5%;
+  font-family: "Segoe UI";
+  font-size: 100%; }
+
+label#register-label {
+  color: #111111;
+  font: "Segoe UI";
+  margin-left: 5%;
+  margin-bottom: 0%;
+  margin-top: 2%; }
+
+input[type="email"].loginField {
+  color: #cbcdc7;
+  background-color: rgba(0, 0, 0, 0);
+  height: auto;
+  font-size: 300%;
+  width: 90%;
+  margin: 5% 5% 2% 5%;
+  border: none;
+  outline: none;
+  font-family: "Segoe UI light"; }
+
+input[type="password"].loginField {
+  color: #cbcdc7;
+  background-color: rgba(0, 0, 0, 0);
+  height: auto;
+  font-size: 300%;
+  width: 90%;
+  margin: 0% 5% 5% 5%;
+  border: none;
+  outline: none;
+  font-family: "Segoe UI light"; }
+
+::-moz-placeholder {
+  color: #cbcdc7; }
+
+::-webkit-input-placeholder {
+  color: #cbcdc7; }
+
+:-ms-input-placeholder {
+  color: #cbcdc7; }
+
+.register-forms-container {
+  overflow: hidden;
+  margin: 0.618rem 1.618rem; }
+  .register-forms-container .row {
+    margin-right: auto;
+    margin-left: auto; }
+    .register-forms-container .row .columns {
+      padding-right: 0.618rem;
+      padding-left: 0.618rem; }
+  .register-forms-container .headline-container {
+    margin-top: 0.618rem;
+    margin-bottom: 0.618rem;
+    padding-right: 0.618rem;
+    padding-left: 0.618rem; }
+
+.form-register label {
+  float: right; }
+.form-register .row {
+  margin-top: 0.618rem;
+  margin-bottom: 0.618rem; }
+
+@media screen and (max-width: 640px) {
+  .register-forms-container {
+    margin: 0.618rem 0.618rem; }
+  .form-register label {
+    float: left; } }
+/*
+Base styles include setting heading sizes, default link styles, default
+font styles, and body backgrounds; it doesn’t include any class or ID selectors
+*/
+/*
+Insert code that doesn't output CSS, things like mixin declarations, functions, and variables.
+*/
+.row {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 0; }
+
+.columns {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 0; }
+
+.full-width {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0; }
+
+.space-plus1 {
+  margin-top: 1.618rem;
+  margin-bottom: 1.618rem; }
+
+.space-plus2 {
+  margin-top: 2.618rem;
+  margin-bottom: 2.618rem; }
+
+.space-plus3 {
+  margin-top: 4.236rem;
+  margin-bottom: 4.236rem; }
+
+.space-plus4 {
+  margin-top: 6.854rem;
+  margin-bottom: 6.854rem; }
+
+.space-plus5 {
+  margin-top: 11.089rem;
+  margin-bottom: 11.089rem; }
+
+.space-plus6 {
+  margin-top: 17.942rem;
+  margin-bottom: 17.942rem; }
+
+.space-plus7 {
+  margin-top: 29.03rem;
+  margin-bottom: 29.03rem; }
+
+.space-plus8 {
+  margin-top: 46.971rem;
+  margin-bottom: 46.971rem; }
+
+.space-minus1 {
+  margin-top: 0.618rem;
+  margin-bottom: 0.618rem; }
+
+.space-minus2 {
+  margin-top: 0.382rem;
+  margin-bottom: 0.382rem; }
+
+.space-minus3 {
+  margin-top: 0.236rem;
+  margin-bottom: 0.236rem; }
+
+.space-minus4 {
+  margin-top: 0.146rem;
+  margin-bottom: 0.146rem; }
+
+.space-minus5 {
+  margin-top: 0.09rem;
+  margin-bottom: 0.09rem; }
+
+.space-minus6 {
+  margin-top: 0.056rem;
+  margin-bottom: 0.056rem; }
+
+@font-face {
+  font-family: "Goudy";
+  src: url("../fonts/goudy.otf"); }
+
+body {
+  color: #ffffff; }
+
+.button-overlay {
+  color: #cbcdc7;
+  height: auto;
+  font-size: 1rem;
+  padding: 0.5em;
+  font-family: "Segoe UI Light";
+  border-width: 1px;
+  border-style: solid;
+  border-color: #cbcdc7;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out; }
+
+.button-overlay:hover {
+  background-color: #cbcdc7;
+  color: #111111;
+  border-color: #cbcdc7; }
+
+.button-overlay:focus {
+  background-color: #cbcdc7;
+  color: #111111;
+  border-color: #cbcdc7; }
+
+.button-normal {
+  color: #111111;
+  height: auto;
+  font-size: 1rem;
+  padding: 0.5em;
+  font-family: "Segoe UI Light";
+  border-width: 1px;
+  border-style: solid;
+  border-color: #111111;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out; }
+
+.button-normal:focus {
+  background-color: #111111;
+  color: #cbcdc7;
+  border-color: rgba(0, 0, 0, 0); }
+
+.button-normal:hover {
+  background-color: #111111;
+  color: #cbcdc7;
+  border-color: rgba(0, 0, 0, 0); }
+
+input[type="text"]#searchField {
+  color: #cbcdc7;
+  background-color: rgba(0, 0, 0, 0);
+  height: auto;
+  font-size: 300%;
+  width: 90%;
+  margin: 5%;
+  border: none;
+  outline: none;
+  font-family: "Segoe UI light"; }
+
+input#register_input {
+  margin-left: 5%;
+  font-family: "Segoe UI";
+  font-size: 100%; }
+
+label#register-label {
+  color: #111111;
+  font: "Segoe UI";
+  margin-left: 5%;
+  margin-bottom: 0%;
+  margin-top: 2%; }
+
+input[type="email"].loginField {
+  color: #cbcdc7;
+  background-color: rgba(0, 0, 0, 0);
+  height: auto;
+  font-size: 300%;
+  width: 90%;
+  margin: 5% 5% 2% 5%;
+  border: none;
+  outline: none;
+  font-family: "Segoe UI light"; }
+
+input[type="password"].loginField {
+  color: #cbcdc7;
+  background-color: rgba(0, 0, 0, 0);
+  height: auto;
+  font-size: 300%;
+  width: 90%;
+  margin: 0% 5% 5% 5%;
+  border: none;
+  outline: none;
+  font-family: "Segoe UI light"; }
+
+::-moz-placeholder {
+  color: #cbcdc7; }
+
+::-webkit-input-placeholder {
+  color: #cbcdc7; }
+
+:-ms-input-placeholder {
+  color: #cbcdc7; }
+
+.results-container {
+  overflow: hidden;
+  padding: 0.618rem 1.618rem; }
+  .results-container .headline-container {
+    margin-top: 0.618rem;
+    margin-bottom: 0.618rem;
+    padding-right: 0.618rem;
+    padding-left: 0.618rem; }
+
+.error-message {
+  display: block;
+  width: 300px;
+  margin: 0.618rem auto; }
+
+.infinite-container {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  margin-top: 0.236rem;
+  margin-bottom: 0.236rem;
+  margin-right: 0.236rem;
+  margin-left: 0.236rem; }
+
+#images {
+  padding: 4px; }
+  #images img {
+    vertical-align: bottom; }
+
+.jg-image {
+  overflow: hidden; }
+
+.transcription-container {
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  /*font-size: $space_minus1;*/
+  z-index: 3;
+  cursor: pointer; }
+  .transcription-container div {
+    display: table-cell;
+    position: relative;
+    vertical-align: middle;
+    width: inherit;
+    font-family: "Goudy"; }
+
+span.transcription {
+  display: inline-block;
+  position: relative;
+  width: inherit;
+  max-width: inherit;
+  height: auto;
+  padding: 4px;
+  overflow: hidden;
+  word-wrap: break-word;
+  white-space: normal;
+  /*text-overflow: ellipsis;*/
+  line-height: 1.618rem; }
+
+.overlay, .women, .men, .unisex {
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
+  z-index: 2; }
+
+.overlaytouch, .women-touch, .men-touch, .unisex-touch {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 30%;
+  top: 0;
+  opacity: 0.5;
+  z-index: 2;
+  max-height: 80px; }
+
+.women {
+  background-color: #d22091; }
+
+.men {
+  background-color: #32a2b8; }
+
+.unisex {
+  background-color: #888888; }
+
+.women-touch {
+  background-color: #d22091; }
+
+.men-touch {
+  background-color: #32a2b8; }
+
+.unisex-touch {
+  background-color: #888888; }
+
+.transcription-container-touch {
+  display: block;
+  position: absolute;
+  width: 100%;
+  top: 2%;
+  text-align: center;
+  font-size: 0.618rem;
+  z-index: 3; }
+  .transcription-container-touch div {
+    display: block;
+    position: relative;
+    width: inherit;
+    font-family: "Goudy"; }
+
+.transcription-container-touch span.transcription {
+  display: inline-block;
+  position: relative;
+  width: inherit;
+  max-width: inherit;
+  height: auto;
+  padding: 4px;
+  overflow: hidden;
+  word-wrap: break-word;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  line-height: 1.618rem; }
+/*
+Base styles include setting heading sizes, default link styles, default
+font styles, and body backgrounds; it doesn’t include any class or ID selectors
+*/
+/*
+Insert code that doesn't output CSS, things like mixin declarations, functions, and variables.
+*/
+.row {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 0; }
+
+.columns {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 0; }
+
+.full-width {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0; }
+
+.space-plus1 {
+  margin-top: 1.618rem;
+  margin-bottom: 1.618rem; }
+
+.space-plus2 {
+  margin-top: 2.618rem;
+  margin-bottom: 2.618rem; }
+
+.space-plus3 {
+  margin-top: 4.236rem;
+  margin-bottom: 4.236rem; }
+
+.space-plus4 {
+  margin-top: 6.854rem;
+  margin-bottom: 6.854rem; }
+
+.space-plus5 {
+  margin-top: 11.089rem;
+  margin-bottom: 11.089rem; }
+
+.space-plus6 {
+  margin-top: 17.942rem;
+  margin-bottom: 17.942rem; }
+
+.space-plus7 {
+  margin-top: 29.03rem;
+  margin-bottom: 29.03rem; }
+
+.space-plus8 {
+  margin-top: 46.971rem;
+  margin-bottom: 46.971rem; }
+
+.space-minus1 {
+  margin-top: 0.618rem;
+  margin-bottom: 0.618rem; }
+
+.space-minus2 {
+  margin-top: 0.382rem;
+  margin-bottom: 0.382rem; }
+
+.space-minus3 {
+  margin-top: 0.236rem;
+  margin-bottom: 0.236rem; }
+
+.space-minus4 {
+  margin-top: 0.146rem;
+  margin-bottom: 0.146rem; }
+
+.space-minus5 {
+  margin-top: 0.09rem;
+  margin-bottom: 0.09rem; }
+
+.space-minus6 {
+  margin-top: 0.056rem;
+  margin-bottom: 0.056rem; }
+
+body {
+  color: #ffffff; }
+
+#searchresults-maincontent {
+  margin-top: 40px; }
+
+.list-template {
+  border: 1px;
+  border-color: #cbcdc7;
+  border-style: solid;
+  padding: 10px;
+  color: #111111;
+  height: 122px;
+  font-family: "Segoe UI";
+  width: 100%;
+  margin-bottom: 2%; }
+
+#list-entry-image {
+  float: left;
+  width: 100px;
+  height: 100px;
+  background-color: #8901a7; }
+
+#list-entry-date {
+  font-size: 65%; }
+
+#list-entry-username {
+  font-size: 120%; }
+
+#list-entry-text {
+  font-size: 80%;
+  margin-top: 1%; }
+
+.vertical-line {
+  background-color: #cbcdc7;
+  width: 1px;
+  margin-left: 10px;
+  height: 100px;
+  float: left;
+  margin-right: 10px; }
+
+#list-entry-title {
+  font-size: 120%;
+  margin-left: 1%; }
+
+#list-entry-location {
+  font-size: 80%;
+  margin-top: 1%;
+  margin-left: 1%; }
+
+#list-entry-tags {
+  margin-top: 2%; }
+
+/*
+Base styles include setting heading sizes, default link styles, default
+font styles, and body backgrounds; it doesn’t include any class or ID selectors
+*/
+/*
+Insert code that doesn't output CSS, things like mixin declarations, functions, and variables.
+*/
+.row {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 0; }
+
+.columns {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 0; }
+
+.full-width {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0; }
+
+.space-plus1 {
+  margin-top: 1.618rem;
+  margin-bottom: 1.618rem; }
+
+.space-plus2 {
+  margin-top: 2.618rem;
+  margin-bottom: 2.618rem; }
+
+.space-plus3 {
+  margin-top: 4.236rem;
+  margin-bottom: 4.236rem; }
+
+.space-plus4 {
+  margin-top: 6.854rem;
+  margin-bottom: 6.854rem; }
+
+.space-plus5 {
+  margin-top: 11.089rem;
+  margin-bottom: 11.089rem; }
+
+.space-plus6 {
+  margin-top: 17.942rem;
+  margin-bottom: 17.942rem; }
+
+.space-plus7 {
+  margin-top: 29.03rem;
+  margin-bottom: 29.03rem; }
+
+.space-plus8 {
+  margin-top: 46.971rem;
+  margin-bottom: 46.971rem; }
+
+.space-minus1 {
+  margin-top: 0.618rem;
+  margin-bottom: 0.618rem; }
+
+.space-minus2 {
+  margin-top: 0.382rem;
+  margin-bottom: 0.382rem; }
+
+.space-minus3 {
+  margin-top: 0.236rem;
+  margin-bottom: 0.236rem; }
+
+.space-minus4 {
+  margin-top: 0.146rem;
+  margin-bottom: 0.146rem; }
+
+.space-minus5 {
+  margin-top: 0.09rem;
+  margin-bottom: 0.09rem; }
+
+.space-minus6 {
+  margin-top: 0.056rem;
+  margin-bottom: 0.056rem; }
+
+@font-face {
+  font-family: "Goudy";
+  src: url("../fonts/goudy.otf"); }
+
+body {
+  color: #ffffff; }
+
+.button-overlay {
+  color: #cbcdc7;
+  height: auto;
+  font-size: 1rem;
+  padding: 0.5em;
+  font-family: "Segoe UI Light";
+  border-width: 1px;
+  border-style: solid;
+  border-color: #cbcdc7;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out; }
+
+.button-overlay:hover {
+  background-color: #cbcdc7;
+  color: #111111;
+  border-color: #cbcdc7; }
+
+.button-overlay:focus {
+  background-color: #cbcdc7;
+  color: #111111;
+  border-color: #cbcdc7; }
+
+.button-normal {
+  color: #111111;
+  height: auto;
+  font-size: 1rem;
+  padding: 0.5em;
+  font-family: "Segoe UI Light";
+  border-width: 1px;
+  border-style: solid;
+  border-color: #111111;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out; }
+
+.button-normal:focus {
+  background-color: #111111;
+  color: #cbcdc7;
+  border-color: rgba(0, 0, 0, 0); }
+
+.button-normal:hover {
+  background-color: #111111;
+  color: #cbcdc7;
+  border-color: rgba(0, 0, 0, 0); }
+
+input[type="text"]#searchField {
+  color: #cbcdc7;
+  background-color: rgba(0, 0, 0, 0);
+  height: auto;
+  font-size: 300%;
+  width: 90%;
+  margin: 5%;
+  border: none;
+  outline: none;
+  font-family: "Segoe UI light"; }
+
+input#register_input {
+  margin-left: 5%;
+  font-family: "Segoe UI";
+  font-size: 100%; }
+
+label#register-label {
+  color: #111111;
+  font: "Segoe UI";
+  margin-left: 5%;
+  margin-bottom: 0%;
+  margin-top: 2%; }
+
+input[type="email"].loginField {
+  color: #cbcdc7;
+  background-color: rgba(0, 0, 0, 0);
+  height: auto;
+  font-size: 300%;
+  width: 90%;
+  margin: 5% 5% 2% 5%;
+  border: none;
+  outline: none;
+  font-family: "Segoe UI light"; }
+
+input[type="password"].loginField {
+  color: #cbcdc7;
+  background-color: rgba(0, 0, 0, 0);
+  height: auto;
+  font-size: 300%;
+  width: 90%;
+  margin: 0% 5% 5% 5%;
+  border: none;
+  outline: none;
+  font-family: "Segoe UI light"; }
+
+::-moz-placeholder {
+  color: #cbcdc7; }
+
+::-webkit-input-placeholder {
+  color: #cbcdc7; }
+
+:-ms-input-placeholder {
+  color: #cbcdc7; }
+
+/*
+Base styles include setting heading sizes, default link styles, default
+font styles, and body backgrounds; it doesn’t include any class or ID selectors
+*/
+/*
+Insert code that doesn't output CSS, things like mixin declarations, functions, and variables.
+*/
+body {
+  color: black; }
+
+.details {
+  padding: 32px; }
+
+.action {
+  background: #eee;
+  padding: 0.75em;
+  margin-bottom: 0.5em; }
+
+.action.entry {
+  border: 1px solid #B8B8B8; }
+
+.action.rating .icon-thumbs-down-1 {
+  color: #ff4444; }
+
+.action.rating .icon-thumbs-up-1 {
+  color: #99cc00; }
+
+.action.gender-w {
+  border: 1px solid #d22091; }
+
+.action.gender-m {
+  border: 1px solid #32a2b8; }
+
+.action .content {
+  display: flex; }
+
+.action .container {
+  display: inline-block; }
+
+.action .leftcontainer {
+  margin-right: 0.75em; }
+
+
+.action .comment {
+  overflow: hidden;
+  max-height: 64px;
+  margin-top: 0.5em;
+  font-size: 0.75em; }
+
+.action .time {
+  font-size: 0.5em;
+  float: right; }
+
+.action .info {
+  font-size: 0.5em; }
+/*
+Base styles include setting heading sizes, default link styles, default
+font styles, and body backgrounds; it doesn’t include any class or ID selectors
+*/
+/*
+Insert code that doesn't output CSS, things like mixin declarations, functions, and variables.
+*/
+.row {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 0; }
+
+.columns {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 0; }
+
+.full-width {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0; }
+
+.space-plus1 {
+  margin-top: 1.618rem;
+  margin-bottom: 1.618rem; }
+
+.space-plus2 {
+  margin-top: 2.618rem;
+  margin-bottom: 2.618rem; }
+
+.space-plus3 {
+  margin-top: 4.236rem;
+  margin-bottom: 4.236rem; }
+
+.space-plus4 {
+  margin-top: 6.854rem;
+  margin-bottom: 6.854rem; }
+
+.space-plus5 {
+  margin-top: 11.089rem;
+  margin-bottom: 11.089rem; }
+
+.space-plus6 {
+  margin-top: 17.942rem;
+  margin-bottom: 17.942rem; }
+
+.space-plus7 {
+  margin-top: 29.03rem;
+  margin-bottom: 29.03rem; }
+
+.space-plus8 {
+  margin-top: 46.971rem;
+  margin-bottom: 46.971rem; }
+
+.space-minus1 {
+  margin-top: 0.618rem;
+  margin-bottom: 0.618rem; }
+
+.space-minus2 {
+  margin-top: 0.382rem;
+  margin-bottom: 0.382rem; }
+
+.space-minus3 {
+  margin-top: 0.236rem;
+  margin-bottom: 0.236rem; }
+
+.space-minus4 {
+  margin-top: 0.146rem;
+  margin-bottom: 0.146rem; }
+
+.space-minus5 {
+  margin-top: 0.09rem;
+  margin-bottom: 0.09rem; }
+
+.space-minus6 {
+  margin-top: 0.056rem;
+  margin-bottom: 0.056rem; }
+
+@font-face {
+  font-family: "Goudy";
+  src: url("../fonts/goudy.otf"); }
+
+body {
+  color: #ffffff; }
+
+.button-overlay {
+  color: #cbcdc7;
+  height: auto;
+  font-size: 1rem;
+  padding: 0.5em;
+  font-family: "Segoe UI Light";
+  border-width: 1px;
+  border-style: solid;
+  border-color: #cbcdc7;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out; }
+
+.button-overlay:hover {
+  background-color: #cbcdc7;
+  color: #111111;
+  border-color: #cbcdc7; }
+
+.button-overlay:focus {
+  background-color: #cbcdc7;
+  color: #111111;
+  border-color: #cbcdc7; }
+
+.button-normal {
+  color: #111111;
+  height: auto;
+  font-size: 1rem;
+  padding: 0.5em;
+  font-family: "Segoe UI Light";
+  border-width: 1px;
+  border-style: solid;
+  border-color: #111111;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out; }
+
+.button-normal:focus {
+  background-color: #111111;
+  color: #cbcdc7;
+  border-color: rgba(0, 0, 0, 0); }
+
+.button-normal:hover {
+  background-color: #111111;
+  color: #cbcdc7;
+  border-color: rgba(0, 0, 0, 0); }
+
+input[type="text"]#searchField {
+  color: #cbcdc7;
+  background-color: rgba(0, 0, 0, 0);
+  height: auto;
+  font-size: 300%;
+  width: 90%;
+  margin: 5%;
+  border: none;
+  outline: none;
+  font-family: "Segoe UI light"; }
+
+input#register_input {
+  margin-left: 5%;
+  font-family: "Segoe UI";
+  font-size: 100%; }
+
+label#register-label {
+  color: #111111;
+  font: "Segoe UI";
+  margin-left: 5%;
+  margin-bottom: 0%;
+  margin-top: 2%; }
+
+input[type="email"].loginField {
+  color: #cbcdc7;
+  background-color: rgba(0, 0, 0, 0);
+  height: auto;
+  font-size: 300%;
+  width: 90%;
+  margin: 5% 5% 2% 5%;
+  border: none;
+  outline: none;
+  font-family: "Segoe UI light"; }
+
+input[type="password"].loginField {
+  color: #cbcdc7;
+  background-color: rgba(0, 0, 0, 0);
+  height: auto;
+  font-size: 300%;
+  width: 90%;
+  margin: 0% 5% 5% 5%;
+  border: none;
+  outline: none;
+  font-family: "Segoe UI light"; }
+
+::-moz-placeholder {
+  color: #cbcdc7; }
+
+::-webkit-input-placeholder {
+  color: #cbcdc7; }
+
+:-ms-input-placeholder {
+  color: #cbcdc7; }
+
+.upload-forms-container {
+  margin-top: 0.236rem;
+  margin-bottom: 0.236rem;
+  margin-right: 0.618rem;
+  margin-left: 0.618rem;
+  overflow: hidden; }
+  .upload-forms-container .image-error-container, .upload-forms-container .tag-error {
+    display: none; }
+  .upload-forms-container small {
+    margin-right: 0.236rem;
+    margin-left: 0.236rem; }
+
+.upload-forms-container form > div:not(.add-image-container) {
+  margin-top: 0.618rem;
+  margin-bottom: 0.618rem; }
+
+.add-image-container {
+  display: block;
+  position: relative;
+  width: 180px;
+  height: 180px;
+  margin: 0 auto;
+  background-color: #111111;
+  margin-top: 1.618rem;
+  margin-bottom: 1.618rem;
+  overflow: hidden;
+  border-radius: 180px;
+  box-shadow: inset 0 0 0 16px rgba(200, 200, 200, 0.6), 0 1px 2px rgba(20, 20, 20, 0.3);
+  cursor: pointer; }
+  .add-image-container .add-image-text {
+    display: block;
+    position: absolute;
+    top: 30%;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    text-align: center;
+    line-height: 1.618rem;
+    pointer-events: none;
+    font-family: "Goudy"; }
+  .add-image-container .add-image-bg {
+    display: block;
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    transform: scale(0.1);
+    opacity: 0.18;
+    background: url('../../img/upload/upload_bg.png');
+    background-position: center;
+    background-size: cover;
+    pointer-events: none; }
+
+#add-image-container > div {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  text-align: center;
+  pointer-events: none; }
+
+.image-container {
+  display: none;
+  width: 100%;
+  max-height: 400px;
+  position: relative;
+  overflow: hidden;
+  padding-right: 0.618rem;
+  padding-left: 0.618rem;
+  margin-top: 0;
+  margin-bottom: 1.618rem;
+  text-align: center; }
+  .image-container img {
+    display: block;
+    max-height: inherit;
+    max-width: 800px;
+    margin: 0 auto; }
+
+.fieldset-container {
+  color: #111111; }
+  .fieldset-container legend small {
+    font-weight: normal;
+    font-size: 35%; }
+
+.tags-container {
+  display: block;
+  position: relative;
+  width: 100%;
+  overflow: hidden; }
+
+#tag-list {
+  list-style-type: none;
+  margin-left: 0;
+  margin-right: 0; }
+  #tag-list li {
+    display: inline-block;
+    font-size: 0.618rem;
+    padding-right: 0.236rem;
+    padding-left: 0.236rem;
+    padding-top: 0.236rem;
+    padding-bottom: 0.236rem;
+    margin-right: 0.236rem;
+    margin-left: 0.236rem;
+    background: #cbcdc7;
+    color: #888888;
+    cursor: pointer;
+    transition: all 0.5s ease; }
+  #tag-list .tag-active {
+    background: #888888;
+    color: #ffffff; }
+
+@media screen and (max-width: 1023px) {
+  .image-container img {
+    display: block;
+    max-height: inherit;
+    max-width: 100%;
+    margin: 0 auto; } }
+/*
+Base styles include setting heading sizes, default link styles, default
+font styles, and body backgrounds; it doesn’t include any class or ID selectors
+*/
+/*
+Insert code that doesn't output CSS, things like mixin declarations, functions, and variables.
+*/
+.row {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 0; }
+
+.columns {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 0; }
+
+.full-width {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0; }
+
+.space-plus1 {
+  margin-top: 1.618rem;
+  margin-bottom: 1.618rem; }
+
+.space-plus2 {
+  margin-top: 2.618rem;
+  margin-bottom: 2.618rem; }
+
+.space-plus3 {
+  margin-top: 4.236rem;
+  margin-bottom: 4.236rem; }
+
+.space-plus4 {
+  margin-top: 6.854rem;
+  margin-bottom: 6.854rem; }
+
+.space-plus5 {
+  margin-top: 11.089rem;
+  margin-bottom: 11.089rem; }
+
+.space-plus6 {
+  margin-top: 17.942rem;
+  margin-bottom: 17.942rem; }
+
+.space-plus7 {
+  margin-top: 29.03rem;
+  margin-bottom: 29.03rem; }
+
+.space-plus8 {
+  margin-top: 46.971rem;
+  margin-bottom: 46.971rem; }
+
+.space-minus1 {
+  margin-top: 0.618rem;
+  margin-bottom: 0.618rem; }
+
+.space-minus2 {
+  margin-top: 0.382rem;
+  margin-bottom: 0.382rem; }
+
+.space-minus3 {
+  margin-top: 0.236rem;
+  margin-bottom: 0.236rem; }
+
+.space-minus4 {
+  margin-top: 0.146rem;
+  margin-bottom: 0.146rem; }
+
+.space-minus5 {
+  margin-top: 0.09rem;
+  margin-bottom: 0.09rem; }
+
+.space-minus6 {
+  margin-top: 0.056rem;
+  margin-bottom: 0.056rem; }
+
+@font-face {
+  font-family: "Goudy";
+  src: url("../fonts/goudy.otf"); }
+
+body {
+  color: #ffffff; }
+
+.button-overlay {
+  color: #cbcdc7;
+  height: auto;
+  font-size: 1rem;
+  padding: 0.5em;
+  font-family: "Segoe UI Light";
+  border-width: 1px;
+  border-style: solid;
+  border-color: #cbcdc7;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out; }
+
+.button-overlay:hover {
+  background-color: #cbcdc7;
+  color: #111111;
+  border-color: #cbcdc7; }
+
+.button-overlay:focus {
+  background-color: #cbcdc7;
+  color: #111111;
+  border-color: #cbcdc7; }
+
+.button-normal {
+  color: #111111;
+  height: auto;
+  font-size: 1rem;
+  padding: 0.5em;
+  font-family: "Segoe UI Light";
+  border-width: 1px;
+  border-style: solid;
+  border-color: #111111;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out; }
+
+.button-normal:focus {
+  background-color: #111111;
+  color: #cbcdc7;
+  border-color: rgba(0, 0, 0, 0); }
+
+.button-normal:hover {
+  background-color: #111111;
+  color: #cbcdc7;
+  border-color: rgba(0, 0, 0, 0); }
+
+input[type="text"]#searchField {
+  color: #cbcdc7;
+  background-color: rgba(0, 0, 0, 0);
+  height: auto;
+  font-size: 300%;
+  width: 90%;
+  margin: 5%;
+  border: none;
+  outline: none;
+  font-family: "Segoe UI light"; }
+
+input#register_input {
+  margin-left: 5%;
+  font-family: "Segoe UI";
+  font-size: 100%; }
+
+label#register-label {
+  color: #111111;
+  font: "Segoe UI";
+  margin-left: 5%;
+  margin-bottom: 0%;
+  margin-top: 2%; }
+
+input[type="email"].loginField {
+  color: #cbcdc7;
+  background-color: rgba(0, 0, 0, 0);
+  height: auto;
+  font-size: 300%;
+  width: 90%;
+  margin: 5% 5% 2% 5%;
+  border: none;
+  outline: none;
+  font-family: "Segoe UI light"; }
+
+input[type="password"].loginField {
+  color: #cbcdc7;
+  background-color: rgba(0, 0, 0, 0);
+  height: auto;
+  font-size: 300%;
+  width: 90%;
+  margin: 0% 5% 5% 5%;
+  border: none;
+  outline: none;
+  font-family: "Segoe UI light"; }
+
+::-moz-placeholder {
+  color: #cbcdc7; }
+
+::-webkit-input-placeholder {
+  color: #cbcdc7; }
+
+:-ms-input-placeholder {
+  color: #cbcdc7; }
+
+/*
+Base styles include setting heading sizes, default link styles, default
+font styles, and body backgrounds; it doesn’t include any class or ID selectors
+*/
+/*
+Insert code that doesn't output CSS, things like mixin declarations, functions, and variables.
+*/
+body {
+  color: black; }
+
+.details {
+  padding: 32px; }
+
+#image-container #image {
+  width: 100%; }
+
+#username {
+  font-size: 2em; }
+
+#level {
+  font-size: 0.5em;
+  font-style: italic; }
+
+#joined {
+  font-size: 0.5em; }
+
+#online {
+  font-size: 0.5em; }
+
+#stats {
+  margin-top: 1em;
+  font-size: 0.5em; }
+
+#stats .amount {
+  font-style: italic; }
+
+#achievements {
+  margin-top: 1em;
+  font-size: 0.75em; }
+
+#achievements .achievement {
+  display: inline-block;
+  margin-right: 1em;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  background: #eee;
+  padding: 0.5em;
+  font-size: 0.5rem; }
+
+#achievements .achievement .lvl2 {
+  color: #050; }
+
+#achievements .achievement .lvl3 {
+  color: #0a0; }
+
+#achievements .achievement .lvl4 {
+  color: #0f0; }
+
+#achievements .achievement .lvl5 {
+  color: #005; }
+
+#achievements .achievement .lvl6 {
+  color: #00a; }
+
+#achievements .achievement .lvl7 {
+  color: #00f; }
+
+#achievements .achievement .lvl8 {
+  color: #500; }
+
+#achievements .achievement .lvl9 {
+  color: #a00; }
+
+#achievements .achievement .lvl10 {
+  color: #f00; }
+
+#achievements .achievement .lvl11 {
+  color: #550; }
+
+#achievements .achievement .lvl12 {
+  color: #aa0; }
+
+#achievements .achievement .lvl13 {
+  color: #ff0; }
