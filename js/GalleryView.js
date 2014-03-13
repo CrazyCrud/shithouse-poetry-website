@@ -23,7 +23,7 @@ var GalleryView = (function(document){
 				'refreshTime': 500,
 				'justifyLastRow': true,
 				'rowHeight': 250,
-				'fixedHeight' : true,
+				'fixedHeight' : false,
 				'onComplete': complete
 			});
 		}else{

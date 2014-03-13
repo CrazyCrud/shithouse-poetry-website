@@ -7,11 +7,12 @@ $(document).ready(function() {
 	if(query != null){
 		ImgurManager.search(computeSearch, query, 0);
 		setupImageClick();
-		setupOnce();
+		// setupOnce();
 	}
 });
 
 $(document).on("complete", function(){
+	setupOnce();
 	$.waypoints('refresh');
 });
 
@@ -39,9 +40,17 @@ var setupOnce = _.once(setupInfiniteScroll);
 function computeSearch(searchData){
 	$searchTermLabel.html(query);
 	if(_.isNull(searchData) || _.isUndefined(searchData)){
-		resultsError(NO_RESULTS);
+		if($('.jg-row').length > 0){
+			resultsError(NO_MORE_IMAGES);
+		}else{
+			resultsError(NO_RESULTS);
+		}
 	}else if(_.isEmpty(searchData)){
-		resultsError(NO_RESULTS);
+		if($('.jg-row').length > 0){
+			resultsError(NO_MORE_IMAGES);
+		}else{
+			resultsError(NO_RESULTS);
+		}
 	}else{
 		GalleryView.init($imageContainer);
 		showResults(searchData);

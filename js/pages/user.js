@@ -1,11 +1,12 @@
 var user = {};
-var NO_RESULTS = "Hier gibt es leider keine Bilder mehr!";
+var NO_RESULTS = "Der Nutzer hat noch keine Bilder hochgeladen!";
+var NO_MORE_RESULTS = "Dieser Nutzer hat nicht mehr Bilder hochgeladen!";
 
 $(function(){
 	if(id>0){
 		loadUser(id);
 		setupImageClick();
-		setupOnce();
+		// setupOnce();
 	}
 });
 
@@ -14,6 +15,7 @@ function loadUser(id){
 }
 
 $(document).on("complete", function(){
+	setupOnce();
 	$.waypoints('refresh');
 });
 
@@ -65,16 +67,15 @@ function fillUI(u){
 
 function fillImages(searchData){
 	if(!searchData||searchData.length==0){
-		resultsError(NO_RESULTS);
+		if($('.jg-row').length > 0){
+			resultsError(NO_MORE_RESULTS);
+		}else{
+			resultsError(NO_RESULTS);
+		}
 	}else{
 		GalleryView.init($("#images"));
 		showResults(searchData);
 	}
-	/*
-	var entry = data[0];
-	$("#image").attr("src",entry.images[0].thumbnail);
-	$("#lastlink").attr("href","details.php?id="+entry.id);
-	*/
 }
 
 function resultsError(msg){
