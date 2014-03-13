@@ -100,6 +100,26 @@
 					        	</div>
 					      	</div>
 					      	<div class="row">
+					        	<div class="small-12 medium-3 large-3 columns">
+					        		<label for="confirm-tou">
+					        			Nutzungsbedingungen
+					        		</label>
+					        	</div>
+					        	<div class="small-12 medium-9 large-9 columns">
+					        		<input type="checkbox" id="confirm-tou" required>
+					        		</input>
+					        		<label for="confirm-tou">
+					        			Ich habe die <a target="_blank" href="tou.html">Nutzungsbedingungen</a>
+										für Latrinalia gelesen und
+										akzeptiert und erkläre hiermit
+										meine Einwilligung in die Erhebung,
+										Speicherung und Verarbeitung
+										meiner personenbezogenen Daten zum
+										Zwecke der Teilnahme an Latrinalia.
+					        		</label>
+					        	</div>
+					      	</div>
+					      	<div class="row">
 					        	<div class="small-12 columns">
 					        		<button id="register-submit"
 							    		class="button medium right">
