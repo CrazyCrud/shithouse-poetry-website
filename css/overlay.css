@@ -210,7 +210,8 @@ input[type="password"].loginField {
   overflow: visible;
   top: 90%;
   right: 2%;
-  box-shadow: 1px 1px 1px #111111; }
+  box-shadow: 1px 1px 1px #111111;
+  z-index: 110; }
   #user-overlay .user-overlay-container {
     background-color: rgba(140, 140, 140, 0.9);
     border-radius: 1px; }
@@ -219,6 +220,10 @@ input[type="password"].loginField {
     #user-overlay .user-overlay-container li {
       text-align: center; }
       #user-overlay .user-overlay-container li a {
+        display: block;
+        padding: 8px 0;
+        width: 100%;
+        height: 100%;
         font-size: 0.618rem;
         color: #ffffff; }
     #user-overlay .user-overlay-container li:hover {

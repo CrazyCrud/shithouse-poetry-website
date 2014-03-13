@@ -254,7 +254,7 @@ input[type="password"].loginField {
     bottom: 0;
     left: 0;
     margin: auto;
-    z-index: 100; }
+    /*z-index: 100;*/ }
 
 #upload-button a#link-upload {
   display: inline-block;
