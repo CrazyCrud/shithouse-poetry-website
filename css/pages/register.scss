@@ -31,6 +31,14 @@
 		margin-top: $space_minus1;
 		margin-bottom: $space_minus1;
 	}
+	.error-password{
+		display: none;
+	}
+	.tou-container{
+		label {
+			margin-left: 0;
+		}
+	}
 }
 
 @media screen and (max-width: 640px){

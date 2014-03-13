@@ -206,6 +206,10 @@ input[type="password"].loginField {
 .form-register .row {
   margin-top: 0.618rem;
   margin-bottom: 0.618rem; }
+.form-register .error-password {
+  display: none; }
+.form-register .tou-container label {
+  margin-left: 0; }
 
 @media screen and (max-width: 640px) {
   .register-forms-container {
