@@ -204,6 +204,10 @@ input[type="password"].loginField {
   height: 100%;
   background-color: #111111; }
 
+#maincontent {
+  overflow: hidden;
+  margin-top: 0; }
+
 #upload {
   position: relative;
   width: 100%;
