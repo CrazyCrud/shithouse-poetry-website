@@ -49,7 +49,8 @@ class Queries{
 		$u = DBConfig::$tables["users"];
 		return "UPDATE $u
 		SET sessionkey='".uniqid()."',
-		status = ".DBConfig::$userStatus["deleted"]."
+		status = ".DBConfig::$userStatus["deleted"].",
+		username = 'Gel&ouml;schter Nutzer'
 		WHERE sessionkey='$authkey'";
 	}
 	public static function getuserbyname($uname, $password){
@@ -777,9 +778,10 @@ class Queries{
 		$e = DBConfig::$tables["entries"];
 		$c = DBConfig::$tables["comments"];
 		$i = DBConfig::$tables["images"];
+		$info = DBConfig::$tables["information"];
 		$r = DBConfig::$tables["ratings"];
 		$query =
-		"SELECT 
+		"SELECT DISTINCT
 		`$u`.`id` AS userid,
 		`$u`.`username` AS username,
 		`$e`.`id` AS entryid,
@@ -788,7 +790,8 @@ class Queries{
 		`$e`.`date` AS date,
 		`$i`.`path` AS path,
 		NULL AS comment,
-		NULL AS rating
+		NULL AS rating,
+		NULL AS transcription
 
 		FROM
 		`$u`, `$i`, `$e`
@@ -798,7 +801,7 @@ class Queries{
 		AND `$e`.`userid` = $userid
 
 		UNION
-		SELECT
+		SELECT DISTINCT
 		`$u`.`id` AS userid,
 		`$u`.`username` AS username,
 		`$e`.`id` AS entryid,
@@ -807,7 +810,8 @@ class Queries{
 		`$c`.`timestamp` AS date,
 		`$i`.`path` AS path,
 		`$c`.`comment` AS comment,
-		NULL AS rating
+		NULL AS rating,
+		NULL AS transcription
 
 		FROM
 		`$c`, `$u`, `$e`, `$i`
@@ -821,7 +825,32 @@ class Queries{
 		     OR `$c`.`userid` = $userid)
 
 		UNION
-		SELECT
+		SELECT DISTINCT
+		`$u`.`id` AS userid,
+		`$u`.`username` AS username,
+		`$e`.`id` AS entryid,
+		`$e`.`title` AS title,
+		`$e`.`sex` AS sex,
+		`$info`.`changed` AS date,
+		`$i`.`path` AS path,
+		NULL AS comment,
+		NULL AS rating,
+		`$info`.transcription AS transcription
+
+		FROM
+		`$c`, `$u`, `$e`, `$i`, `$info`
+
+		WHERE
+		`$info`.`entryid` = `$e`.`id`
+		AND `$i`.`entryid` = `$e`.`id`
+		AND LENGTH(`$info`.`transcription`)>0
+		AND `$u`.`id` = `$info`.`transcriberid`
+		AND (`$e`.`userid` = $userid
+		     OR `$info`.`transcriberid` = $userid)
+		AND NOT `$e`.userid = `$info`.`transcriberid`
+
+		UNION
+		SELECT DISTINCT
 		`$u`.`id` AS userid,
 		`$u`.`username` AS username,
 		`$e`.`id` AS entryid,
@@ -830,7 +859,8 @@ class Queries{
 		`$r`.`date` AS date,
 		`$i`.`path` AS path,
 		NULL AS comment,
-		`$r`.rating AS rating
+		`$r`.rating AS rating,
+		NULL AS transcription
 
 		FROM
 		`$u`, `$e`, `$i`, `$r`

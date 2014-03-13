@@ -37,7 +37,10 @@ function fillActions(ac){
 		var action = ac[i];
 		var add = true;
 		for(var j=0; j<actions.length; j++){
-			if(actions[j].date == ac[i].date){
+			if(actions[j].date == ac[i].date
+				&&actions[j].transcription == ac[i].transcription
+				&&actions[j].rating == ac[i].rating
+				&&actions[j].comment == ac[i].comment){
 				add = false;
 				break;
 			}
@@ -51,6 +54,7 @@ function fillActions(ac){
 function addAction(action){
 	if(action.comment != null)addComment(action);
 	else if(action.rating != null)addRating(action);
+	else if(action.transcription != null)addTranscription(action);
 	else addUpload(action);
 }
 
@@ -134,6 +138,36 @@ function addRating(entry){
 	$info.append($user);
 	if(entry.userid == user.id) $info.append(" hast ein Bild "+sentiment+" bewertet:");
 	else $info.append(" hat ein Bild "+sentiment+" bewertet:");
+	$left.append($img);
+	$right.append($info);
+	$right.append($title);
+
+	var $content = $('<div class="content"></div>');
+	$content.append($left);
+	$content.append($right);
+	
+	$container.append($time);
+	$container.append($content);
+
+	$("#actions").append($container);
+}
+
+function addTranscription(entry){
+	if(entry.userid == user.id)entry.username = "Du";
+	var $container = $('<div class="action rating"></div>');
+	var $img = $('<a href="details.php?id='+entry.entryid+'"><img src="'+entry.smallthumbnail+'" title="'+entry.title+'"></img></a>');
+	var $user = $('<a href="user.php?id='+entry.userid+'">'+entry.username+"</a>");
+	if(entry.transcription.length>100)entry.transcription = entry.transcription.substring(0,97)+"...";
+	if(entry.transcription.trim().length == 0)entry.transcription = '<span class="missing">Transkription gel&ouml;scht</span>';
+	var $title = $('<div class="comment">'+entry.transcription+'</div>');
+	var $left = $('<div class="leftcontainer container"></div>');
+	var $right = $('<div class="rightcontainer container"></div>');
+	var $info = $('<div class="info"><i class="icon-feather"/></div>');
+	var $time = $('<div class="time">'+formatTime(entry.date)+'</div>');
+
+	$info.append($user);
+	if(entry.userid == user.id) $info.append(" hast ein Bild transkribiert:");
+	else $info.append(" hat ein Bild von dir transkribiert:");
 	$left.append($img);
 	$right.append($info);
 	$right.append($title);

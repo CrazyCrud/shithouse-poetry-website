@@ -771,7 +771,8 @@ class DBHelper{
 		// check whether allowed to update
 		if($user["status"]!=DBConfig::$userStatus["admin"]
 			&&$user["id"]!=$entry["userid"]
-			&&$user["id"]!=$info["transcriberid"])return false;
+			&&$user["id"]!=$info["transcriberid"]
+			&&strlen(trim($info["transcription"]))>0)return false;
 
 		if(!$this->removeInformation($entryid))return false;
 		$this->addInformation(
@@ -834,6 +835,7 @@ class DBHelper{
 				return $tags["tagid"];
 			}
 			if(strlen(trim($tag))<3)return false;
+			$tag = strtolower($tag);
 			$query = Queries::createtag($tag);
 			return $this->query($query);
 		}
