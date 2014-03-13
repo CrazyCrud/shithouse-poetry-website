@@ -140,6 +140,7 @@ function logoutUser(data){
         document.cookie = "username=''  ; expires=" + d.toGMTString();
         document.cookie = "userid=''; expires=" + d.toGMTString();
         document.cookie = "admin=''; expires=" + d.toGMTString();
+        document.cookie = "authkey=''; expires=" + d.toGMTString();
         window.location = "index.html";
     }
 }
