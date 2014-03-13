@@ -19,7 +19,8 @@ body{
 }
 
 .details{
-  padding: 32px;
+  padding: $space_plus1;
+  padding-top: 0;
 }
 
 #controlpanel{
@@ -38,6 +39,7 @@ body{
 
 #image-container{
   text-align: center;
+  padding-top: 6px;
 }
 
 #title{
@@ -186,4 +188,8 @@ body{
 #report-icon:hover{
   color: #ff4444;
   opacity: 1;
+}
+
+#comments-header{
+  padding-bottom: 6px;
 }

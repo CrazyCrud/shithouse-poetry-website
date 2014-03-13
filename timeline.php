@@ -54,8 +54,8 @@
 			</header>
 			<section id="maincontent">
 				<div class="details-entry">
-					<div class="row details">
-						Neueste Aktivit&auml;ten zu deinen Bildern:
+					<div id="timeline-header" class="row details">
+						<h3>Neueste Aktivit&auml;ten zu deinen Bildern:</h3>
 					</div>
 					<div class="row details">
 						<div id="actions">

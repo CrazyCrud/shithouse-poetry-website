@@ -202,7 +202,8 @@ body {
   right: 0; }
 
 .details {
-  padding: 32px; }
+  padding: 1.618rem;
+  padding-top: 0; }
 
 #controlpanel {
   display: none;
@@ -217,7 +218,8 @@ body {
   width: 100%; }
 
 #image-container {
-  text-align: center; }
+  text-align: center;
+  padding-top: 6px; }
 
 #title {
   font-size: 2rem; }
@@ -337,3 +339,6 @@ body {
 #report-icon:hover {
   color: #ff4444;
   opacity: 1; }
+
+#comments-header {
+  padding-bottom: 6px; }
