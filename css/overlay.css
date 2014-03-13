@@ -242,13 +242,12 @@ input[type="password"].loginField {
   border-right: 5px solid transparent;
   border-bottom: 5px solid rgba(140, 140, 140, 0.9); }
 
-.ui-autocomplete, .ui-widget-content {
+.form-container .ui-autocomplete, .form-container .ui-widget-content {
   font-family: "Segoe UI Light";
   background: rgba(30, 30, 30, 0.9);
   border: none; }
-  .ui-autocomplete .ui-menu-item a, .ui-widget-content .ui-menu-item a {
+  .form-container .ui-autocomplete .ui-menu-item a, .form-container .ui-widget-content .ui-menu-item a {
     color: #ffffff; }
-
 .form-container div {
   margin-top: 0.618rem;
   margin-bottom: 0.618rem; }

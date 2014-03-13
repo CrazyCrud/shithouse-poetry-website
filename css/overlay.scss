@@ -71,19 +71,20 @@
 	border-bottom: 5px solid rgba(140, 140, 140, 0.9);
 }
 
-.ui-autocomplete, .ui-widget-content{
-	font-family: "Segoe UI Light";
-	background: rgba(30, 30, 30, 0.9);
-	border: none;
+.form-container{
 
-	.ui-menu-item{
-		a{
-			color: $white;
+	.ui-autocomplete, .ui-widget-content{
+		font-family: "Segoe UI Light";
+		background: rgba(30, 30, 30, 0.9);
+		border: none;
+
+		.ui-menu-item{
+			a{
+				color: $white;
+			}
 		}
 	}
-}
 
-.form-container{
 	div{
 		margin-top: $space_minus1;
 		margin-bottom: $space_minus1;
