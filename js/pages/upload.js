@@ -112,8 +112,8 @@ function initUpload(){
 				data['artist'] = artist;
 			}
 			if((latitude_g != -1000 && longitude_g != -1000)){
-				data['latitude'] = latitude_g;
-				data['longitude'] = longitude_g;
+				data['lat'] = latitude_g;
+				data['long'] = longitude_g;
 			}
 			if(tags.length > 0){
 				data['tags'] = tags;
