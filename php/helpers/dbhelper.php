@@ -835,6 +835,7 @@ class DBHelper{
 				return $tags["tagid"];
 			}
 			if(strlen(trim($tag))<3)return false;
+			$tag = strtolower($tag);
 			$query = Queries::createtag($tag);
 			return $this->query($query);
 		}

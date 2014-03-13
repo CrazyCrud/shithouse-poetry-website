@@ -49,7 +49,8 @@ class Queries{
 		$u = DBConfig::$tables["users"];
 		return "UPDATE $u
 		SET sessionkey='".uniqid()."',
-		status = ".DBConfig::$userStatus["deleted"]."
+		status = ".DBConfig::$userStatus["deleted"].",
+		username = 'Gel&ouml;schter Nutzer'
 		WHERE sessionkey='$authkey'";
 	}
 	public static function getuserbyname($uname, $password){
