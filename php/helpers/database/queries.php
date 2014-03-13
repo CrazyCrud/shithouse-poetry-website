@@ -67,10 +67,12 @@ class Queries{
 		$e = DBConfig::$tables["entries"];
 		$c = DBConfig::$tables["comments"];
 		$r = DBConfig::$tables["ratings"];
+		$info = DBConfig::$tables["information"];
 		$query = "SELECT
 		SUM(entries) AS entries,
 		SUM(comments) AS comments,
-		SUM(ratings) AS ratings
+		SUM(ratings) AS ratings,
+		SUM(transcriptions) AS transcriptions
 
 		FROM(
 
@@ -78,7 +80,8 @@ class Queries{
 		$id AS userid,
 		COUNT(*) AS entries,
 		NULL AS comments,
-		NULL AS ratings
+		NULL AS ratings,
+		NULL AS transcriptions
 		FROM $e
 		WHERE $e.userid = $id
 
@@ -87,7 +90,8 @@ class Queries{
 		$id AS userid,
 		NULL AS entries,
 		COUNT(*) AS comments,
-		NULL AS ratings
+		NULL AS ratings,
+		NULL AS transcriptions
 		FROM $c
 		WHERE $c.userid = $id
 
@@ -96,7 +100,18 @@ class Queries{
 		$id AS userid,
 		NULL AS entries,
 		NULL AS comments,
-		COUNT(*) AS ratings
+		NULL AS ratings,
+		COUNT(*) AS transcriptions
+		FROM $info
+		WHERE $info.transcriberid = $id
+
+		UNION
+		SELECT
+		$id AS userid,
+		NULL AS entries,
+		NULL AS comments,
+		COUNT(*) AS ratings,
+		NULL AS transcriptions
 		FROM $r
 		WHERE $r.userid = $id
 		 ) a

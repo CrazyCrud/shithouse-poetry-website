@@ -67,6 +67,7 @@
 								<div id="entries">Bilder hochgeladen: <span class="amount"></span></div>
 								<div id="comments">Kommentare gepostet: <span class="amount"></span></div>
 								<div id="ratings">Bilder bewertet: <span class="amount"></span></div>
+								<div id="transcriptions">Bilder transkribiert: <span class="amount"></span></div>
 							</div>
 						</div>
 						<div class="details small-12 medium-5 large-5 columns right" id="image-container">
@@ -75,6 +76,7 @@
 								<div id="entries"></div>
 								<div id="comments"></div>
 								<div id="ratings"></div>
+								<div id="transcriptions"></div>
 							</div>
 						</div>
 					</div>	
