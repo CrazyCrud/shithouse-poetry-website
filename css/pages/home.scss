@@ -125,6 +125,8 @@
 	margin-right: auto;
 }
 
+/*
+
 .jg-image{
 	overflow: hidden;
 }
@@ -135,7 +137,6 @@
 	width: 100%;
 	height: 100%;
 	text-align: center;
-	/*font-size: $space_minus1;*/
 	z-index: 3;
 	cursor: pointer;
 
@@ -158,7 +159,6 @@ span.transcription{
 	overflow: hidden;
 	word-wrap: break-word;
 	white-space: normal;
-	/*text-overflow: ellipsis;*/
 	line-height: $space_plus1;
 }
 
@@ -243,6 +243,7 @@ span.transcription{
 	line-height: $space_plus1;
 }
 
+*/
 .vote-container{
 	display: none;
 	text-align: center;

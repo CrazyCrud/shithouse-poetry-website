@@ -296,101 +296,125 @@ input[type="password"].loginField {
   margin-left: auto;
   margin-right: auto; }
 
-.jg-image {
-  overflow: hidden; }
+/*
 
-.transcription-container {
-  display: none;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  /*font-size: $space_minus1;*/
-  z-index: 3;
-  cursor: pointer; }
-  .transcription-container div {
-    display: table-cell;
-    position: relative;
-    vertical-align: middle;
-    width: inherit;
-    font-family: "Goudy"; }
+.jg-image{
+	overflow: hidden;
+}
 
-span.transcription {
-  display: inline-block;
-  position: relative;
-  width: inherit;
-  max-width: inherit;
-  height: auto;
-  padding: 4px;
-  overflow: hidden;
-  word-wrap: break-word;
-  white-space: normal;
-  /*text-overflow: ellipsis;*/
-  line-height: 1.618rem; }
+.transcription-container{
+	display: none;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	z-index: 3;
+	cursor: pointer;
 
-.overlay, .women, .men, .unisex {
-  display: none;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  opacity: 0.5;
-  z-index: 2; }
+	div{
+		display: table-cell;
+		position: relative;
+		vertical-align: middle;
+		width: inherit;
+		@include transcription-font();
+	}
+}
 
-.overlaytouch, .women-touch, .men-touch, .unisex-touch {
-  display: block;
-  position: absolute;
-  width: 100%;
-  height: 30%;
-  top: 0;
-  opacity: 0.5;
-  z-index: 2;
-  max-height: 80px; }
+span.transcription{
+	display: inline-block;
+	position: relative;
+	width: inherit;
+	max-width: inherit;
+	height: auto;
+	padding: 4px;
+	overflow: hidden;
+	word-wrap: break-word;
+	white-space: normal;
+	line-height: $space_plus1;
+}
 
-.women {
-  background-color: #d22091; }
+.overlay{
+	display: none;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	opacity: 0.5;
+	z-index: 2;
+}
 
-.men {
-  background-color: #32a2b8; }
+.overlaytouch{
+	display: block;
+	position: absolute;
+	width: 100%;
+	height: 30%;
+	top: 0;
+	opacity: 0.5;
+	z-index: 2;
+	max-height: 80px;
+}
 
-.unisex {
-  background-color: #888888; }
+.women{
+	@extend .overlay;
+	background-color: $pink;
+}
 
-.women-touch {
-  background-color: #d22091; }
+.men{
+	@extend .overlay;
+	background-color: $blue;
+}
 
-.men-touch {
-  background-color: #32a2b8; }
+.unisex{
+	@extend .overlay;
+	background-color: $darkgrey;
+}
 
-.unisex-touch {
-  background-color: #888888; }
+.women-touch{
+	@extend .overlaytouch;
+	background-color: $pink;
+}
 
-.transcription-container-touch {
-  display: block;
-  position: absolute;
-  width: 100%;
-  top: 2%;
-  text-align: center;
-  font-size: 0.618rem;
-  z-index: 3; }
-  .transcription-container-touch div {
-    display: block;
-    position: relative;
-    width: inherit;
-    font-family: "Goudy"; }
+.men-touch{
+	@extend .overlaytouch;
+	background-color: $blue;
+}
 
-.transcription-container-touch span.transcription {
-  display: inline-block;
-  position: relative;
-  width: inherit;
-  max-width: inherit;
-  height: auto;
-  padding: 4px;
-  overflow: hidden;
-  word-wrap: break-word;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  line-height: 1.618rem; }
+.unisex-touch{
+	@extend .overlaytouch;
+	background-color: $darkgrey;
+}
 
+.transcription-container-touch{
+	display: block;
+	position: absolute;
+	width: 100%;
+	top: 2%;
+	text-align: center;
+	font-size: $space_minus1;
+	z-index: 3;
+
+	div{
+		display: block;
+		position: relative;
+		width: inherit;
+		@include transcription-font();
+	}
+}
+
+.transcription-container-touch span.transcription{
+	display: inline-block;
+	position: relative;
+	width: inherit;
+	max-width: inherit;
+	height: auto;
+	padding: 4px;
+	overflow: hidden;
+	word-wrap: break-word;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	line-height: $space_plus1;
+}
+
+*/
 .vote-container {
   display: none;
   text-align: center;

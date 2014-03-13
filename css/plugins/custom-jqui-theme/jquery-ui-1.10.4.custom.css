@@ -787,18 +787,16 @@ body .ui-tooltip {
 /* Component containers
 ----------------------------------*/
 .ui-widget {
-	font-family: Segoe UI;
-	font-size: 1.2em;
+
 }
 .ui-widget .ui-widget {
-	font-size: .5em;
+	font-size: .5rem;
 }
 .ui-widget input,
 .ui-widget select,
 .ui-widget textarea,
 .ui-widget button {
-	font-family: Segoe UI;
-	font-size: 1em;
+	font-size: .8rem;
 }
 .ui-widget-content {
 	border: 1px solid #aaaaaa;
@@ -806,6 +804,7 @@ body .ui-tooltip {
 	color: #222222;
 }
 .ui-widget-content a {
+	font-size: .8rem;
 	color: #222222;
 }
 .ui-widget-header {
