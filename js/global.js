@@ -6,6 +6,7 @@ $(document).ready(function() {
     setupOverlayBackground();
     cookieUser();
     greetUser();
+    getCurrentUser();
 });
 
 function setupOverlayBackground(){
@@ -20,7 +21,6 @@ function createOverlayBackground(){
     }else{
         $("body").append(overlayTemplate());
     }
-    
 }
 
 function removeOverlayBackground(){
@@ -123,5 +123,23 @@ function convertDateTime(dt){
 }
 
 getAvatar = function(name){
-  return "http://social.microsoft.com/profile/u/avatar.jpg?displayname=%1".replace("%1",name);
+    return "http://social.microsoft.com/profile/u/avatar.jpg?displayname=%1".replace("%1",name);
+}
+
+function getCurrentUser(){
+    var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+    if(authkey){
+        ImgurManager.getUserAuth(logoutUser, authkey);
+    }
+}
+
+function logoutUser(data){
+    if(_.isNull(data)){
+        $("#link-login").children('span').html("Login");
+        var d = new Date(1970, 1);
+        document.cookie = "username=''  ; expires=" + d.toGMTString();
+        document.cookie = "userid=''; expires=" + d.toGMTString();
+        document.cookie = "admin=''; expires=" + d.toGMTString();
+        window.location = "index.html";
+    }
 }
