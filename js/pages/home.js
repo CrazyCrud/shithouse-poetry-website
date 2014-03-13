@@ -343,9 +343,11 @@ function enableVoting(){
 
 function setupVoting(){
 	$upVote.click(function(event) {
+		event.preventDefault();
 		lazyClick(false);
 	});
 	$downVote.click(function(event) {
+		event.preventDefault();
 		lazyClick(true);
 	});
 }
