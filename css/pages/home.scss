@@ -20,6 +20,11 @@
 	background-color: $black;
 }
 
+#maincontent{
+	overflow: hidden;
+	margin-top: 0;
+}
+
 #upload{
 	position : relative;
 	width: 100%;
