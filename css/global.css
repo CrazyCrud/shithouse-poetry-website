@@ -215,7 +215,8 @@ body {
     margin-right: 8px; }
 
 #maincontent {
-  overflow: hidden; }
+  overflow: hidden;
+  margin-top: 1.5rem; }
 
 #maincontent:not(.home) {
   padding-top: 1.618rem; }
