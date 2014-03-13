@@ -12,8 +12,8 @@
 // a json with a successcode and true if the operation was successfull:
 /* 
 {
-	success : 1 ,
-	data : true
+	"success":1,
+	"data":"test"
 }
 */
 // for success codes see ../php/config.php
