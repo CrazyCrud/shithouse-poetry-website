@@ -72,7 +72,7 @@ if($data == false){
 	exit();
 }
 
-$json["data"] = $data;
+$json["data"] = $transcription;
 
 $json["success"] = $CODE_SUCCESS;
 echo json_encode($json);

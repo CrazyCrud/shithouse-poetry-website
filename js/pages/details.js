@@ -79,6 +79,7 @@ function addComments(c){
 }
 
 function initGUI(){
+	$("#transcription #content").click(changeTranscription);
 	$("#thumbsdown").click(function(){
 		if($(this).hasClass("mine")){
 			ImgurManager.addRating(refresh, entry.id, 0);
@@ -290,13 +291,52 @@ function fillUI(e){
 		$("#upload-info #author").html(entry.username);
 		$("#upload-info #author").attr("href", "user.php?id="+entry.userid);
 
-		//set transcription
-		var trans = entry.information[0].transcription.trim();
-		if(trans.length==0){
-			trans = '<p class="missing">keine Transkription angegeben</p>';
-		}
-		$("#transcription #content").html(trans);
+		setTranscription();
 	}
+}
+
+function setTranscription(){
+	//set transcription
+	var trans = entry.information[0].transcription.trim();
+	if(trans.length==0){
+		trans = '<p class="missing">keine Transkription angegeben</p><button class="tiny">Transkription hinzuf&uuml;gen</button>';
+	}
+	$("#transcription #content").html(trans);
+}
+
+function changeTranscription(){
+	if($("#edittranscription").length != 0)return;
+	var permission = false;
+	if(user.admin!==false)permission = true;
+	if(user.id == entry.userid)permission = true;
+	if(user.id == entry.information[0].userid)permission = true;
+	if(entry.information[0]["transcription"].length == 0)permission = true;
+	if(!permission)return;
+
+	var $container = $('<div id="edittranscription"></div>');
+	$input = $('<input type="text"></input>');
+	$input.val(entry.information[0]["transcription"]);
+	$ok = $('<button class="tiny">OK</ok>');
+	$container.append($input);
+	$container.append($ok);
+	$("#transcription #content").html($container);
+
+	$ok.click(function(){
+		updateTranscription($input.val());
+	});
+}
+
+function updateTranscription(newTrans){
+	ImgurManager.updateTranscription(onTranscriptionUpdated, entry["id"], newTrans);
+}
+
+function onTranscriptionUpdated(success){
+	if(success!=null){
+		entry.information[0]["transcription"] = success;
+		entry.information[0]["userid"] = user.id;
+		entry.information[0]["username"] = user.username;
+	}
+	setTranscription();
 }
 
 function userLogout(){

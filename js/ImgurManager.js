@@ -104,6 +104,17 @@ var ImgurManager = (function(){
 				callback(links);
 			});
 		},
+		updateTranscription : function(callback, entryid, transcription){
+			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+			var links = null;
+			var url = 'updateTranscription.php?authkey='+authkey+"&entryid="+entryid+"&transcription="+transcription;
+			$.post('php/backend/' + url, function(data) {
+				if(data.success == 1){
+					links = data.data;
+				}
+				callback(links);
+			});
+		},
 		addRating : function(callback, entryid, rating){
 			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 			var url = 'addRating.php?authkey=' + authkey + 
