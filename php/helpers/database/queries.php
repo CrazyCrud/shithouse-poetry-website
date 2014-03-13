@@ -294,21 +294,25 @@ class Queries{
 	*/
 	public static function getinformation($entryid){
 		$i = DBConfig::$tables["information"];
+		$u = DBConfig::$tables["users"];
 		if(isset($entryid)){
-			$id = "`$i`.entryid = $entryid";
+			$id = "AND `$i`.entryid = $entryid";
 		}else{
-			$id = "1";
+			$id = "";
 		}
 		$query = 
 			"SELECT
 			`$i`.entryid AS entryid,
 			`$i`.artist AS artist,
 			`$i`.transcription AS transcription,
+			`$i`.transcriberid AS userid,
+			`$u`.username AS username,
 			`$i`.location AS location,
 			`$i`.longitude AS longitude,
 			`$i`.latitude AS latitude
-			FROM $i
-			WHERE $id";
+			FROM $i, $u
+			WHERE `$i`.transcriberid = `$u`.id
+			$id";
 		return $query;
 	}
 	public static function removeinformation($entryid){
@@ -318,13 +322,15 @@ class Queries{
 		WHERE `$i`.entryid = $entryid";
 		return $query;
 	}
-	public static function addinformation($entryid, $artist, $transcription, $location, $lat, $long){
+	public static function addinformation($entryid, $artist, $transcription, $location, $lat, $long, $userid){
 		$i = DBConfig::$tables["information"];
+		if(!isset($lat))$lat = -1;
+		if(!isset($long))$long = -1;
 		$query =
 		"INSERT INTO `$i`
-		(entryid, artist, transcription, location, latitude, longitude)
+		(entryid, artist, transcription, transcriberid, location, latitude, longitude)
 		VALUES
-		($entryid, '$artist', '$transcription', '$location', $lat, $long)";
+		($entryid, '$artist', '$transcription', $userid, '$location', $lat, $long)";
 		return $query;
 	}
 	/**
