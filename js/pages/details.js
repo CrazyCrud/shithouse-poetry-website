@@ -300,18 +300,28 @@ function setTranscription(){
 	var trans = entry.information[0].transcription.trim();
 	if(trans.length==0){
 		trans = '<p class="missing">keine Transkription angegeben</p><button class="tiny">Transkription hinzuf&uuml;gen</button>';
+	}else{
+		if(canTranscribe()){
+			$("#transcription #content").attr("title","zum Bearbeiten klicken");
+		}else{
+			$("#transcription #content").attr("title","");
+		}
 	}
 	$("#transcription #content").html(trans);
 }
 
-function changeTranscription(){
-	if($("#edittranscription").length != 0)return;
+function canTranscribe(){
+	if($("#edittranscription").length != 0)return false;
 	var permission = false;
 	if(user.admin!==false)permission = true;
 	if(user.id == entry.userid)permission = true;
 	if(user.id == entry.information[0].userid)permission = true;
 	if(entry.information[0]["transcription"].length == 0)permission = true;
-	if(!permission)return;
+	return permission;
+}
+
+function changeTranscription(){
+	if(!canTranscribe())return;
 
 	var $container = $('<div id="edittranscription"></div>');
 	$input = $('<input type="text"></input>');

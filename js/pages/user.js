@@ -54,12 +54,13 @@ function fillUI(u){
 		$("#stats #entries .amount").html(u.stats.entries);
 		$("#stats #comments .amount").html(u.stats.comments);
 		$("#stats #ratings .amount").html(u.stats.ratings);
+		$("#stats #transcriptions .amount").html(u.stats.transcriptions);
 		drawAchievements(u.stats);
 		var today = new Date();
 		var timeObj = convertDateTime(user.joindate);
 		var timestamp = timeObj.getTime();
 		var difference = today-timestamp;
-		var lvl = computeLevel(u.stats.entries, u.stats.comments, u.stats.ratings, difference);
+		var lvl = computeLevel(u.stats.entries, u.stats.comments, u.stats.ratings, u.stats.transcriptions, difference);
 		$("#level").html("(Level "+lvl+")");
 	}
 	ImgurManager.getEntriesForUser(fillImages, id);
@@ -94,25 +95,28 @@ function drawAchievements(stats){
 	drawEntryAchievements(stats.entries);
 	drawCommentAchievements(stats.comments);
 	drawRatingAchievements(stats.ratings);
+	drawTranscriptionAchievements(stats.transcriptions);
 	if($(".achievement").length == 0){
 		var $none = $('<div class="missing">Dieser Nutzer hat noch keine Erfolge.</div>');
 		$("#achievements").append($none);
 	}
 }
 
-function computeLevel(entries, comments, ratings, ageInMillis){
+function computeLevel(entries, comments, ratings, transcriptions, ageInMillis){
 	var ageInDays = ageInMillis/1000 /60 /60 /24;
 	var level = 1;
 
-	var entryMulti = .1;
+	var entryMulti = .05;
 	var commentMulti = .01;
 	var ratingMulti = .02;
 	var ageMulti = .01;
+	var transMulti = .05;
 
 	var extralevel = entries*entryMulti;
 	extralevel += comments*commentMulti;
 	extralevel += ratings*ratingMulti;
 	extralevel += ageInDays*ageMulti;
+	extralevel += transcriptions*transMulti;
 
 	level = Math.floor(level+extralevel);
 	return level;
@@ -165,6 +169,22 @@ function drawRatingAchievements(amount){
 	if(amount>=5000)$container.append(achievement("<i class='lvl11 icon-thumbs-up-1'/>","5000 Bilder bewertet"));
 	if(amount>=7500)$container.append(achievement("<i class='lvl12 icon-thumbs-up-1'/>","7500 Bilder bewertet"));
 	if(amount>=10000)$container.append(achievement("<i class='lvl13 icon-thumbs-up-1'/>","10000 Bilder bewertet"));
+}
+function drawTranscriptionAchievements(amount){
+	var $container = $('#achievements #transcriptions');
+	if(amount>0)$container.append(achievement("<i class='lvl1 icon-feather'/>","Ein Bild transkribiert"));
+	if(amount>=10)$container.append(achievement("<i class='lvl2 icon-feather'/>","10 Bilder transkribiert"));
+	if(amount>=50)$container.append(achievement("<i class='lvl3 icon-feather'/>","50 Bilder transkribiert"));
+	if(amount>=100)$container.append(achievement("<i class='lvl4 icon-feather'/>","100 Bilder transkribiert"));
+	if(amount>=200)$container.append(achievement("<i class='lvl5 icon-feather'/>","200 Bilder transkribiert"));
+	if(amount>=500)$container.append(achievement("<i class='lvl6 icon-feather'/>","500 Bilder transkribiert"));
+	if(amount>=750)$container.append(achievement("<i class='lvl7 icon-feather'/>","750 Bilder transkribiert"));
+	if(amount>=1000)$container.append(achievement("<i class='lvl8 icon-feather'/>","1000 Bilder transkribiert"));
+	if(amount>=1500)$container.append(achievement("<i class='lvl9 icon-feather'/>","1500 Bilder transkribiert"));
+	if(amount>=2000)$container.append(achievement("<i class='lvl10 icon-feather'/>","2000 Bilder transkribiert"));
+	if(amount>=5000)$container.append(achievement("<i class='lvl11 icon-feather'/>","5000 Bilder transkribiert"));
+	if(amount>=7500)$container.append(achievement("<i class='lvl12 icon-feather'/>","7500 Bilder transkribiert"));
+	if(amount>=10000)$container.append(achievement("<i class='lvl13 icon-feather'/>","10000 Bilder transkribiert"));
 }
 
 function achievement(title, description){
