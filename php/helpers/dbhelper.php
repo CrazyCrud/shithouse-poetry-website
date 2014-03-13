@@ -529,7 +529,7 @@ class DBHelper{
 		$this->addTag($entry["tags"], $entryid);
 
 		// add information
-		$this->addInformation($entryid,$entry["artist"],$entry["transcription"],$entry["location"],$entry["lat"],$entry["long"]);
+		$this->addInformation($entryid,$entry["artist"],$entry["transcription"],$entry["location"],$entry["lat"],$entry["long"], $user["id"]);
 
 		// index
 		$taggedTitle = $entry["title"];
@@ -676,7 +676,7 @@ class DBHelper{
 		// add information
 		if($information){
 			$this->removeInformation($entry["id"]);
-			$this->addInformation($entry["id"],$entry["artist"],$entry["transcription"],$entry["location"],$entry["lat"],$entry["long"]);
+			$this->addInformation($entry["id"],$entry["artist"],$entry["transcription"],$entry["location"],$entry["lat"],$entry["long"], $user["id"]);
 		}
 
 		// index
@@ -751,9 +751,51 @@ class DBHelper{
 		return $this->query($query);
 	}
 
-	private function addInformation($entryid,$artist,$transcription,$location,$lat,$long){
-		$query = Queries::addinformation($entryid, $artist, $transcription, $location, $lat, $long);
+	private function addInformation($entryid,$artist,$transcription,$location,$lat,$long, $userid){
+		$query = Queries::addinformation($entryid, $artist, $transcription, $location, $lat, $long, $userid);
 		return $this->query($query);
+	}
+
+	// need to be owner of entry or transcription or an admin
+	public function updateTranscription($entryid, $transcription){
+		$entry = $this->getEntry($entryid);
+		if(!isset($entry["id"]))return false;
+		$info = $entry["information"][0];
+
+		// do nothing if no update necessary
+		if($info["transcription"]==$transcription)return true;
+
+		$user = $this->getUser();
+		if(!isset($user["id"]))return false;
+
+		// check whether allowed to update
+		if($user["status"]!=DBConfig::$userStatus["admin"]
+			&&$user["id"]!=$entry["userid"]
+			&&$user["id"]!=$info["transcriberid"])return false;
+
+		if(!$this->removeInformation($entryid))return false;
+		$this->addInformation(
+			$entryid,
+			$info["artist"],
+			$transcription,
+			$info["location"],
+			$info["lat"],
+			$info["long"],
+			$user["id"]);
+
+		if($this->removeIndex($entryid)){
+			$taggedTitle = $entry["title"];
+			foreach($entry["tags"] as $tag){
+				if(is_numeric($tag)){
+					$tagText = $this->getTag($tag)["tag"];
+				}else{
+					$tagText = $tag;
+				}
+				if($tagText)$taggedTitle .= " ".$tagText;
+			}
+			return $this->index($entryid, $taggedTitle, $transcription);
+		}else
+			return true;
 	}
 
 	/**
