@@ -87,7 +87,8 @@
 					        		<label for="password" id="new-pwd">Passwort</label>
 					        	</div>
 					        	<div class="small-12 medium-9 large-9 columns">
-					        		<input type="password" id="password" placeholder="Hier Passwort eingeben..." required>
+					        		<input type="password" pattern="password_easy" id="password" placeholder="Hier Passwort eingeben..." required>
+					        		<small class="error error-password">Das Passwort muss mindestens 6 Zeichen lang sein</small>
 					        	</div>
 					        </div>
 					        <div class="row">
@@ -95,7 +96,7 @@
 					        		<label for="confirm-password">Passwort bestätigen</label>
 					        	</div>
 					        	<div class="small-12 medium-9 large-9 columns">
-					        		<input type="password" id="confirm-password" 
+					        		<input type="password" pattern="password_easy" id="confirm-password" 
 					        			placeholder="Hier Passwort bestätigen..." data-equalto="password">
 					        	</div>
 					      	</div>
@@ -105,7 +106,7 @@
 					        			Nutzungsbedingungen
 					        		</label>
 					        	</div>
-					        	<div class="small-12 medium-9 large-9 columns">
+					        	<div class="small-12 medium-9 large-9 columns tou-container">
 					        		<input type="checkbox" id="confirm-tou" required>
 					        		</input>
 					        		<label for="confirm-tou">

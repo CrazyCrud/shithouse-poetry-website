@@ -1,8 +1,10 @@
 var overlayTemplate = null;
 var rootFolder = null;
 
+// ^[A-Za-z0-9_]{6,}
+
 $(document).ready(function() {
-	$(document).foundation();
+	 $(document).foundation();
     setupOverlayBackground();
     cookieUser();
     greetUser();

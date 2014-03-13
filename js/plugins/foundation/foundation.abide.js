@@ -15,7 +15,7 @@
         alpha_numeric : /^[a-zA-Z0-9]+$/,
         integer: /^\d+$/,
         number: /-?(?:\d+|\d{1,3}(?:,\d{3})+)?(?:\.\d+)?/,
-
+        password_easy : /^(.){6,}$/,
         // generic password: upper-case, lower-case, number/special character, and min 8 characters
         password : /(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/,
 
