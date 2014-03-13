@@ -6,7 +6,7 @@
 	width: 100%;
 	height: auto;
 	@include vertical-margin($space_minus3, 0);
-	@include horizontal-margin($space_minus3, $space_minus3);
+	@include horizontal-padding($space_minus3, $space_minus3);
 }
 
 #images{

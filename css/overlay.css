@@ -221,8 +221,10 @@ input[type="password"].loginField {
       #user-overlay .user-overlay-container li a {
         font-size: 0.618rem;
         color: #ffffff; }
-      #user-overlay .user-overlay-container li a:hover {
-        text-decoration: underline; }
+    #user-overlay .user-overlay-container li:hover {
+      background-color: #ffffff; }
+      #user-overlay .user-overlay-container li:hover a {
+        color: #888888; }
 
 #user-overlay:before {
   content: "";
@@ -271,7 +273,7 @@ input[type="password"].loginField {
   color: #ffffff; }
 
 @media screen and (max-width: 459px) {
-  #search-input {
+  #search-input, #mail-input, #password-input {
     font-size: 1rem; }
   #search-button {
     float: left; } }

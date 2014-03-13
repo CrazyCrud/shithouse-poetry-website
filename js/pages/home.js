@@ -51,16 +51,6 @@ function setupInfiniteScroll(){
 			}		
 		}
 	}, { offset: 'bottom-in-view'
-			/*
-			function(){
-				var magicNumber = 284;
-				var vpTopOffset = $mainheader.height() + $tabsContainer.height() - magicNumber;
-				if(($.waypoints('viewportHeight') - vpTopOffset) < $(this).height()){
-					return ($(this).height() - ($.waypoints('viewportHeight') - vpTopOffset)) * -1;
-				}else{
-					return -($.waypoints('viewportHeight') + 1); // never reached
-				}
-			*/
 	});
 }
 
@@ -187,7 +177,7 @@ function displayImages(){
 			'refreshTime': 500,
 			'justifyLastRow': true,
 			'rowHeight': 250,
-			'fixedHeight' : true,
+			'fixedHeight' : false,
 			'onComplete': imagesFullyDisplayed
 		});
 	}else{

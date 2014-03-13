@@ -273,8 +273,8 @@ input[type="password"].loginField {
   overflow: hidden;
   margin-top: 0.236rem;
   margin-bottom: 0.236rem;
-  margin-right: 0.236rem;
-  margin-left: 0.236rem; }
+  padding-right: 0.236rem;
+  padding-left: 0.236rem; }
 
 .tabs {
   /*@include horizontal-margin($space_minus3, $space_minus3);*/ }

@@ -42,7 +42,14 @@
 				color: $white;
 			}
 			a:hover{
-				text-decoration: underline;
+				/*text-decoration: underline;*/
+			}
+		}
+		li:hover{
+			background-color: $white;
+
+			a{
+				color: $darkgrey;
 			}
 		}
 	}
@@ -106,7 +113,7 @@
 }
 
 @media screen and (max-width: 459px){
-	#search-input{
+	#search-input, #mail-input, #password-input{
 		font-size: 1rem;
 	}
 

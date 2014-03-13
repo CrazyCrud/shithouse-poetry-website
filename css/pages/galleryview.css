@@ -193,8 +193,8 @@ input[type="password"].loginField {
   height: auto;
   margin-top: 0.236rem;
   margin-bottom: 0;
-  margin-right: 0.236rem;
-  margin-left: 0.236rem; }
+  padding-right: 0.236rem;
+  padding-left: 0.236rem; }
 
 #images {
   padding: 4px; }

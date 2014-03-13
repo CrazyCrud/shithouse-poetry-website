@@ -25,15 +25,18 @@ $(document).ready(function() {
 	$(this).mouseup(function (e)
 	{
 	    var container = $("#user-overlay");
-	    if (!container.is(e.target) 
-	        	&& container.has(e.target).length === 0) {
+	    if (!container.is(e.target) && container.has(e.target).length === 0) {
 	        $(container).remove();
 	    }
 	});
 });
 
 function isLoggedIn(){
-	return user.username.length > 0 ? true: false;
+	if(user.username.length > 0){
+		return true;
+	}else{
+		return false;
+	}
 }
 
 function manageLoginOverlay(){
