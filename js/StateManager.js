@@ -55,7 +55,7 @@ var StateManager = (function(){
 			return hasTouchSupport();
 		},
 		isDesktop: function(){
-			if(state == states.properties[states.LARGE].name || hasTouchSupport()){
+			if(state == states.properties[states.LARGE].name || !hasTouchSupport()){
 				return true;
 			}else{
 				return false;
