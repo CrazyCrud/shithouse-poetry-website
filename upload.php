@@ -100,11 +100,11 @@
 							    <div class="small-12 columns add-sex-container">
 							    	<label>Geschlecht<small>erforderlich</small></label>
 	      							<input type="radio" name="sex" value="M" id="men" required>
-	      							<label for="men">Männer</label>
+	      							<label for="men">Männertoilette</label>
 							      	<input type="radio" name="sex" value="W" id="women" required>
-							      	<label for="women">Frauen</label>
+							      	<label for="women">Frauentoilette</label>
 							      	<input type="radio" name="sex" value="U" id="unisex" required>
-							      	<label for="unisex">Unisex</label>
+							      	<label for="unisex">Unisex-Toilette</label>
 							    </div>
 							    <div class="small-12 columns add-location-container">
 									<label for="location">Ort<small>optional</small>
