@@ -122,7 +122,7 @@ function userLogin(){
 					console.log("code not logged in");
 					break;
 				case 7:
-					error("Nutzername oder Passwort nicht gefunden.");
+					error("Nutzername oder Passwort nicht gefunden oder Email noch nicht best&auml;tigt.");
 					break;
 				default: 
 					console.log(data);					
@@ -153,7 +153,7 @@ function getUser(authkey){
 					console.log("code not logged in");
 					break;
 				case 7:
-					error("Nutzername oder Passwort nicht gefunden.");
+					error("Nutzername oder Passwort nicht gefunden oder Email noch nicht best&auml;tigt.");
 					break;
 				default: 
 					console.log(data);					

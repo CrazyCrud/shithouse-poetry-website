@@ -158,7 +158,7 @@ function onLoginSuccess(authkey){
 			]
 		});
 	}else{
-		$("<div>Die Registrierung war erfolgreich!</br>Wir haben dir eine Email geschickt, die du noch best&auml;tigen musst bevor du dich einloggen kannst.</div>").dialog(
+		$("<div>Die Registrierung war erfolgreich!</br>Wir haben eine Email an "+authkey+" geschickt, die du noch best&auml;tigen musst bevor du dich einloggen kannst.</div>").dialog(
 		{
 			dialogClass: "no-close",
 			modal: true,

@@ -1,8 +1,9 @@
 <?php
 
 $emailBodyContent =
-'
-<html style="font-family:Helvetica">
+'<html>
+<head></head>
+<body style="font-family:Helvetica">
 <img src="http://latrinalia.de/img/global/top-img-bw.jpg" style="width:100%"></img>
 <h2>Willkommen bei Latrinalia</h2>
 <p>Wir freuen uns, dass du zu uns gekommen bist um mit uns die Welt der Toiletten-Schmierereien zu erkunden und zu analysieren.</p>
@@ -18,17 +19,27 @@ Sollte der Link aus irgendwelchen Gr&uuml;nden nicht funktionieren, kopiere einf
 <br/>
 Vielen Dank und liebe Gr&uuml;&szlig;e,<br/>
 Dein Team von Latrinalia
-</html>
-';
+</body>
+</html>';
 
 function sendVerificationMail($email, $username, $key){
+	global $emailBodyContent;
 	$url = "http://www.latrinalia.de/verify.php?verification=".$key;
 
 	$from = "noreply@latrinalia.de";
 	$subject = "Willkommen bei Latrinalia";
 	$message = str_replace("%1", $key, $emailBodyContent);
 
-	mail($email,$subject,$message,"From: $from\n");
+	$header  = "MIME-Version: 1.0\r\n";
+	$header .= "Content-type: text/html; charset=iso-8859-1\r\n";
+	 
+	$header .= "From: $from\r\n";
+	// $header .= "Cc: $cc\r\n";  // falls an CC gesendet werden soll
+	$header .= "X-Mailer: PHP ". phpversion();
+
+	echo $message;
+
+	mail($email,$subject,$message,$header);
 }
 
 ?>
