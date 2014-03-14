@@ -158,13 +158,24 @@ function onLoginSuccess(authkey){
 			]
 		});
 	}else{
-		var d = new Date();
-		var oneYear = 31536000000;
-		d.setTime(d.getTime() + oneYear);
-
-		document.cookie = "authkey=" + authkey + "; expires=" + d.toGMTString();
-
-		ImgurManager.getUserAuth(logUserIn, authkey);
+		$("<div>Die Registrierung war erfolgreich!</br>Wir haben dir eine Email geschickt, die du noch best&auml;tigen musst bevor du dich einloggen kannst.</div>").dialog(
+		{
+			dialogClass: "no-close",
+			modal: true,
+			width: 'auto',
+			title: 'Registrierung erfolgreich',
+			close: function(event, ui) {
+				window.location = "index.html";
+			},
+			buttons: [
+				{
+					text: 'OK',
+					click: function(){
+						$(this).dialog('close');
+					}
+				}
+			]
+		});
 	}
 }
 
