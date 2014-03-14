@@ -58,7 +58,7 @@
 					<div class="row">
 						<div class="details small-12 medium-7 large-7 columns left" id="image-description">
 							<div id="title">
-								<span id="username">Nutzer nicht gefunden</span>
+								<span id="username">Nutzer wird geladen ...</span>
 								<span id="level"></span>
 							</div>
 							<div id="joined">Beigetreten <span id="membersince"></span></div>

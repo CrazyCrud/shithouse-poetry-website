@@ -26,7 +26,7 @@ function sendVerificationMail($email, $username, $key){
 	global $emailBodyContent;
 	$url = "http://www.latrinalia.de/verify.php?verification=".$key;
 
-	$from = "Latrinalia@latrinalia.de";
+	$from = "Latrinalia <noreply@latrinalia.de>";
 	$subject = "Willkommen bei Latrinalia";
 	$message = str_replace("%1", $key, $emailBodyContent);
 
