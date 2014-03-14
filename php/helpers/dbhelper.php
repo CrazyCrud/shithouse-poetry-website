@@ -173,7 +173,7 @@ class DBHelper{
 			||$users[0]["status"]==DBConfig::$userStatus["newUser"])return false;
 		$user = $users[0];
 		$key = md5($mail).uniqid();
-		$query = Queries::login($user["id"], $key, $_SERVER['REMOTE_ADDR']);
+		$query = Queries::login($user["id"], $key, md5($_SERVER['HTTP_USER_AGENT'])."@".$_SERVER['REMOTE_ADDR']);
 		if($this->query($query)){
 			return $key;
 		}
