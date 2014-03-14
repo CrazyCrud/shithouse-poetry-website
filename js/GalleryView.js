@@ -1,10 +1,12 @@
-var GalleryView = (function(document){
+var GalleryView = (function(){
 	var settings = {
 		imgData : [],
 		currentEntry : 0,
 		imageContainer : null,
+		displaySingleImage: false,
 		rowHeight : 200,
-		fixedHeight : false
+		fixedHeight : false,
+		justifyLastRow: false
 	};
 
 	var displayImages = function(){
@@ -40,7 +42,7 @@ var GalleryView = (function(document){
 				'fixedHeight': settings.fixedHeight,
 				'rowHeight': settings.rowHeight,
 				'refreshTime': 500,
-				'justifyLastRow': true,
+				'justifyLastRow': settings.justifyLastRow,
 				'onComplete': complete
 			});
 		}
@@ -55,9 +57,9 @@ var GalleryView = (function(document){
 		addOverlay();
 	};
 
-	var empty = function(){
+	var endOfVoting = function(){
 		$.event.trigger({
-			type : "empty",
+			type : "votingend",
 			message: "No images are availabe",
 			time: new Date()
 		});
@@ -143,7 +145,7 @@ var GalleryView = (function(document){
 				});
 			}
 		});
-	}
+	};
 
 	/*
 		should ne called if multiple images were appended and should be displayed
@@ -151,10 +153,12 @@ var GalleryView = (function(document){
 	var loadAllImages = function(){
 		var imgLoaded = 0;
 		clearScreen();
+		settings.displaySingleImage = false;
+		settings.justifyLastRow = false;
 		if(_.isEmpty(settings.imgData) || settings.imageContainer.length < 1){
 			return;
 		}else{
-			var numImages = _.keys(settings.imgData).length;
+			var numImages = settings.imgData.length;
 			for(var i = 0; i < numImages; i++){
 				var htmlData = settings.imgData[i].image_m;
 				var $imgContent = $(htmlData).find('img');
@@ -176,10 +180,12 @@ var GalleryView = (function(document){
 	*/
 	var loadSingleImage = function(){
 		clearScreen();
+		settings.displaySingleImage = true;
+		settings.justifyLastRow = true;
 		if(_.isEmpty(settings.imgData) || settings.imageContainer.length < 1){
 			return;
 		}else if(getCurrentEntry() >= getLastEntry()){
-			empty();
+			endOfVoting();
 			return;
 		}else{
 			var htmlData = settings.imgData[getCurrentEntry()].image_m;
@@ -201,7 +207,7 @@ var GalleryView = (function(document){
 	};
 
 	var getCurrentEntry = function(){
-		return currentEntry;
+		return settings.currentEntry;
 	};
 
 	var getLastEntry = function(){
@@ -209,7 +215,6 @@ var GalleryView = (function(document){
 	};
 
 	var appendEntries = function(entries){
-		console.log(entries);
 		if(_.isEmpty(entries)){
 			return;
 		}else{
@@ -241,17 +246,35 @@ var GalleryView = (function(document){
 		}
 	};
 
+	var setMaxwidth = function(fullscreen){
+		if(fullscreen){
+			settings.imageContainer.removeClass('images-vote');
+		}else{
+			settings.imageContainer.addClass('images-vote');
+		}
+	};
+
 	var resetEntries = function(){
 		setCurrentEntry(0);
-		settings.imgData = {};
+		settings.imgData = [];
 	};
 
 	var resizeImages = function(){
-		clearScreen();
-		for(var index in settings.imgData){
-			settings.imageContainer.append(settings.imgData[index].image_m);
+		if(StateManager.getWidth() != StateManager.getInitialWidth()){
+			clearScreen();
+			if(settings.displaySingleImage){
+				if(getCurrentEntry() > 0){
+					settings.imageContainer.append(settings.imgData[getCurrentEntry() - 1].image_l);
+				}else{
+					settings.imageContainer.append(settings.imgData[getCurrentEntry()].image_l);
+				}
+			}else{
+				for(var index in settings.imgData){
+					settings.imageContainer.append(settings.imgData[index].image_m);
+				}
+			}
+			displayImages();
 		}
-		displayImages();
 	};
 
 	var clearScreen = function(){
@@ -280,6 +303,7 @@ var GalleryView = (function(document){
 		loadAllImages: loadAllImages,
 		loadSingleImage: loadSingleImage,
 		getLastEntry: getLastEntry,
+		setMaxwidth: setMaxwidth,
 		settings: settings
 	}
-}(document));
+}());

@@ -6,6 +6,7 @@
 		<link rel="stylesheet" type="text/css" href="css/plugins/foundation.css"/>
 		<link rel="stylesheet" type="text/css" href="css/plugins/fontello/fontello.css"/>
 		<link rel="stylesheet" type="text/css" href="css/plugins/gallery/jquery.justifiedgallery.min.css"/>
+		<link href="css/plugins/custom-jqui-theme/jquery-ui-1.10.4.custom.css" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="css/global.css"/>
 		<link rel="stylesheet" type="text/css" href="css/overlay.css"/>
 		<link rel="stylesheet" type="text/css" href="css/pages/galleryview.css"/>
@@ -179,6 +180,7 @@
   		<script src="js/plugins/foundation/foundation.topbar.js"></script>
   		<script src="js/plugins/transit/transit.min.js"></script>
   		<script src="js/plugins/gallery/jquery.justifiedgallery.js"></script>
+  		<script src="js/plugins/jquery-ui-custom/jquery-ui-1.10.4.custom.min.js"></script>
   		<script src="js/plugins/waypoint/waypoints.min.js"></script>
   		<script src="js/StateManager.js"></script>
   		<script src="js/ImgurManager.js"></script>
