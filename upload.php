@@ -239,6 +239,7 @@
 			</section>
     	</script>
 		<script src="js/plugins/jquery.min.js"></script>
+  		<script src="js/plugins/md5/jquery.md5.js"></script>
 		<script src="js/plugins/underscore.js"></script>
 		<script src="js/plugins/foundation/foundation.js"></script>
   		<script src="js/plugins/foundation/foundation.topbar.js"></script>
