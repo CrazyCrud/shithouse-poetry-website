@@ -32,7 +32,7 @@ function setupInfiniteScroll(){
 	$("html").waypoint(function(direction) {
 		if(direction == "down"){
 			if($.waypoints('viewportHeight') < $(this).height()){
-				ImgurManager.getEntriesForUser(fillImages, id, GalleryView.getCurrentEntry());
+				ImgurManager.getEntriesForUser(fillImages, id, GalleryView.getLastEntry());
 			}		
 		}
 	}, { offset: 'bottom-in-view'
@@ -98,7 +98,7 @@ function resultsError(msg){
 
 function showResults(searchData){
 	GalleryView.appendEntries(searchData);
-	GalleryView.reload();
+	GalleryView.loadAllImages();
 }
 
 function drawAchievements(stats){

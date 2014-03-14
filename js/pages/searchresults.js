@@ -4,6 +4,7 @@ var NO_RESULTS = "Für diesen Suchbegriff gab es leider keine Treffer!";
 var NO_MORE_IMAGES = "Wir können dir leider keine weiteren Bilder mehr liefern";
 
 $(document).ready(function() {
+	console.log(query, type);
 	if(query != null){
 		if(type != null){
 			setupImageClick();
@@ -44,7 +45,7 @@ function setupInfiniteScroll(){
 	$("html").waypoint(function(direction) {
 		if(direction == "down"){
 			if($.waypoints('viewportHeight') < $(this).height()){
-				ImgurManager.search(computeSearch, query, GalleryView.getCurrentEntry());
+				ImgurManager.search(computeSearch, query, GalleryView.getLastEntry());
 			}		
 		}
 	}, { offset: 'bottom-in-view'
@@ -82,5 +83,5 @@ function resultsError(msg){
 
 function showResults(searchData){
 	GalleryView.appendEntries(searchData);
-	GalleryView.reload();
+	GalleryView.loadAllImages();
 }

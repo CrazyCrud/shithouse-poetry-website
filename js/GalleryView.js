@@ -1,6 +1,6 @@
 var GalleryView = (function(document){
 	var settings = {
-		imgData : {},
+		imgData : [],
 		currentEntry : 0,
 		imageContainer : null,
 		rowHeight : 200,
@@ -53,6 +53,14 @@ var GalleryView = (function(document){
 			time: new Date()
 		});
 		addOverlay();
+	};
+
+	var empty = function(){
+		$.event.trigger({
+			type : "empty",
+			message: "No images are availabe",
+			time: new Date()
+		});
 	};
 
 	var addOverlay = function(){
@@ -137,7 +145,10 @@ var GalleryView = (function(document){
 		});
 	}
 
-	var reload = function(){
+	/*
+		should ne called if multiple images were appended and should be displayed
+	*/
+	var loadAllImages = function(){
 		var imgLoaded = 0;
 		clearScreen();
 		if(_.isEmpty(settings.imgData) || settings.imageContainer.length < 1){
@@ -160,23 +171,50 @@ var GalleryView = (function(document){
 		}
 	};
 
+	/*
+		should ne called if multiple images were appended but only one should be displayed
+	*/
+	var loadSingleImage = function(){
+		clearScreen();
+		if(_.isEmpty(settings.imgData) || settings.imageContainer.length < 1){
+			return;
+		}else if(getCurrentEntry() >= getLastEntry()){
+			empty();
+			return;
+		}else{
+			var htmlData = settings.imgData[getCurrentEntry()].image_m;
+			var $imgContent = $(htmlData).find('img');
+			Foundation.lib_methods.loaded($imgContent, function(){
+				settings.imageContainer.append(htmlData);
+				displayImages();
+				incrementCurrentEntry();
+			});
+		}
+	};
+
 	var setCurrentEntry = function(newValue){
 		settings.currentEntry = newValue;
-	}
+	};
 
 	var incrementCurrentEntry = function(){
 		settings.currentEntry++;
-	}
+	};
 
 	var getCurrentEntry = function(){
-		return settings.currentEntry;
-	}
+		return currentEntry;
+	};
+
+	var getLastEntry = function(){
+		return settings.imgData.length;
+	};
 
 	var appendEntries = function(entries){
+		console.log(entries);
 		if(_.isEmpty(entries)){
 			return;
 		}else{
 			var numImages = entries.length;
+			var lastImageIndex = getLastEntry();
 			for(var i = 0; i < numImages; i++){
 				var entry = entries[i];
 				var id = parseInt(entry.id);
@@ -189,7 +227,7 @@ var GalleryView = (function(document){
 						entry.images[0].thumbnail + '"/></a>';	
 					var imgContent_l = '<a href="" title="' + id + '"><img src="' + 
 						entry.images[0].largethumbnail + '"/></a>';
-					settings.imgData[i] = {
+					settings.imgData[lastImageIndex + i] = {
 						id: id,
 						gender: gender,
 						transcription: transcription,
@@ -198,10 +236,14 @@ var GalleryView = (function(document){
 						date: entry.date,
 						rating: parseFloat(entry.ratings.rating)
 					};
-					incrementCurrentEntry();
 				}
 			}
 		}
+	};
+
+	var resetEntries = function(){
+		setCurrentEntry(0);
+		settings.imgData = {};
 	};
 
 	var resizeImages = function(){
@@ -225,16 +267,19 @@ var GalleryView = (function(document){
 
 	var init = _.once(setupContainer);
 
-	var reset = function(element){
+	/* not used 
+	var resetImageContainer = function(element){
 		setupContainer(element);
 	};
+	*/
 
 	return {
 		init: init,
-		reset: reset,
+		resetEntries: resetEntries,
 		appendEntries: appendEntries,
-		reload: reload,
-		getCurrentEntry: getCurrentEntry,
+		loadAllImages: loadAllImages,
+		loadSingleImage: loadSingleImage,
+		getLastEntry: getLastEntry,
 		settings: settings
 	}
 }(document));

@@ -75,8 +75,10 @@
 			var type = null;
 
 			<?php
-			if(isset($_GET["query"]) && isset($_GET["type"])){
+			if(isset($_GET["query"])){
 				echo "query='".mysql_escape_string($_GET["query"])."';";
+			}
+			if(isset($_GET["type"])){
 				echo "type='".mysql_escape_string($_GET["type"])."';";
 			}
 
