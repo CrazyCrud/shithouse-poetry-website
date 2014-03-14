@@ -48,7 +48,7 @@ function setupNavigation(){
 							opacity: 0}, 300, 'easeOutSine', function() {
 								$(".li-upload-container").empty();
 						});
-			$(".upload-button-container").css('z-index', 100);
+			$(".upload-button-container").css('z-index', 2);
 			$uploadLink.transition({
 				x: 0, y: 0, scale: 1, opacity: 1
 			});
