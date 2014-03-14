@@ -43,11 +43,16 @@ function manageLoginOverlay(){
 	if($("#user-overlay").length < 1){
 		$("#mainnav").append(userTemplate());
 		$("#link-logout").click(function(event) {
+			/*
 			var d = new Date(1970, 1);
 			document.cookie = "username=''	; expires=" + d.toGMTString();
 			document.cookie = "userid=''; expires=" + d.toGMTString();
 			document.cookie = "admin=''; expires=" + d.toGMTString();
+			document.cookie = "authkey=''; expires=" + d.toGMTString();
+			ImgurManager.logout(logoutSuccess);
 			window.location = "index.html";
+			*/
+			logoutUser(null);
 		});
 		$("#link-myimages").attr('href', 'user.php?id=' + user.id);
 		$("#link-user").attr('href', 'register.php?edit=true');

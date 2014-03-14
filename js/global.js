@@ -141,6 +141,14 @@ function logoutUser(data){
         document.cookie = "userid=''; expires=" + d.toGMTString();
         document.cookie = "admin=''; expires=" + d.toGMTString();
         document.cookie = "authkey=''; expires=" + d.toGMTString();
-        window.location = "index.html";
+        ImgurManager.logout(logoutSuccess);
     }
+}
+
+function logoutSuccess(yep){
+  if(yep){
+    window.location = "index.html";
+  }else{
+    window.location = "index.html"; // change dat
+  }
 }
