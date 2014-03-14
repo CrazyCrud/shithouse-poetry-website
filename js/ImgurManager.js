@@ -99,7 +99,7 @@ var ImgurManager = (function(){
 
 			var url = 'getFilteredEntries.php?filter=type&' + 
 				'values=' + types + '&start=' + start + 
-				'orderby=' + order;
+				'&orderby=' + order;
 			$.get('php/backend/' + url, function(data) {
 				if(data.success == 1){
 					links = data.data;
@@ -116,7 +116,7 @@ var ImgurManager = (function(){
 
 			var url = 'getFilteredEntries.php?filter=tag&' + 
 				'values=' + tags + '&start=' + start + 
-				'orderby=' + order;
+				'&orderby=' + order;
 				console.log(url);
 			$.get('php/backend/' + url, function(data) {
 				if(data.success == 1){
@@ -134,7 +134,7 @@ var ImgurManager = (function(){
 
 			var url = 'getFilteredEntries.php?filter=sex&' + 
 				'values=' + sex + '&start=' + start + 
-				'orderby=' + order;
+				'&orderby=' + order;
 			$.get('php/backend/' + url, function(data) {
 				if(data.success == 1){
 					links = data.data;
@@ -151,7 +151,7 @@ var ImgurManager = (function(){
 
 			var url = 'getFilteredEntries.php?filter=user&' + 
 				'values=' + user + '&start=' + start + 
-				'orderby=' + order;
+				'&orderby=' + order;
 			$.get('php/backend/' + url, function(data) {
 				if(data.success == 1){
 					links = data.data;
