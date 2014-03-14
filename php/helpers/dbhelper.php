@@ -416,6 +416,44 @@ class DBHelper{
 		return $this->getAllEntries($orderby, $start, $where);
 	}
 
+	// returns an array of random entries for the user to transcribe
+	// (mostly new entries without a transcription)
+	// $amount is the number of entries to return
+	// (when not given one entry is returned)
+	public function getRandomUntranscribedEntries($amount){
+		if(!isset($amount))$amount = 1;
+
+		// check whether logged in
+		// and get lowest ratings
+		$user = $this->getUser();
+		$query = Queries::getrandomuntranscribedids();
+
+		$ids = $this->query($query);
+		if(!$ids||count($ids)==0)return false;
+
+		if(count($ids)==1){
+			return $this->getEntry($ids[0]["id"]);
+		}
+
+		// randomize list
+		shuffle($ids);
+
+		// get entries with those rating
+		$e = DBConfig::$tables["entries"];
+		$where = "`$e`.id = ".$ids[0]["id"];
+		for($i=1;$i<count($ids)&&$i<$amount;$i++){
+			$where .= " OR `$e`.id = ".$ids[$i]["id"];
+		}
+		$query = Queries::getEntry(false,$where);
+
+		$entries = $this->query($query);
+
+		if(!$entries)return false;
+		$entries = $this->addExtras($entries, $user["id"]);
+		shuffle($entries);
+		return $entries;
+	}
+
 	// returns an array of random entries for the user to rate
 	// (mostly new entries with few ratings)
 	// $amount is the number of entries to return

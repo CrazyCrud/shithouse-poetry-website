@@ -509,6 +509,17 @@ class Queries{
 		LIMIT 0,100";
 		return $query;
 	}
+	public static function getrandomuntranscribedids(){
+		$i = DBConfig::$tables["information"];
+		$e = DBConfig::$tables["entries"];
+		$query =
+		"SELECT 
+		`$i`.entryid as id
+		FROM `$i`
+		WHERE LENGTH(`$i`.transcription)=0
+		ORDER BY `changed` DESC";
+		return $query;
+	}
 	public static function getrandomratingsforuser($userid){
 		if(!isset($userid)){
 			return Queries::getrandomratings();
