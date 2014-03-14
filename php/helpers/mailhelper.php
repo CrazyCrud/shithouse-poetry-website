@@ -1,14 +1,4 @@
 <?php
-	
-	function sendVerificationMail($email, $username, $key){
-		$url = "http://www.latrinalia.de/verify.php?verification=".$key;
-
-		$from = "noreply@latrinalia.de";
-		$subject = "Willkommen bei Latrinalia";
-		$message = str_replace("%1", $key, $emailBodyContent);
-
-		mail($email,$subject,$message,"From: $from\n");
-	}
 
 $emailBodyContent =
 '
@@ -30,5 +20,15 @@ Vielen Dank und liebe Gr&uuml;&szlig;e,<br/>
 Dein Team von Latrinalia
 </html>
 ';
+
+function sendVerificationMail($email, $username, $key){
+	$url = "http://www.latrinalia.de/verify.php?verification=".$key;
+
+	$from = "noreply@latrinalia.de";
+	$subject = "Willkommen bei Latrinalia";
+	$message = str_replace("%1", $key, $emailBodyContent);
+
+	mail($email,$subject,$message,"From: $from\n");
+}
 
 ?>

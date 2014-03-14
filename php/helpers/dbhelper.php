@@ -169,8 +169,8 @@ class DBHelper{
 		$query = Queries::getuserbyname($email, $password);
 		$users = $this->query($query);
 		if(count($users)==0)return false;
-		if($users["status"]==DBConfig::$userStatus["deleted"]
-			||$users["status"]==DBConfig::$userStatus["newUser"])return false;
+		if($users[0]["status"]==DBConfig::$userStatus["deleted"]
+			||$users[0]["status"]==DBConfig::$userStatus["newUser"])return false;
 		$user = $users[0];
 		$key = md5($mail).uniqid();
 		$query = Queries::login($user["id"], $key, $_SERVER['REMOTE_ADDR']);
