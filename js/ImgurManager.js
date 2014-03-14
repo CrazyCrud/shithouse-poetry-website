@@ -104,6 +104,20 @@ var ImgurManager = (function(){
 				callback(links);
 			});
 		},
+		getRandomUntranscribedEntries : function(callback){
+			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+			var links = null;
+			var url = 'getRandomUntranscribedEntries.php?amount=10';
+			if(authkey.length == AUTH_KEY_LENGTH){
+				url += ('&authkey=' + authkey);
+			}
+			$.post('php/backend/' + url, function(data) {
+				if(data.success == 1){
+					links = data.data;
+				}
+				callback(links);
+			});
+		},
 		updateTranscription : function(callback, entryid, transcription){
 			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 			var links = null;
