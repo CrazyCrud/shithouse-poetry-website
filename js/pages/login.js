@@ -169,7 +169,7 @@ function saveUser(user){
 	document.cookie = "username=" + user.username + "; expires=" + d.toGMTString();
 	document.cookie = "userid=" +user.id+ "; expires=" + d.toGMTString();
 	document.cookie = "admin=" + user.status + "; expires=" + d.toGMTString();
-	window.location = "index.html";
+	window.location.reload(true);
 }
 
 function error(message){
