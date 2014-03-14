@@ -72,16 +72,13 @@
 }
 
 .form-container{
+	.filter-type-container{
+		display: none;
+		margin-top: 0;
 
-	.ui-autocomplete, .ui-widget-content{
-		font-family: "Segoe UI Light";
-		background: rgba(30, 30, 30, 0.9);
-		border: none;
-
-		.ui-menu-item{
-			a{
-				color: $white;
-			}
+		label{
+			font-family: "Segoe UI Light";
+			color: $lightgrey;
 		}
 	}
 
@@ -97,6 +94,7 @@
 	.switch-label{
 		float: left;
 		color: $lightgrey;
+		margin-top: 0;
 		margin-right: $space_minus2;
 		font-family: "Segoe UI Light";
 	}
@@ -107,7 +105,7 @@
 	    -webkit-user-select:none; 
 	    -moz-user-select:none; 
 	    -ms-user-select: none;
-	    margin-top: 0.25rem;
+	    margin-top: 0;
 	    margin-left: 3.2rem
 	}
 
@@ -220,6 +218,7 @@
 	border: 0;
 	background: rgba(10, 10, 10, 0.0);
 	padding: 0;
+	font-family: "Segoe UI Light";
 }
 
 #search-input:focus, #mail-input:focus, #password-input:focus{
@@ -235,6 +234,18 @@
 	height: auto;
 	top: 0%;
 	right: 3%;
+}
+
+.search-autocomplete{
+	font-family: "Segoe UI Light";
+	background: rgba(30, 30, 30, 0.9);
+	border: none;
+
+	.ui-menu-item{
+		a{
+			color: $white;
+		}
+	}
 }
 
 #back-button{

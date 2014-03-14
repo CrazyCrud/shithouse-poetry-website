@@ -242,12 +242,12 @@ input[type="password"].loginField {
   border-right: 5px solid transparent;
   border-bottom: 5px solid rgba(140, 140, 140, 0.9); }
 
-.form-container .ui-autocomplete, .form-container .ui-widget-content {
-  font-family: "Segoe UI Light";
-  background: rgba(30, 30, 30, 0.9);
-  border: none; }
-  .form-container .ui-autocomplete .ui-menu-item a, .form-container .ui-widget-content .ui-menu-item a {
-    color: #ffffff; }
+.form-container .filter-type-container {
+  display: none;
+  margin-top: 0; }
+  .form-container .filter-type-container label {
+    font-family: "Segoe UI Light";
+    color: #cbcdc7; }
 .form-container div {
   margin-top: 0.618rem;
   margin-bottom: 0.618rem; }
@@ -256,6 +256,7 @@ input[type="password"].loginField {
 .form-container .switch-label {
   float: left;
   color: #cbcdc7;
+  margin-top: 0;
   margin-right: 0.382rem;
   font-family: "Segoe UI Light"; }
 .form-container .onoffswitch {
@@ -264,7 +265,7 @@ input[type="password"].loginField {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
-  margin-top: 0.25rem;
+  margin-top: 0;
   margin-left: 3.2rem; }
 .form-container .onoffswitch-checkbox {
   display: none; }
@@ -351,7 +352,8 @@ input[type="password"].loginField {
   color: #ffffff;
   border: 0;
   background: rgba(10, 10, 10, 0);
-  padding: 0; }
+  padding: 0;
+  font-family: "Segoe UI Light"; }
 
 #search-input:focus, #mail-input:focus, #password-input:focus {
   border: 0;
@@ -365,6 +367,13 @@ input[type="password"].loginField {
   height: auto;
   top: 0%;
   right: 3%; }
+
+.search-autocomplete {
+  font-family: "Segoe UI Light";
+  background: rgba(30, 30, 30, 0.9);
+  border: none; }
+  .search-autocomplete .ui-menu-item a {
+    color: #ffffff; }
 
 #back-button {
   margin-bottom: 1.618rem;

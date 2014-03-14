@@ -5,9 +5,25 @@ var NO_MORE_IMAGES = "Wir können dir leider keine weiteren Bilder mehr liefern"
 
 $(document).ready(function() {
 	if(query != null){
-		ImgurManager.search(computeSearch, query, 0);
-		setupImageClick();
-		// setupOnce();
+		if(type != null){
+			setupImageClick();
+			switch(type){
+				case "sex":
+					ImgurManager.searchBySex(computeSearch, query, null, 0);
+					return;
+				case "type":
+					ImgurManager.searchByType(computeSearch, query, null, 0);
+					return;
+				case "tag":
+					ImgurManager.searchByTag(computeSearch, query, null, 0);
+					return;
+			}
+		}else{
+			ImgurManager.search(computeSearch, query, 0);
+			setupImageClick();
+		}
+	}else{
+		resultsError(NO_RESULTS);
 	}
 });
 

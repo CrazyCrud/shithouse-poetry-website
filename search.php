@@ -72,10 +72,12 @@
 		</div>
 		<script type="text/javascript">
 			var query = null;
+			var type = null;
 
 			<?php
-			if(isset($_GET["query"])){
+			if(isset($_GET["query"]) && isset($_GET["type"])){
 				echo "query='".mysql_escape_string($_GET["query"])."';";
+				echo "type='".mysql_escape_string($_GET["type"])."';";
 			}
 
 			?>
@@ -124,6 +126,17 @@
 						<div class="small-6 columns submit-container">
 							<a href="#" class="button-overlay" id="search-button">Suchen</a>
 						</div>
+						<div class="small-12 columns">
+							<div class="filter-type-container left">
+								<label class="filter-label">Filtern nach...</label>
+									<input type="radio" name="filtertype" value="tag" id="tagFilter" checked>
+							    	<label for="tagFilter">Tags</label>
+									<input type="radio" name="filtertype" value="type" id="typeFilter" >
+      								<label for="typeFilter">Type</label>
+      								<input type="radio" name="filtertype" value="sex" id="sexFilter">
+      								<label for="sexFilter">Geschlecht</label>
+							</div>
+						</div> 
 					</div>				
 				</div>
 			</section>
