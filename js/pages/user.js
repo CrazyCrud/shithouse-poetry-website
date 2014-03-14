@@ -1,6 +1,8 @@
 var user = {};
 var NO_RESULTS = "Der Nutzer hat noch keine Bilder hochgeladen!";
 var NO_MORE_RESULTS = "Dieser Nutzer hat nicht mehr Bilder hochgeladen!";
+var NO_MORE_RESULTS_USER = "Du hast keine weiteren Bilder hochgeladen!";
+var NO_RESULTS_USER = "Du hast noch keine Bilder hochgeladen!";
 
 $(function(){
 	if(id>0){
@@ -69,9 +71,17 @@ function fillUI(u){
 function fillImages(searchData){
 	if(!searchData||searchData.length==0){
 		if($('.jg-row').length > 0){
-			resultsError(NO_MORE_RESULTS);
+			if(user.username == document.cookie.replace(/(?:(?:^|.*;\s*)username\s*\=\s*([^;]*).*$)|^.*$/, "$1")){
+				resultsError(NO_MORE_RESULTS_USER);
+			}else{
+				resultsError(NO_MORE_RESULTS);
+			}
 		}else{
-			resultsError(NO_RESULTS);
+			if(user.username == document.cookie.replace(/(?:(?:^|.*;\s*)username\s*\=\s*([^;]*).*$)|^.*$/, "$1")){
+				resultsError(NO_RESULTS_USER);
+			}else{
+				resultsError(NO_RESULTS);
+			}
 		}
 	}else{
 		GalleryView.init($("#images"));
