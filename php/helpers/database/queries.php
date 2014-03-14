@@ -125,6 +125,7 @@ class Queries{
 		COUNT(*) AS transcriptions
 		FROM $info
 		WHERE $info.transcriberid = $id
+		AND NOT LENGTH($info.transcription)=0
 
 		UNION
 		SELECT

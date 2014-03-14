@@ -803,7 +803,7 @@ class DBHelper{
 	}
 
 	private function addInformation($entryid,$artist,$transcription,$location,$lat,$long, $userid){
-		$query = Queries::addinformation($entryid, $artist, $transcription, $location, $lat, $long, $userid);
+		$query = Queries::addinformation($entryid, $artist, trim($transcription), $location, $lat, $long, $userid);
 		return $this->query($query);
 	}
 
@@ -829,7 +829,7 @@ class DBHelper{
 		$this->addInformation(
 			$entryid,
 			$info["artist"],
-			$transcription,
+			trim($transcription),
 			$info["location"],
 			$info["lat"],
 			$info["long"],
