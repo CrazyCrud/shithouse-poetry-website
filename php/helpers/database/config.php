@@ -23,7 +23,8 @@ class DBConfig{
 		"users" => "user",
 		"usertags" => "usertags",
 		"index" => "index",
-		"locations" => "location"
+		"locations" => "location",
+		"sessions" => "sessions"
 	);
 
 	public static $dbStatus = array(

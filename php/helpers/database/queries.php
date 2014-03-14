@@ -8,9 +8,14 @@ class Queries{
 	USER QUERIES
 	**/
 	public static function getuser($sessionkey){
+		$u = DBConfig::$tables["users"];
+		$s = DBConfig::$tables["sessions"];
 		return
 		"SELECT id, email, username, joindate, lastaction, status
-		FROM `".DBConfig::$tables["users"]."` WHERE `sessionkey` = \"$sessionkey\"";
+		FROM `$u`, `$s`
+		WHERE
+		`$s`.`authkey` = \"$sessionkey\"
+		AND `$u`.id = `$s`.userid";
 	}
 	public static function getuserbyid($id){
 		return
@@ -19,10 +24,13 @@ class Queries{
 	}
 	public static function update($key){
 		$u = DBConfig::$tables["users"];
+		$s = DBConfig::$tables["sessions"];
 		$date = date( 'Y-m-d H:i:s', time());
-		return "UPDATE $u
-		SET lastaction='$date'
-		WHERE sessionkey='$key'";
+		return "UPDATE $u as u
+		JOIN `$s` as s
+		ON u.id = s.userid
+		SET u.lastaction='$date'
+		WHERE s.authkey='$key'";
 	}
 	public static function updateuserwithoutpassword($userid, $mail, $name){
 		return "UPDATE $u
@@ -119,17 +127,23 @@ class Queries{
 		GROUP BY userid";
 		return $query;
 	}
-	public static function login($userid, $authkey){
-		$u = DBConfig::$tables["users"];
-		return "UPDATE $u
-		SET sessionkey='$authkey'
-		WHERE id = $userid";
+	public static function login($userid, $authkey, $ip){
+		$s = DBConfig::$tables["sessions"];
+		$date = date( 'Y-m-d H:i:s', time());
+		$query =
+		"INSERT INTO $s
+		(userid, authkey, login, ip)
+		VALUES
+		($userid, '$authkey', '$date', '$ip')
+		ON DUPLICATE KEY UPDATE
+		login = '$date',
+		authkey = '$authkey'";
+		return $query;
 	}
 	public static function logout($authkey){
-		$u = DBConfig::$tables["users"];
-		return "UPDATE $u
-		SET sessionkey='".uniqid()."'
-		WHERE sessionkey='$authkey'";
+		$s = DBConfig::$tables["sessions"];
+		return "DELETE FROM $s
+		WHERE authkey='$authkey'";
 	}
 	/**
 	COMMENT QUERIES

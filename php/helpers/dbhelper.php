@@ -160,7 +160,7 @@ class DBHelper{
 		if(count($users)==0)return false;
 		$user = $users[0];
 		$key = md5($mail).uniqid();
-		$query = Queries::login($user["id"], $key);
+		$query = Queries::login($user["id"], $key, $_SERVER['REMOTE_ADDR']);
 		if($this->query($query)){
 			return $key;
 		}
