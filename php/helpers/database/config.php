@@ -36,7 +36,7 @@ class DBConfig{
 
 	public static $userStatus = array(
 		"deleted" => -1,
-		"newUser" => 0,
+		"newUser" => 2,
 		"default" => 0,
 		"admin" =>1
 	);

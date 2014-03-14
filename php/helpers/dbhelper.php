@@ -1,11 +1,12 @@
 <?php
 
-include("stemmer.php");
-include("util.php");
-include("database/constants.php");
-include("database/queries.php");
-include("database/connection.php");
-include("database/config.php");
+include_once("stemmer.php");
+include_once("util.php");
+include_once("database/constants.php");
+include_once("database/queries.php");
+include_once("database/connection.php");
+include_once("database/config.php");
+include_once("mailhelper.php");
 
 /*
 Latrinalia DataBase Helper
@@ -89,6 +90,15 @@ class DBHelper{
 		}
 	}
 
+	// verify a new user
+	public function verify($key){
+		if(!isset($key))return false;
+		$query = Queries::verify($key);
+		if(!$this->query($query))return false;
+		$query = Queries::getuserbykey($key);
+		return $this->query($query);
+	}
+
 	private function getUserStats($id){
 		$query = Queries::getuserstats($id);
 		return $this->query($query);
@@ -142,7 +152,8 @@ class DBHelper{
 		$key = md5($mail).uniqid();
 		$query = Queries::createuser($key, $mail, $name, $pwd);
 		if($this->query($query)){
-			return $key;
+			sendVerificationMail($mail, $name, $key);
+			return $mail;
 		}else{
 			return false;
 		}
@@ -158,6 +169,8 @@ class DBHelper{
 		$query = Queries::getuserbyname($email, $password);
 		$users = $this->query($query);
 		if(count($users)==0)return false;
+		if($users["status"]==DBConfig::$userStatus["deleted"]
+			||$users["status"]==DBConfig::$userStatus["newUser"])return false;
 		$user = $users[0];
 		$key = md5($mail).uniqid();
 		$query = Queries::login($user["id"], $key, $_SERVER['REMOTE_ADDR']);

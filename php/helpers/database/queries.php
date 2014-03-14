@@ -17,6 +17,19 @@ class Queries{
 		`$s`.`authkey` = \"$sessionkey\"
 		AND `$u`.id = `$s`.userid";
 	}
+	public static function verify($key){
+		$u = DBConfig::$tables["users"];
+		$query=
+		"UPDATE `$u`
+		SET status = ".DBConfig::$userStatus["default"]."
+		WHERE sessionkey='$key'";
+		return $query;
+	}
+	public static function getuserbykey($key){
+		return
+		"SELECT id, email, username, joindate, lastaction, status
+		FROM `".DBConfig::$tables["users"]."` WHERE `sessionkey` = \"$key\"";
+	}
 	public static function getuserbyid($id){
 		return
 		"SELECT id, email, username, joindate, lastaction, status
