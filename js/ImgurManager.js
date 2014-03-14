@@ -90,6 +90,74 @@ var ImgurManager = (function(){
 				callback(links);	
 			});
 		},
+		searchByType : function(callback, types, orderby, currentEntry){
+			types = types || 1;
+			orderby = orderby || orderby.properties[orderby.DATE].name;
+			start = currentEntry || 0;
+
+			var links = null;
+
+			var url = 'getFilteredEntries.php?filter=type&
+				values=' + types + '&start=' + start + 
+				'orderby=' + orderby;
+			$.get('php/backend/' + url, function(data) {
+				if(data.success == 1){
+					links = data.data;
+				}	
+				callback(links);	
+			});
+		},
+		searchByTag : function(callback, tags, orderby, currentEntry){
+			tags = tags || 1;
+			orderby = orderby || orderby.properties[orderby.DATE].name;
+			start = currentEntry || 0;
+
+			var links = null;
+
+			var url = 'getFilteredEntries.php?filter=tag&
+				values=' + tags + '&start=' + start + 
+				'orderby=' + orderby;
+			$.get('php/backend/' + url, function(data) {
+				if(data.success == 1){
+					links = data.data;
+				}	
+				callback(links);	
+			});
+		},
+		searchBySex : function(callback, sex, orderby, currentEntry){
+			sex = sex || "m";
+			orderby = orderby || orderby.properties[orderby.DATE].name;
+			start = currentEntry || 0;
+
+			var links = null;
+
+			var url = 'getFilteredEntries.php?filter=sex&
+				values=' + sex + '&start=' + start + 
+				'orderby=' + orderby;
+			$.get('php/backend/' + url, function(data) {
+				if(data.success == 1){
+					links = data.data;
+				}	
+				callback(links);	
+			});
+		},
+		searchByUser : function(callback, userid, orderby, currentEntry){
+			user = user || 1;
+			orderby = orderby || orderby.properties[orderby.DATE].name;
+			start = currentEntry || 0;
+
+			var links = null;
+
+			var url = 'getFilteredEntries.php?filter=user&
+				values=' + user + '&start=' + start + 
+				'orderby=' + orderby;
+			$.get('php/backend/' + url, function(data) {
+				if(data.success == 1){
+					links = data.data;
+				}	
+				callback(links);	
+			});
+		},
 		getRandomEntries : function(callback){
 			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 			var links = null;
