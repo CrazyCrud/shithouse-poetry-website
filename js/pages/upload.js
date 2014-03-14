@@ -44,11 +44,19 @@ function fillUI(e){
 	$imageContainer.css("display","block");
 	$("#title").val(entry.title);
 	$("#transcription").val(entry.information[0].transcription);
-	$("#type option[value="+entry.typename.replace(/ /g,"_")+"]").attr("selected", "selected");
+	$("#type option[value="+entry.typename.replace(/[^a-zA-Z0-9]/g,"_")+"]").attr("selected", "selected");
 	$(".add-sex-container input[value=U]").attr("checked", true);
 	$(".add-sex-container input[value="+entry.sex.toUpperCase()+"]").attr("checked", true);
 	ImgurManager.getLocations(retrieveLocations, entry.information[0].latitude, entry.information[0].longitude);
-	$("#location option[value="+entry.information[0].location.replace(/ /g,"_")+"]").attr("selected", "selected");	
+	var $loc = $("#location option[value="+entry.information[0].location.replace(/[^a-zA-Z0-9]/g,"")+"]");
+	if($loc.length!=0)$loc.attr("selected", "selected");	
+	else{
+		var content = "<option value='" + entry.information[0].location.replace(/[^a-zA-Z0-9]/g,"") + "'>" + entry.information[0].location + "</option>";
+		var $content = $(content);
+		$content.attr("selected","selected");
+		$locationInput.append($content);
+	}
+
 	$("#artist").val(entry.information[0].artist);
 	var $tagElements = $tagList.find('li span');
 	var availableTags = _.pluck($tagElements, 'innerHTML');
@@ -93,14 +101,14 @@ function initUpload(){
 			var title = $.trim($("input#title").val());
 			var artist = $.trim($("input#artist").val());
 			var transcription = $.trim($("input#transcription").val());
-			var location = $.trim($locationInput.find('option:selected').val());
+			var location = $.trim($locationInput.find('option:selected').html());
 			var sex = $.trim($("input:radio[name=sex]:checked").val());
 
 			var tags = _.pluck($tagList.find('.tag-active-text'), 'innerHTML');
 
 			tags = tags.join(',');
 
-			var type = $.trim($("#type").find('option:selected').val());
+			var type = $.trim($("#type").find('option:selected').html());
 
 			if(location.length > 2){
 				data['location'] = location;
@@ -300,7 +308,7 @@ function retrieveLocations(locData){
 	}else{
 		for(var i = 0; i < locations.length; i++){
 			var location = locations[i];
-			var content = "<option value='" + location.replace(/ /g,"_") + "'>" + location + "</option>";
+			var content = "<option value='" + location.replace(/[^a-zA-Z0-9]/g,"") + "'>" + location + "</option>";
 			var $content = $(content);
 			if(entry.information && entry.information[0]){
 				if(entry.information[0].location == location){
@@ -365,7 +373,7 @@ function appendTypes(typeData){
 		for(var i = 0; i < types.length; i++){
 			var type = types[i];
 			var typeDesc = typesDesc[i];
-			var content = "<option value='" + type.replace(/ /g,"_") + "' title='" + typeDesc + "'>" + type + "</option>";
+			var content = "<option value='" + type.replace(/[^a-zA-Z0-9]/g,"_") + "' title='" + typeDesc + "'>" + type + "</option>";
 			var $content = $(content);
 			if(entry.typename){
 				if(entry.typename == type){
