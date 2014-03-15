@@ -223,11 +223,18 @@ var GalleryView = (function(){
 			for(var i = 0; i < numImages; i++){
 				var entry = entries[i];
 				var id = parseInt(entry.id);
-				if((_.chain(settings.imgData).pluck("id").indexOf(id).value()) > -1){
+				if(!entry.images||entry.images.length==0||!entry.images[0].thumbnail||!entry.images[0].largethumbnail){
+					console.log("skipping",entry);
+					continue;
+				}else if((_.chain(settings.imgData).pluck("id").indexOf(id).value()) > -1){
 					continue;
 				}else{
-					var gender = entry.sex;
-					var transcription = entry.title;
+					var gender = entry.sex||"u";
+					var rating = 0;
+					if(entry.ratings&&entry.ratings.length!=0&&entry.ratings.rating){
+						rating = entry.ratings.rating;
+					}
+					var transcription = entry.title||"";
 					var imgContent_m = '<a href="" title="' + id + '"><img src="' + 
 						entry.images[0].thumbnail + '"/></a>';	
 					var imgContent_l = '<a href="" title="' + id + '"><img src="' + 
@@ -238,8 +245,8 @@ var GalleryView = (function(){
 						transcription: transcription,
 						image_m: imgContent_m,
 						image_l: imgContent_l,
-						date: entry.date,
-						rating: parseFloat(entry.ratings.rating)
+						date: entry.date||"",
+						rating: parseFloat(rating)
 					};
 				}
 			}

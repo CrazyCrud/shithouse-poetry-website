@@ -222,55 +222,22 @@ function fillUI(e){
 		if(e.userid == user.id || user.admin){
 			$("#controlpanel").css("display","block");
 		}
-		//set rating
-		$innerRating = $("#inner-rating");
-		//calculation of "green"-percentage of the rating
-		var r = entry.ratings[0].rating;
-		if(!r)r=0;
-		var i = parseFloat(r);
-		var j = (1+i)*50;
-		var width = j + "%";
-		$innerRating.css("width", width);
-		$("#ratingcount").html(entry.ratings[0].ratingcount);
+		
+		setRating(entry);
 
-		$(".thumbs").removeClass("mine");
-		if(entry.ratings[0].ratedbyme){
-			if(entry.ratings[0].ratedbyme==-1){
-				$("#thumbsdown").addClass("mine");
-			}else if(entry.ratings[0].ratedbyme==1){
-				$("#thumbsup").addClass("mine");
-			}
-		}
-
-		//set image
-		var $image = $("#image");
-		$("#image").css('width', '100%');
-		var $entryTitle = $("#entry-title");
-		$image.attr("src", entry.images[0].largethumbnail);
-		$image.attr("title", entry.title);
+		setImage(entry);
 
 		//set title
 		document.getElementById("title").innerHTML=entry.title;
 
-		//set artist
-		$("#artist").html(entry.information[0].artist);
-
-		//set location
-		$("#locationdescription").html(entry.information[0].location);
+		setInfo(entry);
 
 		//set type
 		var $t = $("#typedescription");
 		$t.html(entry.typename);
 		$t.attr("title",entry.typedescription);
 
-		//set tags
-		var $tags = $("#tags");
-		$tags.html("");
-		for(var i=0; i<entry.tags.length; i++){
-			var tag = entry.tags[i];
-			var $tag = $('<span id="tag-'+tag.tagid+'" class="tag">'+tag.tag+'</span>');
-			$tags.append($tag);
-		}
+		setTags(entry);
 
 		//set sex
 		var sex = entry.sex.toLowerCase();
@@ -292,6 +259,56 @@ function fillUI(e){
 		$("#upload-info #author").attr("href", "user.php?id="+entry.userid);
 
 		setTranscription();
+	}
+}
+
+function setTags(entry){
+	//set tags
+	var $tags = $("#tags");
+	$tags.html("");
+	for(var i=0; i<entry.tags.length; i++){
+		var tag = entry.tags[i];
+		var $tag = $('<span id="tag-'+tag.tagid+'" class="tag">'+tag.tag+'</span>');
+		$tags.append($tag);
+	}
+}
+
+function setInfo(entry){
+	//set artist
+	$("#artist").html(entry.information[0].artist);
+
+	//set location
+	$("#locationdescription").html(entry.information[0].location);
+}
+
+function setImage(entry){
+	//set image
+	var $image = $("#image");
+	$("#image").css('width', '100%');
+	var $entryTitle = $("#entry-title");
+	$image.attr("src", entry.images[0].largethumbnail);
+	$image.attr("title", entry.title);
+}
+
+function setRating(entry){
+	//set rating
+	$innerRating = $("#inner-rating");
+	//calculation of "green"-percentage of the rating
+	var r = entry.ratings[0].rating;
+	if(!r)r=0;
+	var i = parseFloat(r);
+	var j = (1+i)*50;
+	var width = j + "%";
+	$innerRating.css("width", width);
+	$("#ratingcount").html(entry.ratings[0].ratingcount);
+
+	$(".thumbs").removeClass("mine");
+	if(entry.ratings[0].ratedbyme){
+		if(entry.ratings[0].ratedbyme==-1){
+			$("#thumbsdown").addClass("mine");
+		}else if(entry.ratings[0].ratedbyme==1){
+			$("#thumbsup").addClass("mine");
+		}
 	}
 }
 
