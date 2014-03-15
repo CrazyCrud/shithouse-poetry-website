@@ -25,6 +25,14 @@ class Queries{
 		WHERE sessionkey='$key'";
 		return $query;
 	}
+	public static function registerdummy($id){
+		$u = DBConfig::$tables["users"];
+		$query=
+		"UPDATE `$u`
+		SET status = ".DBConfig::$userStatus["newUser"]."
+		WHERE id='$id'";
+		return $query;
+	}
 	public static function getuserbykey($key){
 		return
 		"SELECT id, email, username, joindate, lastaction, status
@@ -59,12 +67,12 @@ class Queries{
 		password='$pwd'
 		WHERE id=$userid";
 	}
-	public static function createuser($key, $mail, $name, $pwd){
+	public static function createuser($key, $mail, $name, $pwd, $status){
 		$u = DBConfig::$tables["users"];
 		return "INSERT INTO $u
 		(email, username, joindate, lastaction, status, sessionkey, password)
 		VALUES
-		('$mail','$name', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP,".DBConfig::$userStatus["newUser"].",'$key','$pwd')";
+		('$mail','$name', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP,$status,'$key','$pwd')";
 	}
 	public static function deleteuser($authkey){
 		$u = DBConfig::$tables["users"];

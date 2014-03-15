@@ -125,6 +125,11 @@ class DBHelper{
 
 		// check whether valid email
 		if (!filter_var($mail, FILTER_VALIDATE_EMAIL))return false;
+
+		if($user["status"]==DBConfig::$userStatus["unregistered"]){
+			$this->registerDummy($user);
+		}
+
 		if(isset($pwd)){
 			$query = Queries::updateuser($user["id"], $mail, $name, $pwd);
 		}else{
@@ -133,7 +138,13 @@ class DBHelper{
 		return $this->query($query);
 	}
 
+	private function registerDummy($user){
+		$query = Queries::registerdummy($user["id"]);
+		return $this->query($query);
+	}
+
 	public function createUser($mail, $name, $pwd){
+		if(strlen($mail)==0&&strlen($name)==0)return $this->createDummyUser($pwd);
 		// check whether username is long enough
 		if(strlen($name)<3)return false;
 
@@ -149,10 +160,25 @@ class DBHelper{
 		$user = $this->getUser($name);
 		if(isset($user["id"]))return false;
 
+		$status = DBConfig::$userStatus["newUser"];
+
 		$key = md5($mail).uniqid();
-		$query = Queries::createuser($key, $mail, $name, $pwd);
+		$query = Queries::createuser($key, $mail, $name, $pwd, $status);
 		if($this->query($query)){
 			sendVerificationMail($mail, $name, $key);
+			return $mail;
+		}else{
+			return false;
+		}
+	}
+
+	private function createDummyUser($pwd){
+		$name = "User".uniqid();
+		$mail = $name."@latrinalia.de";
+		$status = DBConfig::$userStatus["unregistered"];
+		$key = md5($mail).uniqid();
+		$query = Queries::createuser($key, $mail, $name, $pwd, $status);
+		if($this->query($query)){
 			return $mail;
 		}else{
 			return false;
