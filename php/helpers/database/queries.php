@@ -417,12 +417,37 @@ class Queries{
 	}
 	public static function getalltagsbystatus($status){
 		$t = DBConfig::$tables["tags"];
-		$query = "SELECT * FROM `$t` WHERE `$t`.status = $status";
+		$u = DBConfig::$tables["usertags"];
+		$query = 
+		"SELECT
+		`$t`.tagid as tagid,
+		`$t`.tag as tag,
+		`$t`.status as status,
+		COUNT(`$u`.entryid) as count
+		FROM `$t`
+		LEFT OUTER JOIN
+		`$u`
+		ON `$t`.tagid = `$u`.tagid
+		WHERE `$t`.status = $status
+		GROUP BY `$t`.tagid
+		ORDER BY count DESC";
 		return $query;
 	}
 	public static function getalltags(){
 		$t = DBConfig::$tables["tags"];
-		$query = "SELECT * FROM `$t`";
+		$u = DBConfig::$tables["usertags"];
+		$query = 
+		"SELECT
+		`$t`.tagid as tagid,
+		`$t`.tag as tag,
+		`$t`.status as status,
+		COUNT(`$u`.entryid) as count
+		FROM `$t`
+		LEFT OUTER JOIN
+		`$u`
+		ON `$t`.tagid = `$u`.tagid
+		GROUP BY `$t`.tagid
+		ORDER BY count DESC";
 		return $query;
 	}
 	public static function deletetag($id){
