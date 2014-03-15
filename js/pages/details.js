@@ -148,10 +148,6 @@ function initGUI(){
 								title: "Vielen Dank für deine Meldung",
 								show: true
 							});
-							setTimeout(function() {	
-								$dialog.dialog('close');
-								$dialog.dialog("destroy");
-						}, 2000);
 						}else{
 							$dialog = $('<div><br>Deine Meldung wurde nicht erfolgreich eingetragen.<br>&Uuml;berpr&uuml;fe bitte, dass diese mindestens 10 Zeichen lang ist.</div>');
 							$dialog.dialog({
@@ -218,12 +214,8 @@ function fillUI(e){
 			modal: true,
 			width: "auto",
 			title: "Eintrag nicht vorhanden",
-			open: function(){
-				setTimeout(function() {	
-								$dialog.dialog('close');
-								$dialog.dialog("destroy");
-								window.location = "index.html";
-						}, 1000);
+			close: function(){
+				window.location = "index.html";
 			}
 		});
 	}else{
