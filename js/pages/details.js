@@ -79,6 +79,7 @@ function addComments(c){
 }
 
 function initGUI(){
+	if(!loggedIn())disable();
 	$("#transcription #content").click(changeTranscription);
 	$("#thumbsdown").click(function(){
 		if($(this).hasClass("mine")){
@@ -182,6 +183,15 @@ function initGUI(){
 			}
 		});
 	});
+}
+
+function disable(){
+	$(".thumbs").css("display","none");
+	$("#report").css("display","none");
+	//$("#rating").attr("title","Melde dich an um diesen Eintrag zu bewerten.");
+	$("#comment-input").attr("disabled","disabled");
+	$("#comment-input").attr("title","Melde dich an um Kommentare zu schreiben.");
+	$("#comment-input").attr("placeholder","Melde dich an um Kommentare zu schreiben.");	
 }
 
 function onCommentDeleted(success, commentid){
@@ -310,13 +320,25 @@ function setRating(entry){
 			$("#thumbsup").addClass("mine");
 		}
 	}
+
+	var user = entry.ratings[0].ratingcount+" Nutzern";
+	if(entry.ratings[0].ratingcount==1)user = "einem Nutzer";
+
+	var title = "Dieser Beitrag wurde von "+user+" zu "+Math.floor(j)+"% positiv bewertet.";
+	if(entry.ratings[0].ratingcount==0)title="Dieser Beitrag wurde noch nicht bewertet.";
+	$("#rating").attr("title",title);
 }
 
 function setTranscription(){
 	//set transcription
 	var trans = entry.information[0].transcription.trim();
 	if(trans.length==0){
-		trans = '<p class="missing">keine Transkription angegeben</p><button class="tiny">Transkription hinzuf&uuml;gen</button>';
+		trans = '<p class="missing">keine Transkription angegeben</p>';
+		if(canTranscribe()){
+			trans += '<button class="tiny">Transkription hinzuf&uuml;gen</button>';
+		}else{
+			trans += "(Melde dich an um selbst eine Transkription hinzuzuf&uuml;gen.)"
+		}
 	}else{
 		if(canTranscribe()){
 			$("#transcription #content").attr("title","zum Bearbeiten klicken");
@@ -329,6 +351,7 @@ function setTranscription(){
 
 function canTranscribe(){
 	if($("#edittranscription").length != 0)return false;
+	if(!loggedIn())return false;
 	var permission = false;
 	if(user.admin!==false)permission = true;
 	if(user.id == entry.userid)permission = true;

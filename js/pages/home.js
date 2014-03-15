@@ -72,7 +72,11 @@ function handleVoteClick(element){
 	setActive($voteLink.parent("dd"));
 	disableInfiniteScroll();
 	clearRequests();
-	getVoteEntries();
+	if(loggedIn()){
+		getVoteEntries();
+	}else{
+		appendMessage("Bitte melde dich an um Bilder zu bewerten.");
+	}
 }
 
 function setupImageClick(){

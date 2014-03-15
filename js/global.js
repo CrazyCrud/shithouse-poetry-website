@@ -42,6 +42,10 @@ function greetUser(){
     }
 }
 
+function loggedIn(){
+  return(user&&user.username&&user.username.length>0);
+}
+
 function formatTime(time){
   var ONE_SEC = 1000;
   var ONE_MIN = 60*ONE_SEC;
