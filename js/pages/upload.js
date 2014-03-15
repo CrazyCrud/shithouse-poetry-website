@@ -28,6 +28,7 @@ $(document).ready(function() {
 
 function initEdit(){
 	if(id < 1){
+		$(".add-image-container").css("display","block");
 		return;
 	}else{
 		document.title = "Bearbeiten";
@@ -82,12 +83,9 @@ function initDialog(){
 		$("body").append('<script src="js/plugins/jquery-ui-custom/jquery-ui-1.10.4.custom.min.js"></script>'
 		+'<link rel="stylesheet" type="text/css" href="css/plugins/custom-jqui-theme/jquery-ui-1.10.4.custom.css"/>');
 	}
-	setTimeout(function(){
-		var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-		if(!authkey || authkey.length != 45){
-			error("Sie m&uuml;ssen eingeloggt sein, um ein Bild hochladen zu können");
-		}
-	},500);
+	if(!loggedIn()){
+		window.location = "register.php";
+	}
 }
 
 function initUpload(){
