@@ -414,7 +414,7 @@ function onGetUser(data){
 
 function onTranscriptionUpdated(success){
 	if(success!=null){
-		entry.information[0]["transcription"] = success;
+		entry.information[0]["transcription"] = $("#input-transcription").val();
 		entry.information[0]["userid"] = user.id;
 		entry.information[0]["username"] = user.username;
 	}

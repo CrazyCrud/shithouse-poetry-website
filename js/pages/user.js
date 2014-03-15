@@ -1,4 +1,4 @@
-var user = {};
+var queriedUser = {};
 var NO_RESULTS = "Der Nutzer hat noch keine Bilder hochgeladen!";
 var NO_MORE_RESULTS = "Dieser Nutzer hat nicht mehr Bilder hochgeladen!";
 var NO_MORE_RESULTS_USER = "Du hast keine weiteren Bilder hochgeladen!";
@@ -44,14 +44,15 @@ var setupOnce = _.once(setupInfiniteScroll);
 function fillUI(u){
 	if(!u){
 		console.log("Error getting user");
+		$("#username").html("Dieser Nutzer existiert nicht.");
 		return;
 	}else{
-		user = u;
+		queriedUser = u;
 	}
-	$("#username").html(user.username);
-	$("#membersince").html(formatTime(user.joindate));
-	$("#lastseen").html(formatTime(user.lastaction));
-	$("#lastseen").attr("title",user.lastaction);	
+	$("#username").html(queriedUser.username);
+	$("#membersince").html(formatTime(queriedUser.joindate));
+	$("#lastseen").html(formatTime(queriedUser.lastaction));
+	$("#lastseen").attr("title",queriedUser.lastaction);	
 	if(u.stats){
 		$("#stats #entries .amount").html(u.stats.entries);
 		$("#stats #comments .amount").html(u.stats.comments);
@@ -59,7 +60,7 @@ function fillUI(u){
 		$("#stats #transcriptions .amount").html(u.stats.transcriptions);
 		drawAchievements(u.stats);
 		var today = new Date();
-		var timeObj = convertDateTime(user.joindate);
+		var timeObj = convertDateTime(queriedUser.joindate);
 		var timestamp = timeObj.getTime();
 		var difference = today-timestamp;
 		var lvl = computeLevel(u.stats.entries, u.stats.comments, u.stats.ratings, u.stats.transcriptions, difference);
@@ -71,13 +72,13 @@ function fillUI(u){
 function fillImages(searchData){
 	if(!searchData||searchData.length==0){
 		if($('.jg-row').length > 0){
-			if(user.username == document.cookie.replace(/(?:(?:^|.*;\s*)username\s*\=\s*([^;]*).*$)|^.*$/, "$1")){
+			if(queriedUser.username == document.cookie.replace(/(?:(?:^|.*;\s*)username\s*\=\s*([^;]*).*$)|^.*$/, "$1")){
 				resultsError(NO_MORE_RESULTS_USER);
 			}else{
 				resultsError(NO_MORE_RESULTS);
 			}
 		}else{
-			if(user.username == document.cookie.replace(/(?:(?:^|.*;\s*)username\s*\=\s*([^;]*).*$)|^.*$/, "$1")){
+			if(queriedUser.username == document.cookie.replace(/(?:(?:^|.*;\s*)username\s*\=\s*([^;]*).*$)|^.*$/, "$1")){
 				resultsError(NO_RESULTS_USER);
 			}else{
 				resultsError(NO_RESULTS);

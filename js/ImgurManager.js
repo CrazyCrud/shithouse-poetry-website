@@ -459,7 +459,11 @@ var ImgurManager = (function(){
 			});
 		},
 		getUser : function(callback, id){
+			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 			var url = 'getUser.php?id='+id;
+			if(authkey.length == 45)
+				url += "&authkey="+authkey;
+			console.log(url);
 			$.get("php/backend/"+url,function(data){
 				if(data.success == 1){
 					callback(data.data);
