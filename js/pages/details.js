@@ -351,7 +351,6 @@ function setTranscription(){
 
 function canTranscribe(){
 	if($("#edittranscription").length != 0)return false;
-	if(!loggedIn())return false;
 	var permission = false;
 	if(user.admin!==false)permission = true;
 	if(user.id == entry.userid)permission = true;
@@ -364,7 +363,7 @@ function changeTranscription(){
 	if(!canTranscribe())return;
 
 	var $container = $('<div id="edittranscription"></div>');
-	$input = $('<input type="text"></input>');
+	$input = $('<input id="input-transcription" type="text"></input>');
 	$input.val(entry.information[0]["transcription"]);
 	$ok = $('<button class="tiny">OK</ok>');
 	$container.append($input);
@@ -377,6 +376,39 @@ function changeTranscription(){
 }
 
 function updateTranscription(newTrans){
+	if(!loggedIn())
+		createDummy();
+	else{
+		ImgurManager.updateTranscription(onTranscriptionUpdated, entry["id"], newTrans);
+	}
+}
+
+function createDummy(){
+	message("Speichern", "Wir legen f&uuml;r dich einen Account an damit du deine Transkriptionen sp&auml;ter bearbeiten kannst.<br/>Bitte habe etwas Gedult.");
+	user = {};
+	user.password = guid();
+	ImgurManager.createUser(onDummyCreated, "", user.password, "");
+}
+
+function onDummyCreated(data){
+	if(data==null){
+		message("Oops!", "Leider konnte wir keinen Account anlegen um Transkriptionen hinzuzuf&uuml;gen.<br/>Wende dich an einen Systemadministrator oder versuche es sp&auml;ter nochmal.");
+	}else{
+		ImgurManager.loginUser(onLoginSuccess, data, user.password);
+	}
+}
+
+function onLoginSuccess(data){
+	if(data==null){
+		message("Oops!", "Leider konnte wir keinen Account einloggen um Transkriptionen hinzuzuf&uuml;gen.<br/>Wende dich an einen Systemadministrator oder versuche es sp&auml;ter nochmal.");
+	}else{
+		ImgurManager.getUserAuth(onGetUser, data);
+	}
+}
+
+function onGetUser(data){
+	saveUser(data);
+	var newTrans = $("#input-transcription").val();
 	ImgurManager.updateTranscription(onTranscriptionUpdated, entry["id"], newTrans);
 }
 
@@ -386,7 +418,10 @@ function onTranscriptionUpdated(success){
 		entry.information[0]["userid"] = user.id;
 		entry.information[0]["username"] = user.username;
 	}
+	cookieUser();
 	setTranscription();
+	$(".error-dialog").dialog("close");
+	$(".error-dialog").remove();
 }
 
 function userLogout(){
@@ -413,7 +448,6 @@ function userLogout(){
 
 }
 
-
 function showRating(){
 	if(!expanded){
 		$("#outer-rating").animate({width: "100"}, 500);
@@ -421,4 +455,13 @@ function showRating(){
 	}
 }
 
-
+function message(title, message){
+	$(".error-dialog").dialog("close");
+	$(".error-dialog").remove();
+	var $dialog = $('<div class="error-dialog">'+message+"</div>");
+	$dialog.dialog({
+		modal: true,
+		width: "80%",
+		title: title
+	});
+}
