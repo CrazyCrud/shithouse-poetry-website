@@ -48,6 +48,11 @@ if(isset($_POST["id"]) || isset($_POST["authkey"])){
 $user = "";
 $db = new DBHelper();
 
+if(isset($_GET["authkey"])){
+	$key = $_GET["authkey"];
+	$db->setAuthKey($key);
+}
+
 if(isset($_GET["id"])){
 	$id = $_GET["id"];
 	if(is_numeric($id)){
@@ -55,8 +60,6 @@ if(isset($_GET["id"])){
 	}
 	$user = $db->getUser($id);
 }else if(isset($_GET["authkey"])){
-	$key = $_GET["authkey"];
-	$db->setAuthKey($key);
 	$user = $db->getUser();
 }else{
 	$json["message"]="identifier missing";

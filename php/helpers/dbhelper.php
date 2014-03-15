@@ -70,6 +70,7 @@ class DBHelper{
 	// or a user by id or username or email
 	public function getUser($id){
 		if(isset($id)){
+			$me = $this->getUser();
 			if(is_string($id)){
 				$query = Queries::getuserbyname($id);
 			}else{
@@ -80,6 +81,12 @@ class DBHelper{
 			$stats = $this->getUserStats($users[0]["id"]);
 			if($stats){
 				$users[0]["stats"] = $stats[0];
+			}
+			if((!isset($me))
+				||$me==false
+				||($me["status"]!=DBConfig::$userStatus["admin"]
+					&&$me["id"]!=$users[0]["id"])){
+				$users[0]["email"]="user".$users[0]["id"]."@latrinalia.de";
 			}
 			return $users[0];
 		}else{
