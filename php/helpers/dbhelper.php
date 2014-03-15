@@ -221,7 +221,7 @@ class DBHelper{
 		if(strlen($comment)==0)return false;
 		$user = $this->getUser();
 		$entry = $this->getEntry($entryid);
-		if(!isset($user["id"])||!isset($entry["id"])){
+		if(!isset($user["id"])||!isset($entry["id"])||$user["id"]==DBConfig::$userStatus["unregistered"]){
 			return false;
 		}
 		$query = Queries::addcomment($entryid, $comment, $user["id"]);
@@ -239,7 +239,7 @@ class DBHelper{
 	public function deleteComment($commentid){
 		$user = $this->getUser();
 		$comment = $this->getComment($commentid);
-		if(!isset($user["id"])||!isset($comment[0]["id"])){
+		if(!isset($user["id"])||!isset($comment[0]["id"])||$user["id"]==DBConfig::$userStatus["unregistered"]){
 			return false;
 		}
 		if($user["status"] == DBConfig::$userStatus["admin"]){
@@ -1051,7 +1051,7 @@ class DBHelper{
 	// $rating can be positive or negative (or 0 to reset it)
 	public function addRating($entryid, $rating){
 		$user = $this->getUser();
-		if(!isset($user["id"]))return false;
+		if(!isset($user["id"])||$user["id"]==DBConfig::$userStatus["unregistered"])return false;
 		$rating = $rating>0?1:($rating<0?-1:0);
 		if($rating == 0){
 			$query = Queries::deleterating($entryid, $user["id"]);

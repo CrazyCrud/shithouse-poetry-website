@@ -36,9 +36,11 @@ class DBConfig{
 
 	public static $userStatus = array(
 		"deleted" => -1,
-		"newUser" => 2,
 		"default" => 0,
-		"admin" =>1
+		"admin" =>1,
+		"newUser" => 2,
+		"banned" =>3,
+		"unregistered" =>4
 	);
 
 	public static $tagStatus = array(
