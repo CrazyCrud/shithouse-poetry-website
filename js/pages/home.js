@@ -10,6 +10,7 @@ var $tabsContainer = $(".tabs");
 var $hotLink = $("#tab-hot");
 var $newLink = $("#tab-new");
 var $voteLink = $("#tab-vote");
+var $transcribeLink = $("#tab-transcribe");
 var $votingContainer = $(".vote-container");
 var $upVote = $("#up-vote");
 var $downVote = $("#down-vote");
@@ -39,12 +40,14 @@ function setupTabFunctionality(){
 	var lazyHotClick = _.throttle(handleHotClick, 2000);
 	var lazyNewClick = _.throttle(handleNewClick, 2000);
 	var lazyVoteClick = _.throttle(handleVoteClick, 2000);
+	var lazyTranscribeClick = _.throttle(handleTranscribeClick, 2000);
 	$hotLink.click(lazyHotClick);
 	$newLink.click(lazyNewClick);
 	$voteLink.click(lazyVoteClick);
+	$(document).on("click", "#tab-transcribe", lazyTranscribeClick);
 }
 
-function handleHotClick(element){
+function handleHotClick(){
 	deleteMessage();
 	GalleryView.setMaxwidth(true);
 	setActive($hotLink.parent("dd"));
@@ -55,7 +58,7 @@ function handleHotClick(element){
 	getEntries(ImgurManager.OrderBy.properties[ImgurManager.OrderBy.RATING].name);
 }
 
-function handleNewClick(element){
+function handleNewClick(){
 	deleteMessage();
 	GalleryView.setMaxwidth(true);
 	setActive($newLink.parent("dd"));
@@ -66,7 +69,7 @@ function handleNewClick(element){
 	getEntries(ImgurManager.OrderBy.properties[ImgurManager.OrderBy.DATE].name);
 }
 
-function handleVoteClick(element){
+function handleVoteClick(){
 	deleteMessage();
 	GalleryView.setMaxwidth(false);
 	setActive($voteLink.parent("dd"));
@@ -77,6 +80,16 @@ function handleVoteClick(element){
 	}else{
 		appendMessage("Bitte melde dich an um Bilder zu bewerten.");
 	}
+}
+
+function handleTranscribeClick(){
+	deleteMessage();
+	GalleryView.setMaxwidth(true);
+	setActive($transcribeLink.parent("dd"));
+	enableInfiniteScroll();
+	disableVoting();
+	clearRequests();
+	getUntranscribedEntries();
 }
 
 function setupImageClick(){
@@ -107,7 +120,11 @@ function setupInfiniteScroll(){
 		if(direction == "down"){
 			if($.waypoints('viewportHeight') < $(this).height()){
 				console.log("Load more images...");
-				getEntries();
+				if(getActiveState() == "transcribe"){
+					getUntranscribedEntries();
+				}else{
+					getEntries();
+				}				
 			}		
 		}
 	}, { offset: 'bottom-in-view'
@@ -183,6 +200,10 @@ function getVoteEntries(){
 	ImgurManager.getRandomEntries(computeVoteEntries);
 }
 
+function getUntranscribedEntries(){
+	ImgurManager.getRandomUnstranscribedEntries(computeEntries);
+}
+
 function addRating(entryid, rating){
 	ImgurManager.addRating(GalleryView.loadSingleImage, entryid, rating);
 }
@@ -192,8 +213,11 @@ function computeEntries(entries){
 		appendMessage(NO_IMAGES);
 	}else{
 		GalleryView.init($imageContainer);
-		GalleryView.appendEntries(entries);
-		GalleryView.loadAllImages();
+		if(GalleryView.appendEntries(entries)){
+			GalleryView.loadAllImages();
+		}else{
+			appendMessage(NO_IMAGES);
+		}
 	}
 }
 

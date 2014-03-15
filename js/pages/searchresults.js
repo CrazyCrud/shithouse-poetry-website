@@ -4,24 +4,29 @@ var NO_RESULTS = "Für diesen Suchbegriff gab es leider keine Treffer!";
 var NO_MORE_IMAGES = "Wir können dir leider keine weiteren Bilder mehr liefern";
 
 $(document).ready(function() {
-	console.log(query, type);
 	if(query != null){
-		if(type != null){
-			setupImageClick();
-			switch(type){
-				case "sex":
-					ImgurManager.searchBySex(computeSearch, query, null, 0);
-					return;
-				case "type":
-					ImgurManager.searchByType(computeSearch, query, null, 0);
-					return;
-				case "tag":
-					ImgurManager.searchByTag(computeSearch, query, null, 0);
-					return;
-			}
-		}else{
-			ImgurManager.search(computeSearch, query, 0);
-			setupImageClick();
+		setupImageClick();
+		ImgurManager.search(computeSearch, query, 0);
+	}else if(type != null){
+		setupImageClick();
+		switch(type){
+			case "sex":
+				var sex = "";
+				if(values == "Männer"){
+					sex = "m";
+				}else if(values == "Frauen"){
+					sex = "w";
+				}else{
+					sex = "u";
+				}
+				ImgurManager.searchBySex(computeSearch, sex, null, 0);
+				return;
+			case "type":
+				ImgurManager.searchByType(computeSearch, values, null, 0);
+				return;
+			case "tag":
+				ImgurManager.searchByTag(computeSearch, values, null, 0);
+				return;
 		}
 	}else{
 		resultsError(NO_RESULTS);
@@ -55,7 +60,12 @@ function setupInfiniteScroll(){
 var setupOnce = _.once(setupInfiniteScroll);
 
 function computeSearch(searchData){
-	$searchTermLabel.html(query);
+	if(query != null){
+		$searchTermLabel.html(query);
+	}else{
+		$searchTermLabel.html(values);
+	}
+	
 	if(_.isNull(searchData) || _.isUndefined(searchData)){
 		if($('.jg-row').length > 0){
 			resultsError(NO_MORE_IMAGES);

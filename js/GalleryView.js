@@ -160,6 +160,9 @@ var GalleryView = (function(){
 		}else{
 			var numImages = settings.imgData.length;
 			for(var i = 0; i < numImages; i++){
+				if(_.isUndefined(settings.imgData[i]) || _.isEmpty(settings.imgData[i])){
+					continue;
+				}
 				var htmlData = settings.imgData[i].image_m;
 				var $imgContent = $(htmlData).find('img');
 				Foundation.lib_methods.loaded($imgContent, function(){
@@ -215,20 +218,22 @@ var GalleryView = (function(){
 	};
 
 	var appendEntries = function(entries){
+		var imgDataChanged = false;
 		if(_.isEmpty(entries)){
-			return;
+			return imgDataChanged;
 		}else{
 			var numImages = entries.length;
 			var lastImageIndex = getLastEntry();
 			for(var i = 0; i < numImages; i++){
 				var entry = entries[i];
 				var id = parseInt(entry.id);
-				if(!entry.images||entry.images.length==0||!entry.images[0].thumbnail||!entry.images[0].largethumbnail){
-					console.log("skipping",entry);
+				if(!entry.images || entry.images.length==0 || !entry.images[0].thumbnail || 
+						!entry.images[0].largethumbnail){
 					continue;
 				}else if((_.chain(settings.imgData).pluck("id").indexOf(id).value()) > -1){
 					continue;
 				}else{
+					imgDataChanged = true;
 					var gender = entry.sex||"u";
 					var rating = 0;
 					if(entry.ratings&&entry.ratings.length!=0&&entry.ratings.rating){
@@ -250,6 +255,7 @@ var GalleryView = (function(){
 					};
 				}
 			}
+			return imgDataChanged;
 		}
 	};
 

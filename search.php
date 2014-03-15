@@ -74,16 +74,19 @@
 		<script type="text/javascript">
 			var query = null;
 			var type = null;
+			var values = null;
 
 			<?php
 			if(isset($_GET["query"])){
 				echo "query='".mysql_escape_string($_GET["query"])."';";
 			}
 			if(isset($_GET["type"])){
-				echo "type='".mysql_escape_string($_GET["type"])."';";
+				echo "type='".mysql_escape_string($_GET["type"])."';\n";
+				echo "values=".json_encode($_GET["values"]).";";
 			}
 
 			?>
+			console.log(values);
 		</script>
 		<script type="text/template" class="overlay-template">
 			<div id="overlay-background"></div>
@@ -140,6 +143,13 @@
       								<label for="sexFilter">Geschlecht</label>
 							</div>
 						</div> 
+						<div class="small-12 columns searchtags-container left">
+					    	<div class="tags-container">
+					    		<ul id="tag-list">
+
+					    		</ul>
+					    	</div>
+					    </div>
 					</div>				
 				</div>
 			</section>

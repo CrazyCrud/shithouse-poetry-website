@@ -122,6 +122,13 @@
       								<label for="sexFilter">Geschlecht</label>
 							</div>
 						</div> 
+						<div class="small-12 columns searchtags-container left">
+					    	<div class="tags-container">
+					    		<ul id="tag-list">
+
+					    		</ul>
+					    	</div>
+					    </div>
 					</div>				
 				</div>
 			</section>

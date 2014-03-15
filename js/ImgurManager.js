@@ -48,6 +48,18 @@ var ImgurManager = (function(){
 				callback(links);
 			});
 		},
+		getRandomUnstranscribedEntries : function(callback){
+			var links = null;
+			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+			var url = 'getRandomUntranscribedEntries.php?authkey=' + authkey + "&amount=20"; 
+			console.log(url);
+			$.get('php/backend/' + url, function(data) {
+				if(data.success == 1){
+					links = data.data;
+				}	
+				callback(links);
+			});
+		},
 		getEntriesForUser : function(callback, userid, start){
 			start = start || 0;
 			var url = 'getFilteredEntries.php?filter=user&values='+userid+"&start="+start;

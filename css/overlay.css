@@ -380,6 +380,33 @@ input[type="password"].loginField {
   font-size: 1.618rem;
   color: #ffffff; }
 
+.tags-container {
+  display: block;
+  position: relative;
+  width: 100%;
+  overflow: hidden; }
+
+.searchtags-container #tag-list {
+  list-style-type: none;
+  margin-left: 0;
+  margin-right: 0; }
+  .searchtags-container #tag-list li {
+    display: inline-block;
+    font-size: 0.618rem;
+    padding-right: 0.236rem;
+    padding-left: 0.236rem;
+    padding-top: 0.236rem;
+    padding-bottom: 0.236rem;
+    margin-right: 0.236rem;
+    margin-left: 0.236rem;
+    background-color: #eee;
+    color: #888888;
+    cursor: pointer;
+    transition: all 0.5s ease; }
+  .searchtags-container #tag-list .tag-active {
+    background: #888888;
+    color: #ffffff; }
+
 @media screen and (max-width: 640px) {
   #user-overlay:before {
     left: 68%; } }

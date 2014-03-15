@@ -283,7 +283,7 @@ input[type="password"].loginField {
 .tabs {
   /*@include horizontal-margin($space_minus3, $space_minus3);*/ }
   .tabs dd {
-    width: 33.3%; }
+    width: 25%; }
     .tabs dd a {
       margin-left: auto;
       margin-right: auto;
@@ -300,125 +300,6 @@ input[type="password"].loginField {
   margin-left: auto;
   margin-right: auto; }
 
-/*
-
-.jg-image{
-	overflow: hidden;
-}
-
-.transcription-container{
-	display: none;
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	text-align: center;
-	z-index: 3;
-	cursor: pointer;
-
-	div{
-		display: table-cell;
-		position: relative;
-		vertical-align: middle;
-		width: inherit;
-		@include transcription-font();
-	}
-}
-
-span.transcription{
-	display: inline-block;
-	position: relative;
-	width: inherit;
-	max-width: inherit;
-	height: auto;
-	padding: 4px;
-	overflow: hidden;
-	word-wrap: break-word;
-	white-space: normal;
-	line-height: $space_plus1;
-}
-
-.overlay{
-	display: none;
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	opacity: 0.5;
-	z-index: 2;
-}
-
-.overlaytouch{
-	display: block;
-	position: absolute;
-	width: 100%;
-	height: 30%;
-	top: 0;
-	opacity: 0.5;
-	z-index: 2;
-	max-height: 80px;
-}
-
-.women{
-	@extend .overlay;
-	background-color: $pink;
-}
-
-.men{
-	@extend .overlay;
-	background-color: $blue;
-}
-
-.unisex{
-	@extend .overlay;
-	background-color: $darkgrey;
-}
-
-.women-touch{
-	@extend .overlaytouch;
-	background-color: $pink;
-}
-
-.men-touch{
-	@extend .overlaytouch;
-	background-color: $blue;
-}
-
-.unisex-touch{
-	@extend .overlaytouch;
-	background-color: $darkgrey;
-}
-
-.transcription-container-touch{
-	display: block;
-	position: absolute;
-	width: 100%;
-	top: 2%;
-	text-align: center;
-	font-size: $space_minus1;
-	z-index: 3;
-
-	div{
-		display: block;
-		position: relative;
-		width: inherit;
-		@include transcription-font();
-	}
-}
-
-.transcription-container-touch span.transcription{
-	display: inline-block;
-	position: relative;
-	width: inherit;
-	max-width: inherit;
-	height: auto;
-	padding: 4px;
-	overflow: hidden;
-	word-wrap: break-word;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-	line-height: $space_plus1;
-}
-
-*/
 .vote-container {
   display: none;
   text-align: center;
@@ -449,3 +330,7 @@ span.transcription{
   .message-container .message {
     font-size: 0.618rem;
     color: #111111; }
+
+@media screen and (max-width: 640px) {
+  .tabs dd {
+    width: 33.33333%; } }
