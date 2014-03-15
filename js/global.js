@@ -32,10 +32,11 @@ function cookieUser(){
     user.id = document.cookie.replace(/(?:(?:^|.*;\s*)userid\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     user.username = document.cookie.replace(/(?:(?:^|.*;\s*)username\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     user.admin = document.cookie.replace(/(?:(?:^|.*;\s*)admin\s*\=\s*([^;]*).*$)|^.*$/, "$1")=="1";
+    user.status = document.cookie.replace(/(?:(?:^|.*;\s*)admin\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 }
 
 function greetUser(){
-    if(!_.isEmpty(user)){
+    if(!_.isEmpty(user)&&user.status!="4"){
       if(user.username.length > 0){
         $("#link-login").children('span').html(user.username);
       }
@@ -44,6 +45,15 @@ function greetUser(){
 
 function loggedIn(){
   return(user&&user.username&&user.username.length>0);
+}
+
+function saveUser(user){
+  var d = new Date();
+  var oneYear = 31536000000;
+  d.setTime(d.getTime() + oneYear);
+  document.cookie = "username=" + user.username + "; expires=" + d.toGMTString();
+  document.cookie = "userid=" +user.id+ "; expires=" + d.toGMTString();
+  document.cookie = "admin=" + user.status + "; expires=" + d.toGMTString();
 }
 
 function formatTime(time){
@@ -155,4 +165,15 @@ function logoutSuccess(yep){
   }else{
     window.location = "index.html"; // change dat
   }
+}
+
+function s4() {
+  return Math.floor((1 + Math.random()) * 0x10000)
+             .toString(16)
+             .substring(1);
+}
+
+function guid() {
+  return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+         s4() + '-' + s4() + s4() + s4();
 }

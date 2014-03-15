@@ -80,6 +80,7 @@ function addComments(c){
 
 function initGUI(){
 	if(!loggedIn())disable();
+	else if(user.status=="4")disableForDummy();
 	$("#transcription #content").click(changeTranscription);
 	$("#thumbsdown").click(function(){
 		if($(this).hasClass("mine")){
@@ -185,6 +186,13 @@ function disable(){
 	$(".thumbs").css("display","none");
 	$("#report").css("display","none");
 	//$("#rating").attr("title","Melde dich an um diesen Eintrag zu bewerten.");
+	$("#comment-input").attr("disabled","disabled");
+	$("#comment-input").attr("title","Melde dich an um Kommentare zu schreiben.");
+	$("#comment-input").attr("placeholder","Melde dich an um Kommentare zu schreiben.");	
+}
+
+function disableForDummy(){
+	$(".thumbs").css("display","none");
 	$("#comment-input").attr("disabled","disabled");
 	$("#comment-input").attr("title","Melde dich an um Kommentare zu schreiben.");
 	$("#comment-input").attr("placeholder","Melde dich an um Kommentare zu schreiben.");	

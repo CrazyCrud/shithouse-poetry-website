@@ -15,7 +15,7 @@ $(document).ready(function() {
 	userTemplate = _.template($("script.overlay-user").html());
 
 	$loginLink.click(function(event) {
-		if(isLoggedIn()){
+		if(isLoggedIn()&&user.status!="4"){
 			manageLoginOverlay();
 		}else{
 			appendLoginOverlay();
@@ -32,11 +32,7 @@ $(document).ready(function() {
 });
 
 function isLoggedIn(){
-	if(user.username.length > 0){
-		return true;
-	}else{
-		return false;
-	}
+	return loggedIn();
 }
 
 function manageLoginOverlay(){
@@ -142,6 +138,7 @@ function getUser(authkey){
 			switch(data["success"]){
 				case 1: 
 					saveUser(data["data"]);
+					window.location.reload(true);
 					break;
 				case 3: 
 					error("Es fehlt ein Parameter. Bitte wenden Sie sich an den Admin.");
@@ -160,16 +157,6 @@ function getUser(authkey){
 			}
 		}
 	});
-}
-
-function saveUser(user){
-	var d = new Date();
-	var oneYear = 31536000000;
-	d.setTime(d.getTime() + oneYear);
-	document.cookie = "username=" + user.username + "; expires=" + d.toGMTString();
-	document.cookie = "userid=" +user.id+ "; expires=" + d.toGMTString();
-	document.cookie = "admin=" + user.status + "; expires=" + d.toGMTString();
-	window.location.reload(true);
 }
 
 function error(message){

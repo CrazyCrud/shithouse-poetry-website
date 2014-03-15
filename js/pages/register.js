@@ -12,7 +12,7 @@ $(document).ready(function() {
   		})
   		.on('valid', function () {
   			console.log("Form valid");
-  			if(edit){
+  			if(edit&&user.status!="4"){
   				updateUser();
   			}else{
 	    		registerUser();
@@ -28,7 +28,7 @@ $(document).ready(function() {
   		
   	});
 
-  	if(edit)initEditing();
+  	if(edit&&user.status!="4")initEditing();
   	else{
   		$("#old-pwd").remove();
   	}
@@ -51,10 +51,20 @@ function fillUser(user){
 }
 
 function registerUser(){
+	if(user.status=="4")return updateDummy();
+	else{
+		var mail = $mailInput.val();
+		var username = $userNameInput.val();
+		var md5_pwd = $.md5($passwordInput.val());
+		ImgurManager.createUser(onLoginSuccess, username, md5_pwd, mail);
+	}
+}
+
+function updateDummy(){
+	var md5_pwd = $.md5($passwordInput.val());
 	var mail = $mailInput.val();
 	var username = $userNameInput.val();
-	var md5_pwd = $.md5($passwordInput.val());
-	ImgurManager.createUser(onLoginSuccess, username, md5_pwd, mail);
+	ImgurManager.updateUser(onLoginSuccess, mail, username, md5_pwd);
 }
 
 function updateUser(){
@@ -165,6 +175,7 @@ function onLoginSuccess(authkey){
 			width: 'auto',
 			title: 'Registrierung erfolgreich',
 			close: function(event, ui) {
+				logoutUser(null);
 				window.location = "index.html";
 			},
 			buttons: [

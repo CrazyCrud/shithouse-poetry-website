@@ -138,6 +138,21 @@
 							    		für das Bild aus
 							   		</small>
 							    </div>
+							    <div class="small-12 columns fieldset-container" id="tou">
+						        	<div class="small-12 columns tou-container">
+						        		<input type="checkbox" id="confirm-tou" required>
+						        		</input>
+						        		<label for="confirm-tou">
+						        			Ich habe die <a target="_blank" href="tou.html">Nutzungsbedingungen</a>
+											für Latrinalia gelesen und
+											akzeptiert und erkläre hiermit
+											meine Einwilligung in die Erhebung,
+											Speicherung und Verarbeitung
+											meiner personenbezogenen Daten zum
+											Zwecke der Teilnahme an Latrinalia.
+						        		</label>
+						        	</div>
+						      	</div>
 							    <div class="small-12 columns">
 							    	<button id="upload-submit"
 							    		class="button medium right">

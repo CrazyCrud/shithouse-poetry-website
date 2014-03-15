@@ -27,6 +27,9 @@ $(document).ready(function() {
 });
 
 function initEdit(){
+	if(user&&user.status&&user.status!="4"){
+		$("#tou").remove();
+	}
 	if(id < 1){
 		$(".add-image-container").css("display","block");
 		return;
@@ -83,60 +86,92 @@ function initDialog(){
 		$("body").append('<script src="js/plugins/jquery-ui-custom/jquery-ui-1.10.4.custom.min.js"></script>'
 		+'<link rel="stylesheet" type="text/css" href="css/plugins/custom-jqui-theme/jquery-ui-1.10.4.custom.css"/>');
 	}
-	if(!loggedIn()){
-		window.location = "register.php";
+}
+
+function saveImage(){
+	message("Speichern", "Bild wird gespeichert, bitte warten ...");
+	var data = {};
+	var title = $.trim($("input#title").val());
+	var artist = $.trim($("input#artist").val());
+	var transcription = $.trim($("input#transcription").val());
+	var location = $.trim($locationInput.find('option:selected').html());
+	var sex = $.trim($("input:radio[name=sex]:checked").val());
+
+	var tags = _.pluck($tagList.find('.tag-active-text'), 'innerHTML');
+
+	tags = tags.join(',');
+
+	var type = $.trim($("#type").find('option:selected').html());
+
+	if(location.length > 2){
+		data['location'] = location;
 	}
+	if(transcription.length > 2){
+		data['transcription'] = transcription;
+	}
+	if(artist.length > 2){
+		data['artist'] = artist;
+	}
+	if((latitude_g != -1000 && longitude_g != -1000)){
+		data['lat'] = latitude_g;
+		data['long'] = longitude_g;
+	}
+	if(tags.length > 0){
+		data['tags'] = tags;
+	}
+
+	data['sex'] = sex;
+	data['title'] = title;
+	data['type'] = type;
+
+	if(entry.id){
+		data["entryid"] = entry.id;
+		ImgurManager.updateEntry(function(){
+			window.location = "details.php?id="+entry.id;
+		}, data);
+	}else{
+		ImgurManager.addEntry(uploadImage, data);
+	}
+}
+
+function createDummy(){
+	message("Speichern", "Wir legen f&uuml;r dich einen Account an damit du deine Bilder sp&auml;ter bearbeiten kannst.<br/>Bitte habe etwas Gedult.");
+	user = {};
+	user.password = guid();
+	ImgurManager.createUser(onDummyCreated, "", user.password, "");
+}
+
+function onDummyCreated(data){
+	if(data==null){
+		message("Oops!", "Leider konnte wir keinen Account anlegen um Bilder hochzuladen.<br/>Wende dich an einen Systemadministrator oder versuche es sp&auml;ter nochmal.");
+	}else{
+		ImgurManager.loginUser(onLoginSuccess, data, user.password);
+	}
+}
+
+function onLoginSuccess(data){
+	if(data==null){
+		message("Oops!", "Leider konnte wir keinen Account einloggen um Bilder hochzuladen.<br/>Wende dich an einen Systemadministrator oder versuche es sp&auml;ter nochmal.");
+	}else{
+		ImgurManager.getUserAuth(onGetUser, data);
+	}
+}
+
+function onGetUser(data){
+	saveUser(data);
+	saveImage();
 }
 
 function initUpload(){
 	$form.on('invalid', function(event) {
     	checkForImage();
 	}).on('valid', function(event) {
+		event.preventDefault();
 		if(checkForImage()){
-			message("Speichern", "Bild wird gespeichert, bitte warten ...");
-			event.preventDefault();
-			var data = {};
-			var title = $.trim($("input#title").val());
-			var artist = $.trim($("input#artist").val());
-			var transcription = $.trim($("input#transcription").val());
-			var location = $.trim($locationInput.find('option:selected').html());
-			var sex = $.trim($("input:radio[name=sex]:checked").val());
-
-			var tags = _.pluck($tagList.find('.tag-active-text'), 'innerHTML');
-
-			tags = tags.join(',');
-
-			var type = $.trim($("#type").find('option:selected').html());
-
-			if(location.length > 2){
-				data['location'] = location;
-			}
-			if(transcription.length > 2){
-				data['transcription'] = transcription;
-			}
-			if(artist.length > 2){
-				data['artist'] = artist;
-			}
-			if((latitude_g != -1000 && longitude_g != -1000)){
-				data['lat'] = latitude_g;
-				data['long'] = longitude_g;
-			}
-			if(tags.length > 0){
-				data['tags'] = tags;
-			}
-
-			data['sex'] = sex;
-			data['title'] = title;
-			data['type'] = type;
-
-			if(entry.id){
-				data["entryid"] = entry.id;
-				ImgurManager.updateEntry(function(){
-					window.location = "details.php?id="+entry.id;
-				}, data);
-			}else{
-				ImgurManager.addEntry(uploadImage, data);
-			}
+			if(loggedIn())
+				saveImage();
+			else
+				createDummy();
 		}
 	});
 
@@ -467,6 +502,8 @@ function tagFunctionality(tag){
 }
 
 function error(message){
+	$(".error-dialog").dialog("close");
+	$(".error-dialog").remove();
 	var $dialog = $('<div class="error-dialog">'+message+"</div>");
 	$dialog.dialog({
 		modal: true,
@@ -479,13 +516,12 @@ function error(message){
 }
 
 function message(title, message){
+	$(".error-dialog").dialog("close");
+	$(".error-dialog").remove();
 	var $dialog = $('<div class="error-dialog">'+message+"</div>");
 	$dialog.dialog({
 		modal: true,
 		width: "80%",
-		title: title,
-		close : function(){
-			window.location = "index.html";
-		}
+		title: title
 	});
 }
