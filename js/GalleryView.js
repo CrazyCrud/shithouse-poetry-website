@@ -2,6 +2,7 @@ var GalleryView = (function(){
 	var settings = {
 		imgData : [],
 		currentEntry : 0,
+		currentVerticalPosition: 0,
 		imageContainer : null,
 		displaySingleImage: false,
 		rowHeight : 200,
@@ -54,6 +55,7 @@ var GalleryView = (function(){
 			message: "Images are completely loaded",
 			time: new Date()
 		});
+		$(window).scrollTop(settings.currentVerticalPosition);
 		addOverlay();
 	};
 
@@ -291,6 +293,7 @@ var GalleryView = (function(){
 	};
 
 	var clearScreen = function(){
+		settings.currentVerticalPosition = $(window).scrollTop();
 		settings.imageContainer.empty();
 	};
 
