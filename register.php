@@ -61,8 +61,9 @@
 					        		<label for="username">Benutzername</label>
 					        	</div>
 					        	<div class="small-12 medium-9 large-9 columns">
-					        		<input type="text" id="username" 
+					        		<input type="text" pattern="username" id="username" 
 					        			placeholder="Hier Benutzername eingeben..." required>
+					        		<small class="error error-username">Der Name muss mindestens 4 Zeichen lang sein ohne Sonderzeichen</small>
 					        	</div>
 					      	</div>
 					      	<div class="row">
