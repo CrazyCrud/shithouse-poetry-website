@@ -160,6 +160,17 @@
 	}
 }
 
+.transcribe-container{
+	display: none;
+	text-align: center;
+	margin: $space_minus1 0;
+	height: auto;
+
+	.transcribe-input-container{
+		
+	}
+}
+
 .message-container{
 	text-align: center;
 

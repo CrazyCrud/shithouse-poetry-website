@@ -19,6 +19,11 @@ var StateManager = (function(){
 	var setState = function(){
 		if (viewportWidth <= states.properties[states.SMALL].value) {
 			state = states.properties[states.SMALL].name;
+			$.event.trigger({
+				type : "sizesmall",
+				message: "Viewportwidth changed to small devices",
+				time: new Date()
+			});
 		}
 		else if (viewportWidth > states.properties[states.SMALL].value &&
 			viewportWidth <= states.properties[states.MEDIUM].value){

@@ -1,4 +1,3 @@
-
 var currentOrder = null;
 var NO_SINGLE_IMAGE = "Wir können dir leider kein weiteres Bild liefern";
 var NO_IMAGES = "Wir können dir leider keine weiteren Bilder mehr liefern";
@@ -12,13 +11,18 @@ var $newLink = $("#tab-new");
 var $voteLink = $("#tab-vote");
 var $transcribeLink = $("#tab-transcribe");
 var $votingContainer = $(".vote-container");
+var $transcribeContainer = $(".transcribe-container");
 var $upVote = $("#up-vote");
 var $downVote = $("#down-vote");
+var $transcribeInput = $("#transcription-input");
+var $submitTranscription = $("#transcription-submit");
+var $skipTranscription = $("#skip-transcription");
 var $mainheader = $("#mainheader");
 
 $(document).ready(function() {
 	setupTabFunctionality();
 	setupVoting();
+	setupTranscribing();
 	setupImageClick();
 	getEntries();
 });
@@ -30,10 +34,21 @@ $(document).on("complete", function(){
 	refreshWaypoints();
 });
 
+$(document).on("sizesmall", function(){
+	if(getActiveState() == "transcribe" || getActiveState() == undefined){
+		$newLink.trigger('click');
+	}	
+});
+
 $(document).on("votingend", function(){
 	console.log("votingend");
 	clearRequests();
-	getVoteEntries();
+	var state = getActiveState();
+	if(state == "vote"){
+		getVoteEntries();
+	}else if(state == "transcribe"){
+		getUntranscribedEntries();
+	}	
 });
 
 function setupTabFunctionality(){
@@ -53,6 +68,7 @@ function handleHotClick(){
 	setActive($hotLink.parent("dd"));
 	enableInfiniteScroll();
 	disableVoting();
+	disableTranscribing();
 	setOrder(ImgurManager.OrderBy.properties[ImgurManager.OrderBy.RATING].name);
 	clearRequests();
 	getEntries(ImgurManager.OrderBy.properties[ImgurManager.OrderBy.RATING].name);
@@ -64,6 +80,7 @@ function handleNewClick(){
 	setActive($newLink.parent("dd"));
 	enableInfiniteScroll();
 	disableVoting();
+	disableTranscribing();
 	setOrder(ImgurManager.OrderBy.properties[ImgurManager.OrderBy.DATE].name);
 	clearRequests();
 	getEntries(ImgurManager.OrderBy.properties[ImgurManager.OrderBy.DATE].name);
@@ -73,6 +90,7 @@ function handleVoteClick(){
 	deleteMessage();
 	GalleryView.setMaxwidth(false);
 	setActive($voteLink.parent("dd"));
+	disableTranscribing();
 	disableInfiniteScroll();
 	clearRequests();
 	if(loggedIn()){
@@ -84,10 +102,11 @@ function handleVoteClick(){
 
 function handleTranscribeClick(){
 	deleteMessage();
-	GalleryView.setMaxwidth(true);
+	GalleryView.setMaxwidth(false);
 	setActive($transcribeLink.parent("dd"));
-	enableInfiniteScroll();
+	disableInfiniteScroll();
 	disableVoting();
+	enableTranscribing();
 	clearRequests();
 	getUntranscribedEntries();
 }
@@ -102,11 +121,20 @@ function setupImageClick(){
 function setupVoting(){
 	$upVote.click(function(event) {
 		event.preventDefault();
-		lazyClick(false);
+		lazyVoteClick(false);
 	});
 	$downVote.click(function(event) {
 		event.preventDefault();
-		lazyClick(true);
+		lazyVoteClick(true);
+	});
+}
+
+function setupTranscribing(){
+	$skipTranscription.click(function(event) {
+		lazyTranscribeClick(event);
+	});
+	$submitTranscription.click(function(event) {
+		lazyTranscribeClick(event);
 	});
 }
 
@@ -149,6 +177,10 @@ function enableVoting(){
 	$votingContainer.css('display', 'block');
 }
 
+function enableTranscribing(){
+	$transcribeContainer.css('display', 'block');
+}
+
 function handleVote(sucks){
 	var rating = 0;
 	var entryid = $imageContainer.find('.jg-image').find('a').attr('title');
@@ -160,10 +192,33 @@ function handleVote(sucks){
 	addRating(entryid, rating);
 }
 
-var lazyClick = _.throttle(handleVote, 2000);
+function handleTranscription(e){
+	console.log(e.target.id);
+	if(e.target.id == "transcription-submit"){
+		var entryid = $imageContainer.find('.jg-image').find('a').attr('title');
+		var transcription = $transcribeInput.val();
+		if(_.isUndefined(transcription)){
+			return;
+		}
+		if(transcription.length > 1){
+			$transcribeInput.val("Transkription...");
+			addTranscribtion(entryid, transcription);
+		}
+	}else{
+		GalleryView.loadSingleImage();
+	}
+}
+
+var lazyVoteClick = _.throttle(handleVote, 2000);
+
+var lazyTranscribeClick = _.throttle(handleTranscription);
 
 function disableVoting(){
 	$votingContainer.css('display', 'none');
+}
+
+function disableTranscribing(){
+	$transcribeContainer.css('display', 'none');
 }
 
 function enableInfiniteScroll(){
@@ -201,11 +256,15 @@ function getVoteEntries(){
 }
 
 function getUntranscribedEntries(){
-	ImgurManager.getRandomUnstranscribedEntries(computeEntries);
+	ImgurManager.getRandomUnstranscribedEntries(computeTranscribeEntries);
 }
 
 function addRating(entryid, rating){
 	ImgurManager.addRating(GalleryView.loadSingleImage, entryid, rating);
+}
+
+function addTranscribtion(entryid, transcription){
+	ImgurManager.updateTranscription(GalleryView.loadSingleImage, entryid, transcription);
 }
 
 function computeEntries(entries){
@@ -218,6 +277,19 @@ function computeEntries(entries){
 		}else{
 			appendMessage(NO_IMAGES);
 		}
+	}
+}
+
+function computeTranscribeEntries(entries){
+	if(_.isNull(entries) || _.isEmpty(entries)){
+		disableTranscribing();
+		clearScreen();
+		appendMessage(NO_SINGLE_IMAGE);
+	}else{
+		enableTranscribing();
+		GalleryView.init($imageContainer);
+		GalleryView.appendEntries(entries);
+		GalleryView.loadSingleImage();
 	}
 }
 
