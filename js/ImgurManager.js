@@ -397,6 +397,17 @@ var ImgurManager = (function(){
 				console.log("complete");
 			});
 		},
+		getTags: function(callback){
+			var url = 'getTags.php?';
+			var tagData = null;
+
+			$.get('php/backend/' + url, function(data) {
+				if(data.success == 1){
+					tagData = data.data;
+				}
+				callback(tagData);
+			});
+		},
 		getSystemTags: function(callback){
 			var url = 'getTags.php?status=1';
 			var tagData = null;

@@ -15,7 +15,7 @@ $(document).ready(function() {
 	searchTemplate = _.template($("script.search-template").html());
 
 	$searchLink.click(function(event) {
-		ImgurManager.getSystemTags(getSearchTags);
+		ImgurManager.getTags(getSearchTags);
 		// ImgurManager.getUserTags(getSearchTags);
 		ImgurManager.getTypes(getSearchTypes);
 		appendSearchOverlay();
@@ -59,6 +59,7 @@ function appendSearchOverlay(){
 
 	$filterSwitch.change(function(event) {
 		if($(this).is(":checked")){
+			$searchInput.animate({'opacity': 0}, 700);
 			$filterTypesContainer.fadeIn(400, function(){
 				$searchInput.prop('disabled', true);
 				$searchInput.attr('placeholder', '');
@@ -80,6 +81,7 @@ function appendSearchOverlay(){
 		}else{
 			$("#tag-list").empty();
 			$searchInput.attr('placeholder', 'Suche nach...');
+			$searchInput.animate({'opacity': 1}, 400);
 			$searchInput.prop('disabled', false);
 			$filterTypesContainer.fadeOut(400);
 		}
@@ -155,6 +157,7 @@ function getSearchTags(tagData){
 			return;
 		}else{
 			tags = _.pluck(tagData, 'tag');
+			tags = tags.slice(0, 10);
 		}
 	}
 }

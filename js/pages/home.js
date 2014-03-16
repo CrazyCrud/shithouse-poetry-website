@@ -41,7 +41,6 @@ $(document).on("sizesmall", function(){
 });
 
 $(document).on("votingend", function(){
-	console.log("votingend");
 	clearRequests();
 	var state = getActiveState();
 	if(state == "vote"){
