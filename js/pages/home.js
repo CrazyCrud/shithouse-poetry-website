@@ -200,7 +200,7 @@ function handleTranscription(e){
 			return;
 		}
 		if(transcription.length > 1){
-			$transcribeInput.val("Transkription...");
+			//$transcribeInput.val("Transkription...");
 			addTranscribtion(entryid, transcription);
 		}
 	}else{
@@ -263,7 +263,45 @@ function addRating(entryid, rating){
 }
 
 function addTranscribtion(entryid, transcription){
+	if(!loggedIn())
+		createDummy();
+	else{
+		ImgurManager.updateTranscription(GalleryView.loadSingleImage, entryid, transcription);
+		$transcribeInput.val("");
+	}
+}
+
+function createDummy(){
+	message("Speichern", "Wir legen f&uuml;r dich einen Account an damit du deine Transkriptionen sp&auml;ter bearbeiten kannst.<br/>Bitte habe etwas Gedult.");
+	user = {};
+	user.password = guid();
+	ImgurManager.createUser(onDummyCreated, "", user.password, "");
+}
+
+function onDummyCreated(data){
+	if(data==null){
+		message("Oops!", "Leider konnte wir keinen Account anlegen um Transkriptionen hinzuzuf&uuml;gen.<br/>Wende dich an einen Systemadministrator oder versuche es sp&auml;ter nochmal.");
+	}else{
+		ImgurManager.loginUser(onDummyLoginSuccess, data, user.password);
+	}
+}
+
+function onDummyLoginSuccess(data){
+	if(data==null){
+		message("Oops!", "Leider konnte wir keinen Account einloggen um Transkriptionen hinzuzuf&uuml;gen.<br/>Wende dich an einen Systemadministrator oder versuche es sp&auml;ter nochmal.");
+	}else{
+		ImgurManager.getUserAuth(onGetUser, data);
+	}
+}
+
+function onGetUser(data){
+	$(".error-dialog").dialog("close");
+	$(".error-dialog").remove();
+	saveUser(data);
+	var entryid = $imageContainer.find('.jg-image').find('a').attr('title');
+	var transcription = $transcribeInput.val();
 	ImgurManager.updateTranscription(GalleryView.loadSingleImage, entryid, transcription);
+	$transcribeInput.val("");
 }
 
 function computeEntries(entries){
@@ -321,4 +359,15 @@ function clearRequests(){
 
 function clearScreen(){
 	$imageContainer.empty();
+}
+
+function message(title, message){
+	$(".error-dialog").dialog("close");
+	$(".error-dialog").remove();
+	var $dialog = $('<div class="error-dialog">'+message+"</div>");
+	$dialog.dialog({
+		modal: true,
+		width: "80%",
+		title: title
+	});
 }

@@ -394,11 +394,11 @@ function onDummyCreated(data){
 	if(data==null){
 		message("Oops!", "Leider konnte wir keinen Account anlegen um Transkriptionen hinzuzuf&uuml;gen.<br/>Wende dich an einen Systemadministrator oder versuche es sp&auml;ter nochmal.");
 	}else{
-		ImgurManager.loginUser(onLoginSuccess, data, user.password);
+		ImgurManager.loginUser(onDummyLoginSuccess, data, user.password);
 	}
 }
 
-function onLoginSuccess(data){
+function onDummyLoginSuccess(data){
 	if(data==null){
 		message("Oops!", "Leider konnte wir keinen Account einloggen um Transkriptionen hinzuzuf&uuml;gen.<br/>Wende dich an einen Systemadministrator oder versuche es sp&auml;ter nochmal.");
 	}else{
