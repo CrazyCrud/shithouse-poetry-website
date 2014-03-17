@@ -252,7 +252,8 @@ body {
   padding: 0.25rem;
   margin-right: 0.5rem;
   background: #eee;
-  color: #555; }
+  color: #555;
+  cursor: pointer; }
 
 #upload-info {
   font-size: 0.5rem;
