@@ -278,7 +278,8 @@ function setTags(entry){
 	$tags.html("");
 	for(var i=0; i<entry.tags.length; i++){
 		var tag = entry.tags[i];
-		var $tag = $('<span id="tag-'+tag.tagid+'" class="tag">'+tag.tag+'</span>');
+		var $tag = $('<span id="tag-'+tag.tagid+'" class="tag" title="Filter nach '+tag.tag'">'+tag.tag+'</span>');
+		$tag.attr("href", "search.php?type=tag&values="+tag.tag);
 		$tags.append($tag);
 	}
 }

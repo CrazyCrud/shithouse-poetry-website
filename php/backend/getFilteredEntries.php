@@ -15,6 +15,7 @@
 // type (all types as id or text), 
 // tag (all tags as id or text),
 // user (with userid as value)
+// location (text)
 //
 // it is possible to filter for multiple types or tags
 //
@@ -160,7 +161,9 @@ if($filter == "sex"){
 }else if($filter == "tag"){
 	$entries = $db->getAllEntriesByTag($values, $orderby, $start);
 }else if($filter == "user"){
-	$entries = $db->getAllEntriesByUser($orderby, $start, $values[0]);
+	$entries = $db->getAllEntriesByUser($values[0], $orderby, $start);
+}else if($filter = "location"){
+	$entries = $db->getAllEntriesByLocation($values, $orderby, $start);
 }else{
 	$json["message"]="Wrong filter";
 	echo json_encode($json);
