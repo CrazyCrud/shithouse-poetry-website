@@ -1398,6 +1398,11 @@ class DBHelper{
 		return $this->explodeLocs($locs);
 	}
 
+	public function getUsedLocations(){
+		$query = Queries::getusedlocations();
+		return $this->query($query);
+	}
+
 	private function getAllLocations(){
 		$query = Queries::getalllocations();
 		return $this->query($query);

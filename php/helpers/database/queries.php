@@ -1033,6 +1033,21 @@ class Queries{
 		"SELECT * FROM `$l` $where";
 		return $query;
 	}
+	public static function getusedlocations(){
+		$e = DBConfig::$tables["entries"];
+		$info = DBConfig::$tables["information"];
+		$query = 
+		"SELECT 
+		location, 
+		COUNT(entryid) AS count 
+		FROM 
+		`$info`, 
+		`$e`
+		WHERE `$info`.entryid = `$e`.id 
+		GROUP BY location 
+		ORDER BY count DESC";
+		return $query;
+	}
 	public static function deletelocation($id){
 		$l = DBConfig::$tables["locations"];
 		$query =
