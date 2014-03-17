@@ -19,7 +19,6 @@ Vielen Dank und liebe Gr&uuml;&szlig;e,<br/>
 Dein Team von Latrinalia
 </body>
 </html>';
-echo $emailBodyContent;
 function sendVerificationMail($email, $username, $key){
 	global $emailBodyContent;
 	$url = "http://www.latrinalia.de/verify.php?verification=".$key;
