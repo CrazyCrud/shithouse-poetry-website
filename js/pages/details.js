@@ -376,8 +376,12 @@ function changeTranscription(){
 	$input = $('<input id="input-transcription" type="text"></input>');
 	$input.val(entry.information[0]["transcription"]);
 	$ok = $('<button class="tiny">OK</ok>');
+	$help = $('<label>'
+		+'<a href="howto.html#transription" target="_blank">Wie transkribiere ich richtig?</a>'
+	+'</label>');
 	$container.append($input);
 	$container.append($ok);
+	$container.append($help);
 	$("#transcription #content").html($container);
 
 	$ok.click(function(){

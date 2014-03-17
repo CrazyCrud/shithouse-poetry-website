@@ -37,7 +37,8 @@ module.exports = function(grunt) {
                     'css/pages/timeline.css': 'css/pages/timeline.scss',
                     'css/pages/search.css': 'css/pages/search.scss',
                     'css/pages/galleryview.css': 'css/pages/galleryview.scss',
-                    'css/pages/verify.css': 'css/pages/verify.scss'
+                    'css/pages/verify.css': 'css/pages/verify.scss',
+                    'css/pages/howto.css': 'css/pages/howto.scss'
                 }
             } 
         },

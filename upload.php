@@ -55,6 +55,9 @@
 			<section id="maincontent">
 				<div class="row">
 					<div class="small-12 columns full-width">
+						<label>
+							<a href="howto.html" target="_blank">Wie mache ich das hier richtig?</a>
+						</label>
 						<div class="upload-forms-container">
 							<form data-abide="ajax">
 								<div class="add-image-container">
