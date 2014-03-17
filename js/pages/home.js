@@ -24,7 +24,7 @@ $(document).ready(function() {
 	setupVoting();
 	setupTranscribing();
 	setupImageClick();
-	getEntries();
+	setupCurrentTab();
 });
 
 
@@ -66,6 +66,7 @@ function handleHotClick(){
 	deleteMessage();
 	GalleryView.setMaxwidth(true);
 	setActive($hotLink.parent("dd"));
+	window.location.hash="hot";
 	enableInfiniteScroll();
 	disableVoting();
 	disableTranscribing();
@@ -78,6 +79,7 @@ function handleNewClick(){
 	deleteMessage();
 	GalleryView.setMaxwidth(true);
 	setActive($newLink.parent("dd"));
+	window.location.hash="new";
 	enableInfiniteScroll();
 	disableVoting();
 	disableTranscribing();
@@ -90,6 +92,7 @@ function handleVoteClick(){
 	deleteMessage();
 	GalleryView.setMaxwidth(false);
 	setActive($voteLink.parent("dd"));
+	window.location.hash="vote";
 	disableTranscribing();
 	disableInfiniteScroll();
 	clearRequests();
@@ -104,6 +107,7 @@ function handleTranscribeClick(){
 	deleteMessage();
 	GalleryView.setMaxwidth(false);
 	setActive($transcribeLink.parent("dd"));
+	window.location.hash="transcribe";
 	disableInfiniteScroll();
 	disableVoting();
 	enableTranscribing();
@@ -157,6 +161,26 @@ function setupInfiniteScroll(){
 		}
 	}, { offset: 'bottom-in-view'
 	});
+}
+
+function setupCurrentTab(){
+	var url = document.URL;
+	
+	if(url.indexOf("#hot") != -1){
+		setActive($hotLink.parent("dd"));
+		handleHotClick();
+	}else if(url.indexOf("#vote") != -1){
+		setActive($voteLink.parent("dd"));
+		handleVoteClick();
+	}else if(url.indexOf("#transcribe") != -1){
+		setActive($transcribeLink.parent("dd"));
+		handleTranscribeClick();
+	}else{
+		setActive($newLink.parent("dd"));
+		window.location.hash="new"
+		//getEntries(ImgurManager.OrderBy.properties[ImgurManager.OrderBy.DATE].name);
+		handleNewClick();
+	}
 }
 
 var setupOnce = _.once(setupInfiniteScroll);
