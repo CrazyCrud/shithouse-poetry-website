@@ -216,3 +216,7 @@ input[type="password"].loginField {
     margin: 0.618rem 0.618rem; }
   .form-register label {
     float: left; } }
+
+#register-submit{
+  margin-top: 10px;
+}
