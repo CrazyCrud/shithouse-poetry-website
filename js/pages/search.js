@@ -63,13 +63,13 @@ function appendSearchOverlay(){
 			$filterTypesContainer.fadeIn(400, function(){
 				$searchInput.prop('disabled', true);
 				$searchInput.attr('placeholder', '');
-				$("#tag-list").hide();
+				$("#tag-search-list").hide();
 				appendSearchTags($("input:radio[name=filtertype]:checked").val());
 
 		    	$("input:radio[name=filtertype]").change(function(event) {
 		    		var filterFor = $("input:radio[name=filtertype]:checked").val();
-		    		$("#tag-list").hide();
-		    		$("#tag-list").empty();
+		    		$("#tag-search-list").hide();
+		    		$("#tag-search-list").empty();
 		    		if(filterFor == "sex"){
 		    			appendSearchTags(filterFor, true);
 		    		}else{
@@ -79,7 +79,7 @@ function appendSearchOverlay(){
 			});
 			
 		}else{
-			$("#tag-list").empty();
+			$("#tag-search-list").empty();
 			$searchInput.attr('placeholder', 'Suche nach...');
 			$searchInput.animate({'opacity': 1}, 400);
 			$searchInput.prop('disabled', false);
@@ -119,7 +119,7 @@ function appendSearchTags(which, singleValue){
 			}
 			break;
 	}
-	$("#tag-list").fadeIn();
+	$("#tag-search-list").fadeIn();
 }
 
 function appendSingleTag(tag, singleValue){
@@ -129,7 +129,7 @@ function appendSingleTag(tag, singleValue){
 		tagFunctionality($(this), singleValue);
 	});
 
-	$("#tag-list").append($tagItem);
+	$("#tag-search-list").append($tagItem);
 }
 
 function tagFunctionality(tag, singleValue){
@@ -139,7 +139,6 @@ function tagFunctionality(tag, singleValue){
 		$tag.children('span').removeClass('tag-active-text');
 	}else{
 		if(singleValue){
-			console.log("sasds");
 			$.each($('.tag-active'), function() {
 				$(this).removeClass('tag-active');
 			});
