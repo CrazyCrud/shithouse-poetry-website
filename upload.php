@@ -122,8 +122,8 @@
 								<div class="small-12 columns fieldset-container">
 							    	<fieldset>
 								    	<legend>Tags<small>optional</small></legend>
-								    	<div class="tags-container">
-								    		<ul id="tag-list">
+								    	<div class="entry-tags-container">
+								    		<ul id="entry-tag-list">
 
 								    		</ul>
 								    	</div>
@@ -276,7 +276,7 @@
 		<script src="js/plugins/underscore.js"></script>
 		<script src="js/plugins/foundation/foundation.js"></script>
   		<script src="js/plugins/foundation/foundation.topbar.js"></script>
-		<script src="js/plugins/jquery-ui-custom/jquery-ui-1.10.4.custom.min.js"></script>
+		<script src="js/plugins/jquery-ui-custom/jquery-ui.min.js"></script>
   		<script src="js/plugins/foundation/foundation.abide.js"></script>
   		<script src="js/plugins/exif/load-image.min.js"></script>
 		<script src="js/plugins/exif/load-image-ios.js"></script>

@@ -10,8 +10,8 @@ var $addImageInput = $("input.file-input");
 var $customTagInput = $("#custom-tag");
 var $locationInput = $("select#location");
 var $typeInput = $("select#type");
-var $tagsContainer = $(".tags-container");
-var $tagList = $("#tag-list");
+var $tagsContainer = $(".entry-tags-container");
+var $tagList = $("#entry-tag-list");
 var $uploadSubmit = $("#upload-submit");
 var $form = $(".upload-forms-container > form");
 var $imageError = $(".image-error-container");
@@ -83,8 +83,7 @@ function fillUI(e){
 
 function initDialog(){
 	if(!$("<div></div>").dialog){
-		$("body").append('<script src="js/plugins/jquery-ui-custom/jquery-ui-1.10.4.custom.min.js"></script>'
-		+'<link rel="stylesheet" type="text/css" href="css/plugins/custom-jqui-theme/jquery-ui-1.10.4.custom.css"/>');
+		
 	}
 }
 

@@ -164,7 +164,7 @@
     	</script>
 		<script src="js/plugins/jquery.min.js"></script>
   		<script src="js/plugins/md5/jquery.md5.js"></script>
-		<script src="js/plugins/jquery-ui-custom/jquery-ui-1.10.4.custom.min.js"></script>
+		<script src="js/plugins/jquery-ui-custom/jquery-ui.min.js"></script>
 		<script src="js/plugins/underscore.js"></script>		
 		<script src="js/plugins/foundation/foundation.js"></script>
   		<script src="js/plugins/foundation/foundation.topbar.js"></script>
