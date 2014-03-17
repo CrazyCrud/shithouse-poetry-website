@@ -311,7 +311,8 @@ class Queries{
 			`$t`.id AS typeid,
 			`$t`.name AS typename,
 			`$t`.description AS typedescription,
-			AVG(`$r`.rating) AS ratings
+			AVG(`$r`.rating) AS ratings,
+			COUNT(`$r`.rating) AS ratingcount
 
 			FROM
 			`$e`, `$u`, `$t`, `$r`, `$tags`, `$usertags`
@@ -328,7 +329,7 @@ class Queries{
 			GROUP BY
 			`$r`.entryid
 			ORDER BY
-			ratings DESC
+			ratings DESC, ratingcount DESC
 			LIMIT $start, $limit";
 		return $query;
 	}
