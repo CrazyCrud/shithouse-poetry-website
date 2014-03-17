@@ -40,7 +40,6 @@ module.exports = function(grunt) {
                     'css/pages/verify.css': 'css/pages/verify.scss',
                     'css/pages/tou.css': 'css/pages/tou.scss',
                     'css/pages/howto.css': 'css/pages/howto.scss'
-
                 }
             } 
         },
