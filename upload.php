@@ -276,7 +276,7 @@
 		<script src="js/plugins/underscore.js"></script>
 		<script src="js/plugins/foundation/foundation.js"></script>
   		<script src="js/plugins/foundation/foundation.topbar.js"></script>
-		<script src="js/plugins/jquery-ui-custom/jquery-ui-1.10.4.custom.min.js"></script>
+		<script src="js/plugins/jquery-ui-custom/jquery-ui.min.js"></script>
   		<script src="js/plugins/foundation/foundation.abide.js"></script>
   		<script src="js/plugins/exif/load-image.min.js"></script>
 		<script src="js/plugins/exif/load-image-ios.js"></script>

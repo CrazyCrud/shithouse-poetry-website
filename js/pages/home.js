@@ -51,6 +51,7 @@ $(document).on("votingend", function(){
 });
 
 function setupTabFunctionality(){
+	GalleryView.init($imageContainer);
 	var lazyHotClick = _.throttle(handleHotClick, 2000);
 	var lazyNewClick = _.throttle(handleNewClick, 2000);
 	var lazyVoteClick = _.throttle(handleVoteClick, 2000);

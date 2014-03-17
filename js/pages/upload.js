@@ -83,8 +83,7 @@ function fillUI(e){
 
 function initDialog(){
 	if(!$("<div></div>").dialog){
-		$("body").append('<script src="js/plugins/jquery-ui-custom/jquery-ui-1.10.4.custom.min.js"></script>'
-		+'<link rel="stylesheet" type="text/css" href="css/plugins/custom-jqui-theme/jquery-ui-1.10.4.custom.css"/>');
+		
 	}
 }
 
