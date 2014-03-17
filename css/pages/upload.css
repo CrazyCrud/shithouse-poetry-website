@@ -271,17 +271,17 @@ input[type="password"].loginField {
     font-weight: normal;
     font-size: 35%; }
 
-.tags-container {
+.entry-tags-container {
   display: block;
   position: relative;
   width: 100%;
   overflow: hidden; }
 
-#tag-list {
+#entry-tag-list {
   list-style-type: none;
   margin-left: 0;
   margin-right: 0; }
-  #tag-list li {
+  #entry-tag-list li {
     display: inline-block;
     font-size: 0.618rem;
     padding-right: 0.236rem;
@@ -294,13 +294,13 @@ input[type="password"].loginField {
     color: #888888;
     cursor: pointer;
     transition: all 0.5s ease; }
-  #tag-list .tag-active {
+  #entry-tag-list .tag-active {
     background: #888888;
     color: #ffffff; }
-  #tag-list .tag-user {
+  #entry-tag-list .tag-user {
     position: relative;
     cursor: auto; }
-    #tag-list .tag-user i {
+    #entry-tag-list .tag-user i {
       position: relative;
       font-size: 0.618rem;
       width: 10px;
