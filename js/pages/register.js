@@ -106,7 +106,7 @@ function onUpdateResult(success){
 			width: 'auto',
 			title: 'Speichern fehlgeschlagen',
 			close: function(event, ui) {
-				window.location = "index.html";
+				window.location = "index.php";
 			},
 			buttons: [
 				{
@@ -125,7 +125,7 @@ function onUpdateResult(success){
 		document.cookie = "username=" + username + "; expires=" + d.toGMTString();
 		document.cookie = "userid=" + user.id + "; expires=" + d.toGMTString();
 		document.cookie = "admin=" + user.status + "; expires=" + d.toGMTString();
-		window.location = "index.html";
+		window.location = "index.php";
 		$("<div>Benutzerdaten erfolgreich aktualisiert.</div>").dialog(
 		{
 			dialogClass: "no-close",
@@ -133,7 +133,7 @@ function onUpdateResult(success){
 			width: 'auto',
 			title: 'Speichern erfolgreich',
 			close: function(event, ui) {
-				window.location = "index.html";
+				window.location = "index.php";
 			},
 			buttons: [
 				{
@@ -156,7 +156,7 @@ function onLoginSuccess(authkey){
 			width: 'auto',
 			title: 'Registrierung fehlgeschlagen',
 			close: function(event, ui) {
-				window.location = "index.html";
+				window.location = "index.php";
 			},
 			buttons: [
 				{
@@ -176,7 +176,7 @@ function onLoginSuccess(authkey){
 			title: 'Registrierung erfolgreich',
 			close: function(event, ui) {
 				logoutUser(null);
-				window.location = "index.html";
+				window.location = "index.php";
 			},
 			buttons: [
 				{
@@ -204,7 +204,7 @@ function logUserIn(user){
 			modal: true,
 			width: 'auto',
 			close: function(event, ui) {
-				window.location = "index.html";
+				window.location = "index.php";
 			},
 			title: 'Registrierung abgeschlossen',
 			buttons: {

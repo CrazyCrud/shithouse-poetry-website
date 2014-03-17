@@ -117,7 +117,7 @@ function initGUI(){
 			buttons:{
 				"OK":function(){
 					ImgurManager.deleteEntry(id, function(success){
-						if(success)window.location = "index.html";
+						if(success)window.location = "index.php";
 					});
 					$(this).dialog("close");
 				},
@@ -223,7 +223,7 @@ function fillUI(e){
 			width: "auto",
 			title: "Eintrag nicht vorhanden",
 			close: function(){
-				window.location = "index.html";
+				window.location = "index.php";
 			}
 		});
 	}else{
@@ -377,7 +377,7 @@ function changeTranscription(){
 	$input.val(entry.information[0]["transcription"]);
 	$ok = $('<button class="tiny">OK</ok>');
 	$help = $('<label>'
-		+'<a href="howto.html#transription" target="_blank">Wie transkribiere ich richtig?</a>'
+		+'<a href="howto.php#transcription" target="_blank">Wie transkribiere ich richtig?</a>'
 	+'</label>');
 	$container.append($input);
 	$container.append($ok);
@@ -450,9 +450,9 @@ function userLogout(){
 		else
 		{
 			switch(data["success"]){
-				case 1: //delete cookies, call index.html 
+				case 1: //delete cookies, call index.php 
 				document.cookie = "authkey= ; expires= Thu, 01 Jan 1970 00:00:00 GMT";
-				window.location = "index.html";
+				window.location = "index.php";
 					break;
 				default: console.log(data);					
 			}

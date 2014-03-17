@@ -1,7 +1,7 @@
 # robots.txt zu Latrinalia
 
 User-agent: *
-Disallow: /tou.html
+Disallow: /tou.php
 Disallow: /css/
 Disallow: /img/
 Disallow: /js/

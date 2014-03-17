@@ -1,0 +1,98 @@
+
+		<script type="text/template" class="overlay-template">
+			<div id="overlay-background"></div>
+		</script>
+		<script type="text/template" class="overlay-user">
+			<section id="user-overlay">
+				<div class="user-overlay-container">
+					<ul>
+						<li><a id="link-timeline" href="timeline.php">Meine Timeline</a></li>
+						<li><a id="link-myimages" href="javascript:void()">Mein Profil</a></li>
+						<li><a id="link-user" href="javascript:void()">Account</a></li>
+						<li><a id="link-logout" href="javascript:void()">Logout</a></li>
+					</ul>
+				</div>
+			</section>
+		</script>
+		<script type="text/template" class="search-template">
+ 			<section id="searchcontent" class="overlaycontent">
+				<div class="row">
+					<div class="close-button-container">
+						<a href="#" class="left" id="back-button"> 
+							<i class="icon-cancel"></i>
+						</a>
+					</div>
+					<div class="small-11 small-centered medium-10 medium-centered large-8 large-centered columns form-container">
+						<div class="small-12 columns full-width input-container">
+							<input type="text" placeholder="Suche nach..." id="search-input" autofocus>
+						</div>
+						<div class="small-6 columns filter-container">
+							<div class="switch-label">
+								<span>Filter</span>
+							</div>
+							<div class="onoffswitch">
+							    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch">
+							    <label class="onoffswitch-label" for="myonoffswitch">
+							        <div class="onoffswitch-inner">
+							            <div class="onoffswitch-active"><div class="onoffswitch-switch">AN</div></div>
+							            <div class="onoffswitch-inactive"><div class="onoffswitch-switch">AUS</div></div>
+							        </div>
+							    </label>
+							</div>
+						</div>	
+						<div class="small-6 columns submit-container">
+							<a href="#" class="button-overlay" id="search-button">Suchen</a>
+						</div>
+						<div class="small-12 columns">
+							<div class="filter-type-container left">
+								<label class="filter-label">Filtern nach...</label>
+									<input type="radio" name="filtertype" value="tag" id="tagFilter" checked>
+							    	<label for="tagFilter">Tags</label>
+									<input type="radio" name="filtertype" value="type" id="typeFilter" >
+      								<label for="typeFilter">Type</label>
+      								<input type="radio" name="filtertype" value="sex" id="sexFilter">
+      								<label for="sexFilter">Geschlecht</label>
+      								<input type="radio" name="filtertype" value="location" id="locationFilter">
+      								<label for="locationFilter">Ort</label>
+							</div>
+						</div> 
+						<div class="small-12 columns searchtags-container left">
+					    	<div class="tags-search-container">
+					    		<ul id="tag-search-list">
+
+					    		</ul>
+					    	</div>
+					    </div>
+					</div>				
+				</div>
+			</section>
+    	</script>
+    	<script type="text/template" class="login-template">
+ 			<section id="logincontent" class="overlaycontent">
+				<div class="row">
+					<div class="close-button-container">
+						<a href="#" class="left" id="back-button"> 
+							<i class="icon-cancel"></i>
+						</a>
+					</div>
+					<div class="small-11 small-centered medium-10 medium-centered large-8 large-centered columns form-container">
+						<div class="small-12 columns full-width input-container">
+							<form id="login-form">
+								<input type="email" placeholder="E-Mail" name="mail-input" class="login-field" id="mail-input" autofocus />
+								<input type="password" placeholder="Passwort" name="password-input" class="login-field" id="password-input" />
+							</form>
+						</div>	
+						<div class="small-12 columns full-width submit-container">
+							<a href="register.php" class="button-overlay left" 
+									id="register-button">
+								Registrieren 
+							</a>
+							<a href="#" class="button-overlay right" 
+									id="login-button">
+								Login
+							</a>
+						</div>
+					</div>		
+				</div>
+			</section>
+    	</script>

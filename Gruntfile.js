@@ -46,7 +46,7 @@ module.exports = function(grunt) {
         uncss: {
             dist: {
                 files: {
-                'css/global.css': ['index.html','pages/*.html']
+                'css/global.css': ['index.php','pages/*.html']
                 }
             }
         },

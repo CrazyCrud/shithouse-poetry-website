@@ -509,7 +509,7 @@ function error(message){
 		width: "80%",
 		title: "Oops!",
 		close : function(){
-			window.location = "index.html";
+			window.location = "index.php";
 		}
 	});
 }

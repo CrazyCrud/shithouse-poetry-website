@@ -162,9 +162,9 @@ function logoutUser(data){
 
 function logoutSuccess(yep){
   if(yep){
-    window.location = "index.html";
+    window.location = "index.php";
   }else{
-    window.location = "index.html"; // change dat
+    window.location = "index.php"; // change dat
   }
 }
 

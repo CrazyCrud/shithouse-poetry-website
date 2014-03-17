@@ -46,7 +46,7 @@ function manageLoginOverlay(){
 			document.cookie = "admin=''; expires=" + d.toGMTString();
 			document.cookie = "authkey=''; expires=" + d.toGMTString();
 			ImgurManager.logout(logoutSuccess);
-			window.location = "index.html";
+			window.location = "index.php";
 			*/
 			logoutUser(null);
 		});
