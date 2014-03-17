@@ -54,6 +54,14 @@ class Queries{
 		"SELECT id, email, username, joindate, lastaction, status
 		FROM `".DBConfig::$tables["users"]."` WHERE `id` = \"$id\"";
 	}
+	public static function updateuserstatus($userid, $status){
+		$u = DBConfig::$tables["users"];
+		$query = 
+		"UPDATE `$u`
+		SET status = $status
+		WHERE id = $userid";
+		return $query;
+	}
 	public static function update($key){
 		$u = DBConfig::$tables["users"];
 		$s = DBConfig::$tables["sessions"];
@@ -775,12 +783,14 @@ class Queries{
 		`$u`.username as username,
 		`$u`.lastaction as lastaction
 
-		FROM `$r`,`$u`,`$e`,`$c`
+		FROM `$u`,`$e`,`$r`
+		LEFT OUTER JOIN `$c`
+		ON `$r`.commentid = `$c`.id
 
-		WHERE (`$r`.userid = `$u`.id OR `$r`.userid = -1)
-		AND (`$r`.commentid = `$c`.id OR `$r`.commentid = -1)
-		AND `$r`.entryid = `$e`.id
-		AND `$r`.id = $reportid";
+		WHERE `$r`.userid = `$u`.id
+		AND `$r`.entryid = `$e`.id ";
+		if(isset($reportid))$query .= "AND `$r`.id = $reportid ";
+		$query .= "ORDER BY reportdate";
 		return $query;
 	}
 	public static function getreportofuser($entryid, $userid){

@@ -382,6 +382,17 @@ var ImgurManager = (function(){
 				}	
 			});
 		},
+		getReports : function(callback){
+			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+			var url = "getReports.php?authkey=" + authkey;
+			$.post("php/backend/" + url, function(data){
+				if(data.success == 1){
+					callback(data.data);
+				}else{
+					callback(false);
+				}	
+			});
+		},
 		addReport : function(callback, entryid, reportdesc, commentid){
 			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 			var url = "addReport.php?entryid=" + entryid + "&reportdesc=" + reportdesc +
@@ -389,6 +400,19 @@ var ImgurManager = (function(){
 			$.post("php/backend/" + url, function(data){
 				if(data.success == 1){
 					callback(true);
+				}else{
+					callback(false);
+				}	
+			});
+		},
+		updateReport : function(callback, reportid, status){
+			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+			var url = "updateReport.php?reportid=" + reportid + "&status=" + status +
+				"&authkey=" + authkey;
+			console.log(url);
+			$.post("php/backend/" + url, function(data){
+				if(data.success == 1){
+					callback(data);
 				}else{
 					callback(false);
 				}	
@@ -483,6 +507,18 @@ var ImgurManager = (function(){
 					var oneYear = 31536000000;
 					d.setTime(d.getTime() + oneYear);
 					document.cookie = "authkey=" + userData + "; expires=" + d.toGMTString();
+				}
+				callback(userData);
+			});
+		},
+		updateUserStatus : function(callback, userid, status){
+			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+			var url = 'updateUser.php?status=' + status + '&id=' + userid + '&authkey='+authkey;
+			var userData = null;
+			console.log(url);
+			$.get('php/backend/' + url, function(data) {
+				if(data.success == 1){
+					userData = data.data;
 				}
 				callback(userData);
 			});

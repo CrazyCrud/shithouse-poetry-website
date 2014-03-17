@@ -41,33 +41,40 @@ if(isset($_GET["authkey"])){
 	exit();
 }
 
-if(isset($_GET["mail"])){
-	$mail = $_GET["mail"];
+if(isset($_GET["id"])&&isset($_GET["status"])){
+	$db = new DBHelper();
+	$db->setAuthKey($key);
+	$data = $db->updateUserStatus($_GET["id"], $_GET["status"]);
 }else{
-	$json["message"]="mail missing";
-	echo json_encode($json);
-	exit();
-}
 
-if(isset($_GET["name"])){
-	$name = $_GET["name"];
-}else{
-	$json["message"]="name missing";
-	echo json_encode($json);
-	exit();
-}
+	if(isset($_GET["mail"])){
+		$mail = $_GET["mail"];
+	}else{
+		$json["message"]="mail missing";
+		echo json_encode($json);
+		exit();
+	}
 
-if(isset($_GET["pwd"])){
-	$pwd = $_GET["pwd"];
-}else{
-	$json["message"]="password missing";
-	echo json_encode($json);
-	exit();
-}
+	if(isset($_GET["name"])){
+		$name = $_GET["name"];
+	}else{
+		$json["message"]="name missing";
+		echo json_encode($json);
+		exit();
+	}
 
-$db = new DBHelper();
-$db->setAuthKey($key);
-$data = $db->updateUser($mail, $name, $pwd);
+	if(isset($_GET["pwd"])){
+		$pwd = $_GET["pwd"];
+	}else{
+		$json["message"]="password missing";
+		echo json_encode($json);
+		exit();
+	}
+
+	$db = new DBHelper();
+	$db->setAuthKey($key);
+	$data = $db->updateUser($mail, $name, $pwd);
+}
 
 if($data == false){
 	$json["success"]=$CODE_ERROR;
