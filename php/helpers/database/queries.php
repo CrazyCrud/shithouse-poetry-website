@@ -76,11 +76,14 @@ class Queries{
 	}
 	public static function deleteuser($authkey){
 		$u = DBConfig::$tables["users"];
-		return "UPDATE $u
+		$s = DBConfig::$tables["sessions"];
+		return "UPDATE `$u`
+		JOIN `$s`
+		ON `$s`.userid = `$u`.id
 		SET sessionkey='".uniqid()."',
 		status = ".DBConfig::$userStatus["deleted"].",
 		username = 'Gel&ouml;schter Nutzer'
-		WHERE sessionkey='$authkey'";
+		WHERE `$s`.authkey='$authkey'";
 	}
 	public static function getuserbyname($uname, $password){
 		if(isset($password)){
@@ -166,6 +169,12 @@ class Queries{
 		$s = DBConfig::$tables["sessions"];
 		return "DELETE FROM $s
 		WHERE authkey='$authkey'";
+	}
+	public static function harddeleteuser($id){
+		$u = DBConfig::$tables["users"];
+		$query =
+		"DELETE FROM `$u` WHERE id=$id";
+		return $query;
 	}
 	/**
 	COMMENT QUERIES
@@ -341,6 +350,14 @@ class Queries{
 		WHERE `$e`.id = $id";
 		return $query;
 	}
+	public static function mergeuserentries($oldId, $newId){
+		$e = DBConfig::$tables["entries"];
+		$query =
+		"UPDATE `$e`
+		SET `$e`.userid = $newId
+		WHERE `$e`.userid = $oldId";
+		return $query;
+	}
 	/**
 	INFORMATION QUERIES
 	*/
@@ -383,6 +400,14 @@ class Queries{
 		(entryid, artist, transcription, transcriberid, location, latitude, longitude)
 		VALUES
 		($entryid, '$artist', '$transcription', $userid, '$location', $lat, $long)";
+		return $query;
+	}
+	public static function mergeuserinformation($oldId, $newId){
+		$i = DBConfig::$tables["information"];
+		$query=
+		"UPDATE `$i`
+		SET `$i`.transcriberid = $newId
+		WHERE `$i`.transcriberid = $oldId";
 		return $query;
 	}
 	/**
@@ -608,6 +633,14 @@ class Queries{
 		WHERE `$r`.entryid = $entryid";
 		return $query;
 	}
+	public static function mergeuserrating($oldId, $newId){
+		$r = DBConfig::$tables["ratings"];
+		$query =
+		"UPDATE `$r`
+		SET `$r`.userid = $newId
+		WHERE `$r`.userid = $oldId";
+		return $query;
+	}
 	/**
 	TYPE QUERIES
 	*/
@@ -750,6 +783,14 @@ class Queries{
 		$query = 
 		"DELETE FROM `$r`
 		WHERE `$r`.entryid = $entryid";
+		return $query;
+	}
+	public static function mergeuserreports($oldId, $newId){
+		$r = DBConfig::$tables["reports"];
+		$query =
+		"UPDATE `$r`
+		SET `$r`.userid = $newId
+		WHERE `$r`.userid = $oldId";
 		return $query;
 	}
 	/**
