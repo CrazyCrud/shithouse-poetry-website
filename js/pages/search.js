@@ -100,21 +100,21 @@ function appendSearchTags(which, singleValue){
 		case "tag":
 			for(var i = 0; i < tags.length; i++){
 				if(!_.isUndefined(tags[i])){
-					appendSingleTag(tags[i], singleValue);
+					appendSingleSearchTag(tags[i], singleValue);
 				}
 			}
 			break;
 		case "type":
 			for(var i = 0; i < types.length; i++){
 				if(!_.isUndefined(types[i])){
-					appendSingleTag(types[i], singleValue);
+					appendSingleSearchTag(types[i], singleValue);
 				}
 			}
 			break;
 		case "sex":
 			for(var i = 0; i < sex.length; i++){
 				if(!_.isUndefined(sex[i])){
-					appendSingleTag(sex[i], singleValue);
+					appendSingleSearchTag(sex[i], singleValue);
 				}
 			}
 			break;
@@ -122,17 +122,17 @@ function appendSearchTags(which, singleValue){
 	$("#tag-search-list").fadeIn();
 }
 
-function appendSingleTag(tag, singleValue){
+function appendSingleSearchTag(tag, singleValue){
 	var $tagItem = $("<li><span>" + tag + "</span></li>");
 
 	$tagItem.click(function(event) {
-		tagFunctionality($(this), singleValue);
+		searchTagFunctionality($(this), singleValue);
 	});
 
 	$("#tag-search-list").append($tagItem);
 }
 
-function tagFunctionality(tag, singleValue){
+function searchTagFunctionality(tag, singleValue){
 	var $tag = $(tag);
 	if($tag.hasClass('tag-active')){
 		$tag.removeClass('tag-active');
