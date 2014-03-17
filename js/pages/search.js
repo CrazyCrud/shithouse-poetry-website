@@ -47,7 +47,7 @@ function appendSearchOverlay(){
 		}else if($filterSwitch.is(":checked")){
 			var filterFor = $("input:radio[name=filtertype]:checked").val();
 			var values = [];
-			$.each($('.tag-active').children('span'), function() {
+			$.each($('#tag-search-list .tag-active').children('span'), function() {
 				 values[values.length] = $(this).html();
 			});
 			if(values.length > 0){
