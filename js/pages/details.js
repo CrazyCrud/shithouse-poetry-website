@@ -246,6 +246,7 @@ function fillUI(e){
 		var $t = $("#typedescription");
 		$t.html(entry.typename);
 		$t.attr("title",entry.typedescription);
+		$t.attr("href", "search.php?type=type&values="+entry.typename);
 
 		setTags(entry);
 
@@ -254,12 +255,15 @@ function fillUI(e){
 		switch(sex){
 			case "m":
 				$("#sex").addClass("icon-male");
+				$("#sex").prop("title", "M&auml;nnertoilette");
 				break;
 			case "w":
 				$("#sex").addClass("icon-female");
+				$("#sex").prop("title", "Frauentoilette");
 				break;
 			default:
 				$("#sex").addClass("icon-help");
+				$("#sex").prop("title", "Unisex-Toilette");
 		}
 
 		//set upload info
@@ -290,6 +294,8 @@ function setInfo(entry){
 
 	//set location
 	$("#locationdescription").html(entry.information[0].location);
+	//$("locationdescription").attr("title", "");
+	//$("#locationdescription").attr("href", "search.php?type=location&values="+entry.information[0].location);
 }
 
 function setImage(entry){
