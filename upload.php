@@ -122,8 +122,8 @@
 								<div class="small-12 columns fieldset-container">
 							    	<fieldset>
 								    	<legend>Tags<small>optional</small></legend>
-								    	<div class="tags-container">
-								    		<ul id="tag-list">
+								    	<div class="entry-tags-container">
+								    		<ul id="entry-tag-list">
 
 								    		</ul>
 								    	</div>
