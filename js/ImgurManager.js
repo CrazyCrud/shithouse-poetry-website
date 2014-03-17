@@ -170,6 +170,7 @@ var ImgurManager = (function(){
 			});
 		},
 		searchByLocation : function(callback, locations, order, currentEntry){
+			console.log("test?");
 			locations = locations || "Universität";
 			order = order || orderby.properties[orderby.DATE].name;
 			start = currentEntry || 0;
@@ -180,9 +181,12 @@ var ImgurManager = (function(){
 				'values=' + locations + '&start=' + start + 
 				'&orderby=' + order;
 			$.get('php/backend/' + url, function(data) {
+				console.log("callback");
 				if(data.success == 1){
 					links = data.data;
+					console.log("success");
 				}	
+
 				callback(links);	
 			});
 		},

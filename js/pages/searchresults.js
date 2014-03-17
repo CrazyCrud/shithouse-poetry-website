@@ -27,6 +27,9 @@ $(document).ready(function() {
 			case "tag":
 				ImgurManager.searchByTag(computeSearch, values, null, 0);
 				return;
+			case "location":
+				ImgurManager.searchByLocation(computeSearch, values, null, 0);
+				return;
 		}
 	}else{
 		resultsError(NO_RESULTS);

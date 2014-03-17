@@ -7,7 +7,8 @@ var $searchInput;
 var autocompleteList = [];
 var tags = [];
 var types = [];
-var sex = ["Männer", "Frauen", "Unisex"];
+var locations = [];
+var sex = ["Männertoilette", "Frauentoilette", "Unisex-Toilette"];
 
 var searchTemplate = null; 
 
@@ -18,6 +19,7 @@ $(document).ready(function() {
 		ImgurManager.getTags(getSearchTags);
 		// ImgurManager.getUserTags(getSearchTags);
 		ImgurManager.getTypes(getSearchTypes);
+		ImgurManager.getUsedLocations(getSearchLocations);
 		appendSearchOverlay();
 	});
 });
@@ -118,6 +120,13 @@ function appendSearchTags(which, singleValue){
 				}
 			}
 			break;
+		case "location":
+			for(var i = 0; i < locations.length; i++){
+				if(!_.isUndefined(locations[i])){
+					appendSingleSearchTag(locations[i], singleValue);
+				}
+			}
+			break;
 	}
 	$("#tag-search-list").fadeIn();
 }
@@ -169,6 +178,18 @@ function getSearchTypes(typeData){
 			return;
 		}else{
 			types = _.pluck(typeData, 'name');
+		}
+	}
+}
+
+function getSearchLocations(locationData){
+	if(_.isUndefined(locationData) || _.isNull(locationData)){
+		return;
+	}else{
+		if(_.isEmpty(locationData)){
+			return;
+		}else{
+			locations = _.pluck(locationData, 'location');
 		}
 	}
 }
