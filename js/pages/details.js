@@ -297,7 +297,7 @@ function setInfo(entry){
 
 	//set location
 	$("#locationdescription").html(entry.information[0].location);
-	//$("locationdescription").attr("title", "");
+	//$("locationdescription").attr("title", "Nach weiteren Eintr&auml;gen mit dem Ort \''+entry.information[0].location+'\' suchen.");
 	//$("#locationdescription").attr("href", "search.php?type=location&values="+entry.information[0].location);
 }
 
