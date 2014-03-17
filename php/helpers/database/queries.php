@@ -19,10 +19,21 @@ class Queries{
 	}
 	public static function verify($key){
 		$u = DBConfig::$tables["users"];
+		$newKey = uniqid();
 		$query=
 		"UPDATE `$u`
-		SET status = ".DBConfig::$userStatus["default"]."
+		SET status = ".DBConfig::$userStatus["default"].",
+		sessionkey = '$newKey'
 		WHERE sessionkey='$key'";
+		return $query;
+	}
+	public static function updateverificationkey($userid, $key){
+		$u = DBConfig::$tables["users"];
+		$query =
+		"UPDATE `$u`
+		SET sessionkey = '$key',
+		status = ".DBConfig::$userStatus["newUser"]."
+		WHERE `$u`.id = $userid";
 		return $query;
 	}
 	public static function registerdummy($id){
@@ -174,6 +185,12 @@ class Queries{
 		$u = DBConfig::$tables["users"];
 		$query =
 		"DELETE FROM `$u` WHERE id=$id";
+		return $query;
+	}
+	public static function getallusers(){
+		$u = DBConfig::$tables["users"];
+		$query =
+		"SELECT * FROM `$u`";
 		return $query;
 	}
 	/**

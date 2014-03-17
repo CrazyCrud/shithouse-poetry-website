@@ -137,11 +137,30 @@ class DBHelper{
 			$this->registerDummy($user);
 		}
 
+		if($mail != $user["email"]){
+			$key = md5($mail).uniqid();
+			$query = Queries::updateverificationkey($user["id"],$key);
+			if($this->query($query)){
+				sendVerificationMail($mail, $name, $key);
+			}
+		}
+
 		if(isset($pwd)){
 			$query = Queries::updateuser($user["id"], $mail, $name, $pwd);
 		}else{
 			$query = Queries::updateuserwithoutpassword($user["id"], $mail, $name);
 		}
+		return $this->query($query);
+	}
+
+	public function getAllUsers(){
+		$user = $this->getUser();
+		if(!isset($user)
+			||$user===false
+			||$user["status"]!=DBConfig::$userStatus["admin"]){
+			return false;
+		}
+		$query = Queries::getallusers();
 		return $this->query($query);
 	}
 
