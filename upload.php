@@ -55,6 +55,9 @@
 			<section id="maincontent">
 				<div class="row">
 					<div class="small-12 columns full-width">
+						<label>
+							<a href="howto.html" target="_blank">Wie mache ich das hier richtig?</a>
+						</label>
 						<div class="upload-forms-container">
 							<form data-abide="ajax">
 								<div class="add-image-container">
@@ -99,12 +102,18 @@
 								</div>
 							    <div class="small-12 columns add-sex-container">
 							    	<label>Geschlecht<small>erforderlich</small></label>
-	      							<input type="radio" name="sex" value="M" id="men" required>
-	      							<label for="men">Männertoilette</label>
-							      	<input type="radio" name="sex" value="W" id="women" required>
-							      	<label for="women">Frauentoilette</label>
-							      	<input type="radio" name="sex" value="U" id="unisex" required>
-							      	<label for="unisex">Unisex-Toilette</label>
+							    	<div class="small-5 medium-3 large-2 columns add-sex-container">
+		      							<input type="radio" name="sex" value="M" id="men" required>
+		      							<label for="men">Männertoilette</label>
+		      						</div>
+		      						<div class="small-7 medium-3 large-2 columns add-sex-container">
+								    	<input type="radio" name="sex" value="W" id="women" required>
+								      	<label for="women">Frauentoilette</label>
+							      	</div>
+							      	<div class="small-12 medium-3 large-2 columns add-sex-container left">
+								      	<input type="radio" name="sex" value="U" id="unisex" required>
+								      	<label for="unisex">Unisex-Toilette</label>
+								    </div>
 							    </div>
 							    <div class="small-12 columns add-location-container">
 									<label for="location">Ort<small>optional</small>
@@ -138,21 +147,23 @@
 							    		für das Bild aus
 							   		</small>
 							    </div>
-							    <div class="small-12 columns fieldset-container" id="tou">
-						        	<div class="small-12 columns tou-container">
-						        		<input type="checkbox" id="confirm-tou" required>
-						        		</input>
-						        		<label for="confirm-tou">
-						        			Ich habe die <a target="_blank" href="tou.html">Nutzungsbedingungen</a>
-											für Latrinalia gelesen und
-											akzeptiert und erkläre hiermit
-											meine Einwilligung in die Erhebung,
-											Speicherung und Verarbeitung
-											meiner personenbezogenen Daten zum
-											Zwecke der Teilnahme an Latrinalia.
-						        		</label>
+						        	<div class="small-12 columns fieldset-container" id="tou">
+						        		<div class="small-1 columns tou-container center">
+							        		<input type="checkbox" id="confirm-tou" required>
+							        		</input>
+							        	</div>
+						        		<div class="small-11 columns tou-container">
+							        		<label for="confirm-tou">
+							        			Ich habe die <a target="_blank" href="tou.html">Nutzungsbedingungen</a>
+												für Latrinalia gelesen und
+												akzeptiert und erkläre hiermit
+												meine Einwilligung in die Erhebung,
+												Speicherung und Verarbeitung
+												meiner personenbezogenen Daten zum
+												Zwecke der Teilnahme an Latrinalia.
+							        		</label>
+						        		</div>
 						        	</div>
-						      	</div>
 							    <div class="small-12 columns">
 							    	<button id="upload-submit"
 							    		class="button medium right">

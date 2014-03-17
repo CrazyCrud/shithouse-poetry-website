@@ -51,78 +51,82 @@
 			<section id="maincontent">
 				<div class="row">
 					<div class="small-12 columns register-forms-container">
-						<div class="small-12 medium-9 medium-offset-3
-								large-9 large-offset-3 columns headline-container">
+						<div class="small-12 medium-10 medium-offset-2
+								large-10 large-offset-2 columns headline-container">
 							<h3 id="header">Registrieren</h3>															
 						</div>	
 						<form data-abide="ajax" class="form-register" novalidate="novalidate">
 							<div class="row">
-					        	<div class="small-12 medium-3 large-3 columns">
-					        		<label for="username">Benutzername</label>
+					        	<div class="small-12 medium-2 large-2 columns">
+					        		<label class="inline"for="username">Benutzername</label>
 					        	</div>
-					        	<div class="small-12 medium-9 large-9 columns">
+					        	<div class="small-11 medium-9 large-9 columns left">
 					        		<input type="text" pattern="username" id="username" 
 					        			placeholder="Hier Benutzername eingeben..." required>
 					        		<small class="error error-username">Der Name muss mindestens 4 Zeichen lang sein ohne Sonderzeichen</small>
 					        	</div>
 					      	</div>
 					      	<div class="row">
-					        	<div class="small-12 medium-3 large-3 columns">
-					        		<label for="mail">E-Mail</label>
+					        	<div class="small-12 medium-2 large-2 columns">
+					        		<label class="inline" for="mail">E-Mail</label>
 					        	</div>
-					        	<div class="small-12 medium-9 large-9 columns">
+					        	<div class="small-11 medium-9 large-9 columns left">
 					          		<input pattern="email" type="email" id="mail" 
 					          			placeholder="Hier E-Mail eingeben..." required>
 					       		</div>
 					      	</div>
 					      	<div class="row" id="old-pwd">
-					        	<div class="small-12 medium-3 large-3 columns">
-					        		<label for="old-password">Aktuelles Passwort</label>
+					        	<div class="small-12 medium-2 large-2 columns">
+					        		<label class="inline" for="old-password">Aktuelles Passwort</label>
 					        	</div>
-					        	<div class="small-12 medium-9 large-9 columns">
+					        	<div class="small-11 medium-9 large-9 columns left">
 					        		<input type="password" id="old-password" placeholder="Hier aktuelles Passwort eingeben..." required>
 					        	</div>
 					        </div>
 					      	<div class="row">
-					        	<div class="small-12 medium-3 large-3 columns">
-					        		<label for="password" id="new-pwd">Passwort</label>
+					        	<div class="small-12 medium-2 large-2 columns">
+					        		<label class="inline" for="password" id="new-pwd">Passwort</label>
 					        	</div>
-					        	<div class="small-12 medium-9 large-9 columns">
+					        	<div class="small-11 medium-9 large-9 columns left">
 					        		<input type="password" pattern="password_easy" id="password" placeholder="Hier Passwort eingeben..." required>
 					        		<small class="error error-password">Das Passwort muss mindestens 6 Zeichen lang sein</small>
 					        	</div>
 					        </div>
 					        <div class="row">
-					        	<div class="small-12 medium-3 large-3 columns">
-					        		<label for="confirm-password">Passwort bestätigen</label>
+					        	<div class="small-12 medium-2 large-2 columns">
+					        		<label class="inline" for="confirm-password">Passwort bestätigen</label>
 					        	</div>
-					        	<div class="small-12 medium-9 large-9 columns">
+					        	<div class="small-11 medium-9 large-9 columns left">
 					        		<input type="password" pattern="password_easy" id="confirm-password" 
 					        			placeholder="Hier Passwort bestätigen..." data-equalto="password">
 					        	</div>
 					      	</div>
 					      	<div class="row">
-					        	<div class="small-12 medium-3 large-3 columns">
-					        		<label for="confirm-tou">
-					        			Nutzungsbedingungen
-					        		</label>
+					        	<div class="small-12 medium-2 large-2 columns">
+					        		<br/>
 					        	</div>
-					        	<div class="small-12 medium-9 large-9 columns tou-container">
-					        		<input type="checkbox" id="confirm-tou" required>
-					        		</input>
-					        		<label for="confirm-tou">
-					        			Ich habe die <a target="_blank" href="tou.html">Nutzungsbedingungen</a>
-										für Latrinalia gelesen und
-										akzeptiert und erkläre hiermit
-										meine Einwilligung in die Erhebung,
-										Speicherung und Verarbeitung
-										meiner personenbezogenen Daten zum
-										Zwecke der Teilnahme an Latrinalia.
-					        		</label>
+					        	<div class="row">
+						        	<div class="small-11 medium-9 large-9 columns left tou-container">
+						        		<div class="small-1 columns tou-container left">
+							        		<input type="checkbox" id="confirm-tou" required>
+							        		</input>
+							        	</div>
+						        		<div class="small-11 columns tou-container">
+							        		<label for="confirm-tou">
+							        			Ich habe die <a target="_blank" href="tou.html">Nutzungsbedingungen</a>
+												für Latrinalia gelesen und
+												akzeptiert und erkläre hiermit
+												meine Einwilligung in die Erhebung,
+												Speicherung und Verarbeitung
+												meiner personenbezogenen Daten zum
+												Zwecke der Teilnahme an Latrinalia.
+							        		</label>
+						        		</div>
+						        	</div>
 					        	</div>
-					      	</div>
+					        </div>
 					      	<div class="row">
-					        	<div class="small-12 columns">
+					        	<div class="small-11 columns">
 					        		<button id="register-submit"
 							    		class="button medium right">
 							    		Registrieren

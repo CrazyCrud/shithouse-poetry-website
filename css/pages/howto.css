@@ -186,37 +186,35 @@ input[type="password"].loginField {
 :-ms-input-placeholder {
   color: #cbcdc7; }
 
-.register-forms-container {
-  overflow: hidden;
-  margin: 0.618rem 1.618rem; }
-  .register-forms-container .row {
-    margin-right: auto;
-    margin-left: auto; }
-    .register-forms-container .row .columns {
-      padding-right: 0.618rem;
-      padding-left: 0.618rem; }
-  .register-forms-container .headline-container {
-    margin-top: 0.618rem;
-    margin-bottom: 0.618rem;
-    padding-right: 0.618rem;
-    padding-left: 0.618rem; }
+/*
+Base styles include setting heading sizes, default link styles, default
+font styles, and body backgrounds; it doesn’t include any class or ID selectors
+*/
+/*
+Insert code that doesn't output CSS, things like mixin declarations, functions, and variables.
+*/
+body {
+  color: black; }
 
-.form-register label {
-  float: right; }
-.form-register .row {
-  margin-top: 0.618rem;
-  margin-bottom: 0.618rem; }
-.form-register .error-password, .form-register .error-username {
-  display: none; }
-.form-register .tou-container label {
-  margin-left: 0; }
+.row {
+  padding: 0.618rem; }
 
-@media screen and (max-width: 640px) {
-  .register-forms-container {
-    margin: 0.618rem 0.618rem; }
-  .form-register label {
-    float: left; } }
+.headline {
+  font-size: 1.618rem; }
 
-#register-submit{
-  margin-top: 10px;
-}
+.content {
+  font-size: 0.618rem;
+  vertical-align: middle; }
+  .content .text {
+    margin-bottom: 0.618rem; }
+  .content .images .image {
+    text-align: center;
+    font-size: 2.618rem; }
+    .content .images .image .title {
+      font-size: 0.618rem; }
+    .content .images .image img {
+      margin-bottom: 0.618rem; }
+    .content .images .image .icon-thumbs-down-1 {
+      color: #ff4444; }
+    .content .images .image .icon-thumbs-up-1 {
+      color: #99cc00; }
