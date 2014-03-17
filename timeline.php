@@ -123,8 +123,8 @@
 							</div>
 						</div> 
 						<div class="small-12 columns searchtags-container left">
-					    	<div class="tags-container">
-					    		<ul id="tag-list">
+					    	<div class="tags-search-container">
+					    		<ul id="tag-search-list">
 
 					    		</ul>
 					    	</div>
