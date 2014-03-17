@@ -332,6 +332,30 @@ class Queries{
 			LIMIT $start, $limit";
 		return $query;
 	}
+	public static function getentriesbylocation($start, $limit, $orderby,  $where){
+		$e = DBConfig::$tables["entries"];
+		$info = DBConfig::$tables["information"];
+		$r = DBConfig::$tables["ratings"];
+		if(!isset($where)){
+			$where = "";
+		}else{
+			$where = " AND (".$where.")";
+		}
+		$query = 
+			"SELECT
+			`$info`.entryid as id,
+			location,
+			`$e`.date as date,
+			AVG(`$r`.rating) as rating
+			FROM `$e`, `$info`, `$r`
+			WHERE (`$e`.id = `$info`.entryid) 
+			AND (`$info`.entryid = `$r`.entryid)
+			$where
+			GROUP BY `$info`.entryid
+			ORDER BY $orderby DESC
+			LIMIT $start, $limit";
+		return $query;
+	}
 	public static function getallentries($start, $limit, $order, $where){
 		if(!isset($order)){
 			$order = "date";

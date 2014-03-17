@@ -477,6 +477,46 @@ class DBHelper{
 		return $this->getAllEntries($orderby, $start, $where);
 	}
 
+	public function getAllEntriesByLocation($location, $orderby, $start){
+		$e = DBConfig::$tables["entries"];
+		$info = DBConfig::$tables["information"];
+		$where = "";
+		if(is_array($location)){
+			if(count($location)>0){
+				$singlelocation = $location[0];
+				if(is_string($singlelocation)){
+					$where .= "(`$info`.location = '$singlelocation')";
+				}else{
+					return false;
+				}
+				foreach($location as $singlelocation){
+					if(is_string($singlelocation)){
+						$where .= " OR (`$info`.location = '$singlelocation')";
+					}else{
+						return false;
+					}
+				}
+			}
+		}else{
+			if(is_string($location)){
+				$where .= "(`$info`.location = '$location')";
+			}else{
+				return false;
+			}
+		}
+		$query = Queries::getentriesbylocation($start, Constants::NUMENTRIES, $orderby, $where);
+		$entries = $this->query($query);
+
+		$queriedEntries = array();
+
+		foreach($entries as $singleEntry){
+			$entry = $this->getEntry($singleEntry["id"]);
+			array_push($queriedEntries, $entry);
+		}
+
+		return $queriedEntries;
+	}
+
 	// returns an array of random entries for the user to transcribe
 	// (mostly new entries without a transcription)
 	// $amount is the number of entries to return
