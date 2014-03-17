@@ -1,7 +1,5 @@
 <?php
 
-###################### ADMIN OR USER DIFFERENT USAGE ############
-
 // How to use this page:
 // open it with the info about the latitude and longitude:
 //
@@ -18,22 +16,16 @@
 	"data":
 		[
 			{
-				"id":"1",
-				"locations":
-					[
-						"Turnhalle",
-						"Kneipe",
-						"Bar",
-						"Kirche",
-						"Cafe",
-						"Restaurant",
-						"Schule",
-						"Universit\u00e4t"
-					],
-				"fromlatitude":"-90",
-				"fromlongitude":"-180",
-				"tolatitude":"90",
-				"tolongitude":"180"
+				"location":"Sprach-, Literatur- und Kulturwissenschaften",
+				"count":"22"
+			},
+			{
+				"location":"Universit\u00e4t",
+				"count":"16"
+			},
+			{
+				"location":"Bar",
+				"count":"1"
 			}
 		]
 }

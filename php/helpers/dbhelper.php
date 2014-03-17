@@ -504,13 +504,13 @@ class DBHelper{
 			if(count($location)>0){
 				$singlelocation = $location[0];
 				if(is_string($singlelocation)){
-					$where .= "(`$info`.location = '$singlelocation')";
+					$where .= "(`$info`.location LIKE '%$singlelocation%')";
 				}else{
 					return false;
 				}
 				foreach($location as $singlelocation){
 					if(is_string($singlelocation)){
-						$where .= " OR (`$info`.location = '$singlelocation')";
+						$where .= " OR (`$info`.location LIKE '%$singlelocation%')";
 					}else{
 						return false;
 					}

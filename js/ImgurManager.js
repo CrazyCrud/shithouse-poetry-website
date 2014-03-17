@@ -183,6 +183,7 @@ var ImgurManager = (function(){
 				if(data.success == 1){
 					links = data.data;
 				}	
+
 				callback(links);	
 			});
 		},

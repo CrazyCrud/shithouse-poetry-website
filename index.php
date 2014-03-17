@@ -73,7 +73,7 @@
 				<div class="row">
 					<div class="small-12 columns full-width">
 						<dl class="tabs" data-tab>
-							<dd class="active"><a id="tab-new" href="javascript:void(0)">New</a></dd>
+							<dd><a id="tab-new" href="javascript:void(0)">New</a></dd>
 							<dd><a id="tab-hot" href="javascript:void(0)">Hot</a></dd>
 							<dd><a id="tab-vote" href="javascript:void(0)">Vote</a></dd>
 							<dd><a id="tab-transcribe" class="show-for-medium-up" 

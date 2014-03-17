@@ -255,7 +255,7 @@ function fillUI(e){
 		switch(sex){
 			case "m":
 				$("#sex").addClass("icon-male");
-				$("#sex").prop("title", "M&auml;nnertoilette");
+				$("#sex").prop("title", "Männertoilette");
 				break;
 			case "w":
 				$("#sex").addClass("icon-female");
