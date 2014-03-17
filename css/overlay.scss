@@ -254,16 +254,14 @@
 	color: $white;
 }
 
-.tags-container{
-	display: block;
-	position: relative;
-	width: 100%;
-	overflow: hidden;
-}
-
-
 .searchtags-container{
-	#tag-list{
+	.tags-search-container{
+		display: block;
+		position: relative;
+		width: 100%;
+		overflow: hidden;
+	}
+	#tag-search-list{
 		list-style-type: none;
 		margin-left: 0;
 		margin-right: 0; 

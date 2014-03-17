@@ -30,8 +30,6 @@ var ImgurManager = (function(){
 		}
 	};
 
-	var AUTH_KEY_LENGTH = 45;
-
 	return {
 		getEntries : function(callback, order, currentEntry){
 			var searchProps = {};
@@ -443,7 +441,11 @@ var ImgurManager = (function(){
 			});
 		},
 		loginUser : function(callback, mail, password){
+			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 			var url = 'login.php?mail=' + mail + '&password=' + password;
+			if(authkey && authkey.length == AUTH_KEY_LENGTH){
+				url += "&authkey="+authkey;
+			}
 			var userData = null;
 			console.log(url);
 			$.get('php/backend/' + url, function(data) {
