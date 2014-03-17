@@ -198,6 +198,7 @@ class DBHelper{
 	}
 
 	// logs in a user and returns an authkey (or false)
+	// set an authkey to combine the newly logged in account with the old one
 	public function login($email, $password){
 		$query = Queries::getuserbyname($email, $password);
 		$users = $this->query($query);
@@ -205,7 +206,13 @@ class DBHelper{
 		if($users[0]["status"]==DBConfig::$userStatus["deleted"]
 			||$users[0]["status"]==DBConfig::$userStatus["newUser"])return false;
 		$user = $users[0];
-		$key = md5($mail).uniqid();
+		$oldUser = $this->getUser();
+		if(isset($oldUser)
+			&&$oldUser!==false
+			&&$oldUser["status"]==DBConfig::$userStatus["unregistered"]){
+			$this->mergeUser($oldUser["id"], $user["id"]);
+		}
+		$key = md5($email).uniqid();
 		$query = Queries::login($user["id"], $key, md5($_SERVER['HTTP_USER_AGENT'])."@".$_SERVER['REMOTE_ADDR']);
 		if($this->query($query)){
 			return $key;
@@ -229,6 +236,27 @@ class DBHelper{
 		}else{
 			return false;
 		}
+	}
+
+	private function mergeUser($oldId, $newId){
+		$success = true;
+		$query = Queries::mergeuserentries($oldId, $newId);
+		if(!$this->query($query))$success = false;
+		$query = Queries::mergeuserinformation($oldId, $newId);
+		if(!$this->query($query))$success = false;
+		$query = Queries::mergeuserrating($oldId, $newId);
+		if(!$this->query($query))$success = false;
+		$query = Queries::mergeuserreports($oldId, $newId);
+		if(!$this->query($query))$success = false;
+		$this->deleteUser();
+		if($success)$this->hardDeleteUser($oldId);
+	}
+
+	// USE WITH CAUTION AND ONLY USE WHEN ALL RELATED ENTRIES ARE
+	// DELETED AS WELL OR ASSOCIATED TO ANOTHER USER
+	private function hardDeleteUser($id){
+		$query = Queries::harddeleteuser($id);
+		return $this->query($query);
 	}
 
 	/**

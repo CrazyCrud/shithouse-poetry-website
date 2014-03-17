@@ -63,13 +63,13 @@ function appendSearchOverlay(){
 			$filterTypesContainer.fadeIn(400, function(){
 				$searchInput.prop('disabled', true);
 				$searchInput.attr('placeholder', '');
-				$("#tag-list").hide();
+				$("#tag-search-list").hide();
 				appendSearchTags($("input:radio[name=filtertype]:checked").val());
 
 		    	$("input:radio[name=filtertype]").change(function(event) {
 		    		var filterFor = $("input:radio[name=filtertype]:checked").val();
-		    		$("#tag-list").hide();
-		    		$("#tag-list").empty();
+		    		$("#tag-search-list").hide();
+		    		$("#tag-search-list").empty();
 		    		if(filterFor == "sex"){
 		    			appendSearchTags(filterFor, true);
 		    		}else{
@@ -79,7 +79,7 @@ function appendSearchOverlay(){
 			});
 			
 		}else{
-			$("#tag-list").empty();
+			$("#tag-search-list").empty();
 			$searchInput.attr('placeholder', 'Suche nach...');
 			$searchInput.animate({'opacity': 1}, 400);
 			$searchInput.prop('disabled', false);
@@ -100,46 +100,45 @@ function appendSearchTags(which, singleValue){
 		case "tag":
 			for(var i = 0; i < tags.length; i++){
 				if(!_.isUndefined(tags[i])){
-					appendSingleTag(tags[i], singleValue);
+					appendSingleSearchTag(tags[i], singleValue);
 				}
 			}
 			break;
 		case "type":
 			for(var i = 0; i < types.length; i++){
 				if(!_.isUndefined(types[i])){
-					appendSingleTag(types[i], singleValue);
+					appendSingleSearchTag(types[i], singleValue);
 				}
 			}
 			break;
 		case "sex":
 			for(var i = 0; i < sex.length; i++){
 				if(!_.isUndefined(sex[i])){
-					appendSingleTag(sex[i], singleValue);
+					appendSingleSearchTag(sex[i], singleValue);
 				}
 			}
 			break;
 	}
-	$("#tag-list").fadeIn();
+	$("#tag-search-list").fadeIn();
 }
 
-function appendSingleTag(tag, singleValue){
+function appendSingleSearchTag(tag, singleValue){
 	var $tagItem = $("<li><span>" + tag + "</span></li>");
 
 	$tagItem.click(function(event) {
-		tagFunctionality($(this), singleValue);
+		searchTagFunctionality($(this), singleValue);
 	});
 
-	$("#tag-list").append($tagItem);
+	$("#tag-search-list").append($tagItem);
 }
 
-function tagFunctionality(tag, singleValue){
+function searchTagFunctionality(tag, singleValue){
 	var $tag = $(tag);
 	if($tag.hasClass('tag-active')){
 		$tag.removeClass('tag-active');
 		$tag.children('span').removeClass('tag-active-text');
 	}else{
 		if(singleValue){
-			console.log("sasds");
 			$.each($('.tag-active'), function() {
 				$(this).removeClass('tag-active');
 			});

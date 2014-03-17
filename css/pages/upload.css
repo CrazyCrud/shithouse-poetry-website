@@ -310,6 +310,9 @@ input[type="password"].loginField {
       padding-right: 0.146rem;
       padding-left: 0.382rem; }
 
+.tou-container input[type="checkbox"] + label {
+  margin-left: 0; }
+
 @media screen and (max-width: 1023px) {
   .image-container img {
     display: block;

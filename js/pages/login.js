@@ -95,8 +95,12 @@ function appendLoginOverlay(){
 }
 
 function userLogin(){
+	var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 	var md5_pwd = $.md5($passwordInput.val());
 	var url = "php/backend/login.php?mail=" + $mailInput.val() + "&password=" + md5_pwd;
+	if(authkey && authkey.length == AUTH_KEY_LENGTH){
+		url += "&authkey="+authkey;
+	}
 
 	$.get(url, function(data){
 		if(!data["success"]){

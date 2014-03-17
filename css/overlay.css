@@ -380,17 +380,16 @@ input[type="password"].loginField {
   font-size: 1.618rem;
   color: #ffffff; }
 
-.tags-container {
+.searchtags-container .tags-search-container {
   display: block;
   position: relative;
   width: 100%;
   overflow: hidden; }
-
-.searchtags-container #tag-list {
+.searchtags-container #tag-search-list {
   list-style-type: none;
   margin-left: 0;
   margin-right: 0; }
-  .searchtags-container #tag-list li {
+  .searchtags-container #tag-search-list li {
     display: inline-block;
     font-size: 0.618rem;
     padding-right: 0.236rem;
@@ -403,7 +402,7 @@ input[type="password"].loginField {
     color: #888888;
     cursor: pointer;
     transition: all 0.5s ease; }
-  .searchtags-container #tag-list .tag-active {
+  .searchtags-container #tag-search-list .tag-active {
     background: #888888;
     color: #ffffff; }
 

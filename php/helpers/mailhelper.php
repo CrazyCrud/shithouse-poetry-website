@@ -5,23 +5,20 @@ $emailBodyContent =
 <head></head>
 <body style="font-family:Helvetica">
 <img src="http://latrinalia.de/img/global/top-img-bw.jpg" style="width:100%"></img>
-<h2>Willkommen bei Latrinalia</h2>
-<p>Wir freuen uns, dass du zu uns gekommen bist um mit uns die Welt der Toiletten-Schmierereien zu erkunden und zu analysieren.</p>
-<p>Ziel hinter Latrinalia ist es mit Hilfe des Internets eine wissenschaftlich relevante Datenbasis zu Toiletten-Grafitti zu erstellen. Dabei bist du eine gro&szlig;e Hilfe, denn wir brauchen m&ouml;glichst viele aktive Nutzer, um all unsere Eintr&auml;ge korrekt bewerten und transkribieren zu lassen.</p>
+<h2>Willkommen bei Latrinalia, %2</h2>
+<p>Danke, dass du dich bei uns registriert hast und mit uns die Welt der Toiletten-Schmierereien erkunden und anlaysieren m&ouml;chtest.</p>
+<p>Das Ziel von Latrinalia ist mit Hilfe von Crowdsourcing eine wissenschaftlich relevante Datenbasis zum Thema Toiletten-Graffiti zu erstellen. Du bist uns dabei eine gro&szlig;e Hilfe, denn  je mehr Leute Eintr&auml;ge erstellen, bewerten und transkribieren, desto besser k&ouml;nnen wir arbeiten.</p>
 <br/>
-<br/>
-<p>Diese Email wurde dir geschickt, weil du dich bei <a href="http://www.latrinalia.de">http://www.latrinalia.de<a> registriert hast und nun deinen Email-Account verifizieren musst.<br/>
-Hast du dich dort nicht registriert und wei&szlig;t nicht, warum du diese Email bekommen hast ignoriere sie einfach.</p>
-Um deine Registrierung abzuschlie&szlig;en klicke bitte <a href="http://www.latrinalia.de/verify.php?verification=%1">auf diesen Link</a>.
-Sollte der Link aus irgendwelchen Gr&uuml;nden nicht funktionieren, kopiere einfach folgenden Text in deine Browser-Adressleiste:<br/>
-<br/>http://www.latrinalia.de/verify.php?verification=%1</p>
-<br/>
+Diese E-Mail wurde dir geschickt, weil du dich bei http://www.latrinalia.de registriert hast und nun deinen Email-Account verifizieren musst. 
+Falls du dich dort nicht registiert hast und nicht wei&szlig;t, warum du diese E-Mail bekommen hast, ignoriere sie einfach.
+<p>Um deine Registrierung abzuschlie&szlig;en, klicke bitte <a href="http://www.latrinalia.de/verify.php?verification=%1">auf diesen Link</a>.</p>
+<p>Sollte der Link aus irgendwelchen Gr&uuml;nden nicht funktionieren, kopiere einfach folgenden Text in deine Browser-Adressleiste:<br/>
+http://www.latrinalia.de/verify.php?verification=%1</p>
 <br/>
 Vielen Dank und liebe Gr&uuml;&szlig;e,<br/>
 Dein Team von Latrinalia
 </body>
 </html>';
-
 function sendVerificationMail($email, $username, $key){
 	global $emailBodyContent;
 	$url = "http://www.latrinalia.de/verify.php?verification=".$key;
@@ -29,6 +26,7 @@ function sendVerificationMail($email, $username, $key){
 	$from = "Latrinalia <noreply@latrinalia.de>";
 	$subject = "Willkommen bei Latrinalia";
 	$message = str_replace("%1", $key, $emailBodyContent);
+	$message = str_replace("%2", $username, $emailBodyContent);
 
 	$header  = "MIME-Version: 1.0\r\n";
 	$header .= "Content-type: text/html; charset=iso-8859-1\r\n";

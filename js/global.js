@@ -1,5 +1,6 @@
 var overlayTemplate = null;
 var rootFolder = null;
+var AUTH_KEY_LENGTH = 45;
 
 $(document).ready(function() {
 	 $(document).foundation();
