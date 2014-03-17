@@ -315,6 +315,16 @@ var ImgurManager = (function(){
 				callback(locations);
 			});
 		},
+		getUsedLocations : function(callback){
+			var locations = null;
+			var url = "getUsedLocations.php";
+			$.post("php/backend/" + url, function(data){
+				if(data.success == 1){
+					locations = data.data;
+				}
+				callback(locations);
+			});
+		},
 		getDefaultLocations : function(callback){
 			var locations = null;
 			var url = "getLocations.php?lat=-1&long=-1";
