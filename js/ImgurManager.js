@@ -171,6 +171,23 @@ var ImgurManager = (function(){
 				callback(links);	
 			});
 		},
+		searchByLocation : function(callback, locations, order, currentEntry){
+			locations = locations || "Universität";
+			order = order || orderby.properties[orderby.DATE].name;
+			start = currentEntry || 0;
+
+			var links = null;
+
+			var url = 'getFilteredEntries.php?filter=location&' + 
+				'values=' + locations + '&start=' + start + 
+				'&orderby=' + order;
+			$.get('php/backend/' + url, function(data) {
+				if(data.success == 1){
+					links = data.data;
+				}	
+				callback(links);	
+			});
+		},
 		getRandomEntries : function(callback){
 			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 			var links = null;
