@@ -104,7 +104,7 @@
 
 								<p>Stand: 18.03.2014</p>
 
-								<p>Copyright © 2014 ausschließliche Nutzungsrechte von Latrinalia</p>
+								<p>Copyright © 2014 ausschließliches Impressum von Latrinalia</p>
 
 							</div>
 						</div>
