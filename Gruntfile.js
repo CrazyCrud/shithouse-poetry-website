@@ -39,7 +39,8 @@ module.exports = function(grunt) {
                     'css/pages/galleryview.css': 'css/pages/galleryview.scss',
                     'css/pages/verify.css': 'css/pages/verify.scss',
                     'css/pages/tou.css': 'css/pages/tou.scss',
-                    'css/pages/howto.css': 'css/pages/howto.scss'
+                    'css/pages/howto.css': 'css/pages/howto.scss',
+                    'css/pages/admin.css': 'css/pages/admin.scss'
                 }
             } 
         },

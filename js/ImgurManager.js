@@ -382,6 +382,17 @@ var ImgurManager = (function(){
 				}	
 			});
 		},
+		getReports : function(callback){
+			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+			var url = "getReports.php?authkey=" + authkey;
+			$.post("php/backend/" + url, function(data){
+				if(data.success == 1){
+					callback(data.data);
+				}else{
+					callback(false);
+				}	
+			});
+		},
 		addReport : function(callback, entryid, reportdesc, commentid){
 			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 			var url = "addReport.php?entryid=" + entryid + "&reportdesc=" + reportdesc +
@@ -389,6 +400,18 @@ var ImgurManager = (function(){
 			$.post("php/backend/" + url, function(data){
 				if(data.success == 1){
 					callback(true);
+				}else{
+					callback(false);
+				}	
+			});
+		},
+		updateReport : function(callback, reportid, status){
+			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+			var url = "updateReport.php?reportid=" + reportid + "&status=" + status +
+				"&authkey=" + authkey;
+			$.post("php/backend/" + url, function(data){
+				if(data.success == 1){
+					callback(data);
 				}else{
 					callback(false);
 				}	
@@ -487,6 +510,17 @@ var ImgurManager = (function(){
 				callback(userData);
 			});
 		},
+		updateUserStatus : function(callback, userid, status){
+			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+			var url = 'updateUser.php?status=' + status + '&id=' + userid + '&authkey='+authkey;
+			var userData = null;
+			$.get('php/backend/' + url, function(data) {
+				if(data.success == 1){
+					userData = data.data;
+				}
+				callback(userData);
+			});
+		},
 		updateUser : function(callback, mail, username, password){
 			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 			var url = 'updateUser.php?mail=' + mail + '&pwd=' + password + '&name=' + username + '&authkey='+authkey;
@@ -504,6 +538,20 @@ var ImgurManager = (function(){
 			var url = 'getUser.php?id='+id;
 			if(authkey.length == 45)
 				url += "&authkey="+authkey;
+			console.log(url);
+			$.get("php/backend/"+url,function(data){
+				if(data.success == 1){
+					callback(data.data);
+				}else{
+					callback(false);
+				}
+			});
+		},
+		getUsers : function(callback){
+			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+			var url = 'getUsers.php?authkey='+authkey;
+			if(authkey.length != 45)
+				callback(false);
 			console.log(url);
 			$.get("php/backend/"+url,function(data){
 				if(data.success == 1){

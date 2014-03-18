@@ -1,0 +1,57 @@
+@import "../partials/base";
+
+/*
+Base styles include setting heading sizes, default link styles, default
+font styles, and body backgrounds; it doesn’t include any class or ID selectors
+*/
+/*
+Insert code that doesn't output CSS, things like mixin declarations, functions, and variables.
+*/
+
+body{
+  color: black;
+}
+
+#headline{
+	i{
+		display: none;
+	}
+}
+
+.section{
+	display: none;
+}
+
+#notifications-header{
+	text-align: center;
+	i{
+		cursor:pointer;
+		margin-right: $space_minus1;
+	}
+}
+
+#users-table-header{
+	font-size: $space_minus1;
+}
+
+#users-table-content{
+	.user-table-row{
+		.user-unknown{opacity:.5}
+		.user-new{color:$dark-yellow}
+		.user-banned{color:$red}
+		.user-deleted{color:$red}
+		.user-unregistered{opacity:.5}
+		.user-admin{color:$green}
+	}
+}
+
+#reports-table-content{
+	.report{
+		width:33%;
+	}
+	.report-table-row{
+		.report-ok{color:$grey}
+		.report-default{color:black}
+		.report-important{color:$red}
+	}
+}

@@ -26,7 +26,7 @@ function sendVerificationMail($email, $username, $key){
 	$from = "Latrinalia <noreply@latrinalia.de>";
 	$subject = "Willkommen bei Latrinalia";
 	$message = str_replace("%1", $key, $emailBodyContent);
-	$message = str_replace("%2", $username, $emailBodyContent);
+	$message = str_replace("%2", $username, $message);
 
 	$header  = "MIME-Version: 1.0\r\n";
 	$header .= "Content-type: text/html; charset=iso-8859-1\r\n";

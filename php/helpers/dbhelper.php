@@ -111,6 +111,22 @@ class DBHelper{
 		return $this->query($query);
 	}
 
+	// only doable by admin!!!
+	public function updateUserStatus($userid, $status){
+		$user = $this->getUser();
+		if(!isset($user["id"])||$user["status"]!=DBConfig::$userStatus["admin"]){
+			return false;
+		}
+		$query = Queries::updateuserstatus($userid, $status);
+		if(!$this->query($query))return false;
+		if($status==DBConfig::$userStatus["deleted"]
+			||$status==DBConfig::$userStatus["newUser"]
+			||$status==DBConfig::$userStatus["banned"]
+			||$status==DBConfig::$userStatus["unregistered"])
+			$this->logoutUser($userid);
+		return true;
+	}
+
 	public function updateUser($mail, $name, $pwd){
 		$user = $this->getUser();
 		if(!isset($user["id"])){
@@ -121,7 +137,6 @@ class DBHelper{
 		if(!isset($mail)&&!isset($name)&&!isset($pwd))return false;
 		if(!isset($mail))$mail = $user["email"];
 		if(!isset($name))$name = $user["username"];
-		if(!isset($pwd))$pwd = $user["password"];
 
 
 		// check whether username is long enough
@@ -137,11 +152,31 @@ class DBHelper{
 			$this->registerDummy($user);
 		}
 
+		if($mail != $user["email"]){
+			$key = md5($mail).uniqid();
+			$query = Queries::updateverificationkey($user["id"],$key);
+			if($this->query($query)){
+				sendVerificationMail($mail, $name, $key);
+			}
+		}
+
 		if(isset($pwd)){
 			$query = Queries::updateuser($user["id"], $mail, $name, $pwd);
+			$this->logoutUser($user["id"]);
 		}else{
 			$query = Queries::updateuserwithoutpassword($user["id"], $mail, $name);
 		}
+		return $this->query($query);
+	}
+
+	public function getAllUsers(){
+		$user = $this->getUser();
+		if(!isset($user)
+			||$user===false
+			||$user["status"]!=DBConfig::$userStatus["admin"]){
+			return false;
+		}
+		$query = Queries::getallusers();
 		return $this->query($query);
 	}
 
@@ -204,7 +239,8 @@ class DBHelper{
 		$users = $this->query($query);
 		if(count($users)==0)return false;
 		if($users[0]["status"]==DBConfig::$userStatus["deleted"]
-			||$users[0]["status"]==DBConfig::$userStatus["newUser"])return false;
+			||$users[0]["status"]==DBConfig::$userStatus["newUser"]
+			||$users[0]["status"]==DBConfig::$userStatus["banned"])return false;
 		$user = $users[0];
 		$oldUser = $this->getUser();
 		if(isset($oldUser)
@@ -236,6 +272,11 @@ class DBHelper{
 		}else{
 			return false;
 		}
+	}
+
+	private function logoutUser($userid){
+		$query = Queries::logoutuser($userid);
+		return $this->query($query);
 	}
 
 	private function mergeUser($oldId, $newId){
@@ -1173,7 +1214,7 @@ class DBHelper{
 	REPORT FUNCTIONS
 	*/
 
-	// There are two ways to call this method !!!!!!
+	// There are three ways to call this method !!!!!!
 	// First:
 	//		Only give the $id (reportid) and get the full
 	//		report with this id (you need to be logged in)
@@ -1182,10 +1223,12 @@ class DBHelper{
 	//		(you need to be logged on for that or an admin)
 	//		to get all reports from that user on the given entry
 	// 		(including possible reports on comments)
+	// Third:
+	//		Give nothing and get all reports (admin only)
 	public function getReport($id, $userid){
 		if(isset($userid)){
 			return $this->getReportOfUser($id, $userid);
-		}else{
+		}else if(isset($id)){
 			$user = $this->getUser();
 
 			if(!isset($user["id"]))return false;
@@ -1199,6 +1242,13 @@ class DBHelper{
 				&& $user["id"]!=$report[0]["userid"])return false;
 
 			return $report[0];
+		}else{
+			$user = $this->getUser();
+			if(!isset($user["id"])
+				||$user["status"]!=DBConfig::$userStatus["admin"])
+				return false;
+			$query = Queries::getreport();
+			return $this->query($query);
 		}
 	}
 
