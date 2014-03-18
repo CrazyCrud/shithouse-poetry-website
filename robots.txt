@@ -2,6 +2,8 @@
 
 User-agent: *
 Disallow: /tou.php
+Disallow: /impressum.php
+Disallow: /privacy.php
 Disallow: /css/
 Disallow: /img/
 Disallow: /js/
