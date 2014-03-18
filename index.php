@@ -17,7 +17,7 @@
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 		<script type="text/javascript" src="js/plugins/modernizr.js"></script>
-		<title>Latrinalia - Eine Platform für Toiletten-Graffiti</title>
+		<title>Latrinalia - Eine Plattform für Toiletten-Graffiti</title>
 	</head>
 	<body>
 		<div id="index">
