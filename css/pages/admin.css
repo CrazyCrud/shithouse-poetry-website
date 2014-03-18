@@ -234,7 +234,8 @@ body {
   color: #ff4444; }
 
 #locations-content #locations-map {
-  height: 28rem; }
+  height: 28rem;
+  margin-bottom: 0.618rem; }
 #locations-content #locations-table-container {
   height: 28rem;
   overflow-y: auto; }

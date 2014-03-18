@@ -83,6 +83,7 @@ i.icon-thumbs-up-1:before {
 		background-color: rgba(203, 205, 199, 0.9);
 		border-radius: 1px;
 		z-index: 10;
+		margin-bottom: 44px;
 
 		ul{
 			margin: 0 0 8px 0;
@@ -118,7 +119,7 @@ i.icon-thumbs-up-1:before {
 	.law-icon-container{
 		position: absolute;
 		display: table;
-		bottom: 2%;
+		bottom: 0;
 		right: 2%;
 		width: 32px;
 		background: $lightgrey;
@@ -141,10 +142,3 @@ i.icon-thumbs-up-1:before {
 		}
 	}
 }
-
-.law-container > div{
-	display: block;
-	width: 100%;
-	overflow: hidden;
-}
-

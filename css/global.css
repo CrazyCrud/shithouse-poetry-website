@@ -247,7 +247,8 @@ i.icon-thumbs-up-1:before {
     width: inherit;
     background-color: rgba(203, 205, 199, 0.9);
     border-radius: 1px;
-    z-index: 10; }
+    z-index: 10;
+    margin-bottom: 44px; }
     .law-container #law-overlay ul {
       margin: 0 0 8px 0;
       list-style: none; }
@@ -273,7 +274,7 @@ i.icon-thumbs-up-1:before {
   .law-container .law-icon-container {
     position: absolute;
     display: table;
-    bottom: 2%;
+    bottom: 0;
     right: 2%;
     width: 32px;
     background: #cbcdc7;
@@ -293,8 +294,3 @@ i.icon-thumbs-up-1:before {
       text-align: center;
       font-size: 0.9rem;
       color: #ffffff; }
-
-.law-container > div {
-  display: block;
-  width: 100%;
-  overflow: hidden; }
