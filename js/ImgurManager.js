@@ -43,7 +43,7 @@ var ImgurManager = (function(){
 				if(data.success == 1){
 					links = data.data;
 				}	
-				callback(links);
+				callback(links, searchProps.orderby);
 			});
 		},
 		getRandomUnstranscribedEntries : function(callback){

@@ -2,6 +2,10 @@ var currentOrder = null;
 var NO_SINGLE_IMAGE = "Wir können dir leider kein weiteres Bild liefern";
 var NO_IMAGES = "Wir können dir leider keine weiteren Bilder mehr liefern";
 
+var lastRequest = null;
+
+var requests = [];
+
 var $homeButton = $("#link-home");
 var $infiniteContainer = $(".infinite-container");
 var $imageContainer = $("#images");
@@ -29,7 +33,6 @@ $(document).ready(function() {
 
 
 $(document).on("complete", function(){
-	console.log("complete");
 	setupOnce();
 	refreshWaypoints();
 });
@@ -151,7 +154,6 @@ function setupInfiniteScroll(){
 	$("html").waypoint(function(direction) {
 		if(direction == "down"){
 			if($.waypoints('viewportHeight') < $(this).height()){
-				console.log("Load more images...");
 				if(getActiveState() == "transcribe"){
 					getUntranscribedEntries();
 				}else{
@@ -217,7 +219,6 @@ function handleVote(sucks){
 }
 
 function handleTranscription(e){
-	console.log(e.target.id);
 	if(e.target.id == "transcription-submit"){
 		var entryid = $imageContainer.find('.jg-image').find('a').attr('title');
 		var transcription = $transcribeInput.val();
@@ -268,19 +269,102 @@ function getActiveState(){
 
 function getEntries(orderby){
 	var order = orderby || currentOrder;
+	if(order == ImgurManager.OrderBy.properties[ImgurManager.OrderBy.DATE].name){
+		setRequest("new");
+	}else{
+		setRequest("hot");
+	}
 	ImgurManager.getEntries(computeEntries, order, GalleryView.getLastEntry());
 }
 
-function getFilteredEntries(){
-	ImgurManager.getFilteredEntries(computeEntries, null, GalleryView.getLastEntry());
-}
-
 function getVoteEntries(){
+	setRequest("vote");
 	ImgurManager.getRandomEntries(computeVoteEntries);
 }
 
 function getUntranscribedEntries(){
+	setRequest("transcribe");
 	ImgurManager.getRandomUnstranscribedEntries(computeTranscribeEntries);
+}
+
+function computeEntries(entries, orderby){
+	if(ImgurManager.OrderBy.properties[ImgurManager.OrderBy.DATE].name == orderby){
+		if(!isLastestRequest("new")){
+			return;
+		}
+	}else{
+		if(!isLastestRequest("hot")){
+			return;
+		}
+	}
+	if(_.isNull(entries) || _.isEmpty(entries)){
+		appendMessage(NO_IMAGES);
+	}else{
+		GalleryView.init($imageContainer);
+		if(GalleryView.appendEntries(entries)){
+			GalleryView.loadAllImages();
+		}else{
+			appendMessage(NO_IMAGES);
+		}
+	}
+}
+
+function computeTranscribeEntries(entries){
+	if(!isLastestRequest("transcribe")){
+		return;
+	}
+	if(_.isNull(entries) || _.isEmpty(entries)){
+		disableTranscribing();
+		clearScreen();
+		appendMessage(NO_SINGLE_IMAGE);
+	}else{
+		enableTranscribing();
+		GalleryView.init($imageContainer);
+		GalleryView.appendEntries(entries);
+		GalleryView.loadSingleImage();
+	}
+}
+
+function computeVoteEntries(entries){
+	if(!isLastestRequest("vote")){
+		return;
+	}
+	if(_.isNull(entries) || _.isEmpty(entries)){
+		disableVoting();
+		clearScreen();
+		appendMessage(NO_SINGLE_IMAGE);
+	}else{
+		enableVoting();
+		GalleryView.init($imageContainer);
+		GalleryView.appendEntries(entries);
+		GalleryView.loadSingleImage();
+	}
+}
+
+function setOrder(newOrder){
+	if(newOrder == currentOrder){
+		return;
+	}
+	currentOrder = newOrder;
+}
+
+function setRequest(which){
+	requests[requests.length] = which;
+	if(requests.length > 3){
+		requests = requests.slice(1);
+	}
+}
+
+function isLastestRequest(which){
+	var lastRequest = _.last(requests);
+	if(_.isUndefined(lastRequest)){
+		return true;
+	}
+	if(_.last(requests) == which){
+		return true;
+	}else{
+		return false;
+	}
 }
 
 function addRating(entryid, rating){
@@ -327,52 +411,6 @@ function onGetUser(data){
 	var transcription = $transcribeInput.val();
 	ImgurManager.updateTranscription(GalleryView.loadSingleImage, entryid, transcription);
 	$transcribeInput.val("");
-}
-
-function computeEntries(entries){
-	if(_.isNull(entries) || _.isEmpty(entries)){
-		appendMessage(NO_IMAGES);
-	}else{
-		GalleryView.init($imageContainer);
-		if(GalleryView.appendEntries(entries)){
-			GalleryView.loadAllImages();
-		}else{
-			appendMessage(NO_IMAGES);
-		}
-	}
-}
-
-function computeTranscribeEntries(entries){
-	if(_.isNull(entries) || _.isEmpty(entries)){
-		disableTranscribing();
-		clearScreen();
-		appendMessage(NO_SINGLE_IMAGE);
-	}else{
-		enableTranscribing();
-		GalleryView.init($imageContainer);
-		GalleryView.appendEntries(entries);
-		GalleryView.loadSingleImage();
-	}
-}
-
-function computeVoteEntries(entries){
-	if(_.isNull(entries) || _.isEmpty(entries)){
-		disableVoting();
-		clearScreen();
-		appendMessage(NO_SINGLE_IMAGE);
-	}else{
-		enableVoting();
-		GalleryView.init($imageContainer);
-		GalleryView.appendEntries(entries);
-		GalleryView.loadSingleImage();
-	}
-}
-
-function setOrder(newOrder){
-	if(newOrder == currentOrder){
-		return;
-	}
-	currentOrder = newOrder;
 }
 
 function clearRequests(){

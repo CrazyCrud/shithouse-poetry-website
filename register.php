@@ -80,7 +80,7 @@
 					        		<label class="inline" for="old-password">Aktuelles Passwort</label>
 					        	</div>
 					        	<div class="small-11 medium-9 large-9 columns left">
-					        		<input type="password" id="old-password" placeholder="Hier aktuelles Passwort eingeben..." required>
+					        		<input type="password" pattern="password_easy" id="old-password" placeholder="Hier aktuelles Passwort eingeben..." required>
 					        	</div>
 					        </div>
 					      	<div class="row">
