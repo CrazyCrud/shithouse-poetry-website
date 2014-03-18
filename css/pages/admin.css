@@ -225,7 +225,7 @@ body {
   color: #99cc00; }
 
 #reports-table-content .report {
-  max-width: 33%; }
+  width: 33%; }
 #reports-table-content .report-table-row .report-ok {
   color: #B8B8B8; }
 #reports-table-content .report-table-row .report-default {
