@@ -2,6 +2,7 @@ var $users = $("#users-table-content");
 var $reports = $("#reports-table-content");
 var $userButton = $("#notifications-header #users");
 var $reportButton = $("#notifications-header #reports");
+var $locationButton = $("#notifications-header #locations");
 
 $(function(){
 	initGUI();
@@ -13,10 +14,16 @@ function initGUI(){
 	$userButton.click(function(){
 		$(".section").css("display","none");
 		$(".section#users").css("display","block");
+		loadUsers();
 	});
 	$reportButton.click(function(){
 		$(".section").css("display","none");
 		$(".section#reports").css("display","block");
+		loadReports();
+	});
+	$locationButton.click(function(){
+		$(".section").css("display","none");
+		$(".section#locations").css("display","block");
 	});
 	$(document).on("change",".useroption",function(){
 		var userid = $(this).attr("userid");
@@ -28,6 +35,22 @@ function initGUI(){
 		var status = $(this).find(":selected").attr("status");
 		updateReport(reportid, status);
 	});
+	$("#reports-table").tablesorter({ 
+		sortList: [[4,1],[3,1]],
+        textExtraction: function(node) { 
+        	if(node.hasAttribute("sort"))
+        		return node.getAttribute("sort");
+            return node.innerHTML; 
+        } 
+    });
+	$("#users-table").tablesorter({ 
+		sortList: [[3,1]],
+        textExtraction: function(node) { 
+        	if(node.hasAttribute("sort"))
+        		return node.getAttribute("sort");
+            return node.innerHTML; 
+        } 
+    });
 }
 
 function updateUser(userid, status){
@@ -64,7 +87,7 @@ function updateReport(reportid, status){
 	ImgurManager.updateReport(function(data){
 		if(data!=null){
 			var $report = $("#report"+reportid);
-			var $icon = $($reports.find(".status i")[0]);
+			var $icon = $($report.find(".status i")[0]);
 			$icon.removeClass();
 			switch(status){
 				case "-1":
@@ -112,19 +135,13 @@ function fillUsersUI(data){
 		if(isNewUser(user))newUserCount++;
 		addUser(user);
 	}
-	$("#users-table").tablesorter({ 
-		sortList: [[3,1]],
-        textExtraction: function(node) { 
-        	if(node.hasAttribute("sort"))
-        		return node.getAttribute("sort");
-            return node.innerHTML; 
-        } 
-    });
     if(newUserCount==0)
     	$("#notifications-header #users").html("");
     else
     	$("#notifications-header #users").html(newUserCount);
     $("#notifications-header #users").attr("title",newUserCount+" neue(r) Benutzer in den letzten 24 Stunden");
+
+    $("#users-table").trigger("update");
 }
 
 function fillReportsUI(data){
@@ -139,19 +156,13 @@ function fillReportsUI(data){
 		}
 		addReport(report);
 	}
-	$("#reports-table").tablesorter({ 
-		sortList: [[4,1],[3,1]],
-        textExtraction: function(node) { 
-        	if(node.hasAttribute("sort"))
-        		return node.getAttribute("sort");
-            return node.innerHTML; 
-        } 
-    });
     if(newReportsCount == 0)
     	$("#notifications-header #reports").html("");
     else
     	$("#notifications-header #reports").html(newReportsCount);
     $("#notifications-header #reports").attr("title",newReportsCount+" unbehandelte Meldung(en)");
+
+    $("#reports-table").trigger("update");
 }
 
 function addUser(queriedUser){
