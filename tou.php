@@ -174,16 +174,11 @@
 								<li>Der zwischen Latrinalia und dem Nutzer abgeschlossene Vertrag unterliegt deutschem Recht unter Ausschluss des UN-Kaufrechts.</li>
 								<li>Sollten sich einzelne Bestimmungen dieser Nutzungsbedingungen ganz oder teilweise als unwirksam erweisen, so wird die Wirksamkeit des Vertrages im Übrigen nicht berührt. An die Stelle der unwirksamen Bestimmung treten die gesetzlichen Vorschriften.</li>
 								<li>Anbieter von Latrinalia ist:</li>
-							</ol><p>Latrinalia<br />
-							Bastian Hinterleitner<br />
-							Eichhornstraße 39<br />
-							91126 Schwabach</p>
+							</ol>
 
-							<p>Stand: 17.03.2014</p>
+							<p><a rel="nofollow" href="impressum.php" target="_blank">Impressum</a></p>
 
-							<p><br />
-								<br />
-							</p>
+							<p>Stand: 18.03.2014</p>
 
 <p>Copyright © 2014 ausschließliche Nutzungsrechte von Latrinalia</p>
 
