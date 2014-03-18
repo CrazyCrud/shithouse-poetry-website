@@ -475,7 +475,7 @@ function addReport(report){
 		+'<td class="title"><a href="details.php?id='+report.entryid+'" target="_blank">'+report.entrytitle+'</a></td>'
 		+'<td class="user"><a href="user.php?id='+report.userid+'" target="_blank">'+report.username+'</a></td>'
 		+'<td class="report">'+report.reportdescription+'</td>'
-		+'<td class="date" sort="'+report.reportdate+'">'+formatTime(report.reportdate)+'</td>'
+		+'<td class="date" title="'+report.reportdate+'" sort="'+report.reportdate+'">'+formatTime(report.reportdate)+'</td>'
 		+'<td class="status" sort="'+report.status+'" >'+icon+options+'</td>'
 		+'</tr>'
 	);
