@@ -49,9 +49,8 @@ function fillUI(u){
 	}else{
 		queriedUser = u;
 	}
-	var admin = "";
-	if(queriedUser.status==1)admin='<img src="img/global/admin.png" title="Administrator"></img>';
-	$("#username").html(admin+queriedUser.username);
+	var usericon = getUserIcon(queriedUser.status);
+	$("#username").html(usericon+queriedUser.username);
 	$("#membersince").html(formatTime(queriedUser.joindate));
 	$("#lastseen").html(formatTime(queriedUser.lastaction));
 	$("#lastseen").attr("title",queriedUser.lastaction);	

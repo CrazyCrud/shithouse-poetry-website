@@ -42,9 +42,8 @@ function showComments(c){
 
 function buildComment(comment){
 	var $comment = $('<div comment-id="'+comment.commentid+'" class="comment"></div>');
-	var admin = "";
-	if(comment.userstatus==1)admin='<img src="img/global/admin.png" title="Administrator"></img>';
-	var $author = $('<div class="author">'+admin+'<a href="user.php?id='+comment.userid+'">'+comment.username+'</a></div>');
+	var usericon = getUserIcon(comment.userstatus);
+	var $author = $('<div class="author">'+usericon+'<a href="user.php?id='+comment.userid+'">'+comment.username+'</a></div>');
 	var $date = $('<div class="date">'+formatTime(comment.time)+'</div>');
 	$date.attr("title",comment.time);
 	if(user.admin || user.id == comment.userid){
@@ -271,9 +270,8 @@ function fillUI(e){
 		//set upload info
 		$("#upload-info #date").html(formatTime(entry.date));
 		$("#upload-info #date").attr("title", entry.date);
-		var admin = "";
-		if(entry.userstatus==1)admin='<img src="img/global/admin.png" title="Administrator"></img>';
-		$("#upload-info #author").html(admin+entry.username);
+		var usericon = getUserIcon(entry.userstatus);
+		$("#upload-info #author").html(usericon+entry.username);
 		$("#upload-info #author").attr("href", "user.php?id="+entry.userid);
 
 		setTranscription();
