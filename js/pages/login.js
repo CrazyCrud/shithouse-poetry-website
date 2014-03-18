@@ -62,6 +62,7 @@ function manageLoginOverlay(){
 function appendLoginOverlay(){
 	createOverlayBackground();
 	$("body").append(loginTemplate());
+	document.body.style.overflow = "hidden";
 
 	$overlay = $(".overlaycontent");
 	$backButton = $("#back-button");
@@ -89,6 +90,7 @@ function appendLoginOverlay(){
 	$backButton.click(function(event) {
 		removeOverlayBackground();
 		$overlay.remove();
+		document.body.style.overflow = "auto";
 	});
 
 	$loginButton.click(function(event) {

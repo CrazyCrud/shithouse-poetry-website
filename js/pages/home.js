@@ -174,18 +174,12 @@ function setupCurrentTab(){
 	var url = document.URL;
 	
 	if(url.indexOf("#hot") != -1){
-		setActive($hotLink.parent("dd"));
 		handleHotClick();
 	}else if(url.indexOf("#vote") != -1){
-		setActive($voteLink.parent("dd"));
 		handleVoteClick();
 	}else if(url.indexOf("#transcribe") != -1){
-		setActive($transcribeLink.parent("dd"));
 		handleTranscribeClick();
 	}else{
-		setActive($newLink.parent("dd"));
-		window.location.hash="new"
-		//getEntries(ImgurManager.OrderBy.properties[ImgurManager.OrderBy.DATE].name);
 		handleNewClick();
 	}
 }
