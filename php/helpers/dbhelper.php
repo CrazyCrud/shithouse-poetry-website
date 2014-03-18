@@ -233,7 +233,8 @@ class DBHelper{
 		$users = $this->query($query);
 		if(count($users)==0)return false;
 		if($users[0]["status"]==DBConfig::$userStatus["deleted"]
-			||$users[0]["status"]==DBConfig::$userStatus["newUser"])return false;
+			||$users[0]["status"]==DBConfig::$userStatus["newUser"]
+			||$users[0]["status"]==DBConfig::$userStatus["banned"])return false;
 		$user = $users[0];
 		$oldUser = $this->getUser();
 		if(isset($oldUser)
