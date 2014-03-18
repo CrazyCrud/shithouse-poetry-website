@@ -180,6 +180,7 @@ function setupCurrentTab(){
 	}else if(url.indexOf("#transcribe") != -1){
 		handleTranscribeClick();
 	}else{
+		console.log();
 		handleNewClick();
 	}
 }
@@ -263,6 +264,9 @@ function setActive(linkContainer){
 }
 
 function getActiveState(){
+	if(_.isUndefined($tabsContainer.children('.active').find('a').html())){
+		return undefined;
+	}
 	return $tabsContainer.children('.active').find('a').html().toLowerCase();
 }
 

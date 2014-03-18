@@ -66,27 +66,85 @@ i.icon-thumbs-up-1:before {
     transform: scale(-1, 1);
 }
 
-#law-container{
+.law-container{
 	position: fixed;
 	display: block;
-	bottom: 2%;
+	bottom: 4%;
 	right: 2%;
-	width: 32px;
-	background: $lightgrey;
-	border-radius: 32px;
-	height: 32px;
-	opacity: 0.6;
-	cursor: pointer;
-	z-index: 10;
+	width: 200px;
+	height: auto;
 	text-align: center;
+	z-index: 1000;
 
-	i{
+	#law-overlay{
+		position: relative;
+		display: none;
+		width: inherit;
+		background-color: rgba(203, 205, 199, 0.9);
+		border-radius: 1px;
+		z-index: 10;
+
+		ul{
+			margin: 0 0 8px 0;
+			list-style: none;
+
+			li{
+				text-align: center;
+
+				a{
+					display: block;
+					padding: 8px 0;
+					width: 100%;
+					height: 100%;
+					font-size: $space_minus1;
+					color: $white;
+				}
+			}
+		}
+	}
+
+		#law-overlay:before{
+		content: "";
 		position: absolute;
-		display: block;
-		top: 0;
-		bottom: 0;
-		right: 0;
-		left: 0;
+		bottom: -3%;
+		right: 8%;
+		width: 0; 
+		height: 0; 
+		border-left: 5px solid transparent;
+		border-right: 5px solid transparent;
+		border-top: 5px solid rgba(203, 205, 199, 0.9);
+	}
+
+	.law-icon-container{
+		position: absolute;
+		display: table;
+		bottom: 2%;
+		right: 2%;
+		width: 32px;
+		background: $lightgrey;
+		border-radius: 32px;
+		height: 32px;
+		opacity: 1;
+		cursor: pointer;
 		text-align: center;
+		z-index: 10000;
+		span{
+			display: table-cell;
+	  		vertical-align: middle;
+			top: 0;
+			bottom: 0;
+			right: 0;
+			left: 0;
+			text-align: center;
+			font-size: .9rem;
+			color: $white;
+		}
 	}
 }
+
+.law-container > div{
+	display: block;
+	width: 100%;
+	overflow: hidden;
+}
+

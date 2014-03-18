@@ -22,6 +22,22 @@ function setupLawMenu(){
     if($("script.law-template").length > 0){
         lawTemplate = _.template($("script.law-template").html()); 
         $("body").append(lawTemplate());
+        $(".law-icon-container").click(function(event) {
+            if($("#law-overlay").css('visibility') != "hidden"){
+              $("#law-overlay").css('visibility', 'hidden');
+            }else{
+              $("#law-overlay").css('visibility', 'visible');
+            }
+        });
+
+        $(this).mouseup(function (e)
+        {
+            var container = $("#law-overlay");
+            if (!container.is(e.target) && !($(e.target).parent().hasClass('law-icon-container')) &&
+                container.has(e.target).length === 0) {
+                $(container).css('visibility', 'hidden');
+            }
+        });
     }
 }
 

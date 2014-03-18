@@ -26,7 +26,8 @@ $(document).ready(function() {
 	$(this).mouseup(function (e)
 	{
 	    var container = $("#user-overlay");
-	    if (!container.is(e.target) && container.has(e.target).length === 0) {
+	    if (!container.is(e.target) && $(e.target).parent("a").attr('id') !=  "link-login" &&
+	    	container.has(e.target).length === 0) {
 	        $(container).remove();
 	    }
 	});
