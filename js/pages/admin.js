@@ -124,7 +124,7 @@ function fillUsersUI(data){
     	$("#notifications-header #users").html("");
     else
     	$("#notifications-header #users").html(newUserCount);
-    $("#notifications-header #users").attr("title",newUserCount+" neue Benutzer seit gestern");
+    $("#notifications-header #users").attr("title",newUserCount+" neue(r) Benutzer in den letzten 24 Stunden");
 }
 
 function fillReportsUI(data){
@@ -151,7 +151,7 @@ function fillReportsUI(data){
     	$("#notifications-header #reports").html("");
     else
     	$("#notifications-header #reports").html(newReportsCount);
-    $("#notifications-header #reports").attr("title",newReportsCount+" unbehandelte Meldungen");
+    $("#notifications-header #reports").attr("title",newReportsCount+" unbehandelte Meldung(en)");
 }
 
 function addUser(queriedUser){
@@ -206,7 +206,7 @@ function addUser(queriedUser){
     +'<td class="username"><a href="user.php?id='+queriedUser.id+'" target="_blank">'+queriedUser.username+'</a></td> '
     +'<td class="date" title="'+queriedUser.joindate+'" sort="'+queriedUser.joindate+'">'+formatTime(queriedUser.joindate)+'</td> '
     +'<td class="date" title="'+queriedUser.lastaction+'" sort="'+queriedUser.lastaction+'">'+formatTime(queriedUser.lastaction)+'</td> '
-    +'<td class="status" title="'+status+'" sort="'+queriedUser.status+'">'+icon+options+'</td> '
+    +'<td class="status" sort="'+queriedUser.status+'">'+icon+options+'</td> '
 	+'</tr>');
 
 	$users.append($container);
@@ -240,7 +240,7 @@ function addReport(report){
 		+'<td class="user"><a href="user.php?id='+report.userid+'" target="_blank">'+report.username+'</a></td>'
 		+'<td class="report">'+report.reportdescription+'</td>'
 		+'<td class="date" sort="'+report.reportdate+'">'+formatTime(report.reportdate)+'</td>'
-		+'<td class="status" sort="'+report.status+'" title="'+status+'">'+icon+options+'</td>'
+		+'<td class="status" sort="'+report.status+'" >'+icon+options+'</td>'
 		+'</tr>'
 	);
 

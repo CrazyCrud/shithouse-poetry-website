@@ -42,7 +42,7 @@ if($reports == false){
 		$json["message"] = "Database error";
 	}else{
 		$json["success"] = $CODE_NOT_FOUND;
-		$json["message"] = "No comments found";
+		$json["message"] = "No reports found";
 	}
 	echo json_encode($json);
 	exit();
