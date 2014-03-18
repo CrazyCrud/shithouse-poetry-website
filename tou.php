@@ -54,7 +54,7 @@
 				<div class="row small-12 medium-11 large-11 medium-centered large-centered columns">
 					<div id="content" >
 
-						<h2 id="terms_web_header"> 
+						<h2 id="terms_web_header"> <!-- &sect; -->
 							Rechtliche Informationen und Nutzungsbedingungen von Latrinalia zur Erstellung eines Accounts bei Latrinalia und Nutzung der Web-App von Latrinalia</h2>
 
 							<p>Der Nutzer erkennt die nachfolgenden Nutzungsbedingungen uneingeschränkt an:</p>

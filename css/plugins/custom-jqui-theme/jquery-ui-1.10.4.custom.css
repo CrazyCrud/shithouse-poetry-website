@@ -484,11 +484,12 @@ button.ui-button::-moz-focus-inner {
 	//overflow: hidden;
 	text-overflow: ellipsis;
 	font-size: .8em;
+	color: #888888;
 }
 .ui-dialog .ui-dialog-titlebar-close {
 	position: absolute;
 	right: .3em;
-	top: 50%;
+	top: 40%;
 	width: 20px;
 	margin: -10px 0 0 0;
 	padding: 1px;
@@ -523,9 +524,9 @@ button.ui-button::-moz-focus-inner {
 	bottom: -5px;
 	background-position: 16px 16px;
 }
-.ui-draggable .ui-dialog-titlebar {
+/*.ui-draggable .ui-dialog-titlebar {
 	cursor: move;
-}
+}*/
 .ui-menu {
 	list-style: none;
 	padding: 2px;
@@ -809,7 +810,7 @@ body .ui-tooltip {
 }
 .ui-widget-header {
 	border: none;
-	border-bottom: 1px solid black;
+	border-bottom: 1px solid #B8B8B8;
 	//background: #e4e4e4 url(images/ui-bg_flat_50_e4e4e4_40x100.png) 50% 50% repeat-x;
 	//color: #535353;
 	//font-weight: bold;
