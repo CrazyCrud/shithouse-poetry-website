@@ -171,6 +171,7 @@ function logoutSuccess(yep){
 function getUserIcon(status){
   switch(status){
     case 1:
+    case "1":
       return '<img src="img/global/admin.png" title="Administrator"></img>';
     default:
       return "";
