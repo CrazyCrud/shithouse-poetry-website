@@ -5,17 +5,31 @@ module.exports = function(grunt) {
         concat: {
             dist: {
                 src: [
-                    'js/plugins/*.js',
-                    'js/pages/*.js',
-                    'js/global.js'
+                    'js/plugins/jquery.min.js',
+                    'js/plugins/underscore.min.js',
+                    'js/plugins/exif/load-image.min.js',
+                    'js/plugins/exif/load-image-ios.js',
+                    'js/plugins/exif/load-image-orientation.js',
+                    'js/plugins/exif/load-image-meta.js',
+                    'js/plugins/exif/load-image-exif.js',
+                    'js/plugins/exif/load-image-exif-map.js',
+                    'js/plugins/foundation/foundation.js',
+                    'js/plugins/foundation/foundation.topbar.js',
+                    'js/plugins/foundation/foundation.abide.js',
+                    'js/plugins/gallery/*.js',
+                    'js/plugins/jquery-ui-custom/*.js',
+                    'js/plugins/md5/*.js',
+                    'js/plugins/table/*.js',
+                    'js/plugins/transit/*.js',
+                    'js/plugins/waypoint/*.js',
                 ],
-                dest: 'js/build/production.js'
+                dest: 'js/plugins/build/production.plugins.js'
             }
         },
         uglify: {
             build: {
-                src: 'js/build/production.js',
-                dest: 'js/build/production.min.js'
+                src: 'js/plugins/build/production.plugins.js',
+                dest: 'js/plugins/build/production.plugins.min.js'
             }
         },
         sass: {
@@ -44,23 +58,19 @@ module.exports = function(grunt) {
                 }
             } 
         },
-        uncss: {
-            dist: {
-                files: {
-                'css/global.css': ['index.php','pages/*.html']
-                }
-            }
-        },
         concat_css: {
             options:{
                 rebaseUrls: false
             },
             all: {
                 src: [
-                    'css/global.css',
-                    'css/pages/*.css'
+                    'css/plugins/normalize.css',
+                    'css/plugins/foundation.css',
+                    'css/plugins/custom-jqui-theme/jquery-ui-1.10.4.custom.css',
+                    'css/plugins/fontello/*.css',
+                    'css/plugins/gallery/jquery.justifiedgallery.min.css',
                 ],
-                dest: 'css/global.css'
+                dest: 'css/plugins/build/production.plugins.css'
             },
         },
         autoprefixer: {
@@ -76,10 +86,10 @@ module.exports = function(grunt) {
         cssmin: {
             minify: {
                 expand: true,
-                cwd: 'css/build/',
-                src: ['production.css', '!*.min.css'],
-                dest: 'css/build/',
-                ext: '.min.css'
+                cwd: 'css/plugins/build/',
+                src: ['production.plugins.css', '!*.min.css'],
+                dest: 'css/plugins/build/',
+                ext: '.plugins.min.css'
             }
         },
         imagemin: {
@@ -118,7 +128,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-sass');
     /*grunt.loadNpmTasks('grunt-contrib-sass');*/
     grunt.loadNpmTasks('grunt-contrib-imagemin');
-    grunt.loadNpmTasks('grunt-uncss');
     grunt.loadNpmTasks('grunt-concat-css');
     grunt.loadNpmTasks('grunt-autoprefixer');
     grunt.loadNpmTasks('grunt-contrib-cssmin');

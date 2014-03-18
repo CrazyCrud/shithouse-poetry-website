@@ -3,9 +3,7 @@
 	<head>
 		<meta charset="utf-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
-		<link rel="stylesheet" type="text/css" href="css/plugins/foundation.css"/>
-		<link rel="stylesheet" type="text/css" href="css/plugins/fontello/fontello.css"/>
-		<link rel="stylesheet" type="text/css" href="css/plugins/custom-jqui-theme/jquery-ui-1.10.4.custom.css"/>
+		<link rel="stylesheet" type="text/css" href="css/plugins/build/production.plugins.min.css"/>
 		<link rel="stylesheet" type="text/css" href="css/global.css"/>
 		<link rel="stylesheet" type="text/css" href="css/overlay.css"/>
 		<link rel="stylesheet" type="text/css" href="css/pages/tou.css"/>
@@ -185,12 +183,15 @@
 		<?php
 			include("templates.html");
 		?>
+		<!--
 		<script src="js/plugins/jquery.min.js"></script>
   		<script src="js/plugins/md5/jquery.md5.js"></script>
 		<script src="js/plugins/underscore.js"></script>
 		<script src="js/plugins/foundation/foundation.js"></script>
   		<script src="js/plugins/foundation/foundation.topbar.js"></script>
 		<script src="js/plugins/jquery-ui-custom/jquery-ui.min.js"></script>
+		-->
+		<script src="js/plugins/build/production.plugins.min.js"></script>
 		<script src="js/ImgurManager.js"></script>
   		<script src="js/StateManager.js"></script>
 		<script src="js/global.js"></script>
