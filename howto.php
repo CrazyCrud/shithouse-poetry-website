@@ -53,7 +53,7 @@
 				</div>
 			</header>
 			<section id="maincontent">
-				<div class="row" name="foto">
+				<div class="row" name="foto" id="foto">
 					<h1 class="headline">Wie mache ich ein richtiges Foto?</h1>
 					<div class="content small-12 medium-12 large-12">
 						<div class="columns small-12 medium-6 large-6 text">
@@ -74,7 +74,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="row" name="title">
+				<div class="row" name="title" id="title">
 					<h1 class="headline">Welchen Titel soll ich f&uuml;r mein Bild w&auml;hlen?</h1>
 					<div class="content">
 						<div class="columns small-12 medium-6 large-6 text">
@@ -95,7 +95,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="row" name="transcription">
+				<div class="row" name="transcription" id="transcription">
 					<h1 class="headline">Wie transkribiere ich richtig?</h1>
 					<div class="content">
 						<div class="columns small-12 medium-6 large-6 text">
@@ -120,7 +120,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="row" name="type">
+				<div class="row" name="type" id="type">
 					<h1 class="headline">Welchem Typ entspricht mein Foto?</h1>
 					<div class="content">
 						<div class="columns small-12 medium-6 large-6 text">
@@ -143,7 +143,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="row" name="gender">
+				<div class="row" name="gender" id="gender">
 					<h1 class="headline">Welches Geschlecht soll ich f&uuml;r mein Foto w&auml;hlen?</h1>
 					<div class="content">
 						<div class="columns small-12 medium-6 large-6 text">
@@ -164,7 +164,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="row" name="location">
+				<div class="row" name="location" id="location">
 					<h1 class="headline">Welchen Ort soll ich f&uuml;r mein Bild w&auml;hlen?</h1>
 					<div class="content">
 						<div class="columns small-12 medium-6 large-6 text">
@@ -188,7 +188,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="row" name="artist">
+				<div class="row" name="artist" id="artist">
 					<h1 class="headline">Wen soll ich als K&uuml;nstler f&uuml;r mein Bild eintragen?</h1>
 					<div class="content">
 						<div class="columns small-12 medium-6 large-6 text">
@@ -212,7 +212,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="row" name="tags">
+				<div class="row" name="tags" id="tags">
 					<h1 class="headline">Wie w&auml;hle ich die richtigen Tags f&uuml;r mein Bild?</h1>
 					<div class="content">
 						<div class="columns small-12 medium-6 large-6 text">
