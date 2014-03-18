@@ -2,6 +2,7 @@ var $loginLink = $("#link-login");
 var $overlay;
 var $backButton;
 var $loginButton;
+var $registerButton;
 var $registerInput;
 var $mailInput;
 var $passwordInput;
@@ -65,6 +66,7 @@ function appendLoginOverlay(){
 	$overlay = $(".overlaycontent");
 	$backButton = $("#back-button");
 	$loginButton = $("#login-button");
+	$registerButton = $("#register-button");
 	$registerInput = $("#register-input");
 	$mailInput = $("#mail-input");
 	$passwordInput = $("#password-input");
@@ -91,6 +93,15 @@ function appendLoginOverlay(){
 
 	$loginButton.click(function(event) {
 		userLogin();
+	});
+
+	$registerButton.click(function(event){
+		var mail = $mailInput.val();
+		if(mail){
+			window.location = "register.php?mail=" + mail;
+		}else{
+			window.location = "register.php";
+		}
 	});
 }
 
