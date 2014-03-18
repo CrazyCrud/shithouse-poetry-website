@@ -242,15 +242,20 @@ input[type="password"].loginField {
   border-right: 5px solid transparent;
   border-bottom: 5px solid rgba(140, 140, 140, 0.9); }
 
+.form-container .filter-label {
+  font-size: 1rem; }
 .form-container .filter-type-container {
   display: none;
-  margin-top: 0; }
+  margin-top: 0;
+  margin-bottom: 0; }
   .form-container .filter-type-container label {
     font-family: "Segoe UI Light";
     color: #cbcdc7; }
 .form-container div {
   margin-top: 0.618rem;
   margin-bottom: 0.618rem; }
+.form-container .searchtags-container {
+  margin-top: 0; }
 .form-container .input-container {
   margin-top: 4.236rem; }
 .form-container .switch-label {
@@ -258,7 +263,8 @@ input[type="password"].loginField {
   color: #cbcdc7;
   margin-top: 0;
   margin-right: 0.382rem;
-  font-family: "Segoe UI Light"; }
+  font-family: "Segoe UI Light";
+  font-size: 1rem; }
 .form-container .onoffswitch {
   position: relative;
   width: 100px;

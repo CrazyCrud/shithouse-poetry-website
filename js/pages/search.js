@@ -68,6 +68,8 @@ function appendSearchOverlay(){
 				$("#tag-search-list").hide();
 				appendSearchTags($("input:radio[name=filtertype]:checked").val());
 
+				$submitButton.html("Filtern");
+
 		    	$("input:radio[name=filtertype]").change(function(event) {
 		    		var filterFor = $("input:radio[name=filtertype]:checked").val();
 		    		$("#tag-search-list").hide();
@@ -82,6 +84,7 @@ function appendSearchOverlay(){
 			
 		}else{
 			$("#tag-search-list").empty();
+			$submitButton.html("Suchen");
 			$searchInput.attr('placeholder', 'Suche nach...');
 			$searchInput.animate({'opacity': 1}, 400);
 			$searchInput.prop('disabled', false);
