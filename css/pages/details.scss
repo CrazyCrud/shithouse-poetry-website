@@ -87,6 +87,11 @@ body{
 #upload-info{
   font-size: .5rem;
   text-align: right;
+  #author{
+    img{
+      height: .75rem;
+    }
+  }
 }
 
 #transcription{
@@ -155,6 +160,9 @@ body{
 
 .comment .author{
   font-size: .5rem;
+  img{
+    height: .75rem;
+  }
 }
 
 .comment .date{

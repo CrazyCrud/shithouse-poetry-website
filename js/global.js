@@ -168,6 +168,16 @@ function logoutSuccess(yep){
   }
 }
 
+function getUserIcon(status){
+  switch(status){
+    case 1:
+    case "1":
+      return '<img src="img/global/admin.png" title="Administrator"></img>';
+    default:
+      return "";
+  }
+}
+
 function s4() {
   return Math.floor((1 + Math.random()) * 0x10000)
              .toString(16)

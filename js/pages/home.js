@@ -2,8 +2,6 @@ var currentOrder = null;
 var NO_SINGLE_IMAGE = "Wir können dir leider kein weiteres Bild liefern";
 var NO_IMAGES = "Wir können dir leider keine weiteren Bilder mehr liefern";
 
-var lastRequest = null;
-
 var requests = [];
 
 var $homeButton = $("#link-home");
@@ -24,6 +22,13 @@ var $skipTranscription = $("#skip-transcription");
 var $mainheader = $("#mainheader");
 
 $(document).ready(function() {
+	$(window).scroll(function(event) {
+		if($(window).scrollTop() > 100){
+			$homeButton.css('visibility', 'visible');
+		}else{
+			$homeButton.css('visibility', 'hidden');
+		}
+	});
 	setupTabFunctionality();
 	setupVoting();
 	setupTranscribing();
