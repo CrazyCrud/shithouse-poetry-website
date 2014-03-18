@@ -232,3 +232,11 @@ body {
   color: black; }
 #reports-table-content .report-table-row .report-important {
   color: #ff4444; }
+
+#locations-content #locations-map {
+  height: 28rem; }
+#locations-content #locations-table-container {
+  height: 28rem;
+  overflow-y: auto; }
+#locations-content .description button {
+  float: right; }

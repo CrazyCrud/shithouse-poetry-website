@@ -144,22 +144,25 @@
 						<h3>Orte:</h2>
 					</div>
 					<div class="row" id="locations-content">
-						<div class="map columns small-12 medium-8 large-10" id="locations-map">
+						<div class="map columns small-12 medium-7 large-7" id="locations-map" name="map"></div>
+						<div id="locations-table-container" class="columns small-12 medium-5 large-5">
+							<table id="locations-table" class="tablesorter">
+								<thead> 
+									<tr> 
+										<th>Auf Karte</th>
+									    <th>Orte</th> 
+									    <th>L&ouml;schen</th>
+									</tr> 
+								</thead> 
+								<tbody id="locations-table-content"> 
+									<tr> 
+										<td>Auf Karte</td>
+									    <td>Orte</td> 
+									    <td>L&ouml;schen</td>
+									</tr> 
+								</tbody>
+							</table>
 						</div>
-						<table id="locations-table" class="tablesorter columns small-12 medium-4 large-2">
-							<thead> 
-								<tr> 
-								    <th>Orte</th> 
-								    <th>L&ouml;schen</th>
-								</tr> 
-							</thead> 
-							<tbody id="locations-table-content"> 
-								<tr> 
-								    <td>Orte</td> 
-								    <td>L&ouml;schen</td>
-								</tr> 
-							</tbody>
-						</table>
 					</div>
 				</section>
 			</section>
@@ -167,6 +170,7 @@
 		<?php
 			include("templates.html");
 		?>
+		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 		<script src="js/plugins/jquery.min.js"></script>
   		<script src="js/plugins/md5/jquery.md5.js"></script>
   		<script src="js/plugins/table/jquery.tablesorter.min.js"></script>

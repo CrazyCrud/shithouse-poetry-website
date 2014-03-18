@@ -55,3 +55,16 @@ body{
 		.report-important{color:$red}
 	}
 }
+
+#locations-content{
+	#locations-map{
+		height: 28rem;
+	}
+	#locations-table-container{
+		height: 28rem;
+		overflow-y: auto;
+	}
+	.description button{
+		float: right;
+	}
+}
