@@ -46,6 +46,9 @@ body{
 }
 
 #reports-table-content{
+	.report{
+		max-width:33%;
+	}
 	.report-table-row{
 		.report-ok{color:$grey}
 		.report-default{color:black}
