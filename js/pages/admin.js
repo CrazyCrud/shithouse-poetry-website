@@ -320,9 +320,9 @@ function drawStatisticPie(data){
 	console.log(data);
 	var data = google.visualization.arrayToDataTable([
 		['Geschlecht', 'Beiträge'],
-		['Männlich', parseInt(data.male)],
-		['Weiblich', parseInt(data.female)],
-		['Unisex', parseInt(data.unisex)]
+		['Männertoiletten', parseInt(data.male)],
+		['Frauentoiletten', parseInt(data.female)],
+		['Unisex-Toiletten', parseInt(data.unisex)]
 	]);
 
 	var options = {
