@@ -238,5 +238,8 @@ body {
 #locations-content #locations-table-container {
   height: 28rem;
   overflow-y: auto; }
+  #locations-content #locations-table-container #locations-add-header {
+    padding-left: 0.618rem;
+    padding-top: 0.618rem; }
 #locations-content .description button {
   float: right; }

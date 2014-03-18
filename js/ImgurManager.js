@@ -341,6 +341,35 @@ var ImgurManager = (function(){
 				}
 			});
 		},
+		createLocation : function(callback, locations, flat, flong, tlat, tlong){
+			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+			if(authkey.length != AUTH_KEY_LENGTH)callback(false);
+			var url = "createLocation.php?authkey="+authkey;
+			url += "&locations="+locations;
+			url += "&flat="+flat;
+			url += "&flong="+flong;
+			url += "&tlat="+tlat;
+			url += "&tlong="+tlong;
+			$.post("php/backend/"+url, function(data){
+				if(data.success == 1){
+					callback(true);
+				}else{
+					callback(false);
+				}
+			});
+		},
+		deleteLocation : function(callback, id){
+			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+			if(authkey.length != AUTH_KEY_LENGTH)callback(false);
+			var url = "deleteLocation.php?authkey="+authkey+"&locationid="+id;
+			$.post("php/backend/"+url, function(data){
+				if(data.success == 1){
+					callback(true);
+				}else{
+					callback(false);
+				}
+			});
+		},
 		getUsedLocations : function(callback){
 			var locations = null;
 			var url = "getUsedLocations.php";

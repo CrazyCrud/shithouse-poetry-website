@@ -83,7 +83,7 @@
 				<div class="row" id="notifications-header">
 					<i class="icon-user" id="users"></i>
 					<i class="icon-block" id="reports"></i>
-					<i class="icon-ok" id="locations"></i>
+					<i class="icon-map" title="Orte verwalten" id="locations"></i>
 				</div>
 				<section class="section" id="users">
 					<div class="row" id="users-header">
@@ -144,6 +144,10 @@
 					<div class="row" id="locations-content">
 						<div class="map columns small-12 medium-7 large-7" id="locations-map" name="map"></div>
 						<div id="locations-table-container" class="columns small-12 medium-5 large-5">
+							<div id="locations-add-header">
+								<span>neuen Eintrag hinzuf&uuml;gen</span>
+								<button class="tiny" id="add-location"><i class="icon-plus"></i></button>
+							</div>
 							<table id="locations-table" class="tablesorter">
 								<thead> 
 									<tr> 

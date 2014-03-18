@@ -53,6 +53,9 @@ function manageLoginOverlay(){
 			logoutUser(null);
 		});
 		$("#link-myimages").attr('href', 'user.php?id=' + user.id);
+		if(user.status == 1 || user.status == "1"){
+			$($("#link-adminpanel").parent()).css("display","block");
+		}
 		$("#link-user").attr('href', 'register.php?edit=true');
 	}else{
 		$("#user-overlay").remove();
