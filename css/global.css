@@ -240,7 +240,7 @@ i.icon-thumbs-up-1:before {
   width: 200px;
   height: auto;
   text-align: center;
-  z-index: 1000; }
+  z-index: 99; }
   .law-container #law-overlay {
     position: relative;
     display: none;
@@ -283,7 +283,7 @@ i.icon-thumbs-up-1:before {
     opacity: 1;
     cursor: pointer;
     text-align: center;
-    z-index: 10000; }
+    z-index: 99; }
     .law-container .law-icon-container span {
       display: table-cell;
       vertical-align: middle;

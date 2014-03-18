@@ -234,7 +234,7 @@ input[type="password"].loginField {
 #user-overlay:before {
   content: "";
   position: absolute;
-  top: -3%;
+  top: -2.5%;
   left: 48%;
   width: 0;
   height: 0;
