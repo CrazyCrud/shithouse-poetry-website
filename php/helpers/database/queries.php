@@ -217,7 +217,8 @@ class Queries{
 		`$c`.comment AS 'comment',
 		`$c`.timestamp AS 'time',
 		`$u`.id AS 'userid',
-		`$u`.username AS 'username'
+		`$u`.username AS 'username',
+		`$u`.status AS 'userstatus'
 		FROM `$c`, `$u`
 		WHERE `$u`.id = `$c`.userid
 		AND `comment`.id<$commentid
@@ -299,6 +300,7 @@ class Queries{
 			`$e`.sex AS sex,
 			`$e`.userid AS userid,
 			`$u`.username AS username,
+			`$u`.status AS userstatus,
 			`$t`.id AS typeid,
 			`$t`.name AS typename,
 			`$t`.description AS typedescription
@@ -338,6 +340,7 @@ class Queries{
 			`$e`.sex AS sex,
 			`$e`.userid AS userid,
 			`$u`.username AS username,
+			`$u`.status AS userstatus,
 			`$t`.id AS typeid,
 			`$t`.name AS typename,
 			`$t`.description AS typedescription,
