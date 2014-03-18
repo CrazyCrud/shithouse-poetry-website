@@ -26,8 +26,10 @@ $(document).ready(function() {
 
 function appendSearchOverlay(){
 	createOverlayBackground();
-
 	$("body").append(searchTemplate());
+	document.body.style.overflow = "hidden";
+
+	 
 
 	$overlay = $(".overlaycontent");
 	$searchLink = $("#link-search");
@@ -40,6 +42,7 @@ function appendSearchOverlay(){
 	$backButton.click(function(event) {
 		removeOverlayBackground();
 		$overlay.remove();
+		document.body.style.overflow = "auto";
 	});
 
 	$submitButton.click(function(event) {
