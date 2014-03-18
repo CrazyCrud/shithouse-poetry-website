@@ -306,14 +306,39 @@ var ImgurManager = (function(){
 			});
 		},
 		getLocations : function(callback, latitude, longitude){
+			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 			var locations = null;
-			var url = "getLocations.php?lat=" + latitude + 
-				"&long=" + longitude;
+			var url = "getLocations.php?";
+			if(authkey.length == AUTH_KEY_LENGTH){
+				url += "authkey="+authkey+"&";
+			}
+			if(latitude&&longitude){
+				url+= "lat=" + latitude
+					+"&long=" + longitude;
+			}
 			$.post("php/backend/" + url, function(data){
 				if(data.success == 1){
 					locations = data.data;
 				}
 				callback(locations);
+			});
+		},
+		updateLocation : function(callback, locationid, locations, flat, flong, tlat, tlong){
+			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+			if(authkey.length != AUTH_KEY_LENGTH)callback(false);
+			var url = "updateLocation.php?authkey="+authkey;
+			url += "&locationid="+locationid;
+			url += "&locations="+locations;
+			url += "&flat="+flat;
+			url += "&flong="+flong;
+			url += "&tlat="+tlat;
+			url += "&tlong="+tlong;
+			$.post("php/backend/"+url, function(data){
+				if(data.success == 1){
+					callback(true);
+				}else{
+					callback(false);
+				}
 			});
 		},
 		getUsedLocations : function(callback){

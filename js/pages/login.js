@@ -180,7 +180,7 @@ function error(message){
 	var $dialog = $('<div class="error-dialog">' + message + "</div>");
 	$dialog.dialog({
 		modal: true,
-		width: "80%",
+		width: "auto",
 		title: "Oops!"
 	});
 }

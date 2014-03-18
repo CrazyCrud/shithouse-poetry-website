@@ -1,5 +1,9 @@
+var map;
+var rectangles = [];
+var locationlist = [];
 var $users = $("#users-table-content");
 var $reports = $("#reports-table-content");
+var $locations = $("#locations-table-content");
 var $userButton = $("#notifications-header #users");
 var $reportButton = $("#notifications-header #reports");
 var $locationButton = $("#notifications-header #locations");
@@ -24,6 +28,7 @@ function initGUI(){
 	$locationButton.click(function(){
 		$(".section").css("display","none");
 		$(".section#locations").css("display","block");
+		loadLocations();
 	});
 	$(document).on("change",".useroption",function(){
 		var userid = $(this).attr("userid");
@@ -35,6 +40,12 @@ function initGUI(){
 		var status = $(this).find(":selected").attr("status");
 		updateReport(reportid, status);
 	});
+	$(document).on("click","#locations-table-content .description",function(){
+		initLocationEdit(this);
+	});
+	$(document).on("click","#locations-table-content .ok-button",function(){
+		updateEditedLocation(this);
+	});
 	$("#reports-table").tablesorter({ 
 		sortList: [[4,1],[3,1]],
         textExtraction: function(node) { 
@@ -45,6 +56,13 @@ function initGUI(){
     });
 	$("#users-table").tablesorter({ 
 		sortList: [[3,1]],
+        textExtraction: function(node) { 
+        	if(node.hasAttribute("sort"))
+        		return node.getAttribute("sort");
+            return node.innerHTML; 
+        } 
+    });
+    $("#locations-table").tablesorter({ 
         textExtraction: function(node) { 
         	if(node.hasAttribute("sort"))
         		return node.getAttribute("sort");
@@ -108,6 +126,14 @@ function loadUsers(){
 	ImgurManager.getUsers(fillUsersUI);
 }
 
+function loadLocations(){
+	// if map is empty
+	if(!$.trim($("#locations-map").html())){
+		initMap();
+	}
+	ImgurManager.getLocations(fillLocationsUI);
+}
+
 function loadReports(){
 	ImgurManager.getReports(fillReportsUI);
 }
@@ -142,6 +168,19 @@ function fillUsersUI(data){
     $("#notifications-header #users").attr("title",newUserCount+" neue(r) Benutzer in den letzten 24 Stunden");
 
     $("#users-table").trigger("update");
+}
+
+function fillLocationsUI(data){
+	console.log(data);
+	$locations.html("");
+	clearMap();
+	if(!data)return;
+	for(var i=0; i<data.length; i++){
+		var loc = data[i];
+		addLocation(loc);
+	}
+    
+    $("#locations-table").trigger("update");
 }
 
 function fillReportsUI(data){
@@ -256,4 +295,133 @@ function addReport(report){
 	);
 
 	$reports.append($container);
+}
+
+function addLocation(location){
+
+	locationlist[location.id] = location;
+
+	var mapIcon = '<a href="#map"><i class="icon-left-big"></i></a>';
+	var icon = '<a href="javascript:void()"><i class="icon-cancel"></i></a>';
+
+	var locations = buildLocationString(location.locations);
+
+	var $container = $('<tr class="location-table-row" locationid="'+location.id+'" id="location'+location.id+'">'
+		+'<td class="map">'+mapIcon+'</a></td>'
+		+'<td class="description row">'+locations+'</a></td>'
+		+'<td class="delete">'+icon+'</a></td>'
+		+'</tr>'
+	);
+
+	$locations.append($container);
+
+	var color = getRandomColor();
+
+	var rectangle = new google.maps.Rectangle({
+	    strokeColor: color,
+	    strokeOpacity: 0.75,
+	    strokeWeight: 2,
+	    fillColor: color,
+	    fillOpacity: 0,
+	    map: map,
+	    editable: true,
+	    locationid: location.id,
+	    bounds: new google.maps.LatLngBounds(
+	    	new google.maps.LatLng(location.fromlatitude, location.fromlongitude),
+	    	new google.maps.LatLng(location.tolatitude, location.tolongitude))
+	});
+
+	google.maps.event.addListener(rectangle,"bounds_changed",function(a,b,c){
+		var flat = this.bounds.Aa.j;
+		var flong = this.bounds.qa.j;
+		var tlat = this.bounds.Aa.k;
+		var tlong = this.bounds.qa.k;
+		updateLocation(this.locationid,false,flat,flong,tlat,tlong);
+	});
+
+	rectangles.push(rectangle);
+}
+
+function updateEditedLocation(target){
+	var $row = $($(target).closest(".location-table-row"));
+	var id = $row.attr("locationid");
+	var locationstring = $($row.find("input")[0]).val().replace(new RegExp(";( ){2,}"),"; ");
+	var location = locationlist[id];
+	location.locations = locationstring.split(";");
+	ImgurManager.updateLocation(onLocationUpdated,
+		id,
+		locationstring,
+		location.fromlatitude,
+		location.fromlongitude,
+		location.tolatitude,
+		location.tolongitude);
+}
+
+function updateLocation(id, locations, flat, flong, tlat, tlong){
+	var loc = locationlist[id];
+	if(!locations){
+		locations = buildLocationString(loc.locations);
+	}
+	loc.fromlatitude = flat;
+	loc.fromlongitude = flong;
+	loc.tolatitude = tlat;
+	loc.tolongitude = tlong;
+	loc.locations = locations.split(";");
+	ImgurManager.updateLocation(onLocationUpdated, id, locations, flat, flong, tlat, tlong);
+}
+
+function onLocationUpdated(success){
+	if(!success || success==null){
+		console.log("Error updating location ...");
+	}else{
+		endLocationEdit();
+	}
+}
+
+function initLocationEdit(target){
+	var input = $(target).find("input");
+	if(input&&input.length!=0)return;
+	endLocationEdit();
+	var $input = $('<input type="text"></input>');
+	var $button = $('<button class="tiny ok-button">OK</button>');
+	$input.val($(target).html());
+	$(target).html("");
+	$(target).append($input);
+	$(target).append($button);
+}
+
+function endLocationEdit(){
+	$("#locations-table-content .location-table-row").each(function(){
+		var id = $(this).attr("locationid");
+		var input = $(this).find("input");
+		var description = $(this).find(".description");
+		if(!input||input.length==0)return;
+		var txt = buildLocationString(locationlist[id].locations);
+		description.html(txt);
+	});
+}
+
+function buildLocationString(list){
+	if(list.length == 0)return "";
+	var result = list[0].trim();
+	for(var i=1; i<list.length; i++){
+		result += "; "+list[i].trim();
+	}
+	return result;
+}
+
+function clearMap() {
+  if (rectangles) {
+    for (i in rectangles) {
+      rectangles[i].setMap(null);
+    }
+  }
+}
+
+function initMap(){
+	var mapOptions = {
+		zoom: 8,
+		center: new google.maps.LatLng(49, 12.1),
+	};
+	map = new google.maps.Map(document.getElementById('locations-map'),mapOptions);
 }
