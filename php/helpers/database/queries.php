@@ -189,6 +189,11 @@ class Queries{
 		return "DELETE FROM $s
 		WHERE authkey='$authkey'";
 	}
+	public static function logoutuser($userid){
+		$s = DBConfig::$tables["sessions"];
+		return "DELETE FROM $s
+		WHERE userid=$userid";
+	}
 	public static function harddeleteuser($id){
 		$u = DBConfig::$tables["users"];
 		$query =

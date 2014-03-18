@@ -118,7 +118,12 @@ class DBHelper{
 			return false;
 		}
 		$query = Queries::updateuserstatus($userid, $status);
-		return $this->query($query);
+		if(!$this->query($query))return false;
+		if($status==DBConfig::$userStatus["deleted"]
+			||$status==DBConfig::$userStatus["newUser"]
+			||$status==DBConfig::$userStatus["banned"]
+			||$status==DBConfig::$userStatus["unregistered"])
+			return $this->logoutUser($userid);
 	}
 
 	public function updateUser($mail, $name, $pwd){
@@ -131,7 +136,6 @@ class DBHelper{
 		if(!isset($mail)&&!isset($name)&&!isset($pwd))return false;
 		if(!isset($mail))$mail = $user["email"];
 		if(!isset($name))$name = $user["username"];
-		if(!isset($pwd))$pwd = $user["password"];
 
 
 		// check whether username is long enough
@@ -157,6 +161,7 @@ class DBHelper{
 
 		if(isset($pwd)){
 			$query = Queries::updateuser($user["id"], $mail, $name, $pwd);
+			$this->logoutUser($user["id"]);
 		}else{
 			$query = Queries::updateuserwithoutpassword($user["id"], $mail, $name);
 		}
@@ -266,6 +271,11 @@ class DBHelper{
 		}else{
 			return false;
 		}
+	}
+
+	private function logoutUser($userid){
+		$query = Queries::logoutuser($userid);
+		return $this->query($query);
 	}
 
 	private function mergeUser($oldId, $newId){
