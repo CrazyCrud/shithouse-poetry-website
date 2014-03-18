@@ -7,6 +7,10 @@ var $locations = $("#locations-table-content");
 var $userButton = $("#notifications-header #users");
 var $reportButton = $("#notifications-header #reports");
 var $locationButton = $("#notifications-header #locations");
+var $addLocationButton = $("#add-location");
+
+var STROKE_DEFAULT = "#000";
+var STROKE_FOCUS = "#008CBA";
 
 $(function(){
 	initGUI();
@@ -30,6 +34,9 @@ function initGUI(){
 		$(".section#locations").css("display","block");
 		loadLocations();
 	});
+	$addLocationButton.click(function(){
+		createLocation();
+	});
 	$(document).on("change",".useroption",function(){
 		var userid = $(this).attr("userid");
 		var status = $(this).find(":selected").attr("status");
@@ -45,6 +52,12 @@ function initGUI(){
 	});
 	$(document).on("click","#locations-table-content .ok-button",function(){
 		updateEditedLocation(this);
+	});
+	$(document).on("click",".location-table-row .map a", function(){
+		goToMap(this);
+	});
+	$(document).on("click",".location-table-row .delete a", function(){
+		deleteLocation(this);
 	});
 	$("#reports-table").tablesorter({ 
 		sortList: [[4,1],[3,1]],
@@ -175,9 +188,10 @@ function fillLocationsUI(data){
 	$locations.html("");
 	clearMap();
 	if(!data)return;
-	for(var i=0; i<data.length; i++){
+	for(i in data){
 		var loc = data[i];
-		addLocation(loc);
+		if(loc)
+			addLocation(loc);
 	}
     
     $("#locations-table").trigger("update");
@@ -308,20 +322,18 @@ function addLocation(location){
 
 	var $container = $('<tr class="location-table-row" locationid="'+location.id+'" id="location'+location.id+'">'
 		+'<td class="map">'+mapIcon+'</a></td>'
-		+'<td class="description row">'+locations+'</a></td>'
+		+'<td class="description">'+locations+'</a></td>'
 		+'<td class="delete">'+icon+'</a></td>'
 		+'</tr>'
 	);
 
-	$locations.append($container);
-
-	var color = getRandomColor();
+	$locations.prepend($container);
 
 	var rectangle = new google.maps.Rectangle({
-	    strokeColor: color,
+	    strokeColor: STROKE_DEFAULT,
 	    strokeOpacity: 0.75,
 	    strokeWeight: 2,
-	    fillColor: color,
+	    fillColor: STROKE_DEFAULT,
 	    fillOpacity: 0,
 	    map: map,
 	    editable: true,
@@ -339,7 +351,7 @@ function addLocation(location){
 		updateLocation(this.locationid,false,flat,flong,tlat,tlong);
 	});
 
-	rectangles.push(rectangle);
+	rectangles[location.id] = rectangle;
 }
 
 function updateEditedLocation(target){
@@ -355,6 +367,64 @@ function updateEditedLocation(target){
 		location.fromlongitude,
 		location.tolatitude,
 		location.tolongitude);
+}
+
+function goToMap(target){
+	var $row = $($(target).closest(".location-table-row"));
+	var id = $row.attr("locationid");
+	hideOverlays();
+	rectangles[id].setOptions({strokeColor : STROKE_FOCUS});
+	var flat = rectangles[id].bounds.Aa.j;
+	var tlat = rectangles[id].bounds.Aa.k;
+	var flong = rectangles[id].bounds.qa.j;
+	var tlong = rectangles[id].bounds.qa.k;
+	var latitude = (flat+tlat)/2;
+	var longitude = (flong+tlong)/2;
+
+	var latDelta = Math.abs(flat-tlat);
+	var longDelta = Math.abs(flong-tlong);
+
+	var delta = latDelta;
+	if(longDelta>latDelta)delta = longDelta;
+
+	var center = new google.maps.LatLng(latitude, longitude);
+	map.fitBounds(rectangles[id].bounds);
+}
+
+function hideOverlays(){
+	for(i in rectangles){
+		rectangles[i].setOptions({strokeColor : STROKE_DEFAULT});
+	}
+}
+
+function deleteLocation(target){
+	var $row = $($(target).closest(".location-table-row"));
+	var id = $row.attr("locationid");
+	ImgurManager.deleteLocation(onLocationDeleted,id);
+	locationlist[id]=false;
+}
+
+function onLocationDeleted(success){
+	if(!success||success==null){
+		console.log("Error deleting location");
+	}else{
+		fillLocationsUI(locationlist);
+	}
+}
+
+function createLocation(){
+	map.setZoom(map.getZoom()+1);
+	var flat = map.getBounds().Aa.j;
+	var tlat = map.getBounds().Aa.k;
+	var flong = map.getBounds().qa.j;
+	var tlong = map.getBounds().qa.k;
+	map.setZoom(map.getZoom()-1);
+	var locations = "";
+	ImgurManager.createLocation(onLocationCreated, locations, flat, flong, tlat, tlong);
+}
+
+function onLocationCreated(){
+	loadLocations();
 }
 
 function updateLocation(id, locations, flat, flong, tlat, tlong){
@@ -381,7 +451,10 @@ function onLocationUpdated(success){
 function initLocationEdit(target){
 	var input = $(target).find("input");
 	if(input&&input.length!=0)return;
+	var $row = $($(target).closest(".location-table-row"));
+	var id = $row.attr("locationid");	
 	endLocationEdit();
+	rectangles[id].setOptions({strokeColor : STROKE_FOCUS});
 	var $input = $('<input type="text"></input>');
 	var $button = $('<button class="tiny ok-button">OK</button>');
 	$input.val($(target).html());
@@ -390,7 +463,8 @@ function initLocationEdit(target){
 	$(target).append($button);
 }
 
-function endLocationEdit(){
+function endLocationEdit(){	
+	hideOverlays();
 	$("#locations-table-content .location-table-row").each(function(){
 		var id = $(this).attr("locationid");
 		var input = $(this).find("input");
@@ -420,8 +494,9 @@ function clearMap() {
 
 function initMap(){
 	var mapOptions = {
-		zoom: 8,
+		zoom: 12,
 		center: new google.maps.LatLng(49, 12.1),
+		disableDefaultUI: true
 	};
 	map = new google.maps.Map(document.getElementById('locations-map'),mapOptions);
 }

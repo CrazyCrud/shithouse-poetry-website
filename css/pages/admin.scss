@@ -59,10 +59,15 @@ body{
 #locations-content{
 	#locations-map{
 		height: 28rem;
+		margin-bottom: $space_minus1;
 	}
 	#locations-table-container{
 		height: 28rem;
 		overflow-y: auto;
+		#locations-add-header{
+			padding-left: $space_minus1;
+			padding-top: $space_minus1;
+		}
 	}
 	.description button{
 		float: right;
