@@ -1,5 +1,5 @@
 var iconOffsetX = 0;
-var iconOffsetY = 0;
+var iconOffsetY = 18;
 
 $(document).ready(function() {
 	setupNavigation();
