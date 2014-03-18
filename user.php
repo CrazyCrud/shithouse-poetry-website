@@ -3,16 +3,14 @@
 	<head>
 		<meta charset="utf-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
-		<link rel="stylesheet" type="text/css" href="css/plugins/foundation.css"/>
-		<link rel="stylesheet" type="text/css" href="css/plugins/fontello/fontello.css"/>
-		<link rel="stylesheet" type="text/css" href="css/plugins/gallery/jquery.justifiedgallery.min.css"/>
+		<link rel="stylesheet" type="text/css" href="css/plugins/build/production.plugins.min.css"/>
 		<link rel="stylesheet" type="text/css" href="css/global.css"/>
 		<link rel="stylesheet" type="text/css" href="css/overlay.css"/>
 		<link rel="stylesheet" type="text/css" href="css/pages/galleryview.css"/>
 		<link rel="stylesheet" type="text/css" href="css/pages/user.css"/>
 		<link rel="icon" type="image/x-icon" href="img/global/favicon.jpg"/>
 		<script type="text/javascript" src="js/plugins/modernizr.js"></script>
-		<title>Latrinalia</title>
+		<title>Nutzeransicht</title>
 	</head>
 	<body>
 		<div id="index">
@@ -107,6 +105,7 @@
 				<?php
 			include("templates.html");
 		?>
+		<!--
 		<script src="js/plugins/jquery.min.js"></script>
   		<script src="js/plugins/md5/jquery.md5.js"></script>
 		<script src="js/plugins/underscore.js"></script>		
@@ -116,6 +115,8 @@
   		<script src="js/plugins/gallery/jquery.justifiedgallery.js"></script>
   		<script src="js/plugins/waypoint/waypoints.min.js"></script>
   		<script src="js/plugins/jquery-ui-custom/jquery-ui.min.js"></script>
+  		-->
+  		<script src="js/plugins/build/production.plugins.min.js"></script>
   		<script src="js/ImgurManager.js"></script>
   		<script src="js/StateManager.js"></script>
   		<script src="js/GalleryView.js"></script>

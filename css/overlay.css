@@ -244,8 +244,8 @@ input[type="password"].loginField {
 
 .form-container .filter-label {
   font-size: 1rem; }
-.form-container .radio-label{
-    font-size: 0.7rem;  }
+.form-container .radio-label {
+  font-size: 0.7rem; }
 .form-container .filter-type-container {
   display: none;
   margin-top: 0;
