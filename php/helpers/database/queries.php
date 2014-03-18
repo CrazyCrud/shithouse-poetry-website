@@ -587,6 +587,14 @@ class Queries{
 		WHERE `$u`.entryid = $entryid";
 		return $query;
 	}
+	public static function updatetag($id, $status){
+		$t = DBConfig::$tables["tags"];
+		$query =
+		"UPDATE `$t`
+		SET `$t`.status = $status
+		WHERE `$t`.tagid = $id";
+		return $query;
+	}
 	/**
 	RATING QUERIES
 	*/
@@ -1135,6 +1143,41 @@ class Queries{
 		(`$l`.locations, `$l`.fromlatitude, `$l`.fromlongitude, `$l`.tolatitude, `$l`.tolongitude)
 		VALUES
 		('$locations', $flat, $flong, $tlat, $tlong)";
+		return $query;
+	}
+	/**
+	STATISTIC QUERIES
+	*/
+	public static function getuploads(){
+		$e = DBConfig::$tables["entries"];
+		$query = 
+		"SELECT COUNT( * ) AS entries,
+		DATE_FORMAT(date,'%Y-%m-%d') AS day
+		FROM `$e`
+
+		GROUP BY day
+		ORDER BY day DESC";
+		return $query;
+	}
+	public static function getjoins(){
+		$u = DBConfig::$tables["users"];
+		$query = 
+		"SELECT COUNT( * ) AS users,
+		DATE_FORMAT(joindate,'%Y-%m-%d') AS day
+		FROM `$u`
+
+		GROUP BY day
+		ORDER BY day DESC";
+		return $query;
+	}
+	public static function getsexcounts(){
+		$e = DBConfig::$tables["entries"];
+		$query =
+		"SELECT
+		SUM(CASE WHEN sex='m' OR sex='M' THEN 1 ELSE 0 END)AS male,
+		SUM(CASE WHEN sex='w' OR sex='W' THEN 1 ELSE 0 END)AS female,
+		SUM(CASE WHEN sex<>'m' AND sex<>'M' AND sex<>'w' AND sex<>'W' THEN 1 ELSE 0 END)AS unisex
+		FROM `$e`";
 		return $query;
 	}
 }

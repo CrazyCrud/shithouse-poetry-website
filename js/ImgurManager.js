@@ -400,6 +400,18 @@ var ImgurManager = (function(){
 				callback(types);
 			});
 		},
+		updateType : function(callback, id, name, text){
+			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+			var url = "updateType.php?id=" + id + "&name=" + name +
+				"&desc=" + text + "&authkey=" + authkey;
+			$.post("php/backend/" + url, function(data){
+				if(data.success == 1){
+					callback(true);
+				}else{
+					callback(false);
+				}	
+			});
+		},
 		getComments: function(callback, entryid, start){
 			var comments = null;
 			start = start || -1;
@@ -533,6 +545,18 @@ var ImgurManager = (function(){
 				callback(tagData);
 			});
 		},
+		updateTag : function(callback, id, status){
+			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+			var url = "updateTag.php?id=" + id + "&status=" + status +
+				"&authkey=" + authkey;
+			$.post("php/backend/" + url, function(data){
+				if(data.success == 1){
+					callback(true);
+				}else{
+					callback(false);
+				}	
+			});
+		},
 		createUser : function(callback, username, pw, mail){
 			var url = 'createUser.php?name=' + username + '&pwd=' + pw + 
 				'&mail=' + mail;
@@ -606,7 +630,6 @@ var ImgurManager = (function(){
 			var url = 'getUsers.php?authkey='+authkey;
 			if(authkey.length != 45)
 				callback(false);
-			console.log(url);
 			$.get("php/backend/"+url,function(data){
 				if(data.success == 1){
 					callback(data.data);
@@ -635,6 +658,17 @@ var ImgurManager = (function(){
 					searchData = data.data;
 				}
 				callback(searchData);
+			});
+		},
+		getStatistics : function(callback){
+			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+			var url = 'getStatistics.php?authkey=' + authkey;
+			$.get('php/backend/' + url, function(data) {
+				var result = false;
+				if(data.success == 1){
+					result = data.data;
+				}
+				callback(result);
 			});
 		},
 		logout: function(callback, authkey){

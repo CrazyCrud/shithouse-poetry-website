@@ -79,15 +79,32 @@
 					<i class="icon-thumbs-down-1"></i>
 					<i class="icon-male"></i>
 					<i class="icon-help"></i>
+					<i class="icon-spin5"></i>
+					<i class="icon-plus"></i>
+					<i class="icon-map"></i>
+					<i class="icon-cancel-1"></i>
+					<i class="icon-cancel-2"></i>
 				</div>
 				<div class="row" id="notifications-header">
-					<i class="icon-user" id="users"></i>
-					<i class="icon-block" id="reports"></i>
-					<i class="icon-map" title="Orte verwalten" id="locations"></i>
+					<a href="#" id="overview"><i class="icon-help-circled" title="&Uuml;bersicht"></i></a>
+					<a href="#" id="users"><i class="icon-user"></i><span id="usercount"></span></a>
+					<a href="#" id="reports"><i class="icon-block"></i><span id="reportcount"></span></a>
+					<a href="#" id="locations"><i class="icon-map" title="Orte verwalten"></i></a>
+					<a href="#" id="tags"><i class="icon-chat-empty" title="Tags verwalten"></i></a>
+					<a href="#" id="types"><i class="icon-comment" title="Types verwalten"></i></a>
 				</div>
+				<section class="section" id="overview">
+					<div class="row" id="overview-header">
+						<h3>&Uuml;bersicht</h2>
+					</div>
+					<div class="row" id="overview-content">
+						<div id="chart-div" class="graph columns small-12 medium-6 large-6"></div>
+						<div id="pie-div" class="graph columns small-12 medium-6 large-6"></div>
+					</div>
+				</section>
 				<section class="section" id="users">
 					<div class="row" id="users-header">
-						<h3>Benutzer:</h2>
+						<h3>Nutzer</h2>
 					</div>
 					<table id="users-table" class="tablesorter row">
 						<thead> 
@@ -100,7 +117,7 @@
 							    <th>Status</th>
 							</tr> 
 						</thead> 
-						<tbody id="users-table-content"> 
+						<tbody id="users-table-content">
 							<tr> 
 							    <td>id</td> 
 							    <td>Mail</td>
@@ -114,7 +131,7 @@
 				</section>
 				<section class="section" id="reports">
 					<div class="row" id="reports-header">
-						<h3>Meldungen:</h2>
+						<h3>Meldungen</h2>
 					</div>
 					<table id="reports-table" class="tablesorter row">
 						<thead> 
@@ -139,7 +156,7 @@
 				</section>
 				<section class="section" id="locations">
 					<div class="row" id="locations-header">
-						<h3>Orte:</h2>
+						<h3>Orte</h2>
 					</div>
 					<div class="row" id="locations-content">
 						<div class="map columns small-12 medium-7 large-7" id="locations-map" name="map"></div>
@@ -167,11 +184,42 @@
 						</div>
 					</div>
 				</section>
+				<section class="section" id="tags">
+					<div class="row" id="tags-header">
+						<h3>Tags</h2>
+						<p class="tiny">
+							Dies sind die System-Tags, die dem Nutzer beim Erstellen eines Eintrags vorgeschlagen werden:
+						</p>
+					</div>
+					<div class="row" id="tags-content">
+						<div id="tagscontainer" class="columns small-12 middle-8 large-8">
+						</div>
+						<div id="addtagscontainter" class="columns small-12 middle-4 large-4">
+							<div id="inputcontainer" class="columns small-8 middle-8 large-8">
+								<input type="text" id="taginput"></input>
+							</div>
+							<div class="columns small-4 middle-4 larger-4">
+								<button id="addtagbutton" class="tiny">Hinzuf&uuml;gen</button>
+							</div>
+						</div>
+					</div>
+				</section>
+				<section class="section" id="types">
+					<div class="row" id="types-header">
+						<h3>Types</h2>
+					</div>
+					<div class="row" id="types-content">
+						
+						
+
+					</div>
+				</section>
 			</section>
 		</div>
 		<?php
 			include("templates.html");
 		?>
+		<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 		<script src="js/plugins/build/production.plugins.min.js"></script>
 		<script src="js/ImgurManager.js"></script>

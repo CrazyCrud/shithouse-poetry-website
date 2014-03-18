@@ -4,39 +4,76 @@ var locationlist = [];
 var $users = $("#users-table-content");
 var $reports = $("#reports-table-content");
 var $locations = $("#locations-table-content");
+var $tags = $("#tags-content #tagscontainer");
+var $types = $("#types-content");
+var $overviewButton = $("#notifications-header #overview");
 var $userButton = $("#notifications-header #users");
 var $reportButton = $("#notifications-header #reports");
 var $locationButton = $("#notifications-header #locations");
+var $tagsButton = $("#notifications-header #tags");
+var $typesButton = $("#notifications-header #types");
 var $addLocationButton = $("#add-location");
+var $addTagButton = $("#addtagbutton");
 
 var STROKE_DEFAULT = "#000";
 var STROKE_FOCUS = "#008CBA";
 
 $(function(){
 	initGUI();
+	loadStatistics();
 	loadUsers();
 	loadReports();
+	loadOverview();
+	loadTags();
+	loadTypes();
+	$overviewButton.trigger("click");
 });
 
 function initGUI(){
+	$overviewButton.click(function(){
+		$("#notifications-header a").removeClass("active");
+		$(this).addClass("active");
+		$(".section").css("display","none");
+		$(".section#overview").css("display","block");
+		loadOverview();
+	});
 	$userButton.click(function(){
+		$("#notifications-header a").removeClass("active");
+		$(this).addClass("active");
 		$(".section").css("display","none");
 		$(".section#users").css("display","block");
 		loadUsers();
 	});
 	$reportButton.click(function(){
+		$("#notifications-header a").removeClass("active");
+		$(this).addClass("active");
 		$(".section").css("display","none");
 		$(".section#reports").css("display","block");
 		loadReports();
 	});
 	$locationButton.click(function(){
+		$("#notifications-header a").removeClass("active");
+		$(this).addClass("active");
 		$(".section").css("display","none");
 		$(".section#locations").css("display","block");
 		loadLocations();
 	});
-	$addLocationButton.click(function(){
-		createLocation();
+	$tagsButton.click(function(){
+		$("#notifications-header a").removeClass("active");
+		$(this).addClass("active");
+		$(".section").css("display","none");
+		$(".section#tags").css("display","block");
+		loadTags();
 	});
+	$typesButton.click(function(){
+		$("#notifications-header a").removeClass("active");
+		$(this).addClass("active");
+		$(".section").css("display","none");
+		$(".section#types").css("display","block");
+		loadTypes();
+	});
+	$addLocationButton.click(createLocation);
+	$addTagButton.click(createTag);
 	$(document).on("change",".useroption",function(){
 		var userid = $(this).attr("userid");
 		var status = $(this).find(":selected").attr("status");
@@ -56,8 +93,14 @@ function initGUI(){
 	$(document).on("click",".location-table-row .map a", function(){
 		goToMap(this);
 	});
+	$(document).on("click","#tagscontainer .tag a", function(){
+		deleteTag(this);
+	});
 	$(document).on("click",".location-table-row .delete a", function(){
 		deleteLocation(this);
+	});
+	$(document).on("click","#types-content .type .edit a", function(){
+		editTypeClicked(this);
 	});
 	$("#reports-table").tablesorter({ 
 		sortList: [[4,1],[3,1]],
@@ -135,6 +178,10 @@ function updateReport(reportid, status){
 	}, reportid, status);
 }
 
+function loadStatistics(){
+	ImgurManager.getStatistics(fillStatisticsUI);
+}
+
 function loadUsers(){
 	ImgurManager.getUsers(fillUsersUI);
 }
@@ -151,6 +198,18 @@ function loadReports(){
 	ImgurManager.getReports(fillReportsUI);
 }
 
+function loadOverview(){
+
+}
+
+function loadTags(){
+	ImgurManager.getSystemTags(fillTagsUI);
+}
+
+function loadTypes(){
+	ImgurManager.getTypes(fillTypesUI);
+}
+
 function isNewUser(user){
 	var ONE_SEC = 1000;
 	var ONE_MIN = 60*ONE_SEC;
@@ -164,8 +223,122 @@ function isNewUser(user){
 	return(difference<=ONE_DAY)
 }
 
-function fillUsersUI(data){
+function fillTagsUI(data){
+	if(!data||data==null)return;
+	$tags.empty();
+	for(i in data){
+		var $tag = $('<div class="tag">'
+			+'<span>'+data[i].tag+'</span>'
+			+'<a title="L&ouml;schen" href="#">'
+			+'<i class="icon-cancel"></i>'
+			+'</a></div>');
+		$tags.append($tag);
+	}
+}
+
+function fillTypesUI(data){
+	if(!data||data==null)return;
+	$types.empty();
+	for(i in data){
+		var $type = $('<div typeid="'+data[i].id+'" class="type row">'
+			+'<div class="columns name small-2 medium-2 large-2">'
+			+'<span class="text">'+data[i].name+'</span>'
+			+'<input class="input" value="'+data[i].name+'"></input>'
+			+'</div>'
+			+'<div class="columns description small-9 medium-9 large-9">'
+			+'<span class="text">'+data[i].description+'</span>'
+			+'<input class="input" value="'+data[i].description+'"></input>'
+			+'</div>'
+			+'<div class="columns edit small-1 medium-1 large-1"><a href="#"><i class="icon-pencil"></i></a></div>'
+			+'</div>');
+		$types.append($type);
+	}
+}
+
+function getStatisticArray(joins, uploads){
+	var result = [["Datum", "Nutzer", "Beiträge"]];
+	var numbers = mergeStatisticArrays(joins, uploads);
+	for(i in numbers){
+		var length = result.length;
+		var users = parseInt(numbers[i].join);
+		var entries = parseInt(numbers[i].entries);
+		result[length] = [i, users, entries];
+	}
+	result = result.sort(function(a,b){
+		if(a[0]=="Datum")return -1;
+		return a[0].localeCompare(b[0]);
+	});
+	for(var i=2; i<result.length; i++){
+		result[i][1] += result[i-1][1];
+		result[i][2] += result[i-1][2];
+	}
+	return result;
+}
+
+function mergeStatisticArrays(joins, uploads){
+	var array = [];
+	for(i in joins){
+		array[joins[i].day] = {join:joins[i].users, entries:0};
+	}
+	for(i in uploads){
+		if(array[uploads[i].day]){
+			array[uploads[i].day].entries = uploads[i].entries;
+		}else{
+			array[uploads[i].day] = {join:0, entries:uploads[i].entries};
+		}
+	}
+	return array;
+}
+
+function fillStatisticsUI(data){
+	google.load("visualization", "1", {callback:function(){
+    	drawStatisticsUI(data);
+	},packages:["corechart"]});
+}
+
+function drawStatisticsUI(data){
+	drawStatisticGraphs(data);
+	drawStatisticPie(data.genders[0]);
+}
+
+function drawStatisticGraphs(data){
+	var array = getStatisticArray(data.joins, data.uploads);
+	var data = google.visualization.arrayToDataTable(array);
+
+	var options = {
+		title: 'Nutzer und Beiträge',
+		hAxis: {title: 'Datum',  titleTextStyle: {color: '#333'}},
+		vAxis: {title: 'Anzahl'},
+		explorer:{ keepInBounds: true }
+	};
+
+	var chart = new google.visualization.AreaChart(document.getElementById('chart-div'));
+	chart.draw(data, options);
+}
+
+function drawStatisticPie(data){
 	console.log(data);
+	var data = google.visualization.arrayToDataTable([
+		['Geschlecht', 'Beiträge'],
+		['Männlich', parseInt(data.male)],
+		['Weiblich', parseInt(data.female)],
+		['Unisex', parseInt(data.unisex)]
+	]);
+
+	var options = {
+		title: 'Geschlechterverteilung',
+		slices: {
+			0:{color:"#32a2b8"},
+			1:{color:"#d22091"},
+			2:{color:"#999"}
+		}
+	};
+
+	var chart = new google.visualization.PieChart(document.getElementById('pie-div'));
+	chart.draw(data, options);
+}
+
+function fillUsersUI(data){
 	$users.html("");
 	if(!data)return;
 	var newUserCount = 0;
@@ -175,10 +348,10 @@ function fillUsersUI(data){
 		addUser(user);
 	}
     if(newUserCount==0)
-    	$("#notifications-header #users").html("");
+    	$("#notifications-header #users #usercount").html("");
     else
-    	$("#notifications-header #users").html(newUserCount);
-    $("#notifications-header #users").attr("title",newUserCount+" neue(r) Benutzer in den letzten 24 Stunden");
+    	$("#notifications-header #users #usercount").html(newUserCount);
+    $("#notifications-header #users").attr("title",newUserCount+" neue(r) Nutzer in den letzten 24 Stunden");
 
     $("#users-table").trigger("update");
 }
@@ -198,7 +371,6 @@ function fillLocationsUI(data){
 }
 
 function fillReportsUI(data){
-	console.log(data);
 	$reports.html("");
 	if(!data)return;
 	var newReportsCount = 0;
@@ -210,9 +382,9 @@ function fillReportsUI(data){
 		addReport(report);
 	}
     if(newReportsCount == 0)
-    	$("#notifications-header #reports").html("");
+    	$("#notifications-header #reports #reportcount").html("");
     else
-    	$("#notifications-header #reports").html(newReportsCount);
+    	$("#notifications-header #reports #reportcount").html(newReportsCount);
     $("#notifications-header #reports").attr("title",newReportsCount+" unbehandelte Meldung(en)");
 
     $("#reports-table").trigger("update");
@@ -273,7 +445,7 @@ function addUser(queriedUser){
     +'<td class="status" sort="'+queriedUser.status+'">'+icon+options+'</td> '
 	+'</tr>');
 
-	$users.append($container);
+	$users.prepend($container);
 }
 
 function addReport(report){
@@ -397,6 +569,12 @@ function hideOverlays(){
 	}
 }
 
+function deleteTag(target){
+	var $tag = $($(target).closest(".tag"));
+	var name = $tag.find("span")[0].innerHTML;
+	ImgurManager.updateTag(loadTags, name, 0);
+}
+
 function deleteLocation(target){
 	var $row = $($(target).closest(".location-table-row"));
 	var id = $row.attr("locationid");
@@ -410,6 +588,12 @@ function onLocationDeleted(success){
 	}else{
 		fillLocationsUI(locationlist);
 	}
+}
+
+function createTag(){
+	var tag = $("#taginput").val();
+	$("#taginput").val("");
+	ImgurManager.updateTag(loadTags, tag, 1);
 }
 
 function createLocation(){
@@ -461,6 +645,22 @@ function initLocationEdit(target){
 	$(target).html("");
 	$(target).append($input);
 	$(target).append($button);
+}
+
+function editTypeClicked(target){
+	var $type = $(target).closest(".type");
+	var $inputs = $($type.find(".input"));
+	var $texts = $($type.find(".text"));
+	if($inputs.css("display")=="none"){
+		$inputs.css("display", "block");
+		$texts.css("display", "none");
+	}else{
+		$inputs.css("display", "none");
+		var id = $type.attr("typeid");
+		var name = $($type.find(".name input.input")).val();
+		var text = $($type.find(".description input.input")).val();
+		ImgurManager.updateType(loadTypes, id, name, text);
+	}
 }
 
 function endLocationEdit(){	

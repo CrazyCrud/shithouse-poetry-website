@@ -196,6 +196,9 @@ Insert code that doesn't output CSS, things like mixin declarations, functions, 
 body {
   color: black; }
 
+p.tiny {
+  font-size: 0.618rem; }
+
 #headline i {
   display: none; }
 
@@ -204,9 +207,22 @@ body {
 
 #notifications-header {
   text-align: center; }
-  #notifications-header i {
-    cursor: pointer;
+  #notifications-header a {
     margin-right: 0.618rem; }
+    #notifications-header a span {
+      vertical-align: bottom;
+      font-size: 0.618rem;
+      margin-left: -0.25rem;
+      margin-top: 0.6rem; }
+  #notifications-header a.active {
+    color: black; }
+  #notifications-header #reports span {
+    color: #ff4444; }
+  #notifications-header #users span {
+    color: #99cc00; }
+
+#overview .graph {
+  height: 15rem; }
 
 #users-table-header {
   font-size: 0.618rem; }
@@ -244,3 +260,23 @@ body {
     padding-top: 0.618rem; }
 #locations-content .description button {
   float: right; }
+
+#tags-content #tagscontainer .tag {
+  display: inline-block;
+  padding: 0.618rem;
+  margin: 0.236rem;
+  font-size: 0.618rem;
+  background: #eee;
+  color: #555; }
+
+#types-content .type {
+  padding: 0.618rem;
+  margin: 0.236rem;
+  font-size: 0.618rem;
+  background: #eee;
+  color: #555; }
+  #types-content .type .input {
+    display: none;
+    width: 90%; }
+  #types-content .type .edit {
+    text-align: right; }

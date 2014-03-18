@@ -1111,6 +1111,16 @@ class DBHelper{
 		}
 	}
 
+	public function updateTag($tag, $status){
+		$user = $this->getUser();
+		if(!$user["status"]
+			||$user["status"]!=DBConfig::$userStatus["admin"])
+			return false;
+		$tagId = $this->createTag($tag);
+		$query = Queries::updatetag($tagId, $status);
+		return $this->query($query);
+	}
+
 	// this will only be called if the user is allowed to
 	// so we dont need to check it here
 	private function removeTags($entryid){
@@ -1507,6 +1517,37 @@ class DBHelper{
 			$locs[$key]["locations"] = $locations;
 		}
 		return $locs;
+	}
+
+	/**
+	STATISTICS
+	*/
+
+	// you need to be admin
+	public function getStatistics(){
+		$user = $this->getUser();
+		if(!isset($user["status"])
+			||$user["status"]!=DBConfig::$userStatus["admin"])
+			return false;
+
+		// get entry stats
+		$query = Queries::getuploads();
+		$uploads = $this->query($query);
+
+		// get user stats
+		$query = Queries::getjoins();
+		$joins = $this->query($query);
+
+		// get sex stats
+		$query = Queries::getsexcounts();
+		$gender = $this->query($query);
+
+		$result = array();
+		$result["uploads"]=$uploads;
+		$result["joins"]=$joins;
+		$result["genders"]=$gender;
+
+		return $result;
 	}
 
 }
