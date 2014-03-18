@@ -140,7 +140,7 @@ function fillReportsUI(data){
 		addReport(report);
 	}
 	$("#reports-table").tablesorter({ 
-		sortList: [[4,1]],
+		sortList: [[4,1],[3,1]],
         textExtraction: function(node) { 
         	if(node.hasAttribute("sort"))
         		return node.getAttribute("sort");

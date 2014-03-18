@@ -123,7 +123,8 @@ class DBHelper{
 			||$status==DBConfig::$userStatus["newUser"]
 			||$status==DBConfig::$userStatus["banned"]
 			||$status==DBConfig::$userStatus["unregistered"])
-			return $this->logoutUser($userid);
+			$this->logoutUser($userid);
+		return true;
 	}
 
 	public function updateUser($mail, $name, $pwd){

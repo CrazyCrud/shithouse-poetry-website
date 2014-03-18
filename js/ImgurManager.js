@@ -409,7 +409,6 @@ var ImgurManager = (function(){
 			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 			var url = "updateReport.php?reportid=" + reportid + "&status=" + status +
 				"&authkey=" + authkey;
-			console.log(url);
 			$.post("php/backend/" + url, function(data){
 				if(data.success == 1){
 					callback(data);
@@ -515,7 +514,6 @@ var ImgurManager = (function(){
 			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 			var url = 'updateUser.php?status=' + status + '&id=' + userid + '&authkey='+authkey;
 			var userData = null;
-			console.log(url);
 			$.get('php/backend/' + url, function(data) {
 				if(data.success == 1){
 					userData = data.data;
