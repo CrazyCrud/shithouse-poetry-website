@@ -1,5 +1,7 @@
 # robots.txt zu Latrinalia
 
+http://latrinalia.de/sitemap.txt
+
 User-agent: *
 Disallow: /tou.php
 Disallow: /impressum.php

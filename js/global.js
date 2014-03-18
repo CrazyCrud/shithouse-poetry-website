@@ -1,10 +1,12 @@
 var overlayTemplate = null;
+var lawTemplate = null;
 var rootFolder = null;
 var AUTH_KEY_LENGTH = 45;
 
 $(document).ready(function() {
 	 $(document).foundation();
     setupOverlayBackground();
+    setupLawMenu();
     cookieUser();
     greetUser();
     getCurrentUser();
@@ -13,6 +15,13 @@ $(document).ready(function() {
 function setupOverlayBackground(){
     if($("script.overlay-template").length > 0){
         overlayTemplate = _.template($("script.overlay-template").html()); 
+    }
+}
+
+function setupLawMenu(){
+    if($("script.law-template").length > 0){
+        lawTemplate = _.template($("script.law-template").html()); 
+        $("body").append(lawTemplate());
     }
 }
 

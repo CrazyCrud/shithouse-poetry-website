@@ -65,3 +65,28 @@ i.icon-thumbs-up-1:before {
     -o-transform: scale(-1, 1);
     transform: scale(-1, 1);
 }
+
+#law-container{
+	position: fixed;
+	display: block;
+	bottom: 2%;
+	right: 2%;
+	width: 32px;
+	background: $lightgrey;
+	border-radius: 32px;
+	height: 32px;
+	opacity: 0.6;
+	cursor: pointer;
+	z-index: 10;
+	text-align: center;
+
+	i{
+		position: absolute;
+		display: block;
+		top: 0;
+		bottom: 0;
+		right: 0;
+		left: 0;
+		text-align: center;
+	}
+}

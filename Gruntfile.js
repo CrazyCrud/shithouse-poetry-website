@@ -134,5 +134,5 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-imagemin');
     grunt.loadNpmTasks('grunt-contrib-watch');
 
-    grunt.registerTask('default', ['concat', 'uglify', 'sass', 'concat_css', 'autoprefixer', 'cssmin', 'imagemin']);
+    grunt.registerTask('default', ['concat', 'uglify', 'concat_css', 'cssmin', 'imagemin']);
 };
