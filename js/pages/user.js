@@ -49,7 +49,9 @@ function fillUI(u){
 	}else{
 		queriedUser = u;
 	}
-	$("#username").html(queriedUser.username);
+	var admin = "";
+	if(queriedUser.status==1)admin='<img src="img/global/admin.png" title="Administrator"></img>';
+	$("#username").html(admin+queriedUser.username);
 	$("#membersince").html(formatTime(queriedUser.joindate));
 	$("#lastseen").html(formatTime(queriedUser.lastaction));
 	$("#lastseen").attr("title",queriedUser.lastaction);	
