@@ -85,6 +85,7 @@
 				<div class="row" id="notifications-header">
 					<i class="icon-user" id="users"></i>
 					<i class="icon-block" id="reports"></i>
+					<i class="icon-ok" id="locations"></i>
 				</div>
 				<section class="section" id="users">
 					<div class="row" id="users-header">
@@ -102,6 +103,14 @@
 							</tr> 
 						</thead> 
 						<tbody id="users-table-content"> 
+							<tr> 
+							    <td>id</td> 
+							    <td>Mail</td>
+							    <td>Name</td>
+							    <td>Beitritt</td>
+							    <td>Online</td>
+							    <td>Status</td>
+							</tr> 
 						</tbody>
 					</table>
 				</section>
@@ -120,8 +129,38 @@
 							</tr> 
 						</thead> 
 						<tbody id="reports-table-content"> 
+							<tr> 
+							    <td>Eintrag</td> 
+							    <td>Nutzer</td> 
+							    <td>Meldung</td> 
+							    <td>Datum</td>
+							    <td>Status</td>
+							</tr> 
 						</tbody>
 					</table>
+				</section>
+				<section class="section" id="locations">
+					<div class="row" id="locations-header">
+						<h3>Orte:</h2>
+					</div>
+					<div class="row" id="locations-content">
+						<div class="map columns small-12 medium-8 large-10" id="locations-map">
+						</div>
+						<table id="locations-table" class="tablesorter columns small-12 medium-4 large-2">
+							<thead> 
+								<tr> 
+								    <th>Orte</th> 
+								    <th>L&ouml;schen</th>
+								</tr> 
+							</thead> 
+							<tbody id="locations-table-content"> 
+								<tr> 
+								    <td>Orte</td> 
+								    <td>L&ouml;schen</td>
+								</tr> 
+							</tbody>
+						</table>
+					</div>
 				</section>
 			</section>
 		</div>

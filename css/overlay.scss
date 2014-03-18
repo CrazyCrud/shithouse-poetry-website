@@ -72,9 +72,14 @@
 }
 
 .form-container{
+	.filter-label{
+		font-size: 1rem;
+	}
+
 	.filter-type-container{
 		display: none;
 		margin-top: 0;
+		margin-bottom: 0;
 
 		label{
 			font-family: "Segoe UI Light";
@@ -87,6 +92,10 @@
 		margin-bottom: $space_minus1;
 	}
 
+	.searchtags-container{
+		margin-top: 0;
+	}
+
 	.input-container{
 		margin-top: $space_plus3;
 	}
@@ -97,6 +106,7 @@
 		margin-top: 0;
 		margin-right: $space_minus2;
 		font-family: "Segoe UI Light";
+		font-size: 1rem;
 	}
 
 	.onoffswitch {
