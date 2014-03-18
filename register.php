@@ -72,7 +72,15 @@
 					        	</div>
 					        	<div class="small-11 medium-9 large-9 columns left">
 					          		<input pattern="email" type="email" id="mail" 
-					          			placeholder="Hier E-Mail eingeben..." required>
+					          			placeholder="Hier E-Mail eingeben..." 
+
+					          			<?php 
+					          				if(isset($_GET["mail"])){
+					          					echo 'value="'.$_GET["mail"].'" ';
+					          				}
+
+					          			?>
+					          		required>
 					       		</div>
 					      	</div>
 					      	<div class="row" id="old-pwd">
