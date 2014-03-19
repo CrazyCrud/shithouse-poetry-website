@@ -21,7 +21,6 @@ $(document).ready(function() {
 
   	$form.on('submit', function(event) {
   		event.preventDefault();
-  		console.log("Form submit");
   	});
 
   	$submitButton.click(function(event) {
@@ -125,7 +124,6 @@ function onUpdateResult(success){
 		document.cookie = "username=" + username + "; expires=" + d.toGMTString();
 		document.cookie = "userid=" + user.id + "; expires=" + d.toGMTString();
 		document.cookie = "admin=" + user.status + "; expires=" + d.toGMTString();
-		window.location = "index.php";
 		$("<div>Benutzerdaten erfolgreich aktualisiert.</div>").dialog(
 		{
 			dialogClass: "no-close",
