@@ -38,7 +38,7 @@ function initEditing(){
 	$("#register-submit").html("Speichern");
 	$("#username").attr("disabled","disabled");
 	$("#mail").attr("disabled","disabled");
-	$("#new-pwd").html("Neues Password");
+	$("#new-pwd").html("Neues Passwort");
 	ImgurManager.getUser(fillUser, user.id);
 }
 

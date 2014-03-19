@@ -136,7 +136,7 @@
 					        </div>
 					        <div class="row">
 					        	<div class="small-12 medium-2 large-2 columns">
-					        		<label class="inline" for="description">Innhalt</label>
+					        		<label class="inline" for="description">Inhalt</label>
 					        	</div>
 					        	<div class="small-11 medium-9 large-9 columns left">
 									<textarea id="description" name="description" placeholder="Was möchtest du uns mitteilen?" maxlength="400" cols="20" rows="8" required><?php if(isset($desc) && $desc != "") echo $desc; ?></textarea>
@@ -144,7 +144,7 @@
 					        </div>
 					        <div class="row">
 					        	<div class="small-12 medium-2 large-2 columns">
-					        		<label class="inline" for="capcha-container">Capcha</label>
+					        		<label class="inline" for="capcha-container"></label>
 					        	</div>
 					        	<div id="capcha-container" class="small-11 medium-9 large-9 columns left">
 									<?php
