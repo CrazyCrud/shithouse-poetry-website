@@ -209,7 +209,11 @@ function getUserName(user){
     case "-1":
       return "Gel&ouml;schter Nutzer";
     default:
-      return user.name;
+      if(user.name)
+        return user.name;
+      if(user.username)
+        return user.username;
+      return "???";
   }
 }
 
