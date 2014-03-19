@@ -45,7 +45,7 @@ function computeCropBounds(){
 	result.x = 100*selection.x/bounds[0];
 	result.y = 100*selection.y/bounds[1];
 	result.w = 100*selection.w/bounds[0];
-	result.h = 100*selection.w/bounds[1];
+	result.h = 100*selection.h/bounds[1];
 	return result;
 }
 
