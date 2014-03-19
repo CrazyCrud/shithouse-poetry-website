@@ -124,6 +124,9 @@ class DBHelper{
 			||$status==DBConfig::$userStatus["banned"]
 			||$status==DBConfig::$userStatus["unregistered"])
 			$this->logoutUser($userid);
+		if($status==DBConfig::$userStatus["deleted"]){
+			return $this->deleteUser($userid);
+		}
 		return true;
 	}
 
@@ -227,8 +230,31 @@ class DBHelper{
 		}
 	}
 
-	public function deleteUser(){
-		$query = Queries::deleteuser($this->authkey);
+	// pass $id if an admin and want to delete another user
+	public function deleteUser($id){
+		if(is_numeric(trim($id))){
+			$id = intval($id);
+		}
+		$user = $this->getUser();
+		if(!isset($user["id"]))return false;
+		if(isset($id)
+			&&$user["status"]==DBConfig::$userStatus["admin"]){
+			if($user["id"]!=$id){
+				$user = $this->getUser($id);
+				if(!isset($user["id"]))return false;
+			}
+		}else if($id!=$user["id"]){
+			echo "no permission";
+			return false;
+		}
+
+		$name = 'User'.$id.uniqid();
+		$mail = $name."@latrinalia.de";
+		$password = md5(uniqid());
+
+		$query = Queries::updateuser($user["id"], $mail, $name, $password);
+		$this->logoutUser($user["id"]);
+
 		return $this->query($query);
 	}
 
