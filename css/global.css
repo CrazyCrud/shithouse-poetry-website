@@ -245,7 +245,7 @@ i.icon-thumbs-up-1:before {
     position: relative;
     display: none;
     width: inherit;
-    background-color: rgba(203, 205, 199, 0.9);
+    background-color: rgba(140, 140, 140, 0.9);
     border-radius: 1px;
     z-index: 10;
     margin-bottom: 44px; }
@@ -261,16 +261,20 @@ i.icon-thumbs-up-1:before {
           height: 100%;
           font-size: 0.618rem;
           color: #ffffff; }
+      .law-container #law-overlay ul li:hover {
+        background-color: #ffffff; }
+        .law-container #law-overlay ul li:hover a {
+          color: #888888; }
   .law-container #law-overlay:before {
     content: "";
     position: absolute;
-    bottom: -3%;
+    bottom: -4.5%;
     right: 8%;
     width: 0;
     height: 0;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
-    border-top: 5px solid rgba(203, 205, 199, 0.9); }
+    border-top: 5px solid rgba(140, 140, 140, 0.9); }
   .law-container .law-icon-container {
     position: absolute;
     display: table;
