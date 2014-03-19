@@ -343,6 +343,8 @@ function drawStatisticGraphs(data){
 	var dashboard = new google.visualization.Dashboard(
        document.getElementById('chart-div'));
 
+	var colors = ['#99cc00', '#8901a7'];
+
 	var options = {
 		title: 'Nutzer und Beiträge',
 		hAxis: {
@@ -350,7 +352,8 @@ function drawStatisticGraphs(data){
 			titleTextStyle: {color: '#333'}
 		},
 		vAxis: {title: 'Anzahl'},
-		explorer:{ keepInBounds: true }
+		explorer:{ keepInBounds: true },
+		colors:colors
 	};
 
 	var twoWeeksAgo = new Date();
@@ -366,7 +369,8 @@ function drawStatisticGraphs(data){
 				'chartType': 'LineChart',
 				'chartOptions': {
 					'chartArea': {'width': '90%'},
-					'hAxis': {'baselineColor': 'none'}
+					'hAxis': {'baselineColor': 'none'},
+					colors:colors
 				},
 				// Display a single series that shows the closing value of the stock.
 				// Thus, this view has two columns: the date (axis) and the stock value (line series).
