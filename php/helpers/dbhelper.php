@@ -100,10 +100,11 @@ class DBHelper{
 	// verify a new user
 	public function verify($key){
 		if(!isset($key))return false;
+		$query = Queries::getuserbykey($key);
+		$user = $this->query($query);
 		$query = Queries::verify($key);
 		if(!$this->query($query))return false;
-		$query = Queries::getuserbykey($key);
-		return $this->query($query);
+		return $user;
 	}
 
 	private function getUserStats($id){
