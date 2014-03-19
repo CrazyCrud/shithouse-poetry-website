@@ -230,7 +230,6 @@ var ImgurManager = (function(){
 			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 			var url = 'addRating.php?authkey=' + authkey + 
 				'&entryid=' + entryid + '&rating=' + rating;
-			console.log(url);
 			$.post('php/backend/' + url, function(data) {
 				if(data.success == 1){
 					callback();

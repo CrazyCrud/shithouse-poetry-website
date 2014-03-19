@@ -4,6 +4,7 @@ var GalleryView = (function(){
 		currentEntry : 0,
 		currentVerticalPosition: 0,
 		imageContainer : null,
+		imageContainerTmp : null,
 		displaySingleImage: false,
 		rowHeight : 200,
 		fixedHeight : false,
@@ -11,52 +12,107 @@ var GalleryView = (function(){
 	};
 
 	var displayImages = function(){
-		if(StateManager.getState() == StateManager.States.
-			properties[StateManager.States.SMALL].name){
-			settings.imageContainer.justifiedGallery({
-				'sizeRangeSuffixes': {'lt100':'',
-					'lt240':'', 
-					'lt320':'', 
-					'lt500':'', 
-					'lt640':'', 
-					'lt1024':''},
-				'captions': false,
-				'target': "_blank",
-				'margins': 3,
-				'refreshTime': 500,
-				'justifyLastRow': true,
-				'rowHeight': 250,
-				'fixedHeight' : false,
-				'onComplete': complete
-			});
+		if(settings.displaySingleImage){
+			if(StateManager.getState() == 
+				StateManager.States.properties[StateManager.States.SMALL].name){
+				settings.imageContainer.justifiedGallery({
+					'sizeRangeSuffixes': {'lt100':'',
+						'lt240':'', 
+						'lt320':'', 
+						'lt500':'', 
+						'lt640':'', 
+						'lt1024':''},
+					'captions': false,
+					'target': "_blank",
+					'margins': 3,
+					'refreshTime': 500,
+					'justifyLastRow': true,
+					'rowHeight': 250,
+					'fixedHeight' : false,
+					'onComplete': complete
+				});
+			}else{
+				settings.imageContainer.justifiedGallery({
+					'sizeRangeSuffixes': {'lt100':'',
+						'lt240':'', 
+						'lt320':'', 
+						'lt500':'', 
+						'lt640':'', 
+						'lt1024':''},
+					'captions': false,
+					'target': "_blank",
+					'margins': 3,
+					'fixedHeight': settings.fixedHeight,
+					'rowHeight': settings.rowHeight,
+					'refreshTime': 500,
+					'justifyLastRow': settings.justifyLastRow,
+					'onComplete': complete
+				});
+			}
 		}else{
-			settings.imageContainer.justifiedGallery({
-				'sizeRangeSuffixes': {'lt100':'',
-					'lt240':'', 
-					'lt320':'', 
-					'lt500':'', 
-					'lt640':'', 
-					'lt1024':''},
-				'captions': false,
-				'target': "_blank",
-				'margins': 3,
-				'fixedHeight': settings.fixedHeight,
-				'rowHeight': settings.rowHeight,
-				'refreshTime': 500,
-				'justifyLastRow': settings.justifyLastRow,
-				'onComplete': complete
-			});
+			if(_.isNull(settings.imageContainerTmp) || 
+				_.isUndefined(settings.imageContainerTmp)){
+				return;
+			}
+			if(StateManager.getState() == 
+				StateManager.States.properties[StateManager.States.SMALL].name){
+				settings.imageContainerTmp.justifiedGallery({
+					'sizeRangeSuffixes': {'lt100':'',
+						'lt240':'', 
+						'lt320':'', 
+						'lt500':'', 
+						'lt640':'', 
+						'lt1024':''},
+					'captions': false,
+					'target': "_blank",
+					'margins': 3,
+					'refreshTime': 500,
+					'justifyLastRow': true,
+					'rowHeight': 250,
+					'fixedHeight' : false,
+					'onComplete': complete
+				});
+			}else{
+				settings.imageContainerTmp.justifiedGallery({
+					'sizeRangeSuffixes': {'lt100':'',
+						'lt240':'', 
+						'lt320':'', 
+						'lt500':'', 
+						'lt640':'', 
+						'lt1024':''},
+					'captions': false,
+					'target': "_blank",
+					'margins': 3,
+					'fixedHeight': settings.fixedHeight,
+					'rowHeight': settings.rowHeight,
+					'refreshTime': 500,
+					'justifyLastRow': settings.justifyLastRow,
+					'onComplete': complete
+				});
+			}
 		}
+
 	};
 
 	var complete = function(){
-		$.event.trigger({
-			type : "complete",
-			message: "Images are completely loaded",
-			time: new Date()
-		});
-		$(window).scrollTop(settings.currentVerticalPosition);
-		addOverlay();
+		if(!_.isNull(settings.imageContainerTmp) && 
+			settings.imageContainerTmp.prev().length > 0){
+			$.when(settings.imageContainerTmp.prev().remove()).then(function(){
+				$.event.trigger({
+					type : "complete",
+					message: "Images are completely loaded",
+					time: new Date()
+				});
+				addOverlay();
+			});
+		}else{
+			$.event.trigger({
+				type : "complete",
+				message: "Images are completely loaded",
+				time: new Date()
+			});
+			addOverlay();
+		}
 	};
 
 	var endOfVoting = function(){
@@ -154,13 +210,15 @@ var GalleryView = (function(){
 	*/
 	var loadAllImages = function(){
 		var imgLoaded = 0;
-		clearScreen();
+		// clearScreen();
 		settings.displaySingleImage = false;
 		settings.justifyLastRow = false;
 		if(_.isEmpty(settings.imgData) || settings.imageContainer.length < 1){
 			return;
 		}else{
 			var numImages = settings.imgData.length;
+			settings.imageContainerTmp = $("<div></div>");
+			settings.imageContainer.append(settings.imageContainerTmp);
 			for(var i = 0; i < numImages; i++){
 				if(_.isUndefined(settings.imgData[i]) || _.isEmpty(settings.imgData[i])){
 					continue;
@@ -171,7 +229,7 @@ var GalleryView = (function(){
 					imgLoaded++;
 					if(imgLoaded == numImages){
 						for(var index in settings.imgData){
-							settings.imageContainer.append(settings.imgData[index].image_m);
+							settings.imageContainerTmp.append(settings.imgData[index].image_m);
 						}
 						displayImages();
 					}
@@ -276,16 +334,18 @@ var GalleryView = (function(){
 
 	var resizeImages = function(){
 		if(StateManager.getWidth() != StateManager.getInitialWidth()){
-			clearScreen();
 			if(settings.displaySingleImage){
+				clearScreen();
 				if(getCurrentEntry() > 0){
 					settings.imageContainer.append(settings.imgData[getCurrentEntry() - 1].image_l);
 				}else{
 					settings.imageContainer.append(settings.imgData[getCurrentEntry()].image_l);
 				}
 			}else{
+				settings.imageContainerTmp = $("<div></div>");
+				settings.imageContainer.append(settings.imageContainerTmp);
 				for(var index in settings.imgData){
-					settings.imageContainer.append(settings.imgData[index].image_m);
+					settings.imageContainerTmp.append(settings.imgData[index].image_m);
 				}
 			}
 			displayImages();
@@ -295,6 +355,7 @@ var GalleryView = (function(){
 	var clearScreen = function(){
 		settings.currentVerticalPosition = $(window).scrollTop();
 		settings.imageContainer.empty();
+		settings.imageContainerTmp = null;
 	};
 
 	var lazyRearrange = _.debounce(resizeImages, 500);

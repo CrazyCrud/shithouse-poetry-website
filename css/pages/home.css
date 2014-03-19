@@ -295,6 +295,10 @@ input[type="password"].loginField {
   padding: 4px; }
   #images img {
     vertical-align: bottom; }
+  #images .justifiedGallery {
+    margin-bottom: 0; }
+  #images .justifiedGallery:last-of-type {
+    margin-bottom: 10px; }
 
 .images-vote {
   display: block;
