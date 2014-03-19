@@ -308,10 +308,14 @@ function setInfo(entry){
 function setImage(entry){
 	//set image
 	var $image = $("#image");
+	$("#image").css('visiblity', 'hidden');
 	$("#image").css('width', '100%');
 	var $entryTitle = $("#entry-title");
 	$image.attr("src", entry.images[0].largethumbnail);
 	$image.attr("title", entry.title);
+	Foundation.lib_methods.loaded($image, function(){
+		$("#image").css('visiblity', 'visible');
+	});	
 }
 
 function setRating(entry){
