@@ -1150,6 +1150,7 @@ class DBHelper{
 	// (set authkey before)
 	// admin only
 	public function createType($name, $description){
+		if(strlen($name)<3||strlen($description)<3)return false;
 		$user = $this->getUser();
 		if(!isset($user["id"])||$user["status"]!=DBConfig::$userStatus["admin"]){
 			return false;
