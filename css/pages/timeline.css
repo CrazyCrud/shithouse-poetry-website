@@ -85,6 +85,10 @@ Insert code that doesn't output CSS, things like mixin declarations, functions, 
   font-family: "Segoe UI";
   src: url("../fonts/segoe-ui.ttf"); }
 
+@font-face {
+  font-family: "Segoe UI Light";
+  src: url("../fonts/segoe-ui-light.ttf"); }
+
 body {
   color: #ffffff; }
 

@@ -111,6 +111,7 @@ var GalleryView = (function(){
 				message: "Images are completely loaded",
 				time: new Date()
 			});
+			$(window).scrollTop(settings.currentVerticalPosition);
 			addOverlay();
 		}
 	};
@@ -253,6 +254,12 @@ var GalleryView = (function(){
 			endOfVoting();
 			return;
 		}else{
+			if(_.isNull(settings.imgData[getCurrentEntry()]) ||
+				_.isUndefined(settings.imgData[getCurrentEntry()])){
+				incrementCurrentEntry();
+				loadSingleImage();
+				return;
+			}
 			var htmlData = settings.imgData[getCurrentEntry()].image_m;
 			var $imgContent = $(htmlData).find('img');
 			Foundation.lib_methods.loaded($imgContent, function(){
