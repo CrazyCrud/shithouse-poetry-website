@@ -6,7 +6,7 @@
 		<link rel="stylesheet" type="text/css" href="css/plugins/build/production.plugins.min.css"/>
 		<link rel="stylesheet" type="text/css" href="css/global.css"/>
 		<link rel="stylesheet" type="text/css" href="css/overlay.css"/>
-		<link rel="stylesheet" type="text/css" href="css/pages/tou.css"/>
+		<link rel="stylesheet" type="text/css" href="css/pages/law.css"/>
 		<link rel="icon" type="image/x-icon" href="img/global/favicon.jpg"/>
 		<script type="text/javascript" src="js/plugins/modernizr.js"></script>
 		<title>Nutzungsbedingungen</title>
@@ -51,7 +51,7 @@
 				</div>
 			</header>
 			<section id="maincontent">
-				<div id="content-tou" class="row">
+				<div id="tou-content" class="law-content row">
 					<div class="small-11 small-centered medium-11 large-11 medium-centered large-centered columns">
 						<h2 id="terms_web_header"> <!-- &sect; -->
 						Rechtliche Informationen und Nutzungsbedingungen von Latrinalia zur Erstellung eines Accounts bei Latrinalia und Nutzung der Web-App von Latrinalia</h2>
@@ -128,10 +128,6 @@
 						<h3>§8  Links zu anderen Websites</h3>
 
 						<p>In den Web-Apps sowie ggf. in den von den Nutzern eingestellten Inhalten können Verknüpfungen („links“) zu Webseiten Dritter als zusätzlicher Service zur Verfügung gestellt werden. Diese Webseiten sind vollkommen unabhängig und liegen außerhalb des Verantwortungsbereichs sowie der Kontrolle von Latrinalia. Latrinalia haftet daher nicht für die Inhalte irgendeiner dieser Webseiten Dritter, auf die über die Web-App bzw. die Online-Plattform zugegriffen wird, und übernimmt keinerlei Verantwortung für den Inhalt, die Datenschutzbestimmungen oder die Nutzung solcher Webseiten. Für illegale, fehlerhafte oder unvollständige Inhalte und insbesondere für Schäden, die aus der Nutzung oder Nichtnutzung solcherart dargebotener Informationen entstehen, haftet allein der Anbieter der Website, auf die über die Web-App oder von Nutzern eingestellten Inhalte verwiesen wurde. </p>
-
-						<p><br />
-							<br />
-						</p>
 
 						<h3>§9  Marken- und sonstige Schutzrechte</h3>
 

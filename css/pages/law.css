@@ -1,0 +1,14 @@
+.law-content {
+  color: #111111; }
+  .law-content p, .law-content ol {
+    color: #111111;
+    font-size: 0.75rem; }
+  .law-content .row {
+    margin-left: auto;
+    margin-right: auto; }
+
+#impressum-content form textarea#description {
+  resize: none;
+  min-height: 150px; }
+#impressum-content form button#submit {
+  margin-top: 16px; }

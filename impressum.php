@@ -33,7 +33,7 @@
 	<link rel="stylesheet" type="text/css" href="css/plugins/build/production.plugins.min.css"/>
 	<link rel="stylesheet" type="text/css" href="css/global.css"/>
 	<link rel="stylesheet" type="text/css" href="css/overlay.css"/>
-	<link rel="stylesheet" type="text/css" href="css/pages/impressum.css"/>
+	<link rel="stylesheet" type="text/css" href="css/pages/law.css"/>
 	<link rel="icon" type="image/x-icon" href="img/global/favicon.jpg"/>
 	<script type="text/javascript" src="js/plugins/modernizr.js"></script>
 	<title>Impressum</title>
@@ -99,68 +99,90 @@
 
 			 	echo '</script>';
 			?>
-			<div class="small-12 medium-11 large-11 medium-centered large-centered columns">
-				<div id="content" >
+			<div id="impressum-content" class="law-content row">
+				<div class="small-11 small-centered medium-11 large-11 medium-centered large-centered columns">
 					<div class="row">
-						<h1 id="impressum" name="impressum">Impressum</h1><p>Angaben gemäß § 5 TMG:<br/><br/></p>
+						<h2 id="impressum" name="impressum">Impressum</h2><p>Angaben gemäß § 5 TMG:</p>
 						<p>GbR Latrinalia<br />
 							Eichhornstraße 39<br />
 							91126 Schwabach</p>
-							<h2>Vertreten durch:</h2>
-							<p>Bastian Hinterleitner<br />
-								Franziska Hertlein<br />
-								Constantin Lehenmeier<br />
-								Thomas Spröd</p>
+						<h3>Vertreten durch:</h3>
+						<p>Bastian Hinterleitner<br />
+							Franziska Hertlein<br />
+							Constantin Lehenmeier<br />
+							Thomas Spröd</p>
 
-								<h2 id="contact" name="contact">Kontakt:</h2>
-								<br/>
-								<div>E-Mail: <strong>support[at]latrinalia.de</strong></div>
-								<br/>
-							</div>
+						<h3 id="contact" name="contact">Kontakt:</h3>
+						<p>E-Mail: <em>support[at]latrinalia.de</em></p>
+					</div>
+					<div class="row">
+						<h2> Kontaktformular: </h2>						
+						<form action="" id="contactForm" name="contactForm" method="post" data-abide>
 							<div class="row">
-								<div class="small-12 medium-6 large-6 columns">
-								<h2> Kontaktformular: </h2>						
-								<form action="" id="contactForm" name="contactForm" method="post" data-abide>
-									<input pattern="email" type="email" id="email" name="email" placeholder="Ihre E-Mail Addresse" <?php if(isset($email) && $email != "") echo 'value="'.$email.'"'; ?> required>
+								<div class="small-12 medium-2 large-2 columns">
+					        		<label class="inline" for="email">E-Mail</label>
+					        	</div>
+					        	<div class="small-11 medium-9 large-9 columns left">
+					        		<input pattern="email" type="email" id="email" name="email" placeholder="Ihre E-Mail Addresse" <?php if(isset($email) && $email != "") echo 'value="'.$email.'"'; ?> required>
+					        	</div>
+					        </div>
+					        <div class="row">
+					        	<div class="small-12 medium-2 large-2 columns">
+					        		<label class="inline" for="subject">Betreff</label>
+					        	</div>
+					        	<div class="small-11 medium-9 large-9 columns left">
 									<input id="subject" name="subject" type="text" placeholder="Betreff" <?php if(isset($subject) && $subject != "") echo 'value="'.$subject.'"'; ?> required>
+					        	</div>
+					        </div>
+					        <div class="row">
+					        	<div class="small-12 medium-2 large-2 columns">
+					        		<label class="inline" for="description">Innhalt</label>
+					        	</div>
+					        	<div class="small-11 medium-9 large-9 columns left">
 									<textarea id="description" name="description" placeholder="Was möchten Sie uns mitteilen?" maxlength="400" cols="20" rows="8" required><?php if(isset($desc) && $desc != "") echo $desc; ?></textarea>
-									        <?php
-									          $publickey = "6LcSSvASAAAAAHECPqkbcRLzzmliSEI0OqJej6MX";
-									          echo recaptcha_get_html($publickey);
-									        ?>
+					        	</div>
+					        </div>
+					        <div class="row">
+					        	<div class="small-12 medium-2 large-2 columns">
+					        		<label class="inline" for="capcha-container">Capcha</label>
+					        	</div>
+					        	<div id="capcha-container" class="small-11 medium-9 large-9 columns left">
+									<?php
+								        $publickey = "6LcSSvASAAAAAHECPqkbcRLzzmliSEI0OqJej6MX";
+								        echo recaptcha_get_html($publickey);
+								    ?>
+								    <button class="tiny left" name="submit" id="submit" type="submit">Absenden</button>				        	
+								</div>
+					        </div>
+				        
+						</form>
+					</div>
+					<div class="row">
+						<h2 id="disclaimer" name="disclaimer">Haftungsausschluss (Disclaimer)</h2>
 
-									<button class="tiny right" name="submit" id="submit" type="submit">Absenden</button>
-								</form>
-							</div>
-						</div>
-					</br>
-				</br>
-				<div class="row">
-					<h1 id="disclaimer" name="disclaimer">Haftungsausschluss (Disclaimer)</h1>
+						<p><h3 id="disclaimerContents" name="disclaimerContents">Haftung für Inhalte</h3></p> 
 
-					<p><h3 id="disclaimerContents" name="disclaimerContents">Haftung für Inhalte</h3></p> 
+						<p>Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen. Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden von entsprechenden Rechtsverletzungen werden wir diese Inhalte umgehend entfernen.</p> 
 
-					<p>Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen. Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden von entsprechenden Rechtsverletzungen werden wir diese Inhalte umgehend entfernen.</p> 
+						<p><h3 id="disclaimerLinks" name="disclaimerLinks">Haftung für Links</h3></p> 
 
-					<p><h3 id="disclaimerLinks" name="disclaimerLinks">Haftung für Links</h3></p> 
+						<p>Unser Angebot enthält Links zu externen Webseiten Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar. Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Links umgehend entfernen.</p> 
 
-					<p>Unser Angebot enthält Links zu externen Webseiten Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar. Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Links umgehend entfernen.</p> 
+						<p><h3 id="disclaimerCopyright" name="disclaimerCopyright">Urheberrecht</h3></p> 
 
-					<p><h3 id="disclaimerCopyright" name="disclaimerCopyright">Urheberrecht</h3></p> 
+						<p>Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers. Downloads und Kopien dieser Seite sind nur für den privaten, nicht kommerziellen Gebrauch gestattet. Soweit die Inhalte auf dieser Seite nicht vom Betreiber erstellt wurden, werden die Urheberrechte Dritter beachtet. Insbesondere werden Inhalte Dritter als solche gekennzeichnet. Sollten Sie trotzdem auf eine Urheberrechtsverletzung aufmerksam werden, bitten wir um einen entsprechenden Hinweis. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Inhalte umgehend entfernen.</p>
 
-					<p>Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers. Downloads und Kopien dieser Seite sind nur für den privaten, nicht kommerziellen Gebrauch gestattet. Soweit die Inhalte auf dieser Seite nicht vom Betreiber erstellt wurden, werden die Urheberrechte Dritter beachtet. Insbesondere werden Inhalte Dritter als solche gekennzeichnet. Sollten Sie trotzdem auf eine Urheberrechtsverletzung aufmerksam werden, bitten wir um einen entsprechenden Hinweis. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Inhalte umgehend entfernen.</p>
+						<p>Die Datenschutzerklärung finden Sie hier: <a rel="nofollow" href="privacy.php" target="_blank">Datenschutzerklärung</a></p>
 
-					<p>Die Datenschutzerklärung finden Sie hier: <a rel="nofollow" href="privacy.php" target="_blank">Datenschutzerklärung</a></p>
+						<p>Unsere Nutzungsbedingungen finden Sie hier: <a rel="nofollow" href="tou.php" target="_blank">Nutzungsbedingungen</a></p>
 
-					<p>Unsere Nutzungsbedingungen finden Sie hier: <a rel="nofollow" href="tou.php" target="_blank">Nutzungsbedingungen</a></p>
+						<p>Stand: 18.03.2014</p>
 
-					<p>Stand: 18.03.2014</p>
-
-					<p>Copyright © 2014 ausschließliches Impressum von Latrinalia</p>
+						<p>Copyright © 2014 ausschließliches Impressum von Latrinalia</p>
+					</div>
 				</div>
 			</div>
-		</div>
-	</section>
+		</section>
 	<?php
 		include("templates.html");
 	?>
