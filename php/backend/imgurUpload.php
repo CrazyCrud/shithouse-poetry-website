@@ -94,7 +94,18 @@ for($i = 0; $i < count($_FILES['images']['name']); $i++){
 		$extension = getExtension($_FILES['images']['name'][$i]);
   		$extension = strtolower($extension);
 
-        $image = resizeImage($_FILES['images']['tmp_name'][$i], $extension, $MAX_SIZE);
+		if(isset($_POST["bounds-x"])
+			&&isset($_POST["bounds-y"])
+			&&isset($_POST["bounds-w"])
+			&&isset($_POST["bounds-h"])){
+			$bounds = array();
+			$bounds["x"] = $_POST["bounds-x"];
+			$bounds["y"] = $_POST["bounds-y"];
+			$bounds["w"] = $_POST["bounds-w"];
+			$bounds["h"] = $_POST["bounds-h"];
+		}
+
+        $image = resizeImage($_FILES['images']['tmp_name'][$i], $extension, $MAX_SIZE, $bounds);
 
 		ob_start();
 		imagepng($image);
@@ -125,7 +136,7 @@ $json["data"]=$data;
 echo json_encode($json);
 
 
-function resizeImage($img, $type, $max){
+function resizeImage($img, $type, $max, $bounds){
 
 		// create image
 	if($type=="jpg" || $type=="jpeg" )
@@ -143,23 +154,49 @@ function resizeImage($img, $type, $max){
 
 	list($width,$height)=getimagesize($img);
 
-	// return it without resizing if its already small enough
-	if($width<=$max && $height<=$max)return $src;
+	// check whether to crop
+	if(isset($bounds)){
+		$x = $bounds["x"]*$width/100;
+		$y = $bounds["y"]*$height/100;
+		$w = $bounds["w"]*$width/100;
+		$h = $bounds["h"]*$height/100;
 
-	// create resizing factor
-	if($width>$height){
-		$factor = $max/$width;
+		// check whether to resize
+		$factor = 1;
+		if($w>$max || $h>$max){
+			// create resizing factor
+			if($w>$h){
+				$factor = $max/$w;
+			}else{
+				$factor = $max/$h;
+			}
+		}
+		// calculate new size
+		$newWidth = $factor * $w;
+		$newHeight = $factor * $h;
+
+		// create new resized image
+		$result=imagecreatetruecolor($newWidth,$newHeight);
+		imagecopyresampled($result,$src,0,0,$x,$y,$newWidth,$newHeight,$w,$h);
 	}else{
-		$factor = $max/$height;
+		// return it without resizing if its already small enough
+		if($width<=$max && $height<=$max)return $src;
+
+		// create resizing factor
+		if($width>$height){
+			$factor = $max/$width;
+		}else{
+			$factor = $max/$height;
+		}
+
+		// calculate new size
+		$newWidth = $factor * $width;
+		$newHeight = $factor * $height;
+
+		// create new resized image
+		$result=imagecreatetruecolor($newWidth,$newHeight);
+		imagecopyresampled($result,$src,0,0,0,0,$newWidth,$newHeight,$width,$height);
 	}
-
-	// calculate new size
-	$newWidth = $factor * $width;
-	$newHeight = $factor * $height;
-
-	// create new resized image
-	$result=imagecreatetruecolor($newWidth,$newHeight);
-	imagecopyresampled($result,$src,0,0,0,0,$newWidth,$newHeight,$width,$height);
 
 	// free space
 	imagedestroy($src);

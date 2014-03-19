@@ -2,6 +2,7 @@ var latitude_g = -1000;
 var longitude_g = -1000;
 
 var entry = {};
+var crop;
 var $imageContainer = $(".image-container");
 var $addImageContainer = $(".add-image-container");
 var $addImageText = $(".add-image-text");
@@ -26,6 +27,28 @@ $(document).ready(function() {
 	initDialog();
 });
 
+function cropMe(target){
+	var target = $(target.currentTarget);
+	crop = $.Jcrop(target);
+	var bounds = crop.getBounds();
+	var x = 10;
+	var y = 10;
+	var w = bounds[0]-10;
+	var h = bounds[1]-10;
+	crop.setSelect([x,y,w,h]);
+}
+
+function computeCropBounds(){
+	var selection = crop.tellSelect();
+	var bounds = crop.getBounds();
+	var result = {};
+	result.x = 100*selection.x/bounds[0];
+	result.y = 100*selection.y/bounds[1];
+	result.w = 100*selection.w/bounds[0];
+	result.h = 100*selection.w/bounds[1];
+	return result;
+}
+
 function initEdit(){
 	if(user&&user.status&&user.status!="4"){
 		$("#tou").remove();
@@ -45,6 +68,7 @@ function fillUI(e){
 	entry = e;
 	var $img = $('<img id="img-upload" exif="true" src="'+entry.images[0].thumbnail+'"/>');
 	$imageContainer.append($img);
+	$img.load(cropMe);
 	$imageContainer.css("display","block");
 	$("#title").val(entry.title);
 	$("#transcription").val(entry.information[0].transcription);
@@ -222,6 +246,7 @@ function initImageUpload(){
 			// var src = window.URL.createObjectURL(file);
 			$imageContainer.empty();
 			$imageContainer.append($img);
+			$img.load(cropMe);
 			showError("image", false);
 			$imageContainer.fadeIn('slow', function() {
 				$addImageText.html("Bild</br>ändern");
@@ -273,7 +298,7 @@ function extractImageData(data){
 
 function uploadImage(entryid){
 	var file = $addImageInput[0].files[0];
-	ImgurManager.uploadImage(uploadImageResult, entryid, file);
+	ImgurManager.uploadImage(uploadImageResult, entryid, file, computeCropBounds());
 }
 
 function uploadImageResult(uploadSuccesfull, entryid){
@@ -281,7 +306,7 @@ function uploadImageResult(uploadSuccesfull, entryid){
 		window.location = "details.php?id="+entryid;
 	}else{
 		error("Bild konnte nicht hochgeladen werden.");
-		ImgurManager.deleteEntry(data);
+		//ImgurManager.deleteEntry(data);
 	}
 }
 

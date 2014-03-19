@@ -4,6 +4,7 @@
 		<meta charset="utf-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
 		<link rel="stylesheet" type="text/css" href="css/plugins/build/production.plugins.min.css"/>
+		<link rel="stylesheet" href="css/plugins/jcrop/jquery.Jcrop.min.css" type="text/css" />
 		<link rel="stylesheet" type="text/css" href="css/global.css"/>
 		<link rel="stylesheet" type="text/css" href="css/overlay.css"/>
 		<link rel="stylesheet" type="text/css" href="css/pages/upload.css"/>
@@ -53,7 +54,7 @@
 			<section id="maincontent">
 				<div class="row">
 					<div class="small-12 columns full-width">
-						<label class="howto-label">
+						<label class="small-12 howto-label">
 							<a href="howto.php" target="_blank">Wie mache ich das hier richtig?</a>
 						</label>
 						<div class="upload-forms-container">
@@ -204,6 +205,7 @@
 		<script src="js/plugins/exif/load-image-exif-map.js"></script>
 		-->
 		<script src="js/plugins/build/production.plugins.min.js"></script>
+		<script src="js/plugins/jcrop/jquery.Jcrop.min.js"></script>
 		<script src="js/ImgurManager.js"></script>
   		<script src="js/StateManager.js"></script>
 		<script src="js/global.js"></script>

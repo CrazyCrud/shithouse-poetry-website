@@ -489,13 +489,17 @@ var ImgurManager = (function(){
 				}	
 			});
 		},
-		uploadImage : function(callback, entryid, file){
+		uploadImage : function(callback, entryid, file, bounds){
 			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 			
 			var formData = new FormData();
 			formData.append('authkey', authkey);
 			formData.append('id', entryid);
 			formData.append('images[0]', file);
+			formData.append('bounds-x',bounds.x);
+			formData.append('bounds-y',bounds.y);
+			formData.append('bounds-w',bounds.w);
+			formData.append('bounds-h',bounds.h);
 
 			var url = "imgurUpload.php";
 
@@ -514,7 +518,6 @@ var ImgurManager = (function(){
 				callback(false, entryid);
 			})
 			.always(function() {
-				
 			});
 		},
 		getTags: function(callback){

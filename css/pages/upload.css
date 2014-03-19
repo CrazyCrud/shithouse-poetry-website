@@ -275,6 +275,10 @@ input[type="password"].loginField {
     max-height: inherit;
     max-width: 800px;
     margin: 0 auto; }
+  .image-container .jcrop-holder {
+    margin: 0 auto; }
+    .image-container .jcrop-holder div {
+      z-index: 0; }
 
 .fieldset-container {
   color: #111111; }
