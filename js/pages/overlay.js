@@ -19,17 +19,6 @@ function showSearchOverlay(){
 			searchContent.style.display="block";	
 	}
 }
-/*function hideSearchOverlay(){
-	if(document.getElementById("overlay")) 
-	{
-		document.getElementsByTagName("body")[0].removeChild(searchContent);
-		document.getElementsByTagName("body")[0].removeChild(document.getElementById("overlay"));
-	}
-}*/
-
-//////////////////////////////////////////////////////////////////
-console.log("loginOverlay");
-
 
 function showLoginOverlay(){
 	if(!document.getElementById("overlay")) {
@@ -42,7 +31,6 @@ function showLoginOverlay(){
 }
 
 function hideOverlay(){
-	console.log("hideOverlay");
 	if(document.getElementById("overlay")) 
 		{ 
 			

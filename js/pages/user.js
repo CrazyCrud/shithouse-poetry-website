@@ -43,7 +43,6 @@ var setupOnce = _.once(setupInfiniteScroll);
 
 function fillUI(u){
 	if(!u){
-		console.log("Error getting user");
 		$("#username").html("Dieser Nutzer existiert nicht.");
 		return;
 	}else{

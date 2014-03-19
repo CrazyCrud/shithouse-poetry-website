@@ -228,9 +228,8 @@ var ImgurManager = (function(){
 			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 			var url = 'addRating.php?authkey=' + authkey + 
 				'&entryid=' + entryid + '&rating=' + rating;
-			console.log(url);
-			$.post('php/backend/' + url, function(data) {
-				console.log(data);
+
+			$.post('php/backend/' + url, function(data) {				
 				if(data.success == 1){
 					callback();
 					return;
@@ -249,7 +248,7 @@ var ImgurManager = (function(){
 					if(data.success == 1){
 						callback(data.data);
 					}else{
-						console.log("Error");
+						//console.log("Error");
 					}
 				});
 			}
@@ -265,7 +264,7 @@ var ImgurManager = (function(){
 					if(data.success == 1){
 						callback(data.data);
 					}else{
-						console.log("Error");
+						//console.log("Error");
 					}
 				});
 			}
@@ -275,11 +274,11 @@ var ImgurManager = (function(){
 			var url = "deleteEntry.php?entryid=" + entryid + 
 				"&authkey=" + authkey;
 			$.post("php/backend/" + url, function(data){
-				if(data.success == 1){
-					console.log("Entry deleted...");
-				}else{
-					console.log("Error");
-				}
+				// if(data.success == 1){
+				// 	console.log("Entry deleted...");
+				// }else{
+				// 	console.log("Error");
+				// }
 				callback(data.success==1);
 			});
 		},
@@ -296,7 +295,7 @@ var ImgurManager = (function(){
 					callback(data["data"]);
 				}else{
 					callback("Error");
-					console.log("Error");
+					//console.log("Error");
 				}
 			});
 		},

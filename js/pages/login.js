@@ -133,16 +133,16 @@ function userLogin(){
 					error("Es fehlt ein Parameter. Bitte wenden Sie sich an den Admin.");
 					break;
 				case 0: 
-					console.log(data["message"]);
+					//console.log(data["message"]);
 					break;
 				case -1: 
-					console.log("code not logged in");
+					//console.log("code not logged in");
 					break;
 				case 7:
 					error("Nutzername oder Passwort nicht gefunden oder Email noch nicht best&auml;tigt.");
 					break;
 				default: 
-					console.log(data);					
+					//console.log(data);					
 			}
 		}
 	});
@@ -165,16 +165,16 @@ function getUser(authkey){
 					error("Es fehlt ein Parameter. Bitte wenden Sie sich an den Admin.");
 					break;
 				case 0: 
-					console.log(data["message"]);
+					//console.log(data["message"]);
 					break;
 				case -1: 
-					console.log("code not logged in");
+					//console.log("code not logged in");
 					break;
 				case 7:
 					error("Nutzername oder Passwort nicht gefunden oder Email noch nicht best&auml;tigt.");
 					break;
 				default: 
-					console.log(data);					
+					//console.log(data);					
 			}
 		}
 	});

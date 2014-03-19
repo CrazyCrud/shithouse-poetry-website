@@ -11,7 +11,6 @@ $(document).ready(function() {
     		
   		})
   		.on('valid', function () {
-  			console.log("Form valid");
   			if(edit&&user.status!="4"){
   				updateUser();
   			}else{
@@ -44,7 +43,6 @@ function initEditing(){
 }
 
 function fillUser(user){
-	console.log(user);
 	$("#username").val(user.username);
 	$("#mail").val(user.email);
 }

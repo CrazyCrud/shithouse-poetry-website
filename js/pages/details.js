@@ -448,22 +448,19 @@ function onTranscriptionUpdated(success){
 }
 
 function userLogout(){
-	console.log("userLogout");
 	var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 	var logoutURL = "php/backend/logout.php?authkey="+authkey;
 	$.get(logoutURL, function(data){
-	console.log(data);
 		if(!data["success"]){
 			alert("Es gibt Probleme bei der Kommunikation mit dem Server");
 		}
 		else
 		{
 			switch(data["success"]){
-				case 1: //delete cookies, call index.php 
 				document.cookie = "authkey= ; expires= Thu, 01 Jan 1970 00:00:00 GMT";
 				window.location = "index.php";
 					break;
-				default: console.log(data);					
+				default: //console.log(data);					
 			}
 		}
 

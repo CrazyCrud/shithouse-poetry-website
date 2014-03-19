@@ -436,7 +436,6 @@ function fillUsersUI(data){
 }
 
 function fillLocationsUI(data){
-	console.log(data);
 	$locations.html("");
 	clearMap();
 	if(!data)return;
@@ -663,7 +662,7 @@ function deleteLocation(target){
 
 function onLocationDeleted(success){
 	if(!success||success==null){
-		console.log("Error deleting location");
+		//console.log("Error deleting location");
 	}else{
 		fillLocationsUI(locationlist);
 	}
@@ -713,7 +712,7 @@ function updateLocation(id, locations, flat, flong, tlat, tlong){
 
 function onLocationUpdated(success){
 	if(!success || success==null){
-		console.log("Error updating location ...");
+		//console.log("Error updating location ...");
 	}else{
 		endLocationEdit();
 	}

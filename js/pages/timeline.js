@@ -10,7 +10,6 @@ $(function(){
 function initGUI(){
 	$("#moreactions").click(function(){
 		var count = actions.length;
-		console.log("loading action #"+count);
 		ImgurManager.getTimeline(fillUI, count);
 	});
 }
@@ -21,7 +20,6 @@ function loadTimeline(){
 
 function fillUI(ac){
 	if(!ac||ac.length == 0){
-		console.log("Error getting timeline");
 		$("#moreactions").css("display","none");
 		return;
 	}
