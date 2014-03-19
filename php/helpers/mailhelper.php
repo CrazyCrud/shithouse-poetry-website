@@ -34,30 +34,32 @@ Dein Team von Latrinalia
 </html>';
 
 $contentAdminMail =
-'<h2>Diese Email wurde mit Hilfe des Kontaktformulars auf Latrinalia.de an Sie gesendet:</h2>
+'<h2>Diese Email wurde mit Hilfe des Kontaktformulars auf Latrinalia.de an dich gesendet:</h2>
 <div>%1</div><br/><br/>
 <div>Diese Mail wurde von %2 versendet.</div>';
 
 $contentUserMail =
-'<h2>Diese Email wurde mit Hilfe des Kontaktformulars an die Ansprechpartner von Latrinalia.de gesendet:</h2>
+'<h2>Folgende Nachricht wurde in deinem Namen an die Ansprechpartner von Latrinalia.de gesendet:</h2>
 <div>%1</div>';
+
+$contentRecoveryMail =
+'<h2>Dein neues Passwort</h2>
+<div><p>Diese Mail wurde dir geschickt, weil du bei latrinalia.de ein neues Passwort angefordert hast.<br/>
+Hast du dies nich getan, so wende dich bitte umgehend an unseren <a href="mailto:support@latrinalia.de">Support</a>
+ (support@latrinalia.de).</p>
+ <p>Aus Sicherheitsgr&uuml;nden senden wir dir nicht dein Passwort und deinen Nutzernamen in einer Mail.</p>
+ <p>Dein neues Passwort lautet:</p>
+ <b>%1</b></div>';
 
 function sendVerificationMail($email, $username, $key){
 	global $emailBodyContent;
 	$url = "http://www.latrinalia.de/verify.php?verification=".$key;
 
-	$from = "Latrinalia <noreply@latrinalia.de>";
 	$subject = "Willkommen bei Latrinalia";
 	$message = str_replace("%1", $key, $emailBodyContent);
 	$message = str_replace("%2", $username, $message);
 
-	$header  = "MIME-Version: 1.0\r\n";
-	$header .= "Content-type: text/html; charset=iso-8859-1\r\n";
-	 
-	$header .= "From: $from\r\n";
-	$header .= "X-Mailer: PHP ". phpversion();
-
-	mail($email,$subject,$message,$header);
+	sendMail($email, $subject, $message);
 }
 
 function sendMail($email, $title, $content, $from = "Latrinalia <noreply@latrinalia.de>"){
@@ -93,6 +95,15 @@ function sendMailToAdmins($sender, $title, $content){
 	foreach($adminEmails as $admin){
 		sendAdminMail($admin, $sender, $title, $content);	
 	}
+}
+
+function sendRecoveryMail($mail, $pwd){
+	global $contentRecoveryMail;
+	
+	$subject = "Neues Passwort f&uuml;r Latrinalia";
+	$message = str_replace("%1", $pwd, $contentRecoveryMail);
+
+	sendMail($mail, $subject, $message);
 }
 
 ?>

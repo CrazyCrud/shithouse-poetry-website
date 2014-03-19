@@ -106,6 +106,7 @@ class Queries{
 		WHERE `$s`.authkey='$authkey'";
 	}
 	public static function getuserbyname($uname, $password){
+		$and = "";
 		if(isset($password)){
 			$and = "AND `password` = '$password'";
 		}

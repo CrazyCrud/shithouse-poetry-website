@@ -131,6 +131,22 @@ class DBHelper{
 		return true;
 	}
 
+	public function recoverPassword($mail, $name){
+		$user = $this->getUser($mail);
+		if(!isset($user["email"]))return false;
+		if($user["username"]!=$name)return false;
+		$pwd = uniqid();
+		$success = $this->resetPassword($user["id"], $mail, $name, $pwd);
+		if(!isset($success)||$success==false)return false;
+		sendRecoveryMail($mail, $pwd);
+		return true;
+	}
+
+	private function resetPassword($userid, $mail, $name, $pwd){
+		$query = Queries::updateuser($userid, $mail, $name, $pwd);
+		return $this->query($query);
+	}
+
 	public function updateUser($mail, $name, $pwd){
 		$user = $this->getUser();
 		if(!isset($user["id"])){
