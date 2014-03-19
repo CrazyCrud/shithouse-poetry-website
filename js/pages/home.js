@@ -168,6 +168,9 @@ function setupInfiniteScroll(){
 		}
 	}, { offset: 'bottom-in-view'
 	});
+	if(getActiveState() == "vote" || getActiveState() == "transcribe"){
+		$.waypoints("disable");
+	}
 }
 
 function setupCurrentTab(){
@@ -180,7 +183,6 @@ function setupCurrentTab(){
 	}else if(url.indexOf("#transcribe") != -1){
 		handleTranscribeClick();
 	}else{
-		console.log();
 		handleNewClick();
 	}
 }
@@ -329,6 +331,7 @@ function computeTranscribeEntries(entries){
 }
 
 function computeVoteEntries(entries){
+	console.log(entries);
 	if(!isLastestRequest("vote")){
 		return;
 	}

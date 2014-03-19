@@ -81,6 +81,14 @@ Insert code that doesn't output CSS, things like mixin declarations, functions, 
   font-family: "Goudy";
   src: url("../fonts/goudy.otf"); }
 
+@font-face {
+  font-family: "Segoe UI";
+  src: url("../fonts/segoe-ui.ttf"); }
+
+@font-face {
+  font-family: "Segoe UI Light";
+  src: url("../fonts/segoe-ui-light.ttf"); }
+
 body {
   color: #ffffff; }
 
@@ -185,6 +193,9 @@ input[type="password"].loginField {
 
 :-ms-input-placeholder {
   color: #cbcdc7; }
+
+.howto-label {
+  margin-left: 0.618rem; }
 
 .upload-forms-container {
   margin-top: 0.236rem;
@@ -318,4 +329,12 @@ input[type="password"].loginField {
     display: block;
     max-height: inherit;
     max-width: 100%;
-    margin: 0 auto; } }
+    margin: 0 auto; }
+  .add-image-container .add-image-bg {
+    display: block;
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    transform: scale(0.1);
+    opacity: 0.18;
+    background: none; } }

@@ -53,7 +53,7 @@
 			<section id="maincontent">
 				<div class="row">
 					<div class="small-12 columns full-width">
-						<label>
+						<label class="howto-label">
 							<a href="howto.php" target="_blank">Wie mache ich das hier richtig?</a>
 						</label>
 						<div class="upload-forms-container">

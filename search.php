@@ -84,7 +84,6 @@
 			}
 
 			?>
-			console.log(values);
 		</script>
 		<?php
 			include("templates.html");

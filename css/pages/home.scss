@@ -125,6 +125,14 @@
 	img{
 		vertical-align: bottom;
 	}
+
+	.justifiedGallery{
+		margin-bottom: 0;
+	}
+
+	.justifiedGallery:last-of-type{
+		margin-bottom: 10px;
+	}
 }
 
 .images-vote{

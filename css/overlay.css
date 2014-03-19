@@ -81,6 +81,14 @@ Insert code that doesn't output CSS, things like mixin declarations, functions, 
   font-family: "Goudy";
   src: url("../fonts/goudy.otf"); }
 
+@font-face {
+  font-family: "Segoe UI";
+  src: url("../fonts/segoe-ui.ttf"); }
+
+@font-face {
+  font-family: "Segoe UI Light";
+  src: url("../fonts/segoe-ui-light.ttf"); }
+
 body {
   color: #ffffff; }
 
@@ -210,7 +218,6 @@ input[type="password"].loginField {
   overflow: visible;
   top: 90%;
   right: 2%;
-  box-shadow: 1px 1px 1px #111111;
   z-index: 110; }
   #user-overlay .user-overlay-container {
     background-color: rgba(140, 140, 140, 0.9);

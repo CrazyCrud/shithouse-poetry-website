@@ -81,6 +81,14 @@ Insert code that doesn't output CSS, things like mixin declarations, functions, 
   font-family: "Goudy";
   src: url("../fonts/goudy.otf"); }
 
+@font-face {
+  font-family: "Segoe UI";
+  src: url("../fonts/segoe-ui.ttf"); }
+
+@font-face {
+  font-family: "Segoe UI Light";
+  src: url("../fonts/segoe-ui-light.ttf"); }
+
 body {
   color: #ffffff; }
 
@@ -295,6 +303,10 @@ input[type="password"].loginField {
   padding: 4px; }
   #images img {
     vertical-align: bottom; }
+  #images .justifiedGallery {
+    margin-bottom: 0; }
+  #images .justifiedGallery:last-of-type {
+    margin-bottom: 10px; }
 
 .images-vote {
   display: block;

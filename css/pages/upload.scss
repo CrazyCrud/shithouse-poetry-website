@@ -1,5 +1,9 @@
 @import "../partials/base";
 
+.howto-label{
+	margin-left: $space_minus1;
+}
+
 .upload-forms-container{
 	@include vertical-margin($space_minus3, $space_minus3);
 	@include horizontal-margin($space_minus1, $space_minus1); 
@@ -153,6 +157,18 @@
 			max-height: inherit;
 			max-width: 100%;;
 			margin: 0 auto;
+		}
+	}
+
+	.add-image-container{
+		.add-image-bg{
+			display: block;
+			position: absolute;
+			width: 180px;
+			height: 180px;
+			transform: scale(0.1);
+			opacity: 0.18;
+			background: none;
 		}
 	}
 }

@@ -95,16 +95,16 @@
 				</div>
 				<section class="section" id="overview">
 					<div class="row" id="overview-header">
-						<h3>&Uuml;bersicht</h2>
+						<h3>&Uuml;bersicht</h3>
 					</div>
 					<div class="row" id="overview-content">
-						<div id="chart-div" class="graph columns small-12 medium-6 large-6"></div>
-						<div id="pie-div" class="graph columns small-12 medium-6 large-6"></div>
+						<div id="chart-div" class="graph columns small-12 medium-6 large-6">Graph wird geladen</div>
+						<div id="pie-div" class="graph columns small-12 medium-6 large-6">Chart wird geladen</div>
 					</div>
 				</section>
 				<section class="section" id="users">
 					<div class="row" id="users-header">
-						<h3>Nutzer</h2>
+						<h3>Nutzer</h3>
 					</div>
 					<table id="users-table" class="tablesorter row">
 						<thead> 
@@ -131,7 +131,7 @@
 				</section>
 				<section class="section" id="reports">
 					<div class="row" id="reports-header">
-						<h3>Meldungen</h2>
+						<h3>Meldungen</h3>
 					</div>
 					<table id="reports-table" class="tablesorter row">
 						<thead> 
@@ -156,7 +156,7 @@
 				</section>
 				<section class="section" id="locations">
 					<div class="row" id="locations-header">
-						<h3>Orte</h2>
+						<h3>Orte</h3>
 					</div>
 					<div class="row" id="locations-content">
 						<div class="map columns small-12 medium-7 large-7" id="locations-map" name="map"></div>
@@ -186,13 +186,14 @@
 				</section>
 				<section class="section" id="tags">
 					<div class="row" id="tags-header">
-						<h3>Tags</h2>
+						<h3>Tags</h3>
 						<p class="tiny">
 							Dies sind die System-Tags, die dem Nutzer beim Erstellen eines Eintrags vorgeschlagen werden:
 						</p>
 					</div>
 					<div class="row" id="tags-content">
 						<div id="tagscontainer" class="columns small-12 middle-8 large-8">
+							Tags werden geladen ...
 						</div>
 						<div id="addtagscontainter" class="columns small-12 middle-4 large-4">
 							<div id="inputcontainer" class="columns small-8 middle-8 large-8">
@@ -206,12 +207,25 @@
 				</section>
 				<section class="section" id="types">
 					<div class="row" id="types-header">
-						<h3>Types</h2>
+						<h3>Types</h3>
 					</div>
 					<div class="row" id="types-content">
-						
-						
-
+						Types werden geladen ...
+					</div>
+					<div class="row" id="types-add-content">
+						<a href="#" class="tiny" id="newtypebutton">Neuen Type hinzuf&uuml;gen</a>
+						<div id="add-type-container">
+							<div class="tiny">Neuen Type hinzuf&uuml;gen (Vorsicht!! Das ist permanent und kann nicht r&uuml;ckg&auml;ngig gemacht werden!)</div>
+							<div class="columns small-2 medium-2 large-2 inputcontainer">
+								<input type="text" id="newtype-name" placeholder="Name"></input>
+							</div>
+							<div class="columns small-9 medium-9 large-9 inputcontainer">
+								<input type="text" id="newtype-description" placeholder="Beschreibung"></input>
+							</div>
+							<div class="columns small-1 medium-1 large-1">
+								<button class="tiny" id="addtypebutton"><i class="icon-plus"></i></button>
+							</div>
+						</div>
 					</div>
 				</section>
 			</section>

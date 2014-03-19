@@ -15,6 +15,14 @@ body{
 p.tiny{
 	font-size: $space_minus1;
 }
+a.tiny{
+	font-size: $space_minus1;
+}
+div.tiny{
+	margin-top: $space_minus2;
+	margin-bottom: $space_minus2;
+	font-size: $space_minus1;
+}
 
 #headline{
 	i{
@@ -125,5 +133,13 @@ p.tiny{
 		.edit{
 			text-align: right;
 		}
+	}
+}
+#types-add-content{
+	#add-type-container{
+		display: none;
+	}
+	.inputcontainer{
+		padding-right: $space_minus1;
 	}
 }

@@ -81,6 +81,14 @@ Insert code that doesn't output CSS, things like mixin declarations, functions, 
   font-family: "Goudy";
   src: url("../fonts/goudy.otf"); }
 
+@font-face {
+  font-family: "Segoe UI";
+  src: url("../fonts/segoe-ui.ttf"); }
+
+@font-face {
+  font-family: "Segoe UI Light";
+  src: url("../fonts/segoe-ui-light.ttf"); }
+
 body {
   color: #ffffff; }
 
@@ -235,7 +243,7 @@ i.icon-thumbs-up-1:before {
 .law-container {
   position: fixed;
   display: block;
-  bottom: 4%;
+  bottom: 0;
   right: 2%;
   width: 200px;
   height: auto;
@@ -245,7 +253,7 @@ i.icon-thumbs-up-1:before {
     position: relative;
     display: none;
     width: inherit;
-    background-color: rgba(203, 205, 199, 0.9);
+    background-color: rgba(140, 140, 140, 0.9);
     border-radius: 1px;
     z-index: 10;
     margin-bottom: 44px; }
@@ -261,24 +269,29 @@ i.icon-thumbs-up-1:before {
           height: 100%;
           font-size: 0.618rem;
           color: #ffffff; }
+      .law-container #law-overlay ul li:hover {
+        background-color: #ffffff; }
+        .law-container #law-overlay ul li:hover a {
+          color: #888888; }
   .law-container #law-overlay:before {
     content: "";
     position: absolute;
-    bottom: -3%;
+    bottom: -4.5%;
     right: 8%;
     width: 0;
     height: 0;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
-    border-top: 5px solid rgba(203, 205, 199, 0.9); }
+    border-top: 5px solid rgba(140, 140, 140, 0.9); }
   .law-container .law-icon-container {
     position: absolute;
     display: table;
     bottom: 0;
     right: 2%;
-    width: 32px;
+    width: 38px;
     background: #cbcdc7;
-    border-radius: 32px;
+    border-top-right-radius: 32px;
+    border-top-left-radius: 32px;
     height: 32px;
     opacity: 1;
     cursor: pointer;
