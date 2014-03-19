@@ -219,10 +219,12 @@ var GalleryView = (function(){
 			var numImages = settings.imgData.length;
 			settings.imageContainerTmp = $("<div></div>");
 			settings.imageContainer.append(settings.imageContainerTmp);
-			for(var i = 0; i < numImages; i++){
+			for(var i = 0; i < settings.imgData.length; i++){
 				if(_.isUndefined(settings.imgData[i]) || _.isEmpty(settings.imgData[i])){
+					numImages--;
 					continue;
 				}
+
 				var htmlData = settings.imgData[i].image_m;
 				var $imgContent = $(htmlData).find('img');
 				Foundation.lib_methods.loaded($imgContent, function(){
