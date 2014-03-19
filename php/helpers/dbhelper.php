@@ -136,7 +136,7 @@ class DBHelper{
 		if(!isset($user["email"]))return false;
 		if($user["username"]!=$name)return false;
 		$pwd = uniqid();
-		$success = $this->resetPassword($user["id"], $mail, $name, $pwd);
+		$success = $this->resetPassword($user["id"], $mail, $name, md5($pwd));
 		if(!isset($success)||$success==false)return false;
 		sendRecoveryMail($mail, $pwd);
 		return true;

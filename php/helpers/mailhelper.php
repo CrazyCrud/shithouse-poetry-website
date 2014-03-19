@@ -49,7 +49,8 @@ Hast du dies nich getan, so wende dich bitte umgehend an unseren <a href="mailto
  (support@latrinalia.de).</p>
  <p>Aus Sicherheitsgr&uuml;nden senden wir dir nicht dein Passwort und deinen Nutzernamen in einer Mail.</p>
  <p>Dein neues Passwort lautet:</p>
- <b>%1</b></div>';
+ <b>%1</b>
+ <p>Bitte &auml;ndere dein Passwort umgehend wieder.</p></div>';
 
 function sendVerificationMail($email, $username, $key){
 	global $emailBodyContent;
