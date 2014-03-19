@@ -100,7 +100,7 @@ function sendMailToAdmins($sender, $title, $content){
 function sendRecoveryMail($mail, $pwd){
 	global $contentRecoveryMail;
 	
-	$subject = "Neues Passwort f&uuml;r Latrinalia";
+	$subject = "Neues Passwort für Latrinalia";
 	$message = str_replace("%1", $pwd, $contentRecoveryMail);
 
 	sendMail($mail, $subject, $message);
