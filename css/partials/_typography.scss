@@ -3,10 +3,19 @@
 	src: url("../fonts/goudy.otf");
 }
 
+@font-face{
+	font-family: $segoe;
+	src: url("../fonts/segoe-ui.ttf");
+}
+
 body{
 	color: $white;
 }
 
 @mixin transcription-font(){
 	font-family: $transcription;
+}
+
+@mixin interface-font(){
+	font-family: $segoe;
 }

@@ -81,6 +81,10 @@ Insert code that doesn't output CSS, things like mixin declarations, functions, 
   font-family: "Goudy";
   src: url("../fonts/goudy.otf"); }
 
+@font-face {
+  font-family: "Segoe UI";
+  src: url("../fonts/segoe-ui.ttf"); }
+
 body {
   color: #ffffff; }
 
@@ -235,7 +239,7 @@ i.icon-thumbs-up-1:before {
 .law-container {
   position: fixed;
   display: block;
-  bottom: 4%;
+  bottom: 0;
   right: 2%;
   width: 200px;
   height: auto;
@@ -280,9 +284,10 @@ i.icon-thumbs-up-1:before {
     display: table;
     bottom: 0;
     right: 2%;
-    width: 32px;
+    width: 38px;
     background: #cbcdc7;
-    border-radius: 32px;
+    border-top-right-radius: 32px;
+    border-top-left-radius: 32px;
     height: 32px;
     opacity: 1;
     cursor: pointer;
