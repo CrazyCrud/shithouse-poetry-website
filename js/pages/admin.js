@@ -442,7 +442,7 @@ function addUser(queriedUser){
 
 	var s = queriedUser.status;
 	var options = '<select userid="'+queriedUser.id+'" class="small-10 medium-10 large-10 useroption">';
-	options += '<option '+(s==-1?"selected":"")+' status="-1" value>Gel&ouml;scht</option>';
+	if(s==-1)options += '<option selected status="-1" value>Gel&ouml;scht</option>';
 	options += '<option '+(s==0?"selected":"")+' status="0" value>Nutzer</option>';
 	options += '<option '+(s==1?"selected":"")+' status="1" value>Admin</option>';
 	options += '<option '+(s==2?"selected":"")+' status="2" value>neuer Nutzer</option>';
