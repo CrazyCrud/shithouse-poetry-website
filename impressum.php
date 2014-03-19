@@ -21,7 +21,7 @@
 	  	if ($resp->is_valid) {
 	  		global $email, $subject, $desc;
 	    	sendUserMail($email, $subject, $desc);
-	    	sendAdminMail("thomas@latrinalia.de", $email, $subject, $desc);
+	    	sendMailToAdmins($email, $subject, $desc);
 	  	}
 	}
 ?>
@@ -79,9 +79,9 @@
 		</header>
 		<section id="maincontent">
 			 <script type="text/javascript">
-			 var RecaptchaOptions = {
-			    theme : 'clean'
-			 };
+				 var RecaptchaOptions = {
+				    theme : 'clean'
+				 };
 			 </script>
 			 <?php
 			 	echo '<script type="text/javascript">';
