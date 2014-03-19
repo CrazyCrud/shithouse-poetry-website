@@ -129,7 +129,7 @@ var GalleryView = (function(){
 		$(".jg-image a").each(function(index, value) {
 			var $parent = $(this).parent(".jg-image");
 			var id = parseInt($(this).attr('title'));
-
+			$(this).attr('href', 'javascript:void()');
 			var index = _.chain(settings.imgData).pluck("id").indexOf(id).value();
 
 			elementData = settings.imgData[index];
