@@ -239,6 +239,10 @@ div.tiny {
 
 #overview .graph {
   height: 15rem; }
+  #overview .graph #chart-chart-div {
+    height: 13rem; }
+  #overview .graph #chart-control-div {
+    height: 2rem; }
 
 #users-table-header {
   font-size: 0.618rem; }
