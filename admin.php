@@ -98,7 +98,11 @@
 						<h3>&Uuml;bersicht</h3>
 					</div>
 					<div class="row" id="overview-content">
-						<div id="chart-div" class="graph columns small-12 medium-6 large-6">Graph wird geladen</div>
+						<div id="chart-div" class="graph columns small-12 medium-6 large-6">
+							<span>Graph wird geladen</span>
+							<div id="chart-chart-div"></div>
+							<div id="chart-control-div"></div>
+						</div>
 						<div id="pie-div" class="graph columns small-12 medium-6 large-6">Chart wird geladen</div>
 					</div>
 				</section>

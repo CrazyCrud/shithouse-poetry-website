@@ -24,7 +24,7 @@ var STROKE_FOCUS = "#008CBA";
 
 $(function(){
 	initGUI();
-	loadStatistics();
+	//loadStatistics();
 	loadUsers();
 	loadReports();
 	loadTags();
@@ -269,8 +269,20 @@ function fillTypesUI(data){
 	}
 }
 
+function arrayToDataTable(array){
+	var result = new google.visualization.DataTable();
+	result.addColumn('date', "Datum");
+	result.addColumn('number', "Nutzer");
+	result.addColumn('number', "Beiträge");
+	for(i in array){
+		array[i][0] = new Date(array[i][0]);
+		result.addRow(array[i]);
+	}
+	return result;
+}
+
 function getStatisticArray(joins, uploads){
-	var result = [["Datum", "Nutzer", "Beiträge"]];
+	var result = [];//[["Datum", "Nutzer", "Beiträge"]];
 	var numbers = mergeStatisticArrays(joins, uploads);
 	for(i in numbers){
 		var length = result.length;
@@ -309,7 +321,7 @@ function fillStatisticsUI(data){
 	if(!googleloaded){
 		google.load("visualization", "1", {callback:function(){
 	    	drawStatisticsUI(data);
-		},packages:["corechart"]});
+		},packages:["corechart","controls"]});
 	}else{
     	drawStatisticsUI(data);
     }
@@ -323,21 +335,68 @@ function drawStatisticsUI(data){
 
 function drawStatisticGraphs(data){
 	var array = getStatisticArray(data.joins, data.uploads);
-	var data = google.visualization.arrayToDataTable(array);
+	var data = arrayToDataTable(array);
+
+	$("#chart-div span").remove();
+	$("#chart-div div").html("");
+
+	var dashboard = new google.visualization.Dashboard(
+       document.getElementById('chart-div'));
+
+	var colors = ['#99cc00', '#8901a7'];
 
 	var options = {
 		title: 'Nutzer und Beiträge',
-		hAxis: {title: 'Datum',  titleTextStyle: {color: '#333'}},
+		hAxis: {
+			title: 'Datum', 
+			titleTextStyle: {color: '#333'}
+		},
 		vAxis: {title: 'Anzahl'},
-		explorer:{ keepInBounds: true }
+		explorer:{ keepInBounds: true },
+		colors:colors
 	};
 
-	var chart = new google.visualization.AreaChart(document.getElementById('chart-div'));
-	chart.draw(data, options);
+	var twoWeeksAgo = new Date();
+	twoWeeksAgo.setDate(twoWeeksAgo.getDate() - 14);
+
+	var control = new google.visualization.ControlWrapper({
+		'controlType': 'ChartRangeFilter',
+		'containerId': 'chart-control-div',
+		'options': {
+			// Filter by the date axis.
+			'filterColumnIndex': "0",
+			'ui': {
+				'chartType': 'LineChart',
+				'chartOptions': {
+					'chartArea': {'width': '90%'},
+					'hAxis': {'baselineColor': 'none'},
+					colors:colors
+				},
+				// Display a single series that shows the closing value of the stock.
+				// Thus, this view has two columns: the date (axis) and the stock value (line series).
+				'chartView': {
+					'columns': [0, 1, 2]
+				},
+				// 1 day in milliseconds = 24 * 60 * 60 * 1000 = 86,400,000
+				'minRangeSize': 8*86400000
+			}
+		},
+		// Initial range
+		'state': {'range': {'end': new Date(), 'start': twoWeeksAgo}}
+	});
+
+	var chart = new google.visualization.ChartWrapper({
+		'chartType': 'LineChart',
+		//dataTable: data,
+		containerId: 'chart-chart-div',
+		options: options
+	});
+
+	dashboard.bind(control, chart);
+	dashboard.draw(data);
 }
 
 function drawStatisticPie(data){
-	console.log(data);
 	var data = google.visualization.arrayToDataTable([
 		['Geschlecht', 'Beiträge'],
 		['Männertoiletten', parseInt(data.male)],

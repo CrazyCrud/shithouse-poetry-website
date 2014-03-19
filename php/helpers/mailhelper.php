@@ -60,10 +60,9 @@ function sendVerificationMail($email, $username, $key){
 	mail($email,$subject,$message,$header);
 }
 
-function sendMail($email, $title, $content){
+function sendMail($email, $title, $content, $from = "Latrinalia <noreply@latrinalia.de>"){
 	global $emailBody;
-
-	$from = "Latrinalia <noreply@latrinalia.de>";
+	
 	$subject = $title;
 	$message = str_replace("%1", $content, $emailBody);
 
@@ -86,7 +85,7 @@ function sendAdminMail($admin, $sender, $title, $content){
 	global $contentAdminMail;
 	$message = str_replace("%1", $content, $contentAdminMail);
 	$message = str_replace("%2", $sender, $message);
-	sendMail($admin, $title, $message);
+	sendMail($admin, $title, $message, $sender);
 }
 
 function sendMailToAdmins($sender, $title, $content){
