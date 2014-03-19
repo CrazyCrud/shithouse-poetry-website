@@ -6,7 +6,7 @@
 		<link rel="stylesheet" type="text/css" href="css/plugins/build/production.plugins.min.css"/>
 		<link rel="stylesheet" type="text/css" href="css/global.css"/>
 		<link rel="stylesheet" type="text/css" href="css/overlay.css"/>
-		<link rel="stylesheet" type="text/css" href="css/pages/tou.css"/>
+		<link rel="stylesheet" type="text/css" href="css/pages/law.css"/>
 		<link rel="icon" type="image/x-icon" href="img/global/favicon.jpg"/>
 		<script type="text/javascript" src="js/plugins/modernizr.js"></script>
 		<title>Datenschutzerklärung</title>
@@ -51,9 +51,10 @@
 				</div>
 			</header>
 			<section id="maincontent">
-				<div class="row small-12 medium-11 large-11 medium-centered large-centered columns">
+				<div class="law-content row">
+				<div class="small-11 small-centered medium-11 large-11 medium-centered large-centered columns">
 					<div id="content" >
-						<h1 id="privacy" name="privacy">Datenschutzerklärung:</h1>
+						<h2 id="privacy" name="privacy">Datenschutzerklärung:</h2>
 
 						<p><h3>Datenschutz</h3></p> 
 
@@ -97,6 +98,7 @@
 
 								<p>Copyright © 2014 ausschließliche Datenschutzerklärung von Latrinalia</p>
 							</div>
+						</div>
 						</div>
 					</section>
 		<?php
