@@ -331,6 +331,7 @@ function computeTranscribeEntries(entries){
 }
 
 function computeVoteEntries(entries){
+	console.log(entries);
 	if(!isLastestRequest("vote")){
 		return;
 	}
