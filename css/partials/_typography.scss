@@ -8,6 +8,11 @@
 	src: url("../fonts/segoe-ui.ttf");
 }
 
+@font-face{
+	font-family: $segoeli;
+	src: url("../fonts/segoe-ui-light.ttf");
+}
+
 body{
 	color: $white;
 }
@@ -18,4 +23,8 @@ body{
 
 @mixin interface-font(){
 	font-family: $segoe;
+}
+
+@mixin interface-font(){
+	font-family: $segoeli;
 }
