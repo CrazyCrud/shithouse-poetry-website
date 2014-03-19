@@ -68,7 +68,6 @@ function fillUI(e){
 	entry = e;
 	var $img = $('<img id="img-upload" exif="true" src="'+entry.images[0].thumbnail+'"/>');
 	$imageContainer.append($img);
-	$img.load(cropMe);
 	$imageContainer.css("display","block");
 	$("#title").val(entry.title);
 	$("#transcription").val(entry.information[0].transcription);
