@@ -194,6 +194,6 @@ input[type="password"].loginField {
 :-ms-input-placeholder {
   color: #cbcdc7; }
 
-#content {
+#content-tou p, #content-tou ol {
   color: #111111;
-  font-size: 0.7rem; }
+  font-size: 0.5rem; }
