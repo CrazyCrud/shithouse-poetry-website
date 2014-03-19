@@ -294,7 +294,7 @@ function getStatisticArray(joins, uploads){
 		if(a[0]=="Datum")return -1;
 		return a[0].localeCompare(b[0]);
 	});
-	for(var i=2; i<result.length; i++){
+	for(var i=1; i<result.length; i++){
 		result[i][1] += result[i-1][1];
 		result[i][2] += result[i-1][2];
 	}
@@ -493,8 +493,9 @@ function addUser(queriedUser){
 			status = "Gebannt";
 			break;
 		case "4":
-			icon = '<i class="icon-help-circled user-unregistered"></i>';
-			status = "Unregistriert";
+			return;// dont show dummy-users
+			//icon = '<i class="icon-help-circled user-unregistered"></i>';
+			//status = "Unregistriert";
 			break;
 	}
 
@@ -505,7 +506,7 @@ function addUser(queriedUser){
 	options += '<option '+(s==1?"selected":"")+' status="1" value>Admin</option>';
 	options += '<option '+(s==2?"selected":"")+' status="2" value>neuer Nutzer</option>';
 	options += '<option '+(s==3?"selected":"")+' status="3" value>Gebannt</option>';
-	options += '<option '+(s==4?"selected":"")+' status="4" value>Unregistriert</option></select>';
+	//options += '<option '+(s==4?"selected":"")+' status="4" value>Unregistriert</option></select>';
 
 	if(user.id == queriedUser.id)options = "";
 

@@ -1167,7 +1167,7 @@ class Queries{
 		"SELECT COUNT( * ) AS users,
 		DATE_FORMAT(joindate,'%Y-%m-%d') AS day
 		FROM `$u`
-
+		WHERE `$u`.status != ".DBConfig::$userStatus["unregistered"]."
 		GROUP BY day
 		ORDER BY day DESC";
 		return $query;
