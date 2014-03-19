@@ -14,6 +14,10 @@ var $tagsButton = $("#notifications-header #tags");
 var $typesButton = $("#notifications-header #types");
 var $addLocationButton = $("#add-location");
 var $addTagButton = $("#addtagbutton");
+var $newTypeButton = $("#newtypebutton");
+var $addTypeButton = $("#addtypebutton");
+var $newTypeName = $("#newtype-name");
+var $newTypeDescription = $("#newtype-description");
 
 var STROKE_DEFAULT = "#000";
 var STROKE_FOCUS = "#008CBA";
@@ -23,7 +27,6 @@ $(function(){
 	loadStatistics();
 	loadUsers();
 	loadReports();
-	loadOverview();
 	loadTags();
 	loadTypes();
 	$overviewButton.trigger("click");
@@ -35,7 +38,7 @@ function initGUI(){
 		$(this).addClass("active");
 		$(".section").css("display","none");
 		$(".section#overview").css("display","block");
-		loadOverview();
+		loadStatistics();
 	});
 	$userButton.click(function(){
 		$("#notifications-header a").removeClass("active");
@@ -74,6 +77,10 @@ function initGUI(){
 	});
 	$addLocationButton.click(createLocation);
 	$addTagButton.click(createTag);
+	$newTypeButton.click(function(){
+		showCreateTypeDialog(true);
+	});
+	$addTypeButton.click(createType);
 	$(document).on("change",".useroption",function(){
 		var userid = $(this).attr("userid");
 		var status = $(this).find(":selected").attr("status");
@@ -178,6 +185,16 @@ function updateReport(reportid, status){
 	}, reportid, status);
 }
 
+function showCreateTypeDialog(visible){
+	if(visible){
+		$("#newtypebutton").css("display","none");
+		$("#add-type-container").css("display","block");
+	}else{
+		$("#newtypebutton").css("display","");
+		$("#add-type-container").css("display","none");
+	}
+}
+
 function loadStatistics(){
 	ImgurManager.getStatistics(fillStatisticsUI);
 }
@@ -198,15 +215,12 @@ function loadReports(){
 	ImgurManager.getReports(fillReportsUI);
 }
 
-function loadOverview(){
-
-}
-
 function loadTags(){
 	ImgurManager.getSystemTags(fillTagsUI);
 }
 
 function loadTypes(){
+	showCreateTypeDialog(false);
 	ImgurManager.getTypes(fillTypesUI);
 }
 
@@ -290,13 +304,19 @@ function mergeStatisticArrays(joins, uploads){
 	return array;
 }
 
+var googleloaded = false;
 function fillStatisticsUI(data){
-	google.load("visualization", "1", {callback:function(){
+	if(!googleloaded){
+		google.load("visualization", "1", {callback:function(){
+	    	drawStatisticsUI(data);
+		},packages:["corechart"]});
+	}else{
     	drawStatisticsUI(data);
-	},packages:["corechart"]});
+    }
 }
 
 function drawStatisticsUI(data){
+	googleloaded = true;
 	drawStatisticGraphs(data);
 	drawStatisticPie(data.genders[0]);
 }
@@ -594,6 +614,14 @@ function createTag(){
 	var tag = $("#taginput").val();
 	$("#taginput").val("");
 	ImgurManager.updateTag(loadTags, tag, 1);
+}
+
+function createType(){
+	var name = $("#newtype-name").val();
+	$("#newtype-name").val("");
+	var txt = $("#newtype-description").val();
+	$("#newtype-description").val("");
+	ImgurManager.createType(loadTypes, name, txt);
 }
 
 function createLocation(){

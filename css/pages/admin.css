@@ -199,6 +199,14 @@ body {
 p.tiny {
   font-size: 0.618rem; }
 
+a.tiny {
+  font-size: 0.618rem; }
+
+div.tiny {
+  margin-top: 0.382rem;
+  margin-bottom: 0.382rem;
+  font-size: 0.618rem; }
+
 #headline i {
   display: none; }
 
@@ -280,3 +288,8 @@ p.tiny {
     width: 90%; }
   #types-content .type .edit {
     text-align: right; }
+
+#types-add-content #add-type-container {
+  display: none; }
+#types-add-content .inputcontainer {
+  padding-right: 0.618rem; }
