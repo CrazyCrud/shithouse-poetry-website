@@ -411,6 +411,18 @@ var ImgurManager = (function(){
 				}	
 			});
 		},
+		createType : function(callback, name, text){
+			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+			var url = "createType.php?name=" + name + "&desc=" + text +
+				"&authkey=" + authkey;
+			$.post("php/backend/" + url, function(data){
+				if(data.success == 1){
+					callback(true);
+				}else{
+					callback(false);
+				}	
+			});
+		},
 		getComments: function(callback, entryid, start){
 			var comments = null;
 			start = start || -1;
