@@ -1,5 +1,18 @@
 <?php
 
+$adminEmails = array("bastian@latrinalia.de", "franziska@latrinalia.de", "constantin@latrinalia.de", "thomas@latrinalia.de");
+
+$emailBody = '<html>
+<head></head>
+<body style="font-family:Helvetica">
+<img src="http://latrinalia.de/img/global/top-img-bw.jpg" style="width:100%"></img>
+<div>%1</div>
+<br/>
+Vielen Dank und liebe Gr&uuml;&szlig;e,<br/>
+Dein Team von Latrinalia
+</body>
+</html>';
+
 $emailBodyContent =
 '<html>
 <head></head>
@@ -19,6 +32,16 @@ Vielen Dank und liebe Gr&uuml;&szlig;e,<br/>
 Dein Team von Latrinalia
 </body>
 </html>';
+
+$contentAdminMail =
+'<h2>Diese Email wurde mit Hilfe des Kontaktformulars auf Latrinalia.de an Sie gesendet:</h2>
+<div>%1</div><br/><br/>
+<div>Diese Mail wurde von %2 versendet.</div>';
+
+$contentUserMail =
+'<h2>Diese Email wurde mit Hilfe des Kontaktformulars an die Ansprechpartner von Latrinalia.de gesendet:</h2>
+<div>%1</div>';
+
 function sendVerificationMail($email, $username, $key){
 	global $emailBodyContent;
 	$url = "http://www.latrinalia.de/verify.php?verification=".$key;
@@ -35,6 +58,42 @@ function sendVerificationMail($email, $username, $key){
 	$header .= "X-Mailer: PHP ". phpversion();
 
 	mail($email,$subject,$message,$header);
+}
+
+function sendMail($email, $title, $content){
+	global $emailBody;
+
+	$from = "Latrinalia <noreply@latrinalia.de>";
+	$subject = $title;
+	$message = str_replace("%1", $content, $emailBody);
+
+	$header  = "MIME-Version: 1.0\r\n";
+	$header .= "Content-type: text/html; charset=iso-8859-1\r\n";
+	 
+	$header .= "From: $from\r\n";
+	$header .= "X-Mailer: PHP ". phpversion();
+
+	mail($email,$subject,$message,$header);
+}
+
+function sendUserMail($email, $title, $content){
+	global $contentUserMail;
+	$message = str_replace("%1", $content, $contentUserMail);
+	sendMail($email, $title, $message);
+}
+
+function sendAdminMail($admin, $sender, $title, $content){
+	global $contentAdminMail;
+	$message = str_replace("%1", $content, $contentAdminMail);
+	$message = str_replace("%2", $sender, $message);
+	sendMail($admin, $title, $message);
+}
+
+function sendMailToAdmins($sender, $title, $content){
+	global $adminEmails;
+	foreach($adminEmails as $admin){
+		sendAdminMail($admin, $sender, $title, $content);	
+	}
 }
 
 ?>

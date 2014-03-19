@@ -1,0 +1,15 @@
+@import "../partials/base";
+
+#content{
+	color: $black;
+	font-size: 0.7rem;
+}
+
+form textarea#description{
+	resize:none;
+	min-height: 150px;
+}
+
+form button#submit{
+  margin-top: 6px;
+}

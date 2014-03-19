@@ -22,6 +22,7 @@ module.exports = function(grunt) {
                     'js/plugins/table/*.js',
                     'js/plugins/transit/*.js',
                     'js/plugins/waypoint/*.js',
+                    'js/plugins/recaptcha/*.js',
                 ],
                 dest: 'js/plugins/build/production.plugins.js'
             }
