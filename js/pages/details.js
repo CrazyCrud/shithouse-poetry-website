@@ -457,6 +457,7 @@ function userLogout(){
 		else
 		{
 			switch(data["success"]){
+				case 1:
 				document.cookie = "authkey= ; expires= Thu, 01 Jan 1970 00:00:00 GMT";
 				window.location = "index.php";
 					break;
