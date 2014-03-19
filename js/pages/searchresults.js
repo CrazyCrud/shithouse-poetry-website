@@ -12,9 +12,9 @@ $(document).ready(function() {
 		switch(type){
 			case "sex":
 				var sex = "";
-				if(values == "Männer"){
+				if(values == "Männertoilette"){
 					sex = "m";
-				}else if(values == "Frauen"){
+				}else if(values == "Frauentoilette"){
 					sex = "w";
 				}else{
 					sex = "u";
