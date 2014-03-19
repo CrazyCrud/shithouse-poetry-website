@@ -111,12 +111,12 @@
 					<div class="row">
 						<div class="small-12 medium-6 large-6 columns">
 							<h2>Passwort vergessen?</h2>						
-							Gib hier deine Email-Addresse und deinen Benutzernamen ein und wir werden dir ein neues
+							Gib hier deine Email-Adresse und deinen Benutzernamen ein und wir werden dir ein neues
 							Passwort zuschicken:
 							<br/>
 							<br/>
 							<form action="" id="contactForm" name="contactForm" method="post">
-								<input type="email" id="email" name="email" placeholder="E-Mail Addresse" <?php if(isset($email) && $email != "" && !$passwordchanged) echo 'value="'.$email.'"'; ?> required>
+								<input type="email" id="email" name="email" placeholder="E-Mail Adresse" <?php if(isset($email) && $email != "" && !$passwordchanged) echo 'value="'.$email.'"'; ?> required>
 								<input id="username" name="username" type="text" placeholder="Nutzername" <?php if(isset($username) && $username != "" && !$passwordchanged) echo 'value="'.$username.'"'; ?> required>
 						        <?php
 						          $publickey = "6LcSSvASAAAAAHECPqkbcRLzzmliSEI0OqJej6MX";

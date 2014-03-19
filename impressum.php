@@ -123,7 +123,7 @@
 					        		<label class="inline" for="email">E-Mail</label>
 					        	</div>
 					        	<div class="small-11 medium-9 large-9 columns left">
-					        		<input pattern="email" type="email" id="email" name="email" placeholder="Ihre E-Mail Addresse" <?php if(isset($email) && $email != "") echo 'value="'.$email.'"'; ?> required>
+					        		<input pattern="email" type="email" id="email" name="email" placeholder="Deine E-Mail Adresse" <?php if(isset($email) && $email != "") echo 'value="'.$email.'"'; ?> required>
 					        	</div>
 					        </div>
 					        <div class="row">
@@ -139,7 +139,7 @@
 					        		<label class="inline" for="description">Innhalt</label>
 					        	</div>
 					        	<div class="small-11 medium-9 large-9 columns left">
-									<textarea id="description" name="description" placeholder="Was möchten Sie uns mitteilen?" maxlength="400" cols="20" rows="8" required><?php if(isset($desc) && $desc != "") echo $desc; ?></textarea>
+									<textarea id="description" name="description" placeholder="Was möchtest du uns mitteilen?" maxlength="400" cols="20" rows="8" required><?php if(isset($desc) && $desc != "") echo $desc; ?></textarea>
 					        	</div>
 					        </div>
 					        <div class="row">

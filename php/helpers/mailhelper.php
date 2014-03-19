@@ -25,7 +25,7 @@ $emailBodyContent =
 Diese E-Mail wurde dir geschickt, weil du dich bei http://www.latrinalia.de registriert hast und nun deinen Email-Account verifizieren musst. 
 Falls du dich dort nicht registiert hast und nicht wei&szlig;t, warum du diese E-Mail bekommen hast, ignoriere sie einfach.
 <p>Um deine Registrierung abzuschlie&szlig;en, klicke bitte <a href="http://www.latrinalia.de/verify.php?verification=%1">auf diesen Link</a>.</p>
-<p>Sollte der Link aus irgendwelchen Gr&uuml;nden nicht funktionieren, kopiere einfach folgenden Text in deine Browser-Adressleiste:<br/>
+<p>Sollte der Link aus irgendwelchen Gr&uuml;nden nicht funktionieren, kopiere einfach folgenden Text in deine Browser-Addressleiste:<br/>
 http://www.latrinalia.de/verify.php?verification=%1</p>
 <br/>
 Vielen Dank und liebe Gr&uuml;&szlig;e,<br/>
