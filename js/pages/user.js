@@ -50,7 +50,8 @@ function fillUI(u){
 		queriedUser = u;
 	}
 	var usericon = getUserIcon(queriedUser.status);
-	$("#username").html(usericon+queriedUser.username);
+	var userName = getUserName(queriedUser);
+	$("#username").html(usericon+userName);
 	$("#membersince").html(formatTime(queriedUser.joindate));
 	$("#lastseen").html(formatTime(queriedUser.lastaction));
 	$("#lastseen").attr("title",queriedUser.lastaction);	

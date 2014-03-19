@@ -93,6 +93,7 @@ class Queries{
 		VALUES
 		('$mail','$name', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP,$status,'$key','$pwd')";
 	}
+	// DEPRECATED
 	public static function deleteuser($authkey){
 		$u = DBConfig::$tables["users"];
 		$s = DBConfig::$tables["sessions"];

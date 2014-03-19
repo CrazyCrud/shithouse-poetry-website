@@ -203,6 +203,16 @@ function getUserIcon(status){
   }
 }
 
+function getUserName(user){
+  switch(user.status){
+    case -1:
+    case "-1":
+      return "Gel&ouml;schter Nutzer";
+    default:
+      return user.name;
+  }
+}
+
 function s4() {
   return Math.floor((1 + Math.random()) * 0x10000)
              .toString(16)
