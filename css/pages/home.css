@@ -339,6 +339,28 @@ input[type="password"].loginField {
       color: #ffffff;
       background-color: #111111; }
 
+#outer-rating {
+  display: inline-block;
+  position: relative;
+  visibility: hidden;
+  width: 100px;
+  height: 5px;
+  margin: 0;
+  padding: 0;
+  background-color: #ff4444;
+  padding-left: 6px;
+  padding-right: 6px; }
+
+#inner-rating {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  background-color: #99cc00; }
+
+#rating-count {
+  font-size: 0.75rem; }
+
 .transcribe-container {
   display: none;
   text-align: center;

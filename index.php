@@ -90,6 +90,10 @@
 							<div class="vote-container small-12 columns">
 								<div class="vote-icon-container">
 									<i id="up-vote" class="icon-thumbs-up-1"></i>
+									<span id="outer-rating">
+										<span id="inner-rating"></span>
+									</span>
+									<span id="rating-count"></span>
 									<i id="down-vote" class="icon-thumbs-down-1"></i>
 								</div>
 							</div>
@@ -118,17 +122,6 @@
 		<?php
 			include("templates.html");
 		?>
-		<!--
-		<script src="js/plugins/jquery.min.js"></script>
-		<script src="js/plugins/underscore.js"></script>
-		<script src="js/plugins/foundation/foundation.js"></script>
-  		<script src="js/plugins/foundation/foundation.topbar.js"></script>
-  		<script src="js/plugins/waypoint/waypoints.min.js"></script>
-  		<script src="js/plugins/transit/transit.min.js"></script>
-  		<script src="js/plugins/gallery/jquery.justifiedgallery.js"></script>
-  		<script src="js/plugins/jquery-ui-custom/jquery-ui.min.js"></script>
-  		<script src="js/plugins/md5/jquery.md5.js"></script>
-  		-->
   		<script src="js/plugins/build/production.plugins.min.js"></script>
   		<script src="js/StateManager.js"></script>
   		<script src="js/ImgurManager.js"></script>
