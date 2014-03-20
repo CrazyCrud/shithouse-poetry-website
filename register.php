@@ -1,5 +1,8 @@
 <!doctype html>
-<html lang="en">
+<?php
+	error_reporting(0);
+?>
+<html lang="de">
 	<head>
 		<meta charset="utf-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -74,7 +77,7 @@
 					          			placeholder="Hier E-Mail eingeben..." 
 
 					          			<?php 
-					          				if(isset($_GET["mail"])){
+					          				if(isset($_GET["mail"]) && $_GET["mail"] != ""){
 					          					echo 'value="'.$_GET["mail"].'" ';
 					          				}
 
