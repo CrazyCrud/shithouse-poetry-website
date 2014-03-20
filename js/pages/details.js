@@ -386,7 +386,7 @@ function changeTranscription(){
 	$input.val(entry.information[0]["transcription"]);
 	$ok = $('<button class="tiny">OK</ok>');
 	$help = $('<label>'
-		+'<a href="howto.php#transcription" target="_blank">Wie transkribiere ich richtig?</a>'
+		+'<a href="howto.php#transcription" target="_blank"><i class="icon-info"></i>Wie transkribiere ich richtig?</a>'
 	+'</label>');
 	$container.append($input);
 	$container.append($ok);

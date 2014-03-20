@@ -58,7 +58,7 @@
 				<div class="row">
 					<div class="small-12 columns full-width">
 						<label class="small-12 howto-label">
-							<a href="howto.php" target="_blank">Wie mache ich das hier richtig?</a>
+							<a href="howto.php" target="_blank"><i class="icon-info"></i>Wie mache ich das hier richtig?</a>
 						</label>
 						<div class="upload-forms-container">
 							<form data-abide="ajax">

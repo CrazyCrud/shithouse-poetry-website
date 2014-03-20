@@ -107,7 +107,7 @@
 									<button id="skip-transcription" class="tiny">
 										Überspringen</button>
 									<label>
-										<a href="howto.php#transcription" target="_blank">Wie transkribiere ich richtig?</a>
+										<a href="howto.php#transcription" target="_blank"><i class="icon-info"></i>Wie transkribiere ich richtig?</a>
 									</label>
 								</div>
 							</div>
