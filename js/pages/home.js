@@ -20,6 +20,7 @@ var $transcribeInput = $("#transcription-input");
 var $submitTranscription = $("#transcription-submit");
 var $skipTranscription = $("#skip-transcription");
 var $mainheader = $("#mainheader");
+var $loadingSpinner = $("#loading-spinner");
 
 $(document).ready(function() {
 	$(window).scroll(function(event) {
@@ -207,9 +208,9 @@ function appendMessage(message){
 
 function loadingSpinner(bitch){
 	if(bitch){
-		$("#loading-spinner").css('display', 'inline-block');
+		$loadingSpinner.css('display', 'inline-block');
 	}else{
-		$("#loading-spinner").css('display', 'none');
+		$loadingSpinner.css('display', 'none');
 	}
 }
 
