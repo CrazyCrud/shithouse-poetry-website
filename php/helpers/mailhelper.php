@@ -14,11 +14,7 @@ Dein Team von Latrinalia
 </html>';
 
 $emailBodyContent =
-'<html>
-<head></head>
-<body style="font-family:Helvetica">
-<img src="http://latrinalia.de/img/global/top-img-bw.jpg" style="width:100%"></img>
-<h2>Willkommen bei Latrinalia, %2</h2>
+'<h2>Willkommen bei Latrinalia, %2</h2>
 <p>Danke, dass du dich bei uns registriert hast und mit uns die Welt der Toiletten-Schmierereien erkunden und anlaysieren m&ouml;chtest.</p>
 <p>Das Ziel von Latrinalia ist mit Hilfe von Crowdsourcing eine wissenschaftlich relevante Datenbasis zum Thema Toiletten-Graffiti zu erstellen. Du bist uns dabei eine gro&szlig;e Hilfe, denn  je mehr Leute Eintr&auml;ge erstellen, bewerten und transkribieren, desto besser k&ouml;nnen wir arbeiten.</p>
 <br/>
@@ -27,11 +23,7 @@ Falls du dich dort nicht registiert hast und nicht wei&szlig;t, warum du diese E
 <p>Um deine Registrierung abzuschlie&szlig;en, klicke bitte <a href="http://www.latrinalia.de/verify.php?verification=%1">auf diesen Link</a>.</p>
 <p>Sollte der Link aus irgendwelchen Gr&uuml;nden nicht funktionieren, kopiere einfach folgenden Text in deine Browser-Addressleiste:<br/>
 http://www.latrinalia.de/verify.php?verification=%1</p>
-<br/>
-Vielen Dank und liebe Gr&uuml;&szlig;e,<br/>
-Dein Team von Latrinalia
-</body>
-</html>';
+<br/>';
 
 $contentAdminMail =
 '<h2>Diese Email wurde mit Hilfe des Kontaktformulars auf Latrinalia.de an dich gesendet:</h2>
