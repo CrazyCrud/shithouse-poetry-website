@@ -39,7 +39,51 @@ function initEditing(){
 	$("#username").attr("disabled","disabled");
 	$("#mail").attr("disabled","disabled");
 	$("#new-pwd").html("Neues Passwort");
+	$("#delete-submit").css('display', 'inline-block');
+	$("#delete-submit").click(function(event) {
+		event.preventDefault();
+		$("<div>Bist du sicher dass du dein Account löschen willst?</br>Alle mit deinem Account verknüpften Daten werden unwiederruflich gelöscht.</div>").dialog({
+			modal: true,
+			width: "80%",
+			title: "Benutzerkonto löschen",
+			buttons: [{
+				text: "OK",
+				click: function(){
+					console.log("delete");
+					ImgurManager.deleteUser(deleteUser);
+					$(this).dialog("close");
+					}
+				}, {
+				text: "Abbrechen",
+				click: function(){
+					$(this).dialog("close");
+					}
+				}
+			]
+		});
+	});
 	ImgurManager.getUser(fillUser, user.id);
+}
+
+function deleteUser(success){
+	console.log(success);
+	if(success){
+		window.location = "index.php";
+	}else{
+		$("<div>Dein Account konnte leider nicht gelöscht werden.</div>").dialog({
+			modal: true,
+			width: "60%",
+			title: "Es ist ein Fehler aufgetreten",
+			buttons: [
+				{
+					text: "OK",
+					click: function(){
+						$(this).dialog("close");
+					}
+				}
+			]
+		});
+	}
 }
 
 function fillUser(user){
