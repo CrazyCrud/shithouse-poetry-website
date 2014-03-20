@@ -94,8 +94,6 @@ if(isset($_GET["tlong"])){
 	exit();
 }
 
-$locations = str_replace(",", ";" , $locations);
-
 $db = new DBHelper();
 
 $db->setAuthKey($key);
