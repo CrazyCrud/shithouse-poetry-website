@@ -374,14 +374,24 @@ var ImgurManager = (function(){
 				callback(locations);
 			});
 		},
+		getMyLocationFromIP : function(callback){
+			$.get("http://ipinfo.io", function(response) {
+				var locs = response.loc.split(",");
+				callback(locs);
+			}, "jsonp");
+		},
 		getDefaultLocations : function(callback){
-			var locations = null;
-			var url = "getLocations.php?lat=-1&long=-1";
-			$.post("php/backend/" + url, function(data){
-				if(data.success == 1){
-					locations = data.data;
-				}
-				callback(locations);
+			ImgurManager.getMyLocationFromIP(function(locs) {
+				var latitude = locs[0];
+				var longitude = locs[1];
+				var locations = null;
+				var url = "getLocations.php?lat="+latitude+"&long="+longitude;
+				$.post("php/backend/" + url, function(data){
+					if(data.success == 1){
+						locations = data.data;
+					}
+					callback(locations);
+				});
 			});
 		},
 		getTypes : function(callback){
