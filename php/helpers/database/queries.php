@@ -93,17 +93,19 @@ class Queries{
 		VALUES
 		('$mail','$name', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP,$status,'$key','$pwd')";
 	}
-	// DEPRECATED
-	public static function deleteuser($authkey){
+	public static function deleteuser($userid){
+		$name = 'User'.$id.uniqid();
+		$mail = $name."@latrinalia.de";
+		$password = md5(uniqid());
+		$key = md5($mail).uniqid();
 		$u = DBConfig::$tables["users"];
-		$s = DBConfig::$tables["sessions"];
 		return "UPDATE `$u`
-		JOIN `$s`
-		ON `$s`.userid = `$u`.id
-		SET sessionkey='".uniqid()."',
+		SET sessionkey='$key',
 		status = ".DBConfig::$userStatus["deleted"].",
-		username = 'Gel&ouml;schter Nutzer'
-		WHERE `$s`.authkey='$authkey'";
+		username = '$name',
+		email = '$mail',
+		password = '$password'
+		WHERE `$u`.id='$userid'";
 	}
 	public static function getuserbyname($uname, $password){
 		$and = "";

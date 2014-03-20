@@ -218,10 +218,13 @@ function initUpload(){
 		event.preventDefault();
 	});
 
-	$customTagInput.bind("keydown", function(event) {
+	$customTagInput.bind("keyup", function(event) {
+		console.log("keyup!");
         var code = event.which;
         if(code == 13 || code == 9 || code == 188 || code == 186 || code == 190){
         	var text = $.trim($(this).val());
+        	text = text.replace(",","");
+        	text = text.replace(";","");
         	if(text.length > 2){
         		var $tagElements = $tagList.find('li span');
 				var availableTags = _.pluck($tagElements, 'innerHTML');
@@ -486,7 +489,9 @@ function appendUserTags(tagData){
 	        	minLength: 0,
 	        	source: tags,
 		        select: function(event, ui) {
-		          	$customTagInput.val(ui.item.value);
+		        	var text = ui.item.value;
+		          	appendSingleTag(text, true, true);
+		          	$customTagInput.val("");
 		          	return false;
 		        }
 	    	});
