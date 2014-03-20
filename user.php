@@ -60,7 +60,7 @@
 			<section id="maincontent">
 				<div class="details-user">
 					<div class="row">
-						<div class="details small-12 medium-7 large-7 columns left" id="image-description">
+						<div class="details small-12 medium-7 large-7 columns left" id="user-description">
 							<div id="title">
 								<span id="username">Nutzer wird geladen ...</span>
 								<span id="level"></span>
@@ -74,7 +74,7 @@
 								<div id="transcriptions">Bilder transkribiert: <span class="amount"></span></div>
 							</div>
 						</div>
-						<div class="details small-12 medium-5 large-5 columns right" id="image-container">
+						<div class="details small-12 medium-5 large-5 columns right" id="achievements-container">
 							<div id="achievements">
 								Erfolge:
 								<div id="entries"></div>
@@ -84,6 +84,12 @@
 							</div>
 						</div>
 					</div>	
+					<div class="row follows" id="follows">
+						<div class="details small-12 medium-12 large-12 columns" id="follows-description">
+							<div id="follows-title">Du hast folgende Leute abonniert:</div>
+							<div id="follows-container"></div>
+						</div>
+					</div>
 					<div class="row pictures">
 						<div class="images-container small-12 columns">
 							<div id="pictures-header">Bilder:</div>

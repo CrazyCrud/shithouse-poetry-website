@@ -24,7 +24,8 @@ class DBConfig{
 		"usertags" => "usertags",
 		"index" => "index",
 		"locations" => "location",
-		"sessions" => "sessions"
+		"sessions" => "sessions",
+		"follows" => "follows"
 	);
 
 	public static $dbStatus = array(

@@ -79,6 +79,7 @@ class DBHelper{
 			$users = $this->query($query);
 			if(count($users)==0)return false;
 			$stats = $this->getUserStats($users[0]["id"]);
+			$users[0]["follows"] = $this->getFollows($users[0]["id"]);
 			if($stats){
 				$users[0]["stats"] = $stats[0];
 			}
@@ -109,6 +110,11 @@ class DBHelper{
 
 	private function getUserStats($id){
 		$query = Queries::getuserstats($id);
+		return $this->query($query);
+	}
+
+	private function getFollows($id){
+		$query = Queries::getuserfollows($id);
 		return $this->query($query);
 	}
 

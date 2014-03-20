@@ -118,6 +118,37 @@ class Queries{
 		WHERE (`username` = '$uname'
 		 OR `email` = '$uname') $and";
 	}
+	public static function getuserfollows($id){
+		$u = DBConfig::$tables["users"];
+		$f = DBConfig::$tables["follows"];
+		$query =
+		"SELECT followerid, followername, targetid, targetname, a.date FROM(
+			SELECT
+			`$u`.id AS followerid,
+			`$u`.username AS followername,
+			`$f`.date AS date
+			FROM `$u`, `$f`
+			WHERE `$u`.id = `$f`.follower
+			AND (`$f`.follower = $id
+				OR `$f`.target = $id)
+		)a
+
+		JOIN(
+			SELECT
+			`$u`.id AS targetid,
+			`$u`.username AS targetname,
+			`$f`.date AS date
+			FROM `$u`, `$f`
+			WHERE `$u`.id = `$f`.target
+			AND (`$f`.follower = $id
+				OR `$f`.target = $id)
+		)b
+
+		ON a.date = b.date
+
+		ORDER BY a.date";
+		return $query;
+	}
 	public static function getuserstats($id){
 		$e = DBConfig::$tables["entries"];
 		$c = DBConfig::$tables["comments"];
@@ -978,6 +1009,7 @@ class Queries{
 		$e = DBConfig::$tables["entries"];
 		$c = DBConfig::$tables["comments"];
 		$i = DBConfig::$tables["images"];
+		$f = DBConfig::$tables["follows"];
 		$info = DBConfig::$tables["information"];
 		$r = DBConfig::$tables["ratings"];
 		$query =
@@ -994,11 +1026,14 @@ class Queries{
 		NULL AS transcription
 
 		FROM
-		`$u`, `$i`, `$e`
+		`$u`, `$i`, `$e`, `$f`
 
 		WHERE `$i`.`entryid` = `$e`.`id`
-		AND `$u`.id = $userid
-		AND `$e`.`userid` = $userid
+		AND `$e`.`userid` = `$u`.`id`
+		AND (`$e`.`userid` = $userid
+			OR (`$e`.`userid` = `$f`.target
+				AND `$f`.follower = $userid)
+		)
 
 		UNION
 		SELECT DISTINCT
@@ -1071,6 +1106,25 @@ class Queries{
 		AND `$r`.`userid` = $userid
 		AND `$r`.`userid` = `$u`.id
 		    
+		UNION
+		SELECT DISTINCT
+		`$u`.`id` AS userid,
+		`$u`.`username` AS username,
+		`$f`.target AS entryid,
+		NULL AS title,
+		NULL AS sex,
+		`$f`.`date` AS date,
+		NULL AS path,
+		NULL AS comment,
+		NULL AS rating,
+		NULL AS transcription
+
+		FROM `$f`, `$u`
+		WHERE
+		(`$f`.follower = $userid AND `$u`.id = `$f`.target)
+		OR
+		(`$f`.target = $userid AND `$u`.id = `$f`.follower)
+
 		ORDER BY date DESC
 
 		LIMIT $start, $limit";

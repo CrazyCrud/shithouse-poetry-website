@@ -38,7 +38,8 @@ function fillActions(ac){
 			if(actions[j].date == ac[i].date
 				&&actions[j].transcription == ac[i].transcription
 				&&actions[j].rating == ac[i].rating
-				&&actions[j].comment == ac[i].comment){
+				&&actions[j].comment == ac[i].comment
+				&&actions[j].userid == ac[i].userid){
 				add = false;
 				break;
 			}
@@ -50,7 +51,8 @@ function fillActions(ac){
 }
 
 function addAction(action){
-	if(action.comment != null)addComment(action);
+	if(action.path == null)addFollow(action);
+	else if(action.comment != null)addComment(action);
 	else if(action.rating != null)addRating(action);
 	else if(action.transcription != null)addTranscription(action);
 	else addUpload(action);
@@ -101,6 +103,35 @@ function addUpload(entry){
 	$info.append($user);
 	if(entry.userid == user.id) $info.append(" hast ein Bild hochgeladen:");
 	else $info.append(" hat ein Bild hochgeladen:");
+	$left.append($img);
+	$right.append($info);
+	$right.append($title);
+
+	var $content = $('<div class="content"></div>');
+	$content.append($left);
+	$content.append($right);
+	
+	$container.append($time);
+	$container.append($content);
+
+	$("#actions").append($container);
+}
+
+function addFollow(entry){
+	var $container = $('<div class="action follow"></div>');
+	var $img = $('<a href="user.php?id='+entry.userid+'"><img src="img/user/follow.jpg" title="'+entry.username+'"></img></a>');
+	var $user = $('<a href="user.php?id='+entry.userid+'">'+entry.username+"</a>");
+	var icon = '<i class="icon-user-1"/>';
+	var $title = $('<div class="comment"></div>');
+	$title.append(icon);
+	var $left = $('<div class="leftcontainer container"></div>');
+	var $right = $('<div class="rightcontainer container"></div>');
+	var $info = $('<div class="info"></div>');
+	var $time = $('<div class="time">'+formatTime(entry.date)+'</div>');
+
+	$info.append($user);
+	if(entry.entryid == user.id) $title.append("... hat dich abonniert.");
+	else $title.append("Du hast "+entry.username+" abonniert.");
 	$left.append($img);
 	$right.append($info);
 	$right.append($title);
