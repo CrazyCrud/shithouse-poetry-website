@@ -231,10 +231,10 @@ var ImgurManager = (function(){
 
 			$.post('php/backend/' + url, function(data) {				
 				if(data.success == 1){
-					callback();
+					callback(rating);
 					return;
 				}
-				callback();
+				callback(rating);
 			});
 		},
 		addEntry : function(callback, formData){

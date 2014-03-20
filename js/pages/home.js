@@ -214,6 +214,9 @@ function enableTranscribing(){
 }
 
 function handleVote(sucks){
+	if($("#images").length < 1){
+		return;
+	}
 	var rating = 0;
 	var entryid = $imageContainer.find('.jg-image').find('a').attr('title');
 	if(sucks){
@@ -388,10 +391,38 @@ function addTranscribtion(entryid, transcription){
 	}
 }
 
-function requestRating(){
+function requestRating(rating){
 	var currentEntry = GalleryView.getEntry();
-	console.log(currentEntry);
-	// GalleryView.loadSingleImage();
+	if(currentEntry == null || _.isUndefined(currentEntry.rating) ||
+		_.isUndefined(currentEntry.rating)){
+		GalleryView.loadSingleImage();
+		return;
+	}else{
+		currentEntry.ratingcount += 1;
+		var ratingMeasure = parseFloat(1 / currentEntry.ratingcount);
+		currentEntry.rating += (ratingMeasure * rating);
+		$("#outer-rating").css('visibility', 'visible');
+		if(currentEntry.rating > 0.75){
+			$("#inner-rating").css('width', '100%');
+		}else if(currentEntry.rating > 0.5){
+			$("#inner-rating").css('width', '50%');
+		}else if(currentEntry.rating > 0.25){
+			$("#inner-rating").css('width', '25%');
+		}else{
+			$("#inner-rating").css('width', '0%');
+		}
+		$("#rating-count").html("(" + currentEntry.ratingcount + ")");
+		$upVote.unbind('click');
+		$downVote.unbind('click');
+		_.delay(loadNextEntry, 2000);
+	}
+}
+
+function loadNextEntry(){
+	$("#outer-rating").css('visibility', 'hidden');
+	$("#rating-count").html("");
+	setupVoting();
+	GalleryView.loadSingleImage();
 }
 
 function createDummy(){

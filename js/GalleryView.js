@@ -305,8 +305,10 @@ var GalleryView = (function(){
 					imgDataChanged = true;
 					var gender = entry.sex||"u";
 					var rating = 0;
-					if(entry.ratings&&entry.ratings.length!=0&&entry.ratings.rating){
+					var ratingCount = 0;
+					if(entry.ratings && entry.ratings.length != 0 && entry.ratings.rating){
 						rating = entry.ratings.rating;
+						ratingCount = entry.ratings.ratingcount;
 					}
 					var transcription = entry.title||"";
 					var imgContent_m = '<a href="" title="' + id + '"><img src="' + 
@@ -320,7 +322,8 @@ var GalleryView = (function(){
 						image_m: imgContent_m,
 						image_l: imgContent_l,
 						date: entry.date||"",
-						rating: parseFloat(rating)
+						rating: parseFloat(rating),
+						ratingcount: ratingCount
 					};
 				}
 			}
@@ -339,11 +342,11 @@ var GalleryView = (function(){
 	var getEntry = function(){
 		var entry = null;
 		if(getCurrentEntry() < 1){
-			entry = imgData[0];
+			entry = settings.imgData[0];
 		}else{
-			entry = imgData[getLastEntry() - 1]
+			entry = settings.imgData[getCurrentEntry() - 1]
 		}
-		if(_.isNull(entry) || _.isUndefined()){
+		if(_.isNull(entry) || _.isUndefined(entry)){
 			entry = null;
 		}
 		return entry;
