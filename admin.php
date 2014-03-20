@@ -56,42 +56,11 @@
 			<section id="maincontent">
 				<div class="row" id="headline">
 					<h2>Latrinalia - AdminPanel</h2>
-					<i class="icon-search"></i>
-					<i class="icon-female"></i>
-					<i class="icon-camera"></i>
-					<i class="icon-ok"></i>
-					<i class="icon-cancel"></i>
-					<i class="icon-upload"></i>
-					<i class="icon-upload-cloud"></i>
-					<i class="icon-pencil"></i>
-					<i class="icon-comment"></i>
-					<i class="icon-chat-empty"></i>
-					<i class="icon-attention"></i>
-					<i class="icon-left-big"></i>
-					<i class="icon-user-1"></i>
-					<i class="icon-user"></i>
-					<i class="icon-help-circled"></i>
-					<i class="icon-home"></i>
-					<i class="icon-feather"></i>
-					<i class="icon-up-circled"></i>
-					<i class="icon-thumbs-up"></i>
-					<i class="icon-thumbs-down"></i>
-					<i class="icon-block"></i>
-					<i class="icon-cog"></i>
-					<i class="icon-thumbs-up-1"></i>
-					<i class="icon-thumbs-down-1"></i>
-					<i class="icon-male"></i>
-					<i class="icon-help"></i>
-					<i class="icon-spin5"></i>
-					<i class="icon-plus"></i>
-					<i class="icon-map"></i>
-					<i class="icon-cancel-1"></i>
-					<i class="icon-cancel-2"></i>
 				</div>
 				<div class="row" id="notifications-header">
 					<a href="#" id="overview"><i class="icon-help-circled" title="&Uuml;bersicht"></i></a>
 					<a href="#" id="users"><i class="icon-user"></i><span id="usercount"></span></a>
-					<a href="#" id="reports"><i class="icon-block"></i><span id="reportcount"></span></a>
+					<a href="#" id="reports"><i class="icon-attention">&nbsp;</i><span id="reportcount"></span></a>
 					<a href="#" id="locations"><i class="icon-map" title="Orte verwalten"></i></a>
 					<a href="#" id="tags"><i class="icon-chat-empty" title="Tags verwalten"></i></a>
 					<a href="#" id="types"><i class="icon-comment" title="Types verwalten"></i></a>

@@ -94,7 +94,7 @@
 								</div>
 							</div>
 							<div id="report">
-								<i title="Melden" id="report-icon" class="icon-block"></i>
+								<i title="Melden" id="report-icon" class="icon-attention"></i>
 							</div>
 						</div>
 					</div>	
