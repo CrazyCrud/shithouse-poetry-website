@@ -136,7 +136,11 @@
 					        	</div>
 					        </div>
 					      	<div class="row">
-					        	<div class="small-11 columns">
+					        	<div class="small-11 medium-9 medium-offset-2 large-9 large-offset-2 buttons-container columns">
+					        		<button id="delete-submit"
+							    		class="button medium left">
+							    		Account löschen
+							    	</button>
 					        		<button id="register-submit"
 							    		class="button medium right">
 							    		Registrieren

@@ -681,6 +681,15 @@ var ImgurManager = (function(){
 				callback(data.success);
 			});
 		},
+		deleteUser: function(){
+			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+			var url = 'deleteUser.php?authkey=' + authkey;
+			console.log(url);
+			$.get('php/backend/' + url, function(data) {
+				console.log(data);
+				callback(data.success);
+			});
+		},
 		Tags : tags,
 		OrderBy: orderby,
 		Sex : sex

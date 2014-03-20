@@ -218,6 +218,8 @@ input[type="password"].loginField {
   display: none; }
 .form-register .tou-container label {
   margin-left: 0; }
+.form-register .buttons-container {
+  margin-top: 0.618rem; }
 
 @media screen and (max-width: 640px) {
   .register-forms-container {
@@ -227,3 +229,6 @@ input[type="password"].loginField {
 
 #register-submit {
   margin-top: 10px; }
+
+#delete-submit {
+  display: none; }

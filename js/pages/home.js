@@ -133,19 +133,23 @@ function setupImageClick(){
 function setupVoting(){
 	$upVote.click(function(event) {
 		event.preventDefault();
+		$(this).blur();
 		lazyVoteClick(false);
 	});
 	$downVote.click(function(event) {
 		event.preventDefault();
+		$(this).blur();
 		lazyVoteClick(true);
 	});
 }
 
 function setupTranscribing(){
 	$skipTranscription.click(function(event) {
+		$(this).blur();
 		lazyTranscribeClick(event);
 	});
 	$submitTranscription.click(function(event) {
+		$(this).blur();
 		lazyTranscribeClick(event);
 	});
 }
