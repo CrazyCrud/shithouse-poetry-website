@@ -32,7 +32,11 @@
 										<span></span><i class="icon-home"></i>
 									</a>
 								</li>
-								<li class="li-upload-container"></li>
+								<li class="li-upload-container">
+									<a id="link-upload" href="javascript:void">
+										<span></span><i class="icon-upload-cloud"></i>
+									</a>
+								</li>
 							</ul>
 							<ul class="right">
 								<li class="li-search-container">

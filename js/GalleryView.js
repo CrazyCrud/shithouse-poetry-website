@@ -15,7 +15,11 @@ var GalleryView = (function(){
 		if(settings.displaySingleImage){
 			if(StateManager.getState() == 
 				StateManager.States.properties[StateManager.States.SMALL].name){
-				settings.imageContainer.justifiedGallery({
+				if(_.isNull(settings.imageContainerTmp) || 
+					_.isUndefined(settings.imageContainerTmp)){
+					return;
+				}
+				settings.imageContainerTmp.justifiedGallery({
 					'sizeRangeSuffixes': {'lt100':'',
 						'lt240':'', 
 						'lt320':'', 
@@ -245,7 +249,7 @@ var GalleryView = (function(){
 		should ne called if multiple images were appended but only one should be displayed
 	*/
 	var loadSingleImage = function(){
-		clearScreen();
+		// clearScreen();
 		settings.displaySingleImage = true;
 		settings.justifyLastRow = true;
 		if(_.isEmpty(settings.imgData) || settings.imageContainer.length < 1){
@@ -261,9 +265,11 @@ var GalleryView = (function(){
 				return;
 			}
 			var htmlData = settings.imgData[getCurrentEntry()].image_m;
+			settings.imageContainerTmp = $("<div></div>");
+			settings.imageContainer.append(settings.imageContainerTmp);
 			var $imgContent = $(htmlData).find('img');
 			Foundation.lib_methods.loaded($imgContent, function(){
-				settings.imageContainer.append(htmlData);
+				settings.imageContainerTmp.append(htmlData);
 				displayImages();
 				incrementCurrentEntry();
 			});
