@@ -133,69 +133,102 @@ function computeLevel(entries, comments, ratings, transcriptions, ageInMillis){
 	return level;
 }
 
+var entryAchievements = [
+	{ level: 1, limit:1, text:"Mindestens ein Bild hochgeladen" },
+	{ level: 2, limit:10, text:"Mindestens 10 Bilder hochgeladen" },
+	{ level: 3, limit:50, text:"Mindestens 50 Bilder hochgeladen" },
+	{ level: 4, limit:100, text:"Mindestens 100 Bilder hochgeladen" },
+	{ level: 5, limit:200, text:"Mindestens 200 Bilder hochgeladen" },
+	{ level: 6, limit:500, text:"Mindestens 500 Bilder hochgeladen" },
+	{ level: 7, limit:750, text:"Mindestens 750 Bilder hochgeladen" },
+	{ level: 8, limit:1000, text:"Mindestens 1000 Bilder hochgeladen" },
+	{ level: 9, limit:1337, text:"Mindestens 1337 Bilder hochgeladen" },
+	{ level: 10, limit:2000, text:"Mindestens 2000 Bilder hochgeladen" },
+	{ level: 11, limit:5000, text:"Mindestens 5000 Bilder hochgeladen" },
+	{ level: 12, limit:7500, text:"Mindestens 7500 Bilder hochgeladen" },
+	{ level: 13, limit:9001, text:"Mindestens 9001 Bilder hochgeladen" }
+];
+var commentAchievements = [
+	{ level: 1, limit:1, text:"Mindestens einen Kommentar abgegeben" },
+	{ level: 2, limit:10, text:"Mindestens 10 Kommentare abgegeben" },
+	{ level: 3, limit:50, text:"Mindestens 50 Kommentare abgegeben" },
+	{ level: 4, limit:100, text:"Mindestens 100 Kommentare abgegeben" },
+	{ level: 5, limit:200, text:"Mindestens 200 Kommentare abgegeben" },
+	{ level: 6, limit:500, text:"Mindestens 500 Kommentare abgegeben" },
+	{ level: 7, limit:750, text:"Mindestens 750 Kommentare abgegeben" },
+	{ level: 8, limit:1000, text:"Mindestens 1000 Kommentare abgegeben" },
+	{ level: 9, limit:1337, text:"Mindestens 1337 Kommentare abgegeben" },
+	{ level: 10, limit:2000, text:"Mindestens 2000 Kommentare abgegeben" },
+	{ level: 11, limit:5000, text:"Mindestens 5000 Kommentare abgegeben" },
+	{ level: 12, limit:7500, text:"Mindestens 7500 Kommentare abgegeben" },
+	{ level: 13, limit:9001, text:"Mindestens 9001 Kommentare abgegeben" }
+];
+var ratingAchievements = [
+	{ level: 1, limit:1, text:"Mindestens ein Bild bewertet" },
+	{ level: 2, limit:10, text:"Mindestens 10 Bilder bewertet" },
+	{ level: 3, limit:50, text:"Mindestens 50 Bilder bewertet" },
+	{ level: 4, limit:100, text:"Mindestens 100 Bilder bewertet" },
+	{ level: 5, limit:200, text:"Mindestens 200 Bilder bewertet" },
+	{ level: 6, limit:500, text:"Mindestens 500 Bilder bewertet" },
+	{ level: 7, limit:750, text:"Mindestens 750 Bilder bewertet" },
+	{ level: 8, limit:1000, text:"Mindestens 1000 Bilder bewertet" },
+	{ level: 9, limit:1337, text:"Mindestens 1337 Bilder bewertet" },
+	{ level: 10, limit:2000, text:"Mindestens 2000 Bilder bewertet" },
+	{ level: 11, limit:5000, text:"Mindestens 5000 Bilder bewertet" },
+	{ level: 12, limit:7500, text:"Mindestens 7500 Bilder bewertet" },
+	{ level: 13, limit:9001, text:"Mindestens 9001 Bilder bewertet" }
+];
+var transcriptionAchievements = [
+	{ level: 1, limit:1, text:"Mindestens ein Bild transkribiert" },
+	{ level: 2, limit:10, text:"Mindestens 10 Bilder transkribiert" },
+	{ level: 3, limit:50, text:"Mindestens 50 Bilder transkribiert" },
+	{ level: 4, limit:100, text:"Mindestens 100 Bilder transkribiert" },
+	{ level: 5, limit:200, text:"Mindestens 200 Bilder transkribiert" },
+	{ level: 6, limit:500, text:"Mindestens 500 Bilder transkribiert" },
+	{ level: 7, limit:750, text:"Mindestens 750 Bilder transkribiert" },
+	{ level: 8, limit:1000, text:"Mindestens 1000 Bilder transkribiert" },
+	{ level: 9, limit:1337, text:"Mindestens 1337 Bilder transkribiert" },
+	{ level: 10, limit:2000, text:"Mindestens 2000 Bilder transkribiert" },
+	{ level: 11, limit:5000, text:"Mindestens 5000 Bilder transkribiert" },
+	{ level: 12, limit:7500, text:"Mindestens 7500 Bilder transkribiert" },
+	{ level: 13, limit:9001, text:"Mindestens 9001 Bilder transkribiert" }
+];
+
 function drawEntryAchievements(amount){
 	var $container = $('#achievements #entries');
-	if(amount>=1)$container.append(achievement("<i class='lvl1 icon-upload'/>","Mindestens ein Bild hochgeladen"));
-	if(amount>=10)$container.append(achievement("<i class='lvl2 icon-upload'/>","Mindestens 10 Bilder hochgeladen"));
-	if(amount>=50)$container.append(achievement("<i class='lvl3 icon-upload'/>","Mindestens 50 Bilder hochgeladen"));
-	if(amount>=100)$container.append(achievement("<i class='lvl4 icon-upload'/>","Mindestens 100 Bilder hochgeladen"));
-	if(amount>=200)$container.append(achievement("<i class='lvl5 icon-upload'/>","Mindestens 200 Bilder hochgeladen"));
-	if(amount>=500)$container.append(achievement("<i class='lvl6 icon-upload'/>","Mindestens 500 Bilder hochgeladen"));
-	if(amount>=750)$container.append(achievement("<i class='lvl7 icon-upload'/>","Mindestens 750 Bilder hochgeladen"));
-	if(amount>=1000)$container.append(achievement("<i class='lvl8 icon-upload'/>","Mindestens 1000 Bilder hochgeladen"));
-	if(amount>=1337)$container.append(achievement("<i class='lvl9 icon-upload'/>","Mindestens 1337 Bilder hochgeladen"));
-	if(amount>=2000)$container.append(achievement("<i class='lvl10 icon-upload'/>","Mindestens 2000 Bilder hochgeladen"));
-	if(amount>=5000)$container.append(achievement("<i class='lvl11 icon-upload'/>","Mindestens 5000 Bilder hochgeladen"));
-	if(amount>=7500)$container.append(achievement("<i class='lvl12 icon-upload'/>","Mindestens 7500 Bilder hochgeladen"));
-	if(amount>9000)$container.append(achievement("<i class='lvl13 icon-upload'/>","&Uuml;ber 9000 Bilder hochgeladen"));
+	for(var i=0; i<entryAchievements.length; i++){
+		var ac = entryAchievements[i];
+		$container.append(achievement("<i class='lvl"+ac.level+" icon-upload'/>",ac.text));
+		if(amount < ac.limit)break;
+	}
+	$container.find(".achievement").last().addClass("next-achievement");
 }
 function drawCommentAchievements(amount){
 	var $container = $('#achievements #comments');
-	if(amount>0)$container.append(achievement("<i class='lvl1 icon-comment'/>","Mindestens einen Kommentar abgegeben"));
-	if(amount>=10)$container.append(achievement("<i class='lvl2 icon-comment'/>","Mindestens 10 Kommentare abgegeben"));
-	if(amount>=50)$container.append(achievement("<i class='lvl3 icon-comment'/>","Mindestens 50 Kommentare abgegeben"));
-	if(amount>=100)$container.append(achievement("<i class='lvl4 icon-comment'/>","Mindestens 100 Kommentare abgegeben"));
-	if(amount>=200)$container.append(achievement("<i class='lvl5 icon-comment'/>","Mindestens 200 Kommentare abgegeben"));
-	if(amount>=500)$container.append(achievement("<i class='lvl6 icon-comment'/>","Mindestens 500 Kommentare abgegeben"));
-	if(amount>=750)$container.append(achievement("<i class='lvl7 icon-comment'/>","Mindestens 750 Kommentare abgegeben"));
-	if(amount>=1000)$container.append(achievement("<i class='lvl8 icon-comment'/>","Mindestens 1000 Kommentare abgegeben"));
-	if(amount>=1337)$container.append(achievement("<i class='lvl9 icon-comment'/>","Mindestens 1337 Kommentare abgegeben"));
-	if(amount>=2000)$container.append(achievement("<i class='lvl10 icon-comment'/>","Mindestens 2000 Kommentare abgegeben"));
-	if(amount>=5000)$container.append(achievement("<i class='lvl11 icon-comment'/>","Mindestens 5000 Kommentare abgegeben"));
-	if(amount>=7500)$container.append(achievement("<i class='lvl12 icon-comment'/>","Mindestens 7500 Kommentare abgegeben"));
-	if(amount>9000)$container.append(achievement("<i class='lvl13 icon-comment'/>","&Uuml;ber 9000 Kommentare abgegeben"));
+	for(var i=0; i<commentAchievements.length; i++){
+		var ac = commentAchievements[i];
+		$container.append(achievement("<i class='lvl"+ac.level+" icon-comment'/>",ac.text));
+		if(amount < ac.limit)break;
+	}
+	$container.find(".achievement").last().addClass("next-achievement");
 }
 function drawRatingAchievements(amount){
 	var $container = $('#achievements #ratings');
-	if(amount>0)$container.append(achievement("<i class='lvl1 icon-thumbs-up-1'/>","Mindestens ein Bild bewertet"));
-	if(amount>=10)$container.append(achievement("<i class='lvl2 icon-thumbs-up-1'/>","Mindestens 10 Bilder bewertet"));
-	if(amount>=50)$container.append(achievement("<i class='lvl3 icon-thumbs-up-1'/>","Mindestens 50 Bilder bewertet"));
-	if(amount>=100)$container.append(achievement("<i class='lvl4 icon-thumbs-up-1'/>","Mindestens 100 Bilder bewertet"));
-	if(amount>=200)$container.append(achievement("<i class='lvl5 icon-thumbs-up-1'/>","Mindestens 200 Bilder bewertet"));
-	if(amount>=500)$container.append(achievement("<i class='lvl6 icon-thumbs-up-1'/>","Mindestens 500 Bilder bewertet"));
-	if(amount>=750)$container.append(achievement("<i class='lvl7 icon-thumbs-up-1'/>","Mindestens 750 Bilder bewertet"));
-	if(amount>=1000)$container.append(achievement("<i class='lvl8 icon-thumbs-up-1'/>","Mindestens 1000 Bilder bewertet"));
-	if(amount>=1337)$container.append(achievement("<i class='lvl9 icon-thumbs-up-1'/>","Mindestens 1337 Bilder bewertet"));
-	if(amount>=2000)$container.append(achievement("<i class='lvl10 icon-thumbs-up-1'/>","Mindestens 2000 Bilder bewertet"));
-	if(amount>=5000)$container.append(achievement("<i class='lvl11 icon-thumbs-up-1'/>","Mindestens 5000 Bilder bewertet"));
-	if(amount>=7500)$container.append(achievement("<i class='lvl12 icon-thumbs-up-1'/>","Mindestens 7500 Bilder bewertet"));
-	if(amount>9000)$container.append(achievement("<i class='lvl13 icon-thumbs-up-1'/>","&Uuml;ber 9000 Bilder bewertet"));
+	for(var i=0; i<ratingAchievements.length; i++){
+		var ac = ratingAchievements[i];
+		$container.append(achievement("<i class='lvl"+ac.level+" icon-thumbs-up-1'/>",ac.text));
+		if(amount < ac.limit)break;
+	}
+	$container.find(".achievement").last().addClass("next-achievement");
 }
 function drawTranscriptionAchievements(amount){
 	var $container = $('#achievements #transcriptions');
-	if(amount>0)$container.append(achievement("<i class='lvl1 icon-feather'/>","Mindestens ein Bild transkribiert"));
-	if(amount>=10)$container.append(achievement("<i class='lvl2 icon-feather'/>","Mindestens 10 Bilder transkribiert"));
-	if(amount>=50)$container.append(achievement("<i class='lvl3 icon-feather'/>","Mindestens 50 Bilder transkribiert"));
-	if(amount>=100)$container.append(achievement("<i class='lvl4 icon-feather'/>","Mindestens 100 Bilder transkribiert"));
-	if(amount>=200)$container.append(achievement("<i class='lvl5 icon-feather'/>","Mindestens 200 Bilder transkribiert"));
-	if(amount>=500)$container.append(achievement("<i class='lvl6 icon-feather'/>","Mindestens 500 Bilder transkribiert"));
-	if(amount>=750)$container.append(achievement("<i class='lvl7 icon-feather'/>","Mindestens 750 Bilder transkribiert"));
-	if(amount>=1000)$container.append(achievement("<i class='lvl8 icon-feather'/>","Mindestens 1000 Bilder transkribiert"));
-	if(amount>=1337)$container.append(achievement("<i class='lvl9 icon-feather'/>","Mindestens 1337 Bilder transkribiert"));
-	if(amount>=2000)$container.append(achievement("<i class='lvl10 icon-feather'/>","Mindestens 2000 Bilder transkribiert"));
-	if(amount>=5000)$container.append(achievement("<i class='lvl11 icon-feather'/>","Mindestens 5000 Bilder transkribiert"));
-	if(amount>=7500)$container.append(achievement("<i class='lvl12 icon-feather'/>","Mindestens 7500 Bilder transkribiert"));
-	if(amount>9000)$container.append(achievement("<i class='lvl13 icon-feather'/>","&Uuml;ber 9000 Bilder transkribiert"));
+	for(var i=0; i<transcriptionAchievements.length; i++){
+		var ac = transcriptionAchievements[i];
+		$container.append(achievement("<i class='lvl"+ac.level+" icon-feather'/>",ac.text));
+		if(amount < ac.limit)break;
+	}
+	$container.find(".achievement").last().addClass("next-achievement");
 }
 
 function achievement(title, description){
