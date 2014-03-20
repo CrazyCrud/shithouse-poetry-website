@@ -103,7 +103,7 @@
 				<div class="small-11 small-centered medium-11 large-11 medium-centered large-centered columns">
 					<div class="row">
 						<h2 id="impressum" name="impressum">Impressum</h2><p>Angaben gemäß § 5 TMG:</p>
-						<p>GbR Latrinalia<br />
+						<p>Latrinalia - Franziska Hertlein, Bastian Hinterleitner, Constantin Lehenmeier, Thomas Spröd GbR<br />
 							Eichhornstraße 39<br />
 							91126 Schwabach</p>
 						<h3>Vertreten durch:</h3>
