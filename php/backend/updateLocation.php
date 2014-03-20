@@ -10,7 +10,7 @@
 // flong=30&tlat=60&tlong=50
 //
 // required parameters are:
-// authkey,locationid, location (array with locations seperated by comma), flat, 
+// authkey,locationid, location (array with locations separeted by semicolon), flat, 
 // flong, tlat, tlong
 //
 // The answer looks as follows:
