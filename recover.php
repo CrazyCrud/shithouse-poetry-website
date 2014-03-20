@@ -105,29 +105,29 @@
 
 			 	echo '</script>';
 			?>
-	<div class="small-12 medium-11 large-11 medium-centered large-centered columns">
-		<div id="content" >
-			<div class="row">
-					<div class="row">
-						<div class="small-12 medium-6 large-6 columns">
-							<h2>Passwort vergessen?</h2>						
-							Gib hier deine Email-Adresse und deinen Benutzernamen ein und wir werden dir ein neues
-							Passwort zuschicken:
-							<br/>
-							<br/>
-							<form action="" id="contactForm" name="contactForm" method="post">
-								<input type="email" id="email" name="email" placeholder="E-Mail Adresse" <?php if(isset($email) && $email != "" && !$passwordchanged) echo 'value="'.$email.'"'; ?> required>
-								<input id="username" name="username" type="text" placeholder="Nutzername" <?php if(isset($username) && $username != "" && !$passwordchanged) echo 'value="'.$username.'"'; ?> required>
-						        <?php
-						          $publickey = "6LcSSvASAAAAAHECPqkbcRLzzmliSEI0OqJej6MX";
-						          echo recaptcha_get_html($publickey);
-						        ?>
-								<button class="tiny right" name="submit" id="submit" type="submit">Absenden</button>
-							</form>
-						</div>
-					</div>
+		<div id="content" class="small-11 small-centered medium-11 large-11 medium-centered large-centered row">
+			<h2>Passwort vergessen?</h2>						
+			Gib hier deine Email-Adresse und deinen Benutzernamen ein und wir werden dir ein neues
+			Passwort zuschicken:
+			<br/>
+			<br/>
+			<form action="" class="small-11 medium-9 large-9 columns" id="contactForm" name="contactForm" method="post">
+				<div class="columns">
+					<input type="email" id="email" name="email" placeholder="E-Mail Adresse" <?php if(isset($email) && $email != "" && !$passwordchanged) echo 'value="'.$email.'"'; ?> required>
 				</div>
-			</div>
+				<div class="columns">
+					<input id="username" name="username" type="text" placeholder="Nutzername" <?php if(isset($username) && $username != "" && !$passwordchanged) echo 'value="'.$username.'"'; ?> required>
+		        </div>
+				<div class="columns">
+			        <?php
+			          $publickey = "6LcSSvASAAAAAHECPqkbcRLzzmliSEI0OqJej6MX";
+			          echo recaptcha_get_html($publickey);
+			        ?>
+		        </div>
+				<div class="row">
+					<button class="tiny right" name="submit" id="submit" type="submit">Absenden</button>
+				</div>
+			</form>
 		</div>
 	</div>
 	</section>
