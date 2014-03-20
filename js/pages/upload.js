@@ -25,7 +25,15 @@ $(document).ready(function() {
 	getType();
 	getTags();
 	initDialog();
+	getLocation();
 });
+
+function getLocation(){
+	ImgurManager.getMyLocationFromIP(function(loc){
+		latitude_g = loc[0];
+		longitude_g = loc[1];
+	});
+}
 
 function cropMe(target){
 	var target = $(target.currentTarget);
@@ -305,7 +313,7 @@ function uploadImageResult(uploadSuccesfull, entryid){
 		window.location = "details.php?id="+entryid;
 	}else{
 		error("Bild konnte nicht hochgeladen werden.");
-		//ImgurManager.deleteEntry(data);
+		ImgurManager.deleteEntry(entryid);
 	}
 }
 
