@@ -336,6 +336,19 @@ var GalleryView = (function(){
 		}
 	};
 
+	var getEntry = function(){
+		var entry = null;
+		if(getCurrentEntry() < 1){
+			entry = imgData[0];
+		}else{
+			entry = imgData[getLastEntry() - 1]
+		}
+		if(_.isNull(entry) || _.isUndefined()){
+			entry = null;
+		}
+		return entry;
+	};
+
 	var resetEntries = function(){
 		setCurrentEntry(0);
 		settings.imgData = [];
@@ -390,6 +403,7 @@ var GalleryView = (function(){
 		loadSingleImage: loadSingleImage,
 		getLastEntry: getLastEntry,
 		setMaxwidth: setMaxwidth,
+		getEntry: getEntry,
 		settings: settings
 	}
 }());

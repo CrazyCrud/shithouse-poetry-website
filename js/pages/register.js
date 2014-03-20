@@ -49,7 +49,6 @@ function initEditing(){
 			buttons: [{
 				text: "OK",
 				click: function(){
-					console.log("delete");
 					ImgurManager.deleteUser(deleteUser);
 					$(this).dialog("close");
 					}
@@ -66,7 +65,6 @@ function initEditing(){
 }
 
 function deleteUser(success){
-	console.log(success);
 	if(success){
 		window.location = "index.php";
 	}else{
