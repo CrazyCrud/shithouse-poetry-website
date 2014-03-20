@@ -1,3 +1,5 @@
+var KEY_ENTER = 13;
+
 var $loginLink = $("#link-login");
 var $overlay;
 var $backButton;
@@ -79,14 +81,14 @@ function appendLoginOverlay(){
 
 	$mailInput.on('keypress', function(event) {
 		var code = event.which;
-		if(code == 13){
+		if(code == KEY_ENTER){
 			$loginButton.trigger('click');
 		}
 	});
 
 	$passwordInput.on('keypress', function(event) {
 		var code = event.which;
-		if(code == 13){
+		if(code == KEY_ENTER){
 			$loginButton.trigger('click');
 		}
 	});

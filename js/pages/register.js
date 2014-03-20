@@ -90,12 +90,13 @@ function fillUser(user){
 }
 
 function registerUser(){
+	console.log("test?");
 	if(user.status=="4")return updateDummy();
 	else{
 		var mail = $mailInput.val();
 		var username = $userNameInput.val();
 		var md5_pwd = $.md5($passwordInput.val());
-		ImgurManager.createUser(onLoginSuccess, username, md5_pwd, mail);
+		ImgurManager.createUser(onRegisterSuccess, username, md5_pwd, mail);
 	}
 }
 
@@ -103,7 +104,7 @@ function updateDummy(){
 	var md5_pwd = $.md5($passwordInput.val());
 	var mail = $mailInput.val();
 	var username = $userNameInput.val();
-	ImgurManager.updateUser(onLoginSuccess, mail, username, md5_pwd);
+	ImgurManager.updateUser(onRegisterSuccess, mail, username, md5_pwd);
 }
 
 function updateUser(){
@@ -185,7 +186,7 @@ function onUpdateResult(success){
 	}
 }
 
-function onLoginSuccess(authkey){
+function onRegisterSuccess(authkey){
 	if(authkey == null){
 		$("<div>Die Registrierung ist fehlgeschlagen!</br>Anscheinend gibt es Probleme mit dem Server.</br>Probieren Sie es später noch einmal</div>").dialog(
 		{

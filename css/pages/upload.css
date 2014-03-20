@@ -328,6 +328,9 @@ input[type="password"].loginField {
 .tou-container input[type="checkbox"] + label {
   margin-left: 0; }
 
+.rights-container input[type="checkbox"] + label {
+  margin-left: 0; }
+
 @media screen and (max-width: 1023px) {
   .image-container img {
     display: block;

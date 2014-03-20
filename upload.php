@@ -58,7 +58,7 @@
 				<div class="row">
 					<div class="small-12 columns full-width">
 						<label class="small-12 howto-label">
-							<a href="howto.php" target="_blank">Wie mache ich das hier richtig?</a>
+							<a href="howto.php" target="_blank"><i class="icon-info"></i>Wie mache ich das hier richtig?</a>
 						</label>
 						<div class="upload-forms-container">
 							<form data-abide="ajax">
@@ -149,6 +149,22 @@
 							    		für das Bild aus
 							   		</small>
 							    </div>
+							    	<div class="small-12 columns fieldset-container" id="rights">
+						        		<div class="small-1 columns rights-container center">
+							        		<input type="checkbox" id="confirm-rights" required>
+							        		</input>
+							        	</div>
+						        		<div class="small-11 columns rights-container">
+							        		<label for="confirm-rights">
+							        			Ich habe das ausgewählte Bild selbst aufgenommen 
+							        			und der Urheber/ die Urheber des darauf zu sehenden Motivs 
+							        			sind mir nicht bekannt. Die Rechte an dem aufgenommenen Bild
+							        			und den damit verknüpften Daten werden mit dem Upload an 
+							        			Latrinalia.de abgetreten. Latrinalia.de darf das Bild und 
+							        			die zugehörigen Daten auswerten und nutzen.
+							        		</label>
+						        		</div>
+						        	</div>
 						        	<div class="small-12 columns fieldset-container" id="tou">
 						        		<div class="small-1 columns tou-container center">
 							        		<input type="checkbox" id="confirm-tou" required>
@@ -166,6 +182,7 @@
 							        		</label>
 						        		</div>
 						        	</div>
+
 							    <div class="small-12 columns">
 							    	<button id="upload-submit"
 							    		class="button medium right">

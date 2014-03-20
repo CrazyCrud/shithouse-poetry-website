@@ -157,6 +157,12 @@
 	}
 }
 
+.rights-container{
+	input[type="checkbox"] + label{
+		margin-left: 0;
+	}
+}
+
 @media screen and (max-width: 1023px){
 	.image-container{
 		img{

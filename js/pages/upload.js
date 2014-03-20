@@ -69,6 +69,7 @@ function initEdit(){
 		$uploadSubmit.html("Speichern");
 		ImgurManager.getEntry(fillUI, id);
 		$(".add-image-container").css("display","none");
+		$("#rights").remove();
 	}
 }
 
