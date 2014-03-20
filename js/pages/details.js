@@ -133,8 +133,9 @@ function initGUI(){
 		window.location = "upload.php?id="+id;
 	});
 	$("#report-icon").click(function(){
-		$('<form name="report"><textarea maxlength="400" cols="20" rows="8" id="description" style="height:auto;width:auto" placeholder="Bitte beschreibe hier, warum du diesen Eintrag melden m&ouml;chtest."></textarea></form>').dialog({
+		$('<div>Bitte beschreibe hier, warum du diesen Eintrag melden m&ouml;chtest.<br/><br/><form name="report" style="width:100%"><textarea maxlength="400" cols="20" rows="8" id="description" style="height:auto;width:100%" placeholder="Bitte beschreibe hier, warum du diesen Eintrag melden m&ouml;chtest."></textarea></form></div>').dialog({
 			modal: true,
+			"min-width":"30%",
 			width: "auto",
 			autoResize: true,
 			title: "Eintrag melden?",
