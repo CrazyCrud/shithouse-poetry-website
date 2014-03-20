@@ -10,7 +10,7 @@
 // flong=30&tlat=60&tlong=50
 //
 // required parameters are:
-// authkey,locationid, location (array with locations seperated by comma), flat, 
+// authkey,locationid, location (array with locations separeted by semicolon), flat, 
 // flong, tlat, tlong
 //
 // The answer looks as follows:
@@ -93,8 +93,6 @@ if(isset($_GET["tlong"])){
 	echo json_encode($json);
 	exit();
 }
-
-$locations = str_replace(",", ";" , $locations);
 
 $db = new DBHelper();
 

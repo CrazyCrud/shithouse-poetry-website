@@ -1,5 +1,8 @@
 <!doctype html>
-<html lang="en">
+<?php
+	error_reporting(0);
+?>
+<html lang="de">
 	<head>
 		<meta charset="utf-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -32,7 +35,7 @@
 						<section class="top-bar-section">
 							<ul class="left">
 								<li class="li-home-container">
-									<a id="link-home" href="index.php">
+									<a id="link-home" href="index.php" title="Startseite">
 										<span></span><i class="icon-home"></i>
 									</a>
 								</li>
@@ -60,7 +63,7 @@
 									
 							</div>
 							<div class="upload-button-container">
-								<span id="upload-button"><a id="link-upload" href="upload.php"><i class="icon-upload-cloud"></i></a></span>
+								<span id="upload-button"><a id="link-upload" href="upload.php" title="Bild hochladen" ><i class="icon-upload-cloud"></i></a></span>
 							</div>
 						</div>
 					</div>
@@ -93,7 +96,7 @@
 							<div class="transcribe-container small-12 columns">
 								<div class="transcribe-input-container">
 									<input type="text" id="transcription-input" 
-										placeholder="Transkription...">
+										placeholder="Schreibe die Wörter nieder, die du im Bild erkennst.">
 									</input>
 									<button id="transcription-submit" class="tiny">
 										Hinzufügen</button>

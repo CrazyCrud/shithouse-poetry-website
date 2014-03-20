@@ -97,7 +97,9 @@ for($i = 0; $i < count($_FILES['images']['name']); $i++){
 		if(isset($_POST["bounds-x"])
 			&&isset($_POST["bounds-y"])
 			&&isset($_POST["bounds-w"])
-			&&isset($_POST["bounds-h"])){
+			&&isset($_POST["bounds-h"])
+			&&$_POST["bounds-w"]>0
+			&&$_POST["bounds-h"]>0){
 			$bounds = array();
 			$bounds["x"] = $_POST["bounds-x"];
 			$bounds["y"] = $_POST["bounds-y"];
