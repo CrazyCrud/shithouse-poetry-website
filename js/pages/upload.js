@@ -313,7 +313,7 @@ function uploadImageResult(uploadSuccesfull, entryid){
 		window.location = "details.php?id="+entryid;
 	}else{
 		error("Bild konnte nicht hochgeladen werden.");
-		//ImgurManager.deleteEntry(data);
+		ImgurManager.deleteEntry(entryid);
 	}
 }
 
