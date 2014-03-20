@@ -232,7 +232,6 @@ function handleTranscription(e){
 			return;
 		}
 		if(transcription.length > 1){
-			//$transcribeInput.val("Transkription...");
 			addTranscribtion(entryid, transcription);
 		}
 	}else{
@@ -377,7 +376,7 @@ function isLastestRequest(which){
 }
 
 function addRating(entryid, rating){
-	ImgurManager.addRating(GalleryView.loadSingleImage, entryid, rating);
+	ImgurManager.addRating(requestRating, entryid, rating);
 }
 
 function addTranscribtion(entryid, transcription){
@@ -387,6 +386,12 @@ function addTranscribtion(entryid, transcription){
 		ImgurManager.updateTranscription(GalleryView.loadSingleImage, entryid, transcription);
 		$transcribeInput.val("");
 	}
+}
+
+function requestRating(){
+	var currentEntry = GalleryView.getEntry();
+	console.log(currentEntry);
+	// GalleryView.loadSingleImage();
 }
 
 function createDummy(){
