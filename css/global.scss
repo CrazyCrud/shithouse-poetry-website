@@ -66,6 +66,8 @@ i.icon-thumbs-up-1:before {
     transform: scale(-1, 1);
 }
 
+$small-font-size: 70%;
+
 .law-container{
 	position: fixed;
 	display: block;
@@ -129,7 +131,7 @@ i.icon-thumbs-up-1:before {
 		bottom: 0;
 		right: 2%;
 		width: 38px;
-		background: $lightgrey;
+		background: $grey;
 		border-top-right-radius: 32px;
 		border-top-left-radius: 32px;
 		height: 32px;

@@ -84,10 +84,10 @@
 									
 								</div>
 								<div class="small-12 columns add-title-container">
-									<label>Titel<small>erforderlich</small>
+									<label>Titel<small>erforderlich</small></label>
 							        	<input id="title" type="text" required>
 							        	</input>
-							    	</label>
+							    	
 								</div>
 								<div class="small-12 columns add-transcription-container">
 									<label>Transkription<small>optional</small>
