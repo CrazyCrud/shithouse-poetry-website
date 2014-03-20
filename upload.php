@@ -157,11 +157,12 @@
 						        		<div class="small-11 columns rights-container">
 							        		<label for="confirm-rights">
 							        			Ich habe das ausgewählte Bild selbst aufgenommen 
-							        			und der Urheber/ die Urheber des darauf zu sehenden Motivs 
-							        			sind mir nicht bekannt. Die Rechte an dem aufgenommenen Bild
-							        			und den damit verknüpften Daten werden mit dem Upload an 
-							        			Latrinalia.de abgetreten. Latrinalia.de darf das Bild und 
-							        			die zugehörigen Daten auswerten und nutzen.
+							        			und der Urheber/ die Urheberin des darauf zu sehenden Motivs 
+							        			ist mir nicht bekannt oder hat dem Heraufladen des Bildes zugestimmt. 
+							        			Die Rechte an dem aufgenommenen Bild und den damit verknüpften Daten 
+							        			werden mit dem Upload an Latrinalia.de abgetreten. 
+							        			Latrinalia.de darf das Bild und die zugehörigen Daten 
+							        			auswerten und nutzen.
 							        		</label>
 						        		</div>
 						        	</div>
