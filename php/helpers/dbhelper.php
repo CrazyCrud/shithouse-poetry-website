@@ -249,10 +249,11 @@ class DBHelper{
 
 	// pass $id if an admin and want to delete another user
 	public function deleteUser($id){
+		$user = $this->getUser();
+		if(!isset($id))$id=$user["id"];
 		if(is_numeric(trim($id))){
 			$id = intval($id);
 		}
-		$user = $this->getUser();
 		if(!isset($user["id"]))return false;
 		if(isset($id)
 			&&$user["status"]==DBConfig::$userStatus["admin"]){
@@ -261,7 +262,6 @@ class DBHelper{
 				if(!isset($user["id"]))return false;
 			}
 		}else if($id!=$user["id"]){
-			echo "no permission";
 			return false;
 		}
 
