@@ -14,6 +14,7 @@
 .icon-left-big:before { content: '\e813'; } /* '' */
 .icon-user-1:before { content: '\e807'; } /* '' */
 .icon-help:before { content: '\e812'; } /* '' */
+.icon-help-circled:before { content: '\e811'; } /* '' */
 .icon-search:before { content: '\e801'; } /* '' */
 .icon-home:before { content: '\e80a'; } /* '' */
 .icon-feather:before { content: '\e819'; } /* '' */
@@ -29,4 +30,4 @@
 .icon-thumbs-up-1:before { content: '\e80d'; } /* '' */
 .icon-thumbs-down-1:before { content: '\e80e'; } /* '' */
 .icon-male:before { content: '\e80f'; } /* '' */
-.icon-help-circled:before { content: '\e811'; } /* '' */
+.icon-info:before { content: '\e81f'; } /* '' */

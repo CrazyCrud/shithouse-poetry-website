@@ -73,6 +73,7 @@ function setupTabFunctionality(){
 function handleHotClick(){
 	deleteMessage();
 	GalleryView.setMaxwidth(true);
+	loadingSpinner(true);
 	setActive($hotLink.parent("dd"));
 	window.location.hash="hot";
 	enableInfiniteScroll();
@@ -86,6 +87,7 @@ function handleHotClick(){
 function handleNewClick(){
 	deleteMessage();
 	GalleryView.setMaxwidth(true);
+	loadingSpinner(true);
 	setActive($newLink.parent("dd"));
 	window.location.hash="new";
 	enableInfiniteScroll();
@@ -99,6 +101,7 @@ function handleNewClick(){
 function handleVoteClick(){
 	deleteMessage();
 	GalleryView.setMaxwidth(false);
+	loadingSpinner(false);
 	setActive($voteLink.parent("dd"));
 	window.location.hash="vote";
 	disableTranscribing();
@@ -114,6 +117,7 @@ function handleVoteClick(){
 function handleTranscribeClick(){
 	deleteMessage();
 	GalleryView.setMaxwidth(false);
+	loadingSpinner(false);
 	setActive($transcribeLink.parent("dd"));
 	window.location.hash="transcribe";
 	disableInfiniteScroll();
@@ -195,9 +199,18 @@ var setupOnce = _.once(setupInfiniteScroll);
 
 
 function appendMessage(message){
+	loadingSpinner(false);
 	message = message || "Es gibt leider keine weiteren Bilder mehr";
 	$(".message").html(message);
 	$(".message").addClass('label secondary');
+}
+
+function loadingSpinner(bitch){
+	if(bitch){
+		$("#loading-spinner").css('display', 'inline-block');
+	}else{
+		$("#loading-spinner").css('display', 'none');
+	}
 }
 
 function deleteMessage(){
@@ -402,15 +415,18 @@ function requestRating(rating){
 		var ratingMeasure = parseFloat(1 / currentEntry.ratingcount);
 		currentEntry.rating += (ratingMeasure * rating);
 		$("#outer-rating").css('visibility', 'visible');
+		var newWidth = "100%";
 		if(currentEntry.rating > 0.75){
-			$("#inner-rating").css('width', '100%');
+			newWidth = '100%';
 		}else if(currentEntry.rating > 0.5){
-			$("#inner-rating").css('width', '50%');
+			newWidth = '50%';
 		}else if(currentEntry.rating > 0.25){
-			$("#inner-rating").css('width', '25%');
+			newWidth = '25%';
 		}else{
-			$("#inner-rating").css('width', '0%');
+			newWidth = "0%";
 		}
+		$("#inner-rating").css('width', newWidth);
+		$("#outer-rating").animate({'width': '100px'}, 300);
 		$("#rating-count").html("(" + currentEntry.ratingcount + ")");
 		$upVote.unbind('click');
 		$downVote.unbind('click');
@@ -420,6 +436,7 @@ function requestRating(rating){
 
 function loadNextEntry(){
 	$("#outer-rating").css('visibility', 'hidden');
+	$("#outer-rating").css('width', '0');
 	$("#rating-count").html("");
 	setupVoting();
 	GalleryView.loadSingleImage();

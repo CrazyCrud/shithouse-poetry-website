@@ -343,7 +343,7 @@ input[type="password"].loginField {
   display: inline-block;
   position: relative;
   visibility: hidden;
-  width: 100px;
+  width: 0;
   height: 5px;
   margin: 0;
   padding: 0;
