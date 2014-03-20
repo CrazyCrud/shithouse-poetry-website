@@ -2,10 +2,17 @@
 <?php
 	error_reporting(0);
 ?>
-<html lang="de">
+<html lang="de" xmlns:fb="http://ogp.me/ns/fb#">
 	<head>
 		<meta charset="utf-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<?php
+			if(isset($_GET["id"])){
+				echo '<meta property="og:image" content="php/backend/preview.php?id='.$_GET["id"].'"/>';
+			}else{
+				echo '<meta property="og:image" content="img/global/favicon.jpg"/>';
+			}
+		?>
 		<link rel="stylesheet" type="text/css" href="css/plugins/build/production.plugins.min.css"/>
 		<link rel="stylesheet" type="text/css" href="css/global.css"/>
 		<link rel="stylesheet" type="text/css" href="css/overlay.css"/>
