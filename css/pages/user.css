@@ -231,6 +231,7 @@ body {
 
 #stats {
   margin-top: 1rem;
+  margin-bottom: 1rem;
   font-size: 0.5rem; }
 
 #stats .amount {
@@ -292,6 +293,22 @@ body {
 #achievements .achievement .lvl13 {
   color: #ff0; }
 
-#achievements .achievement.next-achievement{
-  opacity: .25;
-}
+#achievements .achievement.next-achievement {
+  opacity: 0.25; }
+
+#follows {
+  font-size: 0.618rem; }
+  #follows .myfollows {
+    display: none; }
+  #follows #follows-container {
+    padding-top: 0.618rem; }
+    #follows #follows-container div {
+      display: inline-block;
+      background: #eee;
+      padding: 0.382rem; }
+
+#follow-button {
+  display: none;
+  margin-bottom: 0.618rem; }
+  #follow-button a {
+    font-size: 0.618rem; }

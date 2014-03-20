@@ -45,6 +45,7 @@ body{
 
 #stats{
 	margin-top: 1rem;
+	margin-bottom: 1rem;
 	font-size: .5rem;
 }
 
@@ -113,4 +114,27 @@ body{
 }
 #achievements .achievement.next-achievement{
 	opacity: .25;
+}
+
+#follows{
+	font-size: $space_minus1;
+	.myfollows{
+		display: none;
+	}
+	#follows-container {
+		padding-top: $space_minus1;
+		div{
+			display: inline-block;
+			background: #eee;
+			padding: $space_minus2;
+		}
+	}
+}
+
+#follow-button{
+	display: none;
+ 	a{
+		font-size: $space_minus1;
+	}
+	margin-bottom: $space_minus1;
 }

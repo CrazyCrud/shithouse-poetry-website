@@ -1,4 +1,5 @@
 var queriedUser = {};
+var following = false;
 var NO_RESULTS = "Der Nutzer hat noch keine Bilder hochgeladen!";
 var NO_MORE_RESULTS = "Dieser Nutzer hat nicht mehr Bilder hochgeladen!";
 var NO_MORE_RESULTS_USER = "Du hast keine weiteren Bilder hochgeladen!";
@@ -8,6 +9,9 @@ $(function(){
 	if(id>0){
 		loadUser(id);
 		setupImageClick();
+		if(user.id){
+			$("#follow-button a").click(onFollowClicked);
+		}
 	}
 });
 
@@ -66,6 +70,9 @@ function fillUI(u){
 		var lvl = computeLevel(u.stats.entries, u.stats.comments, u.stats.ratings, u.stats.transcriptions, difference);
 		$("#level").html("(Level "+lvl+")");
 	}
+	if(u.follows){
+		drawFollows(u.follows);
+	}
 	ImgurManager.getEntriesForUser(fillImages, id);
 }
 
@@ -88,6 +95,81 @@ function fillImages(searchData){
 		GalleryView.init($("#images"));
 		showResults(searchData);
 	}
+}
+
+function drawFollows(follows){
+	console.log(follows);
+	if(!user.id)return;
+	if(queriedUser.id==user.id){
+		drawMyFollows(follows);
+	}else{
+		checkWhetherFollowingMe(follows);
+		checkWhetherImFollowing(follows);
+	}
+}
+
+function drawMyFollows(follows){
+	var $container = $("#follows-container");
+	$container.html("");
+	for(i in follows){
+		if(parseInt(follows[i].targetid)!=user.id){
+			var $user = $('<div class="following-user"><a href="user.php?id='+follows[i].targetid+'"><i class="icon-user-1"></i>'+follows[i].targetname+'</a></div>');
+			$container.append($user);
+		}
+	}
+	if($("#follows-container a").length>0){
+		$(".myfollows").css("display","block");
+	}
+}
+
+function checkWhetherFollowingMe(follows){
+	var followsMe = false;
+	for(i in follows){
+		if(parseInt(follows[i].targetid) == user.id){
+			followsMe = true;
+			break;
+		}
+	}
+	if(followsMe){
+		$("#follows").css("display","block");
+		$("#follows #follows-title").css("display","block");
+		$("#follows #follows-title").html("+<i class='icon-user-1'></i>Dieser Nutzer hat dich abonniert ;)");
+	}
+}
+
+function checkWhetherImFollowing(follows){
+	$("#follow-button").css("display","block");
+	var imFollowing = false;
+	for(i in follows){
+		if(parseInt(follows[i].followerid) == user.id){
+			imFollowing = true;
+			break;
+		}
+	}
+	following = imFollowing;
+	if(imFollowing){
+		$("#follow-button").attr("title","Du hast diesen Nutzer abonniert");
+		$("#follow-button a").html("-<i class='icon-user-1'></i>Diesen Nutzer nicht mehr abonnieren");
+	}else{
+		$("#follow-button").attr("title","Uploads dieses Nutzers in meiner Timeline anzeigen");
+		$("#follow-button a").html('+<i class="icon-user-1"></i>Abonnieren');
+	}
+}
+
+function onFollowClicked(){
+	ImgurManager.followUser(onFollowChanged, queriedUser.id, !following);
+}
+
+function onFollowChanged(status){
+	if(status==null)return;
+	var follows = [];
+	if(status){
+		follows[0] = {
+			followerid: "1",
+			targetid: queriedUser.id
+		};
+	}
+	drawFollows(follows);
 }
 
 function resultsError(msg){

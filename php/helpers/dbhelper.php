@@ -360,6 +360,18 @@ class DBHelper{
 		return $this->query($query);
 	}
 
+	public function follow($id, $follow){
+		$user = $this->getUser();
+		if(!isset($user["id"]))return false;
+		if($follow){
+			$query = Queries::followuser($id, $user["id"]);
+			return $this->query($query);
+		}else{
+			$query = Queries::unfollowuser($id, $user["id"]);
+			return $this->query($query);
+		}
+	}
+
 	/**
 	COMMENT FUNCTIONS
 	**/

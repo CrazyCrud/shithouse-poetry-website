@@ -625,6 +625,17 @@ var ImgurManager = (function(){
 				callback(userData);
 			});
 		},
+		followUser : function(callback, userid, follow){
+			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+			var url = 'follow.php?authkey='+authkey+'&userid='+userid+'&follow='+follow;
+			$.get("php/backend/"+url,function(data){
+				if(data.success == 1){
+					callback(follow);
+				}else{
+					callback(null);
+				}
+			});
+		},
 		getUser : function(callback, id){
 			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 			var url = 'getUser.php?id='+id;

@@ -241,6 +241,36 @@ class Queries{
 		"SELECT * FROM `$u`";
 		return $query;
 	}
+	public static function followuser($targetid, $followerid){
+		$f = DBConfig::$tables["follows"];
+		$query =
+		"INSERT INTO `$f`
+		(follower, target)
+		VALUES
+		($followerid, $targetid)";
+		return $query;
+	}
+	public static function unfollowuser($targetid, $followerid){
+		$f = DBConfig::$tables["follows"];
+		$query =
+		"DELETE FROM `$f`
+		WHERE
+		follower = $followerid
+		AND
+		target = $targetid";
+		return $query;
+	}
+	// unused
+	public static function removefollows($userid){
+		$f = DBConfig::$tables["follows"];
+		$query =
+		"DELETE FROM `$f`
+		WHERE
+		follower = $userid
+		OR
+		target = $userid";
+		return $query;
+	}
 	/**
 	COMMENT QUERIES
 	**/
