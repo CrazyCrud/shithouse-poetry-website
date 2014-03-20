@@ -112,16 +112,31 @@ class DBHelper{
 		return $this->query($query);
 	}
 
-	// only doable by admin!!!
+	// only doable by admin!!! (or to delete yourself)
+	// set userid to false if you want to change yourself
 	public function updateUserStatus($userid, $status){
 		$user = $this->getUser();
-		if(!isset($user["id"])||$user["status"]!=DBConfig::$userStatus["admin"]){
+		// im not logged in
+		if(!isset($user["id"])){
+			return false;
+		}
+		// no id given (wanna change myself)
+		if(!isset($userid)||$userid==false){
+			$userid = $user["id"];
+		}
+		// wanna do anything other than delete as not admin
+		if($status != DBConfig::$userStatus["deleted"]
+			&& $user["status"] != DBConfig::$userStatus["admin"]){
+			return false;
+		}
+		// wanna delete somebody else
+		if($status == DBConfig::$userStatus["deleted"]
+			&& $userid != $user["id"]){
 			return false;
 		}
 		$query = Queries::updateuserstatus($userid, $status);
 		if(!$this->query($query))return false;
-		if($status==DBConfig::$userStatus["deleted"]
-			||$status==DBConfig::$userStatus["newUser"]
+		if($status==DBConfig::$userStatus["newUser"]
 			||$status==DBConfig::$userStatus["banned"]
 			||$status==DBConfig::$userStatus["unregistered"])
 			$this->logoutUser($userid);
@@ -265,11 +280,7 @@ class DBHelper{
 			return false;
 		}
 
-		$name = 'User'.$id.uniqid();
-		$mail = $name."@latrinalia.de";
-		$password = md5(uniqid());
-
-		$query = Queries::updateuser($user["id"], $mail, $name, $password);
+		$query = Queries::deleteuser($user["id"]);
 		$this->logoutUser($user["id"]);
 
 		return $this->query($query);

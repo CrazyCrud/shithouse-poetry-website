@@ -43,7 +43,7 @@ if(isset($_GET["authkey"])){
 
 $db = new DBHelper();
 $db->setAuthKey($key);
-$user = $db->deleteUser();
+$user = $db->updateUserStatus(false, DBConfig::$userStatus["deleted"]);
 
 if($user == false){
 	$json["success"]=$CODE_ERROR;
