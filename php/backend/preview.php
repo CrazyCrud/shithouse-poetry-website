@@ -22,14 +22,12 @@ function printPreview($id){
 		printIcon();
 	}else{
 		$file = $entry["images"][0]["smallthumbnail"];
-		header('Content-Length: ' . filesize($file));
 		readfile($file);
 	}
 }
 
 function printIcon(){
 	$file = "http://latrinalia.de/img/global/favicon.jpg";
-	header('Content-Length: ' . filesize($file));
 	readfile($file);
 }
 

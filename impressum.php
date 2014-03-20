@@ -30,13 +30,14 @@
 <head>
 	<meta charset="utf-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<meta name="description" content="Website zur Erfassung, Kategorisierung und Transkription von Toiletten-Schmierereien und -Graffitis."/>
 	<link rel="stylesheet" type="text/css" href="css/plugins/build/production.plugins.min.css"/>
 	<link rel="stylesheet" type="text/css" href="css/global.css"/>
 	<link rel="stylesheet" type="text/css" href="css/overlay.css"/>
 	<link rel="stylesheet" type="text/css" href="css/pages/law.css"/>
 	<link rel="icon" type="image/x-icon" href="img/global/favicon.jpg"/>
 	<script type="text/javascript" src="js/plugins/modernizr.js"></script>
-	<title>Impressum</title>
+	<title>Latrinalia - Impressum</title>
 </head>
 <body>
 	<div id="index">
