@@ -12,6 +12,7 @@
 		<link rel="stylesheet" type="text/css" href="css/pages/galleryview.css"/>
 		<link rel="stylesheet" type="text/css" href="css/pages/home.css"/>
 		<link rel="icon" type="image/x-icon" href="img/global/favicon.jpg"/>
+		<link rel="image_src" href="img/global/favicon.jpg"/>
 		<meta name="description" content="Website zur Erfassung, Kategorisierung und Transkription von Toiletten-Schmierereien und -Graffitis."/>
 		<meta name="keywords" content="Latrinalia, Graffiti, Toilette, Klo, Universität, Regensburg, Medieninformatik, Schmiererei, Bad, Bathroom"/>
 		<meta name="author" content="Franziska Hertlein, Bastian Hinterleitner, Constantin Lehenmeier, Thomas Spröd"/>

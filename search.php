@@ -7,6 +7,7 @@
 		<meta charset="utf-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
 		<meta name="description" content="Website zur Erfassung, Kategorisierung und Transkription von Toiletten-Schmierereien und -Graffitis."/>
+		<link rel="image_src" href="img/global/favicon.jpg"/>
 		<link rel="stylesheet" type="text/css" href="css/plugins/build/production.plugins.min.css"/>
 		<link href="css/plugins/custom-jqui-theme/jquery-ui-1.10.4.custom.css" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="css/global.css"/>
