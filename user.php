@@ -13,7 +13,7 @@
 		<link rel="stylesheet" type="text/css" href="css/pages/user.css"/>
 		<link rel="icon" type="image/x-icon" href="img/global/favicon.jpg"/>
 		<script type="text/javascript" src="js/plugins/modernizr.js"></script>
-		<title>Nutzeransicht</title>
+		<title>Latrinalia - Nutzeransicht</title>
 	</head>
 	<body>
 		<div id="index">

@@ -12,7 +12,7 @@
 		<link rel="stylesheet" type="text/css" href="css/pages/details.css"/>
 		<link rel="icon" type="image/x-icon" href="img/global/favicon.jpg"/>
 		<script type="text/javascript" src="js/plugins/modernizr.js"></script>
-		<title>Detailansicht</title>
+		<title>Latrinalia</title>
 	</head>
 	<body>
 		<div id="index">
