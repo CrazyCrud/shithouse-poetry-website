@@ -340,7 +340,7 @@ class DBHelper{
 			$this->log("@".$user["id"]." ($email) logs in");
 		}
 		$key = md5($email).uniqid();
-		$query = Queries::login($user["id"], $key, md5($_SERVER['HTTP_USER_AGENT'])."@".$_SERVER['REMOTE_ADDR']);
+		$query = Queries::login($user["id"], $key, md5($_SERVER['HTTP_USER_AGENT']."@".$_SERVER['REMOTE_ADDR']));
 		if($this->query($query)){
 			return $key;
 		}
@@ -381,6 +381,10 @@ class DBHelper{
 		$query = Queries::mergeuserrating($oldId, $newId);
 		if(!$this->query($query))$success = false;
 		$query = Queries::mergeuserreports($oldId, $newId);
+		if(!$this->query($query))$success = false;
+		$query = Queries::mergeuserfollows($oldId, $newId);
+		if(!$this->query($query))$success = false;
+		$query = Queries::mergeuserfollowers($oldId, $newId);
 		if(!$this->query($query))$success = false;
 		$this->deleteUser();
 		if($success)$this->hardDeleteUser($oldId);
@@ -1680,6 +1684,77 @@ class DBHelper{
 		$result["genders"]=$gender;
 
 		return $result;
+	}
+
+	/**
+	GLOBAL FUNCTIONS
+	*/
+
+	public function cleanUp(){
+		$this->cleanUpDatabase();
+		$this->cleanUpLogs();
+	}
+
+	private function cleanUpDatabase(){
+		// sessions older 30 days
+		$this->cleanUpSessions();
+		// reports older 90 days
+		$this->cleanUpReports();
+		// delete unregistered users without actions older 30 days
+		$this->cleanUpUsers();
+	}
+
+	private function cleanUpSessions(){
+		echo "cleaning up sessions<br/>";
+		$limit = date("Y-m-d", strtotime("-1 month"));
+		$query = Queries::cleanupsession($limit);
+		$this->query($query);
+	}
+
+	private function cleanUpReports(){
+		echo "cleaning up reports<br/>";
+		$limit = date("Y-m-d", strtotime("-3 month"));
+		$query = Queries::cleanupreports($limit);
+		$this->query($query);
+	}
+
+	private function cleanUpUsers(){
+		echo "cleaning up users<br/>";
+		$limit = date("Y-m-d", strtotime("-4 month"));
+		$query = Queries::getinactiveusers($limit);
+		$users = $this->query($query);
+		if(count($users)==0)return;
+		foreach($users as $inactiveUser){
+			if(!isset($inactiveUser["id"]))continue;
+			$user = $this->getUser(intval($inactiveUser["id"]));
+			if(!isset($user["stats"]))continue;
+			// check whether inactive
+			if($user["stats"]["entries"]!=0
+				||$user["stats"]["transcriptions"]!=0
+				||$user["stats"]["followers"]!=0){
+				continue;
+			}
+			echo "deleting user".$user["id"].": ".$user["username"]."<br/>";
+			$this->hardDeleteUser($user["id"]);
+		}
+	}
+
+	private function cleanUpLogs(){
+		echo "cleaning up logs<br/>";
+		// clean logs older 90 days
+		$now = date_create(date("Y-m-d"));
+		$logsDir = "../logs";
+		$files = scandir($logsDir);
+		foreach($files as $logFile){
+			if(strpos($logFile, ".txt")){
+				$date = date_create(str_replace(".txt", "", $logFile));
+				$difference = date_diff($date, $now, true);
+				if($difference->days > 90){
+					echo "deleting file ".$logFile."<br/>";
+					unlink($logsDir."/".$logFile);
+				}
+			}
+		}
 	}
 
 }
