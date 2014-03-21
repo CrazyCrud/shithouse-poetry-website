@@ -204,7 +204,7 @@
 
 						<p><a rel="nofollow" href="impressum.php" target="_blank">Impressum</a></p>
 
-						<p>Stand: 18.03.2014</p>
+						<p>Stand: 21.03.2014</p>
 
 						<p>Copyright © 2014 ausschließliche Nutzungsrechte von Latrinalia</p>
 					</div>
