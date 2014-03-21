@@ -40,7 +40,7 @@ class DBHelper{
 	private function log($message){
 		$date = date("Y-m-d H:i:s");
 		$file = date("Y-m-d").'.txt';
-		$path = "~/home/tikiblue/html/php/helpers/logs";
+		$path = "/var/www/virtual/tikiblue/html/php/helpers/logs";
 		if(file_exists($path."/".$file)){
 			file_put_contents($path."/".$file, $date."; ".$message."\n", FILE_APPEND);
 		}else{
