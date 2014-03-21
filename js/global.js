@@ -75,8 +75,8 @@ function loggedIn(){
 
 function saveUser(user){
   var d = new Date();
-  var 30Days = 2592000000;
-  d.setTime(d.getTime() + 30Days);
+  var thirtyDays = 2592000000;
+  d.setTime(d.getTime() + thirtyDays);
   document.cookie = "username=" + user.username + "; expires=" + d.toGMTString();
   document.cookie = "userid=" +user.id+ "; expires=" + d.toGMTString();
   document.cookie = "admin=" + user.status + "; expires=" + d.toGMTString();

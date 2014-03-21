@@ -596,8 +596,8 @@ var ImgurManager = (function(){
 				if(data.success == 1){
 					userData = data.data;
 					var d = new Date();
-					var 30Days = 2592000000;
-					d.setTime(d.getTime() + 30Days);
+					var thirtyDays = 2592000000;
+					d.setTime(d.getTime() + thirtyDays);
 					document.cookie = "authkey=" + userData + "; expires=" + d.toGMTString();
 				}
 				callback(userData);

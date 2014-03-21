@@ -193,8 +193,8 @@ function error(message){
 
 function onLoginSuccess(authkey){
 	var d = new Date();
-	var 30Days = 2592000000;
-	d.setTime(d.getTime() + 30Days);
+	var thirtyDays = 2592000000;
+	d.setTime(d.getTime() + thirtyDays);
 	document.cookie = "authkey=" + authkey + "; expires=" + d.toGMTString();
 	getUser(authkey);
 }
