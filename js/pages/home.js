@@ -150,7 +150,7 @@ function setupVoting(){
 }
 
 function setupTranscribing(){
-	if(user.status&&user.status!=4&&user.status!="4"){
+	if(user&&user.status&&user.status!=4&&user.status!="4"){
 		$transcriptionTou.css("display","none");
 	}
 	$skipTranscription.click(function(event) {
