@@ -10,7 +10,7 @@ $(function(){
 		loadUser(id);
 		setupImageClick();
 		if(user.id){
-			$("#follow-button a").click(onFollowClicked);
+			$("#follow-button button").click(onFollowClicked);
 		}
 	}
 });
@@ -98,7 +98,6 @@ function fillImages(searchData){
 }
 
 function drawFollows(follows){
-	console.log(follows);
 	if(!user.id)return;
 	if(queriedUser.id==user.id){
 		drawMyFollows(follows);
@@ -113,6 +112,7 @@ function drawMyFollows(follows){
 	$container.html("");
 	for(i in follows){
 		if(parseInt(follows[i].targetid)!=user.id){
+			console.log(follows[i].targetid);
 			var $user = $('<div class="following-user"><a href="user.php?id='+follows[i].targetid+'"><i class="icon-user-1"></i>'+follows[i].targetname+'</a></div>');
 			$container.append($user);
 		}
@@ -133,7 +133,7 @@ function checkWhetherFollowingMe(follows){
 	if(followsMe){
 		$("#follows").css("display","block");
 		$("#follows #follows-title").css("display","block");
-		$("#follows #follows-title").html("+<i class='icon-user-1'></i>Dieser Nutzer hat dich abonniert ;)");
+		$("#follows #follows-title").html("<i class='icon-user-1'></i>Dieser Nutzer hat dich abonniert");
 	}
 }
 
@@ -149,10 +149,10 @@ function checkWhetherImFollowing(follows){
 	following = imFollowing;
 	if(imFollowing){
 		$("#follow-button").attr("title","Du hast diesen Nutzer abonniert");
-		$("#follow-button a").html("-<i class='icon-user-1'></i>Diesen Nutzer nicht mehr abonnieren");
+		$("#follow-button button").html("-<i class='icon-user-1'></i>Diesen Nutzer nicht mehr abonnieren");
 	}else{
 		$("#follow-button").attr("title","Uploads dieses Nutzers in meiner Timeline anzeigen");
-		$("#follow-button a").html('+<i class="icon-user-1"></i>Abonnieren');
+		$("#follow-button button").html('+<i class="icon-user-1"></i>Abonnieren');
 	}
 }
 

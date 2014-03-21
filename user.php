@@ -86,7 +86,7 @@
 					</div>	
 					<div class="row follows" id="follows">
 						<div class="details small-12 medium-12 large-12 columns" id="follows-description">
-							<div id="follow-button"><a href="#">+<i class="icon-user-1"></i>Abonnieren</a></div>
+							<div id="follow-button"><button class="tiny">+<i class="icon-user-1"></i>Abonnieren</button></div>
 							<div class="myfollows" id="follows-title">Du hast folgende Leute abonniert:</div>
 							<div class="myfollows" id="follows-container"></div>
 						</div>

@@ -127,14 +127,17 @@ body{
 			display: inline-block;
 			background: #eee;
 			padding: $space_minus2;
+			margin-right: $space_minus1;
 		}
 	}
 }
 
 #follow-button{
 	display: none;
- 	a{
-		font-size: $space_minus1;
+ 	i{
+		margin-right: $space_minus1;
 	}
-	margin-bottom: $space_minus1;
+	button{
+		margin-bottom: $space_minus2;
+	}
 }

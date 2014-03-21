@@ -305,10 +305,12 @@ body {
     #follows #follows-container div {
       display: inline-block;
       background: #eee;
-      padding: 0.382rem; }
+      padding: 0.382rem;
+      margin-right: 0.618rem; }
 
 #follow-button {
-  display: none;
-  margin-bottom: 0.618rem; }
-  #follow-button a {
-    font-size: 0.618rem; }
+  display: none; }
+  #follow-button i {
+    margin-right: 0.618rem; }
+  #follow-button button {
+    margin-bottom: 0.382rem; }
