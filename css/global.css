@@ -229,16 +229,19 @@ body {
 #maincontent:not(.home) {
   padding-top: 1.618rem; }
 
-@media screen and (max-width: 640px) {
-  #mainnav .top-bar-section span {
-    display: none; } }
-
 i.icon-thumbs-up-1:before {
   -webkit-transform: scale(-1, 1);
   -moz-transform: scale(-1, 1);
   -ms-transform: scale(-1, 1);
   -o-transform: scale(-1, 1);
   transform: scale(-1, 1); }
+
+.message-container {
+  text-align: center; }
+  .message-container .message {
+    font-size: 0.618rem;
+    color: #111111;
+    margin-bottom: 0.382rem; }
 
 .law-container {
   position: fixed;
@@ -307,3 +310,7 @@ i.icon-thumbs-up-1:before {
       text-align: center;
       font-size: 0.9rem;
       color: #ffffff; }
+
+@media screen and (max-width: 640px) {
+  #mainnav .top-bar-section span {
+    display: none; } }

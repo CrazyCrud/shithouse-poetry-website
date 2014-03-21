@@ -367,12 +367,6 @@ input[type="password"].loginField {
   margin: 0.618rem 0;
   height: auto; }
 
-.message-container {
-  text-align: center; }
-  .message-container .message {
-    font-size: 0.618rem;
-    color: #111111; }
-
 @media screen and (max-width: 640px) {
   .tabs dd {
     width: 33.33333%; } }

@@ -208,15 +208,6 @@
 	}
 }
 
-.message-container{
-	text-align: center;
-
-	.message{
-		font-size: $space_minus1;
-		color: $black;
-	}
-}
-
 @media screen and (max-width:  640px){
 	.tabs{
 		dd{
