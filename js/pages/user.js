@@ -167,7 +167,7 @@ function onFollowChanged(status){
 	var follows = [];
 	if(status){
 		follows[0] = {
-			followerid: "1",
+			followerid: user.id,
 			targetid: queriedUser.id
 		};
 	}
