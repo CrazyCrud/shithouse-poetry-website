@@ -1,3 +1,4 @@
+var $loadingSpinner = $("#loading-spinner");
 var queriedUser = {};
 var following = false;
 var NO_RESULTS = "Der Nutzer hat noch keine Bilder hochgeladen!";
@@ -82,15 +83,15 @@ function fillImages(searchData){
 	if(!searchData||searchData.length==0){
 		if($('.jg-row').length > 0){
 			if(queriedUser.username == document.cookie.replace(/(?:(?:^|.*;\s*)username\s*\=\s*([^;]*).*$)|^.*$/, "$1")){
-				resultsError(NO_MORE_RESULTS_USER);
+				appendMessage(NO_MORE_RESULTS_USER);
 			}else{
-				resultsError(NO_MORE_RESULTS);
+				appendMessage(NO_MORE_RESULTS);
 			}
 		}else{
 			if(queriedUser.username == document.cookie.replace(/(?:(?:^|.*;\s*)username\s*\=\s*([^;]*).*$)|^.*$/, "$1")){
-				resultsError(NO_RESULTS_USER);
+				appendMessage(NO_RESULTS_USER);
 			}else{
-				resultsError(NO_RESULTS);
+				appendMessage(NO_RESULTS);
 			}
 		}
 	}else{
@@ -173,12 +174,21 @@ function onFollowChanged(status){
 	drawFollows(follows);
 }
 
-function resultsError(msg){
-	var content = "<div class='error-message secondary label'>" + msg + "</div>";
-	if($(".error-message").length < 1){
-		$("#images").append(content);
+function appendMessage(message){
+	loadingSpinner(false);
+	message = message || "Es gibt leider keine weiteren Bilder mehr";
+	$(".message").html(message);
+	$(".message").addClass('label secondary');
+}
+
+function loadingSpinner(bitch){
+	if(bitch){
+		$loadingSpinner.css('display', 'inline-block');
+	}else{
+		$loadingSpinner.css('display', 'none');
 	}
 }
+
 
 function showResults(searchData){
 	GalleryView.appendEntries(searchData);

@@ -105,6 +105,10 @@
 								<div class="justifiedGallery" id="images">
 
 								</div>
+								<div class="small-12 columns message-container">
+									<img id="loading-spinner" src="img/global/loading.gif"/>
+									<span class="message"></span>
+								</div>
 							</div>
 						</div>
 					</div>

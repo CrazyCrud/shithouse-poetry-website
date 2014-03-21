@@ -68,6 +68,10 @@
 								<div class="justifiedGallery" id="images">
 
 								</div>
+								<div class="small-12 columns message-container">
+									<img id="loading-spinner" src="img/global/loading.gif"/>
+									<span class="message"></span>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -93,17 +97,6 @@
 		<?php
 			include("templates.html");
 		?>
-		<!--
-		<script src="js/plugins/jquery.min.js"></script>
-  		<script src="js/plugins/md5/jquery.md5.js"></script>
-		<script src="js/plugins/underscore.js"></script>
-		<script src="js/plugins/foundation/foundation.js"></script>
-  		<script src="js/plugins/foundation/foundation.topbar.js"></script>
-  		<script src="js/plugins/transit/transit.min.js"></script>
-  		<script src="js/plugins/gallery/jquery.justifiedgallery.js"></script>
-  		<script src="js/plugins/jquery-ui-custom/jquery-ui.min.js"></script>
-  		<script src="js/plugins/waypoint/waypoints.min.js"></script>
-  		-->
   		<script src="js/plugins/build/production.plugins.min.js"></script>
   		<script src="js/StateManager.js"></script>
   		<script src="js/ImgurManager.js"></script>
