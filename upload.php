@@ -93,7 +93,7 @@
 								</div>
 								<div class="small-12 columns add-transcription-container">
 									<label>Transkription<small>optional</small>
-							        	<input id="transcription" type="text">
+							        	<input id="transcription" type="text" placeholder="Schreibe die Wörter nieder, die du im Bild erkennst.">
 							        	</input>
 							    	</label>
 								</div>
