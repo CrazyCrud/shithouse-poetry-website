@@ -38,9 +38,19 @@ class DBHelper{
 	}
 
 	private function log($message){
-		$date = date("YYYY-mm-dd HH:ii:ss");
-		$file = date("YYYY-mm-dd").'.txt';
-		file_put_contents("logs/".$file, $date.": ".$message."\n", FILE_APPEND);
+		$date = date("Y-m-d H:i:s");
+		$file = date("Y-m-d").'.txt';
+		$path = str_replace("backend","helpers/logs",getcwd());
+		if(!strpos($path, "php")){
+			$path .= "/php/helpers/logs";
+		}
+		if(file_exists($path."/".$file)){
+			file_put_contents($path."/".$file, $date."; ".$message."\n", FILE_APPEND);
+		}else{
+			$handler = fopen($path."/".$file,"w");
+			file_put_contents($path."/".$file, $date."; ".$message."\n");
+			fclose($handler);
+		}
 	}
 
 	private function query($query){
@@ -817,7 +827,7 @@ class DBHelper{
 		$query = Queries::createentry($user["id"], $type["id"], $entry["title"], $entry["sex"]);
 		$entryid = $this->query($query);
 		if(!$entryid)return false;
-		$this->log("@".$user["id"]." (".$user["username"]") creates #$entryid (".$entry["title"].")");
+		$this->log("@".$user["id"]." (".$user["username"].") creates #$entryid (".$entry["title"].")");
 
 		// add tags
 		$this->addTag($entry["tags"], $entryid);
@@ -1214,7 +1224,7 @@ class DBHelper{
 		}else{
 			$tagid = $this->createTag($tag);
 			if($tagid == false)return false;
-			$this->log("@".$user["id"]." (".$user["username"].") adds the tag '$tag' to #".$entry["id"]." (".$entry["title"].")";
+			$this->log("@".$user["id"]." (".$user["username"].") adds the tag '$tag' to #".$entry["id"]." (".$entry["title"].")");
 			$query = Queries::addTag($tagid, $entry["id"]);
 			return $this->query($query);
 		}
