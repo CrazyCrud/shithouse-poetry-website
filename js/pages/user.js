@@ -59,15 +59,17 @@ function fillUI(u){
 	$("#lastseen").attr("title",queriedUser.lastaction);	
 	if(u.stats){
 		$("#stats #entries .amount").html(u.stats.entries);
+		$("#stats #meta .amount").html(Math.floor(100*u.stats.meta)+"% positiv");
 		$("#stats #comments .amount").html(u.stats.comments);
 		$("#stats #ratings .amount").html(u.stats.ratings);
 		$("#stats #transcriptions .amount").html(u.stats.transcriptions);
+		$("#stats #followers .amount").html(u.stats.followers);
 		drawAchievements(u.stats);
 		var today = new Date();
 		var timeObj = convertDateTime(queriedUser.joindate);
 		var timestamp = timeObj.getTime();
 		var difference = today-timestamp;
-		var lvl = computeLevel(u.stats.entries, u.stats.comments, u.stats.ratings, u.stats.transcriptions, difference);
+		var lvl = computeLevel(u.stats.entries, u.stats.comments, u.stats.ratings, u.stats.transcriptions, difference, u.stats.meta, u.stats.followers);
 		$("#level").html("(Level "+lvl+")");
 	}
 	if(u.follows){
@@ -189,27 +191,30 @@ function drawAchievements(stats){
 	drawCommentAchievements(stats.comments);
 	drawRatingAchievements(stats.ratings);
 	drawTranscriptionAchievements(stats.transcriptions);
+	drawFollowerAchievements(stats.followers);
 	if($(".achievement").length == 0){
 		var $none = $('<div class="missing">Dieser Nutzer hat noch keine Erfolge.</div>');
 		$("#achievements").append($none);
 	}
 }
 
-function computeLevel(entries, comments, ratings, transcriptions, ageInMillis){
+function computeLevel(entries, comments, ratings, transcriptions, ageInMillis, meta, followers){
 	var ageInDays = ageInMillis/1000 /60 /60 /24;
 	var level = 1;
 
-	var entryMulti = .05;
+	var entryMulti = .1*meta;
 	var commentMulti = .01;
 	var ratingMulti = .02;
 	var ageMulti = .01;
 	var transMulti = .05;
+	var followMulti = .02;
 
 	var extralevel = entries*entryMulti;
 	extralevel += comments*commentMulti;
 	extralevel += ratings*ratingMulti;
 	extralevel += ageInDays*ageMulti;
 	extralevel += transcriptions*transMulti;
+	extralevel += followers*followMulti;
 
 	level = Math.floor(level+extralevel);
 	return level;
@@ -275,6 +280,22 @@ var transcriptionAchievements = [
 	{ level: 12, limit:7500, text:"Mindestens 7500 Bilder transkribiert" },
 	{ level: 13, limit:9001, text:"Mindestens 9001 Bilder transkribiert" }
 ];
+var followerAchievements = [
+	{ level: 1, limit:1, text:"Mindestens ein Abonnent" },
+	{ level: 2, limit:10, text:"Mindestens 10 Abonnenten" },
+	{ level: 3, limit:50, text:"Mindestens 50 Abonnenten" },
+	{ level: 4, limit:100, text:"Mindestens 100 Abonnenten" },
+	{ level: 5, limit:200, text:"Mindestens 200 Abonnenten" },
+	{ level: 6, limit:500, text:"Mindestens 500 Abonnenten" },
+	{ level: 7, limit:750, text:"Mindestens 750 Abonnenten" },
+	{ level: 8, limit:1000, text:"Mindestens 1000 Abonnenten" },
+	{ level: 9, limit:1337, text:"Mindestens 1337 Abonnenten" },
+	{ level: 10, limit:2000, text:"Mindestens 2000 Abonnenten" },
+	{ level: 11, limit:5000, text:"Mindestens 5000 Abonnenten" },
+	{ level: 12, limit:7500, text:"Mindestens 7500 Abonnenten" },
+	{ level: 13, limit:9001, text:"Mindestens 9001 Abonnenten" }
+];
+
 
 function drawEntryAchievements(amount){
 	var $container = $('#achievements #entries');
@@ -308,6 +329,15 @@ function drawTranscriptionAchievements(amount){
 	for(var i=0; i<transcriptionAchievements.length; i++){
 		var ac = transcriptionAchievements[i];
 		$container.append(achievement("<i class='lvl"+ac.level+" icon-feather'/>",ac.text));
+		if(amount < ac.limit)break;
+	}
+	$container.find(".achievement").last().addClass("next-achievement");
+}
+function drawFollowerAchievements(amount){
+	var $container = $('#achievements #followers');
+	for(var i=0; i<followerAchievements.length; i++){
+		var ac = followerAchievements[i];
+		$container.append(achievement("<i class='lvl"+ac.level+" icon-user-1'/>",ac.text));
 		if(amount < ac.limit)break;
 	}
 	$container.find(".achievement").last().addClass("next-achievement");
