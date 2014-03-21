@@ -27,7 +27,7 @@ function printPreview($id){
 }
 
 function printIcon(){
-	$file = "http://latrinalia.de/img/global/favicon.jpg";
+	$file = "http://latrinalia.de/img/global/icon.png";
 	readfile($file);
 }
 
