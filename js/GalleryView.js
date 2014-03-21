@@ -330,7 +330,7 @@ var GalleryView = (function(){
 						image_l: imgContent_l,
 						date: entry.date||"",
 						rating: parseFloat(rating),
-						ratingcount: ratingCount
+						ratingcount: parseFloat(ratingCount)
 					};
 				}
 			}
