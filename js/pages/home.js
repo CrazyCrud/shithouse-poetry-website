@@ -424,19 +424,15 @@ function requestRating(rating){
 		return;
 	}else{
 		currentEntry.ratingcount += 1;
-		var ratingMeasure = parseFloat(1 / currentEntry.ratingcount);
+		var ratingMeasure = parseFloat(1/currentEntry.ratingcount);
+		currentEntry.rating *= (1-ratingMeasure);
 		currentEntry.rating += (ratingMeasure * rating);
 		$("#outer-rating").css('visibility', 'visible');
-		var newWidth = "100%";
-		if(currentEntry.rating > 0.75){
-			newWidth = '100%';
-		}else if(currentEntry.rating > 0.5){
-			newWidth = '50%';
-		}else if(currentEntry.rating > 0.25){
-			newWidth = '25%';
-		}else{
-			newWidth = "0%";
-		}
+		var r = currentEntry.rating;
+		if(!r)r=0;
+		var i = parseFloat(r);
+		var j = (1+i)*50;
+		var newWidth = j + "%";
 		$("#inner-rating").css('width', newWidth);
 		$("#outer-rating").animate({'width': '100px'}, 300);
 		$("#rating-count").html("(" + currentEntry.ratingcount + ")");

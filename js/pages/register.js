@@ -90,7 +90,6 @@ function fillUser(user){
 }
 
 function registerUser(){
-	console.log("test?");
 	if(user.status=="4"||user.status==4)return updateDummy();
 	else{
 		var mail = $mailInput.val();

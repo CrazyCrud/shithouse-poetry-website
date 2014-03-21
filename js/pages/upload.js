@@ -219,7 +219,6 @@ function initUpload(){
 	});
 
 	$customTagInput.bind("keyup", function(event) {
-		console.log("keyup!");
         var code = event.which;
         if(code == 13 || code == 9 || code == 188 || code == 186 || code == 190){
         	var text = $.trim($(this).val());
