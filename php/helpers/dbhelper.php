@@ -209,7 +209,7 @@ class DBHelper{
 			$this->log("registering dummy as @".$user["id"]." ($mail, $name, $pwd)");
 			$this->registerDummy($user);
 		}else{
-			$this->log("@".$user["id"]." id updating ($mail, $name, $pwd)");
+			$this->log("@".$user["id"]." is updating ($mail, $name, $pwd)");
 		}
 
 		if($mail != $user["email"]){
@@ -262,7 +262,7 @@ class DBHelper{
 		$user = $this->getUser($name);
 		if(isset($user["id"]))return false;
 
-		$this->log("new user created: $mail, $name, $pwd");
+		$this->log("creating new user: $mail, $name, $pwd");
 
 		$status = DBConfig::$userStatus["newUser"];
 
@@ -281,7 +281,7 @@ class DBHelper{
 		$mail = $name."@latrinalia.de";
 		$status = DBConfig::$userStatus["unregistered"];
 		$key = md5($mail).uniqid();
-		$this->log("Dummyuser created: $mail, $name, $key");
+		$this->log("creating Dummyuser: $mail, $name, $key");
 		$query = Queries::createuser($key, $mail, $name, $pwd, $status);
 		if($this->query($query)){
 			return $mail;
@@ -457,7 +457,7 @@ class DBHelper{
 		}else{
 			$id = $user["id"];
 		}
-		$this->log("@".$user["id"]." (".$user["username"].") delets the comment '".$comment[0]["comment"]."' from #".$comments[0]["entryid"]);
+		$this->log("@".$user["id"]." (".$user["username"].") deletes the comment '".$comment[0]["comment"]."' from #".$comments[0]["entryid"]);
 		$query = Queries::deletecomment($commentid, $id);
 		return $this->query($query);
 	}
@@ -756,10 +756,10 @@ class DBHelper{
 		$user = $this->getUser();
 		if(!isset($user["id"]))return false;
 
+		$entry = $this->getEntry($id);
 		// check if the user is allowed to delete the entry
 		// if not admin
 		if(!$user["status"]==DBConfig::$userStatus["admin"]){
-			$entry = $this->getEntry($id);
 			if(!isset($entry["userid"])
 				|| $entry["userid"]!=$user["id"]){
 				return false;
@@ -1082,7 +1082,7 @@ class DBHelper{
 			&&strlen(trim($info["transcription"]))>0)return false;
 
 		if(!$this->removeInformation($entryid))return false;
-		$this->log("@".$user["id"]." changed transcription '".$transcription."' on #".$entryid);
+		$this->log("@".$user["id"]." changes transcription '".$transcription."' on #".$entryid);
 		$this->addInformation(
 			$entryid,
 			$info["artist"],
