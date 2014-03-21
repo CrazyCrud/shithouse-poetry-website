@@ -1328,7 +1328,7 @@ class DBHelper{
 	// $rating can be positive or negative (or 0 to reset it)
 	public function addRating($entryid, $rating){
 		$user = $this->getUser();
-		if(!isset($user["id"])||$user["id"]==DBConfig::$userStatus["unregistered"])return false;
+		if(!isset($user["id"])||$user["status"]==DBConfig::$userStatus["unregistered"])return false;
 		$rating = $rating>0?1:($rating<0?-1:0);
 		$this->log("@".$user["id"]." (".$user["username"].") rates #$entryid with $rating");
 		if($rating == 0){
