@@ -354,11 +354,7 @@ function setTranscription(){
 	var trans = entry.information[0].transcription.trim();
 	if(trans.length==0){
 		trans = '<p class="missing">keine Transkription angegeben</p>';
-		if(canTranscribe()){
-			trans += '<button class="tiny">Transkription hinzuf&uuml;gen</button>';
-		}else{
-			trans += "(Melde dich an um selbst eine Transkription hinzuzuf&uuml;gen.)"
-		}
+		trans += '<button class="tiny">Transkription hinzuf&uuml;gen</button>';
 	}else{
 		if(canTranscribe()){
 			$("#transcription #content").attr("title","zum Bearbeiten klicken");
@@ -383,18 +379,31 @@ function changeTranscription(){
 	if(!canTranscribe())return;
 
 	var $container = $('<div id="edittranscription"></div>');
-	$input = $('<input id="input-transcription" type="text"></input>');
+	var $submitContainer = $('<div id="transcription-submit-container" class="columns"></div>');
+	$input = $('<input id="input-transcription" class="columns" type="text"></input>');
 	$input.val(entry.information[0]["transcription"]);
-	$ok = $('<button class="tiny">OK</ok>');
-	$help = $('<label>'
+	$ok = $('<button class="tiny small-3 medium-4 large-2 columns">OK</ok>');
+	$help = $('<div id="howtotranscribe">'
 		+'<a href="howto.php#transcription" target="_blank"><i class="icon-info"></i>Wie transkribiere ich richtig?</a>'
-	+'</label>');
+	+'</div>');
 	$container.append($input);
-	$container.append($ok);
+	$submitContainer.append($ok);
+	if(!user.status || user.status == 4 || user.status == "4"){
+		$tou = $('<label class="small-9 medium-8 large-10 columns" id="transcribe-tou-container"><input id="transcribe-tou" type="checkbox" required></input>Ich akzeptiere die <a href="tou.php" target="_blank">Nutzungsbedingungen</a>.</label>');
+		$submitContainer.append($tou);
+	}
+	$container.append($submitContainer);
 	$container.append($help);
 	$("#transcription #content").html($container);
 
 	$ok.click(function(){
+		if($tou){
+			if(!$("#transcribe-tou").prop("checked")){
+				$tou.addClass("error");
+				return;
+			}
+			$tou.removeClass("error");
+		}
 		updateTranscription($input.val());
 	});
 }
