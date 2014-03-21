@@ -840,12 +840,12 @@ function formatLog(logLine){
 	if(uid){
 		uid = uid[0].substring(1);
 		text = text.replace("@"+uid,'<a href="user.php?id='+uid+'" target="_blank">User'+uid+'</a>');
-	}else uid = -1;
+	}else uid = "";
 	var eid = text.match(/#[0-9]+/ig);
 	if(eid){
 		eid = eid[0].substring(1);
 		text = text.replace("#"+eid,'<a href="details.php?id='+eid+'" target="_blank">Entry'+eid+'</a>');
-	}else eid = -1;
+	}else eid = "";
 	return {
 		time : time,
 		userid : uid,
