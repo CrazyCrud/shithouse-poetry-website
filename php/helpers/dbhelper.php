@@ -1760,7 +1760,7 @@ class DBHelper{
 		if(!isset($user["status"])||$user["status"]!=DBConfig::$userStatus["admin"]){
 			return false;
 		}
-		$logsDir = "../helpers/logs";
+		$logsDir = "/var/www/virtual/tikiblue/html/php/helpers/logs";
 		$result = array();
 		$files = scandir($logsDir);
 		foreach($files as $logFile){
@@ -1777,7 +1777,7 @@ class DBHelper{
 			return false;
 		}
 		$date = date("Y-m-d",strtotime($date));
-		$logsDir = "../helpers/logs";
+		$logsDir = "/var/www/virtual/tikiblue/html/php/helpers/logs";
 		$content = file_get_contents($logsDir."/".$date.".txt");
 		if(!$content)return false;
 		$content = str_replace("\n\r","\n",$content);
