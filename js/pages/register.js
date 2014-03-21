@@ -212,7 +212,7 @@ function onRegisterSuccess(authkey){
 			dialogClass: "no-close",
 			modal: true,
 			width: 'auto',
-			title: 'Registrierung erfolgreich',
+			title: 'Verifizierungsmail versendet',
 			close: function(event, ui) {
 				logoutUser(null);
 				window.location = "index.php";
