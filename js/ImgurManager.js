@@ -59,7 +59,7 @@ var ImgurManager = (function(){
 		},
 		getEntriesForUser : function(callback, userid, start){
 			start = start || 0;
-			var url = 'getFilteredEntries.php?filter=user&values='+userid+"&start="+start;
+			var url = 'getFilteredEntries.php?filter=user&values='+userid+"&start="+start+"&orderby=rating";
 			$.get('php/backend/' + url, function(data) {
 				var links = false;
 				if(data.success == 1){
