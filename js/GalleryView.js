@@ -313,9 +313,9 @@ var GalleryView = (function(){
 					var gender = entry.sex||"u";
 					var rating = 0;
 					var ratingCount = 0;
-					if(entry.ratings && entry.ratings.length != 0 && entry.ratings.rating){
-						rating = entry.ratings.rating;
-						ratingCount = entry.ratings.ratingcount;
+					if(entry.ratings && entry.ratings.length != 0 && entry.ratings[0].rating){
+						rating = entry.ratings[0].rating;
+						ratingCount = entry.ratings[0].ratingcount;
 					}
 					var transcription = entry.title||"";
 					var imgContent_m = '<a href="" title="' + id + '"><img src="' + 
