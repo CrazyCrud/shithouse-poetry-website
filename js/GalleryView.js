@@ -298,6 +298,9 @@ var GalleryView = (function(){
 		if(_.isEmpty(entries)){
 			return imgDataChanged;
 		}else{
+			if(entries.id){
+				entries = [entries];
+			}
 			var numImages = entries.length;
 			var lastImageIndex = getLastEntry();
 			for(var i = 0; i < numImages; i++){

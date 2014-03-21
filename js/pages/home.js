@@ -325,11 +325,11 @@ function getUntranscribedEntries(){
 
 function computeEntries(entries, orderby){
 	if(ImgurManager.OrderBy.properties[ImgurManager.OrderBy.DATE].name == orderby){
-		if(!isLastestRequest("new")){
+		if(!isLatestRequest("new")){
 			return;
 		}
 	}else{
-		if(!isLastestRequest("hot")){
+		if(!isLatestRequest("hot")){
 			return;
 		}
 	}
@@ -346,7 +346,7 @@ function computeEntries(entries, orderby){
 }
 
 function computeTranscribeEntries(entries){
-	if(!isLastestRequest("transcribe")){
+	if(!isLatestRequest("transcribe")){
 		return;
 	}
 	if(_.isNull(entries) || _.isEmpty(entries)){
@@ -362,7 +362,7 @@ function computeTranscribeEntries(entries){
 }
 
 function computeVoteEntries(entries){
-	if(!isLastestRequest("vote")){
+	if(!isLatestRequest("vote")){
 		return;
 	}
 	if(_.isNull(entries) || _.isEmpty(entries)){
@@ -391,7 +391,7 @@ function setRequest(which){
 	}
 }
 
-function isLastestRequest(which){
+function isLatestRequest(which){
 	var lastRequest = _.last(requests);
 	if(_.isUndefined(lastRequest)){
 		return true;
