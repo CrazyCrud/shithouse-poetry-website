@@ -1702,21 +1702,21 @@ class DBHelper{
 	}
 
 	private function cleanUpSessions(){
-		echo "cleaning up sessions<br/>";
+		echo "cleaning up sessions\n";
 		$limit = date("Y-m-d", strtotime("-1 month"));
 		$query = Queries::cleanupsession($limit);
 		$this->query($query);
 	}
 
 	private function cleanUpReports(){
-		echo "cleaning up reports<br/>";
+		echo "cleaning up reports\n";
 		$limit = date("Y-m-d", strtotime("-3 month"));
 		$query = Queries::cleanupreports($limit);
 		$this->query($query);
 	}
 
 	private function cleanUpUsers(){
-		echo "cleaning up users<br/>";
+		echo "cleaning up users\n";
 		$limit = date("Y-m-d", strtotime("-4 month"));
 		$query = Queries::getinactiveusers($limit);
 		$users = $this->query($query);
@@ -1731,13 +1731,13 @@ class DBHelper{
 				||$user["stats"]["followers"]!=0){
 				continue;
 			}
-			echo "deleting user".$user["id"].": ".$user["username"]."<br/>";
+			echo "deleting user".$user["id"].": ".$user["username"]."\n";
 			$this->hardDeleteUser($user["id"]);
 		}
 	}
 
 	private function cleanUpLogs(){
-		echo "cleaning up logs<br/>";
+		echo "cleaning up logs\n";
 		// clean logs older 90 days
 		$now = date_create(date("Y-m-d"));
 		$logsDir = "../logs";
@@ -1747,11 +1747,42 @@ class DBHelper{
 				$date = date_create(str_replace(".txt", "", $logFile));
 				$difference = date_diff($date, $now, true);
 				if($difference->days > 90){
-					echo "deleting file ".$logFile."<br/>";
+					echo "deleting file ".$logFile."\n";
 					unlink($logsDir."/".$logFile);
 				}
 			}
 		}
+	}
+
+	public function getLogs($date){
+		if(isset($date))return $this->getLogsForDate($date);
+		$user = $this->getUser();
+		if(!isset($user["status"])||$user["status"]!=DBConfig::$userStatus["admin"]){
+			return false;
+		}
+		$logsDir = "../helpers/logs";
+		$result = array();
+		$files = scandir($logsDir);
+		foreach($files as $logFile){
+			if(strpos($logFile, ".txt")){
+				$result[count($result)] = str_replace(".txt","",$logFile);
+			}
+		}
+		return $result;
+	}
+
+	public function getLogsForDate($date){
+		$user = $this->getUser();
+		if(!isset($user["status"])||$user["status"]!=DBConfig::$userStatus["admin"]){
+			return false;
+		}
+		$date = date("Y-m-d",strtotime($date));
+		$logsDir = "../helpers/logs";
+		$content = file_get_contents($logsDir."/".$date.".txt");
+		if(!$content)return false;
+		$content = str_replace("\n\r","\n",$content);
+		$messages = explode("\n",$content);
+		return $messages;
 	}
 
 }

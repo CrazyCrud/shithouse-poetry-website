@@ -305,3 +305,10 @@ div.tiny {
   display: none; }
 #types-add-content .inputcontainer {
   padding-right: 0.618rem; }
+
+section#logs .log {
+  background: #eee;
+  padding: 0.618rem;
+  margin: 0.618rem; }
+  section#logs .log table {
+    margin-top: 0.618rem; }

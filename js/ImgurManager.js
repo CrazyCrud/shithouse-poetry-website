@@ -695,6 +695,20 @@ var ImgurManager = (function(){
 				callback(result);
 			});
 		},
+		getLogs : function(callback, date){
+			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+			var url = 'getLogs.php?authkey=' + authkey;
+			if(date){
+				url += "&date="+date;
+			}
+			$.get('php/backend/' + url, function(data) {
+				var result = false;
+				if(data.success == 1){
+					result = data.data;
+				}
+				callback(result);
+			});
+		},
 		logout: function(callback, authkey){
 			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 			var url = 'logout.php?authkey=' + authkey;

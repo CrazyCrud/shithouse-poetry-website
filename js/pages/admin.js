@@ -6,12 +6,14 @@ var $reports = $("#reports-table-content");
 var $locations = $("#locations-table-content");
 var $tags = $("#tags-content #tagscontainer");
 var $types = $("#types-content");
+var $logs = $("#logs-content");
 var $overviewButton = $("#notifications-header #overview");
 var $userButton = $("#notifications-header #users");
 var $reportButton = $("#notifications-header #reports");
 var $locationButton = $("#notifications-header #locations");
 var $tagsButton = $("#notifications-header #tags");
 var $typesButton = $("#notifications-header #types");
+var $logsButton = $("#notifications-header #logs");
 var $addLocationButton = $("#add-location");
 var $addTagButton = $("#addtagbutton");
 var $newTypeButton = $("#newtypebutton");
@@ -75,6 +77,13 @@ function initGUI(){
 		$(".section#types").css("display","block");
 		loadTypes();
 	});
+	$logsButton.click(function(){
+		$("#notifications-header a").removeClass("active");
+		$(this).addClass("active");
+		$(".section").css("display","none");
+		$(".section#logs").css("display","block");
+		loadLogs();
+	});
 	$addLocationButton.click(createLocation);
 	$addTagButton.click(createTag);
 	$newTypeButton.click(function(){
@@ -108,6 +117,9 @@ function initGUI(){
 	});
 	$(document).on("click","#types-content .type .edit a", function(){
 		editTypeClicked(this);
+	});
+	$(document).on("click",".log-date", function(){
+		editLogClicked(this);
 	});
 	$("#reports-table").tablesorter({ 
 		sortList: [[4,1],[3,1]],
@@ -224,6 +236,10 @@ function loadTypes(){
 	ImgurManager.getTypes(fillTypesUI);
 }
 
+function loadLogs(){
+	ImgurManager.getLogs(fillLogsUI);
+}
+
 function isNewUser(user){
 	var ONE_SEC = 1000;
 	var ONE_MIN = 60*ONE_SEC;
@@ -247,6 +263,15 @@ function fillTagsUI(data){
 			+'<i class="icon-cancel"></i>'
 			+'</a></div>');
 		$tags.append($tag);
+	}
+}
+
+function fillLogsUI(data){
+	if(!data||data==null)return;
+	$logs.empty();
+	for(i in data){
+		var $log = $('<div class="log" id="log'+data[i]+'"><a href="#" class="log-date">'+data[i]+'</a><div class="log-content"></div></div>');
+		$logs.append($log);
 	}
 }
 
@@ -747,6 +772,83 @@ function editTypeClicked(target){
 		var name = $($type.find(".name input.input")).val();
 		var text = $($type.find(".description input.input")).val();
 		ImgurManager.updateType(loadTypes, id, name, text);
+	}
+}
+
+function editLogClicked(target){
+	if($(".log .tablesorter").length==0){
+		loadLog($(target).html());
+	}
+	$(".log-content").html("");
+}
+
+function loadLog(date){
+	ImgurManager.getLogs(onSingleLogLoaded, date);
+}
+
+function onSingleLogLoaded(data){
+	if(data.length==0)return;
+	var date = data[0].substring(0,10);
+	var $log = $("#log"+date);
+	var $container = $($log.find(".log-content")[0]);
+	$container.html("");
+	var $table = $('<table id="logs-table" class="tablesorter">'
+		+'<thead>'
+		+'<tr>'
+		+'<th>Zeit</th>'
+		+'<th>NutzerId</th>'
+		+'<th>BeitragsId</th>'
+		+'<th>Log</th>'
+		+'</tr>'
+		+'</thead>'
+		+'</table>');
+	var $tableBody = $('<tbody></tbody>');
+
+	for(i in data){
+		var log = formatLog(data[i]);
+		if(!log)continue;
+		console.log(log);
+		var $row = $('<tr>'
+			+'<td>'+log.time+'</td>'
+			+'<td sort="'+log.userid+'"><a href="user.php?id='+log.userid+'" target="_blank">'+log.userid+'</a></td>'
+			+'<td sort="'+log.entryid+'"><a href="details.php?id='+log.entryid+'" target="_blank">'+log.entryid+'</a></td>'
+			+'<td>'+log.text+'</td>'
+			+'</tr>');
+		$tableBody.prepend($row);
+	}
+
+	$table.append($tableBody);
+	$container.append($table);
+
+	$table.tablesorter({ 
+		sortList: [[0,1],[1,0],[2,0]],
+        textExtraction: function(node) { 
+        	if(node.hasAttribute("sort"))
+        		return node.getAttribute("sort");
+            return node.innerHTML; 
+        } 
+    });
+}
+
+function formatLog(logLine){
+	if(logLine.trim().length==0)return false;
+	var time = logLine.substring(11,19);
+	var text = logLine.substring(21);
+	var uid = text.match(/@[0-9]+/ig);
+	if(uid){
+		uid = uid[0].substring(1);
+		text = text.replace("@"+uid,'<a href="user.php?id='+uid+'" target="_blank">User'+uid+'</a>');
+	}else uid = -1;
+	var eid = text.match(/#[0-9]+/ig);
+	if(eid){
+		eid = eid[0].substring(1);
+		text = text.replace("#"+eid,'<a href="details.php?id='+eid+'" target="_blank">Entry'+eid+'</a>');
+	}else eid = -1;
+	return {
+		time : time,
+		userid : uid,
+		entryid : eid,
+		text : text
 	}
 }
 

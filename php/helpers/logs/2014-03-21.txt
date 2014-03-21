@@ -1,1 +1,23 @@
-2014-03-21 15:14:17; passwordrecovery for @10 (Basti Hilei) sent to bastian.hinterleitner@gmail.com
+2014-03-21 18:31:48; @1 (tikiblue) logs in
+2014-03-21 18:32:00; @2 (fehlerteufel) logs in
+2014-03-21 18:41:44; @1 changed transcription 'Da steh ich nun, ich armer Tor! Und bin so vermolst als wie zuvor. (Goethe, Faust I.) Ergib dich der dunklen Seite des Vermolst! Nur so kannst du deine Freunde retten. (&quot;Star Wars - Die Rückkehr des Vermolst&quot;)' on #6
+2014-03-21 18:45:54; @4 (FunkyTaliban) logs in
+2014-03-21 18:56:00; @4 (FunkyTaliban) rates #7 with 1
+2014-03-21 18:56:01; @4 (FunkyTaliban) rates #7 with 0
+2014-03-21 18:57:07; @4 (FunkyTaliban) rates #60 with 1
+2014-03-21 19:00:45; @2 (fehlerteufel) logs in
+2014-03-21 19:00:55; @2 (fehlerteufel) logs out
+2014-03-21 19:47:01; @4 (FunkyTaliban) rates #32 with 1
+2014-03-21 19:47:05; @4 (FunkyTaliban) rates #53 with -1
+2014-03-21 19:47:09; @4 (FunkyTaliban) rates #34 with -1
+2014-03-21 19:47:13; @4 (FunkyTaliban) rates #59 with -1
+2014-03-21 19:47:20; @4 (FunkyTaliban) rates #47 with 1
+2014-03-21 19:47:24; @4 (FunkyTaliban) rates #29 with -1
+2014-03-21 19:47:34; @4 (FunkyTaliban) rates #24 with 1
+2014-03-21 19:47:39; @4 (FunkyTaliban) rates #37 with -1
+2014-03-21 19:47:42; @4 (FunkyTaliban) rates #54 with -1
+2014-03-21 19:47:47; @4 (FunkyTaliban) rates #41 with 1
+2014-03-21 19:47:52; @4 (FunkyTaliban) rates #46 with 1
+2014-03-21 19:47:56; @4 (FunkyTaliban) rates #57 with -1
+2014-03-21 19:48:04; @4 (FunkyTaliban) rates #56 with -1
+2014-03-21 19:56:34; @4 (FunkyTaliban) updates report 9 to status -1
