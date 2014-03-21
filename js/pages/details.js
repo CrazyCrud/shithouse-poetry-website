@@ -10,7 +10,7 @@ var comments = [];
 
 var entry={};
 $(function(){
-	$("#image").css('width', '34px');
+	// $("#image").css('width', '34px');
 	cookieUser();
 	refresh();
 	showRating();
@@ -310,12 +310,12 @@ function setImage(entry){
 	//set image
 	var $image = $("#image");
 	$("#image").css('opacity', '0');
-	$("#image").css('width', '100%');
 	var $entryTitle = $("#entry-title");
 	$image.attr("src", entry.images[0].largethumbnail);
 	$image.attr("title", entry.title);
 
 	Foundation.lib_methods.loaded($image, function(){
+		$("#image").css('width', '100%');
 		$("#image").css('opacity', '1');
 	});	
 }
