@@ -419,7 +419,7 @@ function addTranscribtion(entryid, transcription){
 function requestRating(rating){
 	var currentEntry = GalleryView.getEntry();
 	if(currentEntry == null || _.isUndefined(currentEntry.rating) ||
-		_.isUndefined(currentEntry.rating)){
+		_.isUndefined(currentEntry.ratingcount)){
 		GalleryView.loadSingleImage();
 		return;
 	}else{
