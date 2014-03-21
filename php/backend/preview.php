@@ -18,16 +18,16 @@ function printPreview($id){
 		||$entry==false
 		||!isset($entry["images"])
 		||!isset($entry["images"][0])
-		||!isset($entry["images"][0]["smallthumbnail"])){
+		||!isset($entry["images"][0]["thumbnail"])){
 		printIcon();
 	}else{
-		$file = $entry["images"][0]["smallthumbnail"];
+		$file = $entry["images"][0]["thumbnail"];
 		readfile($file);
 	}
 }
 
 function printIcon(){
-	$file = "http://latrinalia.de/img/global/favicon.jpg";
+	$file = "http://latrinalia.de/img/global/icon.png";
 	readfile($file);
 }
 

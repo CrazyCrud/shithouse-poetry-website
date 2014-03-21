@@ -69,9 +69,15 @@
 							<div id="online">Zuletzt online <span id="lastseen"></span></div>
 							<div id="stats">
 								<div id="entries">Bilder hochgeladen: <span class="amount"></span></div>
+								<div id="meta" title="Durchschnittliche Bewertung aller Bilder dieses Nutzers">Bewertung: <span class="amount"></span></div>
+								<br/>
 								<div id="comments">Kommentare gepostet: <span class="amount"></span></div>
+								<br/>
 								<div id="ratings">Bilder bewertet: <span class="amount"></span></div>
+								<br/>
 								<div id="transcriptions">Bilder transkribiert: <span class="amount"></span></div>
+								<br/>
+								<div id="followers">Abonnenten: <span class="amount"></span></div>
 							</div>
 						</div>
 						<div class="details small-12 medium-5 large-5 columns right" id="achievements-container">
@@ -81,6 +87,7 @@
 								<div id="comments"></div>
 								<div id="ratings"></div>
 								<div id="transcriptions"></div>
+								<div id="followers"></div>
 							</div>
 						</div>
 					</div>	
@@ -97,6 +104,10 @@
 							<div class="infinite-container">
 								<div class="justifiedGallery" id="images">
 
+								</div>
+								<div class="small-12 columns message-container">
+									<img id="loading-spinner" src="img/global/loading.gif"/>
+									<span class="message"></span>
 								</div>
 							</div>
 						</div>

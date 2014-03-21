@@ -19,6 +19,7 @@ var $downVote = $("#down-vote");
 var $transcribeInput = $("#transcription-input");
 var $submitTranscription = $("#transcription-submit");
 var $skipTranscription = $("#skip-transcription");
+var $transcriptionTou = $("#transcription-tou");
 var $mainheader = $("#mainheader");
 var $loadingSpinner = $("#loading-spinner");
 
@@ -149,6 +150,9 @@ function setupVoting(){
 }
 
 function setupTranscribing(){
+	if(user.status&&user.status!=4&&user.status!="4"){
+		$transcriptionTou.css("display","none");
+	}
 	$skipTranscription.click(function(event) {
 		$(this).blur();
 		lazyTranscribeClick(event);
@@ -243,6 +247,13 @@ function handleVote(sucks){
 
 function handleTranscription(e){
 	if(e.target.id == "transcription-submit"){
+		if($transcriptionTou.css("display")!="none"){
+			if(!$('#transcription-tou-checkbox').prop("checked")){
+				$transcriptionTou.addClass("error");
+				return;
+			}
+			$transcriptionTou.removeClass("error");
+		}
 		var entryid = $imageContainer.find('.jg-image').find('a').attr('title');
 		var transcription = $transcribeInput.val();
 		if(_.isUndefined(transcription)){

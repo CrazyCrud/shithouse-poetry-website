@@ -110,6 +110,16 @@ body{
   padding: .25rem;
 }
 
+#transcribe-tou-container{
+  display: inline-block;
+  padding-left: $space_minus1;
+  line-height: 0rem;
+}
+
+#transcription-submit-container{
+  margin-bottom: $space_minus1;
+}
+
 #rating .inline{
   display: inline;
 }

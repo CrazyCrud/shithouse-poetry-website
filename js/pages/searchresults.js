@@ -1,9 +1,11 @@
 var $searchTermLabel = $(".search-term");
 var $imageContainer = $("#images");
+var $loadingSpinner = $("#loading-spinner");
 var NO_RESULTS = "Für diesen Suchbegriff gab es leider keine Treffer!";
 var NO_MORE_IMAGES = "Wir können dir leider keine weiteren Bilder mehr liefern";
 
 $(document).ready(function() {
+	loadingSpinner(true);
 	if(query != null){
 		setupImageClick();
 		ImgurManager.search(computeSearch, query, 0);
@@ -30,9 +32,11 @@ $(document).ready(function() {
 			case "location":
 				ImgurManager.searchByLocation(computeSearch, values, null, 0);
 				return;
+			default:
+				appendMessage(NO_RESULTS);
 		}
 	}else{
-		resultsError(NO_RESULTS);
+		appendMessage(NO_RESULTS);
 	}
 });
 
@@ -71,15 +75,15 @@ function computeSearch(searchData){
 	
 	if(_.isNull(searchData) || _.isUndefined(searchData)){
 		if($('.jg-row').length > 0){
-			resultsError(NO_MORE_IMAGES);
+			appendMessage(NO_MORE_IMAGES);
 		}else{
-			resultsError(NO_RESULTS);
+			appendMessage(NO_RESULTS);
 		}
 	}else if(_.isEmpty(searchData)){
 		if($('.jg-row').length > 0){
-			resultsError(NO_MORE_IMAGES);
+			appendMessage(NO_MORE_IMAGES);
 		}else{
-			resultsError(NO_RESULTS);
+			appendMessage(NO_RESULTS);
 		}
 	}else{
 		GalleryView.init($imageContainer);
@@ -87,14 +91,22 @@ function computeSearch(searchData){
 	}
 }
 
-function resultsError(msg){
-	var content = "<div class='error-message secondary label'>" + msg + "</div>";
-	if($(".error-message").length < 1){
-		$imageContainer.append(content);
-	}
-}
-
 function showResults(searchData){
 	GalleryView.appendEntries(searchData);
 	GalleryView.loadAllImages();
+}
+
+function appendMessage(message){
+	loadingSpinner(false);
+	message = message || "Es gibt leider keine weiteren Bilder mehr";
+	$(".message").html(message);
+	$(".message").addClass('label secondary');
+}
+
+function loadingSpinner(bitch){
+	if(bitch){
+		$loadingSpinner.css('display', 'inline-block');
+	}else{
+		$loadingSpinner.css('display', 'none');
+	}
 }

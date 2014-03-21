@@ -2616,7 +2616,9 @@ label {
     padding: 0.45455rem 0; }
   label small {
     text-transform: capitalize;
-    color: #676767; }
+    color: #676767; 
+    font-size:70%;
+  }
 
 select {
   -webkit-appearance: none !important;

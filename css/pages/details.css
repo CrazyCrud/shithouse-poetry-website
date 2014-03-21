@@ -282,6 +282,14 @@ body {
   color: #555;
   padding: 0.25rem; }
 
+#transcribe-tou-container {
+  display: inline-block;
+  padding-left: 0.618rem;
+  line-height: 0rem; }
+
+#transcription-submit-container {
+  margin-bottom: 0.618rem; }
+
 #rating .inline {
   display: inline; }
 

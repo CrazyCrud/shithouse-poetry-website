@@ -153,12 +153,15 @@ class Queries{
 		$e = DBConfig::$tables["entries"];
 		$c = DBConfig::$tables["comments"];
 		$r = DBConfig::$tables["ratings"];
+		$f = DBConfig::$tables["follows"];
 		$info = DBConfig::$tables["information"];
 		$query = "SELECT
 		SUM(entries) AS entries,
 		SUM(comments) AS comments,
 		SUM(ratings) AS ratings,
-		SUM(transcriptions) AS transcriptions
+		SUM(transcriptions) AS transcriptions,
+		(1+AVG(meta))/2 AS meta,
+		SUM(follows) AS followers
 
 		FROM(
 
@@ -167,7 +170,9 @@ class Queries{
 		COUNT(*) AS entries,
 		NULL AS comments,
 		NULL AS ratings,
-		NULL AS transcriptions
+		NULL AS transcriptions,
+		NULL AS meta,
+		NULL AS follows
 		FROM $e
 		WHERE $e.userid = $id
 
@@ -177,7 +182,9 @@ class Queries{
 		NULL AS entries,
 		COUNT(*) AS comments,
 		NULL AS ratings,
-		NULL AS transcriptions
+		NULL AS transcriptions,
+		NULL AS meta,
+		NULL AS follows
 		FROM $c
 		WHERE $c.userid = $id
 
@@ -187,7 +194,34 @@ class Queries{
 		NULL AS entries,
 		NULL AS comments,
 		NULL AS ratings,
-		COUNT(*) AS transcriptions
+		NULL AS transcriptions,
+		AVG(`$r`.rating) AS meta,
+		NULL AS follows
+		FROM $e, $r
+		WHERE $e.userid = $id
+		AND $e.id = $r.entryid
+
+		UNION
+		SELECT
+		$id AS userid,
+		NULL AS entries,
+		NULL AS comments,
+		NULL AS ratings,
+		NULL AS transcriptions,
+		NULL AS meta,
+		COUNT(*) AS follows
+		FROM $f
+		WHERE $f.target = $id
+
+		UNION
+		SELECT
+		$id AS userid,
+		NULL AS entries,
+		NULL AS comments,
+		NULL AS ratings,
+		COUNT(*) AS transcriptions,
+		NULL AS meta,
+		NULL AS follows
 		FROM $info
 		WHERE $info.transcriberid = $id
 		AND NOT LENGTH($info.transcription)=0
@@ -198,7 +232,9 @@ class Queries{
 		NULL AS entries,
 		NULL AS comments,
 		COUNT(*) AS ratings,
-		NULL AS transcriptions
+		NULL AS transcriptions,
+		NULL AS meta,
+		NULL AS follows
 		FROM $r
 		WHERE $r.userid = $id
 		 ) a
