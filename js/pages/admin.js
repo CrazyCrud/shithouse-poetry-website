@@ -267,7 +267,10 @@ function fillTagsUI(data){
 }
 
 function fillLogsUI(data){
-	if(!data||data==null)return;
+	if(!data||data==null){
+		$("#logs-content").html("keine Logs gefunden.");
+		return;
+	}
 	$logs.empty();
 	for(i in data){
 		var $log = $('<div class="log" id="log'+data[i]+'"><a href="#" class="log-date">'+data[i]+'</a><div class="log-content"></div></div>');
@@ -807,7 +810,6 @@ function onSingleLogLoaded(data){
 	for(i in data){
 		var log = formatLog(data[i]);
 		if(!log)continue;
-		console.log(log);
 		var $row = $('<tr>'
 			+'<td>'+log.time+'</td>'
 			+'<td sort="'+log.userid+'"><a href="user.php?id='+log.userid+'" target="_blank">'+log.userid+'</a></td>'
