@@ -114,7 +114,6 @@ function drawMyFollows(follows){
 	$container.html("");
 	for(i in follows){
 		if(parseInt(follows[i].targetid)!=user.id){
-			console.log(follows[i].targetid);
 			var $user = $('<div class="following-user"><a href="user.php?id='+follows[i].targetid+'"><i class="icon-user-1"></i>'+follows[i].targetname+'</a></div>');
 			$container.append($user);
 		}
