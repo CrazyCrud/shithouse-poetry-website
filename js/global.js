@@ -208,6 +208,9 @@ function getUserName(user){
     case -1:
     case "-1":
       return "Gel&ouml;schter Nutzer";
+    case 4:
+    case "4":
+      return "Anonymer Nutzer";
     default:
       if(user.name)
         return user.name;
