@@ -388,6 +388,7 @@ function changeTranscription(){
 	+'</div>');
 	$container.append($input);
 	$submitContainer.append($ok);
+	var $tou = false;
 	if(!user.status || user.status == 4 || user.status == "4"){
 		$tou = $('<label class="small-9 medium-8 large-10 columns" id="transcribe-tou-container"><input id="transcribe-tou" type="checkbox" required></input>Ich akzeptiere die <a href="tou.php" target="_blank">Nutzungsbedingungen</a>.</label>');
 		$submitContainer.append($tou);
