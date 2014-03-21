@@ -58,7 +58,7 @@
 			<section id="maincontent">
 				<div class="details-entry">
 					<div id="timeline-header" class="row details">
-						<h3>Neueste Aktivit&auml;ten zu deinen Bildern:</h3>
+						<h3>Neueste Aktivit&auml;ten:</h3>
 					</div>
 					<div class="row details">
 						<div id="actions">
