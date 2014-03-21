@@ -154,7 +154,7 @@ class DBHelper{
 			&& $userid != $user["id"]){
 			return false;
 		}
-		$this->log("@".$user["id"]." updating @".$userid." to status ".$status);
+		$this->log("@".$user["id"]." (".$user["status"].") updating @".$userid." to status ".$status);
 		$query = Queries::updateuserstatus($userid, $status);
 		if(!$this->query($query))return false;
 		if($status==DBConfig::$userStatus["newUser"]
@@ -209,7 +209,7 @@ class DBHelper{
 			$this->log("registering dummy as @".$user["id"]." ($mail, $name, $pwd)");
 			$this->registerDummy($user);
 		}else{
-			$this->log("@".$user["id"]." is updating ($mail, $name, $pwd)");
+			$this->log("@".$user["id"]." (".$user["status"].") is updating ($mail, $name, $pwd)");
 		}
 
 		if($mail != $user["email"]){
@@ -334,7 +334,7 @@ class DBHelper{
 			$this->log("merging user @".$oldUser["id"]." (".$oldUser["username"].") into ".$user["id"]. "(".$user["username"].")");
 			$this->mergeUser($oldUser["id"], $user["id"]);
 		}else{
-			$this->log("@".$user["id"]." ($email) logs in");
+			$this->log("@".$user["id"]." (".$user["status"].") logs in");
 		}
 		$key = md5($email).uniqid();
 		$query = Queries::login($user["id"], $key, md5($_SERVER['HTTP_USER_AGENT']."@".$_SERVER['REMOTE_ADDR']));
@@ -433,7 +433,7 @@ class DBHelper{
 		if(!isset($user["id"])||!isset($entry["id"])||$user["id"]==DBConfig::$userStatus["unregistered"]){
 			return false;
 		}
-		$this->log("@".$user["id"]." adds the comment '$comment' to #".$entryid);
+		$this->log("@".$user["id"]." (".$user["status"].") adds the comment '$comment' to #".$entryid);
 		$query = Queries::addcomment($entryid, $comment, $user["id"]);
 		return $this->query($query);
 	}
@@ -1082,7 +1082,7 @@ class DBHelper{
 			&&strlen(trim($info["transcription"]))>0)return false;
 
 		if(!$this->removeInformation($entryid))return false;
-		$this->log("@".$user["id"]." changes transcription '".$transcription."' on #".$entryid);
+		$this->log("@".$user["id"]." (".$user["username"].") changes transcription '".$transcription."' on #".$entryid);
 		$this->addInformation(
 			$entryid,
 			$info["artist"],
