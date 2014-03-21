@@ -517,6 +517,22 @@ class Queries{
 		WHERE `$e`.userid = $oldId";
 		return $query;
 	}
+	public static function mergeuserfollows($oldId, $newId){
+		$f = DBConfig::$tables["follows"];
+		$query =
+		"UPDATE `$f`
+		SET `$f`.follower = $newId
+		WHERE `$f`.follower = $oldId";
+		return $query;
+	}
+	public static function mergeuserfollowers($oldId, $newId){
+		$f = DBConfig::$tables["follows"];
+		$query =
+		"UPDATE `$f`
+		SET `$f`.target = $newId
+		WHERE `$f`.target = $oldId";
+		return $query;
+	}
 	/**
 	INFORMATION QUERIES
 	*/
@@ -1302,6 +1318,30 @@ class Queries{
 		SUM(CASE WHEN sex='w' OR sex='W' THEN 1 ELSE 0 END)AS female,
 		SUM(CASE WHEN sex<>'m' AND sex<>'M' AND sex<>'w' AND sex<>'W' THEN 1 ELSE 0 END)AS unisex
 		FROM `$e`";
+		return $query;
+	}
+	/**
+	CLEANUP
+	*/
+	public static function cleanupsession($date){
+		$s = DBConfig::$tables["sessions"];
+		$query=
+		"DELETE FROM `$s`
+		WHERE `$s`.login <= '$date'";
+		return $query;
+	}
+	public static function cleanupreports($date){
+		$r = DBConfig::$tables["reports"];
+		$query=
+		"DELETE FROM `$r`
+		WHERE `$r`.reportdate <= '$date'";
+		return $query;
+	}
+	public static function getinactiveusers($date){
+		$u = DBConfig::$tables["users"];
+		$query=
+		"SELECT * FROM `$u`
+		WHERE `$u`.lastaction <= '$date'";
 		return $query;
 	}
 }
