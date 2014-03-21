@@ -40,6 +40,13 @@ if(isset($_GET["tags"])){
 	echo json_encode($json);
 	exit();
 }
+if(isset($_GET["authkey"])){
+	$authkey = $_GET["authkey"];
+}else{
+	$json["message"]="authkey missing";
+	echo json_encode($json);
+	exit();
+}
 
 $tags = explode("," , $tags);
 

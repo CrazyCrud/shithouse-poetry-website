@@ -284,7 +284,8 @@ input[type="password"].loginField {
   color: #111111; }
   .fieldset-container legend small {
     font-weight: normal;
-    font-size: 35%; }
+    font-size: 45%;
+    color: #4d4d4d; }
 
 .entry-tags-container {
   display: block;

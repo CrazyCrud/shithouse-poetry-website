@@ -37,6 +37,22 @@ class DBHelper{
 		return true;
 	}
 
+	private function log($message){
+		$date = date("Y-m-d H:i:s");
+		$file = date("Y-m-d").'.txt';
+		$path = str_replace("backend","helpers/logs",getcwd());
+		if(!strpos($path, "php")){
+			$path .= "/php/helpers/logs";
+		}
+		if(file_exists($path."/".$file)){
+			file_put_contents($path."/".$file, $date."; ".$message."\n", FILE_APPEND);
+		}else{
+			$handler = fopen($path."/".$file,"w");
+			file_put_contents($path."/".$file, $date."; ".$message."\n");
+			fclose($handler);
+		}
+	}
+
 	private function query($query){
 		//echo $query."\n\n\n";
 		if($this->connection->status != DBConfig::$dbStatus["ready"])
@@ -104,6 +120,7 @@ class DBHelper{
 		$query = Queries::getuserbykey($key);
 		$user = $this->query($query);
 		$query = Queries::verify($key);
+		$this->log("verifying @".$user["id"]." (".$user["username"].")");
 		if(!$this->query($query))return false;
 		return $user;
 	}
@@ -140,6 +157,7 @@ class DBHelper{
 			&& $userid != $user["id"]){
 			return false;
 		}
+		$this->log("@".$user["id"]." updating @".$userid." to status ".$status);
 		$query = Queries::updateuserstatus($userid, $status);
 		if(!$this->query($query))return false;
 		if($status==DBConfig::$userStatus["newUser"]
@@ -159,6 +177,7 @@ class DBHelper{
 		$pwd = uniqid();
 		$success = $this->resetPassword($user["id"], $mail, $name, md5($pwd));
 		if(!isset($success)||$success==false)return false;
+		$this->log("passwordrecovery for @".$user["id"]." ($name) sent to $mail");
 		sendRecoveryMail($mail, $pwd);
 		return true;
 	}
@@ -190,7 +209,10 @@ class DBHelper{
 		if (!filter_var($mail, FILTER_VALIDATE_EMAIL))return false;
 
 		if($user["status"]==DBConfig::$userStatus["unregistered"]){
+			$this->log("registering dummy as @".$user["id"]." ($mail, $name, $pwd)");
 			$this->registerDummy($user);
+		}else{
+			$this->log("@".$user["id"]." id updating ($mail, $name, $pwd)");
 		}
 
 		if($mail != $user["email"]){
@@ -243,6 +265,8 @@ class DBHelper{
 		$user = $this->getUser($name);
 		if(isset($user["id"]))return false;
 
+		$this->log("new user created: $mail, $name, $pwd");
+
 		$status = DBConfig::$userStatus["newUser"];
 
 		$key = md5($mail).uniqid();
@@ -260,6 +284,7 @@ class DBHelper{
 		$mail = $name."@latrinalia.de";
 		$status = DBConfig::$userStatus["unregistered"];
 		$key = md5($mail).uniqid();
+		$this->log("Dummyuser created: $mail, $name, $key");
 		$query = Queries::createuser($key, $mail, $name, $pwd, $status);
 		if($this->query($query)){
 			return $mail;
@@ -271,6 +296,7 @@ class DBHelper{
 	// pass $id if an admin and want to delete another user
 	public function deleteUser($id){
 		$user = $this->getUser();
+		$modifierId = $user["id"];
 		if(!isset($id))$id=$user["id"];
 		if(is_numeric(trim($id))){
 			$id = intval($id);
@@ -285,6 +311,8 @@ class DBHelper{
 		}else if($id!=$user["id"]){
 			return false;
 		}
+
+		$this->log("@$modifierId deletes @".$user["id"]);
 
 		$query = Queries::deleteuser($user["id"]);
 		$this->logoutUser($user["id"]);
@@ -306,7 +334,10 @@ class DBHelper{
 		if(isset($oldUser)
 			&&$oldUser!==false
 			&&$oldUser["status"]==DBConfig::$userStatus["unregistered"]){
+			$this->log("merging user @".$oldUser["id"]." (".$oldUser["username"].") into ".$user["id"]. "(".$user["username"].")");
 			$this->mergeUser($oldUser["id"], $user["id"]);
+		}else{
+			$this->log("@".$user["id"]." ($email) logs in");
 		}
 		$key = md5($email).uniqid();
 		$query = Queries::login($user["id"], $key, md5($_SERVER['HTTP_USER_AGENT'])."@".$_SERVER['REMOTE_ADDR']);
@@ -326,7 +357,9 @@ class DBHelper{
 				$authkey = $this->getAuthkey();
 			}
 		}
-		if($this->getUser()){
+		$user = $this->getUser();
+		if($user){
+			$this->log("@".$user["id"]." (".$user["username"].") logs out");
 			$query = Queries::logout($authkey);
 			return $this->query($query);
 		}else{
@@ -362,6 +395,7 @@ class DBHelper{
 
 	public function follow($id, $follow){
 		$user = $this->getUser();
+		$this->log("@".$user["id"]." (".$user["username"].") following @".$id.": ".$follow?"follow":"unfollow");
 		if(!isset($user["id"]))return false;
 		if($follow){
 			$query = Queries::followuser($id, $user["id"]);
@@ -398,6 +432,7 @@ class DBHelper{
 		if(!isset($user["id"])||!isset($entry["id"])||$user["id"]==DBConfig::$userStatus["unregistered"]){
 			return false;
 		}
+		$this->log("@".$user["id"]." adds the comment '$comment' to #".$entryid);
 		$query = Queries::addcomment($entryid, $comment, $user["id"]);
 		return $this->query($query);
 	}
@@ -421,6 +456,7 @@ class DBHelper{
 		}else{
 			$id = $user["id"];
 		}
+		$this->log("@".$user["id"]." (".$user["username"].") delets the comment '".$comment[0]["comment"]."' from #".$comments[0]["entryid"]);
 		$query = Queries::deletecomment($commentid, $id);
 		return $this->query($query);
 	}
@@ -737,6 +773,8 @@ class DBHelper{
 		if(!$this->removeImages($id))return false;
 		if(!$this->removeInformation($id))return false;
 
+		$this->log("@".$user["id"]." (".$user["username"].") deletes #".$id." (".$entry["title"].")");
+
 		$query = Queries::deleteentry($id);
 		return $this->query($query);
 	}
@@ -789,6 +827,7 @@ class DBHelper{
 		$query = Queries::createentry($user["id"], $type["id"], $entry["title"], $entry["sex"]);
 		$entryid = $this->query($query);
 		if(!$entryid)return false;
+		$this->log("@".$user["id"]." (".$user["username"].") creates #$entryid (".$entry["title"].")");
 
 		// add tags
 		$this->addTag($entry["tags"], $entryid);
@@ -925,6 +964,8 @@ class DBHelper{
 			}
 		}
 
+		$this->log("@".$user["id"]." (".$user["id"].") updates #".$entry["id"]." (".$e["title"]." -> ".$entry["title"].")");
+
 		// update the entry
 		if($updateEntry){
 			$query = Queries::updateentry($entry["id"], $entry["type"], $entry["title"], $entry["sex"]);
@@ -1040,6 +1081,7 @@ class DBHelper{
 			&&strlen(trim($info["transcription"]))>0)return false;
 
 		if(!$this->removeInformation($entryid))return false;
+		$this->log("@".$user["id"]." changed transcription '".$transcription."' on #".$entryid);
 		$this->addInformation(
 			$entryid,
 			$info["artist"],
@@ -1086,6 +1128,8 @@ class DBHelper{
 	*	existing tag with the same name
 	*/
 	public function createTag($tag){
+		$user = $this->getUser();
+		if(!isset($user["id"]))return false;
 		if(is_array($tag)){
 			$success = true;
 			foreach($tag as $t){
@@ -1101,6 +1145,7 @@ class DBHelper{
 			}
 			if(strlen(trim($tag))<3)return false;
 			$tag = strtolower($tag);
+			$this->log("@".$user["id"]." (".$user["username"].") creates tag '".$tag."'");
 			$query = Queries::createtag($tag);
 			return $this->query($query);
 		}
@@ -1135,6 +1180,7 @@ class DBHelper{
 				return false;
 			}
 			if($user["status"] == DBConfig::$userStatus["admin"]){
+				$this->log("@".$user["id"]." (".$user["username"].") deletes tag '".$tag."'");
 				$query = Queries::deletetag($singletag["tagid"]);
 				if(!$this->query($query))return false;
 				$query = Queries::removetag($singletag["tagid"]);
@@ -1178,6 +1224,7 @@ class DBHelper{
 		}else{
 			$tagid = $this->createTag($tag);
 			if($tagid == false)return false;
+			$this->log("@".$user["id"]." (".$user["username"].") adds the tag '$tag' to #".$entry["id"]." (".$entry["title"].")");
 			$query = Queries::addTag($tagid, $entry["id"]);
 			return $this->query($query);
 		}
@@ -1189,6 +1236,7 @@ class DBHelper{
 			||$user["status"]!=DBConfig::$userStatus["admin"])
 			return false;
 		$tagId = $this->createTag($tag);
+		$this->log("@".$user["id"]." (".$user["username"].") updates tag '$tag' to status ".$status);
 		$query = Queries::updatetag($tagId, $status);
 		return $this->query($query);
 	}
@@ -1231,6 +1279,7 @@ class DBHelper{
 		if(isset($type["id"])){
 			return $this->updateType($type["id"], $name, $description);
 		}
+		$this->log("@".$user["id"]." (".$user["username"].") creates type '$name' with description '$description'");
 		$query = Queries::createtype($name, $description);
 		return $this->query($query);
 	}
@@ -1242,6 +1291,7 @@ class DBHelper{
 		if(!isset($user["id"])||$user["status"]!=DBConfig::$userStatus["admin"]){
 			return false;
 		}
+		$this->log("@".$user["id"]." (".$user["username"].") updates type $id to '$name' with description '$description'");
 		$query = Queries::updatetype($id, $name, $description);
 		return $this->query($query);
 	}
@@ -1258,6 +1308,7 @@ class DBHelper{
 		$query = Queries::deletetype($type["id"]);
 		$result = $this->query($query);
 		if(!$result)return false;
+		$this->log("@".$user["id"]." (".$user["username"].") deletes type $type");
 		$query = Queries::removetypefromentries($type["id"]);
 		return $this->query($query);
 	}
@@ -1278,6 +1329,7 @@ class DBHelper{
 		$user = $this->getUser();
 		if(!isset($user["id"])||$user["id"]==DBConfig::$userStatus["unregistered"])return false;
 		$rating = $rating>0?1:($rating<0?-1:0);
+		$this->log("@".$user["id"]." (".$user["username"].") rates #$entryid with $rating");
 		if($rating == 0){
 			$query = Queries::deleterating($entryid, $user["id"]);
 		}else{
@@ -1360,6 +1412,7 @@ class DBHelper{
 			$userid = -1;
 		}
 		if(!isset($commentid))$commentid = -1;
+		$this->log("@".$user["id"]." (".$user["username"].") adds the report '$reportdescription' to #$entryid (commentid: $commentid)");
 		$query = Queries::addreport($entryid, $userid, DBConfig::$reportStatus["open"], $commentid, $reportdescription);
 		return $this->query($query);
 	}
@@ -1372,6 +1425,7 @@ class DBHelper{
 		}
 		$report = $this->getReport($reportid);
 		if(!isset($report["reportid"]))return false;
+		$this->log("@".$user["id"]." (".$user["username"].") updates report $reportid to status $status");
 		$query = Queries::updatereportstatus($reportid, $status);
 		return $this->query($query);
 	}
@@ -1403,6 +1457,7 @@ class DBHelper{
 		// check whether allowed to make changes
 		if($user["status"]!=DBConfig::$userStatus["admin"]
 				&& $user["id"]!=$img[0]["userid"])return false;
+		$this->log("@".$user["id"]." (".$user["username"].") updates image $id to x:$x, y:$y, w:$w, h:$h");
 		$query = Queries::updateimage($id, $x, $y, $w, $h);
 		return $this->query($query);
 	}
@@ -1416,6 +1471,7 @@ class DBHelper{
 
 	// saves a new image to the databse
 	public function saveImage($entryid, $url, $x, $y, $w, $h){
+		$this->log("imgurupload completed: #$entryid, $url, x:$x, y:$y, w:$w, h:$h");
 		$query = Queries::saveimage($entryid, $url, $x, $y, $w, $h);
 		return $this->query($query);
 	}
@@ -1530,6 +1586,7 @@ class DBHelper{
 		if(!isset($user["id"])
 			||$user["status"]!=DBConfig::$userStatus["admin"])
 			return false;
+		$this->log("@".$user["id"]." (".$user["username"].") deletes location $id");
 		$query = Queries::deletelocation($id);
 		return $this->query($query);
 	}
@@ -1540,6 +1597,7 @@ class DBHelper{
 		if(!isset($user["id"])
 			||$user["status"]!=DBConfig::$userStatus["admin"])
 			return false;
+		$this->log("@".$user["id"]." (".$user["username"].") creates location '$locations' at $flat | $flong - $tlat | $tlong");
 		$query = Queries::createlocation($locations, $flat, $flong, $tlat, $tlong);
 		return $this->query($query);
 	}
@@ -1550,6 +1608,7 @@ class DBHelper{
 		if(!isset($user["id"])
 			||$user["status"]!=DBConfig::$userStatus["admin"])
 			return false;
+		$this->log("@".$user["id"]." (".$user["username"].") updates location $id to '$locations' at $flat | $flong - $tlat | $tlong");
 		$query = Queries::updatelocation($id, $locations, $flat, $flong, $tlat, $tlong);
 		return $this->query($query);
 	}
