@@ -100,11 +100,17 @@
 							</div>
 							<div class="transcribe-container small-12 columns">
 								<div class="transcribe-input-container">
-									<input type="text" id="transcription-input" 
-										placeholder="Schreibe die Wörter nieder, die du im Bild erkennst.">
-									</input>
+									<form>
+										<input type="text" id="transcription-input" 
+											placeholder="Schreibe die Wörter nieder, die du im Bild erkennst.">
+										</input>
+										<div id="transcription-tou">
+											<input type="checkbox" required id="transcription-tou-checkbox"></input>
+											<label>Ich akzeptiere die <a href="tou.php" target="_blank">Nutzungsbedingungen</a>.</label>
+										</div>
+									</form>
 									<button id="transcription-submit" class="tiny">
-										Hinzufügen</button>
+										Speichern</button>
 									<button id="skip-transcription" class="tiny">
 										Überspringen</button>
 									<label>
