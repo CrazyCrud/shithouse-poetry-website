@@ -82,7 +82,7 @@ function addComments(c){
 
 function initGUI(){
 	if(!loggedIn())disable();
-	else if(user.status=="4")disableForDummy();
+	else if(user.status=="4"||user.status==4)disableForDummy();
 	$("#transcription #content").click(changeTranscription);
 	$("#thumbsdown").click(function(){
 		if($(this).hasClass("mine")){

@@ -26,7 +26,7 @@ $(document).ready(function() {
   		
   	});
 
-  	if(edit&&user.status!="4")initEditing();
+  	if(edit&&user.status!="4"&&user.status!=4)initEditing();
   	else{
   		$("#old-pwd").remove();
   	}
@@ -91,7 +91,7 @@ function fillUser(user){
 
 function registerUser(){
 	console.log("test?");
-	if(user.status=="4")return updateDummy();
+	if(user.status=="4"||user.status==4)return updateDummy();
 	else{
 		var mail = $mailInput.val();
 		var username = $userNameInput.val();

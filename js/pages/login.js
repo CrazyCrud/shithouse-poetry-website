@@ -18,7 +18,7 @@ $(document).ready(function() {
 	userTemplate = _.template($("script.overlay-user").html());
 
 	$loginLink.click(function(event) {
-		if(isLoggedIn()&&user.status!="4"){
+		if(isLoggedIn()&&user.status!="4"&&user.status!=4){
 			manageLoginOverlay();
 		}else{
 			appendLoginOverlay();

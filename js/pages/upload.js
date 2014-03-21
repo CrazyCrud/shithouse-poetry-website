@@ -58,7 +58,7 @@ function computeCropBounds(){
 }
 
 function initEdit(){
-	if(user&&user.status&&user.status!="4"){
+	if(user&&user.status&&user.status!="4"&&user.status!=4){
 		$("#tou").remove();
 	}
 	if(id < 1){

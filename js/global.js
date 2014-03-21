@@ -62,7 +62,7 @@ function cookieUser(){
 }
 
 function greetUser(){
-    if(!_.isEmpty(user)&&user.status!="4"){
+    if(!_.isEmpty(user)&&user.status!=4&&user.status!="4"){
       if(user.username.length > 0){
         $("#link-login").children('span').html(user.username);
       }
