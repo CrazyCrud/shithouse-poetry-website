@@ -178,7 +178,7 @@
 
 						<p>Unsere Nutzungsbedingungen finden Sie hier: <a rel="nofollow" href="tou.php" target="_blank">Nutzungsbedingungen</a></p>
 
-						<p>Stand: 18.03.2014</p>
+						<p>Stand: 21.03.2014</p>
 
 						<p>Copyright © 2014 ausschließliches Impressum von Latrinalia</p>
 					</div>

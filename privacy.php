@@ -99,7 +99,7 @@
 								<p>Ihre Datenschutzeinstellungen bei Twitter können Sie in den Konto-Einstellungen unter <a href="http://twitter.com/account/settings" target="_blank">http://twitter.com/account/settings</a> ändern.</p> <p> </p>
 								<p><i>Quellverweis: <a rel="nofollow" href="http://www.google.com/intl/de/analytics/privacyoverview.html" target="_blank">Google Analytics Bedingungen</a>, <a rel="nofollow" href="http://www.google.com/intl/de/+/policy/+1button.html" target="_blank">Datenschutzerklärung für Google +1</a>, <a rel="nofollow" href="http://twitter.com/privacy" target="_blank">Datenschutzerklärung Twitter</a></i></p>
 
-								<p>Stand: 18.03.2014</p>
+								<p>Stand: 21.03.2014</p>
 
 								<p>Copyright © 2014 ausschließliche Datenschutzerklärung von Latrinalia</p>
 							</div>
