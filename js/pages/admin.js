@@ -801,7 +801,7 @@ function onSingleLogLoaded(data){
 		+'<th>Zeit</th>'
 		+'<th>NutzerId</th>'
 		+'<th>BeitragsId</th>'
-		+'<th>Log</th>'
+		+'<th style="width:100%">Log</th>'
 		+'</tr>'
 		+'</thead>'
 		+'</table>');
