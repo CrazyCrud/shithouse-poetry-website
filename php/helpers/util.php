@@ -1,10 +1,12 @@
 <?php
 
 foreach($_GET as $key=>$val){
-	$_GET[$key] = mysql_escape_string(htmlspecialchars($val));
+	$decoded = utf8_encode($val);
+	$_GET[$key] = mysql_escape_string(htmlspecialchars($decoded));
 }
 foreach($_POST as $key=>$val){
-	$_POST[$key] = mysql_escape_string(htmlspecialchars($val));
+	$decoded = utf8_encode($val);
+	$_GET[$key] = mysql_escape_string(htmlspecialchars($decoded));
 }
 
 function standarize_array($arr){
