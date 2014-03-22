@@ -427,7 +427,7 @@ class Queries{
 		$t = DBConfig::$tables["types"];
 		$tags = DBConfig::$tables["tags"];
 		$usertags = DBConfig::$tables["usertags"];
-		$r = DBConfig::$tables["ratings"];
+		$r = DBConfig::$tables["entryratings"];
 		if(!isset($where)){
 			$where = "";
 		}else{
@@ -445,8 +445,8 @@ class Queries{
 			`$t`.id AS typeid,
 			`$t`.name AS typename,
 			`$t`.description AS typedescription,
-			AVG(`$r`.rating) AS ratings,
-			COUNT(`$r`.rating) AS ratingcount
+			`$r`.ratings AS ratings,
+			`$r`.ratingcount AS ratingcount
 
 			FROM
 			`$e`, `$u`, `$t`, `$r`, `$tags`, `$usertags`
