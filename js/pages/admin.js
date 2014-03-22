@@ -274,7 +274,7 @@ function fillLogsUI(data){
 	$logs.empty();
 	for(i in data){
 		var $log = $('<div class="log" id="log'+data[i]+'"><a href="#" class="log-date">'+data[i]+'</a><div class="log-content"></div></div>');
-		$logs.append($log);
+		$logs.prepend($log);
 	}
 }
 
