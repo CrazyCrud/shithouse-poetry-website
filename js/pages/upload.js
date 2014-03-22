@@ -78,8 +78,8 @@ function fillUI(e){
 	var $img = $('<img id="img-upload" exif="true" src="'+entry.images[0].thumbnail+'"/>');
 	$imageContainer.append($img);
 	$imageContainer.css("display","block");
-	$("#title").val($('<p>'+entry.title+'</p>').html());
-	$("#transcription").val($('<p>'+entry.information[0].transcription+'</p>').html());
+	$("#title").val($('<p>'+entry.title+'</p>').text());
+	$("#transcription").val($('<p>'+entry.information[0].transcription+'</p>').text());
 	$("#type option[value="+entry.typename.replace(/[^a-zA-Z0-9]/g,"_")+"]").attr("selected", "selected");
 	$(".add-sex-container input[value=U]").attr("checked", true);
 	$(".add-sex-container input[value="+entry.sex.toUpperCase()+"]").attr("checked", true);
@@ -93,7 +93,7 @@ function fillUI(e){
 		$locationInput.append($content);
 	}
 
-	$("#artist").val($('<p>'+entry.information[0].artist+'</p>').html());
+	$("#artist").val($('<p>'+entry.information[0].artist+'</p>').text());
 	var $tagElements = $tagList.find('li span');
 	var availableTags = _.pluck($tagElements, 'innerHTML');
 
@@ -102,7 +102,7 @@ function fillUI(e){
 	}
 
 	for(var i=0; i<entry.tags.length; i++){
-		var tagText = $('<p>'+entry.tags[i].tag+'</p>').html().toLowerCase();
+		var tagText = $('<p>'+entry.tags[i].tag+'</p>').text().toLowerCase();
 		var index = _.indexOf(availableTags, tagText);
 		if(index == -1){
 			appendSingleTag(entry.tags[i].tag, true, entry.tags[i].status!=1);

@@ -381,7 +381,7 @@ function changeTranscription(){
 	var $container = $('<div id="edittranscription"></div>');
 	var $submitContainer = $('<div id="transcription-submit-container" class="columns"></div>');
 	$input = $('<input id="input-transcription" class="columns" type="text"></input>');
-	$input.val($("<p>"+entry.information[0]["transcription"]+"</p>").html());
+	$input.val($("<p>"+entry.information[0]["transcription"]+"</p>").text());
 	$ok = $('<button class="tiny small-3 medium-4 large-2 columns">OK</ok>');
 	$help = $('<div id="howtotranscribe">'
 		+'<a href="howto.php#transcription" target="_blank"><i class="icon-info"></i>Wie transkribiere ich richtig?</a>'
