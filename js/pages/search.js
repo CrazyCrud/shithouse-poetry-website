@@ -47,7 +47,7 @@ function appendSearchOverlay(){
 
 	$submitButton.click(function(event) {
 		if($searchInput.val().length > 0){
-			var url = 'search.php?query=' + $.trim($searchInput.val());
+			var url = 'search.php?query=' + escape($.trim($searchInput.val()));
 			window.location = url;
 		}else if($filterSwitch.is(":checked")){
 			var filterFor = $("input:radio[name=filtertype]:checked").val();
@@ -56,7 +56,7 @@ function appendSearchOverlay(){
 				 values[values.length] = $(this).html();
 			});
 			if(values.length > 0){
-				var url = 'search.php?type=' + filterFor + "&values=" + values;
+				var url = 'search.php?type=' + escape(filterFor) + "&values=" + escape(values);
 				window.location = url;
 			}
 		}

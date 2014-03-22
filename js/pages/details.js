@@ -288,7 +288,7 @@ function setTags(entry){
 	for(var i=0; i<entry.tags.length; i++){
 		var tag = entry.tags[i];
 		var $tag = $('<span id="tag-'+tag.tagid+'" class="tag" title="Nach weiteren Eintr&auml;gen mit dem Tag \''+tag.tag+'\' suchen.">'+tag.tag+'</span>');
-		$tag.attr("href", "search.php?type=tag&values="+tag.tag);
+		$tag.attr("href", "search.php?type=tag&values="+escape(tag.tag));
 		$tag.click(function(){
 			window.location = $(this).attr("href");
 		})
