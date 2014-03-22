@@ -271,6 +271,8 @@ body {
 
 #transcription {
   margin-top: 1rem; }
+  #transcription p {
+    margin-bottom: 0; }
 
 #transcription #content {
   font-size: 0.5rem; }
