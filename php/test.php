@@ -13,7 +13,7 @@ $db = new DBHelper();
 //$r = $db->getRandomEntries(20);
 //$r = $db->search("ganz");
 //$r = $db->logout();
-$r = $db->getRandomUntranscribedEntries();
+$r = $db->reIndexEverything();
 //echo "response: ".(($r===false)?"false":"$r");
 //echo $db->getThumbnail("http://i.imgur.com/OVvRkHL.png", "s");
 //$db->updateTranscription(42, "Hunde müssen leider drausen warten");
