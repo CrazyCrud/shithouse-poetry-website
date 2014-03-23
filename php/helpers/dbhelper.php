@@ -383,6 +383,8 @@ class DBHelper{
 		if(!$this->query($query))$success = false;
 		$query = Queries::mergeuserfollowers($oldId, $newId);
 		if(!$this->query($query))$success = false;
+		$query = Queries::mergeviews($oldId, $newId);
+		if(!$this->query($query))$success = false;
 		$this->deleteUser();
 		if($success)$this->hardDeleteUser($oldId);
 	}
@@ -781,6 +783,7 @@ class DBHelper{
 		if(!$this->removeReports($id))return false;
 		if(!$this->removeImages($id))return false;
 		if(!$this->removeInformation($id))return false;
+		if(!$this->removeViews($id))return false;
 
 		$this->log("@".$user["id"]." (".$user["username"].") deletes #".$id." (".$entry["title"].")");
 
@@ -1351,6 +1354,24 @@ class DBHelper{
 	// so we dont have to check it here
 	private function removeRatings($entryid){
 		$query = Queries::removeratings($entryid);
+		return $this->query($query);
+	}
+
+	/**
+	VIEW FUNCTIONS
+	*/
+
+	// you need to be logged in to do that
+	// $rating can be positive or negative (or 0 to reset it)
+	public function view($entryid){
+		$user = $this->getUser();
+		if(!isset($user["id"]))return false;
+		$query = Queries::view($entryid, $user["id"]);
+		return $this->query($query);
+	}
+
+	private function removeViews($entryid){
+		$query = Queries::removeviews($entryid);
 		return $this->query($query);
 	}
 

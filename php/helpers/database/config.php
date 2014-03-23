@@ -26,7 +26,9 @@ class DBConfig{
 		"locations" => "location",
 		"sessions" => "sessions",
 		"follows" => "follows",
-		"entryratings" => "entryratings"
+		"entryratings" => "entryratings",
+		"views" => "views",
+		"entryviews" => "entryviews"
 	);
 
 	public static $dbStatus = array(
