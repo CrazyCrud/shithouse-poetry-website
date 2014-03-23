@@ -435,6 +435,7 @@ class DBHelper{
 		if(!isset($user["id"])||!isset($entry["id"])||$user["id"]==DBConfig::$userStatus["unregistered"]){
 			return false;
 		}
+		$this->view($entryid);
 		$this->log("@".$user["id"]." (".$user["username"].") adds the comment '$comment' to #".$entryid);
 		$query = Queries::addcomment($entryid, $comment, $user["id"]);
 		return $this->query($query);
@@ -459,6 +460,7 @@ class DBHelper{
 		}else{
 			$id = $user["id"];
 		}
+		$this->view($entryid);
 		$this->log("@".$user["id"]." (".$user["username"].") deletes the comment '".$comment[0]["comment"]."' from #".$comments[0]["entryid"]);
 		$query = Queries::deletecomment($commentid, $id);
 		return $this->query($query);
@@ -1093,6 +1095,7 @@ class DBHelper{
 			&&strlen(trim($info["transcription"]))>0)return false;
 
 		if(!$this->removeInformation($entryid))return false;
+		$this->view($entryid);
 		$this->log("@".$user["id"]." (".$user["username"].") changes transcription '".$transcription."' on #".$entryid);
 		$this->addInformation(
 			$entryid,
@@ -1341,6 +1344,7 @@ class DBHelper{
 		$user = $this->getUser();
 		if(!isset($user["id"])||$user["status"]==DBConfig::$userStatus["unregistered"])return false;
 		$rating = $rating>0?1:($rating<0?-1:0);
+		$this->view($entryid);
 		$this->log("@".$user["id"]." (".$user["username"].") rates #$entryid with $rating");
 		if($rating == 0){
 			$query = Queries::deleterating($entryid, $user["id"]);
@@ -1442,6 +1446,7 @@ class DBHelper{
 			$userid = -1;
 		}
 		if(!isset($commentid))$commentid = -1;
+		$this->view($entryid);
 		$this->log("@".$user["id"]." (".$user["username"].") adds the report '$reportdescription' to #$entryid (commentid: $commentid)");
 		$query = Queries::addreport($entryid, $userid, DBConfig::$reportStatus["open"], $commentid, $reportdescription);
 		return $this->query($query);
