@@ -548,6 +548,14 @@ class DBHelper{
 		return $entries;
 	}
 
+	public function getThisWeeksTopEntries(){
+		$limit = date("Y-m-d", strtotime("-1 week"));
+		$where = DBConfig::$tables["entries"].".date > '$limit'";
+		$start = 0;
+		$query = Queries::getentriesbyrating($start, Constants::NUMENTRIES, $where);
+		return $this->query($query);
+	}
+
 	// returns the first 20 entries after $start ordered by $orderby
 	// (for $orderby select a name of one of the attributes returned)
 	// where entry.sex = $sex
