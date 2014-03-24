@@ -385,6 +385,10 @@ class DBHelper{
 		if(!$this->query($query))$success = false;
 		$query = Queries::mergeviews($oldId, $newId);
 		if(!$this->query($query))$success = false;
+		else{
+			$query = Queries::removeuserviews($oldId);
+			$this->query($query);
+		}
 		$this->deleteUser();
 		if($success)$this->hardDeleteUser($oldId);
 	}

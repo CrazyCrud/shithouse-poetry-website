@@ -863,6 +863,13 @@ class Queries{
 		WHERE `$v`.entryid = $entryid";
 		return $query;
 	}
+	public static function removeuserviews($userid){
+		$v = DBConfig::$tables["views"];
+		$query =
+		"DELETE FROM `$v`
+		WHERE `$v`.userid = $userid";
+		return $query;
+	}
 	/**
 	TYPE QUERIES
 	*/
