@@ -475,7 +475,7 @@ class Queries{
 			LIMIT $start, $limit";
 		return $query;
 	}
-	public static function getentriesbynormalizedrating($start, $limit, $where, $userid){
+	public static function getentriesbynormalizedrating($start, $limit, $date, $userid){
 		$e = DBConfig::$tables["entries"];
 		$u = DBConfig::$tables["users"];
 		$t = DBConfig::$tables["types"];
@@ -483,10 +483,10 @@ class Queries{
 		$usertags = DBConfig::$tables["usertags"];
 		$v = DBConfig::$tables["entryviews"];
 		$r = DBConfig::$tables["entryratings"];
-		if(!isset($where)){
-			$where = "";
+		if(!isset($date)){
+			return Queries::getentriesbyrating($start, $limit, null, $userid);
 		}else{
-			$where = " AND (".$where.")";
+			$where = DBConfig::$tables["entries"].".date > '$date'";
 		}
 		$query = 
 			"SELECT
@@ -507,8 +507,23 @@ class Queries{
 
 			FROM
 			(
-				SELECT SUM(`$r`.ratingcount) AS allRatingsCount FROM `$r`
+				SELECT SUM(rc) AS allRatingsCount
+				FROM
+				(
+					SELECT 
+					SUM(`$r`.ratingcount) AS rc
+					FROM `$r`, `$e`
+
+					WHERE 
+					`$r`.entryid = `$e`.id
+					AND
+					$where
+
+					GROUP BY `$r`.entryid
+				) innerratingcounts
+
 			) ratingcounts,
+
 			`$u`, `$t`, `$r`, `$tags`, `$usertags`, `$e`
 			LEFT OUTER JOIN `$v`
 			ON `$v`.entryid = `$e`.id
@@ -522,7 +537,8 @@ class Queries{
 			OR `$e`.typeid = -1)
 			AND
 			`$e`.id = `$r`.entryid
-			$where
+			AND
+			( $where )
 
 			GROUP BY
 			`$r`.entryid

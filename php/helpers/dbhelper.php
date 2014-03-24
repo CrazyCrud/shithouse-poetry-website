@@ -51,7 +51,7 @@ class DBHelper{
 	}
 
 	private function query($query){
-		//echo $query."\n\n\n";
+		echo $query."\n\n\n";
 		if($this->connection->status != DBConfig::$dbStatus["ready"])
 			return false;
 		if($this->loggedin()){
@@ -557,10 +557,9 @@ class DBHelper{
 	}
 
 	public function getThisWeeksTopEntries($start){
-		$limit = date("Y-m-d", strtotime("-1 week"));
-		$where = DBConfig::$tables["entries"].".date > '$limit'";
+		$date = date("Y-m-d", strtotime("-1 week"));
 		if(!isset($start))$start = 0;
-		$query = Queries::getentriesbynormalizedrating($start, Constants::NUMENTRIES, $where);
+		$query = Queries::getentriesbynormalizedrating($start, Constants::NUMENTRIES, $date);
 		return $this->query($query);
 	}
 
