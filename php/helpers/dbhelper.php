@@ -464,8 +464,8 @@ class DBHelper{
 		}else{
 			$id = $user["id"];
 		}
-		$this->view($entryid);
-		$this->log("@".$user["id"]." (".$user["username"].") deletes the comment '".$comment[0]["comment"]."' from #".$comments[0]["entryid"]);
+		$this->view($comment[0]["entryid"]);
+		$this->log("@".$user["id"]." (".$user["username"].") deletes the comment '".$comment[0]["comment"]."' from #".$comment[0]["entryid"]);
 		$query = Queries::deletecomment($commentid, $id);
 		return $this->query($query);
 	}
