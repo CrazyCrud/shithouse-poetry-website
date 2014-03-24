@@ -455,7 +455,9 @@ class Queries{
 			`$r`.ratingcount AS ratingcount
 
 			FROM
-			`$e`, `$u`, `$t`, `$r`, `$tags`, `$usertags`, `$v`
+			`$u`, `$t`, `$r`, `$tags`, `$usertags`, `$e`
+			LEFT OUTER JOIN `$v`
+			ON `$v`.entryid = `$e`.id
 
 			WHERE
 			`$e`.userid = `$u`.id
@@ -470,6 +472,62 @@ class Queries{
 			`$r`.entryid
 			ORDER BY
 			ratings DESC, ratingcount DESC
+			LIMIT $start, $limit";
+		return $query;
+	}
+	public static function getentriesbynormalizedrating($start, $limit, $where, $userid){
+		$e = DBConfig::$tables["entries"];
+		$u = DBConfig::$tables["users"];
+		$t = DBConfig::$tables["types"];
+		$tags = DBConfig::$tables["tags"];
+		$usertags = DBConfig::$tables["usertags"];
+		$v = DBConfig::$tables["entryviews"];
+		$r = DBConfig::$tables["entryratings"];
+		if(!isset($where)){
+			$where = "";
+		}else{
+			$where = " AND (".$where.")";
+		}
+		$query = 
+			"SELECT
+			`$e`.id AS id,
+			`$e`.title AS title,
+			`$e`.date AS date,
+			`$e`.sex AS sex,
+			`$e`.userid AS userid,
+			`$u`.username AS username,
+			`$u`.status AS userstatus,
+			`$t`.id AS typeid,
+			`$t`.name AS typename,
+			`$t`.description AS typedescription,
+			`$r`.ratings AS ratings,
+			`$v`.viewcount AS views,
+			`$r`.ratingcount AS ratingcount,
+			`$r`.ratingcount/`ratingcounts`.allRatingsCount AS relevancy
+
+			FROM
+			(
+				SELECT SUM(`$r`.ratingcount) AS allRatingsCount FROM `$r`
+			) ratingcounts,
+			`$u`, `$t`, `$r`, `$tags`, `$usertags`, `$e`
+			LEFT OUTER JOIN `$v`
+			ON `$v`.entryid = `$e`.id
+
+			WHERE
+			`$r`.ratings > 0
+			AND
+			`$e`.userid = `$u`.id
+			AND
+			(`$e`.typeid = `$t`.id
+			OR `$e`.typeid = -1)
+			AND
+			`$e`.id = `$r`.entryid
+			$where
+
+			GROUP BY
+			`$r`.entryid
+			ORDER BY
+			relevancy DESC, ratings DESC
 			LIMIT $start, $limit";
 		return $query;
 	}

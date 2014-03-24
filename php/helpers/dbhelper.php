@@ -556,11 +556,11 @@ class DBHelper{
 		return $entries;
 	}
 
-	public function getThisWeeksTopEntries(){
+	public function getThisWeeksTopEntries($start){
 		$limit = date("Y-m-d", strtotime("-1 week"));
 		$where = DBConfig::$tables["entries"].".date > '$limit'";
-		$start = 0;
-		$query = Queries::getentriesbyrating($start, Constants::NUMENTRIES, $where);
+		if(!isset($start))$start = 0;
+		$query = Queries::getentriesbynormalizedrating($start, Constants::NUMENTRIES, $where);
 		return $this->query($query);
 	}
 
