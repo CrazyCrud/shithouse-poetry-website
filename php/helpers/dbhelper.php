@@ -51,7 +51,7 @@ class DBHelper{
 	}
 
 	private function query($query){
-		echo $query."\n\n\n";
+		//echo $query."\n\n\n";
 		if($this->connection->status != DBConfig::$dbStatus["ready"])
 			return false;
 		if($this->loggedin()){
