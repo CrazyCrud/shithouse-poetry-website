@@ -981,7 +981,7 @@ class DBHelper{
 			}
 		}
 
-		$this->log("@".$user["id"]." (".$user["id"].") updates #".$entry["id"]." (".$e["title"]." -> ".$entry["title"].")");
+		$this->log("@".$user["id"]." (".$user["username"].") updates #".$entry["id"]." (".$e["title"]." -> ".$entry["title"].")");
 
 		// update the entry
 		if($updateEntry){

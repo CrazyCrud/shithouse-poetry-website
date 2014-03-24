@@ -76,7 +76,7 @@
 							<div id="artist"></div>
 							<i title="Geschlecht" id="sex"></i>
 							<div id="type">
-								Typ: <span id="typedescription"></span>
+								Type: <span id="typedescription"></span>
 							</div>
 							<div id="location">
 								Ort: <span id="locationdescription"></span>

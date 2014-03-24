@@ -301,7 +301,12 @@ function setInfo(entry){
 	$("#artist").html(entry.information[0].artist);
 
 	//set location
-	$("#locationdescription").html(entry.information[0].location);
+	var loc = entry.information[0].location;
+	if(loc.trim().length==0){
+		$("#location").css("display","none");
+	}else{
+		$("#locationdescription").html(loc);
+	}
 	//$("locationdescription").attr("title", "Nach weiteren Eintr&auml;gen mit dem Ort \''+entry.information[0].location+'\' suchen.");
 	//$("#locationdescription").attr("href", "search.php?type=location&values="+entry.information[0].location);
 }

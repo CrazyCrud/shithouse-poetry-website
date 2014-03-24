@@ -137,6 +137,9 @@ function saveImage(){
 	if(location.length > 2){
 		data['location'] = location;
 	}
+	if(($locationInput.find('option:selected').html()==$locationInput.children()[0].innerHTML)){
+		data['location'] = "";
+	}
 	if(transcription.length > 2){
 		data['transcription'] = transcription;
 	}
