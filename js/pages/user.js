@@ -23,6 +23,9 @@ function loadUser(id){
 $(document).on("complete", function(){
 	setupOnce();
 	$.waypoints('refresh');
+	if($.waypoints('viewportHeight') >= $("html").height()){
+		appendMessage();
+	}
 });
 
 function setupImageClick(){
