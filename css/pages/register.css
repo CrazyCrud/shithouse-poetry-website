@@ -221,14 +221,25 @@ input[type="password"].loginField {
 .form-register .buttons-container {
   margin-top: 0.618rem; }
 
+#register-submit {
+  margin-top: 10px;
+  float: right; }
+
+#delete-submit {
+  display: none;
+  float: left;
+  margin-top: 10px; }
+
 @media screen and (max-width: 640px) {
   .register-forms-container {
     margin: 0.618rem 0.618rem; }
   .form-register label {
     float: left; } }
 
-#register-submit {
-  margin-top: 10px; }
-
-#delete-submit {
-  display: none; }
+@media screen and (max-width: 480px) {
+  #register-submit {
+    width: 100%;
+    float: none; }
+  #delete-submit {
+    width: 100%;
+    float: none; } }

@@ -221,12 +221,11 @@ body {
 #controlpanel #deleteentry {
   margin-left: 32px; }
 
-#image-container #image {
-  width: 34px; }
-
 #image-container {
   text-align: center;
   padding-top: 6px; }
+  #image-container #image {
+    width: 34px; }
 
 #title {
   font-size: 2rem; }

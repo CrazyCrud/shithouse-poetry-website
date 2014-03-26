@@ -45,6 +45,17 @@
 	}
 }
 
+#register-submit{
+  margin-top: 10px;
+  float: right;
+}
+
+#delete-submit{
+	display: none;
+	float: left;
+	margin-top: 10px;
+}
+
 @media screen and (max-width: 640px){
 	.register-forms-container{
 		margin: $space_minus1 $space_minus1;
@@ -57,11 +68,15 @@
 	}
 }
 
-#register-submit{
-  margin-top: 10px;
-}
+@media screen and (max-width: 480px){
+	#register-submit{
+		width: 100%;
+	  	float: none;
+	}
 
-#delete-submit{
-	display: none;
+	#delete-submit{
+		width: 100%;
+		float: none;
+	}
 }
 
