@@ -106,7 +106,7 @@ function appendLoginOverlay(){
 	$registerButton.click(function(event){
 		var mail = $mailInput.val();
 		if(mail){
-			window.location = "register.php?mail=" + mail;
+			window.location = "register.php?mail=" + escape(mail);
 		}else{
 			window.location = "register.php";
 		}

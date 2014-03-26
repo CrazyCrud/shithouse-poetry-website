@@ -149,3 +149,13 @@ div.tiny{
 		padding-right: $space_minus1;
 	}
 }
+section#logs{
+	.log{
+		background: #eee;
+		padding: $space_minus1;
+		margin: $space_minus1;
+		table{
+			margin-top: $space_minus1;
+		}
+	}
+}

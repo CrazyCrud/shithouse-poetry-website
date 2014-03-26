@@ -61,11 +61,11 @@ function sendMail($email, $title, $content, $from = "Latrinalia <noreply@latrina
 	$subject = $title;
 	$message = str_replace("%1", $content, $emailBody);
 
-	$header  = "MIME-Version: 1.0\r\n";
-	$header .= "Content-type: text/html; charset=iso-8859-1\r\n";
+	$header  = "MIME-Version: 1.0\n";
+	$header .= "Content-type: text/html; charset=iso-8859-1\n";
 	 
-	$header .= "From: $from\r\n";
-	$header .= "X-Mailer: PHP ". phpversion();
+	$header .= "From: $from\n";
+	$header .= "X-Mailer: PHP ". phpversion()."\n";
 
 	mail($email,$subject,$message,$header);
 }

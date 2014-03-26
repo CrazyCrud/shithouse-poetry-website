@@ -288,7 +288,7 @@ function setTags(entry){
 	for(var i=0; i<entry.tags.length; i++){
 		var tag = entry.tags[i];
 		var $tag = $('<span id="tag-'+tag.tagid+'" class="tag" title="Nach weiteren Eintr&auml;gen mit dem Tag \''+tag.tag+'\' suchen.">'+tag.tag+'</span>');
-		$tag.attr("href", "search.php?type=tag&values="+tag.tag);
+		$tag.attr("href", "search.php?type=tag&values="+escape(tag.tag));
 		$tag.click(function(){
 			window.location = $(this).attr("href");
 		})
@@ -301,7 +301,12 @@ function setInfo(entry){
 	$("#artist").html(entry.information[0].artist);
 
 	//set location
-	$("#locationdescription").html(entry.information[0].location);
+	var loc = entry.information[0].location;
+	if(loc.trim().length==0){
+		$("#location").css("display","none");
+	}else{
+		$("#locationdescription").html(loc);
+	}
 	//$("locationdescription").attr("title", "Nach weiteren Eintr&auml;gen mit dem Ort \''+entry.information[0].location+'\' suchen.");
 	//$("#locationdescription").attr("href", "search.php?type=location&values="+entry.information[0].location);
 }
@@ -381,7 +386,7 @@ function changeTranscription(){
 	var $container = $('<div id="edittranscription"></div>');
 	var $submitContainer = $('<div id="transcription-submit-container" class="columns"></div>');
 	$input = $('<input id="input-transcription" class="columns" type="text"></input>');
-	$input.val(entry.information[0]["transcription"]);
+	$input.val($("<p>"+entry.information[0]["transcription"]+"</p>").text());
 	$ok = $('<button class="tiny small-3 medium-4 large-2 columns">OK</ok>');
 	$help = $('<div id="howtotranscribe">'
 		+'<a href="howto.php#transcription" target="_blank"><i class="icon-info"></i>Wie transkribiere ich richtig?</a>'

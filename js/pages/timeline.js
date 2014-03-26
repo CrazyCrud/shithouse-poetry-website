@@ -100,6 +100,20 @@ function addUpload(entry){
 	var $info = $('<div class="info"><i class="icon-upload"/></div>');
 	var $time = $('<div class="time">'+formatTime(entry.date)+'</div>');
 
+	switch(entry.sex.toLowerCase()){
+		case "m":
+			$icon = $('<i class="gender icon-male"></i>');
+			$icon.prop("title", "Männertoilette");
+		break;
+		case "w":
+			$icon = $('<i class="gender icon-female"></i>');
+			$icon.prop("title", "Frauentoilette");
+		break;
+		default:
+			$icon = $('<i class="gender icon-help"></i>');
+			$icon.prop("title", "Unisex-Toilette");
+	}
+
 	$info.append($user);
 	if(entry.userid == user.id) $info.append(" hast ein Bild hochgeladen:");
 	else $info.append(" hat ein Bild hochgeladen:");
@@ -113,6 +127,7 @@ function addUpload(entry){
 	
 	$container.append($time);
 	$container.append($content);
+	$container.append($icon);
 
 	$("#actions").append($container);
 }

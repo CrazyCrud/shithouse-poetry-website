@@ -175,17 +175,17 @@ function getCurrentUser(){
 
 function logoutUser(data){
     if(_.isNull(data)){
-        $("#link-login").children('span').html("Login");
-        var d = new Date(1970, 1);
-        document.cookie = "username=''  ; expires=" + d.toGMTString();
-        document.cookie = "userid=''; expires=" + d.toGMTString();
-        document.cookie = "admin=''; expires=" + d.toGMTString();
-        document.cookie = "authkey=''; expires=" + d.toGMTString();
         ImgurManager.logout(logoutSuccess);
     }
 }
 
 function logoutSuccess(yep){
+  $("#link-login").children('span').html("Login");
+  var d = new Date(1970, 1);
+  document.cookie = "username=''  ; expires=" + d.toGMTString();
+  document.cookie = "userid=''; expires=" + d.toGMTString();
+  document.cookie = "admin=''; expires=" + d.toGMTString();
+  document.cookie = "authkey=''; expires=" + d.toGMTString();
   if(yep){
     window.location = "index.php";
   }else{

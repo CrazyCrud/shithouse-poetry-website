@@ -381,6 +381,7 @@ class Queries{
 		$e = DBConfig::$tables["entries"];
 		$u = DBConfig::$tables["users"];
 		$t = DBConfig::$tables["types"];
+		$v = DBConfig::$tables["entryviews"];
 		$tags = DBConfig::$tables["tags"];
 		$usertags = DBConfig::$tables["usertags"];
 		if(!isset($where)){
@@ -404,10 +405,13 @@ class Queries{
 			`$u`.status AS userstatus,
 			`$t`.id AS typeid,
 			`$t`.name AS typename,
-			`$t`.description AS typedescription
+			`$t`.description AS typedescription,
+			`$v`.viewcount AS views
 
 			FROM
-			`$e`, `$u`, `$t`, `$tags`, `$usertags`
+			`$u`, `$t`, `$tags`, `$usertags`, `$e`
+			LEFT OUTER JOIN
+			`$v` ON `$v`.entryid = `$e`.id
 
 			WHERE
 			$id
@@ -427,7 +431,8 @@ class Queries{
 		$t = DBConfig::$tables["types"];
 		$tags = DBConfig::$tables["tags"];
 		$usertags = DBConfig::$tables["usertags"];
-		$r = DBConfig::$tables["ratings"];
+		$v = DBConfig::$tables["entryviews"];
+		$r = DBConfig::$tables["entryratings"];
 		if(!isset($where)){
 			$where = "";
 		}else{
@@ -445,11 +450,14 @@ class Queries{
 			`$t`.id AS typeid,
 			`$t`.name AS typename,
 			`$t`.description AS typedescription,
-			AVG(`$r`.rating) AS ratings,
-			COUNT(`$r`.rating) AS ratingcount
+			`$r`.ratings AS ratings,
+			`$v`.viewcount AS views,
+			`$r`.ratingcount AS ratingcount
 
 			FROM
-			`$e`, `$u`, `$t`, `$r`, `$tags`, `$usertags`
+			`$u`, `$t`, `$r`, `$tags`, `$usertags`, `$e`
+			LEFT OUTER JOIN `$v`
+			ON `$v`.entryid = `$e`.id
 
 			WHERE
 			`$e`.userid = `$u`.id
@@ -467,10 +475,83 @@ class Queries{
 			LIMIT $start, $limit";
 		return $query;
 	}
+	public static function getentriesbynormalizedrating($start, $limit, $date, $userid){
+		$e = DBConfig::$tables["entries"];
+		$u = DBConfig::$tables["users"];
+		$t = DBConfig::$tables["types"];
+		$tags = DBConfig::$tables["tags"];
+		$usertags = DBConfig::$tables["usertags"];
+		$v = DBConfig::$tables["entryviews"];
+		$r = DBConfig::$tables["entryratings"];
+		if(!isset($date)){
+			return Queries::getentriesbyrating($start, $limit, null, $userid);
+		}else{
+			$where = DBConfig::$tables["entries"].".date > '$date'";
+		}
+		$query = 
+			"SELECT
+			`$e`.id AS id,
+			`$e`.title AS title,
+			`$e`.date AS date,
+			`$e`.sex AS sex,
+			`$e`.userid AS userid,
+			`$u`.username AS username,
+			`$u`.status AS userstatus,
+			`$t`.id AS typeid,
+			`$t`.name AS typename,
+			`$t`.description AS typedescription,
+			`$r`.ratings AS ratings,
+			`$v`.viewcount AS views,
+			`$r`.ratingcount AS ratingcount,
+			`$r`.ratingcount/`ratingcounts`.allRatingsCount AS relevancy
+
+			FROM
+			(
+				SELECT SUM(rc) AS allRatingsCount
+				FROM
+				(
+					SELECT 
+					SUM(`$r`.ratingcount) AS rc
+					FROM `$r`, `$e`
+
+					WHERE 
+					`$r`.entryid = `$e`.id
+					AND
+					$where
+
+					GROUP BY `$r`.entryid
+				) innerratingcounts
+
+			) ratingcounts,
+
+			`$u`, `$t`, `$r`, `$tags`, `$usertags`, `$e`
+			LEFT OUTER JOIN `$v`
+			ON `$v`.entryid = `$e`.id
+
+			WHERE
+			`$r`.ratings > 0
+			AND
+			`$e`.userid = `$u`.id
+			AND
+			(`$e`.typeid = `$t`.id
+			OR `$e`.typeid = -1)
+			AND
+			`$e`.id = `$r`.entryid
+			AND
+			( $where )
+
+			GROUP BY
+			`$r`.entryid
+			ORDER BY
+			relevancy DESC, ratings DESC
+			LIMIT $start, $limit";
+		return $query;
+	}
 	public static function getentriesbylocation($start, $limit, $orderby,  $where){
 		$e = DBConfig::$tables["entries"];
 		$info = DBConfig::$tables["information"];
 		$r = DBConfig::$tables["ratings"];
+		$v = DBConfig::$tables["entryviews"];
 		if(!isset($where)){
 			$where = "";
 		}else{
@@ -481,8 +562,11 @@ class Queries{
 			`$info`.entryid as id,
 			location,
 			`$e`.date as date,
-			AVG(`$r`.rating) as rating
-			FROM `$e`, `$info`, `$r`
+			AVG(`$r`.rating) as rating,
+			`$v`.entryviews as views
+			FROM `$info`, `$r`, `$e`
+			LEFT OUTER JOIN `$v`
+			ON `$v`.entryid = `$e`.id
 			WHERE (`$e`.id = `$info`.entryid) 
 			AND (`$info`.entryid = `$r`.entryid)
 			$where
@@ -531,6 +615,14 @@ class Queries{
 		"UPDATE `$f`
 		SET `$f`.target = $newId
 		WHERE `$f`.target = $oldId";
+		return $query;
+	}
+	public static function mergeuserviews($oldId, $newId){
+		$v = DBConfig::$tables["views"];
+		$query =
+		"UPDATE `$v`
+		SET `$v`.userid = $newId
+		WHERE `$v`.userid = $oldId";
 		return $query;
 	}
 	/**
@@ -822,6 +914,34 @@ class Queries{
 		"UPDATE `$r`
 		SET `$r`.userid = $newId
 		WHERE `$r`.userid = $oldId";
+		return $query;
+	}
+	/**
+	VIEW QUERIES
+	*/
+	public static function view($entryid, $userid){
+		$v = DBConfig::$tables["views"];
+		$query =
+		"INSERT INTO `$v`
+		(entryid, userid, date)
+		VALUES
+		($entryid, $userid, CURRENT_TIMESTAMP)
+		ON DUPLICATE KEY UPDATE
+		`$v`.date = CURRENT_TIMESTAMP";
+		return $query;
+	}
+	public static function removeviews($entryid){
+		$v = DBConfig::$tables["views"];
+		$query =
+		"DELETE FROM `$v`
+		WHERE `$v`.entryid = $entryid";
+		return $query;
+	}
+	public static function removeuserviews($userid){
+		$v = DBConfig::$tables["views"];
+		$query =
+		"DELETE FROM `$v`
+		WHERE `$v`.userid = $userid";
 		return $query;
 	}
 	/**

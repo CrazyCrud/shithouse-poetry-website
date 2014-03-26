@@ -115,7 +115,7 @@ class DBHelper{
 	public function verify($key){
 		if(!isset($key))return false;
 		$query = Queries::getuserbykey($key);
-		$user = $this->query($query);
+		$user = $this->query($query)[0];
 		$query = Queries::verify($key);
 		$this->log("verifying @".$user["id"]." (".$user["username"].")");
 		if(!$this->query($query))return false;
@@ -154,7 +154,7 @@ class DBHelper{
 			&& $userid != $user["id"]){
 			return false;
 		}
-		$this->log("@".$user["id"]." updating @".$userid." to status ".$status);
+		$this->log("@".$user["id"]." (".$user["username"].") updating @".$userid." to status ".$status);
 		$query = Queries::updateuserstatus($userid, $status);
 		if(!$this->query($query))return false;
 		if($status==DBConfig::$userStatus["newUser"]
@@ -209,7 +209,7 @@ class DBHelper{
 			$this->log("registering dummy as @".$user["id"]." ($mail, $name, $pwd)");
 			$this->registerDummy($user);
 		}else{
-			$this->log("@".$user["id"]." id updating ($mail, $name, $pwd)");
+			$this->log("@".$user["id"]." (".$user["username"].") is updating ($mail, $name, $pwd)");
 		}
 
 		if($mail != $user["email"]){
@@ -262,7 +262,7 @@ class DBHelper{
 		$user = $this->getUser($name);
 		if(isset($user["id"]))return false;
 
-		$this->log("new user created: $mail, $name, $pwd");
+		$this->log("creating new user: $mail, $name, $pwd");
 
 		$status = DBConfig::$userStatus["newUser"];
 
@@ -281,7 +281,7 @@ class DBHelper{
 		$mail = $name."@latrinalia.de";
 		$status = DBConfig::$userStatus["unregistered"];
 		$key = md5($mail).uniqid();
-		$this->log("Dummyuser created: $mail, $name, $key");
+		$this->log("creating Dummyuser: $mail, $name, $key");
 		$query = Queries::createuser($key, $mail, $name, $pwd, $status);
 		if($this->query($query)){
 			return $mail;
@@ -334,7 +334,7 @@ class DBHelper{
 			$this->log("merging user @".$oldUser["id"]." (".$oldUser["username"].") into ".$user["id"]. "(".$user["username"].")");
 			$this->mergeUser($oldUser["id"], $user["id"]);
 		}else{
-			$this->log("@".$user["id"]." ($email) logs in");
+			$this->log("@".$user["id"]." (".$user["username"].") logs in");
 		}
 		$key = md5($email).uniqid();
 		$query = Queries::login($user["id"], $key, md5($_SERVER['HTTP_USER_AGENT']."@".$_SERVER['REMOTE_ADDR']));
@@ -383,6 +383,12 @@ class DBHelper{
 		if(!$this->query($query))$success = false;
 		$query = Queries::mergeuserfollowers($oldId, $newId);
 		if(!$this->query($query))$success = false;
+		$query = Queries::mergeviews($oldId, $newId);
+		if(!$this->query($query))$success = false;
+		else{
+			$query = Queries::removeuserviews($oldId);
+			$this->query($query);
+		}
 		$this->deleteUser();
 		if($success)$this->hardDeleteUser($oldId);
 	}
@@ -433,7 +439,8 @@ class DBHelper{
 		if(!isset($user["id"])||!isset($entry["id"])||$user["id"]==DBConfig::$userStatus["unregistered"]){
 			return false;
 		}
-		$this->log("@".$user["id"]." adds the comment '$comment' to #".$entryid);
+		$this->view($entryid);
+		$this->log("@".$user["id"]." (".$user["username"].") adds the comment '$comment' to #".$entryid);
 		$query = Queries::addcomment($entryid, $comment, $user["id"]);
 		return $this->query($query);
 	}
@@ -457,7 +464,8 @@ class DBHelper{
 		}else{
 			$id = $user["id"];
 		}
-		$this->log("@".$user["id"]." (".$user["username"].") delets the comment '".$comment[0]["comment"]."' from #".$comments[0]["entryid"]);
+		$this->view($comment[0]["entryid"]);
+		$this->log("@".$user["id"]." (".$user["username"].") deletes the comment '".$comment[0]["comment"]."' from #".$comment[0]["entryid"]);
 		$query = Queries::deletecomment($commentid, $id);
 		return $this->query($query);
 	}
@@ -546,6 +554,13 @@ class DBHelper{
 		$query = Queries::getentriesbyrating($start, Constants::NUMENTRIES, $where, $userid);
 		$entries = $this->query($query);
 		return $entries;
+	}
+
+	public function getThisWeeksTopEntries($start){
+		$date = date("Y-m-d", strtotime("-1 week"));
+		if(!isset($start))$start = 0;
+		$query = Queries::getentriesbynormalizedrating($start, Constants::NUMENTRIES, $date);
+		return $this->query($query);
 	}
 
 	// returns the first 20 entries after $start ordered by $orderby
@@ -756,10 +771,10 @@ class DBHelper{
 		$user = $this->getUser();
 		if(!isset($user["id"]))return false;
 
+		$entry = $this->getEntry($id);
 		// check if the user is allowed to delete the entry
 		// if not admin
 		if(!$user["status"]==DBConfig::$userStatus["admin"]){
-			$entry = $this->getEntry($id);
 			if(!isset($entry["userid"])
 				|| $entry["userid"]!=$user["id"]){
 				return false;
@@ -773,6 +788,7 @@ class DBHelper{
 		if(!$this->removeReports($id))return false;
 		if(!$this->removeImages($id))return false;
 		if(!$this->removeInformation($id))return false;
+		if(!$this->removeViews($id))return false;
 
 		$this->log("@".$user["id"]." (".$user["username"].") deletes #".$id." (".$entry["title"].")");
 
@@ -965,7 +981,7 @@ class DBHelper{
 			}
 		}
 
-		$this->log("@".$user["id"]." (".$user["id"].") updates #".$entry["id"]." (".$e["title"]." -> ".$entry["title"].")");
+		$this->log("@".$user["id"]." (".$user["username"].") updates #".$entry["id"]." (".$e["title"]." -> ".$entry["title"].")");
 
 		// update the entry
 		if($updateEntry){
@@ -1082,7 +1098,8 @@ class DBHelper{
 			&&strlen(trim($info["transcription"]))>0)return false;
 
 		if(!$this->removeInformation($entryid))return false;
-		$this->log("@".$user["id"]." changed transcription '".$transcription."' on #".$entryid);
+		$this->view($entryid);
+		$this->log("@".$user["id"]." (".$user["username"].") changes transcription '".$transcription."' on #".$entryid);
 		$this->addInformation(
 			$entryid,
 			$info["artist"],
@@ -1328,8 +1345,9 @@ class DBHelper{
 	// $rating can be positive or negative (or 0 to reset it)
 	public function addRating($entryid, $rating){
 		$user = $this->getUser();
-		if(!isset($user["id"])||$user["id"]==DBConfig::$userStatus["unregistered"])return false;
+		if(!isset($user["id"])||$user["status"]==DBConfig::$userStatus["unregistered"])return false;
 		$rating = $rating>0?1:($rating<0?-1:0);
+		$this->view($entryid);
 		$this->log("@".$user["id"]." (".$user["username"].") rates #$entryid with $rating");
 		if($rating == 0){
 			$query = Queries::deleterating($entryid, $user["id"]);
@@ -1343,6 +1361,24 @@ class DBHelper{
 	// so we dont have to check it here
 	private function removeRatings($entryid){
 		$query = Queries::removeratings($entryid);
+		return $this->query($query);
+	}
+
+	/**
+	VIEW FUNCTIONS
+	*/
+
+	// you need to be logged in to do that
+	// $rating can be positive or negative (or 0 to reset it)
+	public function view($entryid){
+		$user = $this->getUser();
+		if(!isset($user["id"]))return false;
+		$query = Queries::view($entryid, $user["id"]);
+		return $this->query($query);
+	}
+
+	private function removeViews($entryid){
+		$query = Queries::removeviews($entryid);
 		return $this->query($query);
 	}
 
@@ -1413,6 +1449,7 @@ class DBHelper{
 			$userid = -1;
 		}
 		if(!isset($commentid))$commentid = -1;
+		$this->view($entryid);
 		$this->log("@".$user["id"]." (".$user["username"].") adds the report '$reportdescription' to #$entryid (commentid: $commentid)");
 		$query = Queries::addreport($entryid, $userid, DBConfig::$reportStatus["open"], $commentid, $reportdescription);
 		return $this->query($query);
@@ -1702,21 +1739,21 @@ class DBHelper{
 	}
 
 	private function cleanUpSessions(){
-		echo "cleaning up sessions<br/>";
+		echo "cleaning up sessions\n";
 		$limit = date("Y-m-d", strtotime("-1 month"));
 		$query = Queries::cleanupsession($limit);
 		$this->query($query);
 	}
 
 	private function cleanUpReports(){
-		echo "cleaning up reports<br/>";
+		echo "cleaning up reports\n";
 		$limit = date("Y-m-d", strtotime("-3 month"));
 		$query = Queries::cleanupreports($limit);
 		$this->query($query);
 	}
 
 	private function cleanUpUsers(){
-		echo "cleaning up users<br/>";
+		echo "cleaning up users\n";
 		$limit = date("Y-m-d", strtotime("-4 month"));
 		$query = Queries::getinactiveusers($limit);
 		$users = $this->query($query);
@@ -1731,13 +1768,13 @@ class DBHelper{
 				||$user["stats"]["followers"]!=0){
 				continue;
 			}
-			echo "deleting user".$user["id"].": ".$user["username"]."<br/>";
+			echo "deleting user".$user["id"].": ".$user["username"]."\n";
 			$this->hardDeleteUser($user["id"]);
 		}
 	}
 
 	private function cleanUpLogs(){
-		echo "cleaning up logs<br/>";
+		echo "cleaning up logs\n";
 		// clean logs older 90 days
 		$now = date_create(date("Y-m-d"));
 		$logsDir = "../logs";
@@ -1747,11 +1784,42 @@ class DBHelper{
 				$date = date_create(str_replace(".txt", "", $logFile));
 				$difference = date_diff($date, $now, true);
 				if($difference->days > 90){
-					echo "deleting file ".$logFile."<br/>";
+					echo "deleting file ".$logFile."\n";
 					unlink($logsDir."/".$logFile);
 				}
 			}
 		}
+	}
+
+	public function getLogs($date){
+		if(isset($date))return $this->getLogsForDate($date);
+		$user = $this->getUser();
+		if(!isset($user["status"])||$user["status"]!=DBConfig::$userStatus["admin"]){
+			return false;
+		}
+		$logsDir = "/var/www/virtual/tikiblue/html/php/helpers/logs";
+		$result = array();
+		$files = scandir($logsDir);
+		foreach($files as $logFile){
+			if(strpos($logFile, ".txt")){
+				$result[count($result)] = str_replace(".txt","",$logFile);
+			}
+		}
+		return $result;
+	}
+
+	public function getLogsForDate($date){
+		$user = $this->getUser();
+		if(!isset($user["status"])||$user["status"]!=DBConfig::$userStatus["admin"]){
+			return false;
+		}
+		$date = date("Y-m-d",strtotime($date));
+		$logsDir = "/var/www/virtual/tikiblue/html/php/helpers/logs";
+		$content = file_get_contents($logsDir."/".$date.".txt");
+		if(!$content)return false;
+		$content = str_replace("\n\r","\n",$content);
+		$messages = explode("\n",$content);
+		return $messages;
 	}
 
 }

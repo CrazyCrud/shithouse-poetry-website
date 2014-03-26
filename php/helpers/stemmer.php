@@ -146,7 +146,7 @@ function _de_stemmer_punctuation(&$text) {
 */
 /* function de_stemmer_search_preprocess(&$text) { */ // php-5.2 -> php-5.3
 function de_stemmer_search_preprocess($text) {
-  $text = strtolower($text);
+  $text = mb_strtolower($text);
 
   $text = _de_stemmer_punctuation($text);
 
@@ -196,6 +196,7 @@ function de_stemmer_help($section = 'admin/help#search') {
 * For details please compare 'search.module-stem.patch'
 */
 function de_stemmer_stem_list($text) {
+  mb_internal_encoding('UTF-8');
 // watchdog('de_stemmer','de_stemmer_stem_list: ' .  setlocale(LC_ALL, NULL), WATCHDOG_NOTICE);
   // Split words from noise and remove apostrophes
   $words = _de_stemmer_split_text($text);
@@ -206,7 +207,7 @@ function de_stemmer_stem_list($text) {
       $stem_list[$word]["count"]++;
     }else{
       $stem_list[$word] = array(
-        "stem"=>_de_stemmer_wortstamm(strtolower($word)),
+        "stem"=>_de_stemmer_wortstamm(mb_strtolower($word)),
         "count"=>1
       );
     }
@@ -221,7 +222,7 @@ function _de_stemmer_region_n($wort) {
 }
 
 function de_stemmer_stem_preprocess($wort) {
-  $wort = strtolower($wort);
+  $wort = mb_strtolower($wort);
   $wort = str_replace("ß", "ss", $wort);
   // replace ß by ss, and put u and y between vowels into upper case
   $wort = preg_replace(  array(  '/ß/',
@@ -237,7 +238,7 @@ function de_stemmer_stem_preprocess($wort) {
 
 
 function _de_stemmer_stem_postprocess($wort) {
-  $wort = strtolower($wort);
+  $wort = mb_strtolower($wort);
 
   if (!_de_stemmer_ausnahme($wort))	// check for exceptions
   {
@@ -291,8 +292,6 @@ $umlaut = preg_match('/[äöüÄÖÜ]/', $wort);
   elseif (preg_match('/(?<=(b|d|f|g|h|k|l|m|n|r|t))s$/u', $stamm, $hits, PREG_OFFSET_CAPTURE, $r1)) {
     $stamm = substr($stamm, 0, $hits[0][1] - $umlaut);
   }
-
-
   /*
     Step 2
     Search for the longest among the following suffixes,
@@ -326,6 +325,7 @@ $umlaut = preg_match('/[äöüÄÖÜ]/', $wort);
                                              ^ means R1 ?
   */
 
+
   if (preg_match('/(?<=eig)(end|ung)$/u', $stamm, $hits, PREG_OFFSET_CAPTURE, $r2)) {
     ;
   }
@@ -351,12 +351,12 @@ $umlaut = preg_match('/[äöüÄÖÜ]/', $wort);
     $stamm = substr($stamm, 0, $hits[0][1] - $umlaut);
   }
 
-
   /* Was ist mit
     chen, lein, bar, schaft, ... ?
   */
 
-  return _de_stemmer_stem_postprocess($stamm);
+    return $stamm;
+  //return _de_stemmer_stem_postprocess($stamm);
 }
 
 

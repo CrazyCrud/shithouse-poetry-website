@@ -1,6 +1,7 @@
 <!doctype html>
 <?php
 	error_reporting(0);
+	include_once("php/helpers/util.php");
 ?>
 <html lang="de">
 	<head>

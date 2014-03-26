@@ -66,6 +66,7 @@
 					<a href="#" id="locations"><i class="icon-map" title="Orte verwalten"></i></a>
 					<a href="#" id="tags"><i class="icon-chat-empty" title="Tags verwalten"></i></a>
 					<a href="#" id="types"><i class="icon-comment" title="Types verwalten"></i></a>
+					<a href="#" id="logs"><i class="icon-info" title="Logs einsehen"></i></a>
 				</div>
 				<section class="section" id="overview">
 					<div class="row" id="overview-header">
@@ -204,6 +205,14 @@
 								<button class="tiny" id="addtypebutton"><i class="icon-plus"></i></button>
 							</div>
 						</div>
+					</div>
+				</section>
+				<section class="section" id="logs">
+					<div class="row" id="logs-header">
+						<h3>Logs</h3>
+					</div>
+					<div class="row" id="logs-content">
+						Logs werden geladen ...
 					</div>
 				</section>
 			</section>

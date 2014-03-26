@@ -74,6 +74,24 @@ body{
 	float: right;
 }
 
+.action .time{
+	font-size: .5em;
+	float: right;
+}
+.action .gender{
+	float: right;
+	margin-top: -.75rem;
+}
+.action .gender.icon-male{
+	color: $blue;
+}
+.action .gender.icon-female{
+	color: $pink;
+}
+.action .gender.icon-help{
+	color: $grey;
+}
+
 .action .info{
 	font-size: .5em;
 }

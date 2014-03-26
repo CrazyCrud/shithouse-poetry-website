@@ -76,7 +76,7 @@
 							<div id="artist"></div>
 							<i title="Geschlecht" id="sex"></i>
 							<div id="type">
-								Typ: <span id="typedescription"></span>
+								Type: <span id="typedescription"></span>
 							</div>
 							<div id="location">
 								Ort: <span id="locationdescription"></span>
@@ -108,7 +108,7 @@
 								<?php
 								$fulluri = 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
 								echo "<a title='Auf facebook teilen' target='_blank' href='https://www.facebook.com/sharer/sharer.php?u=$fulluri&t=Latrinalia - Toiletten-Schmierereien und -Graffitis'><div class='social-facebook'></div></a>";
-								echo "<a title='Auf twitter teilen' target='_blank' href='http://twitter.com/intent/tweet?source=$fulluri&text=$fulluri Latrinalia - Toiletten-Schmierereien und -Graffitis&url=$fulluri'><div class='social-twitter'></div></a>";
+								echo "<a title='Auf twitter teilen' target='_blank' href='http://twitter.com/intent/tweet?source=$fulluri&text=Latrinalia - Toiletten-Schmierereien und -Graffitis&url=$fulluri'><div class='social-twitter'></div></a>";
 								echo "<a title='Auf Google plus teilen' target='_blank' href='https://plus.google.com/share?url=$fulluri'><div class='social-gplus'></div></a>";
 								?>
 							</div>

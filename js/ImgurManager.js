@@ -89,9 +89,9 @@ var ImgurManager = (function(){
 
 			var links = null;
 
-			var url = 'getFilteredEntries.php?filter=' + searchProps.filter + 
-				'&values=' + values + '&start=' + searchProps.start + 
-				'orderby=' + searchProps.orderby;
+			var url = 'getFilteredEntries.php?filter=' + escape(searchProps.filter) + 
+				'&values=' + escape(values) + '&start=' + searchProps.start + 
+				'orderby=' + escape(searchProps.orderby);
 			$.get('php/backend/' + url, function(data) {
 				if(data.success == 1){
 					links = data.data;
@@ -107,8 +107,8 @@ var ImgurManager = (function(){
 			var links = null;
 
 			var url = 'getFilteredEntries.php?filter=type&' + 
-				'values=' + types + '&start=' + start + 
-				'&orderby=' + order;
+				'values=' + escape(types) + '&start=' + start + 
+				'&orderby=' + escape(order);
 			$.get('php/backend/' + url, function(data) {
 				if(data.success == 1){
 					links = data.data;
@@ -124,8 +124,8 @@ var ImgurManager = (function(){
 			var links = null;
 
 			var url = 'getFilteredEntries.php?filter=tag&' + 
-				'values=' + tags + '&start=' + start + 
-				'&orderby=' + order;
+				'values=' + escape(tags) + '&start=' + start + 
+				'&orderby=' + escape(order);
 			$.get('php/backend/' + url, function(data) {
 				if(data.success == 1){
 					links = data.data;
@@ -141,8 +141,8 @@ var ImgurManager = (function(){
 			var links = null;
 
 			var url = 'getFilteredEntries.php?filter=sex&' + 
-				'values=' + sex + '&start=' + start + 
-				'&orderby=' + order;
+				'values=' + escape(sex) + '&start=' + start + 
+				'&orderby=' + escape(order);
 			$.get('php/backend/' + url, function(data) {
 				if(data.success == 1){
 					links = data.data;
@@ -158,8 +158,8 @@ var ImgurManager = (function(){
 			var links = null;
 
 			var url = 'getFilteredEntries.php?filter=user&' + 
-				'values=' + user + '&start=' + start + 
-				'&orderby=' + order;
+				'values=' + escape(user) + '&start=' + start + 
+				'&orderby=' + escape(order);
 			$.get('php/backend/' + url, function(data) {
 				if(data.success == 1){
 					links = data.data;
@@ -175,8 +175,8 @@ var ImgurManager = (function(){
 			var links = null;
 
 			var url = 'getFilteredEntries.php?filter=location&' + 
-				'values=' + locations + '&start=' + start + 
-				'&orderby=' + order;
+				'values=' + escape(locations) + '&start=' + start + 
+				'&orderby=' + escape(order);
 			$.get('php/backend/' + url, function(data) {
 				if(data.success == 1){
 					links = data.data;
@@ -216,7 +216,7 @@ var ImgurManager = (function(){
 		updateTranscription : function(callback, entryid, transcription){
 			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 			var links = null;
-			var url = 'updateTranscription.php?authkey='+authkey+"&entryid="+entryid+"&transcription="+transcription;
+			var url = 'updateTranscription.php?authkey='+authkey+"&entryid="+entryid+"&transcription="+escape(transcription);
 			$.post('php/backend/' + url, function(data) {
 				if(data.success == 1){
 					links = data.data;
@@ -322,7 +322,7 @@ var ImgurManager = (function(){
 			if(authkey.length != AUTH_KEY_LENGTH)callback(false);
 			var url = "updateLocation.php?authkey="+authkey;
 			url += "&locationid="+locationid;
-			url += "&locations="+locations;
+			url += "&locations="+escape(locations);
 			url += "&flat="+flat;
 			url += "&flong="+flong;
 			url += "&tlat="+tlat;
@@ -339,7 +339,7 @@ var ImgurManager = (function(){
 			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 			if(authkey.length != AUTH_KEY_LENGTH)callback(false);
 			var url = "createLocation.php?authkey="+authkey;
-			url += "&locations="+locations;
+			url += "&locations="+escape(locations);
 			url += "&flat="+flat;
 			url += "&flong="+flong;
 			url += "&tlat="+tlat;
@@ -406,8 +406,8 @@ var ImgurManager = (function(){
 		},
 		updateType : function(callback, id, name, text){
 			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-			var url = "updateType.php?id=" + id + "&name=" + name +
-				"&desc=" + text + "&authkey=" + authkey;
+			var url = "updateType.php?id=" + id + "&name=" + escape(name) +
+				"&desc=" + escape(text) + "&authkey=" + authkey;
 			$.post("php/backend/" + url, function(data){
 				if(data.success == 1){
 					callback(true);
@@ -418,7 +418,7 @@ var ImgurManager = (function(){
 		},
 		createType : function(callback, name, text){
 			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-			var url = "createType.php?name=" + name + "&desc=" + text +
+			var url = "createType.php?name=" + escape(name) + "&desc=" + escape(text) +
 				"&authkey=" + authkey;
 			$.post("php/backend/" + url, function(data){
 				if(data.success == 1){
@@ -442,7 +442,7 @@ var ImgurManager = (function(){
 		addComment : function(callback, entryid, comment){
 			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 			if(authkey.length != AUTH_KEY_LENGTH)callback(false);
-			var url = "addComment.php?entryid=" + entryid + "&comment=" + comment + "&authkey=" + authkey;
+			var url = "addComment.php?entryid=" + entryid + "&comment=" + escape(comment) + "&authkey=" + authkey;
 			$.post("php/backend/" + url, function(data){
 				if(data.success == 1){
 					callback(true);
@@ -476,7 +476,7 @@ var ImgurManager = (function(){
 		},
 		addReport : function(callback, entryid, reportdesc, commentid){
 			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-			var url = "addReport.php?entryid=" + entryid + "&reportdesc=" + reportdesc +
+			var url = "addReport.php?entryid=" + entryid + "&reportdesc=" + escape(reportdesc) +
 				"&commentid" + commentid + "&authkey=" + authkey;
 			$.post("php/backend/" + url, function(data){
 				if(data.success == 1){
@@ -575,8 +575,8 @@ var ImgurManager = (function(){
 			});
 		},
 		createUser : function(callback, username, pw, mail){
-			var url = 'createUser.php?name=' + username + '&pwd=' + pw + 
-				'&mail=' + mail;
+			var url = 'createUser.php?name=' + escape(username) + '&pwd=' + pw + 
+				'&mail=' + escape(mail);
 			var userData = null;
 			$.get('php/backend/' + url, function(data) {
 				if(data.success == 1){
@@ -587,7 +587,7 @@ var ImgurManager = (function(){
 		},
 		loginUser : function(callback, mail, password){
 			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-			var url = 'login.php?mail=' + mail + '&password=' + password;
+			var url = 'login.php?mail=' + escape(mail) + '&password=' + password;
 			if(authkey && authkey.length == AUTH_KEY_LENGTH){
 				url += "&authkey="+authkey;
 			}
@@ -616,7 +616,7 @@ var ImgurManager = (function(){
 		},
 		updateUser : function(callback, mail, username, password){
 			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-			var url = 'updateUser.php?mail=' + mail + '&pwd=' + password + '&name=' + username + '&authkey='+authkey;
+			var url = 'updateUser.php?mail=' + escape(mail) + '&pwd=' + password + '&name=' + escape(username) + '&authkey='+authkey;
 			var userData = null;
 			$.get('php/backend/' + url, function(data) {
 				if(data.success == 1){
@@ -638,7 +638,7 @@ var ImgurManager = (function(){
 		},
 		getUser : function(callback, id){
 			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-			var url = 'getUser.php?id='+id;
+			var url = 'getUser.php?id='+escape(id);
 			if(authkey.length == 45)
 				url += "&authkey="+authkey;
 			$.get("php/backend/"+url,function(data){
@@ -674,7 +674,7 @@ var ImgurManager = (function(){
 		},
 		search: function(callback, searchcontent, start){
 			start = start || 0;
-			var url = 'search.php?search=' + searchcontent + '&start=' + start;
+			var url = 'search.php?search=' + escape(searchcontent) + '&start=' + start;
 			var searchData = null;
 
 			$.get('php/backend/' + url, function(data) {
@@ -687,6 +687,20 @@ var ImgurManager = (function(){
 		getStatistics : function(callback){
 			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 			var url = 'getStatistics.php?authkey=' + authkey;
+			$.get('php/backend/' + url, function(data) {
+				var result = false;
+				if(data.success == 1){
+					result = data.data;
+				}
+				callback(result);
+			});
+		},
+		getLogs : function(callback, date){
+			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+			var url = 'getLogs.php?authkey=' + authkey;
+			if(date){
+				url += "&date="+escape(date);
+			}
 			$.get('php/backend/' + url, function(data) {
 				var result = false;
 				if(data.success == 1){

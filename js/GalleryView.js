@@ -322,7 +322,7 @@ var GalleryView = (function(){
 					}
 					var transcription = entry.title||"";
 					var imgContent_m = '<a href="" title="' + id + '"><img src="' + 
-						entry.images[0].thumbnail + '"/></a>';	
+						entry.images[0].largethumbnail + '"/></a>';	
 					var imgContent_l = '<a href="" title="' + id + '"><img src="' + 
 						entry.images[0].largethumbnail + '"/></a>';
 					settings.imgData[lastImageIndex + i] = {

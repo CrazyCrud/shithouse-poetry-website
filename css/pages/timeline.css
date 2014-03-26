@@ -250,5 +250,22 @@ body {
   font-size: 0.5em;
   float: right; }
 
+.action .time {
+  font-size: 0.5em;
+  float: right; }
+
+.action .gender {
+  float: right;
+  margin-top: -0.75rem; }
+
+.action .gender.icon-male {
+  color: #32a2b8; }
+
+.action .gender.icon-female {
+  color: #d22091; }
+
+.action .gender.icon-help {
+  color: #B8B8B8; }
+
 .action .info {
   font-size: 0.5em; }

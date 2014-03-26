@@ -141,6 +141,8 @@ if($entry == false){
 	exit();
 }
 
+$db->view($entryid);
+
 $json["data"] = $entry;
 
 $json["success"] = $CODE_SUCCESS;

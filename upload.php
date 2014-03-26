@@ -126,7 +126,7 @@
 								        </select>
 							      	</label>
 								</div>
-							    <div class="small-12 columns add-artist-container">
+							    <div class="small-12 columns add-artist-container" hidden>
 									<label>Künstler<small>optional</small>
 							        	<input id="artist" type="text">
 							        	</input>

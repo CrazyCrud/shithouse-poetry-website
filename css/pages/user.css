@@ -306,7 +306,8 @@ body {
       display: inline-block;
       background: #eee;
       padding: 0.382rem;
-      margin-right: 0.618rem; }
+      margin-right: 0.618rem;
+      margin-bottom: 0.618rem; }
 
 #follow-button {
   display: none; }
