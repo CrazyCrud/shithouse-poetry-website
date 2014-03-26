@@ -115,7 +115,7 @@ class DBHelper{
 	public function verify($key){
 		if(!isset($key))return false;
 		$query = Queries::getuserbykey($key);
-		$user = $this->query($query);
+		$user = $this->query($query)[0];
 		$query = Queries::verify($key);
 		$this->log("verifying @".$user["id"]." (".$user["username"].")");
 		if(!$this->query($query))return false;
