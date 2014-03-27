@@ -455,17 +455,17 @@ class Queries{
 			`$r`.ratingcount AS ratingcount
 
 			FROM
-			`$u`, `$t`, `$r`, `$tags`, `$usertags`, `$e`
+			`$u`, `$t`, `$tags`, `$usertags`, `$e`
 			LEFT OUTER JOIN `$v`
 			ON `$v`.entryid = `$e`.id
+			LEFT OUTER JOIN `$r`
+			ON `$r`.entryid = `$e`.id
 
 			WHERE
 			`$e`.userid = `$u`.id
 			AND
 			(`$e`.typeid = `$t`.id
 			OR `$e`.typeid = -1)
-			AND
-			`$e`.id = `$r`.entryid
 			$where
 
 			GROUP BY
