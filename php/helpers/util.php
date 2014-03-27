@@ -1,12 +1,16 @@
 <?php
 
 foreach($_GET as $key=>$val){
-	$decoded = utf8_encode($val);
-	$_GET[$key] = mysql_escape_string(htmlspecialchars($decoded));
+	if(!mb_check_encoding($val,"UTF-8")){
+		$val = utf8_encode($val);
+	}
+	$_GET[$key] = mysql_escape_string(htmlspecialchars($val));
 }
 foreach($_POST as $key=>$val){
-	$decoded = utf8_encode($val);
-	$_GET[$key] = mysql_escape_string(htmlspecialchars($decoded));
+	if(!mb_check_encoding($val,"UTF-8")){
+		$val = utf8_encode($val);
+	}
+	$_GET[$key] = mysql_escape_string(htmlspecialchars($val));
 }
 
 function standarize_array($arr){
