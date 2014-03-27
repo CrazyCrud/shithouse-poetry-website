@@ -1173,32 +1173,50 @@ class Queries{
 		return $query;
 	}
 	public static function search($words, $start, $limit){
+		$index = DBConfig::$tables["index"];
 		if(is_array($words)){
 			if(count($words>1)){
-				$word = "`index`.`word` LIKE '%".$words[0]."%'";
+				$word = "`$index`.`word` LIKE '%".$words[0]."%'";
+				$countif = "SUM(CASE WHEN `$index`.`word` LIKE '%".$words[0]."%' THEN 1 ELSE 0 END)";
 				for($i=1; $i<count($words);$i++){
-					$word .= " OR `index`.`word` LIKE '%".$words[$i]."%'";
+					$word .= " OR `$index`.`word` LIKE '%".$words[$i]."%'";
+					$countif .= " + SUM(CASE WHEN `$index`.`word` LIKE '%".$words[$i]."%' THEN 1 ELSE 0 END)";
 				}
 			}else{
-				$word = "`index`.`word` LIKE '%".$words[0]."%'";
+				$word = "`$index`.`word` LIKE '%".$words[0]."%'";
 			}
 		}else{
-			$word = "`index`.`word` LIKE '%$words%'";
+			$word = "`$index`.`word` LIKE '%$words%'";
+			$countif = "SUM(CASE WHEN `$index`.`word` LIKE '%".$words[$i]."%' THEN 1 ELSE 0 END)";
 		}
-		$i = DBConfig::$tables["index"];
 		$query =
 		"SELECT
-		`index`.`entryid` AS id,
-		(SUM(`titleoccurence`)+SUM(`transcriptionoccurence`))/a.occurence AS relevancy
+		b.id,
+		c.occurences+relevancy AS relevancy
 		FROM
-		`index`,
 		(
-		    SELECT `index`.`entryid`, SUM(`titleoccurence`)+SUM(`transcriptionoccurence`) AS occurence
-		    FROM `index` GROUP BY `entryid`
-		) AS a
-		WHERE `index`.`entryid` = a.entryid
-		AND ($word)
-		GROUP BY `index`.`entryid`
+			SELECT
+			`$index`.`entryid` AS id,
+			(SUM(`titleoccurence`)+SUM(`transcriptionoccurence`))/a.occurence AS relevancy
+			FROM
+			`$index`,
+			(
+			    SELECT `$index`.`entryid`, SUM(`titleoccurence`)+SUM(`transcriptionoccurence`) AS occurence
+			    FROM `$index` GROUP BY `entryid`
+			) AS a
+			WHERE `$index`.`entryid` = a.entryid
+			AND ($word)
+			GROUP BY `$index`.`entryid`
+		) AS b,
+		(
+			SELECT
+			`$index`.`entryid` as id,
+			($countif) as occurences
+			FROM `$index`
+			GROUP BY `$index`.`entryid`
+		) AS c
+		WHERE c.id = b.id
+		GROUP BY b.id
 		ORDER BY relevancy DESC
 		LIMIT $start, $limit";
 		return $query;
