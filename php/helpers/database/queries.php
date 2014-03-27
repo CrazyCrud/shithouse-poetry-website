@@ -1177,17 +1177,26 @@ class Queries{
 		if(is_array($words)){
 			if(count($words>1)){
 				$word = "`$index`.`word` LIKE '%".$words[0]."%'";
-				$countif = "SUM(CASE WHEN `$index`.`word` LIKE '%".$words[0]."%' THEN 1 ELSE 0 END)";
+				$innerQuery = "SELECT  `$index`.entryid, 1 AS occurence, '".$words[0]."' AS word
+				FROM  `$index` 
+				WHERE  `$index`.word LIKE  '%".$words[0]."%'
+				GROUP BY  `$index`.entryid";
 				for($i=1; $i<count($words);$i++){
 					$word .= " OR `$index`.`word` LIKE '%".$words[$i]."%'";
-					$countif .= " + SUM(CASE WHEN `$index`.`word` LIKE '%".$words[$i]."%' THEN 1 ELSE 0 END)";
+					$innerQuery .= " UNION SELECT  `$index`.entryid, 1 AS occurence, '".$words[$i]."' AS word
+					FROM  `$index` 
+					WHERE  `$index`.word LIKE  '%".$words[$i]."%'
+					GROUP BY  `$index`.entryid";
 				}
 			}else{
 				$word = "`$index`.`word` LIKE '%".$words[0]."%'";
 			}
 		}else{
 			$word = "`$index`.`word` LIKE '%$words%'";
-			$countif = "SUM(CASE WHEN `$index`.`word` LIKE '%".$words[$i]."%' THEN 1 ELSE 0 END)";
+			$innerQuery = "SELECT  `$index`.entryid, 1 AS occurence, '$words' AS word
+			FROM  `$index` 
+			WHERE  `$index`.word LIKE  '%$words%'
+			GROUP BY  `$index`.entryid";
 		}
 		$query =
 		"SELECT
@@ -1210,10 +1219,12 @@ class Queries{
 		) AS b,
 		(
 			SELECT
-			`$index`.`entryid` as id,
-			($countif) as occurences
-			FROM `$index`
-			GROUP BY `$index`.`entryid`
+			d.`entryid` as id,
+			SUM(d.occurence) as occurences
+			FROM (
+				$innerQuery
+			) d
+			GROUP BY id
 		) AS c
 		WHERE c.id = b.id
 		GROUP BY b.id
