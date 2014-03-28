@@ -214,3 +214,43 @@ body{
   padding-bottom: 6px;
 }
 
+#comment-input{
+  display: inline-block;
+  margin-bottom: 0;  
+  width: 96%;
+  height: 35px;
+  padding: 8px 0 8px 8px;
+  float: left;
+}
+
+#comment-add{
+  display: block;
+  margin-bottom: 8px;
+}
+
+#submit-comment{
+  display: inline-block;
+  height: 35px;
+  width: 4%;
+  max-width: 35px;
+}
+
+@media screen and (max-width: 768px){
+  #comment-input{
+    width: 95%;
+  }
+
+  #submit-comment{
+    width: 5%;
+  }
+}
+
+@media screen and (max-width: 640px){
+  #comment-input{
+    width: 90%;
+  }
+
+  #submit-comment{
+    width: 10%;
+  }
+}

@@ -1,3 +1,5 @@
+var $submitComment = $("#submit-comment");
+
 
 /*
 var hoverLoginMenu = document.getElementById("hoverLoginMenu");
@@ -98,6 +100,13 @@ function initGUI(){
 			ImgurManager.addRating(refresh, entry.id, 1);
 		}
 	});
+	
+	$submitComment.click(function(event) {
+		if($(this).hasClass('disabled')){
+			return;
+		}
+		ImgurManager.addComment(initComments,id,$("#comment-input").val());
+	});
 	$("#comment-input").keyup(function(e){
 		if ( e.which == 13 ) {
 			ImgurManager.addComment(initComments,id,$(this).val());
@@ -190,6 +199,7 @@ function disable(){
 	$("#report").css("display","none");
 	//$("#rating").attr("title","Melde dich an um diesen Eintrag zu bewerten.");
 	$("#comment-input").attr("disabled","disabled");
+	$submitComment.addClass('disabled');
 	$("#comment-input").attr("title","Melde dich an um Kommentare zu schreiben.");
 	$("#comment-input").attr("placeholder","Melde dich an um Kommentare zu schreiben.");	
 }
@@ -197,6 +207,7 @@ function disable(){
 function disableForDummy(){
 	$(".thumbs").css("display","none");
 	$("#comment-input").attr("disabled","disabled");
+	$submitComment.addClass('disabled');
 	$("#comment-input").attr("title","Melde dich an um Kommentare zu schreiben.");
 	$("#comment-input").attr("placeholder","Melde dich an um Kommentare zu schreiben.");	
 }

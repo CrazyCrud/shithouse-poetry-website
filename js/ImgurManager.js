@@ -443,7 +443,9 @@ var ImgurManager = (function(){
 			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 			if(authkey.length != AUTH_KEY_LENGTH)callback(false);
 			var url = "addComment.php?entryid=" + entryid + "&comment=" + escape(comment) + "&authkey=" + authkey;
+			console.log(url);
 			$.post("php/backend/" + url, function(data){
+				console.log(data);
 				if(data.success == 1){
 					callback(true);
 				}else{

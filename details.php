@@ -116,8 +116,9 @@
 					</div>	
 					<div class="row details">
 						<div id="comments-header">Kommentare:</div>
-						<div id="comments-add">
+						<div id="comments-add" class="row collapse">
 							<input type="text" id="comment-input" placeholder="Kommentar schreiben"></input>
+							<a href="javascript:void(0)" id="submit-comment" class="button secondary radius postfix">&#707;</a>
 						</div>
 						<div id="comments-content"></div>
 						<button id="morecomments">
