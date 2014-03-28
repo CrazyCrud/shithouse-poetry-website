@@ -436,7 +436,7 @@ class DBHelper{
 		if(strlen($comment)==0)return false;
 		$user = $this->getUser();
 		$entry = $this->getEntry($entryid);
-		if(!isset($user["id"])||!isset($entry["id"])||$user["id"]==DBConfig::$userStatus["unregistered"]){
+		if(!isset($user["id"])||!isset($entry["id"])||$user["status"]==DBConfig::$userStatus["unregistered"]){
 			return false;
 		}
 		$this->view($entryid);
@@ -456,7 +456,7 @@ class DBHelper{
 	public function deleteComment($commentid){
 		$user = $this->getUser();
 		$comment = $this->getComment($commentid);
-		if(!isset($user["id"])||!isset($comment[0]["id"])||$user["id"]==DBConfig::$userStatus["unregistered"]){
+		if(!isset($user["id"])||!isset($comment[0]["id"])||$user["status"]==DBConfig::$userStatus["unregistered"]){
 			return false;
 		}
 		if($user["status"] == DBConfig::$userStatus["admin"]){

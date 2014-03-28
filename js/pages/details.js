@@ -268,11 +268,11 @@ function fillUI(e){
 		var sex = entry.sex.toLowerCase();
 		switch(sex){
 			case "m":
-				$("#sex").addClass("icon-male");
+				$("#sex").addClass("icon-male-1");
 				$("#sex").prop("title", "Männertoilette");
 				break;
 			case "w":
-				$("#sex").addClass("icon-female");
+				$("#sex").addClass("icon-female-1");
 				$("#sex").prop("title", "Frauentoilette");
 				break;
 			default:

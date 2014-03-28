@@ -102,11 +102,11 @@ function addUpload(entry){
 
 	switch(entry.sex.toLowerCase()){
 		case "m":
-			$icon = $('<i class="gender icon-male"></i>');
+			$icon = $('<i class="gender icon-male-1"></i>');
 			$icon.prop("title", "Männertoilette");
 		break;
 		case "w":
-			$icon = $('<i class="gender icon-female"></i>');
+			$icon = $('<i class="gender icon-female-1"></i>');
 			$icon.prop("title", "Frauentoilette");
 		break;
 		default:

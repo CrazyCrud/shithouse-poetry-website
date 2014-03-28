@@ -65,6 +65,8 @@ function greetUser(){
     if(!_.isEmpty(user)&&user.status!=4&&user.status!="4"){
       if(user.username.length > 0){
         $("#link-login").children('span').html(user.username);
+        $("#link-login i").removeAttr('class');
+        $("#link-login i").addClass('icon-menu');
       }
     }
 }
@@ -188,18 +190,9 @@ function logoutSuccess(yep){
   document.cookie = "authkey=''; expires=" + d.toGMTString();
   if(yep){
     window.location = "index.php";
+
   }else{
     window.location = "index.php"; // change dat
-  }
-}
-
-function getUserIcon(status){
-  switch(status){
-    case 1:
-    case "1":
-      return '<img src="img/global/admin.png" title="Administrator"></img>';
-    default:
-      return "";
   }
 }
 
