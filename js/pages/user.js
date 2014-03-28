@@ -74,7 +74,10 @@ function fillUI(u){
 		var timestamp = timeObj.getTime();
 		var difference = today-timestamp;
 		var lvl = computeLevel(u.stats.entries, u.stats.comments, u.stats.ratings, u.stats.transcriptions, difference, u.stats.meta, u.stats.followers);
-		$("#level").html("(Level "+lvl+")");
+		var levelFloor = Math.floor(lvl);
+		$("#level").html("(Level "+levelFloor+")");
+		var toNextLevel = Math.floor(100*(lvl-levelFloor));
+		$("#level").attr("title", toNextLevel+"% von Level "+(levelFloor+1)+" freigeschaltet.");
 	}
 	if(u.follows){
 		drawFollows(u.follows);
@@ -228,7 +231,7 @@ function computeLevel(entries, comments, ratings, transcriptions, ageInMillis, m
 	extralevel += transcriptions*transMulti;
 	extralevel += followers*followMulti;
 
-	level = Math.floor(level+extralevel);
+	level = level+extralevel;
 	return level;
 }
 
