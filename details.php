@@ -74,7 +74,9 @@
 						<div class="details small-12 medium-5 large-5 columns right" id="image-description">
 							<div id="title">Bild wird geladen ...</div>
 							<div id="artist"></div>
-							<i title="Geschlecht" id="sex"></i>
+							<i class="sex icon-male-1"></i>
+							<i class="sex icon-female-1"></i>
+							<i class="sex icon-help"></i>
 							<div id="type">
 								Type: <span id="typedescription"></span>
 							</div>

@@ -50,18 +50,23 @@ body{
   margin-bottom: 1rem;
 }
 
-#sex{
+.sex{
   width: 1rem;
   height: 1rem;
   float: left;
+  color: #ccc;
 }
 
-#sex.icon-male-1{
+.sex.icon-male-1.active{
   color: $blue;
 }
 
-#sex.icon-female-1{
+.sex.icon-female-1.active{
   color: $pink;
+}
+
+.sex.icon-help.active{
+  color: $black;
 }
 
 #location{

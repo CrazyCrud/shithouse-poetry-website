@@ -266,18 +266,20 @@ function fillUI(e){
 
 		//set sex
 		var sex = entry.sex.toLowerCase();
+		$(".sex").removeClass("active");
+		$(".sex").attr("title", "");
 		switch(sex){
 			case "m":
-				$("#sex").addClass("icon-male-1");
-				$("#sex").prop("title", "Männertoilette");
+				$(".sex.icon-male-1").addClass("active");
+				$(".sex").prop("title", "Männertoilette");
 				break;
 			case "w":
-				$("#sex").addClass("icon-female-1");
-				$("#sex").prop("title", "Frauentoilette");
+				$(".sex.icon-female-1").addClass("active");
+				$(".sex").prop("title", "Frauentoilette");
 				break;
 			default:
-				$("#sex").addClass("icon-help");
-				$("#sex").prop("title", "Unisex-Toilette");
+				$(".sex.icon-help").addClass("active");
+				$(".sex").prop("title", "Unisex-Toilette");
 		}
 
 		//set upload info
