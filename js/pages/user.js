@@ -77,7 +77,7 @@ function fillUI(u){
 		var levelFloor = Math.floor(lvl);
 		$("#level").html("(Level "+levelFloor+")");
 		var toNextLevel = Math.floor(100*(lvl-levelFloor));
-		$("#level").attr("title", toNextLevel+"% von Level "+(levelFloor+1)+" freigeschaltet.");
+		$("#level").attr("title", toNextLevel+"% von Level "+(levelFloor+1)+" freigeschaltet");
 	}
 	if(u.follows){
 		drawFollows(u.follows);

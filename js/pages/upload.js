@@ -370,12 +370,13 @@ function retrieveLocations(locData){
 	$locationInput.children().first().html("Wähle einen Ort aus...");
 	$locationInput.prop('disabled', false);
 	var locations = locData[0]['locations'];
-	if(locData[1]){
-		$.merge(locations, locData[1]['locations']);
+	for(var i=1; i<locData.length; i++){
+		$.merge(locations, locData[i]["locations"]);
 	}
 	if(locations == null || locations.length < 1){
 		return;
 	}else{
+		locations.sort();
 		for(var i = 0; i < locations.length; i++){
 			var location = locations[i];
 			var content = "<option value='" + location.replace(/[^a-zA-Z0-9]/g,"") + "'>" + location + "</option>";
