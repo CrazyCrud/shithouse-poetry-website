@@ -154,14 +154,18 @@ function getUser(authkey){
 	var url = "php/backend/getUser.php?authkey=" + authkey;
 	$.get(url, function(data){
 		if(!data["success"]){
-			alert("Es gibt Probleme bei der Kommunikation mit dem Server beim");
+			error("Es gibt Probleme bei der Kommunikation mit dem Server.");
 		}
 		else
 		{
 			switch(data["success"]){
 				case 1: 
 					saveUser(data["data"]);
-					window.location.reload(true);
+					console.log(window.location.href,"index: "+window.location.href.indexOf("verify.php"));
+					if(window.location.href.indexOf("verify.php")>0){
+						window.location = "index.php";
+					}else
+						window.location.reload(true);
 					break;
 				case 3: 
 					error("Es fehlt ein Parameter. Bitte wenden Sie sich an den Admin.");

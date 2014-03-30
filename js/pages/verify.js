@@ -20,7 +20,7 @@ function verify(key){
 }
 
 function fail(){
-	$("#message").html("Wir k&ouml;nnen den Verifizierungscode keinem Nutzer zuordnen.<br/><br/>Bitte &uuml;berpr&uuml;fe deine Email, ob du den richtigen Link benutzt.");
+	$("#message").html("Wir k&ouml;nnen den Verifizierungscode keinem Nutzer zuordnen.<br/><br/>Vielleicht ist deine Email schon verifiziert.<br/>Bitte &uuml;berpr&uuml;fe, ob du den richtigen Link benutzt.");
 }
 
 function success(user){
