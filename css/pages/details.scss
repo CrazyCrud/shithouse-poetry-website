@@ -93,7 +93,8 @@ body{
   text-align: right;
   #author{
     img{
-      height: .75rem;
+      height: .5rem;
+      vertical-align: bottom;
     }
   }
 }
@@ -178,7 +179,8 @@ body{
 .comment .author{
   font-size: .5rem;
   img{
-    height: .75rem;
+    height: .5rem;
+    vertical-align: bottom;
   }
 }
 

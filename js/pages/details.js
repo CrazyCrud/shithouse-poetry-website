@@ -44,9 +44,10 @@ function showComments(c){
 
 function buildComment(comment){
 	var $comment = $('<div comment-id="'+comment.commentid+'" class="comment"></div>');
-	var usericon = getUserIcon(comment.userstatus);
+	var $usericon = getUserIcon(comment.userstatus, comment.usertitle);
 	var userName = getUserName({status:comment.userstatus,name:comment.username});
-	var $author = $('<div class="author">'+usericon+'<a href="user.php?id='+comment.userid+'">'+userName+'</a></div>');
+	var $author = $('<div class="author"><a href="user.php?id='+comment.userid+'">'+userName+'</a></div>');
+	$author.prepend($usericon);
 	var $date = $('<div class="date">'+formatTime(comment.time)+'</div>');
 	$date.attr("title",comment.time);
 	if(user.admin || user.id == comment.userid){
@@ -285,9 +286,10 @@ function fillUI(e){
 		//set upload info
 		$("#upload-info #date").html(formatTime(entry.date));
 		$("#upload-info #date").attr("title", entry.date);
-		var usericon = getUserIcon(entry.userstatus);
+		var $usericon = getUserIcon(entry.userstatus, entry.usertitle);
 		var userName = getUserName({status:entry.userstatus,name:entry.username});
-		$("#upload-info #author").html(usericon+userName);
+		$("#upload-info #author").html(userName);
+		$("#upload-info #author").prepend($usericon);
 		$("#upload-info #author").attr("href", "user.php?id="+entry.userid);
 
 		setTranscription();

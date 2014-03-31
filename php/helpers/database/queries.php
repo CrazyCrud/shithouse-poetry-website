@@ -11,7 +11,7 @@ class Queries{
 		$u = DBConfig::$tables["users"];
 		$s = DBConfig::$tables["sessions"];
 		return
-		"SELECT id, email, username, joindate, lastaction, status
+		"SELECT id, email, username, title, joindate, lastaction, status
 		FROM `$u`, `$s`
 		WHERE
 		`$s`.`authkey` = \"$sessionkey\"
@@ -46,12 +46,12 @@ class Queries{
 	}
 	public static function getuserbykey($key){
 		return
-		"SELECT id, email, username, joindate, lastaction, status
+		"SELECT id, email, username, title, joindate, lastaction, status
 		FROM `".DBConfig::$tables["users"]."` WHERE `sessionkey` = \"$key\"";
 	}
 	public static function getuserbyid($id){
 		return
-		"SELECT id, email, username, joindate, lastaction, status
+		"SELECT id, email, username, title, joindate, lastaction, status
 		FROM `".DBConfig::$tables["users"]."` WHERE `id` = \"$id\"";
 	}
 	public static function updateuserstatus($userid, $status){
@@ -113,7 +113,7 @@ class Queries{
 			$and = "AND `password` = '$password'";
 		}
 		return
-		"SELECT id, email, username, joindate, lastaction, status
+		"SELECT id, email, username, title, joindate, lastaction, status
 		FROM `".DBConfig::$tables["users"]."`
 		WHERE (`username` = '$uname'
 		 OR `email` = '$uname') $and";
@@ -319,7 +319,8 @@ class Queries{
 		`$c`.timestamp AS 'time',
 		`$u`.id AS 'userid',
 		`$u`.username AS 'username',
-		`$u`.status AS 'userstatus'
+		`$u`.status AS 'userstatus',
+		`$u`.title AS 'usertitle'
 		FROM `$c`, `$u`
 		WHERE `$u`.id = `$c`.userid
 		AND `comment`.id<$commentid
@@ -403,6 +404,7 @@ class Queries{
 			`$e`.userid AS userid,
 			`$u`.username AS username,
 			`$u`.status AS userstatus,
+			`$u`.title AS usertitle,
 			`$t`.id AS typeid,
 			`$t`.name AS typename,
 			`$t`.description AS typedescription,

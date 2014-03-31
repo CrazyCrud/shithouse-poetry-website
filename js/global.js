@@ -196,14 +196,16 @@ function logoutSuccess(yep){
   }
 }
 
-function getUserIcon(status){
-  switch(status){
-    case 1:
-    case "1":
-      return '<img src="img/global/admin.png" title="Administrator"></img>';
-    default:
-      return "";
+function getUserIcon(status, title){
+  var $icon = $('<img src="img/global/admin.png" title="Administrator"></img>');
+  if(status==1){
+    $icon.attr("src","img/global/icons/icon.svg");
+    if(title.trim().length == 0)title = "Administrator";
+  }else{
+    if(title.trim().length > 0)$icon.attr("src", "img/global/icons/"+title.toLowerCase().replace(" ","_")+".svg");
   }
+  if(title.trim().length > 0)$icon.attr("title", title);
+  return $icon;
 }
 
 function getUserName(user){

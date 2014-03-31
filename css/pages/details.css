@@ -270,7 +270,8 @@ body {
   font-size: 0.5rem;
   text-align: right; }
   #upload-info #author img {
-    height: 0.75rem; }
+    height: 0.5rem;
+    vertical-align: bottom; }
 
 #transcription {
   margin-top: 1rem; }
@@ -336,7 +337,8 @@ body {
 .comment .author {
   font-size: 0.5rem; }
   .comment .author img {
-    height: 0.75rem; }
+    height: 0.5rem;
+    vertical-align: bottom; }
 
 .comment .date {
   font-size: 0.5rem;
