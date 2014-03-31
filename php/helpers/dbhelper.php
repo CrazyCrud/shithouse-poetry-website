@@ -402,7 +402,7 @@ class DBHelper{
 
 	public function follow($id, $follow){
 		$user = $this->getUser();
-		$this->log("@".$user["id"]." (".$user["username"].") following @".$id.": ".$follow?"follow":"unfollow");
+		$this->log("@".$user["id"]." (".$user["username"].") ".($follow?"":"un")."following @".$id);
 		if(!isset($user["id"]))return false;
 		if($follow){
 			$query = Queries::followuser($id, $user["id"]);

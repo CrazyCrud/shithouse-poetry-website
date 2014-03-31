@@ -837,19 +837,25 @@ function formatLog(logLine){
 	var time = logLine.substring(11,19);
 	var text = logLine.substring(21);
 	var uid = text.match(/@[0-9]+/ig);
+	var user = "";
 	if(uid){
-		uid = uid[0].substring(1);
-		text = text.replace("@"+uid,'<a href="user.php?id='+uid+'" target="_blank">User'+uid+'</a>');
-	}else uid = "";
+		for(var i=uid.length-1; i>=0; i--){
+			user = uid[i].substring(1);
+			text = text.replace("@"+user,'<a href="user.php?id='+user+'" target="_blank">User'+user+'</a>');
+		}
+	}
 	var eid = text.match(/#[0-9]+/ig);
+	var entry = "";
 	if(eid){
-		eid = eid[0].substring(1);
-		text = text.replace("#"+eid,'<a href="details.php?id='+eid+'" target="_blank">Entry'+eid+'</a>');
+		for(var i=uid.length-1; i>=0; i--){
+			entry = eid[i].substring(1);
+			text = text.replace("#"+entry,'<a href="details.php?id='+entry+'" target="_blank">Entry'+entry+'</a>');
+		}
 	}else eid = "";
 	return {
 		time : time,
-		userid : uid,
-		entryid : eid,
+		userid : user,
+		entryid : entry,
 		text : text
 	}
 }
