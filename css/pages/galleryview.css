@@ -211,6 +211,14 @@ input[type="password"].loginField {
 
 .jg-image {
   overflow: hidden; }
+  .jg-image .nsfw {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #111111;
+    pointer-events: none; }
 
 .transcription-container {
   display: none;

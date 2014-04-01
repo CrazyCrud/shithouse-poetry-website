@@ -32,10 +32,11 @@ function setupLawMenu(){
 
         $(this).mouseup(function (e)
         {
+
             var container = $("#law-overlay");
             if (!container.is(e.target) && !($(e.target).parent().hasClass('law-icon-container')) &&
                 container.has(e.target).length === 0) {
-                $(container).css('visibility', 'none');
+                $(container).css('display', 'none');
             }
         });
     }

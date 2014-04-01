@@ -291,7 +291,8 @@ i.icon-thumbs-up-1:before {
       margin: 0 0 8px 0;
       list-style: none; }
       .law-container #law-overlay ul li {
-        text-align: center; }
+        text-align: center;
+        border: 1px solid rgba(140, 140, 140, 0); }
         .law-container #law-overlay ul li a {
           display: block;
           padding: 8px 0;
@@ -300,7 +301,8 @@ i.icon-thumbs-up-1:before {
           font-size: 0.618rem;
           color: #ffffff; }
       .law-container #law-overlay ul li:hover {
-        background-color: #ffffff; }
+        background-color: #ffffff;
+        border: 1px solid rgba(140, 140, 140, 0.9); }
         .law-container #law-overlay ul li:hover a {
           color: #888888; }
   .law-container #law-overlay:before {

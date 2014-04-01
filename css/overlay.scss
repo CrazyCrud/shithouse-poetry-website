@@ -35,7 +35,7 @@
 		}
 		li{
 			text-align: center;
-
+			border: 1px solid rgba(140, 140, 140, 0.0);
 			a{
 				display: block;
 				padding: 8px 0;
@@ -50,7 +50,7 @@
 		}
 		li:hover{
 			background-color: $white;
-
+			border: 1px solid rgba(140, 140, 140, 0.9);
 			a{
 				color: $darkgrey;
 			}

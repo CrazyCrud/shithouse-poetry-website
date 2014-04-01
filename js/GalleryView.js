@@ -163,6 +163,11 @@ var GalleryView = (function(){
 			}else{
 				$genderOverlay = $parent.children('div.unisex');
 			}
+
+			if(elementData.nsfw){
+				$parent.append("<div class='nsfw'></div>")
+			}
+
 			if(!isDesktop){
 				var newClass = $transcription.attr('class') + "-touch";
 				$transcription.removeAttr('class');
@@ -172,6 +177,7 @@ var GalleryView = (function(){
 				$genderOverlay.addClass(newClass);
 			}else{
 				$parent.hover(function() {
+					$parent.find(".nsfw").css('display', 'none');
 					$genderOverlay.stop(true, true);
 					$transcription.stop(true, true);
 					$image.stop(true, true);
@@ -193,6 +199,7 @@ var GalleryView = (function(){
 						queue: false
 					});
 				}, function() {
+					$parent.find(".nsfw").css('display', 'block');
 					$genderOverlay.stop(true, true);
 					$transcription.stop(true, true);
 					$image.stop(true, true);
@@ -316,6 +323,7 @@ var GalleryView = (function(){
 					var gender = entry.sex||"u";
 					var rating = 0;
 					var ratingCount = 0;
+					var nsfw =  _.indexOf(_.pluck(entry.tags, "tag"), "NSFW") > - 1? true: false;
 					if(entry.ratings && entry.ratings.length != 0 && entry.ratings[0].rating){
 						rating = entry.ratings[0].rating;
 						ratingCount = entry.ratings[0].ratingcount;
@@ -333,7 +341,8 @@ var GalleryView = (function(){
 						image_l: imgContent_l,
 						date: entry.date||"",
 						rating: parseFloat(rating),
-						ratingcount: parseFloat(ratingCount)
+						ratingcount: parseFloat(ratingCount),
+						nsfw: nsfw
 					};
 				}
 			}
