@@ -623,10 +623,10 @@ function addLocation(location){
 	});
 
 	google.maps.event.addListener(rectangle,"bounds_changed",function(a,b,c){
-		var flat = this.bounds.Aa.j;
-		var flong = this.bounds.qa.j;
-		var tlat = this.bounds.Aa.k;
-		var tlong = this.bounds.qa.k;
+		var flat = this.bounds.getSouthWest()["k"];
+		var flong = this.bounds.getSouthWest()["A"];
+		var tlat = this.bounds.getNorthEast()["k"];
+		var tlong = this.bounds.getNorthEast()["A"];
 		updateLocation(this.locationid,false,flat,flong,tlat,tlong);
 	});
 
@@ -653,10 +653,10 @@ function goToMap(target){
 	var id = $row.attr("locationid");
 	hideOverlays();
 	rectangles[id].setOptions({strokeColor : STROKE_FOCUS});
-	var flat = rectangles[id].bounds.Aa.j;
-	var tlat = rectangles[id].bounds.Aa.k;
-	var flong = rectangles[id].bounds.qa.j;
-	var tlong = rectangles[id].bounds.qa.k;
+	var flat = rectangles[id].bounds.getSouthWest()["k"];
+	var tlat = rectangles[id].bounds.getNorthEast()["k"];
+	var flong = rectangles[id].bounds.getSouthWest()["A"];
+	var tlong = rectangles[id].bounds.getNorthEast()["A"];
 	var latitude = (flat+tlat)/2;
 	var longitude = (flong+tlong)/2;
 
@@ -713,10 +713,10 @@ function createType(){
 
 function createLocation(){
 	map.setZoom(map.getZoom()+1);
-	var flat = map.getBounds().Aa.j;
-	var tlat = map.getBounds().Aa.k;
-	var flong = map.getBounds().qa.j;
-	var tlong = map.getBounds().qa.k;
+	var flat = map.getBounds().getSouthWest()["k"];
+	var tlat = map.getBounds().getNorthEast()["k"];
+	var flong = map.getBounds().getSouthWest()["A"];
+	var tlong = map.getBounds().getNorthEast()["A"];
 	map.setZoom(map.getZoom()-1);
 	var locations = "";
 	ImgurManager.createLocation(onLocationCreated, locations, flat, flong, tlat, tlong);
