@@ -218,7 +218,30 @@ input[type="password"].loginField {
     width: 100%;
     height: 100%;
     background-color: #111111;
+    background: #494949;
+    vertical-align: middle;
+    color: #cbcdc7;
+    text-align: center;
+    background: -moz-radial-gradient(center, ellipse cover, #494949 3%, #2d2d2d 46%, #000000 100%);
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(3%, #494949), color-stop(46%, #2d2d2d), color-stop(100%, #000000));
+    background: -webkit-radial-gradient(center, ellipse cover, #494949 3%, #2d2d2d 46%, #000000 100%);
+    background: -o-radial-gradient(center, ellipse cover, #494949 3%, #2d2d2d 46%, #000000 100%);
+    background: -ms-radial-gradient(center, ellipse cover, #494949 3%, #2d2d2d 46%, #000000 100%);
+    background: radial-gradient(ellipse at center, #494949 3%, #2d2d2d 46%, #000000 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#494949', endColorstr='#000000',GradientType=1 );
+    background-size: cover;
+    background-position: center;
     pointer-events: none; }
+  .jg-image .nsfw-text {
+    display: inline-block;
+    vertical-align: middle; }
+  .jg-image .nsfw:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    margin-right: -0.25em;
+    /* Adjusts for spacing */ }
 
 .transcription-container {
   display: none;
