@@ -3,7 +3,7 @@
 $adminEmails = array("bastian@latrinalia.de", "franziska@latrinalia.de", "constantin@latrinalia.de", "thomas@latrinalia.de");
 
 $emailBody = '<html>
-<head></head>
+<head><meta charset="utf-8"/></head>
 <body style="font-family:Helvetica">
 <img src="http://latrinalia.de/img/global/top-img-bw.jpg" style="width:100%"></img>
 <div>%1</div>
@@ -62,12 +62,12 @@ function sendMail($email, $title, $content, $from = "Latrinalia <noreply@latrina
 	$message = str_replace("%1", $content, $emailBody);
 
 	$header  = "MIME-Version: 1.0\n";
-	$header .= "Content-type: text/html; charset=iso-8859-1\n";
+	$header .= "Content-type: text/html; charset=utf-8\n";
 	 
 	$header .= "From: $from\n";
 	$header .= "X-Mailer: PHP ". phpversion()."\n";
 
-	mail($email,$subject,$message,$header);
+	mail($email, $subject, $message,$header);
 }
 
 function sendUserMail($email, $title, $content){
