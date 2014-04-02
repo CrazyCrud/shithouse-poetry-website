@@ -67,7 +67,7 @@ function sendMail($email, $title, $content, $from = "Latrinalia <noreply@latrina
 	$header .= "From: $from\n";
 	$header .= "X-Mailer: PHP ". phpversion()."\n";
 
-	mail($email,'=?utf-8?B?'.base64_encode($subject).'?=','=?utf-8?B?'.base64_encode($message).'?=',$header);
+	mail($email, $subject, $message,$header);
 }
 
 function sendUserMail($email, $title, $content){
