@@ -62,12 +62,12 @@ function sendMail($email, $title, $content, $from = "Latrinalia <noreply@latrina
 	$message = str_replace("%1", $content, $emailBody);
 
 	$header  = "MIME-Version: 1.0\n";
-	$header .= "Content-type: text/html; charset=iso-8859-1\n";
+	$header .= "Content-type: text/html; charset=utf-8\n";
 	 
 	$header .= "From: $from\n";
 	$header .= "X-Mailer: PHP ". phpversion()."\n";
 
-	mail($email,$subject,$message,$header);
+	mail($email,'=?utf-8?B?'.base64_encode($subject).'?=','=?utf-8?B?'.base64_encode($message).'?=',$header);
 }
 
 function sendUserMail($email, $title, $content){
