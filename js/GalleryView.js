@@ -177,10 +177,7 @@ var GalleryView = (function(){
 				$genderOverlay.addClass(newClass);
 			}else{
 				$parent.hover(function() {
-					$parent.find(".nsfw").fadeOut({
-						duration: 300,
-						queue: false
-					});
+					$parent.find(".nsfw").css('display', 'none');
 					$genderOverlay.stop(true, true);
 					$transcription.stop(true, true);
 					$image.stop(true, true);
@@ -202,15 +199,7 @@ var GalleryView = (function(){
 						queue: false
 					});
 				}, function() {
-					$parent.find(".nsfw").fadeIn({
-						duration: 300,
-						start: function(){
-							$(this).css({
-								'display': 'block'
-							});
-						},
-						queue: false
-					});
+					$parent.find(".nsfw").css('display', 'block');
 					$genderOverlay.stop(true, true);
 					$transcription.stop(true, true);
 					$image.stop(true, true);
