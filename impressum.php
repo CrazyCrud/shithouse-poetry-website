@@ -2,6 +2,7 @@
 
 <?php
 	error_reporting(0);
+	require_once("./php/helpers/util.php");
 	require_once('./php/plugins/recaptcha-php-1.11/recaptchalib.php');
 	require_once('./php/helpers/mailhelper.php');
 

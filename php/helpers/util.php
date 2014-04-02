@@ -10,7 +10,8 @@ foreach($_POST as $key=>$val){
 	if(!mb_check_encoding($val,"UTF-8")){
 		$val = utf8_encode($val);
 	}
-	$_GET[$key] = mysql_escape_string(htmlspecialchars($val));
+	$_POST[$key] = mysql_escape_string(htmlspecialchars($val));
+	$_GET[$key] = $_POST[$key];
 }
 
 function standarize_array($arr){
