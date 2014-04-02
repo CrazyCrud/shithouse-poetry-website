@@ -42,6 +42,17 @@ $(document).ready(function() {
 $(document).on("complete", function(){
 	setupOnce();
 	refreshWaypoints();
+	if(getActiveState() == "transcribe"){
+		var currentEntry = GalleryView.getEntry();
+		if(!_.isNull(currentEntry) && !_.isUndefined(currentEntry) && 
+				!_.isEmpty(currentEntry)){
+			if(currentEntry.type != 1){
+				$transcribeInput.attr('placeholder', 'Beschreibe den Inhalt des Bildes mit eigenen Worten.');
+			}else{
+				$transcribeInput.attr('placeholder', 'Schreibe die Wörter nieder, die du im Bild erkennst.');
+			}
+		}
+	}
 });
 
 $(document).on("sizesmall", function(){

@@ -196,10 +196,12 @@ input[type="password"].loginField {
 
 .results-container {
   overflow: hidden;
-  padding: 0.618rem 1.618rem;
+  /* padding: $space_minus1 $space_plus1; */
   padding-bottom: 0; }
   .results-container .headline-container {
     margin-top: 0.618rem;
     margin-bottom: 0.618rem;
     padding-right: 0.618rem;
     padding-left: 0.618rem; }
+
+@media screen and (max-width: 640px) { }
