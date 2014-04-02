@@ -46,6 +46,7 @@ $(document).on("complete", function(){
 		var currentEntry = GalleryView.getEntry();
 		if(!_.isNull(currentEntry) && !_.isUndefined(currentEntry) && 
 				!_.isEmpty(currentEntry)){
+			$transcribeInput.val('');
 			if(currentEntry.type != 1){
 				$transcribeInput.attr('placeholder', 'Beschreibe den Inhalt des Bildes mit eigenen Worten.');
 			}else{
@@ -274,6 +275,7 @@ function handleTranscription(e){
 			addTranscribtion(entryid, transcription);
 		}
 	}else{
+		$transcribeInput.val('');
 		GalleryView.loadSingleImage();
 	}
 }
