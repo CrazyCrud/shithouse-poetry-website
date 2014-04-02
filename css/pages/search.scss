@@ -2,7 +2,7 @@
 
 .results-container{
 	overflow: hidden;
-	padding: $space_minus1 $space_plus1;
+	/* padding: $space_minus1 $space_plus1; */
 	padding-bottom: 0;
 
 	.headline-container{
@@ -10,5 +10,13 @@
 		margin-bottom: $space_minus1;
 		padding-right: $space_minus1;
 		padding-left: $space_minus1;
+	}
+}
+
+@media screen and (max-width: 640px){
+	.results-container{
+		.headline-container{
+			
+		}
 	}
 }

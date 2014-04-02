@@ -165,7 +165,7 @@ var GalleryView = (function(){
 			}
 
 			if(elementData.nsfw){
-				$parent.append("<div class='nsfw'><div class='nsfw-text'>" + elementData.transcription + " (NSFW)</div></div>");
+				$parent.append("<div class='nsfw'><div class='nsfw-text'>" + elementData.transcription + "</br>(NSFW)</div></div>");
 			}
 
 			if(!isDesktop){

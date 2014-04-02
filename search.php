@@ -60,19 +60,17 @@
 			</header>
 			<section id="maincontent">
 				<div class="row">
-					<div class="small-12 medium-11 medium-centered large-10 large-centered columns results-container">
+					<div class="small-12 full-width columns results-container">
 						<div class="small-12 columns headline-container">
 							<h3>Ergebnisse für <i class="search-term"></i></h3>
 						</div>
-						<div class="small-12 columns">
-							<div class="infinite-container">
-								<div class="justifiedGallery" id="images">
+						<div class="infinite-container">
+							<div class="justifiedGallery" id="images">
 
-								</div>
-								<div class="small-12 columns message-container">
-									<img id="loading-spinner" src="img/global/loading.gif"/>
-									<span class="message"></span>
-								</div>
+							</div>
+							<div class="small-12 columns message-container">
+								<img id="loading-spinner" src="img/global/loading.gif"/>
+								<span class="message"></span>
 							</div>
 						</div>
 					</div>
