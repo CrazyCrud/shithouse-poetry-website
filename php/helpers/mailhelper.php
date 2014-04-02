@@ -3,7 +3,7 @@
 $adminEmails = array("bastian@latrinalia.de", "franziska@latrinalia.de", "constantin@latrinalia.de", "thomas@latrinalia.de");
 
 $emailBody = '<html>
-<head></head>
+<head><meta charset="utf-8"/></head>
 <body style="font-family:Helvetica">
 <img src="http://latrinalia.de/img/global/top-img-bw.jpg" style="width:100%"></img>
 <div>%1</div>
