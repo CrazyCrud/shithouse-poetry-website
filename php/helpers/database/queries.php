@@ -1507,6 +1507,27 @@ class Queries{
 		WHERE `$u`.lastaction <= '$date'";
 		return $query;
 	}
+	/**
+	SALT QUERIES
+	*/
+	public static function getsalt($userid){
+		$s = DBConfig::$tables["salts"];
+		$query =
+		"SELECT salt FROM `$s` WHERE id = $userid";
+		return $query;
+	}
+	public static function savesalt($userid, $salt){
+		$s = DBConfig::$tables["salts"];
+		$query =
+		"INSERT INTO `$s`
+		(id, salt)
+		VALUES
+		($userid, '$salt')
+		ON DUPLICATE KEY
+		UPDATE
+		salt = '$salt'";
+		return $query;
+	}
 }
 
 ?>

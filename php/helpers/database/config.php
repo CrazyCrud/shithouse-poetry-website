@@ -8,7 +8,9 @@ class DBConfig{
 		"sqllocation" => "localhost",
 		"sqluser" => "root",
 		"sqlpwd" => "",
-		"sqldb" => "latrinalia"
+		"sqldb" => "latrinalia",
+		"saltdb" => "tikiblue_salt",
+		"salt" => "1337"
 	);
 
 	public static $tables = array(
@@ -28,7 +30,8 @@ class DBConfig{
 		"follows" => "follows",
 		"entryratings" => "entryratings",
 		"views" => "views",
-		"entryviews" => "entryviews"
+		"entryviews" => "entryviews",
+		"salts" => "usersalts"
 	);
 
 	public static $dbStatus = array(

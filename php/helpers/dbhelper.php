@@ -50,14 +50,14 @@ class DBHelper{
 		}
 	}
 
-	private function query($query){
+	private function query($query, $saltDb){
 		//echo $query."\n\n\n";
 		if($this->connection->status != DBConfig::$dbStatus["ready"])
 			return false;
 		if($this->loggedin()){
 			$this->update();
 		}
-		return $this->internalQuery($query);
+		return $this->internalQuery($query, $saltDb);
 	}
 
 	// use with caution!!!
@@ -65,8 +65,8 @@ class DBHelper{
 		return $this->query("SELECT * FROM `".$table."`");
 	}
 
-	private function internalQuery($query){
-		return $this->connection->query($query);
+	private function internalQuery($query, $saltDb){
+		return $this->connection->query($query, $saltDb);
 	}
 
 	// this function updates the last action of the user
@@ -180,6 +180,7 @@ class DBHelper{
 	}
 
 	private function resetPassword($userid, $mail, $name, $pwd){
+		$pwd = $this->saltPassword($userid, $pwd);
 		$query = Queries::updateuser($userid, $mail, $name, $pwd);
 		return $this->query($query);
 	}
@@ -206,10 +207,10 @@ class DBHelper{
 		if (!filter_var($mail, FILTER_VALIDATE_EMAIL))return false;
 
 		if($user["status"]==DBConfig::$userStatus["unregistered"]){
-			$this->log("registering dummy as @".$user["id"]." ($mail, $name, $pwd)");
+			$this->log("registering dummy as @".$user["id"]." ($mail, $name)");
 			$this->registerDummy($user);
 		}else{
-			$this->log("@".$user["id"]." (".$user["username"].") is updating ($mail, $name, $pwd)");
+			$this->log("@".$user["id"]." (".$user["username"].") is updating ($mail, $name)");
 		}
 
 		if($mail != $user["email"]){
@@ -221,6 +222,7 @@ class DBHelper{
 		}
 
 		if(isset($pwd)){
+			$pwd = $this->saltPassword($user["id"],$pwd);
 			$query = Queries::updateuser($user["id"], $mail, $name, $pwd);
 			$this->logoutUser($user["id"]);
 		}else{
@@ -262,13 +264,20 @@ class DBHelper{
 		$user = $this->getUser($name);
 		if(isset($user["id"]))return false;
 
-		$this->log("creating new user: $mail, $name, $pwd");
+		$this->log("creating new user: $mail, $name");
 
 		$status = DBConfig::$userStatus["newUser"];
 
 		$key = md5($mail).uniqid();
+
+		// apply salt to pwd
+		$salt = $this->createSalt();
+		$pwd = $this->applySalt($pwd, $salt);
+
 		$query = Queries::createuser($key, $mail, $name, $pwd, $status);
-		if($this->query($query)){
+		$userid = $this->query($query);
+		if($userid){
+			$this->saveSalt($userid, $salt);
 			sendVerificationMail($mail, $name, $key);
 			return $mail;
 		}else{
@@ -282,8 +291,17 @@ class DBHelper{
 		$status = DBConfig::$userStatus["unregistered"];
 		$key = md5($mail).uniqid();
 		$this->log("creating Dummyuser: $mail, $name, $key");
+
+		// apply salt to pwd
+		$salt = $this->createSalt();
+		$pwd = $this->applySalt($pwd, $salt);
+
 		$query = Queries::createuser($key, $mail, $name, $pwd, $status);
-		if($this->query($query)){
+
+		$userid = $this->query($query);
+
+		if($userid){
+			$this->saveSalt($userid, $salt);
 			return $mail;
 		}else{
 			return false;
@@ -320,6 +338,9 @@ class DBHelper{
 	// logs in a user and returns an authkey (or false)
 	// set an authkey to combine the newly logged in account with the old one
 	public function login($email, $password){
+		$user = $this->getUser($email);
+		if(!isset($user["id"]))return false;
+		$password = $this->saltPassword($user["id"], $password);
 		$query = Queries::getuserbyname($email, $password);
 		$users = $this->query($query);
 		if(count($users)==0)return false;
@@ -1820,6 +1841,53 @@ class DBHelper{
 		$content = str_replace("\n\r","\n",$content);
 		$messages = explode("\n",$content);
 		return $messages;
+	}
+
+	/**
+	SALT FUNCTIONS
+	*/
+
+	private function createSalt(){
+		$salt = uniqid().time().DBConfig::$settings["salt"];
+		return md5($salt);
+	}
+
+	private function saveSalt($userid, $salt){
+		$query = Queries::savesalt($userid, $salt);
+		$result = $this->query($query, true);
+		return $result;
+	}
+
+	private function applySalt($pwd, $salt){
+		return crypt($pwd, $salt);
+	}
+
+	private function saltPassword($userid, $pwd){
+		$salt = $this->getSalt($userid);
+		return crypt($pwd, $salt);
+	}
+
+	private function getSalt($userid){
+		$query = Queries::getsalt($userid);
+		$result = $this->query($query, true);
+		if(count($result)==0)return "";
+		return $result[0];
+	}
+
+	public function saltIt(){
+		$query = Queries::getallusers();
+		$users = $this->query($query);
+		foreach($users as $user){
+			$this->saltUser($user);
+		}
+	}
+
+	private function saltUser($user){
+		$salt = $this->createSalt();
+		$this->saveSalt($user["id"], $salt);
+		$password = $this->applySalt($user["password"], $salt);
+		$query = Queries::updateuser($user["id"], $user["email"], $user["username"], $password);
+		$this->query($query);
 	}
 
 }
