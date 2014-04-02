@@ -320,10 +320,11 @@ var GalleryView = (function(){
 					continue;
 				}else{
 					imgDataChanged = true;
-					var gender = entry.sex||"u";
+					var gender = entry.sex || "u";
 					var rating = 0;
 					var ratingCount = 0;
 					var nsfw =  _.indexOf(_.pluck(entry.tags, "tag"), "NSFW") > - 1? true: false;
+					var type = entry.typeid || 0;
 					if(entry.ratings && entry.ratings.length != 0 && entry.ratings[0].rating){
 						rating = entry.ratings[0].rating;
 						ratingCount = entry.ratings[0].ratingcount;
@@ -342,7 +343,8 @@ var GalleryView = (function(){
 						date: entry.date||"",
 						rating: parseFloat(rating),
 						ratingcount: parseFloat(ratingCount),
-						nsfw: nsfw
+						nsfw: nsfw,
+						type: type
 					};
 				}
 			}

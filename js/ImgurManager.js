@@ -101,7 +101,7 @@ var ImgurManager = (function(){
 		},
 		searchByType : function(callback, types, order, currentEntry){
 			types = types || 1;
-			order = order || orderby.properties[orderby.DATE].name;
+			order = order || orderby.properties[orderby.RATING].name;
 			start = currentEntry || 0;
 
 			var links = null;
@@ -118,7 +118,7 @@ var ImgurManager = (function(){
 		},
 		searchByTag : function(callback, tags, order, currentEntry){
 			tags = tags || 1;
-			order = order || orderby.properties[orderby.DATE].name;
+			order = order || orderby.properties[orderby.RATING].name;
 			start = currentEntry || 0;
 
 			var links = null;
@@ -135,7 +135,7 @@ var ImgurManager = (function(){
 		},
 		searchBySex : function(callback, sex, order, currentEntry){
 			sex = sex || "m";
-			order = order || orderby.properties[orderby.DATE].name;
+			order = order || orderby.properties[orderby.RATING].name;
 			start = currentEntry || 0;
 
 			var links = null;
@@ -169,7 +169,7 @@ var ImgurManager = (function(){
 		},
 		searchByLocation : function(callback, locations, order, currentEntry){
 			locations = locations || "Universität";
-			order = order || orderby.properties[orderby.DATE].name;
+			order = order || orderby.properties[orderby.RATING].name;
 			start = currentEntry || 0;
 
 			var links = null;
