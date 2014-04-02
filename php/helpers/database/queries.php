@@ -378,17 +378,23 @@ class Queries{
 		WHERE `$e`.id = $entryid";
 		return $query;
 	}
-	public static function getentry($entryid, $where){
+	public static function getentry($entryid, $where, $userid){
 		$e = DBConfig::$tables["entries"];
 		$u = DBConfig::$tables["users"];
 		$t = DBConfig::$tables["types"];
 		$v = DBConfig::$tables["entryviews"];
+		$r = DBConfig::$tables["reports"];
 		$tags = DBConfig::$tables["tags"];
 		$usertags = DBConfig::$tables["usertags"];
 		if(!isset($where)){
 			$where = "";
 		}else{
 			$where = " AND (".$where.")";
+		}
+		if(!isset($userid)){
+			$reportJoinCondition = "";
+		}else{
+			$reportJoinCondition = "AND `$r`.userid = $userid";
 		}
 		if(isset($entryid) && $entryid!=false){
 			$id = "`$e`.id = $entryid AND";
@@ -408,12 +414,18 @@ class Queries{
 			`$t`.id AS typeid,
 			`$t`.name AS typename,
 			`$t`.description AS typedescription,
-			`$v`.viewcount AS views
+			`$v`.viewcount AS views,
+			COUNT(DISTINCT `$r`.id) AS reports
 
 			FROM
 			`$u`, `$t`, `$tags`, `$usertags`, `$e`
 			LEFT OUTER JOIN
 			`$v` ON `$v`.entryid = `$e`.id
+			LEFT OUTER JOIN
+			`$r` ON `$r`.entryid = `$e`.id
+			AND `$r`.status != -1
+			AND `$r`.commentid = -1
+			$reportJoinCondition
 
 			WHERE
 			$id
