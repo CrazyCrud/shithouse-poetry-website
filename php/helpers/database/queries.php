@@ -565,7 +565,7 @@ class Queries{
 			location,
 			`$e`.date as date,
 			AVG(`$r`.rating) as rating,
-			`$v`.entryviews as views
+			count(`$v`.entryid) as views
 			FROM `$info`, `$r`, `$e`
 			LEFT OUTER JOIN `$v`
 			ON `$v`.entryid = `$e`.id
