@@ -17,7 +17,7 @@ class DBConnection{
 	}
 
 	private function initConnection(){
-		$link = mysql_pconnect(
+		$link = mysql_connect(
 			DBConfig::$settings["sqllocation"],
 			DBConfig::$settings["sqluser"],
 			DBConfig::$settings["sqlpwd"])
@@ -32,7 +32,7 @@ class DBConnection{
 	}
 
 	private function initSaltConnection(){
-		$saltLink = mysql_pconnect(
+		$saltLink = mysql_connect(
 			DBConfig::$settings["sqllocation"],
 			DBConfig::$settings["sqluser"],
 			DBConfig::$settings["sqlpwd"], true)
