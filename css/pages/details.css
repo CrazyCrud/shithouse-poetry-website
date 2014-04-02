@@ -356,12 +356,19 @@ body {
   text-align: right;
   margin-top: -20px;
   font-size: 0.75rem; }
+  #report div {
+    display: inline-block;
+    font-size: 0.618rem; }
+  #report i {
+    padding-right: 6px;
+    padding-top: 6px;
+    opacity: 0.25;
+    cursor: pointer; }
 
-#report i {
-  padding-right: 6px;
-  padding-top: 6px;
-  opacity: 0.25;
-  cursor: pointer; }
+#report.active {
+  color: #FCAF28; }
+  #report.active i {
+    opacity: 0.75; }
 
 #report-icon:hover {
   color: #ff4444;

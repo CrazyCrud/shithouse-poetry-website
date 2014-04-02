@@ -483,9 +483,9 @@ class DBHelper{
 
 	// returns the complete entry of the given id
 	public function getEntry($entryid){
-		$query = Queries::getentry($entryid);
-		$entry = $this->query($query);
 		$user = $this->getUser();
+		$query = Queries::getentry($entryid, $where, $user["id"]);
+		$entry = $this->query($query);
 		if(count($entry)==0||!$entry)return false;
 		$entry = $entry[0];
 		$query = Queries::getusertags($entryid);

@@ -203,13 +203,23 @@ body{
   text-align: right;
   margin-top: -20px;
   font-size: 0.75rem;
+  div{
+    display: inline-block;
+    font-size: $space_minus1;
+  }
+  i{
+    padding-right: 6px;
+    padding-top: 6px;
+    opacity: .25;
+    cursor: pointer;
+  }
 }
 
-#report i{
-  padding-right: 6px;
-  padding-top: 6px;
-  opacity: .25;
-  cursor: pointer;
+#report.active{
+  color: $orange;
+  i{
+    opacity: .75;
+  }
 }
 
 #report-icon:hover{

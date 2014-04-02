@@ -292,6 +292,21 @@ function fillUI(e){
 		$("#upload-info #author").prepend($usericon);
 		$("#upload-info #author").attr("href", "user.php?id="+entry.userid);
 
+		//set report
+		if(entry.reports != null && entry.reports > 0){
+			var $number = $('<div id="number">'+entry.reports+'</div>');
+			$("#report").prepend($number);
+			$("#report").addClass("active");
+			if(entry.reports == 1)
+				$("#report").attr("title","Es liegt eine Meldung von dir zu diesem Eintrag vor");
+			else
+				$("#report").attr("title","Es liegen "+entry.reports+" Meldungen von dir zu diesem Eintrag vor");
+		}else{
+			$("#report #number").remove();
+			$("#report").removeClass("active");
+			$report.attr("title","");
+		}
+
 		setTranscription();
 	}
 }
