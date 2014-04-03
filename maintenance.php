@@ -58,7 +58,7 @@
 			<section id="maincontent">
 				<div class="row" name="foto" id="foto">
 					<h1>Seite wird gewartet</h1>
-					Die Seite wird gerade gewartet und ist deshalb leider f&uuml;r kurze Zeit nicht erreichebar.<br/>
+					Die Seite wird gerade gewartet und ist deshalb leider f&uuml;r kurze Zeit nicht erreichbar.<br/>
 					Bitte schau sp&auml;ter nochmal vorbei.
 				</div>
 			</section>

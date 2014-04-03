@@ -42,7 +42,10 @@ var ImgurManager = (function(){
 			$.get('php/backend/' + url, function(data) {
 				if(data.success == 1){
 					links = data.data;
-				}	
+				}else if(data.success == 0){
+					console.log("tadah!");
+					window.location = "maintenance.php";
+				}
 				callback(links, searchProps.orderby);
 			});
 		},
@@ -665,11 +668,14 @@ var ImgurManager = (function(){
 			});
 		},
 		getUserAuth: function(callback, authkey){
+			console.log("authing");
 			var url = 'getUser.php?authkey=' + authkey;
 			$.get("php/backend/" + url, function(data){
+				console.log(data);
 				if(data.success == 1){
 					callback(data.data);
 				}else if(data.success == 0){
+					console.log("tadah!");
 					window.location = "maintenance.php";
 				}else{
 					callback(null);
