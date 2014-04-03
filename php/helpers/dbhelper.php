@@ -1871,7 +1871,7 @@ class DBHelper{
 		$query = Queries::getsalt($userid);
 		$result = $this->query($query, true);
 		if(count($result)==0)return "";
-		return $result[0];
+		return $result[0]["salt"];
 	}
 
 	public function saltIt(){
