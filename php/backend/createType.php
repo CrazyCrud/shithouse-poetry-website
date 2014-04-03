@@ -67,7 +67,7 @@ $type = $db->createType($name, $desc);
 if($type == false){
 	$json["success"]=$CODE_ERROR;
 	if(DBConnection::getInstance()->status == DBConfig::$dbStatus["offline"]){
-		$json["message"] = "Database error";
+		$json["message"] = "Database error";$json["success"] = $CODE_DB_ERROR;
 	}else{
 		$json["message"] = "Type could not be created";
 	}

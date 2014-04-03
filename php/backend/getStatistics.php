@@ -78,7 +78,7 @@ $result = $db->getStatistics();
 if($result == false){
 	$json["success"]=$CODE_ERROR;
 	if(DBConnection::getInstance()->status == DBConfig::$dbStatus["offline"]){
-		$json["message"] = "Database error";
+		$json["message"] = "Database error";$json["success"] = $CODE_DB_ERROR;
 	}else{
 		$json["success"] = $CODE_NOT_FOUND;
 		$json["message"] = "Type not found";

@@ -54,7 +54,7 @@ if(isset($_GET["authkey"])){
 if($user == false){
 	$json["success"]=$CODE_ERROR;
 	if(DBConnection::getInstance()->status == DBConfig::$dbStatus["offline"]){
-		$json["message"] = "Database error";
+		$json["message"] = "Database error";$json["success"] = $CODE_DB_ERROR;
 	}else{
 		$json["message"] = "User not found";
 	}

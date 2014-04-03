@@ -89,7 +89,7 @@ $data = $db->updateImage($id, $x, $y, $w, $h);
 if($data == false){
 	$json["success"]=$CODE_ERROR;
 	if(DBConnection::getInstance()->status == DBConfig::$dbStatus["offline"]){
-		$json["message"] = "Database error";
+		$json["message"] = "Database error";$json["success"] = $CODE_DB_ERROR;
 	}else{
 		$json["message"] = "image not found";
 	}

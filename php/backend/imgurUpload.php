@@ -122,7 +122,7 @@ for($i = 0; $i < count($_FILES['images']['name']); $i++){
 		}
 		if(!$db->saveImage($entry["id"], $url, -1,-1,-1,-1)){
 			$json["success"] = $CODE_ERROR;
-			$json["message"] = "database error";
+			$json["message"] = "Database error";$json["success"] = $CODE_DB_ERROR;
 			exit();
 		}
 		$data["url"]=$url;
