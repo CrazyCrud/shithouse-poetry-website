@@ -57,7 +57,7 @@ if(isset($_GET["key"])){
 
 
 
-if($user == false || !isset($user[0]["id"])){
+if($user == false || !isset($user["id"])){
 	$json["success"]=$CODE_ERROR;
 	if(DBConnection::getInstance()->status == DBConfig::$dbStatus["offline"]){
 		$json["message"] = "Database error";
@@ -68,7 +68,7 @@ if($user == false || !isset($user[0]["id"])){
 	exit();
 }
 
-$json["data"] = $user[0];
+$json["data"] = $user;
 
 $json["success"] = $CODE_SUCCESS;
 echo json_encode($json);
