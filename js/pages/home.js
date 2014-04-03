@@ -466,13 +466,13 @@ function loadNextEntry(){
 function createDummy(){
 	message("Speichern", "Wir legen f&uuml;r dich einen Account an damit du deine Transkriptionen sp&auml;ter bearbeiten kannst.<br/>Bitte habe etwas Gedult.");
 	user = {};
-	user.password = guid();
+	user.password = $.md5(guid());
 	ImgurManager.createUser(onDummyCreated, "", user.password, "");
 }
 
 function onDummyCreated(data){
 	if(data==null){
-		message("Oops!", "Leider konnte wir keinen Account anlegen um Transkriptionen hinzuzuf&uuml;gen.<br/>Wende dich an einen Systemadministrator oder versuche es sp&auml;ter nochmal.");
+		message("Oops!", "Leider konnten wir keinen Account anlegen um Transkriptionen hinzuzuf&uuml;gen.<br/>Wende dich an einen Systemadministrator oder versuche es sp&auml;ter nochmal.");
 	}else{
 		ImgurManager.loginUser(onDummyLoginSuccess, data, user.password);
 	}
@@ -480,7 +480,7 @@ function onDummyCreated(data){
 
 function onDummyLoginSuccess(data){
 	if(data==null){
-		message("Oops!", "Leider konnte wir keinen Account einloggen um Transkriptionen hinzuzuf&uuml;gen.<br/>Wende dich an einen Systemadministrator oder versuche es sp&auml;ter nochmal.");
+		message("Oops!", "Leider konnten wir keinen Account einloggen um Transkriptionen hinzuzuf&uuml;gen.<br/>Wende dich an einen Systemadministrator oder versuche es sp&auml;ter nochmal.");
 	}else{
 		ImgurManager.getUserAuth(onGetUser, data);
 	}

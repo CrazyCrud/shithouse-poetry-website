@@ -177,7 +177,7 @@ function createDummy(){
 
 function onDummyCreated(data){
 	if(data==null){
-		message("Oops!", "Leider konnte wir keinen Account anlegen um Bilder hochzuladen.<br/>Wende dich an einen Systemadministrator oder versuche es sp&auml;ter nochmal.");
+		message("Oops!", "Leider konnten wir keinen Account anlegen um Bilder hochzuladen.<br/>Wende dich an einen Systemadministrator oder versuche es sp&auml;ter nochmal.");
 	}else{
 		ImgurManager.loginUser(onLoginDummmySuccess, data, user.password);
 	}
@@ -185,7 +185,7 @@ function onDummyCreated(data){
 
 function onLoginDummmySuccess(data){
 	if(data==null){
-		message("Oops!", "Leider konnte wir keinen Account einloggen um Bilder hochzuladen.<br/>Wende dich an einen Systemadministrator oder versuche es sp&auml;ter nochmal.");
+		message("Oops!", "Leider konnten wir keinen Account einloggen um Bilder hochzuladen.<br/>Wende dich an einen Systemadministrator oder versuche es sp&auml;ter nochmal.");
 	}else{
 		ImgurManager.getUserAuth(onGetUser, data);
 	}

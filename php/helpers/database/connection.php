@@ -17,31 +17,23 @@ class DBConnection{
 	}
 
 	private function initConnection(){
-		$link = mysql_connect(
+		$link = mysqli_connect(
 			DBConfig::$settings["sqllocation"],
 			DBConfig::$settings["sqluser"],
-			DBConfig::$settings["sqlpwd"])
+			DBConfig::$settings["sqlpwd"], DBConfig::$settings["sqldb"])
 		or $this->error(DBConfig::$dbStatus["offline"]);
-		mysql_select_db(
-			DBConfig::$settings["sqldb"],
-			$link)
-		or $this->error(DBConfig::$dbStatus["offline"]);
-		mysql_query("SET character_set_results = 'utf8', character_set_client = 'utf8', character_set_connection = 'utf8', character_set_database = 'utf8', character_set_server = 'utf8'", $link);
+		mysqli_query($link, "SET character_set_results = 'utf8', character_set_client = 'utf8', character_set_connection = 'utf8', character_set_database = 'utf8', character_set_server = 'utf8'");
 		$this->link = $link;
 		$this->status = DBConfig::$dbStatus["ready"];
 	}
 
 	private function initSaltConnection(){
-		$saltLink = mysql_connect(
+		$saltLink = mysqli_connect(
 			DBConfig::$settings["sqllocation"],
 			DBConfig::$settings["sqluser"],
-			DBConfig::$settings["sqlpwd"], true)
+			DBConfig::$settings["sqlpwd"], DBConfig::$settings["saltdb"])
 		or $this->error(DBConfig::$dbStatus["offline"]);
-		mysql_select_db(
-			DBConfig::$settings["saltdb"],
-			$saltLink)
-		or $this->error(DBConfig::$dbStatus["offline"]);
-		mysql_query("SET character_set_results = 'utf8', character_set_client = 'utf8', character_set_connection = 'utf8', character_set_database = 'utf8', character_set_server = 'utf8'", $saltLink);
+		mysqli_query($saltLink, "SET character_set_results = 'utf8', character_set_client = 'utf8', character_set_connection = 'utf8', character_set_database = 'utf8', character_set_server = 'utf8'");
 		$this->saltLink = $saltLink;
 	}
 
@@ -55,12 +47,12 @@ class DBConnection{
 			$link = $this->saltLink;
 		}
 		$rows = array();
-		$result = mysql_query($q, $link)
+		$result = mysqli_query($link, $q)
 		or $this->error(DBConfig::$dbStatus["offline"]);
-		$id = mysql_insert_id();
+		$id = mysqli_insert_id($link);
 		if(strpos($q,"INSERT")!==false&&$id!=0)return $id;
 		if(is_bool($result))return $result;
-		while ($row = mysql_fetch_assoc($result)){
+		while ($row = mysqli_fetch_assoc($result)){
 			$rows[count($rows)]=$row;
 		}
 		return $rows;

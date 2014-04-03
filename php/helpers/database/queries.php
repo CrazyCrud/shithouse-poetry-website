@@ -1528,6 +1528,13 @@ class Queries{
 		salt = '$salt'";
 		return $query;
 	}
+	public static function removeSalt($userid){
+		$s = DBConfig::$tables["salts"];
+		$query=
+		"DELETE FROM `$s`
+		WHERE id = $userid";
+		return $query;
+	}
 }
 
 ?>
