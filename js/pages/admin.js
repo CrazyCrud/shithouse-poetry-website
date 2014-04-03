@@ -847,7 +847,7 @@ function formatLog(logLine){
 	var eid = text.match(/#[0-9]+/ig);
 	var entry = "";
 	if(eid){
-		for(var i=uid.length-1; i>=0; i--){
+		for(var i=eid.length-1; i>=0; i--){
 			entry = eid[i].substring(1);
 			text = text.replace("#"+entry,'<a href="details.php?id='+entry+'" target="_blank">Entry'+entry+'</a>');
 		}
