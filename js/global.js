@@ -205,8 +205,10 @@ function getUserIcon(status, title){
   }else{
     if(title.trim().length > 0)$icon.attr("src", "img/global/icons/"+title.toLowerCase().replace(" ","_")+".svg");
   }
-  if(title.trim().length > 0)$icon.attr("title", title);
-  return $icon;
+  if(title.trim().length > 0){
+    $icon.attr("title", title);
+    return $icon;
+  }
 }
 
 function getUserName(user){
