@@ -352,7 +352,7 @@ class DBHelper{
 		if(isset($oldUser)
 			&&$oldUser!==false
 			&&$oldUser["status"]==DBConfig::$userStatus["unregistered"]){
-			$this->log("merging user @".$oldUser["id"]." (".$oldUser["username"].") into ".$user["id"]. "(".$user["username"].")");
+			$this->log("merging user @".$oldUser["id"]." (".$oldUser["username"].") into @".$user["id"]. "(".$user["username"].")");
 			$this->mergeUser($oldUser["id"], $user["id"]);
 		}else{
 			$this->log("@".$user["id"]." (".$user["username"].") logs in");
