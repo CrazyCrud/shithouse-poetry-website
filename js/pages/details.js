@@ -304,7 +304,7 @@ function fillUI(e){
 		}else{
 			$("#report #number").remove();
 			$("#report").removeClass("active");
-			$report.attr("title","");
+			$("#report").attr("title","");
 		}
 
 		setTranscription();
