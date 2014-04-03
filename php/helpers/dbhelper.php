@@ -417,7 +417,7 @@ class DBHelper{
 	// USE WITH CAUTION AND ONLY USE WHEN ALL RELATED ENTRIES ARE
 	// DELETED AS WELL OR ASSOCIATED TO ANOTHER USER
 	private function hardDeleteUser($id){
-		$query = Queries::removeSalt($id);
+		$query = Queries::removesalt($id);
 		$this->query($query,true);
 		$query = Queries::harddeleteuser($id);
 		return $this->query($query);
