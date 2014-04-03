@@ -669,6 +669,8 @@ var ImgurManager = (function(){
 			$.get("php/backend/" + url, function(data){
 				if(data.success == 1){
 					callback(data.data);
+				}else if(data.success == 0){
+					window.location = "maintenance.php";
 				}else{
 					callback(null);
 				}
