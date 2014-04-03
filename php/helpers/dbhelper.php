@@ -404,7 +404,7 @@ class DBHelper{
 		if(!$this->query($query))$success = false;
 		$query = Queries::mergeuserfollowers($oldId, $newId);
 		if(!$this->query($query))$success = false;
-		$query = Queries::mergeviews($oldId, $newId);
+		$query = Queries::mergeuserviews($oldId, $newId);
 		if(!$this->query($query))$success = false;
 		else{
 			$query = Queries::removeuserviews($oldId);
