@@ -249,7 +249,8 @@ var entryAchievements = [
 	{ level: 10, limit:2000, text:"Mindestens 2000 Bilder hochgeladen" },
 	{ level: 11, limit:5000, text:"Mindestens 5000 Bilder hochgeladen" },
 	{ level: 12, limit:7500, text:"Mindestens 7500 Bilder hochgeladen" },
-	{ level: 13, limit:9001, text:"Mindestens 9001 Bilder hochgeladen" }
+	{ level: 13, limit:9001, text:"Über 9000 Bilder hochgeladen" },
+	{ level: 1, limit:9999999, text:"Unschlagbar!" }
 ];
 var commentAchievements = [
 	{ level: 1, limit:1, text:"Mindestens einen Kommentar abgegeben" },
@@ -264,7 +265,8 @@ var commentAchievements = [
 	{ level: 10, limit:2000, text:"Mindestens 2000 Kommentare abgegeben" },
 	{ level: 11, limit:5000, text:"Mindestens 5000 Kommentare abgegeben" },
 	{ level: 12, limit:7500, text:"Mindestens 7500 Kommentare abgegeben" },
-	{ level: 13, limit:9001, text:"Mindestens 9001 Kommentare abgegeben" }
+	{ level: 13, limit:9001, text:"Über 9000 Kommentare abgegeben" },
+	{ level: 1, limit:9999999, text:"Unschlagbar!" }
 ];
 var ratingAchievements = [
 	{ level: 1, limit:1, text:"Mindestens ein Bild bewertet" },
@@ -279,7 +281,8 @@ var ratingAchievements = [
 	{ level: 10, limit:2000, text:"Mindestens 2000 Bilder bewertet" },
 	{ level: 11, limit:5000, text:"Mindestens 5000 Bilder bewertet" },
 	{ level: 12, limit:7500, text:"Mindestens 7500 Bilder bewertet" },
-	{ level: 13, limit:9001, text:"Mindestens 9001 Bilder bewertet" }
+	{ level: 13, limit:9001, text:"Über 9000 Bilder bewertet" },
+	{ level: 1, limit:9999999, text:"Unschlagbar!" }
 ];
 var transcriptionAchievements = [
 	{ level: 1, limit:1, text:"Mindestens ein Bild transkribiert" },
@@ -294,7 +297,8 @@ var transcriptionAchievements = [
 	{ level: 10, limit:2000, text:"Mindestens 2000 Bilder transkribiert" },
 	{ level: 11, limit:5000, text:"Mindestens 5000 Bilder transkribiert" },
 	{ level: 12, limit:7500, text:"Mindestens 7500 Bilder transkribiert" },
-	{ level: 13, limit:9001, text:"Mindestens 9001 Bilder transkribiert" }
+	{ level: 13, limit:9001, text:"Über 9000 Bilder transkribiert" },
+	{ level: 1, limit:9999999, text:"Unschlagbar!" }
 ];
 var followerAchievements = [
 	{ level: 1, limit:1, text:"Mindestens ein Abonnent" },
@@ -309,7 +313,8 @@ var followerAchievements = [
 	{ level: 10, limit:2000, text:"Mindestens 2000 Abonnenten" },
 	{ level: 11, limit:5000, text:"Mindestens 5000 Abonnenten" },
 	{ level: 12, limit:7500, text:"Mindestens 7500 Abonnenten" },
-	{ level: 13, limit:9001, text:"Mindestens 9001 Abonnenten" }
+	{ level: 13, limit:9001, text:"Über 9000 Abonnenten" },
+	{ level: 1, limit:9999999, text:"Unschlagbar!" }
 ];
 
 
