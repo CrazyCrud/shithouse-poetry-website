@@ -62,9 +62,27 @@ function buildComment(comment){
 		$comment.append($date);
 		$comment.append($author);
 	}
+	com = formatCommentText(com);
 	var $text = $('<div class="text">'+com+'</div>');
 	$comment.append($text);
 	$("#comments-content").prepend($comment);
+}
+
+function formatCommentText(comment){
+	var users = comment.match(/[^0-9]@\-?[0-9]@[a-zA-Z0-9]+/gi);
+	if(users){
+		for(var i=users.length-1; i>=0; i--){
+			users[i] = users[i].trim();
+			var userid = users[i].substring(1).match(/\-?[0-9]/);
+			var username = users[i].replace("@"+userid+"@", "").trim();
+			if(userid == "-1"){
+				comment = comment.replace(users[i],"@"+username);
+			}else{
+				comment = comment.replace(users[i],'<a href="user.php?id='+userid+'">@'+username+'</a>');
+			}
+		}
+	}
+	return comment;
 }
 
 function addComments(c){

@@ -456,6 +456,7 @@ class DBHelper{
 	// returns whether successfull
 	public function addComment($entryid, $comment){
 		$comment = trim($comment);
+		$comment = $this->convertToLinkedText($comment);
 		if(strlen($comment)==0)return false;
 		$user = $this->getUser();
 		$entry = $this->getEntry($entryid);
@@ -1890,6 +1891,27 @@ class DBHelper{
 		$password = $this->applySalt($user["password"], $salt);
 		$query = Queries::updateuser($user["id"], $user["email"], $user["username"], $password);
 		$this->query($query);
+	}
+
+	/**
+	FORMATTING FUNCTIONS
+	*/
+
+	private function convertToLinkedText($text){
+		$matches = array();
+		$pattern = '/[^0-9]@[a-zA-Z]+/';
+		while(preg_match($pattern,$text, $matches, PREG_OFFSET_CAPTURE)){
+			$username = substr($matches[0][0],2);
+			$user = $this->getUser($username);
+			if(isset($user["id"])){
+				$userid = $user["id"];
+			}else{
+				$userid = -1;
+			}
+			$strpos = $matches[0][1]+1;
+			$text = substr($text,0,$strpos)."@$userid".substr($text,$strpos);
+		}
+		return $text;
 	}
 
 }
