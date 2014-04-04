@@ -74,7 +74,7 @@ function addComment(comment){
 
 	$info.append($user);
 	if(comment.userid == user.id) $info.append(" hast ein Bild kommentiert:");
-	else if(comment.indexOf("@"+user.id+"@")!=-1){
+	else if(comment.comment.indexOf("@"+user.id+"@")!=-1){
 		$info.append(" hat dich in einem Kommentar erwähnt:");
 	}else 
 		$info.append(" hat ein Bild von dir kommentiert:");
