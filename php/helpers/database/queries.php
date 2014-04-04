@@ -442,10 +442,6 @@ class Queries{
 	public static function getentriesbyrating($start, $limit, $where, $userid){
 		$e = DBConfig::$tables["entries"];
 		$u = DBConfig::$tables["users"];
-		$t = DBConfig::$tables["types"];
-		$tags = DBConfig::$tables["tags"];
-		$usertags = DBConfig::$tables["usertags"];
-		$v = DBConfig::$tables["entryviews"];
 		$r = DBConfig::$tables["entryratings"];
 		if(!isset($where)){
 			$where = "";
@@ -461,41 +457,28 @@ class Queries{
 			`$e`.userid AS userid,
 			`$u`.username AS username,
 			`$u`.status AS userstatus,
-			`$t`.id AS typeid,
-			`$t`.name AS typename,
-			`$t`.description AS typedescription,
 			`$r`.ratings AS ratings,
-			`$v`.viewcount AS views,
 			`$r`.ratingcount AS ratingcount
 
 			FROM
-			`$u`, `$t`, `$tags`, `$usertags`, `$e`
-			LEFT OUTER JOIN `$v`
-			ON `$v`.entryid = `$e`.id
+			`$u`, `$e`
 			LEFT OUTER JOIN `$r`
 			ON `$r`.entryid = `$e`.id
 
 			WHERE
 			`$e`.userid = `$u`.id
-			AND
-			(`$e`.typeid = `$t`.id
-			OR `$e`.typeid = -1)
 			$where
 
 			GROUP BY
 			`$r`.entryid
 			ORDER BY
-			ratings DESC, ratingcount DESC
+			ratings DESC, ratingcount DESC, `$e`.date ASC
 			LIMIT $start, $limit";
 		return $query;
 	}
 	public static function getentriesbynormalizedrating($start, $limit, $date, $userid){
 		$e = DBConfig::$tables["entries"];
 		$u = DBConfig::$tables["users"];
-		$t = DBConfig::$tables["types"];
-		$tags = DBConfig::$tables["tags"];
-		$usertags = DBConfig::$tables["usertags"];
-		$v = DBConfig::$tables["entryviews"];
 		$r = DBConfig::$tables["entryratings"];
 		if(!isset($date)){
 			return Queries::getentriesbyrating($start, $limit, null, $userid);
@@ -511,11 +494,7 @@ class Queries{
 			`$e`.userid AS userid,
 			`$u`.username AS username,
 			`$u`.status AS userstatus,
-			`$t`.id AS typeid,
-			`$t`.name AS typename,
-			`$t`.description AS typedescription,
 			`$r`.ratings AS ratings,
-			`$v`.viewcount AS views,
 			`$r`.ratingcount AS ratingcount,
 			`$r`.ratingcount/`ratingcounts`.allRatingsCount AS relevancy
 
@@ -538,17 +517,12 @@ class Queries{
 
 			) ratingcounts,
 
-			`$u`, `$t`, `$r`, `$tags`, `$usertags`, `$e`
-			LEFT OUTER JOIN `$v`
-			ON `$v`.entryid = `$e`.id
+			`$u`, `$r`, `$e`
 
 			WHERE
 			`$r`.ratings > 0
 			AND
 			`$e`.userid = `$u`.id
-			AND
-			(`$e`.typeid = `$t`.id
-			OR `$e`.typeid = -1)
 			AND
 			`$e`.id = `$r`.entryid
 			AND
@@ -565,7 +539,6 @@ class Queries{
 		$e = DBConfig::$tables["entries"];
 		$info = DBConfig::$tables["information"];
 		$r = DBConfig::$tables["ratings"];
-		$v = DBConfig::$tables["entryviews"];
 		if(!isset($where)){
 			$where = "";
 		}else{
@@ -576,11 +549,8 @@ class Queries{
 			`$info`.entryid as id,
 			location,
 			`$e`.date as date,
-			AVG(`$r`.rating) as rating,
-			count(`$v`.entryid) as views
+			AVG(`$r`.rating) as rating
 			FROM `$info`, `$r`, `$e`
-			LEFT OUTER JOIN `$v`
-			ON `$v`.entryid = `$e`.id
 			WHERE (`$e`.id = `$info`.entryid) 
 			AND (`$info`.entryid = `$r`.entryid)
 			$where
@@ -598,7 +568,33 @@ class Queries{
 		}else{
 			$lim = "LIMIT $start, $limit";
 		}
-		return Queries::getentry(false, $where)." ORDER BY ".$order." DESC ".$lim;
+
+		$e = DBConfig::$tables["entries"];
+		$u = DBConfig::$tables["users"];
+		$t = DBConfig::$tables["types"];
+		$query = 
+			"SELECT
+			`$e`.id AS id,
+			`$e`.title AS title,
+			`$e`.date AS date,
+			`$e`.sex AS sex,
+			`$e`.userid AS userid
+
+			FROM
+			`$u`, `$t`, `$e`
+
+			WHERE
+			$id
+			`$e`.userid = `$u`.id
+			AND
+			(`$e`.typeid = `$t`.id
+			OR `$e`.typeid = -1)
+			$where
+
+			GROUP BY
+			`$e`.id
+			ORDER BY ".$order." DESC ".$lim;
+		return $query;
 	}
 	public static function deleteentry($id){
 		$e = DBConfig::$tables["entries"];
