@@ -1302,7 +1302,8 @@ class Queries{
 		AND LENGTH(`$c`.`comment`)>0
 		AND `$u`.`id` = `$c`.`userid`
 		AND (`$e`.`userid` = $userid
-		     OR `$c`.`userid` = $userid)
+		     OR `$c`.`userid` = $userid
+		     OR `$c`.`comment` LIKE '%\\@$userid\\@%')
 
 		UNION
 		SELECT DISTINCT

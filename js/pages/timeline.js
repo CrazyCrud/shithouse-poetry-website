@@ -65,7 +65,8 @@ function addComment(comment){
 	var $img = $('<a href="details.php?id='+comment.entryid+'"><img src="'+comment.smallthumbnail+'" title="'+comment.title+'"></img></a>');
 	var $user = $('<a href="user.php?id='+comment.userid+'">'+comment.username+"</a>");
 	if(comment.comment.trim().length == 0)comment.comment = '<span class="missing">Kommentar gel&ouml;scht</span>';
-	var $comment = $('<div class="comment">'+comment.comment+'</div>');
+	var commentText = formatCommentText(comment.comment);
+	var $comment = $('<div class="comment">'+commentText+'</div>');
 	var $left = $('<div class="leftcontainer container"></div>');
 	var $right = $('<div class="rightcontainer container"></div>');
 	var $info = $('<div class="info"><i class="icon-comment"/></div>');
@@ -73,7 +74,10 @@ function addComment(comment){
 
 	$info.append($user);
 	if(comment.userid == user.id) $info.append(" hast ein Bild kommentiert:");
-	else $info.append(" hat ein Bild von dir kommentiert:");
+	else if(comment.indexOf("@"+user.id+"@")!=-1){
+		$info.append(" hat dich in einem Kommentar erwähnt:");
+	}else 
+		$info.append(" hat ein Bild von dir kommentiert:");
 	$left.append($img);
 	$right.append($info);
 	$right.append($comment);
@@ -224,4 +228,21 @@ function addTranscription(entry){
 	$container.append($content);
 
 	$("#actions").append($container);
+}
+
+function formatCommentText(comment){
+	var users = comment.match(/[^0-9]@\-?[0-9]@[a-zA-Z0-9]+/gi);
+	if(users){
+		for(var i=users.length-1; i>=0; i--){
+			users[i] = users[i].trim();
+			var userid = users[i].substring(1).match(/\-?[0-9]/);
+			var username = users[i].replace("@"+userid+"@", "").trim();
+			if(userid == "-1"){
+				comment = comment.replace(users[i],"@"+username);
+			}else{
+				comment = comment.replace(users[i],'<a href="user.php?id='+userid+'">@'+username+'</a>');
+			}
+		}
+	}
+	return comment;
 }
