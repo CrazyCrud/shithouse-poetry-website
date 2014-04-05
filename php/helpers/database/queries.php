@@ -443,6 +443,7 @@ class Queries{
 		$e = DBConfig::$tables["entries"];
 		$u = DBConfig::$tables["users"];
 		$r = DBConfig::$tables["entryratings"];
+		$t = DBConfig::$tables["types"];
 		if(!isset($where)){
 			$where = "";
 		}else{
@@ -461,12 +462,15 @@ class Queries{
 			`$r`.ratingcount AS ratingcount
 
 			FROM
-			`$u`, `$e`
+			`$u`, `$t`, `$e`
 			LEFT OUTER JOIN `$r`
 			ON `$r`.entryid = `$e`.id
 
 			WHERE
 			`$e`.userid = `$u`.id
+			AND
+			(`$e`.typeid = `$t`.id
+			OR `$e`.typeid = -1)
 			$where
 
 			GROUP BY
@@ -568,6 +572,7 @@ class Queries{
 		}else{
 			$lim = "LIMIT $start, $limit";
 		}
+		if(isset($where))$where = "AND ($where)";
 
 		$e = DBConfig::$tables["entries"];
 		$u = DBConfig::$tables["users"];
