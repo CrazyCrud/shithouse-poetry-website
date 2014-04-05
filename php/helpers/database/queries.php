@@ -444,6 +444,8 @@ class Queries{
 		$u = DBConfig::$tables["users"];
 		$r = DBConfig::$tables["entryratings"];
 		$t = DBConfig::$tables["types"];
+		$tags = DBConfig::$tables["tags"];
+		$usertags = DBConfig::$tables["usertags"];
 		if(!isset($where)){
 			$where = "";
 		}else{
@@ -462,7 +464,7 @@ class Queries{
 			`$r`.ratingcount AS ratingcount
 
 			FROM
-			`$u`, `$t`, `$e`
+			`$u`, `$t`, $usertags, `$tags`, `$e`
 			LEFT OUTER JOIN `$r`
 			ON `$r`.entryid = `$e`.id
 
