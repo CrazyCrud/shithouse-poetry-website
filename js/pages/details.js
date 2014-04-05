@@ -178,7 +178,8 @@ function initGUI(){
 								modal: false,
 								width: "auto",
 								title: "Vielen Dank für deine Meldung",
-								show: true
+								show: true,
+								close: refresh
 							});
 						}else{
 							$dialog = $('<div><br>Deine Meldung wurde nicht erfolgreich eingetragen.<br>&Uuml;berpr&uuml;fe bitte, dass diese mindestens 10 Zeichen lang ist.</div>');
@@ -326,6 +327,25 @@ function fillUI(e){
 		}
 
 		setTranscription();
+
+		setNav();
+	}
+}
+
+function setNav(){
+	var next = entry.next;
+	var prev = entry.prev;
+	$("#navpanel a").css("opacity",1);
+	$("#navpanel a").attr("href","#");
+	if(next.length==0)$("#navpanel #next").css("opacity",.25);
+	else{
+		$("#navpanel #next").attr("href","details.php?id="+next[0].id);
+		$("#navpanel #next").attr("title",next[0].title);
+	}
+	if(prev.length==0)$("#navpanel #prev").css("opacity",.25);
+	else{
+		$("#navpanel #prev").attr("href","details.php?id="+prev[0].id);
+		$("#navpanel #prev").attr("title",prev[0].title);
 	}
 }
 

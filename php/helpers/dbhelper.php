@@ -530,6 +530,12 @@ class DBHelper{
 		$entry["ratings"]=$this->query($query);
 		$query = Queries::getinformation($entryid);
 		$entry["information"]=$this->query($query);
+		$query = Queries::getnextentries($entryid);
+		$next = $this->query($query);
+		$query = Queries::getpreventries($entryid);
+		$prev = $this->query($query);
+		$entry["next"] = $next;
+		$entry["prev"] = $prev;
 		return $entry;
 	}
 

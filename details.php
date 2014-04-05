@@ -69,6 +69,10 @@
 					</div>
 					<div class="row">
 						<div class="details small-12 medium-7 large-7 columns left" id="image-container">
+							<div class="columns" id="navpanel">
+								<a href="#" id="prev" class="tiny">< vorheriger</a>
+								<a href="#" id="next" class="tiny">nächster ></a>
+							</div>
 							<img id="image" src="img/global/loading.gif">
 						</div>
 						<div class="details small-12 medium-5 large-5 columns right" id="image-description">

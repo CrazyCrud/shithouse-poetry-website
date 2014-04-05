@@ -221,6 +221,16 @@ body {
 #controlpanel #deleteentry {
   margin-left: 32px; }
 
+#navpanel {
+  font-size: 0.618rem;
+  padding-bottom: 0.618rem; }
+
+#navpanel #prev {
+  float: left; }
+
+#navpanel #next {
+  float: right; }
+
 #image-container {
   text-align: center;
   padding-top: 6px; }

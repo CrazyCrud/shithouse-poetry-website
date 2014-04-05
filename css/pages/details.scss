@@ -32,6 +32,17 @@ body{
   margin-left: 32px;
 }
 
+#navpanel{
+  font-size: $space_minus1;
+  padding-bottom: $space_minus1;
+}
+#navpanel #prev{
+  float:left;
+}
+#navpanel #next{
+  float:right;
+}
+
 #image-container{
   text-align: center;
   padding-top: 6px;

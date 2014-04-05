@@ -642,6 +642,29 @@ class Queries{
 		WHERE `$v`.userid = $oldId";
 		return $query;
 	}
+	public static function getnextentries($entryid){
+		$e = DBConfig::$tables["entries"];
+		$query =
+		"SELECT
+		`$e`.id,
+		`$e`.title
+		FROM `$e`
+		WHERE `$e`.id > $entryid
+		ORDER BY `$e`.id ASC LIMIT 0,1";
+		return $query;
+	}
+
+	public static function getpreventries($entryid){
+		$e = DBConfig::$tables["entries"];
+		$query =
+		"SELECT
+		`$e`.id,
+		`$e`.title
+		FROM `$e`
+		WHERE `$e`.id < $entryid
+		ORDER BY `$e`.id DESC LIMIT 0,1";
+		return $query;
+	}
 	/**
 	INFORMATION QUERIES
 	*/
