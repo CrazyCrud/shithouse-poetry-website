@@ -1905,16 +1905,18 @@ class DBHelper{
 
 	private function convertToLinkedText($text){
 		$matches = array();
-		$pattern = '/[^0-9]@[a-zA-Z]+/';
+		$pattern = '/(^|[^0-9])@[a-zA-Z][a-zA-Z0-9]+/';
 		while(preg_match($pattern,$text, $matches, PREG_OFFSET_CAPTURE)){
-			$username = substr($matches[0][0],2);
+			$match = trim($matches[0][0]);
+			$username = substr($match,1);
 			$user = $this->getUser($username);
 			if(isset($user["id"])){
 				$userid = $user["id"];
 			}else{
 				$userid = -1;
 			}
-			$strpos = $matches[0][1]+1;
+			$strpos = $matches[0][1];
+			$strpos += strpos($matches[0][0],"@");
 			$text = substr($text,0,$strpos)."@$userid".substr($text,$strpos);
 		}
 		return $text;

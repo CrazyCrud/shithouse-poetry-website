@@ -69,11 +69,12 @@ function buildComment(comment){
 }
 
 function formatCommentText(comment){
-	var users = comment.match(/[^0-9]@\-?[0-9]@[a-zA-Z0-9]+/gi);
+	var users = comment.match(/(^|[^0-9])@\-?[0-9]+@[a-zA-Z0-9]+/gi);
 	if(users){
 		for(var i=users.length-1; i>=0; i--){
 			users[i] = users[i].trim();
-			var userid = users[i].substring(1).match(/\-?[0-9]/);
+			var userid = users[i].match(/@\-?[0-9]+@/)[0];
+			userid = userid.substring(1,userid.length-1);
 			var username = users[i].replace("@"+userid+"@", "").trim();
 			if(userid == "-1"){
 				comment = comment.replace(users[i],"@"+username);
