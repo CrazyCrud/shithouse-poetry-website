@@ -212,19 +212,28 @@ function getUserIcon(status, title){
 }
 
 function getUserName(user){
-  switch(user.status){
-    case -1:
-    case "-1":
-      return "Gel&ouml;schter Nutzer";
-    case 4:
-    case "4":
-      return "Anonymer Nutzer";
-    default:
-      if(user.name)
-        return user.name;
-      if(user.username)
-        return user.username;
-      return "???";
+  if(typeof user === "string"){
+    user = user.trim();
+    if(user.indexOf("User")==0&&user.length==17){
+      return "Jemand";
+    }else{
+      return user;
+    }
+  }else{
+    switch(user.status){
+      case -1:
+      case "-1":
+        return "Gel&ouml;schter Nutzer";
+      case 4:
+      case "4":
+        return "Anonymer Nutzer";
+      default:
+        if(user.name)
+          return getUserName(user.name);
+        if(user.username)
+          return getUserName(user.username);
+        return "???";
+    }
   }
 }
 

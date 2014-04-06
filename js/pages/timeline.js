@@ -45,6 +45,8 @@ function fillActions(ac){
 			}
 		}
 		if(add){
+			console.log(action);
+			action["username"] = getUserName(action["username"]);
 			actions[actions.length]=action;
 		}
 	}
