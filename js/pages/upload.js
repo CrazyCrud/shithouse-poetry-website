@@ -130,6 +130,16 @@ function saveImage(){
 
 	var tags = _.pluck($tagList.find('.tag-active-text'), 'innerHTML');
 
+	var enteredtags = $customTagInput.val().trim();
+	if(enteredtags.length>0){
+		var enteredtags = enteredtags.split(/[^a-zA-Z0-9äöüßÄÖÜ]/);
+		for(var i in enteredtags){
+			var tag = enteredtags[i].trim();
+			if(tag.length>0)
+				tags[tags.length]=tag;
+		}
+	}
+
 	tags = tags.join(',');
 
 	var type = $.trim($("#type").find('option:selected').html());
@@ -503,6 +513,21 @@ function appendUserTags(tagData){
 }
 
 function appendSingleTag(tag, state, isUserTag){
+
+	tag = tag.trim();
+	if(tag.length==0){
+		return;
+	}
+	var tags = tag.split(/[^a-zA-Z0-9äöüßÄÖÜ]/);
+	if(tags.length>1){
+		for(var i in tags){
+			var tag = tags[i].trim();
+			if(tag.length>0)
+				appendSingleTag(tag, state, isUserTag);
+		}
+		return;
+	}
+
 	var $tagItem;
 	if(isUserTag){
 		$tagItem = $("<li><span class='tag-active-text'>" + tag + "</span><i class='icon-cancel'></i></li>");

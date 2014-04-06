@@ -256,3 +256,37 @@ function getRandomColor() {
     }
     return color;
 }
+
+function formatCommentText(comment){
+  comment = formatUsersInComment(comment);
+  comment = formatTagsInComment(comment);
+  return comment;
+}
+function formatUsersInComment(comment){
+  var users = comment.match(/(^|[^0-9])@\-?[0-9]+@[a-zA-Z0-9]+/gi);
+  if(users){
+    for(var i=users.length-1; i>=0; i--){
+      users[i] = users[i].trim();
+      var userid = users[i].match(/@\-?[0-9]+@/)[0];
+      userid = userid.substring(1,userid.length-1);
+      var username = users[i].replace("@"+userid+"@", "").trim();
+      if(userid == "-1"){
+        comment = comment.replace(users[i],"@"+username);
+      }else{
+        comment = comment.replace(users[i],'<a href="user.php?id='+userid+'">@'+username+'</a>');
+      }
+    }
+  }
+  return comment;
+}
+function formatTagsInComment(comment){
+  var tags = comment.match(/#[a-zA-Z0-9]+/gi);
+  if(tags){
+    for(var i=tags.length-1; i>=0; i--){
+      tags[i] = tags[i].trim();
+      var tag = tags[i].substring(1);
+      comment = comment.replace(tags[i],'<a href="search.php?type=tag&values='+tag+'">#'+tag+'</a>');
+    }
+  }
+  return comment;
+}

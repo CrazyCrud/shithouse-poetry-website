@@ -186,6 +186,10 @@ class DBHelper{
 	}
 
 	public function updateUser($mail, $name, $pwd){
+		$username = preg_replace('/[^a-zA-Z0-9]/i', "", $name);
+		if($name != $username)return false;
+		$name = $username;
+
 		$user = $this->getUser();
 		if(!isset($user["id"])){
 			return false;
@@ -254,6 +258,9 @@ class DBHelper{
 
 		// username must not be a valid email !!!
 		if (filter_var($name, FILTER_VALIDATE_EMAIL))return false;
+		$username = preg_replace('/[^a-zA-Z0-9]/i', "", $name);
+		if($name != $username)return false;
+		$name = $username;
 
 		// check whether valid email
 		if (!filter_var($mail, FILTER_VALIDATE_EMAIL))return false;
@@ -1247,6 +1254,7 @@ class DBHelper{
 	//
 	// $user is only used internally (ignore it)
 	public function addTag($tag, $entryid, $user){
+		$tag = preg_replace('/[^a-zA-Z0-9äöüßÄÖÜ]/i', "", $tag);
 		if(!isset($user)){
 			$user = $this->getUser();
 		}
