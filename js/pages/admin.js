@@ -451,7 +451,7 @@ function fillUsersUI(data){
 	var newUserCount = 0;
 	for(var i=0; i<data.length; i++){
 		var user = data[i];
-		if(isNewUser(user))newUserCount++;
+		if(user.status!="4"&&isNewUser(user))newUserCount++;
 		addUser(user);
 	}
     if(newUserCount==0)
@@ -841,7 +841,7 @@ function formatLog(logLine){
 	if(uid){
 		for(var i=uid.length-1; i>=0; i--){
 			user = uid[i].substring(1);
-			text = text.replace("@"+user,'<a href="user.php?id='+user+'" target="_blank">User'+user+'</a>');
+			text = text.replace(new RegExp("@"+user+"([^0-9]|$)", "ig"),'<a href="user.php?id='+user+'" target="_blank">User'+user+'</a> ');
 		}
 	}
 	var eid = text.match(/#[0-9]+/ig);
@@ -849,7 +849,7 @@ function formatLog(logLine){
 	if(eid){
 		for(var i=eid.length-1; i>=0; i--){
 			entry = eid[i].substring(1);
-			text = text.replace("#"+entry,'<a href="details.php?id='+entry+'" target="_blank">Entry'+entry+'</a>');
+			text = text.replace(new RegExp("#"+entry+"([^0-9]|$)", "ig"),'<a href="details.php?id='+entry+'" target="_blank">Entry'+entry+'</a> ');
 		}
 	}else eid = "";
 	return {
