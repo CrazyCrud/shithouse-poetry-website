@@ -525,6 +525,10 @@ function addUser(queriedUser){
 			//icon = '<i class="icon-help-circled user-unregistered"></i>';
 			//status = "Unregistriert";
 			break;
+		case "5":
+			icon = '<i class="icon-thumbs-up"></i>';
+			status = "Facebook";
+			break;
 	}
 
 	var s = queriedUser.status;
@@ -534,6 +538,7 @@ function addUser(queriedUser){
 	options += '<option '+(s==1?"selected":"")+' status="1" value>Admin</option>';
 	options += '<option '+(s==2?"selected":"")+' status="2" value>neuer Nutzer</option>';
 	options += '<option '+(s==3?"selected":"")+' status="3" value>Gebannt</option>';
+	if(s==5)options += '<option selected status="5" value>Facebook</option>';
 	//options += '<option '+(s==4?"selected":"")+' status="4" value>Unregistriert</option></select>';
 
 	if(user.id == queriedUser.id)options = "";
@@ -546,7 +551,7 @@ function addUser(queriedUser){
 	var $container = $('<tr class="user-table-row" id="user'+queriedUser.id+'"> '
     +'<td class="id">'+queriedUser.id+'</td> '
     +'<td class="mail">'+queriedUser.email+verified+'</td> '
-    +'<td class="username"><a href="user.php?id='+queriedUser.id+'" target="_blank">'+queriedUser.username+'</a></td> '
+    +'<td class="username"><a href="user.php?id='+queriedUser.id+'" title="'+queriedUser.username+'" target="_blank">'+getUserName(queriedUser.username)+'</a></td> '
     +'<td class="date" title="'+queriedUser.joindate+'" sort="'+queriedUser.joindate+'">'+formatTime(queriedUser.joindate)+'</td> '
     +'<td class="date" title="'+queriedUser.lastaction+'" sort="'+queriedUser.lastaction+'">'+formatTime(queriedUser.lastaction)+'</td> '
     +'<td class="status" sort="'+queriedUser.status+'">'+icon+options+'</td> '
