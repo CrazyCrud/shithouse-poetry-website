@@ -117,6 +117,7 @@ function appendLoginOverlay(){
 }
 
 function userLogin(){
+	message("Login","Du wirst eingeloggt...");
 	var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 	var md5_pwd = $.md5($passwordInput.val());
 	var url = "php/backend/login.php?mail=" + $mailInput.val() + "&password=" + md5_pwd;
@@ -199,6 +200,15 @@ function error(message){
 	});
 }
 
+function message(title, message){
+	var $dialog = $('<div class="jqueryui-dialog">' + message + "</div>");
+	$dialog.dialog({
+		modal: true,
+		width: "auto",
+		title: title
+	});
+}
+
 function onLoginSuccess(authkey){
 	var d = new Date();
 	var thirtyDays = 2592000000;
@@ -232,6 +242,7 @@ function checkFBLogin(){
 }
 
 function FBLogin(){
+	message("Login","Du wirst eingeloggt...");
 	FB.login(function(response) {
 		if (response.authResponse) {
 			FB.api('/me', function(response) {
