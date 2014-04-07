@@ -217,7 +217,7 @@ function getUserName(user){
     if(user.indexOf(":")!=-1){
       return user.replace(/.*:/,"");
     }
-    if(user.indexOf("User")==0&&user.length==17){
+    if(user.indexOf("User")==0&&user.length>=15){
       return "Jemand";
     }else{
       return user;
