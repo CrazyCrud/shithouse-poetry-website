@@ -125,7 +125,9 @@ class DBHelper{
 					$query = Queries::createuser(uniqid(), "fbuser".$fbUser->id."@latrinalia.de", $username, uniqid(), DBConfig::$userStatus["facebook"]);
 					$userid = $this->query($query);
 					if(!isset($userid))return false;
+					$this->log("@".$userid." (".$username.") registers with facebook");
 				}else{
+					$this->log("@".$user[0]["id"]." (".$user[0]["username"].") logs in");
 					$userid = $users[0]["id"];
 				}
 
