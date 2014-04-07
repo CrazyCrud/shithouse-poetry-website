@@ -47,7 +47,8 @@ class DBConfig{
 		"admin" =>1,
 		"newUser" => 2,
 		"banned" =>3,
-		"unregistered" =>4
+		"unregistered" =>4,
+		"facebook" =>5
 	);
 
 	public static $tagStatus = array(

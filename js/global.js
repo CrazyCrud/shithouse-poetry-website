@@ -65,7 +65,7 @@ function cookieUser(){
 function greetUser(){
     if(!_.isEmpty(user)&&user.status!=4&&user.status!="4"){
       if(user.username.length > 0){
-        $("#link-login").children('span').html(user.username);
+        $("#link-login").children('span').html(getUserName(user.username));
         $("#link-login i").removeAttr('class');
         $("#link-login i").addClass('icon-menu');
       }
@@ -214,6 +214,9 @@ function getUserIcon(status, title){
 function getUserName(user){
   if(typeof user === "string"){
     user = user.trim();
+    if(user.indexOf(":")!=-1){
+      return user.replace(/.*:/,"");
+    }
     if(user.indexOf("User")==0&&user.length==17){
       return "Jemand";
     }else{

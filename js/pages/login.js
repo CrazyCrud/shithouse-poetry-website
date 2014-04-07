@@ -73,11 +73,14 @@ function appendLoginOverlay(){
 	$overlay = $(".overlaycontent");
 	$backButton = $("#back-button");
 	$loginButton = $("#login-button");
+	$fbLoginButton = $("#fblogin-button");
 	$registerButton = $("#register-button");
 	$registerInput = $("#register-input");
 	$mailInput = $("#mail-input");
 	$passwordInput = $("#password-input");
 	$loginForm = $("#login-form");
+
+	$fbLoginButton.click(FBLogin);
 
 	$mailInput.on('keypress', function(event) {
 		var code = event.which;
@@ -152,6 +155,7 @@ function userLogin(){
 
 function getUser(authkey){
 	var url = "php/backend/getUser.php?authkey=" + authkey;
+	console.log(url);
 	$.get(url, function(data){
 		if(!data["success"]){
 			error("Es gibt Probleme bei der Kommunikation mit dem Server.");
@@ -203,6 +207,38 @@ function onLoginSuccess(authkey){
 	getUser(authkey);
 }
 
+/**
+FACEBOOK
+*/
 
+FB.init({
+	appId  : '802057676490367',
+	status : true, // check login status
+	cookie : true, // enable cookies to allow the server to access the session
+	xfbml  : true, // parse XFBML
+	//channelUrl : 'http://WWW.MYDOMAIN.COM/channel.html', // channel.html file containing only <script src="//connect.facebook.net/en_US/all.js"></script>
+	oauth  : true // enable OAuth 2.0
+});
 
+function checkFBLogin(){
+	FB.getLoginStatus(function(response) {
+		if(response.authResponse&&response.authResponse.accessToken){
+			var fbAuthkey = response.authResponse.accessToken;
+			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+			if(authkey != fbAuthkey)
+				onLoginSuccess(fbAuthkey);
+		}
+	});
+}
 
+function FBLogin(){
+	FB.login(function(response) {
+		if (response.authResponse) {
+			FB.api('/me', function(response) {
+				checkFBLogin();
+			});
+		} else {
+			error("Leider hat etwas mit dem Facebook Login nicht geklappt.");
+		}
+	});
+}

@@ -104,10 +104,45 @@ class DBHelper{
 			}
 			return $users[0];
 		}else{
-			$query = Queries::getuser($this->authkey);
-			$users = $this->query($query);
-			if(count($users)==0)return false;
-			return $users[0];
+			if(strlen($this->authkey)>AUTHKEY_LENGTH){
+				// get user with facebook session-key
+				$query = Queries::getuser($this->authkey);
+				$users = $this->query($query);
+				if(count($users)>0)return $users[0];
+
+				// if failed query user from facebook
+				$fbUser = $this->getFacebookUser($this->authkey);
+				if(!$fbUser)return false;
+
+				// get facebook user from our database
+				$username = preg_replace('/[^a-zA-Z0-9]/i', "", $fbUser->name);
+				$username = $fbUser->id.":".$username;
+				$query = Queries::getuserbyname($username);
+				$users = $this->query($query);
+				
+				// register him as new user as he doesnt exist in our DB yet
+				if(count($users)==0){
+					$query = Queries::createuser(uniqid(), "fbuser".$fbUser->id."@latrinalia.de", $username, uniqid(), DBConfig::$userStatus["facebook"]);
+					$userid = $this->query($query);
+					if(!isset($userid))return false;
+				}else{
+					$userid = $users[0]["id"];
+				}
+
+				// log him in
+				$query = Queries::login($userid, $this->authkey, md5($_SERVER['HTTP_USER_AGENT']."@".$_SERVER['REMOTE_ADDR']));
+				$success = $this->query($query);
+
+				if($success)
+					return $this->getUser();
+				else
+					return false;
+			}else{
+				$query = Queries::getuser($this->authkey);
+				$users = $this->query($query);
+				if(count($users)==0)return false;
+				return $users[0];
+			}
 		}
 	}
 
@@ -251,7 +286,8 @@ class DBHelper{
 		return $this->query($query);
 	}
 
-	public function createUser($mail, $name, $pwd){
+	// user $facebook parameter only internally
+	public function createUser($mail, $name, $pwd, $facebook){
 		if(strlen($mail)==0&&strlen($name)==0)return $this->createDummyUser($pwd);
 		// check whether username is long enough
 		if(strlen($name)<3)return false;
@@ -274,6 +310,8 @@ class DBHelper{
 		$this->log("creating new user: $mail, $name");
 
 		$status = DBConfig::$userStatus["newUser"];
+		if($facebook)
+			$status = DBConfig::$userStatus["facebook"];
 
 		$key = md5($mail).uniqid();
 
@@ -285,7 +323,8 @@ class DBHelper{
 		$userid = $this->query($query);
 		if($userid){
 			$this->saveSalt($userid, $salt);
-			sendVerificationMail($mail, $name, $key);
+			if(!isset($facebook))
+				sendVerificationMail($mail, $name, $key);
 			return $mail;
 		}else{
 			return false;
@@ -1928,6 +1967,17 @@ class DBHelper{
 			$text = substr($text,0,$strpos)."@$userid".substr($text,$strpos);
 		}
 		return $text;
+	}
+
+	/**
+	FACEBOOK FUNCTIONS
+	*/
+
+	private function getFacebookUser($authkey){
+		$json = file_get_contents("https://graph.facebook.com/me?access_token=".$authkey);
+		$obj = json_decode($json);
+		if(!isset($obj->name))return false;
+		else return $obj;
 	}
 
 }
