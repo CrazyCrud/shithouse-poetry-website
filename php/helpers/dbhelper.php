@@ -127,7 +127,7 @@ class DBHelper{
 					if(!isset($userid))return false;
 					$this->log("@".$userid." (".$username.") registers with facebook");
 				}else{
-					$this->log("@".$user[0]["id"]." (".$user[0]["username"].") logs in");
+					$this->log("@".$users[0]["id"]." (".$users[0]["username"].") logs in");
 					$userid = $users[0]["id"];
 				}
 
