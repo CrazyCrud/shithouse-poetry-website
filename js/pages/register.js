@@ -42,7 +42,7 @@ function initEditing(){
 	$("#delete-submit").css('display', 'inline-block');
 	$("#delete-submit").click(function(event) {
 		event.preventDefault();
-		$("<div>Bist du sicher dass du dein Account löschen willst?</br>Alle mit deinem Account verknüpften Daten werden unwiederruflich gelöscht.</div>").dialog({
+		$("<div>Bist du sicher dass du deinen Account löschen willst?</br>Alle mit deinem Account verknüpften Daten werden unwiederruflich gelöscht.</div>").dialog({
 			modal: true,
 			width: "80%",
 			title: "Benutzerkonto löschen",

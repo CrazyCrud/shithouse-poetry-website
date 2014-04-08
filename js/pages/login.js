@@ -192,6 +192,8 @@ function getUser(authkey){
 }
 
 function error(message){
+	$(".error-dialog").dialog("close");
+	$(".jqueryui-dialog").dialog("close");
 	var $dialog = $('<div class="error-dialog">' + message + "</div>");
 	$dialog.dialog({
 		modal: true,
@@ -201,6 +203,8 @@ function error(message){
 }
 
 function message(title, message){
+	$(".error-dialog").dialog("close");
+	$(".jqueryui-dialog").dialog("close");
 	var $dialog = $('<div class="jqueryui-dialog">' + message + "</div>");
 	$dialog.dialog({
 		modal: true,
@@ -242,14 +246,37 @@ function checkFBLogin(){
 }
 
 function FBLogin(){
-	message("Login","Du wirst eingeloggt...");
-	FB.login(function(response) {
-		if (response.authResponse) {
-			FB.api('/me', function(response) {
-				checkFBLogin();
-			});
-		} else {
-			error("Leider hat etwas mit dem Facebook Login nicht geklappt.");
-		}
+	$('<div>Ich habe die <a target="_blank" href="tou.php">Nutzungsbedingungen</a>'
+			+' für Latrinalia gelesen und'
+			+' akzeptiert und erkläre hiermit'
+			+' meine Einwilligung in die Erhebung,'
+			+' Speicherung und Verarbeitung'
+			+' meiner personenbezogenen Daten zum'
+			+' Zwecke der Teilnahme an Latrinalia.</div>').dialog({
+		modal: true,
+		width: "80%",
+		title: "Nutzungsbedingungen",
+		buttons: [{
+				text: "OK",
+				click: function(){
+					$(this).dialog("close");
+					message("Login","Du wirst eingeloggt...");
+					FB.login(function(response) {
+						if (response.authResponse) {
+							FB.api('/me', function(response) {
+								checkFBLogin();
+							});
+						} else {
+							error("Leider hat etwas mit dem Facebook Login nicht geklappt.");
+						}
+					});
+				}
+			}, {
+				text: "Abbrechen",
+				click: function(){
+					$(this).dialog("close");
+				}
+			}
+		]
 	});
 }
