@@ -3,16 +3,6 @@
 	src: url("../fonts/goudy.otf");
 }
 
-@font-face{
-	font-family: $segoe;
-	src: url("../fonts/segoe-ui.ttf");
-}
-
-@font-face{
-	font-family: $segoeli;
-	src: url("../fonts/segoe-ui-light.ttf");
-}
-
 body{
 	color: $white;
 }
@@ -22,9 +12,6 @@ body{
 }
 
 @mixin interface-font(){
-	font-family: $segoe;
-}
-
-@mixin interface-font(){
-	font-family: $segoeli;
+	//font-family: $segoe;
+	font-weight: 400;
 }

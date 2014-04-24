@@ -81,14 +81,6 @@ Insert code that doesn't output CSS, things like mixin declarations, functions, 
   font-family: "Goudy";
   src: url("../fonts/goudy.otf"); }
 
-@font-face {
-  font-family: "Segoe UI";
-  src: url("../fonts/segoe-ui.ttf"); }
-
-@font-face {
-  font-family: "Segoe UI Light";
-  src: url("../fonts/segoe-ui-light.ttf"); }
-
 body {
   color: #ffffff; }
 
@@ -97,7 +89,6 @@ body {
   height: auto;
   font-size: 1rem;
   padding: 0.5em;
-  font-family: "Segoe UI Light";
   border-width: 1px;
   border-style: solid;
   border-color: #cbcdc7;
@@ -121,7 +112,6 @@ body {
   height: auto;
   font-size: 1rem;
   padding: 0.5em;
-  font-family: "Segoe UI Light";
   border-width: 1px;
   border-style: solid;
   border-color: #111111;
@@ -148,17 +138,14 @@ input[type="text"]#searchField {
   width: 90%;
   margin: 5%;
   border: none;
-  outline: none;
-  font-family: "Segoe UI light"; }
+  outline: none; }
 
 input#register_input {
   margin-left: 5%;
-  font-family: "Segoe UI";
   font-size: 100%; }
 
 label#register-label {
   color: #111111;
-  font: "Segoe UI";
   margin-left: 5%;
   margin-bottom: 0%;
   margin-top: 2%; }
@@ -171,8 +158,7 @@ input[type="email"].loginField {
   width: 90%;
   margin: 5% 5% 2% 5%;
   border: none;
-  outline: none;
-  font-family: "Segoe UI light"; }
+  outline: none; }
 
 input[type="password"].loginField {
   color: #cbcdc7;
@@ -182,8 +168,7 @@ input[type="password"].loginField {
   width: 90%;
   margin: 0% 5% 5% 5%;
   border: none;
-  outline: none;
-  font-family: "Segoe UI light"; }
+  outline: none; }
 
 ::-moz-placeholder {
   color: #cbcdc7; }

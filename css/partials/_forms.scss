@@ -5,24 +5,20 @@
       font-size: 300%;
       width: 90%;
       margin: 5%;
-      border: none; 
-      outline: none; 
-      font-family: "Segoe UI light"; 
-    }   
+      border: none;
+      outline: none;
+    }
 
     input#register_input{
       margin-left: 5%;
-      font-family: "Segoe UI";
       font-size: 100%;
     }
 
     label#register-label{
       color: $black;
-      font: $segoe;
       margin-left: 5%;
       margin-bottom: 0%;
-      margin-top: 2%;      
-      //if-bedingung: screen size = small, margin-top:2%;
+      margin-top: 2%;
     }
 
     input[type="email"].loginField{
@@ -32,9 +28,8 @@
       font-size: 300%;
       width: 90%;
       margin: 5% 5% 2% 5%;
-      border: none; 
-      outline: none; 
-      font-family: "Segoe UI light"; 
+      border: none;
+      outline: none;
     }
 
     input[type="password"].loginField{
@@ -44,10 +39,9 @@
       font-size: 300%;
       width: 90%;
       margin: 0% 5% 5% 5%;
-      border: none; 
-      outline: none; 
-      font-family: "Segoe UI light"; 
-    }   
+      border: none;
+      outline: none;
+    }
 
 
     ::-moz-placeholder {color:$lightgrey;}

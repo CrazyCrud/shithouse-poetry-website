@@ -81,14 +81,6 @@ Insert code that doesn't output CSS, things like mixin declarations, functions, 
   font-family: "Goudy";
   src: url("../fonts/goudy.otf"); }
 
-@font-face {
-  font-family: "Segoe UI";
-  src: url("../fonts/segoe-ui.ttf"); }
-
-@font-face {
-  font-family: "Segoe UI Light";
-  src: url("../fonts/segoe-ui-light.ttf"); }
-
 body {
   color: #ffffff; }
 
@@ -97,7 +89,6 @@ body {
   height: auto;
   font-size: 1rem;
   padding: 0.5em;
-  font-family: "Segoe UI Light";
   border-width: 1px;
   border-style: solid;
   border-color: #cbcdc7;
@@ -121,7 +112,6 @@ body {
   height: auto;
   font-size: 1rem;
   padding: 0.5em;
-  font-family: "Segoe UI Light";
   border-width: 1px;
   border-style: solid;
   border-color: #111111;
@@ -148,17 +138,14 @@ input[type="text"]#searchField {
   width: 90%;
   margin: 5%;
   border: none;
-  outline: none;
-  font-family: "Segoe UI light"; }
+  outline: none; }
 
 input#register_input {
   margin-left: 5%;
-  font-family: "Segoe UI";
   font-size: 100%; }
 
 label#register-label {
   color: #111111;
-  font: "Segoe UI";
   margin-left: 5%;
   margin-bottom: 0%;
   margin-top: 2%; }
@@ -171,8 +158,7 @@ input[type="email"].loginField {
   width: 90%;
   margin: 5% 5% 2% 5%;
   border: none;
-  outline: none;
-  font-family: "Segoe UI light"; }
+  outline: none; }
 
 input[type="password"].loginField {
   color: #cbcdc7;
@@ -182,8 +168,7 @@ input[type="password"].loginField {
   width: 90%;
   margin: 0% 5% 5% 5%;
   border: none;
-  outline: none;
-  font-family: "Segoe UI light"; }
+  outline: none; }
 
 ::-moz-placeholder {
   color: #cbcdc7; }
@@ -251,114 +236,114 @@ input[type="password"].loginField {
   border-right: 5px solid transparent;
   border-bottom: 5px solid rgba(140, 140, 140, 0.9); }
 
-.form-container .filter-label {
-  font-size: 1rem; }
-.form-container .radio-label {
-  font-size: 0.7rem; }
-.form-container .filter-type-container {
-  display: none;
-  margin-top: 0;
-  margin-bottom: 0; }
-  .form-container .filter-type-container label {
-    font-family: "Segoe UI Light";
-    color: #cbcdc7; }
-.form-container div {
-  margin-top: 0.618rem;
-  margin-bottom: 0.618rem; }
-.form-container .searchtags-container {
-  margin-top: 0; }
-.form-container .input-container {
-  margin-top: 4.236rem; }
-.form-container .switch-label {
-  float: left;
-  color: #cbcdc7;
-  margin-top: 0;
-  margin-right: 0.382rem;
-  font-family: "Segoe UI Light";
-  font-size: 1rem; }
-.form-container .onoffswitch {
-  position: relative;
-  width: 100px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  margin-top: 0;
-  margin-left: 3.2rem; }
-.form-container .onoffswitch-checkbox {
-  display: none; }
-.form-container .onoffswitch-label {
-  display: block;
-  overflow: hidden;
-  cursor: pointer;
-  border: 0px solid #999999;
-  border-radius: 0px;
-  margin-left: 0; }
-.form-container .onoffswitch-inner {
-  width: 200%;
-  margin-left: -100%;
-  -moz-transition: margin 0.3s ease-in 0s;
-  -webkit-transition: margin 0.3s ease-in 0s;
-  -o-transition: margin 0.3s ease-in 0s;
-  transition: margin 0.3s ease-in 0s;
-  margin-top: 0;
-  margin-bottom: 0; }
-.form-container .onoffswitch-inner > div {
-  float: left;
-  position: relative;
-  width: 50%;
-  height: 30px;
-  padding: 0;
-  line-height: 30px;
-  font-size: 14px;
-  color: #ffffff;
-  font-weight: bold;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box; }
-.form-container .onoffswitch-inner .onoffswitch-active {
-  padding-left: 15px;
-  background-color: #C2C2C2;
-  color: #FFFFFF;
-  margin-top: 0; }
-.form-container .onoffswitch-inner .onoffswitch-inactive {
-  padding-right: 15px;
-  background-color: #C2C2C2;
-  color: #FFFFFF;
-  text-align: right;
-  margin-top: 0; }
-.form-container .onoffswitch-switch {
-  width: 40px;
-  margin: 0px;
-  text-align: center;
-  border: 0px solid #999999;
-  border-radius: 0px;
-  position: absolute;
-  top: 0;
-  bottom: 0; }
-.form-container .onoffswitch-active .onoffswitch-switch {
-  background: #32A2B8;
-  left: 0; }
-.form-container .onoffswitch-inactive .onoffswitch-switch {
-  background: #A1A1A1;
-  right: 0; }
-.form-container .onoffswitch-active .onoffswitch-switch:before {
-  content: " ";
-  position: absolute;
-  top: 0;
-  left: 40px;
-  border-style: solid;
-  border-color: #32A2B8 transparent transparent #32A2B8;
-  border-width: 15px 10px; }
-.form-container .onoffswitch-inactive .onoffswitch-switch:before {
-  content: " ";
-  position: absolute;
-  top: 0;
-  right: 40px;
-  border-style: solid;
-  border-color: transparent #A1A1A1 #A1A1A1 transparent;
-  border-width: 15px 10px; }
-.form-container .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
-  margin-left: 0; }
+.form-container {
+  font-weight: 400; }
+  .form-container .filter-label {
+    font-size: 1rem; }
+  .form-container .radio-label {
+    font-size: 0.7rem; }
+  .form-container .filter-type-container {
+    display: none;
+    margin-top: 0;
+    margin-bottom: 0; }
+    .form-container .filter-type-container label {
+      color: #cbcdc7; }
+  .form-container div {
+    margin-top: 0.618rem;
+    margin-bottom: 0.618rem; }
+  .form-container .searchtags-container {
+    margin-top: 0; }
+  .form-container .input-container {
+    margin-top: 4.236rem; }
+  .form-container .switch-label {
+    float: left;
+    color: #cbcdc7;
+    margin-top: 0;
+    margin-right: 0.382rem;
+    font-size: 1rem; }
+  .form-container .onoffswitch {
+    position: relative;
+    width: 100px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    margin-top: 0;
+    margin-left: 3.2rem; }
+  .form-container .onoffswitch-checkbox {
+    display: none; }
+  .form-container .onoffswitch-label {
+    display: block;
+    overflow: hidden;
+    cursor: pointer;
+    border: 0px solid #999999;
+    border-radius: 0px;
+    margin-left: 0; }
+  .form-container .onoffswitch-inner {
+    width: 200%;
+    margin-left: -100%;
+    -moz-transition: margin 0.3s ease-in 0s;
+    -webkit-transition: margin 0.3s ease-in 0s;
+    -o-transition: margin 0.3s ease-in 0s;
+    transition: margin 0.3s ease-in 0s;
+    margin-top: 0;
+    margin-bottom: 0; }
+  .form-container .onoffswitch-inner > div {
+    float: left;
+    position: relative;
+    width: 50%;
+    height: 30px;
+    padding: 0;
+    line-height: 30px;
+    font-size: 14px;
+    color: #ffffff;
+    font-weight: bold;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box; }
+  .form-container .onoffswitch-inner .onoffswitch-active {
+    padding-left: 15px;
+    background-color: #C2C2C2;
+    color: #FFFFFF;
+    margin-top: 0; }
+  .form-container .onoffswitch-inner .onoffswitch-inactive {
+    padding-right: 15px;
+    background-color: #C2C2C2;
+    color: #FFFFFF;
+    text-align: right;
+    margin-top: 0; }
+  .form-container .onoffswitch-switch {
+    width: 40px;
+    margin: 0px;
+    text-align: center;
+    border: 0px solid #999999;
+    border-radius: 0px;
+    position: absolute;
+    top: 0;
+    bottom: 0; }
+  .form-container .onoffswitch-active .onoffswitch-switch {
+    background: #32A2B8;
+    left: 0; }
+  .form-container .onoffswitch-inactive .onoffswitch-switch {
+    background: #A1A1A1;
+    right: 0; }
+  .form-container .onoffswitch-active .onoffswitch-switch:before {
+    content: " ";
+    position: absolute;
+    top: 0;
+    left: 40px;
+    border-style: solid;
+    border-color: #32A2B8 transparent transparent #32A2B8;
+    border-width: 15px 10px; }
+  .form-container .onoffswitch-inactive .onoffswitch-switch:before {
+    content: " ";
+    position: absolute;
+    top: 0;
+    right: 40px;
+    border-style: solid;
+    border-color: transparent #A1A1A1 #A1A1A1 transparent;
+    border-width: 15px 10px; }
+  .form-container .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+    margin-left: 0; }
 
 #search-button {
   float: right; }
@@ -369,8 +354,7 @@ input[type="password"].loginField {
   color: #ffffff;
   border: 0;
   background: rgba(10, 10, 10, 0);
-  padding: 0;
-  font-family: "Segoe UI Light"; }
+  padding: 0; }
 
 #search-input:focus, #mail-input:focus, #password-input:focus {
   border: 0;
@@ -389,7 +373,6 @@ input[type="password"].loginField {
   font-size: 0.618rem; }
 
 .search-autocomplete {
-  font-family: "Segoe UI Light";
   background: rgba(30, 30, 30, 0.9);
   border: none; }
   .search-autocomplete .ui-menu-item a {
