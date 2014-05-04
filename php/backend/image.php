@@ -60,6 +60,9 @@ function printOnWall($text, $size){
 	$dest = imagecreatetruecolor($dst_width, $dst_height);
 	imagecopyresized($dest, $img, 0, 0, 0, 0, $dst_width, $dst_height, $dst_width, $dst_height);
 
+	$icon = imagecreatefrompng("../../img/dummy/none.png");
+	imagecopy($dest, $icon, 10, 10, 0, 0, 196, 32);
+
 	imagejpeg($dest);
   	imagedestroy($dest);
 }
