@@ -26,6 +26,7 @@ $(document).ready(function() {
 	getTags();
 	initDialog();
 	getLocation();
+	ImgurManager.getDefaultLocations(retrieveLocations);
 });
 
 function getLocation(){
@@ -211,12 +212,10 @@ function initUpload(){
     	checkForImage();
 	}).on('valid', function(event) {
 		event.preventDefault();
-		if(checkForImage()){
-			if(loggedIn())
-				saveImage();
-			else
-				createDummy();
-		}
+		if(loggedIn())
+			saveImage();
+		else
+			createDummy();
 	});
 
 	$form.bind("keyup keypress", function(e) {
@@ -320,8 +319,12 @@ function extractImageData(data){
 }
 
 function uploadImage(entryid){
-	var file = $addImageInput[0].files[0];
-	ImgurManager.uploadImage(uploadImageResult, entryid, file, computeCropBounds());
+	if(checkForImage()){
+		var file = $addImageInput[0].files[0];
+		ImgurManager.uploadImage(uploadImageResult, entryid, file, computeCropBounds());
+	}else{
+		ImgurManager.addImage(uploadImageResult, entryid);
+	}
 }
 
 function uploadImageResult(uploadSuccesfull, entryid){

@@ -531,6 +531,17 @@ var ImgurManager = (function(){
 			.always(function() {
 			});
 		},
+		addImage : function(callback, entryid){
+			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+			var url = "addImage.php?authkey="+authkey+"&id="+entryid;
+			$.get('php/backend/' + url, function(data) {
+				console.log(data);
+				if(data.success == 1){
+					callback(true, entryid);
+				}
+				callback(false, entryid);
+			});
+		},
 		getTags: function(callback){
 			var url = 'getTags.php?';
 			var tagData = null;
