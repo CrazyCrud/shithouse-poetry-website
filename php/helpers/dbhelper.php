@@ -1594,7 +1594,11 @@ class DBHelper{
 	}
 
 	public function getThumbnail($path, $size){
-		return str_lreplace(".", "$size.", $path);
+		if(!preg_match("imgur", $path)){
+			return $path."&size=".$size;
+		}else{
+			return str_lreplace(".", "$size.", $path);	
+		}
 	}
 
 	/**
