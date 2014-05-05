@@ -1,6 +1,6 @@
 <?php
 
-$adminEmails = array("support@hijacksoft.de");//array("bastian@latrinalia.de", "franziska@latrinalia.de", "constantin@latrinalia.de", "thomas@latrinalia.de");
+$adminEmails = array("support@latrinalia.de");//array("bastian@latrinalia.de", "franziska@latrinalia.de", "constantin@latrinalia.de", "thomas@latrinalia.de");
 
 $emailBody = '<html>
 <head><meta charset="utf-8"/></head>
@@ -59,6 +59,11 @@ function sendMail($email, $title, $content, $from = "Latrinalia <noreply@latrina
 	global $emailBody;
 	
 	$subject = $title;
+
+	$content = str_replace("\\r\\n", "<br/>", $content);
+	$content = str_replace("\\n", "<br/>", $content);
+	$content = str_replace("\\r", "<br/>", $content);
+
 	$message = str_replace("%1", $content, $emailBody);
 
 	$header  = "MIME-Version: 1.0\n";
@@ -73,7 +78,6 @@ function sendMail($email, $title, $content, $from = "Latrinalia <noreply@latrina
 function sendUserMail($email, $title, $content){
 	global $contentUserMail;
 	$message = str_replace("%1", $content, $contentUserMail);
-	$message = str_replace("\n", "<br/>", $message);
 	sendMail($email, $title, $message);
 }
 
