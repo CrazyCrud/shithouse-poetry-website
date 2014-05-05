@@ -104,6 +104,7 @@ class DBHelper{
 			}
 			return $users[0];
 		}else{
+			if($this->authkey == -1)return false;
 			if(strlen($this->authkey)>AUTHKEY_LENGTH){
 				// get user with facebook session-key
 				$query = Queries::getuser($this->authkey);
@@ -585,6 +586,22 @@ class DBHelper{
 		$entry["next"] = $next;
 		$entry["prev"] = $prev;
 		return $entry;
+	}
+
+	// returns only the transcription of an entry
+	// (or false)
+	public function getEntryText($id){
+		$query = Queries::getentrytext($id);
+		$result = $this->query($query);
+		if(!$result)return false;
+		if(count($result)==0)return false;
+		if(!isset($result[0]["transcription"]))return false;
+		$result = $result[0]["transcription"];
+		if(strlen(trim($result))==0){
+			return false;
+		}else{
+			return $result;
+		}
 	}
 
 	// returns the first 20 entries after $start ordered by $orderby

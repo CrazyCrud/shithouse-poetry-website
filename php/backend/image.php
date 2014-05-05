@@ -4,6 +4,19 @@ header('Content-Type:'.$type);
 error_reporting(0);
 include_once("../helpers/dbhelper.php");
 
+if(isset($_GET["text"])){
+	$size = 1;
+	if(isset($_GET["size"])){
+		switch($_GET["size"]){
+			case "l": $size=1;break;
+			case "m": $size=.6;break;
+			case "s": $size=.3;break;
+		}
+	}
+	printOnWall($_GET["text"], $size);
+	exit();
+}
+
 if(isset($_GET["id"])){
 	$entryid = $_GET["id"];
 	printPreview($entryid);
@@ -13,34 +26,28 @@ if(isset($_GET["id"])){
 
 function printPreview($id){
 	$db = new DBHelper();
-	$entry = $db->getEntry($id);
-	if(!isset($entry)
-		||$entry==false
-		||!isset($entry["information"])
-		||!isset($entry["information"][0])
-		||!isset($entry["information"][0]["transcription"])){
+	$text = $db->getEntryText($id);
+	if(!isset($text)
+		||$text == FALSE){
 		printIcon();
 	}else{
-		$txt = $entry["information"][0]["transcription"];
-		$type = $entry["typeid"];
-		if($type == 1){
-			$size = 1;
-			if(isset($_GET["size"])){
-				switch($_GET["size"]){
-					case "l": $size=1;break;
-					case "m": $size=.6;break;
-					case "s": $size=.3;break;
-				}
+		$size = 1;
+		if(isset($_GET["size"])){
+			switch($_GET["size"]){
+				case "l": $size=1;break;
+				case "m": $size=.6;break;
+				case "s": $size=.3;break;
 			}
-			printOnWall($txt, $size);
-		}else{
-			printIcon();
 		}
+		printOnWall($text, $size);
 	}
 }
 
 function printOnWall($text, $size){
 	$charsPerLine = 48;
+	if(strlen($text)<100){
+		$charsPerLine = 25;
+	}
 	$url = "../../img/dummy/wall.jpg";
 
 	$text = html_entity_decode($text);
@@ -49,11 +56,11 @@ function printOnWall($text, $size){
 	$img = writeOnImage($url, $text, $size);
 
 	$lineheight = 36*$size;
-	$charWidth = 18*$size;
+	$charWidth = 15*$size;
 	$lines = preg_match_all('/\n/s', $text);
 	$height = $lines * $lineheight;
-	$dst_height = $height + 2*256*$size;
-	$dst_width = $charWidth*strlen($text) + 2*128*$size;
+	$dst_height = $height + 2*126*$size;
+	$dst_width = $charWidth*$charsPerLine + 2*128*$size;
 	if($dst_width > 1024*$size){
 		$dst_width = 1024*$size;
 	}
@@ -86,7 +93,7 @@ function writeOnImage($url, $txt, $size){
   $text = $txt;
 
   // Print Text On Image
-  imagettftext($jpg_image, 25*$size, 0, 128*$size, 256*$size, $color, $font_path, $text);
+  imagettftext($jpg_image, 25*$size, 0, 128*$size, 128*$size, $color, $font_path, $text);
 
   return $jpg_image;
 }

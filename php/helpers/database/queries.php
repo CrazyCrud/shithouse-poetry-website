@@ -378,6 +378,12 @@ class Queries{
 		WHERE `$e`.id = $entryid";
 		return $query;
 	}
+	public static function getentrytext($id){
+		$i = DBConfig::$tables["information"];
+		$query=
+		"SELECT `transcription` FROM `$i` WHERE `entryid`=$id";
+		return $query;
+	}
 	public static function getentry($entryid, $where, $userid){
 		$e = DBConfig::$tables["entries"];
 		$u = DBConfig::$tables["users"];
