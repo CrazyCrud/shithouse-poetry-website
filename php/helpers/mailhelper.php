@@ -73,6 +73,7 @@ function sendMail($email, $title, $content, $from = "Latrinalia <noreply@latrina
 function sendUserMail($email, $title, $content){
 	global $contentUserMail;
 	$message = str_replace("%1", $content, $contentUserMail);
+	$message = str_replace("\n", "<br/>", $message);
 	sendMail($email, $title, $message);
 }
 
