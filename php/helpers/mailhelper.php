@@ -1,6 +1,6 @@
 <?php
 
-$adminEmails = array("bastian@latrinalia.de", "franziska@latrinalia.de", "constantin@latrinalia.de", "thomas@latrinalia.de");
+$adminEmails = array("support@hijacksoft.de");//array("bastian@latrinalia.de", "franziska@latrinalia.de", "constantin@latrinalia.de", "thomas@latrinalia.de");
 
 $emailBody = '<html>
 <head><meta charset="utf-8"/></head>

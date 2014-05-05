@@ -56,7 +56,7 @@ function printOnWall($text, $size){
 	$img = writeOnImage($url, $text, $size);
 
 	$lineheight = 36*$size;
-	$charWidth = 15*$size;
+	$charWidth = 16*$size;
 	$lines = preg_match_all('/\n/s', $text);
 	$height = $lines * $lineheight;
 	$dst_height = $height + 2*126*$size;
