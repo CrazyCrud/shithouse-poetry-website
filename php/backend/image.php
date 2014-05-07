@@ -64,8 +64,17 @@ function printOnWall($text, $size){
 	if($dst_width > 1024*$size){
 		$dst_width = 1024*$size;
 	}
+
+	$x = 0;
+
+	if($size < .5){
+		$dst_width = 90;
+		$dst_height = 90;
+		$x = 45;
+	}
+
 	$dest = imagecreatetruecolor($dst_width, $dst_height);
-	imagecopyresized($dest, $img, 0, 0, 0, 0, $dst_width, $dst_height, $dst_width, $dst_height);
+	imagecopyresized($dest, $img, 0, 0, $x, 0, $dst_width, $dst_height, $dst_width, $dst_height);
 
 	$icon = imagecreatefrompng("../../img/dummy/none.png");
 	imagecopy($dest, $icon, 10, 10, 0, 0, 196, 32);
