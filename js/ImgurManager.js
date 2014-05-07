@@ -380,12 +380,17 @@ var ImgurManager = (function(){
 			$.get("http://ipinfo.io", function(response) {
 				var locs = response.loc.split(",");
 				callback(locs);
-			}, "jsonp");
+			}, "jsonp").fail(callback(null));
 		},
 		getDefaultLocations : function(callback){
 			ImgurManager.getMyLocationFromIP(function(locs) {
-				var latitude = locs[0];
-				var longitude = locs[1];
+				if(locs == null){
+					var latitude = -1;
+					var longitude = -1;
+				}else{
+					var latitude = locs[0];
+					var longitude = locs[1];
+				}
 				var locations = null;
 				var url = "getLocations.php?lat="+latitude+"&long="+longitude;
 				$.post("php/backend/" + url, function(data){
@@ -500,7 +505,7 @@ var ImgurManager = (function(){
 				}	
 			});
 		},
-		uploadImage : function(callback, entryid, file, bounds){
+		uploadImage : function(callback, entryid, file, bounds, progress){
 			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 			
 			var formData = new FormData();
@@ -514,7 +519,15 @@ var ImgurManager = (function(){
 
 			var url = "imgurUpload.php";
 
-			$.ajax({
+			var ajax = new XMLHttpRequest();
+			ajax.upload.addEventListener("progress", function(event){progress((event.loaded / event.total) * 100)}, false);
+			ajax.addEventListener("load", function(){callback(true, entryid)}, false);
+			ajax.addEventListener("error", function(){callback(false, entryid)}, false);
+			ajax.addEventListener("abort", function(){callback(false, entryid)}, false);
+			ajax.open("POST", "php/backend/"+url);
+			ajax.send(formData);
+
+			/*$.ajax({
 				url: 'php/backend/' + url,
 				type: 'POST',
 				contentType: false,
@@ -529,7 +542,7 @@ var ImgurManager = (function(){
 				callback(false, entryid);
 			})
 			.always(function() {
-			});
+			});*/
 		},
 		addImage : function(callback, entryid){
 			var authkey = document.cookie.replace(/(?:(?:^|.*;\s*)authkey\s*\=\s*([^;]*).*$)|^.*$/, "$1");

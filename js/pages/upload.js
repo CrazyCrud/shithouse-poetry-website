@@ -121,7 +121,7 @@ function initDialog(){
 }
 
 function saveImage(){
-	message("Speichern", "Bild wird gespeichert, bitte warten ...");
+	message("Speichern", "Daten werden gespeichert, bitte warten ...");
 	var data = {};
 	var title = $.trim($("input#title").val());
 	var artist = $.trim($("input#artist").val());
@@ -321,13 +321,19 @@ function extractImageData(data){
 function uploadImage(entryid){
 	if(checkForImage()){
 		var file = $addImageInput[0].files[0];
-		ImgurManager.uploadImage(uploadImageResult, entryid, file, computeCropBounds());
+		ImgurManager.uploadImage(uploadImageResult, entryid, file, computeCropBounds(), progressUpdate);
 	}else{
 		ImgurManager.addImage(uploadImageResult, entryid);
 	}
 }
 
+function progressUpdate(percentage){
+	var bar = '<div style="height:16px;background:gray;margin-top:24px"><div style="height:16px;background:black;width:'+percentage+'%;text-align:center;color:white"></div></div>';
+	message("Speichern", "Bild wird gespeichert, bitte warten ...<br/>"+bar);
+}
+
 function uploadImageResult(uploadSuccesfull, entryid){
+	message("Speichern", "Upload erfolgreich, bitte warten ...");
 	if(uploadSuccesfull){
 		window.location = "details.php?id="+entryid;
 	}else{
