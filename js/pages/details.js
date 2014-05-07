@@ -46,13 +46,23 @@ function buildComment(comment){
 	var $comment = $('<div comment-id="'+comment.commentid+'" class="comment"></div>');
 	var $usericon = getUserIcon(comment.userstatus, comment.usertitle);
 	var userName = getUserName({status:comment.userstatus,name:comment.username});
-	var $author = $('<div class="author"><a href="user.php?id='+comment.userid+'">'+userName+'</a></div>');
+	var $author = $('<div class="author"><a class="userlink" href="user.php?id='+comment.userid+'">'+userName+'</a></div>');
 	$author.prepend($usericon);
 	var $date = $('<div class="date">'+formatTime(comment.time)+'</div>');
 	$date.attr("title",comment.time);
 	if(user.admin || user.id == comment.userid){
 		var $del = $('<i title="Kommentar l&ouml;schen" class="deletecomment icon-cancel"></i>');
 		$date.append($del);
+	}
+
+	if(loggedIn()){
+		var $respond = $('<a href="javascript:void(0)" title="Antworten" style="margin-left: 1rem"><span class="respond-comment"><i class="icon-comment"></i>Antworten</span></a>');
+		$respond.click(function(){
+			var username = $(this).closest(".author").find(".userlink").text();
+			var val = "@"+username+" "+$("#comment-input").val();
+			$("#comment-input").val(val);
+		});
+		$author.append($respond);
 	}
 	
 	var com = comment.comment.trim();
