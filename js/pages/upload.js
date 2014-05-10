@@ -328,8 +328,12 @@ function uploadImage(entryid){
 }
 
 function progressUpdate(percentage){
-	var bar = '<div style="height:16px;background:gray;margin-top:24px"><div style="height:16px;background:black;width:'+percentage+'%;text-align:center;color:white"></div></div>';
-	message("Speichern", "Bild wird gespeichert, bitte warten ...<br/>"+bar);
+	if(percentage < 100){
+		var bar = '<div style="height:16px;background:gray;margin-top:24px"><div style="height:16px;background:black;width:'+percentage+'%;color:white">'+percentage+'%</div></div>';
+		message("Speichern", "Bild wird hochgeladen, bitte warten ...<br/>"+bar);
+	}else{
+		message("Speichern", "Bild wird verarbeitet, bitte warten ...");
+	}
 }
 
 function uploadImageResult(uploadSuccesfull, entryid){
