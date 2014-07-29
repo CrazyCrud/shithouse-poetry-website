@@ -321,8 +321,9 @@ var GalleryView = (function(){
 						"thumbnail": "http://www.latrinalia.de/development/shithouse_poetry/php/backend/image.php?id="+id+"&size=m",
 						"largethumbnail": "http://www.latrinalia.de/development/shithouse_poetry/php/backend/image.php?id="+id+"&size=l",
 						"smallthumbnail": "http://www.latrinalia.de/development/shithouse_poetry/php/backend/image.php?id="+id+"&size=s"
-					}
-				}else if((_.chain(settings.imgData).pluck("id").indexOf(id).value()) > -1){
+					};
+				}
+				if((_.chain(settings.imgData).pluck("id").indexOf(id).value()) > -1){
 					continue;
 				}else{
 					imgDataChanged = true;
