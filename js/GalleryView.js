@@ -315,7 +315,13 @@ var GalleryView = (function(){
 				var id = parseInt(entry.id);
 				if(!entry.images || entry.images.length==0 || !entry.images[0].thumbnail || 
 						!entry.images[0].largethumbnail){
-					continue;
+					entry.images = [];
+					entry.images[0] = {
+						"path": "http://www.latrinalia.de/development/shithouse_poetry/php/backend/image.php?id="+id,
+						"thumbnail": "http://www.latrinalia.de/development/shithouse_poetry/php/backend/image.php?id="+id+"&size=m",
+						"largethumbnail": "http://www.latrinalia.de/development/shithouse_poetry/php/backend/image.php?id="+id+"&size=l",
+						"smallthumbnail": "http://www.latrinalia.de/development/shithouse_poetry/php/backend/image.php?id="+id+"&size=s"
+					}
 				}else if((_.chain(settings.imgData).pluck("id").indexOf(id).value()) > -1){
 					continue;
 				}else{
