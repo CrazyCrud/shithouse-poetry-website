@@ -228,7 +228,6 @@ input[type="password"].loginField {
     position: absolute;
     width: 180px;
     height: 180px;
-    transform: scale(0.1);
     opacity: 0.18;
     background: url('../../img/upload/upload_bg.png');
     background-position: center;
