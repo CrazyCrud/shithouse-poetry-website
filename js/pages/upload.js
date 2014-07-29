@@ -329,7 +329,8 @@ function uploadImage(entryid){
 
 function progressUpdate(percentage){
 	if(percentage < 100){
-		var bar = '<div style="height:16px;background:gray;margin-top:24px"><div style="height:16px;background:black;width:'+percentage+'%;color:white">'+percentage+'%</div></div>';
+		var roundedPercentage = Math.round(percentage);
+		var bar = '<div style="height:16px;background:gray;margin-top:24px"><div style="height:16px;background:black;width:'+percentage+'%;color:white">'+roundedPercentage+'%</div></div>';
 		message("Speichern", "Bild wird hochgeladen, bitte warten ...<br/>"+bar);
 	}else{
 		message("Speichern", "Bild wird verarbeitet, bitte warten ...");
