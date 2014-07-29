@@ -377,7 +377,11 @@ function setImage(entry){
 	var $image = $("#image");
 	$("#image").css('opacity', '0');
 	var $entryTitle = $("#entry-title");
-	$image.attr("src", entry.images[0].largethumbnail);
+	if(entry.images.length > 0 && entry.images[0].largethumbnail){
+		$image.attr("src", entry.images[0].largethumbnail);
+	}else{
+		$image.attr("src", "php/backend/image.php?id="+entry.id+"&size=l");
+	}
 	$image.attr("title", entry.title);
 
 	Foundation.lib_methods.loaded($image, function(){
