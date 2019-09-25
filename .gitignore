@@ -23,6 +23,8 @@ local.properties
 .settings/
 .loadpath
 
+.idea/
+
 # External tool builders
 .externalToolBuilders/
 
@@ -219,3 +221,5 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
+
+www/res/*
