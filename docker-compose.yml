@@ -1,38 +1,40 @@
-version: "2"
+version: "3.7"
 services:
-    www:
-        build: .
-        ports: 
-            - "8001:80"
-        volumes:
-            - ./www:/var/www/html/
-        links:
-            - db
-        networks:
-            - default
-    db:
-        image: mysql:5.7
-        ports: 
-            - "3306:3306"
-        environment:
-            MYSQL_DATABASE: ${MYSQL_DATABASE}
-            MYSQL_USER: ${MYSQL_USER}
-            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD} 
-        volumes:
-            - ./data:/docker-entrypoint-initdb.d
-            - persistent:/var/lib/mysql
-        networks:
-            - default
-    phpmyadmin:
-        image: phpmyadmin/phpmyadmin
-        links: 
-            - db:db
-        ports:
-            - 8000:80
-        environment:
-            MYSQL_USER: ${MYSQL_USER}
-            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD} 
-volumes:
-    persistent:
+  srv:
+    build: ./srv
+    expose:
+      - ${APP_SERVER_PORT}
+    environment:
+      API_HOST: ${API_HOST}
+      APP_SERVER_PORT: ${APP_SERVER_PORT}
+    ports:
+      - ${APP_SERVER_PORT}:${APP_SERVER_PORT}
+    volumes:
+      - ./srv/src:/usr/src/srv/src
+    command: "npm run start"
+  web:
+    build:
+      context: ./web
+      target: "develop-stage"
+    environment:
+      - HOST=0.0.0.0
+      - PORT=${VUE_APP_PORT}
+      - CHOKIDAR_USEPOLLING=true
+    expose:
+      - ${VUE_APP_PORT}
+    ports:
+      - ${HOST_APP_PORT}:${VUE_APP_PORT}
+    volumes:
+      - ./web:/usr/src/web:cached
+    command: "npm run start"
+  db:
+    image: "postgres"
+    container_name: "latrinalia_db"
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_DATABASE}
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgres-data:/var/lib/postgresql
