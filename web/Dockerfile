@@ -2,6 +2,9 @@
 FROM node:11.1-alpine as develop-stage
 WORKDIR /usr/src/web
 COPY package*.json ./
+
+RUN ls
+
 RUN npm install
 COPY . .
 
