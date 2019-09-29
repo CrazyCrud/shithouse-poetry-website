@@ -2,18 +2,19 @@
 
 const express = require('express');
 
-// Constants
+import Data from './src/data.js';
+
 const PORT = 8083;
 const HOST = '0.0.0.0';
 
-// App
 const app = express();
-app.get('/', (req, res) => {
-	res.send('Hello world\n');
-});
 
 app.get('/api', (req, res) => {
 	res.send('Hello API\n');
+});
+
+app.get('/images', (req, res) => {
+	res.send(Data.images);
 });
 
 app.listen(PORT, HOST);

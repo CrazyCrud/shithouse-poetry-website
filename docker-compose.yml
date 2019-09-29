@@ -26,7 +26,7 @@ services:
       - ${HOST_APP_PORT}:${VUE_APP_PORT}
     volumes:
       - ./web:/usr/src/web:cached
-    command: "npm run start"
+    command: "npm run serve"
   db:
     image: "postgres"
     container_name: "latrinalia_db"
