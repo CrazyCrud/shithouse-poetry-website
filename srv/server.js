@@ -1,6 +1,6 @@
 'use strict';
 
-const express = require('express');
+import express from 'express';
 
 import {images} from './src/data.js';
 

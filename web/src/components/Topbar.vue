@@ -6,8 +6,8 @@
 			</b-navbar-item>
 		</template>
 		<template slot="start">
-			<b-navbar-item href="#">
-				<a class="button is-primary">
+			<b-navbar-item tag="router-link" :to="{ path: '/upload' }">
+				<a class="button is-primary nav-item nav-item--upload">
 					<strong>Upload</strong>
 				</a>
 			</b-navbar-item>
@@ -19,7 +19,7 @@
 					</b-input>
 				</b-field>
 			</b-navbar-item>
-			<b-navbar-item href="#">
+			<b-navbar-item tag="router-link" :to="{ path: '/tou' }">
 				Terms of Use
 			</b-navbar-item>
 		</template>
@@ -46,5 +46,10 @@
 </script>
 
 <style lang="scss">
-
+	.nav-item {
+		&--upload {
+			color: white;
+			text-decoration: none;
+		}
+	}
 </style>
