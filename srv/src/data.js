@@ -6,6 +6,6 @@ const images = {
 	}
 };
 
-export default {
+export {
 	images
 }

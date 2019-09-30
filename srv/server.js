@@ -2,7 +2,7 @@
 
 const express = require('express');
 
-import Data from './src/data.js';
+import {images} from './src/data.js';
 
 const PORT = 8083;
 const HOST = '0.0.0.0';
@@ -14,7 +14,7 @@ app.get('/api', (req, res) => {
 });
 
 app.get('/images', (req, res) => {
-	res.send(Data.images);
+	res.send(images);
 });
 
 app.listen(PORT, HOST);
