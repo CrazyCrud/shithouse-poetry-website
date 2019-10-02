@@ -9,7 +9,3 @@ RUN npm install -g nodemon
 RUN npm install
 
 COPY . .
-
-RUN ls
-
-# CMD ["npm", "run", "start"]

@@ -4,7 +4,18 @@ import {config} from './config'
 class Database {
 	constructor() {
 		this.client = new Client(config);
+	}
+
+	connect() {
 		this.client.connect();
+	}
+
+	addEntry(payload) {
+		console.log('Add new entry', payload);
+	}
+
+	getEntries() {
+
 	}
 
 	query() {
@@ -17,3 +28,7 @@ class Database {
 		this.client.end()
 	}
 }
+
+export {
+	Database
+};

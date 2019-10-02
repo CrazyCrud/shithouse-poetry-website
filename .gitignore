@@ -233,5 +233,6 @@ web/dist/
 
 resources/
 postgres-data/
+postgres-init/
 
 srv/src/config.js

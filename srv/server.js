@@ -1,20 +1,21 @@
 'use strict';
 
 import express from 'express';
-
-import {images} from './src/data.js';
+import {API} from './src/api';
 
 const PORT = 8083;
 const HOST = '0.0.0.0';
 
 const app = express();
+const api = new API();
 
 app.get('/api', (req, res) => {
 	res.send('Hello API\n');
 });
 
 app.get('/images', (req, res) => {
-	res.send(images);
+	const response = api.handleUpload(req);
+	res.send(response);
 });
 
 app.listen(PORT, HOST);

@@ -11,7 +11,7 @@ services:
       - ${APP_SERVER_PORT}:${APP_SERVER_PORT}
     volumes:
       - ./srv:/usr/src/srv/
-    command: "npm run start"
+    command: "npm run watch"
   web:
     build:
       context: ./web
@@ -37,4 +37,5 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./postgres-data:/var/lib/postgresql
+      - ./postgres-data:/var/lib/p  ostgresql
+      - ./postgres-init/latrinalia.sql:/docker-entrypoint-initdb.d/init.sql
