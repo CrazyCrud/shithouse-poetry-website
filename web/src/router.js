@@ -3,8 +3,9 @@ import Router from 'vue-router'
 import Home from '@/pages/Home/Home.vue'
 import Upload from '@/pages/Upload/Upload.vue'
 import TOU from '@/pages/TOU/TOU.vue'
+import Signup from '@/pages/Signup/Signup.vue'
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
 	routes: [
@@ -22,6 +23,11 @@ export default new Router({
 			path: '/tou',
 			name: 'tou',
 			component: TOU
+		},
+		{
+			path: '/signup',
+			name: 'signup',
+			component: Signup
 		}
 	]
 })

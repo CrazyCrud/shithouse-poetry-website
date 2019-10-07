@@ -1,13 +1,16 @@
 'use strict';
 
 import express from 'express';
-import {API} from './src/api';
+import {handleUpload} from './src/api';
+
 
 const PORT = 8083;
 const HOST = '0.0.0.0';
 
 const app = express();
-const api = new API();
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 app.use(function (req, res, next) {
 	res.header("Access-Control-Allow-Origin", "*");
@@ -25,20 +28,14 @@ app.get('/api', (req, res) => {
 
 app.post('/api/upload', (req, res) => {
 	const payload = req.body;
-	res.send('Upload completed');
-	/*
-	api.handleUpload(payload).then((entryID) => {
+
+	handleUpload(payload, (entryID) => {
+		console.log(entryID);
 		res.send({
 			status: 200,
 			msg: 'ok'
 		});
-	}).catch((err) => {
-		res.send({
-			status: 400,
-			msg: 'error'
-		});
 	});
-	 */
 });
 
 app.listen(PORT, HOST);

@@ -3,14 +3,14 @@ import axios from 'axios';
 const SERVER = 'http://localhost:8083';
 
 const uploadImage = function (payload) {
-	axios.post(`${SERVER}/api/upload`, {
-		payload: {
-			title: payload.title,
-			sex: payload.sex,
-			transcription: payload.transcription,
-			image: payload.image
-		}
-	})
+	const data = {
+		title: payload.title,
+		sex: payload.sex,
+		transcription: payload.transcription,
+		image: payload.image
+	};
+
+	axios.post(`${SERVER}/api/upload`, data)
 		.then(function (response) {
 			console.log(response);
 		})

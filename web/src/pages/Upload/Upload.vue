@@ -19,19 +19,19 @@
 				</b-field>
 				<b-field>
 					<b-radio-button v-model="sex"
-													native-value="Men"
+													native-value="m"
 													type="is-light">
 						<b-icon icon="men"></b-icon>
 						<span>Men</span>
 					</b-radio-button>
 					<b-radio-button v-model="sex"
-													native-value="Women"
+													native-value="w"
 													type="is-light">
 						<b-icon icon="women"></b-icon>
 						<span>Women</span>
 					</b-radio-button>
 					<b-radio-button v-model="sex"
-													native-value="Other"
+													native-value="u"
 													type="is-light">
 						<b-icon icon="check"></b-icon>
 						<span>Other</span>

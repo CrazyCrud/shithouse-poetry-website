@@ -27,12 +27,17 @@
 		<template slot="end">
 			<b-navbar-item tag="div">
 				<div class="buttons">
-					<a class="button is-primary">
-						<strong>Sign up</strong>
-					</a>
-					<a class="button is-light">
+					<b-navbar-item tag="router-link" :to="{ path: '/signup' }">
+						<a class="button is-primary">
+							<strong>Sign up</strong>
+						</a>
+					</b-navbar-item>
+					<a class="button is-light" @click="isLoginFormActive = true">
 						Log in
 					</a>
+					<b-modal :active.sync="isLoginFormActive" has-modal-card trap-focus custom-class="c-login modal--login">
+						<login v-bind="loginFormProps"></login>
+					</b-modal>
 				</div>
 			</b-navbar-item>
 		</template>
@@ -40,8 +45,23 @@
 </template>
 
 <script>
+	import Login from '@/components/Login';
+
 	export default {
-		name: "Topbar"
+		name: "Topbar",
+		components: {
+			Login
+		},
+		data() {
+			return {
+				isLoginFormActive: false,
+				loginFormProps: {
+					email: '',
+					password: ''
+				}
+			}
+		},
+		methods: {}
 	}
 </script>
 
@@ -51,5 +71,9 @@
 			color: white;
 			text-decoration: none;
 		}
+	}
+
+	.c-login {
+		width: 100%;
 	}
 </style>
