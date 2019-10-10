@@ -9,7 +9,7 @@ You can edit the Mysql credentials in the *.env* file located in the root direct
 
 ## URLs
 
-Visist *localhost:8081* to view the front end.     
+Visist *localhost:8080* to view the front end.     
 The API is running at *localhost:8083/api*.
 You can access the Postgres database at *localhost:5432*.
 
